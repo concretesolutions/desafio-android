@@ -17,3 +17,6 @@ e) **[+1 | +2]** o aplicativo persistir a busca de CEPs (ganha mais pontos se n�
 f) **[+3]** criar um projeto de testes automatizados  
 g) **[+1]** usar boas práticas de desenvolvimento Java (estrutura do projeto, desacoplamento e etc)
 
+### Processo de submissão  
+
+O candidato deverá implementar a solução e enviar um pull request para este repositório com a solução.
