@@ -20,3 +20,7 @@ g) **[+1]** usar boas práticas de desenvolvimento Java (estrutura do projeto, d
 ### Processo de submissão  
 
 O candidato deverá implementar a solução e enviar um pull request para este repositório com a solução.
+
+### URL e Documentação de um serviço de consulta de CEP RESTful:
+Documentação da API: http://correiosapi.apphb.com 
+Exemplo de uso da API: http://correiosapi.apphb.com/cep/76873274
