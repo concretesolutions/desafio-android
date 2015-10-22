@@ -17,6 +17,7 @@ Criar um aplicativo para consultar a [API do GitHub](https://developer.github.co
 ### **A solução DEVE conter** ##
 * Sistema de build Gradle
 * Mapeamento JSON -> Objeto (GSON / Jackson / Moshi / etc)
+* Material Design
 
 ### **Ganha + pontos se conter** ###
 
@@ -24,6 +25,7 @@ Criar um aplicativo para consultar a [API do GitHub](https://developer.github.co
 * Testes no projeto (unitários e por tela)
 * Testes funcionais (que naveguem pelo aplicativo como casos de uso)
 * Cache de imagens e da API
+* Suportar mudanças de orientação das telas sem perder estado
 
 ### **Sugestões** ###
 
@@ -40,13 +42,18 @@ A foto do mockup é meramente ilustrativa.
 
 
 ### **Processo de submissão** ###
+
 O candidato deverá implementar a solução e enviar um pull request para este repositório com a solução.
 
 O processo de Pull Request funciona da seguinte maneira:
+
 1. Candidato fará um fork desse repositório (não irá clonar direto!)
 2. Fará seu projeto nesse fork.
 3. Commitará e subirá as alterações para o __SEU__ fork.
 4. Pela interface do Bitbucket, irá enviar um Pull Request.
 
+Se possível deixar o fork púnlico para facilitar a inspeção do código.
+
 ### **ATENÇÃO** ###
+
 Não se deve tentar fazer o PUSH diretamente para ESTE repositório!
