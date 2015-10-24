@@ -52,7 +52,7 @@ O processo de Pull Request funciona da seguinte maneira:
 3. Commitará e subirá as alterações para o __SEU__ fork.
 4. Pela interface do Bitbucket, irá enviar um Pull Request.
 
-Se possível deixar o fork púnlico para facilitar a inspeção do código.
+Se possível deixar o fork público para facilitar a inspeção do código.
 
 ### **ATENÇÃO** ###
 
