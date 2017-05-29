@@ -1,0 +1,16 @@
+# This is a sample build configuration for Gradle.
+# Check our guides at https://confluence.atlassian.com/x/VYk8Lw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: uber/android-build-environment:latest
+
+pipelines:
+  default:
+    - step:
+        script:
+          - ./build.sh
+          - echo y | android update sdk --filter "extra-android-m2repository" --no-ui -a
+          - echo y | android update sdk --filter "extra-google-m2repository" --no-ui -a
+          - ./gradlew clean checkstyle --stacktrace --continue
+          - ./gradlew testDebug --stacktrace --continue

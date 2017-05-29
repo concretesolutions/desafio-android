@@ -1,0 +1,23 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = '7.6'
+}
+
+task checkstyle(type: Checkstyle) {
+    configFile file("$rootDir/tools/checkstyle.xml")
+
+    ignoreFailures false
+    showViolations true
+
+    source 'src'
+    include '**/*.java'
+
+    classpath = files()
+}
+
+//afterEvaluate { project ->
+//    project.android.buildTypes.each { type ->
+//        tasks["compile${type.name.capitalize()}Sources"].dependsOn('checkstyle')
+//    }
+//}

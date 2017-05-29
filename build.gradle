@@ -1,0 +1,76 @@
+buildscript {
+    ext.kotlin = '1.1.2-4'
+
+    repositories {
+        jcenter()
+        maven { url 'https://maven.google.com' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.google.com' }
+    }
+}
+
+subprojects {
+
+    afterEvaluate {
+
+        if (!android) return
+
+        android {
+            compileSdkVersion 25
+            buildToolsVersion "26.0.0-rc2"
+
+            defaultConfig {
+                minSdkVersion 21
+                targetSdkVersion 25
+
+                versionCode 1
+                versionName "1.0"
+
+                resConfigs "pt"
+            }
+
+            lintOptions {
+                abortOnError false
+            }
+
+            aaptOptions {
+                cruncherEnabled = false
+            }
+
+            testOptions {
+                unitTests.returnDefaultValues = true
+            }
+
+            packagingOptions {
+                exclude 'META-INF/LICENSE'
+            }
+        }
+    }
+}
+
+ext {
+
+    androidSupport = '25.3.1'
+    playServices = '10.2.6'
+
+    constraintLayout = '1.0.2'
+
+    // Log Tracking
+    timber = '4.5.1'
+
+    // Image / Http
+    picasso = '2.5.2'
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

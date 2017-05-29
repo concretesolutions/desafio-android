@@ -1,0 +1,25 @@
+import java.util.regex.Pattern
+
+task layoutIds() {
+    group "QA Helpers"
+    doLast {
+        final Pattern VIEW = Pattern.compile("<([\\w\\.]+)")
+        final Pattern ID = Pattern.compile("android:id=\"(.*?)\"")
+        def layoutDir = "${project.projectDir.absolutePath}/src/main/res/layout"
+        println "LayoutDir = $layoutDir"
+        def files = new File(layoutDir).listFiles()
+
+        files.each {
+            println "\n${it.getName()}"
+            String viewType
+            it.newReader().lines().each {
+                def viewMatcher = VIEW.matcher(it)
+                if (viewMatcher.find())
+                    viewType = viewMatcher.group(1)
+                def idMatcher = ID.matcher(it)
+                if (idMatcher.find())
+                    println "\t${idMatcher.group(1)} -> $viewType"
+            }
+        }
+    }
+}

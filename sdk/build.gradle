@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: "$rootDir/tools/tools.gradle"
+
+android {
+
+    publishNonDefault true
+
+    defaultConfig {
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            useProguard false
+            shrinkResources false
+        }
+
+        release {
+            minifyEnabled true
+            useProguard true
+            shrinkResources true
+        }
+    }
+}
+
+final versions = rootProject.ext
+
+dependencies {
+
+    compile "com.android.support:support-annotations:$versions.androidSupport"
+
+    // Log Tracking
+    compile "com.jakewharton.timber:timber:$versions.timber"
+}
