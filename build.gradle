@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin = '1.1.2-4'
+    ext.kotlin_version = '1.1.2-4'
 
     repositories {
         jcenter()
@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0-alpha1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -53,15 +53,17 @@ subprojects {
             packagingOptions {
                 exclude 'META-INF/LICENSE'
             }
+
+            sourceSets {
+                main.java.srcDirs += 'src/main/kotlin'
+            }
         }
     }
 }
 
 ext {
-
     androidSupport = '25.3.1'
     playServices = '10.2.6'
-
     constraintLayout = '1.0.2'
 
     // Log Tracking
@@ -69,6 +71,12 @@ ext {
 
     // Image / Http
     picasso = '2.5.2'
+    gson = '2.8.0'
+    okHttp = '3.6.0'
+    retrofit = '2.3.0'
+
+    // Rx Android
+    rxAndroid = '2.0.1'
 }
 
 task clean(type: Delete) {

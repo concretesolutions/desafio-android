@@ -4,6 +4,6 @@
     android:id="@+id/main_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.concrete.MainActivity">
+    tools:context=".activity.RepoListActivity">
 
 </android.support.constraint.ConstraintLayout>
