@@ -8,6 +8,5 @@ object PullRequestRepository {
 
     private val api = GithubApi.instance()
 
-    fun list(repo: Repo) = api.listPullRequest(fullName = repo.fullName)
-            .observeOn(mainThread())
+    fun list(repo: Repo) = api.listPullRequest(fullName = repo.fullName).observeOn(mainThread())
 }

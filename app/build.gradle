@@ -56,6 +56,11 @@ dependencies {
 
     implementation project(':sdk')
 
+    // Arch
+    compile "android.arch.lifecycle:runtime:$versions.arch"
+    compile "android.arch.lifecycle:extensions:$versions.arch"
+    annotationProcessor "android.arch.lifecycle:compiler:$versions.arch"
+
     // Picasso
     compile "com.squareup.picasso:picasso:$versions.picasso"
 

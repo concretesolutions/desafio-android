@@ -7,7 +7,5 @@ object RepoRepository {
 
     private val api = GithubApi.instance()
 
-    fun search(page: Int) = api.searchRepositories(page = page, perPage = 10)
-            .observeOn(mainThread())
-
+    fun search(page: Int) = api.searchRepositories(page = page, perPage = 1).observeOn(mainThread())
 }
