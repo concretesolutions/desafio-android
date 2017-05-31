@@ -1,6 +1,7 @@
 package br.com.concrete.sdk.data.remote
 
 import br.com.concrete.sdk.BuildConfig
+import br.com.concrete.sdk.data.remote.interceptor.ResponseInterceptor
 import br.com.concrete.sdk.model.Page
 import br.com.concrete.sdk.model.PullRequest
 import br.com.concrete.sdk.model.Repo
@@ -15,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory.createWithScheduler
 import retrofit2.converter.gson.GsonConverterFactory
@@ -31,7 +33,7 @@ internal interface GithubApi {
             @Query("order") @Order order: String? = null,
             @Query("page") page: Int,
             @Query("per_page") perPage: Int
-    ): Observable<Page<Repo>>
+    ): Observable<Response<Page<Repo>>>
 
     @GET("repos/{fullName}/{repo}/pulls")
     fun listPullRequest(
@@ -45,7 +47,7 @@ internal interface GithubApi {
 
     companion object Factory {
 
-        private val api = Retrofit.Builder()
+        private val api: GithubApi = Retrofit.Builder()
                 .addCallAdapterFactory(createWithScheduler(Schedulers.io()))
                 .addConverterFactory(buildGson())
                 .client(buildClient())
@@ -56,7 +58,10 @@ internal interface GithubApi {
         private fun buildClient(): OkHttpClient {
             val logging = HttpLoggingInterceptor { Timber.i(it) }
                     .setLevel(Level.BODY)
-            return OkHttpClient.Builder().addInterceptor(logging).build()
+            return OkHttpClient.Builder()
+                    .addInterceptor(logging)
+                    .addInterceptor(ResponseInterceptor())
+                    .build()
         }
 
         private fun buildGson(): GsonConverterFactory {
