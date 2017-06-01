@@ -1,8 +1,5 @@
 package br.com.concrete.desafio.statemachine
 
-import android.databinding.DataBindingUtil.bind
-import android.databinding.ViewDataBinding
-import android.transition.Scene
 import android.transition.Transition
 import android.transition.TransitionManager.go
 import br.com.concrete.desafio.animation.SimpleTransitionListener
@@ -14,26 +11,21 @@ import br.com.concrete.desafio.animation.SimpleTransitionListener
 class SceneStateMachine : StateMachine<SceneState>() {
 
     override fun performChangeState(state: SceneState) {
-        val currentState = get(currentStateKey)
-        callAction(currentState?.scene, currentState?.exit)
+        get(currentStateKey)?.exit?.invoke()
 
-        if (state.transition == null) {
+        val attached = if (state.scene == null) false else state.scene!!.sceneRoot.isAttachedToWindow
+        if (state.transition == null || !attached) {
             state.scene?.enter()
-            callAction(state.scene, state.enter)
+            state.enter?.invoke()
         } else
             go(state.scene, state.transition?.addListener(object : SimpleTransitionListener() {
                 override fun onTransitionEnd(transition: Transition) {
-                    callAction(state.scene, state.enter)
+                    state.enter?.invoke()
                     transition.removeListener(this)
                 }
             }))
     }
 
     override fun createState() = SceneState()
-
-    private fun callAction(scene: Scene?, action: ((binding: ViewDataBinding) -> Unit)?) {
-        val root = scene?.sceneRoot?.getChildAt(0)
-        if (root != null) action?.invoke(bind(root))
-    }
 
 }

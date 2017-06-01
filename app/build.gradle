@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply from: "$rootDir/tools/tools.gradle"
 
 android {
@@ -8,10 +9,6 @@ android {
         applicationId "br.com.concrete.desafio"
 
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-    }
-
-    dataBinding {
-        enabled = true
     }
 
     signingConfigs {

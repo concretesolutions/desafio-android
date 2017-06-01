@@ -12,7 +12,7 @@ abstract class StateMachine<T> : HashMap<Int, T>() {
     private val CURRENT_KEY = "StateMachine.CurrentKey"
 
     private var onChangeState: ((key: Int) -> Unit)? = null
-    protected var currentStateKey: Int = 0
+    var currentStateKey: Int = 0
 
     /**
      * The implementation to change the state
@@ -33,7 +33,7 @@ abstract class StateMachine<T> : HashMap<Int, T>() {
         this.onChangeState = onChangeState
     }
 
-    fun changeState(stateKey: Int, onChangeState: ((key: Int) -> Unit)?) {
+    fun changeState(stateKey: Int, onChangeState: ((key: Int) -> Unit)? = this.onChangeState) {
 
         performChangeState(get(stateKey)!!)
         // On change state
@@ -43,8 +43,7 @@ abstract class StateMachine<T> : HashMap<Int, T>() {
     }
 
 
-    fun restoreInstanceState(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) return
+    fun restoreInstanceState(savedInstanceState: Bundle) {
         currentStateKey = savedInstanceState.getInt(CURRENT_KEY)
     }
 
@@ -54,7 +53,12 @@ abstract class StateMachine<T> : HashMap<Int, T>() {
         return bundle
     }
 
-    inline fun setup(func: StateMachine<T>.() -> Unit) = func()
+    inline fun setup(initalState: Int, restoreState: Bundle? = null, func: StateMachine<T>.() -> Unit) {
+        func()
+        currentStateKey = initalState
+        if (restoreState != null) restoreInstanceState(restoreState)
+        changeState(currentStateKey)
+    }
 
     inline fun add(key: Int, state: T.() -> Unit) = put(key, createState().apply { state() })
 

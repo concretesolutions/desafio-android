@@ -1,9 +1,10 @@
 package br.com.concrete.desafio.statemachine
 
-import android.databinding.ViewDataBinding
 import android.transition.Scene
 import android.transition.Transition
 import android.view.ViewGroup
+import br.com.concrete.desafio.repo.RepoListActivity
+import kotlin.reflect.KFunction1
 
 class SceneState {
 
@@ -11,22 +12,16 @@ class SceneState {
         private set
     var transition: Transition? = null
         private set
-    var start: (() -> Unit)? = null
+    var enter: (() -> Unit)? = null
         private set
-    var enter: ((binding: ViewDataBinding) -> Unit)? = null
-        private set
-    var exit: ((binding: ViewDataBinding) -> Unit)? = null
+    var exit: (() -> Unit)? = null
         private set
 
-    fun onStart(func: () -> Unit) {
-        start = func
-    }
-
-    fun onEnter(func: (binding: ViewDataBinding) -> Unit) {
+    fun onEnter(func: () -> Unit) {
         enter = func
     }
 
-    fun onExit(func: (binding: ViewDataBinding) -> Unit) {
+    fun onExit(func: () -> Unit) {
         exit = func
     }
 
