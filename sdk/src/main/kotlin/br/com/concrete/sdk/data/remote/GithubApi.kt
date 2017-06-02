@@ -21,12 +21,13 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory.createWithScheduler
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import timber.log.Timber
 
 internal interface GithubApi {
 
-    @GET("search/users")
+    @GET("search/repositories")
     fun searchRepositories(
             @Query("q") query: String = "language:Java",
             @Query("sort") @SortRepo sort: String? = null,
@@ -35,9 +36,10 @@ internal interface GithubApi {
             @Query("per_page") perPage: Int
     ): Observable<Response<Page<Repo>>>
 
-    @GET("repos/{fullName}/{repo}/pulls")
+    @GET("repos/{creator}/{repo}/pulls")
     fun listPullRequest(
-            @Query("fullName") fullName: String,
+            @Path("creator") creator: String,
+            @Path("repo") repo: String,
             @Query("state") @State state: String? = null,
             @Query("head") head: String? = null,
             @Query("base") base: String? = null,

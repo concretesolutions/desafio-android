@@ -8,4 +8,3 @@ data class Page<out T>(
         @Expose val items: List<T> = emptyList(),
         var nextPage: Int? = null
 )
-

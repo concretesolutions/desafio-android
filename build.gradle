@@ -76,7 +76,7 @@ ext {
     arch = '1.0.0-alpha1'
 
     // Google
-    gson = '2.8.0'
+    gson = '2.8.1'
 
     // Square
     picasso = '2.5.2'

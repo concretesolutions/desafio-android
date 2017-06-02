@@ -1,5 +1,7 @@
-package br.com.concrete.desafio.repo
+package br.com.concrete.desafio.pullrequest
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -7,36 +9,37 @@ import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
 import br.com.concrete.desafio.adapter.BaseAdapter
-import br.com.concrete.desafio.pullrequest.PullRequestListActivity
 import br.com.concrete.desafio.statemachine.SceneStateMachine
-import br.com.concrete.sdk.RepoRepository
+import br.com.concrete.sdk.PullRequestRepository
+import br.com.concrete.sdk.model.PullRequest
 import br.com.concrete.sdk.model.Repo
-import kotlinx.android.synthetic.main.activity_repo_list.*
-import kotlinx.android.synthetic.main.item_repo.view.*
+import kotlinx.android.synthetic.main.activity_pull_request_list.*
+import kotlinx.android.synthetic.main.item_pull_request.view.*
 import kotlinx.android.synthetic.main.sc_default_list.*
 
-class RepoListActivity : AppCompatActivity() {
+class PullRequestListActivity : AppCompatActivity() {
 
     val STATE_MACHINE = "STATE_MACHINE"
     val STATE_ADAPTER = "STATE_ADAPTER"
 
     val stateMachine = SceneStateMachine()
     val fade: Transition = Fade()
-    val adapter = BaseAdapter<Repo>(R.layout.item_repo)
+    val adapter = BaseAdapter<PullRequest>(R.layout.item_pull_request)
             .binder {
-                repo, position, view ->
-                view.itemRepoRoot.text = repo.name
+                pullRequest, position, view ->
+                view.itemPullRequestRoot.text = pullRequest.title
             }
             .click {
-                repo, position, view ->
-                view.context.startActivity(PullRequestListActivity.intent(view.context, repo))
+                pullRequest, position, view ->
+                view.context.toast(pullRequest.title)
             }
+    val repo: Repo by lazy { intent.extras.getParcelable<Repo>(EXTRA_REPO) }
 
     val onEnterLoading: () -> Unit = {
-        RepoRepository.search(0).subscribe(
+        PullRequestRepository.list(repo).subscribe(
                 {
-                    adapter.setList(it.items)
-                    if (it.items.isNotEmpty()) stateMachine.changeState(LIST_STATE)
+                    adapter.setList(it)
+                    if (it.isNotEmpty()) stateMachine.changeState(LIST_STATE)
                     else stateMachine.changeState(EMPTY_STATE)
                 },
                 { stateMachine.changeState(ERROR_STATE) })
@@ -49,7 +52,7 @@ class RepoListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_repo_list)
+        setContentView(R.layout.activity_pull_request_list)
 
         adapter.restoreInstanceState(savedInstanceState?.getBundle(STATE_ADAPTER))
         setupStateMachine(savedInstanceState?.getBundle(STATE_MACHINE))
@@ -64,23 +67,30 @@ class RepoListActivity : AppCompatActivity() {
     private fun setupStateMachine(savedInstanceState: Bundle?) {
         stateMachine.setup(initalState = LOADING_STATE, restoreState = savedInstanceState) {
             add(LOADING_STATE) {
-                scene(R.layout.sc_default_loading to activityRepoListRoot)
+                scene(R.layout.sc_default_loading to activityPullRequestRoot)
                 transition(fade)
                 onEnter(onEnterLoading)
             }
             add(LIST_STATE) {
-                scene(R.layout.sc_default_list to activityRepoListRoot)
+                scene(R.layout.sc_default_list to activityPullRequestRoot)
                 transition(fade)
                 onEnter(onEnterList)
             }
             add(EMPTY_STATE) {
-                scene(R.layout.sc_repo_list_empty to activityRepoListRoot)
+                scene(R.layout.sc_repo_list_empty to activityPullRequestRoot)
                 transition(fade)
             }
             add(ERROR_STATE) {
-                scene(R.layout.sc_repo_list_error to activityRepoListRoot)
+                scene(R.layout.sc_repo_list_error to activityPullRequestRoot)
                 transition(fade)
             }
+        }
+    }
+
+    companion object Factory {
+        val EXTRA_REPO = "EXTRA_REPO"
+        fun intent(context: Context, repo: Repo): Intent {
+            return Intent(context, PullRequestListActivity::class.java).putExtra(EXTRA_REPO, repo)
         }
     }
 }

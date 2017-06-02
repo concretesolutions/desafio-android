@@ -5,4 +5,8 @@
     <string name="repo_list_empty">EMPTY</string>
     <string name="repo_list_error">ERROR</string>
 
+    <!-- Pull Request List -->
+    <string name="pull_request_list_empty">EMPTY</string>
+    <string name="pull_request_list_error">ERROR</string>
+
 </resources>

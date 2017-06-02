@@ -3,8 +3,6 @@ package br.com.concrete.desafio.statemachine
 import android.transition.Scene
 import android.transition.Transition
 import android.view.ViewGroup
-import br.com.concrete.desafio.repo.RepoListActivity
-import kotlin.reflect.KFunction1
 
 class SceneState {
 

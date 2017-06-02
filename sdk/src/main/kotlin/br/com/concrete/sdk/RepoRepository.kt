@@ -12,7 +12,7 @@ object RepoRepository {
     private val api = GithubApi.instance()
 
     fun search(page: Int): Observable<Page<Repo>> {
-        return api.searchRepositories(page = page, perPage = 1)
+        return api.searchRepositories(page = page, perPage = 10)
                 .map({
                     it?.body()!!.apply {
                         nextPage = it.headers().get("Link").extractPage("next")
