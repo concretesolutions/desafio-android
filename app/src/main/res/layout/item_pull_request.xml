@@ -6,4 +6,4 @@
     android:gravity="center"
     android:background="?attr/selectableItemBackground"
     android:layout_height="wrap_content"
-    tools:context=".pullrequest.PullRequestListActivity" />
+    tools:context=".feature.pullrequest.PullRequestListActivity" />

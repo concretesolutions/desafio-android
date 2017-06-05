@@ -6,4 +6,4 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:text="@string/pull_request_list_error"
-    tools:context=".pullrequest.PullRequestListActivity" />
+    tools:context=".feature.pullrequest.PullRequestListActivity" />

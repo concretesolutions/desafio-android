@@ -7,4 +7,4 @@
     android:gravity="center"
     android:background="?attr/selectableItemBackground"
     android:layout_height="wrap_content"
-    tools:context=".repo.PullRequestListActivity" />
+    tools:context=".feature.repo.PullRequestListActivity" />

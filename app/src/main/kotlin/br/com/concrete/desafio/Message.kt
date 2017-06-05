@@ -1,3 +1,4 @@
+@file:JvmName("MessageUtils")
 package br.com.concrete.desafio
 
 import android.content.Context

@@ -1,3 +1,4 @@
+@file:JvmName("ViewStates")
 package br.com.concrete.desafio
 
 const val LIST_STATE = 0

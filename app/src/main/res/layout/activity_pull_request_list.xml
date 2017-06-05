@@ -4,4 +4,4 @@
     android:id="@+id/activityPullRequestRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pullrequest.PullRequestListActivity" />
+    tools:context=".feature.pullrequest.PullRequestListActivity" />
