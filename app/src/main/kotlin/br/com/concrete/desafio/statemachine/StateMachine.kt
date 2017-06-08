@@ -9,10 +9,12 @@ import android.os.Bundle
  */
 abstract class StateMachine<T> : HashMap<Int, T>() {
 
-    private val CURRENT_KEY = "StateMachine.CurrentKey"
+    companion object {
+        const val CURRENT_KEY = "StateMachine.CurrentKey"
+    }
 
     private var onChangeState: ((key: Int) -> Unit)? = null
-    var currentStateKey: Int = 0
+    var currentStateKey: Int = -1
 
     /**
      * The implementation to change the state
@@ -35,6 +37,8 @@ abstract class StateMachine<T> : HashMap<Int, T>() {
 
     fun changeState(stateKey: Int, onChangeState: ((key: Int) -> Unit)? = this.onChangeState) {
 
+        if (stateKey == currentStateKey) return
+
         performChangeState(get(stateKey)!!)
         // On change state
         onChangeState?.invoke(stateKey)
@@ -54,10 +58,8 @@ abstract class StateMachine<T> : HashMap<Int, T>() {
     }
 
     inline fun setup(initalState: Int, restoreState: Bundle? = null, func: StateMachine<T>.() -> Unit) {
-        func()
-        currentStateKey = initalState
-        if (restoreState != null) restoreInstanceState(restoreState)
-        changeState(currentStateKey)
+        this.func()
+        changeState(restoreState?.getInt(CURRENT_KEY) ?: initalState)
     }
 
     inline fun add(key: Int, state: T.() -> Unit) = put(key, createState().apply { state() })

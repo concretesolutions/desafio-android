@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Desafio Android</string>
 
+    <!-- Paginating -->
+    <string name="paginating_try_again">Tentar Novamente</string>
+
     <!-- Repo List -->
     <string name="repo_list_empty">EMPTY</string>
     <string name="repo_list_error">ERROR</string>

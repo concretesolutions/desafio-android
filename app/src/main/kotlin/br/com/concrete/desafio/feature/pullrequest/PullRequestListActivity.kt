@@ -8,13 +8,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
-import br.com.concrete.desafio.adapter.BaseAdapter
+import br.com.concrete.desafio.adapter.BaseRecyclerAdapter
+import br.com.concrete.desafio.feature.repo.pullRequestViewType
 import br.com.concrete.desafio.statemachine.SceneStateMachine
 import br.com.concrete.sdk.PullRequestRepository
 import br.com.concrete.sdk.model.PullRequest
 import br.com.concrete.sdk.model.Repo
 import kotlinx.android.synthetic.main.activity_pull_request_list.*
-import kotlinx.android.synthetic.main.item_pull_request.view.*
 import kotlinx.android.synthetic.main.sc_default_list.*
 
 class PullRequestListActivity : AppCompatActivity() {
@@ -29,19 +29,15 @@ class PullRequestListActivity : AppCompatActivity() {
 
     private val stateMachine = SceneStateMachine()
     private val fade: Transition = Fade()
-    private val adapter = BaseAdapter<PullRequest>(R.layout.item_pull_request)
-            .binder {
-                pullRequest, position, view ->
-                view.itemPullRequestRoot.text = pullRequest.title
-            }
+    private val adapter: BaseRecyclerAdapter<PullRequest> = BaseRecyclerAdapter<PullRequest>().register(pullRequestViewType())
     private val repo: Repo by lazy { intent.extras.getParcelable<Repo>(EXTRA_REPO) }
 
     private val onEnterLoading: () -> Unit = {
         PullRequestRepository.list(repo).subscribe(
                 {
-                    adapter.setList(it)
-                    if (it.isNotEmpty()) stateMachine.changeState(LIST_STATE)
-                    else stateMachine.changeState(EMPTY_STATE)
+                    adapter.addAll(it)
+                    if (it.isEmpty() && adapter.items.isEmpty()) stateMachine.changeState(EMPTY_STATE)
+                    else stateMachine.changeState(LIST_STATE)
                 },
                 { stateMachine.changeState(ERROR_STATE) })
     }

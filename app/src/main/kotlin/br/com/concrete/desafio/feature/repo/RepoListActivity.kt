@@ -6,37 +6,38 @@ import android.support.v7.widget.LinearLayoutManager
 import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
-import br.com.concrete.desafio.adapter.BaseAdapter
-import br.com.concrete.desafio.feature.pullrequest.PullRequestListActivity
+import br.com.concrete.desafio.adapter.PaginatingRecyclerAdapter
 import br.com.concrete.desafio.statemachine.SceneStateMachine
 import br.com.concrete.sdk.RepoRepository
 import br.com.concrete.sdk.model.Repo
 import kotlinx.android.synthetic.main.activity_repo_list.*
-import kotlinx.android.synthetic.main.item_repo.view.*
 import kotlinx.android.synthetic.main.sc_default_list.*
 
 class RepoListActivity : AppCompatActivity() {
 
     private val stateMachine = SceneStateMachine()
     private val fade: Transition = Fade()
-    private val adapter = BaseAdapter<Repo>(R.layout.item_repo)
-            .binder {
-                repo, position, view ->
-                view.itemRepoRoot.text = repo.name
-            }
-            .click {
-                repo, position, view ->
-                view.context.startActivity(PullRequestListActivity.intent(view.context, repo))
-            }
+
+    private val onLoadMore: (Int) -> Unit = {
+        RepoRepository.search(it).subscribe(
+                {
+                    adapter.addPage(it)
+                    if (it.items.isEmpty() && adapter.items.isEmpty()) stateMachine.changeState(EMPTY_STATE)
+                    else stateMachine.changeState(LIST_STATE)
+                },
+                {
+                    if (adapter.items.isEmpty()) stateMachine.changeState(ERROR_STATE)
+                    else adapter.failPage()
+                })
+    }
+
+    private val adapter: PaginatingRecyclerAdapter<Repo> = PaginatingRecyclerAdapter<Repo>()
+            .loadMore(onLoadMore)
+            .register(repoViewType())
+
 
     private val onEnterLoading: () -> Unit = {
-        RepoRepository.search(0).subscribe(
-                {
-                    adapter.setList(it.items)
-                    if (it.items.isNotEmpty()) stateMachine.changeState(LIST_STATE)
-                    else stateMachine.changeState(EMPTY_STATE)
-                },
-                { stateMachine.changeState(ERROR_STATE) })
+        onLoadMore.invoke(0)
     }
 
     private val onEnterList: () -> Unit = {
