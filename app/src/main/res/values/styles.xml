@@ -10,6 +10,7 @@
         <item name="colorAccent">@color/accent</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorControlHighlight">@color/lighter_gray</item>
         <item name="android:windowBackground">@null</item>
     </style>
 
@@ -53,6 +54,36 @@
     <style name="Desafio.TextView.Light">
         <item name="android:textColorPrimary">@color/text_color_dark</item>
         <item name="android:textColor">@color/text_color_dark</item>
+    </style>
+
+
+    <!-- Custom Themes -->
+    <style name="Desafio.TextView.Title">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:textAppearance">@style/Desafio.TextAppearance.Large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Desafio.TextView.Description">
+        <item name="android:textAppearance">@style/Desafio.TextAppearance.Small</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Desafio.TextView.Counter">
+        <item name="android:textColor">?colorAccent</item>
+        <item name="android:textAppearance">@style/Desafio.TextAppearance.Medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Desafio.TextView.UserLogin">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:textAppearance">@style/Desafio.TextAppearance.Small</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">end|center</item>
     </style>
 
 </resources>

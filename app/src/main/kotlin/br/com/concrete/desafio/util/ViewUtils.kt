@@ -5,6 +5,9 @@ package br.com.concrete.desafio.util
 import android.support.v7.app.ActionBar
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import br.com.concrete.desafio.R
+import com.squareup.picasso.Picasso
 
 fun View.addStatusBarPadding() {
     setPadding(paddingLeft,
@@ -18,7 +21,11 @@ fun View.addStatusBarMargin() {
 }
 
 fun ActionBar?.enableBack() {
-    if(this == null) return
+    if (this == null) return
     setDisplayHomeAsUpEnabled(true)
     setDisplayShowHomeEnabled(true)
+}
+
+fun ImageView.loadUrl(url: String) {
+    Picasso.with(context).load(url).placeholder(R.drawable.ic_avatar).into(this)
 }

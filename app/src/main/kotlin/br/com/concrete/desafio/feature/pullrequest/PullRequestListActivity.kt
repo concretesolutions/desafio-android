@@ -8,9 +8,9 @@ import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
 import br.com.concrete.desafio.adapter.BaseRecyclerAdapter
+import br.com.concrete.desafio.decorator.DividerItemDecoration
 import br.com.concrete.desafio.feature.BaseActivity
 import br.com.concrete.desafio.statemachine.SceneStateMachine
-import br.com.concrete.desafio.util.addStatusBarPadding
 import br.com.concrete.desafio.util.enableBack
 import br.com.concrete.sdk.PullRequestRepository
 import br.com.concrete.sdk.model.PullRequest
@@ -45,6 +45,7 @@ class PullRequestListActivity : BaseActivity() {
 
     private val onEnterList: () -> Unit = {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, R.dimen.default_margin))
         recyclerView.adapter = adapter
     }
 

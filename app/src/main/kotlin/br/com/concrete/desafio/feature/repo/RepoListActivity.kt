@@ -6,9 +6,9 @@ import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
 import br.com.concrete.desafio.adapter.PaginatingRecyclerAdapter
+import br.com.concrete.desafio.decorator.DividerItemDecoration
 import br.com.concrete.desafio.feature.BaseActivity
 import br.com.concrete.desafio.statemachine.SceneStateMachine
-import br.com.concrete.desafio.util.addStatusBarPadding
 import br.com.concrete.sdk.RepoRepository
 import br.com.concrete.sdk.model.Repo
 import kotlinx.android.synthetic.main.activity_repo_list.*
@@ -43,6 +43,7 @@ class RepoListActivity : BaseActivity() {
 
     private val onEnterList: () -> Unit = {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, R.dimen.default_margin))
         recyclerView.adapter = adapter
     }
 

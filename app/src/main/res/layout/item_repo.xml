@@ -1,10 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemRepoRoot"
     android:layout_width="match_parent"
-    android:text="Oi"
-    android:gravity="center"
-    android:background="?attr/selectableItemBackground"
     android:layout_height="wrap_content"
-    tools:context=".feature.repo.PullRequestListActivity" />
+    android:background="?attr/selectableItemBackground"
+    android:padding="@dimen/default_margin"
+    tools:background="@color/white"
+    tools:context=".feature.repo.RepoListActivity">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/Desafio.TextView.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nome Repositório" />
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/Desafio.TextView.Description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="Descrição do repositório que consegue ser realmente muito grande mesmo" />
+
+    <ImageView
+        android:id="@+id/forks_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="@dimen/default_margin"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_fork"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <TextView
+        android:id="@+id/forks"
+        style="@style/Desafio.TextView.Counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/forks_icon"
+        app:layout_constraintStart_toEndOf="@id/forks_icon"
+        app:layout_constraintTop_toTopOf="@+id/forks_icon"
+        tools:text="640" />
+
+    <ImageView
+        android:id="@+id/starts_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_star"
+        app:layout_constraintStart_toEndOf="@+id/forks"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <TextView
+        android:id="@+id/stars"
+        style="@style/Desafio.TextView.Counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/starts_icon"
+        app:layout_constraintStart_toEndOf="@id/starts_icon"
+        app:layout_constraintTop_toTopOf="@+id/starts_icon"
+        tools:text="98" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:contentDescription="@null"
+        android:scaleType="fitEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_avatar" />
+
+    <TextView
+        android:id="@+id/userLogin"
+        style="@style/Desafio.TextView.UserLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/avatar"
+        tools:text="username" />
+
+</android.support.constraint.ConstraintLayout>
