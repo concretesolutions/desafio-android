@@ -1,11 +1,58 @@
 <resources>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:textViewStyle">@style/Desafio.TextView</item>
+        <item name="toolbarStyle">@style/Desafio.Toolbar</item>
+    </style>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <!-- TextAppearance  -->
+    <style name="Desafio.TextAppearance" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/default_text_size</item>
+    </style>
+
+    <style name="Desafio.TextAppearance.Small">
+        <item name="android:textSize">@dimen/small_text_size</item>
+    </style>
+
+    <style name="Desafio.TextAppearance.Medium">
+        <item name="android:textSize">@dimen/medium_text_size</item>
+    </style>
+
+    <style name="Desafio.TextAppearance.Large">
+        <item name="android:textSize">@dimen/large_text_size</item>
+    </style>
+
+    <!-- Toolbar  -->
+    <style name="Desafio.Toolbar" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorPrimaryDark</item>
+        <item name="titleTextAppearance">@style/Desafio.Toolbar.Title</item>
+    </style>
+
+    <style name="Desafio.Toolbar.Title" parent="Desafio.TextAppearance.Large">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- TextView  -->
+    <style name="Desafio.TextView" parent="android:Widget.TextView">
+        <item name="android:textColorPrimary">@color/text_color_light</item>
+        <item name="android:textColor">@color/text_color_light</item>
+        <item name="android:textAppearance">@style/Desafio.TextAppearance</item>
+        <item name="android:textAppearanceLarge">@style/Desafio.TextAppearance.Large</item>
+        <item name="android:textAppearanceMedium">@style/Desafio.TextAppearance.Medium</item>
+        <item name="android:textAppearanceSmall">@style/Desafio.TextAppearance.Small</item>
+    </style>
+
+    <style name="Desafio.TextView.Light">
+        <item name="android:textColorPrimary">@color/text_color_dark</item>
+        <item name="android:textColor">@color/text_color_dark</item>
     </style>
 
 </resources>

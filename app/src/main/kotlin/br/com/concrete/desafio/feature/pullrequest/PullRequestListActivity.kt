@@ -3,21 +3,22 @@ package br.com.concrete.desafio.feature.pullrequest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
 import br.com.concrete.desafio.adapter.BaseRecyclerAdapter
-import br.com.concrete.desafio.feature.repo.pullRequestViewType
+import br.com.concrete.desafio.feature.BaseActivity
 import br.com.concrete.desafio.statemachine.SceneStateMachine
+import br.com.concrete.desafio.util.addStatusBarPadding
+import br.com.concrete.desafio.util.enableBack
 import br.com.concrete.sdk.PullRequestRepository
 import br.com.concrete.sdk.model.PullRequest
 import br.com.concrete.sdk.model.Repo
 import kotlinx.android.synthetic.main.activity_pull_request_list.*
 import kotlinx.android.synthetic.main.sc_default_list.*
 
-class PullRequestListActivity : AppCompatActivity() {
+class PullRequestListActivity : BaseActivity() {
 
     companion object Statics {
         private const val EXTRA_REPO = "EXTRA_REPO"
@@ -50,7 +51,8 @@ class PullRequestListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_request_list)
-
+        supportActionBar.enableBack()
+        supportActionBar?.title = repo.name.capitalize()
         adapter.restoreInstanceState(savedInstanceState?.getBundle(STATE_ADAPTER))
         setupStateMachine(savedInstanceState?.getBundle(STATE_MACHINE))
     }
@@ -64,21 +66,21 @@ class PullRequestListActivity : AppCompatActivity() {
     private fun setupStateMachine(savedInstanceState: Bundle?) {
         stateMachine.setup(initalState = LOADING_STATE, restoreState = savedInstanceState) {
             add(LOADING_STATE) {
-                scene(R.layout.sc_default_loading to activityPullRequestRoot)
+                scene(R.layout.sc_default_loading to content)
                 transition(fade)
                 onEnter(onEnterLoading)
             }
             add(LIST_STATE) {
-                scene(R.layout.sc_default_list to activityPullRequestRoot)
+                scene(R.layout.sc_default_list to content)
                 transition(fade)
                 onEnter(onEnterList)
             }
             add(EMPTY_STATE) {
-                scene(R.layout.sc_repo_list_empty to activityPullRequestRoot)
+                scene(R.layout.sc_repo_list_empty to content)
                 transition(fade)
             }
             add(ERROR_STATE) {
-                scene(R.layout.sc_repo_list_error to activityPullRequestRoot)
+                scene(R.layout.sc_repo_list_error to content)
                 transition(fade)
             }
         }

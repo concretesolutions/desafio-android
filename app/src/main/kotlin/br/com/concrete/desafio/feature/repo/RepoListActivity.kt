@@ -1,19 +1,20 @@
 package br.com.concrete.desafio.feature.repo
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
 import br.com.concrete.desafio.adapter.PaginatingRecyclerAdapter
+import br.com.concrete.desafio.feature.BaseActivity
 import br.com.concrete.desafio.statemachine.SceneStateMachine
+import br.com.concrete.desafio.util.addStatusBarPadding
 import br.com.concrete.sdk.RepoRepository
 import br.com.concrete.sdk.model.Repo
 import kotlinx.android.synthetic.main.activity_repo_list.*
 import kotlinx.android.synthetic.main.sc_default_list.*
 
-class RepoListActivity : AppCompatActivity() {
+class RepoListActivity : BaseActivity() {
 
     private val stateMachine = SceneStateMachine()
     private val fade: Transition = Fade()
@@ -48,7 +49,6 @@ class RepoListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repo_list)
-
         adapter.restoreInstanceState(savedInstanceState?.getBundle(STATE_ADAPTER))
         setupStateMachine(savedInstanceState?.getBundle(STATE_MACHINE))
     }
@@ -62,21 +62,21 @@ class RepoListActivity : AppCompatActivity() {
     private fun setupStateMachine(savedInstanceState: Bundle?) {
         stateMachine.setup(initalState = LOADING_STATE, restoreState = savedInstanceState) {
             add(LOADING_STATE) {
-                scene(R.layout.sc_default_loading to activityRepoListRoot)
+                scene(R.layout.sc_default_loading to content)
                 transition(fade)
                 onEnter(onEnterLoading)
             }
             add(LIST_STATE) {
-                scene(R.layout.sc_default_list to activityRepoListRoot)
+                scene(R.layout.sc_default_list to content)
                 transition(fade)
                 onEnter(onEnterList)
             }
             add(EMPTY_STATE) {
-                scene(R.layout.sc_repo_list_empty to activityRepoListRoot)
+                scene(R.layout.sc_repo_list_empty to content)
                 transition(fade)
             }
             add(ERROR_STATE) {
-                scene(R.layout.sc_repo_list_error to activityRepoListRoot)
+                scene(R.layout.sc_repo_list_error to content)
                 transition(fade)
             }
         }

@@ -1,5 +1,6 @@
-@file:JvmName("MessageUtils")
-package br.com.concrete.desafio
+@file:JvmName("ContextUtils")
+
+package br.com.concrete.desafio.util
 
 import android.content.Context
 import android.support.annotation.StringRes
@@ -13,3 +14,10 @@ fun Context.toast(@StringRes msgRes: Int) = Toast.makeText(this, msgRes, Toast.L
 fun Context.alert(@StringRes title: Int, @StringRes message: Int) = AlertDialog.Builder(this).setTitle(title).setMessage(message).show()
 
 fun Context.alert(title: String?, message: String?) = AlertDialog.Builder(this).setTitle(title).setMessage(message).show()
+
+fun Context.statusBarHeight(): Int {
+    var result = 0
+    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+    if (resourceId > 0) result = resources.getDimensionPixelSize(resourceId)
+    return result
+}
