@@ -1,6 +1,7 @@
 package br.com.concrete.desafio.statemachine
 
 import android.os.Bundle
+import br.com.concrete.desafio.STATE_MACHINE_CURRENT_KEY
 
 /**
  * Simple finite state machine for view states.
@@ -8,10 +9,6 @@ import android.os.Bundle
  * Extends this class and implements performChangeState method to make ViewState transitions
  */
 abstract class StateMachine<T> : HashMap<Int, T>() {
-
-    companion object {
-        const val CURRENT_KEY = "StateMachine.CurrentKey"
-    }
 
     private var onChangeState: ((key: Int) -> Unit)? = null
     var currentStateKey: Int = -1
@@ -48,18 +45,18 @@ abstract class StateMachine<T> : HashMap<Int, T>() {
 
 
     fun restoreInstanceState(savedInstanceState: Bundle) {
-        currentStateKey = savedInstanceState.getInt(CURRENT_KEY)
+        currentStateKey = savedInstanceState.getInt(STATE_MACHINE_CURRENT_KEY)
     }
 
     fun saveInstanceState(): Bundle {
         val bundle = Bundle()
-        bundle.putInt(CURRENT_KEY, currentStateKey)
+        bundle.putInt(STATE_MACHINE_CURRENT_KEY, currentStateKey)
         return bundle
     }
 
     inline fun setup(initalState: Int, restoreState: Bundle? = null, func: StateMachine<T>.() -> Unit) {
         this.func()
-        changeState(restoreState?.getInt(CURRENT_KEY) ?: initalState)
+        changeState(restoreState?.getInt(STATE_MACHINE_CURRENT_KEY) ?: initalState)
     }
 
     inline fun add(key: Int, state: T.() -> Unit) = put(key, createState().apply { state() })

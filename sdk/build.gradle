@@ -7,7 +7,7 @@ android {
     publishNonDefault true
 
     defaultConfig {
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        consumerProguardFiles 'consumer-proguard-rules.pro'
     }
 
     def baseUrl = [
@@ -20,7 +20,7 @@ android {
 
             buildConfigField 'String', 'BASE_URL', baseUrl.debug
 
-            minifyEnabled false
+            minifyEnabled true
             useProguard false
             shrinkResources false
         }
@@ -39,28 +39,28 @@ android {
 final versions = rootProject.ext
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     // Support
     compile "com.android.support:support-annotations:$versions.androidSupport"
 
     // Gson
-    compile "com.google.code.gson:gson:$versions.gson"
+    api "com.google.code.gson:gson:$versions.gson"
 
     // OkHttp
-    compile "com.squareup.okhttp3:okhttp:$versions.okHttp"
-    compile("com.squareup.okhttp3:logging-interceptor:$versions.okHttp") {
+    api "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    api("com.squareup.okhttp3:logging-interceptor:$versions.okHttp") {
         exclude module: 'okhttp'
     }
 
     // Retrofit
-    compile "com.squareup.retrofit2:retrofit:$versions.retrofit"
-    compile "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
-    compile "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    api "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    api "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    api "com.squareup.retrofit2:converter-gson:$versions.retrofit"
 
     // Rx Android
-    compile "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+    api "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
 
     // Log Tracking
-    compile "com.jakewharton.timber:timber:$versions.timber"
+    api "com.jakewharton.timber:timber:$versions.timber"
 }

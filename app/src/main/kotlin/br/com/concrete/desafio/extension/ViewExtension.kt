@@ -1,12 +1,13 @@
 @file:JvmName("ViewUtils")
 
-package br.com.concrete.desafio.util
+package br.com.concrete.desafio.extension
 
 import android.support.v7.app.ActionBar
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import br.com.concrete.desafio.R
+import br.com.concrete.desafio.transform.CircleTransform
 import com.squareup.picasso.Picasso
 
 fun View.addStatusBarPadding() {
@@ -27,5 +28,5 @@ fun ActionBar?.enableBack() {
 }
 
 fun ImageView.loadUrl(url: String) {
-    Picasso.with(context).load(url).placeholder(R.drawable.ic_avatar).into(this)
+    Picasso.with(context).load(url).placeholder(R.drawable.ic_avatar).transform(CircleTransform()).into(this)
 }

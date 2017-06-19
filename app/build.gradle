@@ -35,7 +35,7 @@ android {
             debuggable true
             testCoverageEnabled false
 
-            minifyEnabled false
+            minifyEnabled true
             useProguard false
             shrinkResources false
         }
@@ -54,40 +54,40 @@ android {
 final versions = rootProject.ext
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     implementation project(':sdk')
 
     // Picasso
-    compile "com.squareup.picasso:picasso:$versions.picasso"
+    api "com.squareup.picasso:picasso:$versions.picasso"
 
     // Android Support
-    compile "com.android.support:support-compat:$versions.androidSupport"
-    compile "com.android.support:support-core-ui:$versions.androidSupport"
-    compile "com.android.support:support-core-utils:$versions.androidSupport"
-    compile("com.android.support:support-v4:$versions.androidSupport") {
+    api "com.android.support:support-compat:$versions.androidSupport"
+    api "com.android.support:support-core-ui:$versions.androidSupport"
+    api "com.android.support:support-core-utils:$versions.androidSupport"
+    api("com.android.support:support-v4:$versions.androidSupport") {
         exclude module: 'support-annotations'
         exclude module: 'support-compat'
         exclude module: 'support-core-utils'
         exclude module: 'support-media-compat'
         exclude module: 'support-core-ui'
     }
-    compile("com.android.support:appcompat-v7:$versions.androidSupport") {
+    api("com.android.support:appcompat-v7:$versions.androidSupport") {
         exclude module: 'support-v4'
     }
-    compile("com.android.support:design:$versions.androidSupport") {
+    api("com.android.support:design:$versions.androidSupport") {
         exclude module: 'support-v4'
         exclude module: 'appcompat-v7'
         exclude module: 'recyclerview-v7'
     }
-    compile("com.android.support:recyclerview-v7:$versions.androidSupport") {
+    api("com.android.support:recyclerview-v7:$versions.androidSupport") {
         exclude module: 'support-v4'
         exclude module: 'support-annotations'
         exclude module: 'support-compat'
         exclude module: 'support-core-ui'
     }
-    compile("com.android.support:cardview-v7:$versions.androidSupport") {
+    api("com.android.support:cardview-v7:$versions.androidSupport") {
         exclude module: 'support-annotations'
     }
-    compile "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+    api "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
 }

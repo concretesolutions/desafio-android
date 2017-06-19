@@ -11,7 +11,7 @@ import br.com.concrete.desafio.adapter.BaseRecyclerAdapter
 import br.com.concrete.desafio.decorator.DividerItemDecoration
 import br.com.concrete.desafio.feature.BaseActivity
 import br.com.concrete.desafio.statemachine.SceneStateMachine
-import br.com.concrete.desafio.util.enableBack
+import br.com.concrete.desafio.extension.enableBack
 import br.com.concrete.sdk.PullRequestRepository
 import br.com.concrete.sdk.model.PullRequest
 import br.com.concrete.sdk.model.Repo

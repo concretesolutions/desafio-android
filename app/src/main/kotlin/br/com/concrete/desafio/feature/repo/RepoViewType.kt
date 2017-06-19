@@ -3,7 +3,7 @@ package br.com.concrete.desafio.feature.repo
 import br.com.concrete.desafio.R
 import br.com.concrete.desafio.adapter.ViewType
 import br.com.concrete.desafio.feature.pullrequest.PullRequestListActivity
-import br.com.concrete.desafio.util.loadUrl
+import br.com.concrete.desafio.extension.loadUrl
 import br.com.concrete.sdk.model.Repo
 import kotlinx.android.synthetic.main.item_repo.view.*
 

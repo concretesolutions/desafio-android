@@ -2,8 +2,8 @@ package br.com.concrete.desafio.feature.pullrequest
 
 import br.com.concrete.desafio.R
 import br.com.concrete.desafio.adapter.ViewType
-import br.com.concrete.desafio.util.loadUrl
-import br.com.concrete.desafio.util.toast
+import br.com.concrete.desafio.extension.loadUrl
+import br.com.concrete.desafio.extension.toast
 import br.com.concrete.sdk.model.PullRequest
 import kotlinx.android.synthetic.main.item_pull_request.view.*
 

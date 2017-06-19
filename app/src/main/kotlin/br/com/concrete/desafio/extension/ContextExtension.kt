@@ -1,6 +1,6 @@
 @file:JvmName("ContextUtils")
 
-package br.com.concrete.desafio.util
+package br.com.concrete.desafio.extension
 
 import android.content.Context
 import android.support.annotation.StringRes

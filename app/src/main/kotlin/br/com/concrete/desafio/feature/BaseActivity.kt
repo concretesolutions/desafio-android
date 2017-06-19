@@ -2,7 +2,7 @@ package br.com.concrete.desafio.feature
 
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import br.com.concrete.desafio.util.addStatusBarPadding
+import br.com.concrete.desafio.extension.addStatusBarPadding
 import kotlinx.android.synthetic.main.activity_repo_list.*
 
 abstract class BaseActivity : AppCompatActivity() {
