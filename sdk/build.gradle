@@ -4,8 +4,6 @@ apply from: "$rootDir/tools/tools.gradle"
 
 android {
 
-    publishNonDefault true
-
     defaultConfig {
         consumerProguardFiles 'consumer-proguard-rules.pro'
     }
@@ -22,7 +20,6 @@ android {
 
             minifyEnabled true
             useProguard false
-            shrinkResources false
         }
 
         release {
@@ -31,7 +28,6 @@ android {
 
             minifyEnabled true
             useProguard true
-            shrinkResources true
         }
     }
 }
@@ -42,7 +38,7 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     // Support
-    compile "com.android.support:support-annotations:$versions.androidSupport"
+    api "com.android.support:support-annotations:$versions.androidSupport"
 
     // Gson
     api "com.google.code.gson:gson:$versions.gson"
