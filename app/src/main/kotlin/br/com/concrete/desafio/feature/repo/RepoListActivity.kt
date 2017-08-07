@@ -64,7 +64,7 @@ class RepoListActivity : BaseActivity() {
     }
 
     private fun setupStateMachine(savedInstanceState: Bundle?) {
-        stateMachine.setup(initalState = LOADING_STATE, restoreState = savedInstanceState) {
+        stateMachine.setup(initialState = LOADING_STATE, restoreState = savedInstanceState) {
             add(LOADING_STATE) {
                 scene(R.layout.sc_default_loading to content)
                 transition(fade)

@@ -4,14 +4,17 @@ import android.os.Bundle
 import br.com.concrete.desafio.STATE_MACHINE_CURRENT_KEY
 
 /**
- * Simple finite state machine for view states.
+ * Simple finite state machine for view stateMap.
  * This class have the necessary methods to do ViewState transitions
  * Extends this class and implements performChangeState method to make ViewState transitions
  */
-abstract class StateMachine<T> : HashMap<Int, T>() {
+abstract class StateMachine<T> {
+
+    internal val stateMap = HashMap<Int, T>()
 
     private var onChangeState: ((key: Int) -> Unit)? = null
     var currentStateKey: Int = -1
+        private set
 
     /**
      * The implementation to change the state
@@ -23,26 +26,24 @@ abstract class StateMachine<T> : HashMap<Int, T>() {
     /**
      * The implementation to Create a State
 
-     * @param state
+     * @return new State instance
      */
-    abstract fun createState(): T
-
+    protected abstract fun createState(): T
 
     fun onChangeState(onChangeState: ((key: Int) -> Unit)) {
         this.onChangeState = onChangeState
     }
 
-    fun changeState(stateKey: Int, onChangeState: ((key: Int) -> Unit)? = this.onChangeState) {
+    fun changeState(stateKey: Int, forceChange: Boolean = false, onChangeState: ((key: Int) -> Unit)? = this.onChangeState) {
 
-        if (stateKey == currentStateKey) return
+        if (stateKey == currentStateKey && !forceChange) return
 
-        performChangeState(get(stateKey)!!)
+        performChangeState(stateMap[stateKey]!!)
         // On change state
         onChangeState?.invoke(stateKey)
 
         currentStateKey = stateKey
     }
-
 
     fun restoreInstanceState(savedInstanceState: Bundle) {
         currentStateKey = savedInstanceState.getInt(STATE_MACHINE_CURRENT_KEY)
@@ -54,11 +55,12 @@ abstract class StateMachine<T> : HashMap<Int, T>() {
         return bundle
     }
 
-    inline fun setup(initalState: Int, restoreState: Bundle? = null, func: StateMachine<T>.() -> Unit) {
-        this.func()
-        changeState(restoreState?.getInt(STATE_MACHINE_CURRENT_KEY) ?: initalState)
-    }
+    fun add(key: Int, state: T.() -> Unit) = stateMap.put(key, createState().apply { state() })
 
-    inline fun add(key: Int, state: T.() -> Unit) = put(key, createState().apply { state() })
+    inline fun setup(initialState: Int, restoreState: Bundle? = null, func: StateMachine<T>.() -> Unit) {
+        func()
+        val state = if (currentStateKey != -1) currentStateKey else initialState
+        changeState(restoreState?.getInt(STATE_MACHINE_CURRENT_KEY) ?: state, forceChange = true)
+    }
 
 }

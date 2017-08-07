@@ -9,7 +9,7 @@ import android.view.View.*
 class ViewStateMachine : StateMachine<ViewState>() {
 
     override fun performChangeState(state: ViewState) {
-        get(currentStateKey)?.exit?.invoke()
+        stateMap[currentStateKey]?.exit?.invoke()
         state.gones.forEach { it.visibility = GONE }
         state.visibles.forEach { it.visibility = VISIBLE }
         state.invisibles.forEach { it.visibility = INVISIBLE }

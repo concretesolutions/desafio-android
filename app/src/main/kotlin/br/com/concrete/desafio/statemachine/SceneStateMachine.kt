@@ -11,7 +11,7 @@ import br.com.concrete.desafio.animation.SimpleTransitionListener
 class SceneStateMachine : StateMachine<SceneState>() {
 
     override fun performChangeState(state: SceneState) {
-        get(currentStateKey)?.exit?.invoke()
+        stateMap[currentStateKey]?.exit?.invoke()
 
         val attached = if (state.scene == null) false else state.scene!!.sceneRoot.isAttachedToWindow
         if (state.transition == null || !attached) {
