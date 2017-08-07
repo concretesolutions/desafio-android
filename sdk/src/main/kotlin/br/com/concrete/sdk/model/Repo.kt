@@ -1,7 +1,10 @@
 package br.com.concrete.sdk.model
 
 import android.os.Parcel
-import android.os.Parcelable
+import br.com.concrete.sdk.extension.KParcelable
+import br.com.concrete.sdk.extension.parcelableCreator
+import br.com.concrete.sdk.extension.readTypedObjectCompat
+import br.com.concrete.sdk.extension.writeTypedObjectCompat
 import com.google.gson.annotations.Expose
 
 data class Repo(
@@ -12,33 +15,28 @@ data class Repo(
         @Expose val forks: Long,
         @Expose val stargazersCount: Long,
         @Expose val owner: User
-) : Parcelable {
+) : KParcelable {
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<Repo> = object : Parcelable.Creator<Repo> {
-            override fun createFromParcel(source: Parcel): Repo = Repo(source)
-            override fun newArray(size: Int): Array<Repo?> = arrayOfNulls(size)
-        }
+        @JvmField val CREATOR = parcelableCreator(::Repo)
     }
 
-    constructor(source: Parcel) : this(
+    private constructor(source: Parcel) : this(
             source.readLong(),
             source.readString(),
             source.readString(),
             source.readString(),
             source.readLong(),
             source.readLong(),
-            source.readParcelable<User>(User::class.java.classLoader)
+            source.readTypedObjectCompat(User.CREATOR)!!
     )
 
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeLong(id)
-        dest.writeString(name)
-        dest.writeString(fullName)
-        dest.writeString(description)
-        dest.writeLong(forks)
-        dest.writeLong(stargazersCount)
-        dest.writeParcelable(owner, 0)
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeLong(id)
+        writeString(name)
+        writeString(fullName)
+        writeString(description)
+        writeLong(forks)
+        writeLong(stargazersCount)
+        writeTypedObjectCompat(owner, flags)
     }
 }

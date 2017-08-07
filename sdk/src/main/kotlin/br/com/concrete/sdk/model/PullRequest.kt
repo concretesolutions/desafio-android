@@ -1,7 +1,10 @@
 package br.com.concrete.sdk.model
 
 import android.os.Parcel
-import android.os.Parcelable
+import br.com.concrete.sdk.extension.KParcelable
+import br.com.concrete.sdk.extension.parcelableCreator
+import br.com.concrete.sdk.extension.readTypedObjectCompat
+import br.com.concrete.sdk.extension.writeTypedObjectCompat
 import br.com.concrete.sdk.model.type.State
 import com.google.gson.annotations.Expose
 
@@ -11,29 +14,24 @@ data class PullRequest(
         @Expose val title: String,
         @Expose val user: User,
         @Expose val body: String
-) : Parcelable {
+) : KParcelable {
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<PullRequest> = object : Parcelable.Creator<PullRequest> {
-            override fun createFromParcel(source: Parcel): PullRequest = PullRequest(source)
-            override fun newArray(size: Int): Array<PullRequest?> = arrayOfNulls(size)
-        }
+        @JvmField val CREATOR = parcelableCreator(::PullRequest)
     }
 
-    constructor(source: Parcel) : this(
+    private constructor(source: Parcel) : this(
             source.readLong(),
             source.readString(),
             source.readString(),
-            source.readParcelable<User>(User::class.java.classLoader),
+            source.readTypedObjectCompat(User.CREATOR)!!,
             source.readString()
     )
 
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeLong(id)
-        dest.writeString(state)
-        dest.writeString(title)
-        dest.writeParcelable(user, 0)
-        dest.writeString(body)
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeLong(id)
+        writeString(state)
+        writeString(title)
+        writeTypedObjectCompat(user, flags)
+        writeString(body)
     }
 }

@@ -1,3 +1,5 @@
+@file:JvmName("TypeConstants")
+
 package br.com.concrete.sdk.model.type
 
 //region Sort Pull Request | Repo

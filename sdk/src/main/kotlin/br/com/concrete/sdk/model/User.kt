@@ -1,34 +1,31 @@
 package br.com.concrete.sdk.model
 
 import android.os.Parcel
-import android.os.Parcelable
+import br.com.concrete.sdk.extension.KParcelable
+import br.com.concrete.sdk.extension.parcelableCreator
+import com.google.gson.annotations.Expose
 
 data class User(
-        val login: String,
-        val id: Long,
-        val avatarUrl: String,
-        val score: Int
-) : Parcelable {
+        @Expose val login: String,
+        @Expose val id: Long,
+        @Expose val avatarUrl: String,
+        @Expose val score: Int
+) : KParcelable {
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<User> = object : Parcelable.Creator<User> {
-            override fun createFromParcel(source: Parcel): User = User(source)
-            override fun newArray(size: Int): Array<User?> = arrayOfNulls(size)
-        }
+        @JvmField val CREATOR = parcelableCreator(::User)
     }
 
-    constructor(source: Parcel) : this(
+    private constructor(source: Parcel) : this(
             source.readString(),
             source.readLong(),
             source.readString(),
             source.readInt()
     )
 
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeString(login)
-        dest.writeLong(id)
-        dest.writeString(avatarUrl)
-        dest.writeInt(score)
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeString(login)
+        writeLong(id)
+        writeString(avatarUrl)
+        writeInt(score)
     }
 }
