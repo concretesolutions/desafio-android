@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Desafio Android</string>
-
     <!-- Paginating -->
     <string name="paginating_try_again">Tentar Novamente</string>
 

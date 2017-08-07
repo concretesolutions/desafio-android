@@ -15,19 +15,11 @@ android {
 
     buildTypes {
         debug {
-
             buildConfigField 'String', 'BASE_URL', baseUrl.debug
-
-            minifyEnabled true
-            useProguard false
         }
 
         release {
-
             buildConfigField 'String', 'BASE_URL', baseUrl.release
-
-            minifyEnabled true
-            useProguard true
         }
     }
 }
@@ -44,15 +36,23 @@ dependencies {
     api "com.google.code.gson:gson:$versions.gson"
 
     // OkHttp
-    api "com.squareup.okhttp3:okhttp:$versions.okHttp"
-    api("com.squareup.okhttp3:logging-interceptor:$versions.okHttp") {
+    implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    implementation("com.squareup.okhttp3:logging-interceptor:$versions.okHttp") {
         exclude module: 'okhttp'
     }
 
     // Retrofit
-    api "com.squareup.retrofit2:retrofit:$versions.retrofit"
-    api "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
-    api "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    implementation("com.squareup.retrofit2:retrofit:$versions.retrofit") {
+        exclude module: 'okhttp'
+    }
+    implementation("com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit") {
+        exclude module: 'retrofit'
+        exclude module: 'rxjava'
+    }
+    implementation("com.squareup.retrofit2:converter-gson:$versions.retrofit") {
+        exclude module: 'retrofit'
+        exclude module: 'gson'
+    }
 
     // Rx Android
     api "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
