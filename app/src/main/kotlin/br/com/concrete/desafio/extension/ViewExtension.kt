@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import br.com.concrete.desafio.R
-import br.com.concrete.desafio.transform.CircleTransform
+import br.com.concrete.desafio.picasso.transformation.CircleTransform
 import com.squareup.picasso.Picasso
 
 fun View.addStatusBarPadding() {

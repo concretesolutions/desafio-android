@@ -1,4 +1,4 @@
-package br.com.concrete.desafio.transform
+package br.com.concrete.desafio.picasso.transformation
 
 import android.graphics.Bitmap
 import android.graphics.BitmapShader
