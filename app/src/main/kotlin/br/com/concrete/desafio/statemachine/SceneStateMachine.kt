@@ -18,7 +18,7 @@ class SceneStateMachine : StateMachine<SceneState>() {
             state.scene?.enter()
             state.enter?.invoke()
         } else
-            go(state.scene, state.transition?.addListener(object : SimpleTransitionListener() {
+            go(state.scene, state.transition?.clone()?.addListener(object : SimpleTransitionListener() {
                 override fun onTransitionEnd(transition: Transition) {
                     state.enter?.invoke()
                     transition.removeListener(this)

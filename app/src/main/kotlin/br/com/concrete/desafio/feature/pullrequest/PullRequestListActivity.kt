@@ -3,12 +3,12 @@ package br.com.concrete.desafio.feature.pullrequest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
 import br.com.concrete.desafio.adapter.BaseRecyclerAdapter
-import br.com.concrete.desafio.decorator.DividerItemDecoration
 import br.com.concrete.desafio.feature.BaseActivity
 import br.com.concrete.desafio.statemachine.SceneStateMachine
 import br.com.concrete.desafio.extension.enableBack
@@ -37,7 +37,7 @@ class PullRequestListActivity : BaseActivity() {
         PullRequestRepository.list(repo).subscribe(
                 {
                     adapter.addAll(it)
-                    if (it.isEmpty() && adapter.items.isEmpty()) stateMachine.changeState(EMPTY_STATE)
+                    if (adapter.items.isEmpty()) stateMachine.changeState(EMPTY_STATE)
                     else stateMachine.changeState(LIST_STATE)
                 },
                 { stateMachine.changeState(ERROR_STATE) })
@@ -45,7 +45,7 @@ class PullRequestListActivity : BaseActivity() {
 
     private val onEnterList: () -> Unit = {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
-        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, R.dimen.default_margin))
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
         recyclerView.adapter = adapter
     }
 
@@ -54,8 +54,11 @@ class PullRequestListActivity : BaseActivity() {
         setContentView(R.layout.activity_pull_request_list)
         supportActionBar.enableBack()
         supportActionBar?.title = repo.name.capitalize()
-        adapter.restoreInstanceState(savedInstanceState?.getBundle(STATE_ADAPTER))
-        setupStateMachine(savedInstanceState?.getBundle(STATE_MACHINE))
+
+        savedInstanceState?.let {
+            adapter.restoreInstanceState(it.getBundle(STATE_ADAPTER))
+            setupStateMachine(it.getBundle(STATE_MACHINE))
+        } ?: setupStateMachine(null)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

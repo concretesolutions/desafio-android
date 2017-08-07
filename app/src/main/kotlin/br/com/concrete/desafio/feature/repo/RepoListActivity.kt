@@ -1,12 +1,12 @@
 package br.com.concrete.desafio.feature.repo
 
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
 import br.com.concrete.desafio.adapter.PaginatingRecyclerAdapter
-import br.com.concrete.desafio.decorator.DividerItemDecoration
 import br.com.concrete.desafio.feature.BaseActivity
 import br.com.concrete.desafio.statemachine.SceneStateMachine
 import br.com.concrete.sdk.RepoRepository
@@ -23,7 +23,7 @@ class RepoListActivity : BaseActivity() {
         RepoRepository.search(it).subscribe(
                 {
                     adapter.addPage(it)
-                    if (it.items.isEmpty() && adapter.items.isEmpty()) stateMachine.changeState(EMPTY_STATE)
+                    if (adapter.items.isEmpty()) stateMachine.changeState(EMPTY_STATE)
                     else stateMachine.changeState(LIST_STATE)
                 },
                 {
@@ -43,15 +43,18 @@ class RepoListActivity : BaseActivity() {
 
     private val onEnterList: () -> Unit = {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
-        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, R.dimen.default_margin))
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
         recyclerView.adapter = adapter
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repo_list)
-        adapter.restoreInstanceState(savedInstanceState?.getBundle(STATE_ADAPTER))
-        setupStateMachine(savedInstanceState?.getBundle(STATE_MACHINE))
+
+        savedInstanceState?.let {
+            adapter.restoreInstanceState(it.getBundle(STATE_ADAPTER))
+            setupStateMachine(it.getBundle(STATE_MACHINE))
+        } ?: setupStateMachine(null)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

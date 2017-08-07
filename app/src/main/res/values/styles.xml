@@ -12,6 +12,7 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorControlHighlight">@color/lighter_gray</item>
         <item name="android:windowBackground">@null</item>
+        <item name="android:listDivider">@drawable/line_divider</item>
     </style>
 
     <!-- TextAppearance  -->

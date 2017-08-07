@@ -9,20 +9,18 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
-        if (toolbar != null) {
-            toolbar.addStatusBarPadding()
-            setSupportActionBar(toolbar)
+        toolbar?.let {
+            it.addStatusBarPadding()
+            setSupportActionBar(it)
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> {
+            onBackPressed()
+            true
         }
+        else -> super.onOptionsItemSelected(item)
     }
 
 }
