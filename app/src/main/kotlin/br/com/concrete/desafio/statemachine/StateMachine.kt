@@ -57,10 +57,11 @@ abstract class StateMachine<T> {
 
     fun add(key: Int, state: T.() -> Unit) = stateMap.put(key, createState().apply { state() })
 
-    inline fun setup(initialState: Int, restoreState: Bundle? = null, func: StateMachine<T>.() -> Unit) {
+    inline fun setup(initialState: Int = -1, restoreState: Bundle? = null, func: StateMachine<T>.() -> Unit) {
         func()
-        val state = if (currentStateKey != -1) currentStateKey else initialState
-        changeState(restoreState?.getInt(STATE_MACHINE_CURRENT_KEY) ?: state, forceChange = true)
+        var state = if (currentStateKey != -1) currentStateKey else initialState
+        state = restoreState?.getInt(STATE_MACHINE_CURRENT_KEY) ?: state
+        if (state != -1) changeState(state, forceChange = true)
     }
 
 }

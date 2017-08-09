@@ -1,3 +1,5 @@
+@file:JvmName("HeaderUtils")
+
 package br.com.concrete.sdk.extension
 
 internal fun String?.extractPage(rev: String): Int? {

@@ -45,10 +45,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$versions.retrofit") {
         exclude module: 'okhttp'
     }
-    implementation("com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit") {
-        exclude module: 'retrofit'
-        exclude module: 'rxjava'
-    }
+//    implementation("com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit") {
+//        exclude module: 'retrofit'
+//        exclude module: 'rxjava'
+//    }
     implementation("com.squareup.retrofit2:converter-gson:$versions.retrofit") {
         exclude module: 'retrofit'
         exclude module: 'gson'
@@ -59,4 +59,9 @@ dependencies {
 
     // Log Tracking
     api "com.jakewharton.timber:timber:$versions.timber"
+
+    // Android Arch
+    api "android.arch.lifecycle:runtime:$versions.arch"
+    api "android.arch.lifecycle:extensions:$versions.arch"
+
 }

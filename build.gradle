@@ -85,6 +85,9 @@ ext {
 
     // Rx Android
     rxAndroid = '2.0.1'
+
+    // Android Arch
+    arch = '1.0.0-alpha8'
 }
 
 task clean(type: Delete) {

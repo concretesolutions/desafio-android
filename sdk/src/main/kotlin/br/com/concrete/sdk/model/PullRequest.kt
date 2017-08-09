@@ -13,7 +13,7 @@ data class PullRequest(
         @Expose @State val state: String,
         @Expose val title: String,
         @Expose val user: User,
-        @Expose val body: String
+        @Expose val body: String?
 ) : KParcelable {
     companion object {
         @JvmField val CREATOR = parcelableCreator(::PullRequest)

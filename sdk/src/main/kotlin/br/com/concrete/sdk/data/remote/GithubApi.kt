@@ -11,14 +11,11 @@ import br.com.concrete.sdk.model.type.SortRepo
 import br.com.concrete.sdk.model.type.State
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
-import retrofit2.Response
+import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory.createWithScheduler
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -34,7 +31,7 @@ internal interface GithubApi {
             @Query("order") @Order order: String? = null,
             @Query("page") page: Int,
             @Query("per_page") perPage: Int
-    ): Observable<Response<Page<Repo>>>
+    ): Call<Page<Repo>>
 
     @GET("repos/{creator}/{repo}/pulls")
     fun listPullRequest(
@@ -45,12 +42,11 @@ internal interface GithubApi {
             @Query("base") base: String? = null,
             @Query("sort") @SortPullRequest sort: String? = null,
             @Query("direction") @Order order: String? = null
-    ): Observable<List<PullRequest>>
+    ): Call<List<PullRequest>>
 
     companion object Factory {
 
         private val api: GithubApi = Retrofit.Builder()
-                .addCallAdapterFactory(createWithScheduler(Schedulers.io()))
                 .addConverterFactory(buildGson())
                 .client(buildClient())
                 .baseUrl(BuildConfig.BASE_URL).build().create(GithubApi::class.java)

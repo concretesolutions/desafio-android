@@ -27,3 +27,9 @@ const val ALL = "all"
 const val ASCENDING = "asc"
 const val DESCENDING = "desc"
 //endregion
+
+//region ResponseStatus
+const val LOADING = 0L
+const val SUCCESS = 1L
+const val ERROR = 2L
+//endregion
