@@ -45,17 +45,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$versions.retrofit") {
         exclude module: 'okhttp'
     }
-//    implementation("com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit") {
-//        exclude module: 'retrofit'
-//        exclude module: 'rxjava'
-//    }
     implementation("com.squareup.retrofit2:converter-gson:$versions.retrofit") {
         exclude module: 'retrofit'
         exclude module: 'gson'
     }
-
-    // Rx Android
-    api "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
 
     // Log Tracking
     api "com.jakewharton.timber:timber:$versions.timber"

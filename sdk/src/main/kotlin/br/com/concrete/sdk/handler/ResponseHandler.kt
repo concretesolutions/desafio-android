@@ -24,36 +24,57 @@ fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: ((T) -> Unit)) {
     observe(owner, Observer { it?.let(observer) })
 }
 
-internal abstract class ResponseHandler<T>(val cacheMap: HashMap<String, Cache<T>>) : LiveData<Response<T>>() {
+internal abstract class ResponseHandler<T>(val cacheMap: HashMap<String, Cache<T>>? = null) : LiveData<Response<T>>() {
 
     init {
-        val key = this.buildCacheKey()
-        val cache = cacheMap[key]
-        val cachedData = cache?.data
-        val cacheValid = cache?.isValid() ?: false
+        if (cacheMap != null) {
+            val key = this.buildCacheKey()
+            val cache = cacheMap[key]
+            val cachedData = cache?.data
+            val cacheValid = cache?.isValid() ?: false
 
-        if (cacheValid) this.postValue(cachedData.toDataResponse(SUCCESS))
-        else {
-            this.postValue(cachedData.toDataResponse(LOADING))
+            if (cacheValid) this.postValue(cachedData.toDataResponse(SUCCESS))
+            else if (this.shouldFetch()) {
+                this.postValue(cachedData.toDataResponse(LOADING))
+                this.requestFromServer().enqueue(object : Callback<T> {
+                    override fun onResponse(call: Call<T>, response: retrofit2.Response<T>) {
+                        val remoteData = extractDataFromRemoteResponse(response)
+                        if (response.isSuccessful && remoteData != null) {
+                            saveRemoteData(key, remoteData, cachedData)
+                            postValue(remoteData.toDataResponse(SUCCESS))
+                        }
+                    }
+
+                    override fun onFailure(call: Call<T>, throwable: Throwable) {
+                        postValue(cachedData.toDataResponseWithError(throwable))
+                    }
+                })
+            }
+        } else {
+            this.postValue(null.toDataResponse(LOADING))
             this.requestFromServer().enqueue(object : Callback<T> {
                 override fun onResponse(call: Call<T>, response: retrofit2.Response<T>) {
-                    val remoteData = response.body()
-                    if (response.isSuccessful && remoteData != null) {
-                        cacheMap.put(key, Cache(data = remoteData))
-                        postValue(remoteData.toDataResponse(SUCCESS))
-                    }
+                    val remoteData = extractDataFromRemoteResponse(response)
+                    if (response.isSuccessful && remoteData != null) postValue(remoteData.toDataResponse(SUCCESS))
                 }
 
                 override fun onFailure(call: Call<T>, throwable: Throwable) {
-                    postValue(cachedData.toDataResponseWithError(throwable))
+                    postValue(null.toDataResponseWithError(throwable))
                 }
             })
-
         }
     }
 
     abstract fun requestFromServer(): Call<T>
 
     abstract fun buildCacheKey(): String
+
+    open fun extractDataFromRemoteResponse(response: retrofit2.Response<T>): T? = response.body()
+
+    open fun saveRemoteData(key: String, remoteData: T, cachedData: T?) {
+        cacheMap?.put(key, Cache(data = remoteData))
+    }
+
+    open fun shouldFetch() = true
 
 }

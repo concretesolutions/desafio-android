@@ -74,13 +74,13 @@ open class BaseRecyclerAdapter<T : Parcelable> : RecyclerView.Adapter<BaseViewHo
 
     open fun saveInstanceState(): Bundle {
         val bundle = Bundle()
-        bundle.putParcelableArrayList(STATE_LIST, ArrayList<Parcelable>(items))
+//        bundle.putParcelableArrayList(STATE_LIST, ArrayList<Parcelable>(items))
         return bundle
     }
 
     open fun restoreInstanceState(bundle: Bundle?) {
-        if (bundle == null) return
-        items.addAll(bundle.getParcelableArrayList(STATE_LIST))
+//        if (bundle == null) return
+//        items.addAll(bundle.getParcelableArrayList(STATE_LIST))
     }
 
 }

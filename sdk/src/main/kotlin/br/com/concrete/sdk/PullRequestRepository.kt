@@ -13,10 +13,10 @@ object PullRequestRepository {
 
     private val api = GithubApi.instance()
 
-    private val repoCacheMap = HashMap<String, Cache<List<PullRequest>>>()
+    private val pullRequestCacheMap = HashMap<String, Cache<List<PullRequest>>>()
 
     fun list(repo: Repo): LiveData<Response<List<PullRequest>>> {
-        return object : ResponseHandler<List<PullRequest>>(repoCacheMap) {
+        return object : ResponseHandler<List<PullRequest>>(pullRequestCacheMap) {
             override fun requestFromServer(): Call<List<PullRequest>> = api.listPullRequest(creator = repo.owner.login, repo = repo.name)
 
             override fun buildCacheKey() = "${repo.owner.login}|${repo.name}"

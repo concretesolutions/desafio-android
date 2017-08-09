@@ -83,9 +83,6 @@ ext {
     retrofit = '2.3.0'
     timber = '4.5.1'
 
-    // Rx Android
-    rxAndroid = '2.0.1'
-
     // Android Arch
     arch = '1.0.0-alpha8'
 }

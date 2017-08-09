@@ -56,7 +56,7 @@ class PullRequestListActivity : BaseActivity() {
         viewModel.listPullRequest.observe(this) {
             adapter.setList(it.data ?: emptyList())
             when (it.status) {
-                SUCCESS -> stateMachine.changeState(LIST_STATE)
+                SUCCESS -> stateMachine.changeState(if (adapter.items.isEmpty()) EMPTY_STATE else LIST_STATE)
                 LOADING -> stateMachine.changeState(if (adapter.items.isEmpty()) LOADING_STATE else LIST_STATE)
                 ERROR -> stateMachine.changeState(ERROR_STATE)
             }
