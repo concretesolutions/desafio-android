@@ -1,6 +1,8 @@
 package br.com.concrete.sdk.data.remote
 
 import br.com.concrete.sdk.BuildConfig
+import br.com.concrete.sdk.data.remote.factory.ResponseLiveData
+import br.com.concrete.sdk.data.remote.factory.LiveDataCallAdapterFactory
 import br.com.concrete.sdk.data.remote.interceptor.ResponseInterceptor
 import br.com.concrete.sdk.model.Page
 import br.com.concrete.sdk.model.PullRequest
@@ -14,7 +16,6 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -31,7 +32,7 @@ internal interface GithubApi {
             @Query("order") @Order order: String? = null,
             @Query("page") page: Int,
             @Query("per_page") perPage: Int
-    ): Call<Page<Repo>>
+    ): ResponseLiveData<Page<Repo>>
 
     @GET("repos/{creator}/{repo}/pulls")
     fun listPullRequest(
@@ -42,13 +43,14 @@ internal interface GithubApi {
             @Query("base") base: String? = null,
             @Query("sort") @SortPullRequest sort: String? = null,
             @Query("direction") @Order order: String? = null
-    ): Call<List<PullRequest>>
+    ): ResponseLiveData<List<PullRequest>>
 
     companion object Factory {
 
         private val api: GithubApi = Retrofit.Builder()
                 .addConverterFactory(buildGson())
                 .client(buildClient())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .baseUrl(BuildConfig.BASE_URL).build().create(GithubApi::class.java)
 
         fun instance() = api

@@ -10,6 +10,7 @@ import com.google.gson.annotations.Expose
 
 data class PullRequest(
         @Expose val id: Long,
+        @get:State
         @Expose @State val state: String,
         @Expose val title: String,
         @Expose val user: User,

@@ -9,9 +9,8 @@ import android.transition.Transition
 import br.com.concrete.desafio.*
 import br.com.concrete.desafio.adapter.PaginatingRecyclerAdapter
 import br.com.concrete.desafio.feature.BaseActivity
-import br.com.concrete.desafio.feature.pullrequest.RepoListViewModel
 import br.com.concrete.desafio.statemachine.SceneStateMachine
-import br.com.concrete.sdk.handler.observe
+import br.com.concrete.sdk.extension.observe
 import br.com.concrete.sdk.model.Repo
 import br.com.concrete.sdk.model.type.ERROR
 import br.com.concrete.sdk.model.type.LOADING
@@ -28,7 +27,7 @@ class RepoListActivity : BaseActivity() {
 
     private val onLoadMore: (Int) -> Unit = {
         viewModel.search(it).observe(this) {
-            it.data?.let { adapter.addPage(it) }
+            it.data?.let(adapter::addPage)
             when (it.status) {
                 SUCCESS -> stateMachine.changeState(if (adapter.items.isEmpty()) EMPTY_STATE else LIST_STATE)
                 LOADING -> stateMachine.changeState(if (adapter.items.isEmpty()) LOADING_STATE else LIST_STATE)

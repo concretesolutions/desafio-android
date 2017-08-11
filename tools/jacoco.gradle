@@ -3,11 +3,10 @@ apply plugin: 'jacoco'
 def jacocoRetrolambdaMap = [:]
 
 jacoco {
-    toolVersion = '0.7.9.+'
+    toolVersion = '0.7.4+'
 }
 
-task jacocoTestReport(type: JacocoReport,
-        dependsOn: ['testDebugUnitTest', 'connectedDebugAndroidTest']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
 
     reports {
         xml.enabled = true
@@ -19,17 +18,22 @@ task jacocoTestReport(type: JacocoReport,
     final fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*',
                         '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*',
                         '**/*_.*', '**/*_*.*', '**/*_$*.*', '**/*$ViewBinder*.*',
-                        '**/*$ViewBinding*.*', '**/*$Lambda$*', '**/*$lambda$*', '**/lambda$*', '**/*Binding.*', '**/*Binding$*.*']
-    final debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    final mainSrc = "${project.projectDir}/src/main/java"
+                        '**/*$ViewBinding*.*', '**/*$Lambda$*', '**/*$lambda$*',
+                        '**/lambda$*']
 
-    final coverageFiles = fileTree(
-            dir: "${buildDir}/outputs/code-coverage/connected/",
-            include: "*coverage.ec")
+    final fileFilterKt = fileFilter + ['**/*$*$*.*']
 
-    sourceDirectories = files([mainSrc])
-    classDirectories = files([debugTree])
-    executionData = files(["${buildDir}/jacoco/testDebugUnitTest.exec", coverageFiles])
+    final debugTreeJava = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    final debugTreeKotlin = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilterKt)
+    final mainSrcJava = "${project.projectDir}/src/main/java"
+    final mainSrcKotlin = "${project.projectDir}/src/main/kotlin"
+
+    sourceDirectories = files([mainSrcJava, mainSrcKotlin])
+    classDirectories = files([debugTreeJava, debugTreeKotlin])
+    executionData = fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec",
+            "outputs/code-coverage/connected/*coverage.ec"
+    ])
 
     doFirst {
         new File("${buildDir}/intermediates/classes/debug").eachFileRecurse { file ->
