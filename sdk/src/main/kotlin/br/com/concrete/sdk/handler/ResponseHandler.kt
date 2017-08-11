@@ -3,10 +3,12 @@ package br.com.concrete.sdk.handler
 import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.MainThread
 import br.com.concrete.sdk.data.remote.factory.ResponseLiveData
+import br.com.concrete.sdk.extension.nextPage
 import br.com.concrete.sdk.extension.receiveData
 import br.com.concrete.sdk.extension.toDataResponse
 import br.com.concrete.sdk.extension.toDataResponseWithError
 import br.com.concrete.sdk.model.DataResult
+import br.com.concrete.sdk.model.Page
 import br.com.concrete.sdk.model.type.LOADING
 import br.com.concrete.sdk.model.type.SUCCESS
 import retrofit2.Response
@@ -50,7 +52,11 @@ internal abstract class ResponseHandler<T> : MediatorLiveData<DataResult<T>>() {
     protected abstract fun remoteData(): ResponseLiveData<T>
 
     @MainThread
-    protected open fun extractDataFromResponse(response: Response<T>) = response.body()
+    protected open fun extractDataFromResponse(response: Response<T>): T {
+        val body = response.body() ?: throw IllegalStateException("Body is Null!")
+        if (body is Page<*>) body.nextPage = response.nextPage()
+        return body
+    }
 
     @MainThread
     protected open fun shouldPreLoad(localData: Cache<T>?) = localData?.data != null ?: false
