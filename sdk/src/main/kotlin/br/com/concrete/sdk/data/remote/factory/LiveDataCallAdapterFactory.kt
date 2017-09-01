@@ -1,14 +1,16 @@
 package br.com.concrete.sdk.data.remote.factory
 
-import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
+import br.com.concrete.sdk.data.ResponseLiveData
+import br.com.concrete.sdk.extension.nextPage
 import br.com.concrete.sdk.extension.toDataResponse
 import br.com.concrete.sdk.extension.toErrorResponse
 import br.com.concrete.sdk.model.DataResult
+import br.com.concrete.sdk.model.Page
+import br.com.concrete.sdk.model.type.LOADING
 import br.com.concrete.sdk.model.type.SUCCESS
 import retrofit2.Call
 import retrofit2.CallAdapter
-import retrofit2.Response
 import retrofit2.Retrofit
 import java.lang.Exception
 import java.lang.reflect.ParameterizedType
@@ -26,35 +28,33 @@ internal class LiveDataCallAdapterFactory : CallAdapter.Factory() {
     }
 }
 
-internal class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, ResponseLiveData<R>> {
+internal class LiveDataCallAdapter<RESULT>(private val responseType: Type) : CallAdapter<RESULT, ResponseLiveData<RESULT>> {
 
-    override fun responseType(): Type {
-        return responseType
-    }
+    override fun responseType() = responseType
 
-    override fun adapt(call: Call<R>): ResponseLiveData<R> {
-        return object : ResponseLiveData<R>() {
-            private val started = AtomicBoolean(false)
-            override fun onActive() {
-                super.onActive()
-                if (started.compareAndSet(false, true)) RequestMaker(this::postValue).execute(call)
-            }
+    override fun adapt(call: Call<RESULT>) = object : ResponseLiveData<RESULT>() {
+        private val started = AtomicBoolean(false)
+        override fun onActive() {
+            super.onActive()
+            value = null.toDataResponse(LOADING)
+            if (started.compareAndSet(false, true)) RequestMaker(this::setValue).execute(call)
         }
     }
 }
 
-private class RequestMaker<T>(val onRequestFinish: (DataResult<Response<T>>) -> Unit) : AsyncTask<Call<T>, Unit, DataResult<Response<T>>>() {
+private class RequestMaker<RESULT>(val onRequestFinish: (DataResult<RESULT>) -> Unit) : AsyncTask<Call<RESULT>, Unit, DataResult<RESULT>>() {
 
-    override fun doInBackground(vararg calls: Call<T>): DataResult<Response<T>> {
+    override fun doInBackground(vararg calls: Call<RESULT>): DataResult<RESULT> {
         try {
-            return calls[0].execute().toDataResponse(SUCCESS)
+            val response = calls[0].execute()
+            val data = response.body()
+            if (data is Page<*>) data.nextPage = response.nextPage()
+
+            return data.toDataResponse(SUCCESS)
         } catch (error: Exception) {
             return error.toErrorResponse()
         }
     }
 
-    override fun onPostExecute(result: DataResult<Response<T>>) = onRequestFinish.invoke(result)
-
+    override fun onPostExecute(result: DataResult<RESULT>) = onRequestFinish.invoke(result)
 }
-
-internal abstract class ResponseLiveData<T> : LiveData<DataResult<Response<T>>>()

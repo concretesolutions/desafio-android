@@ -1,7 +1,8 @@
 package br.com.concrete.sdk.data.remote
 
+import android.arch.lifecycle.LiveData
 import br.com.concrete.sdk.BuildConfig
-import br.com.concrete.sdk.data.remote.factory.ResponseLiveData
+import br.com.concrete.sdk.data.ResponseLiveData
 import br.com.concrete.sdk.data.remote.factory.LiveDataCallAdapterFactory
 import br.com.concrete.sdk.data.remote.interceptor.ResponseInterceptor
 import br.com.concrete.sdk.model.Page
@@ -47,13 +48,13 @@ internal interface GithubApi {
 
     companion object Factory {
 
-        private val api: GithubApi = Retrofit.Builder()
-                .addConverterFactory(buildGson())
-                .client(buildClient())
-                .addCallAdapterFactory(LiveDataCallAdapterFactory())
-                .baseUrl(BuildConfig.BASE_URL).build().create(GithubApi::class.java)
-
-        fun instance() = api
+        val instance: GithubApi by lazy {
+            Retrofit.Builder()
+                    .addConverterFactory(buildGson())
+                    .client(buildClient())
+                    .addCallAdapterFactory(LiveDataCallAdapterFactory())
+                    .baseUrl(BuildConfig.BASE_URL).build().create(GithubApi::class.java)
+        }
 
         private fun buildClient(): OkHttpClient {
             val logging = HttpLoggingInterceptor { Timber.i(it) }

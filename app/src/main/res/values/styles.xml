@@ -35,6 +35,7 @@
     <!-- Toolbar  -->
     <style name="Desafio.Toolbar" parent="Base.Widget.AppCompat.Toolbar">
         <item name="android:background">?attr/colorPrimaryDark</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="titleTextAppearance">@style/Desafio.Toolbar.Title</item>
     </style>
 

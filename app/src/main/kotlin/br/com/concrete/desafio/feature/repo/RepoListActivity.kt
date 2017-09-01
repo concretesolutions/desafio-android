@@ -1,43 +1,27 @@
 package br.com.concrete.desafio.feature.repo
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
-import br.com.concrete.desafio.adapter.PaginatingRecyclerAdapter
+import br.com.concrete.desafio.adapter.BaseRecyclerAdapter
 import br.com.concrete.desafio.feature.BaseActivity
+import br.com.concrete.desafio.feature.viewModelProvider
 import br.com.concrete.desafio.statemachine.SceneStateMachine
-import br.com.concrete.sdk.extension.observe
 import br.com.concrete.sdk.model.Repo
-import br.com.concrete.sdk.model.type.ERROR
-import br.com.concrete.sdk.model.type.LOADING
-import br.com.concrete.sdk.model.type.SUCCESS
 import kotlinx.android.synthetic.main.activity_repo_list.*
 import kotlinx.android.synthetic.main.sc_default_list.*
 
 class RepoListActivity : BaseActivity() {
 
-    private val viewModel by lazy { ViewModelProviders.of(this)[RepoListViewModel::class.java] }
+    private val viewModel by viewModelProvider(RepoListViewModel::class)
 
     private val stateMachine = SceneStateMachine()
     private val fade: Transition = Fade()
 
-    private val onLoadMore: (Int) -> Unit = {
-        viewModel.search(it).observe(this) {
-            it.data?.let(adapter::addPage)
-            when (it.status) {
-                SUCCESS -> stateMachine.changeState(if (adapter.items.isEmpty()) EMPTY_STATE else LIST_STATE)
-                LOADING -> stateMachine.changeState(if (adapter.items.isEmpty()) LOADING_STATE else LIST_STATE)
-                ERROR -> if (adapter.items.isEmpty()) stateMachine.changeState(ERROR_STATE) else adapter.failPage()
-            }
-        }
-    }
-
-    private val adapter: PaginatingRecyclerAdapter<Repo> = PaginatingRecyclerAdapter<Repo>()
-            .loadMore(onLoadMore)
+    private val adapter: BaseRecyclerAdapter<Repo> = BaseRecyclerAdapter<Repo>()
             .register(repoViewType())
 
     private val onEnterList: () -> Unit = {
@@ -50,7 +34,17 @@ class RepoListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repo_list)
         setupStateMachine()
-        onLoadMore.invoke(0)
+
+        viewModel.repoList.observeData(this) {
+            it?.let {
+                it.items.let(adapter::setList)
+                stateMachine.changeState(if (adapter.items.isEmpty()) EMPTY_STATE else LIST_STATE)
+            } ?: stateMachine.changeState(LOADING_STATE)
+        }
+
+        viewModel.repoList.observeError(this) {
+            stateMachine.changeState(ERROR_STATE)
+        }
     }
 
     private fun setupStateMachine() {

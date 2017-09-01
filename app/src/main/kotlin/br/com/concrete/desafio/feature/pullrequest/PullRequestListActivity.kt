@@ -12,15 +12,10 @@ import br.com.concrete.desafio.*
 import br.com.concrete.desafio.adapter.BaseRecyclerAdapter
 import br.com.concrete.desafio.feature.BaseActivity
 import br.com.concrete.desafio.statemachine.SceneStateMachine
-import br.com.concrete.sdk.extension.observe
 import br.com.concrete.sdk.model.PullRequest
 import br.com.concrete.sdk.model.Repo
-import br.com.concrete.sdk.model.type.ERROR
-import br.com.concrete.sdk.model.type.LOADING
-import br.com.concrete.sdk.model.type.SUCCESS
 import kotlinx.android.synthetic.main.activity_pull_request_list.*
 import kotlinx.android.synthetic.main.sc_default_list.*
-import timber.log.Timber
 
 class PullRequestListActivity : BaseActivity() {
 
@@ -54,15 +49,18 @@ class PullRequestListActivity : BaseActivity() {
 
         setupStateMachine()
 
-        viewModel.listPullRequest.observe(this) {
-            Timber.d("AAA: $it")
-            adapter.setList(it.data ?: emptyList())
-            when (it.status) {
-                SUCCESS -> stateMachine.changeState(if (adapter.items.isEmpty()) EMPTY_STATE else LIST_STATE)
-                LOADING -> stateMachine.changeState(if (adapter.items.isEmpty()) LOADING_STATE else LIST_STATE)
-                ERROR -> stateMachine.changeState(ERROR_STATE)
-            }
+
+        viewModel.listPullRequest.observeData(this) {
+            it?.let {
+                adapter.setList(it)
+                stateMachine.changeState(if (adapter.items.isEmpty()) EMPTY_STATE else LIST_STATE)
+            } ?: stateMachine.changeState(LOADING_STATE)
         }
+
+        viewModel.listPullRequest.observeError(this) {
+            stateMachine.changeState(ERROR_STATE)
+        }
+
     }
 
     private fun setupStateMachine() {
