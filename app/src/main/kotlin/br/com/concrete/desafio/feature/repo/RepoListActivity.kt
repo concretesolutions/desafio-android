@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.transition.Fade
 import android.transition.Transition
 import br.com.concrete.desafio.*
-import br.com.concrete.desafio.adapter.BaseRecyclerAdapter
+import br.com.concrete.desafio.adapter.PaginatingRecyclerAdapter
 import br.com.concrete.desafio.feature.BaseActivity
 import br.com.concrete.desafio.feature.viewModelProvider
 import br.com.concrete.desafio.statemachine.SceneStateMachine
@@ -21,10 +21,15 @@ class RepoListActivity : BaseActivity() {
     private val stateMachine = SceneStateMachine()
     private val fade: Transition = Fade()
 
-    private val adapter: BaseRecyclerAdapter<Repo> = BaseRecyclerAdapter<Repo>()
-            .register(repoViewType())
+    private val onLoadMore: (Int) -> Unit = {
+        viewModel.search(this, it,
+                success = adapter::addPage,
+                error = { adapter.failPage() })
+    }
 
-    private val onEnterList: () -> Unit = {
+    private val adapter: PaginatingRecyclerAdapter<Repo> = PaginatingRecyclerAdapter<Repo>().loadMore(onLoadMore).register(repoViewType())
+
+    private val onEnterList = {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
         recyclerView.adapter = adapter
@@ -35,16 +40,14 @@ class RepoListActivity : BaseActivity() {
         setContentView(R.layout.activity_repo_list)
         setupStateMachine()
 
-        viewModel.repoList.observeData(this) {
+        viewModel.repoList.observeSingleData(this) {
             it?.let {
-                it.items.let(adapter::setList)
+                adapter.addPage(it)
                 stateMachine.changeState(if (adapter.items.isEmpty()) EMPTY_STATE else LIST_STATE)
             } ?: stateMachine.changeState(LOADING_STATE)
         }
 
-        viewModel.repoList.observeError(this) {
-            stateMachine.changeState(ERROR_STATE)
-        }
+        viewModel.repoList.observeSingleError(this) { stateMachine.changeState(ERROR_STATE) }
     }
 
     private fun setupStateMachine() {

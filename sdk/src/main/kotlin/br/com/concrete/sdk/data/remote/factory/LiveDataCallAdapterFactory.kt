@@ -36,8 +36,10 @@ internal class LiveDataCallAdapter<RESULT>(private val responseType: Type) : Cal
         private val started = AtomicBoolean(false)
         override fun onActive() {
             super.onActive()
-            value = null.toDataResponse(LOADING)
-            if (started.compareAndSet(false, true)) RequestMaker(this::setValue).execute(call)
+            if (started.compareAndSet(false, true)) {
+                value = null.toDataResponse(LOADING)
+                RequestMaker(this::setValue).execute(call)
+            }
         }
     }
 }

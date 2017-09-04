@@ -14,7 +14,7 @@ internal class ResponseInterceptor : Interceptor {
         val response = chain.proceed(request)
         val code = response.code()
 
-//        if (response.isSuccessful) return response
+        if (response.isSuccessful) return response
         val path = request.url().encodedPath()
         throw when (code) {
             500 -> ServerException("Server Exception", code, path)
