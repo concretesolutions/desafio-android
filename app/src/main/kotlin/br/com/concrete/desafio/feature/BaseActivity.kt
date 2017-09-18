@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.Toolbar
 import br.com.concrete.desafio.R
 import br.com.concrete.desafio.extension.addStatusBarMargin
+import br.com.concrete.sdk.data.remote.exception.NotFoundException
 import br.com.concrete.sdk.extension.observe
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
@@ -13,9 +14,9 @@ abstract class BaseActivity : LifecycleActivity() {
 
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
-        findViewById<Toolbar>(R.id.toolbar)?.let {
-            it.addStatusBarMargin()
-            it.setNavigationOnClickListener { onBackPressed() }
+        findViewById<Toolbar>(R.id.toolbar)?.apply {
+            addStatusBarMargin()
+            setNavigationOnClickListener { onBackPressed() }
         }
     }
 

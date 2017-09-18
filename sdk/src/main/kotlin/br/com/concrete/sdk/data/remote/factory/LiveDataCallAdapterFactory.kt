@@ -2,12 +2,12 @@ package br.com.concrete.sdk.data.remote.factory
 
 import android.os.AsyncTask
 import br.com.concrete.sdk.data.ResponseLiveData
+import br.com.concrete.sdk.extension.loadingResponse
 import br.com.concrete.sdk.extension.nextPage
 import br.com.concrete.sdk.extension.toDataResponse
 import br.com.concrete.sdk.extension.toErrorResponse
 import br.com.concrete.sdk.model.DataResult
 import br.com.concrete.sdk.model.Page
-import br.com.concrete.sdk.model.type.LOADING
 import br.com.concrete.sdk.model.type.SUCCESS
 import retrofit2.Call
 import retrofit2.CallAdapter
@@ -37,7 +37,7 @@ internal class LiveDataCallAdapter<RESULT>(private val responseType: Type) : Cal
         override fun onActive() {
             super.onActive()
             if (started.compareAndSet(false, true)) {
-                value = null.toDataResponse(LOADING)
+                value = loadingResponse()
                 RequestMaker(this::setValue).execute(call)
             }
         }
