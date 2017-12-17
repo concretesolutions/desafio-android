@@ -24,13 +24,14 @@ task clean(type: Delete) {
 
 // Dependencies versions
 ext {
+
     // Sdk and tools
     minSdkVersion = 16
     targetSdkVersion = 25
     compileSdkVersion = 25
     buildToolsVersion = '26.0.1'
 
-    // App dependencies
+    // Others dependencies
     supportLibraryVersion = '25.3.1'
     retrofitVersion = '2.0.2'
     okhttpVersion = '3.6.0'
@@ -43,4 +44,5 @@ ext {
     runnerVersion = '0.5'
     rulesVersion = '0.5'
     espressoVersion = '2.2.2'
+    butterknifeVersion = '8.8.1'
 }

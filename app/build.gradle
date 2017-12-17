@@ -5,7 +5,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        applicationId "br.com.ghrepos"
+        applicationId "br.com.githubrepos"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -94,6 +94,10 @@ dependencies {
 
     // GUAVA
     compile "com.google.guava:guava:$rootProject.guavaVersion"
+
+    // BUTTERKNIFE
+    compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
 
     // ESPRESSO IDLING RESOURCES
     compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espressoVersion"
