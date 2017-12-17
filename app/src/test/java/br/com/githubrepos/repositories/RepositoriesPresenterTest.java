@@ -70,4 +70,15 @@ public class RepositoriesPresenterTest {
         verify(repositoriesView).showRepositoryList(REPOSITORY_STATUS.getRepositoryList(), doRefresh);
     }
 
+    @Test
+    public void loadRepositoriesFromApiWhenScrollAndLoadIntoView() {
+        repositoriesPresenter.loadRepositoryList(++page, doRefresh = false);
+
+        verify(repositoriesView).setListProgressIndicator(true);
+        verify(repositoryServiceApi).search(eq(page), eq(language), eq(sort), repositoryServiceCallbackArgumentCaptor.capture());
+        repositoryServiceCallbackArgumentCaptor.getValue().onLoaded(REPOSITORY_STATUS);
+        verify(repositoriesView).setListProgressIndicator(false);
+        verify(repositoriesView).showRepositoryList(REPOSITORY_STATUS.getRepositoryList(), doRefresh);
+    }
+
 }

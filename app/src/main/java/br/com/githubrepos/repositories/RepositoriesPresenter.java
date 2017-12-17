@@ -25,12 +25,22 @@ public class RepositoriesPresenter implements RepositoriesContract.UserActionsLi
     public void loadRepositoryList(int page, final boolean doRefresh) {
         String language = "language:Java", sort = "stars";
 
-        mView.setProgressIndicator(doRefresh);
+        if(doRefresh) {
+            mView.setProgressIndicator(true);
+        } else {
+            mView.setListProgressIndicator(true);
+        }
 
         mServiceApi.search(page, language, sort, new RepositoryServiceApi.RepositoryServiceCallback<RepositoryStatus>() {
             @Override
             public void onLoaded(RepositoryStatus data) {
-                mView.setProgressIndicator(false);
+
+                if(doRefresh) {
+                    mView.setProgressIndicator(false);
+                } else {
+                    mView.setListProgressIndicator(false);
+                }
+
                 mView.showRepositoryList(data.getRepositoryList(), doRefresh);
             }
         });
