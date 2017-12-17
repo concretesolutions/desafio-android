@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.google.common.base.Preconditions;
 
+import br.com.githubrepos.data.entity.Repository;
 import br.com.githubrepos.data.entity.RepositoryStatus;
 import br.com.githubrepos.data.service.RepositoryServiceApi;
 
@@ -45,5 +46,10 @@ public class RepositoriesPresenter implements RepositoriesContract.UserActionsLi
             }
         });
 
+    }
+
+    @Override
+    public void openRepository(Repository repository) {
+        mView.showPullRequestListUi(repository.getOwner().getLogin(), repository.getName());
     }
 }

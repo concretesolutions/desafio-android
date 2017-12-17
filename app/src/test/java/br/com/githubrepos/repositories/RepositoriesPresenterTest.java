@@ -81,4 +81,14 @@ public class RepositoriesPresenterTest {
         verify(repositoriesView).showRepositoryList(REPOSITORY_STATUS.getRepositoryList(), doRefresh);
     }
 
+    @Test
+    public void clickOnRepository_ShowPullRequestsUi() {
+        Repository repository = REPOSITORY_LIST.get(0);
+
+        repositoriesPresenter.openRepository(repository);
+
+        verify(repositoriesView).showPullRequestListUi(eq(repository.getOwner().getLogin()),
+                eq(repository.getName()));
+    }
+
 }
