@@ -14,6 +14,12 @@ public interface RepositoriesContract {
         void showRepositoryList(List<Repository> repositoryList, boolean doRefresh);
 
         void showPullRequestListUi(String ownerLogin, String repositoryName);
+
+        void changeActionBarWhenRepositorySelected();
+
+        void changeActionBarWhenRepositoryUnselected(int repositoryPosition);
+
+        void removeRepository(int position);
     }
 
     interface UserActionsListener {
@@ -21,6 +27,12 @@ public interface RepositoriesContract {
         void loadRepositoryList(int page, boolean doRefresh);
 
         void openRepository(Repository repository);
+
+        void selectRepository(int selectedRepositoryPosition);
+
+        void unselectRepository(int selectedRepositoryPosition);
+
+        void deleteSelectedRepository();
     }
 
 }

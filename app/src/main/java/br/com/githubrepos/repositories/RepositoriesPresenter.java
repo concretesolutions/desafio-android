@@ -13,6 +13,8 @@ public class RepositoriesPresenter implements RepositoriesContract.UserActionsLi
     private RepositoryServiceApi mServiceApi;
     private RepositoriesContract.View mView;
 
+    private int selectedRepositoryPosition;
+
     public RepositoriesPresenter(@NonNull RepositoryServiceApi repositoryServiceApi,
                                  @NonNull RepositoriesContract.View repositoriesView) {
 
@@ -20,6 +22,8 @@ public class RepositoriesPresenter implements RepositoriesContract.UserActionsLi
                 "mServiceApi cannot be null!");
         this.mView = Preconditions.checkNotNull(repositoriesView,
                 "mView cannot be null!");
+
+        this.selectedRepositoryPosition = -1;
     }
 
     @Override
@@ -51,5 +55,22 @@ public class RepositoriesPresenter implements RepositoriesContract.UserActionsLi
     @Override
     public void openRepository(Repository repository) {
         mView.showPullRequestListUi(repository.getOwner().getLogin(), repository.getName());
+    }
+
+    @Override
+    public void selectRepository(int selectedRepositoryPosition) {
+        this.selectedRepositoryPosition = selectedRepositoryPosition;
+        mView.changeActionBarWhenRepositorySelected();
+    }
+
+    @Override
+    public void unselectRepository(int selectedRepositoryPosition) {
+        mView.changeActionBarWhenRepositoryUnselected(this.selectedRepositoryPosition);
+        this.selectedRepositoryPosition = -1;
+    }
+
+    @Override
+    public void deleteSelectedRepository() {
+        mView.removeRepository(this.selectedRepositoryPosition);
     }
 }

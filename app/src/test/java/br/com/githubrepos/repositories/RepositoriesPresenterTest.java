@@ -91,4 +91,30 @@ public class RepositoriesPresenterTest {
                 eq(repository.getName()));
     }
 
+    @Test
+    public void longClickOnRepository_SelectItAndReplaceIconsOnActionBar() {
+        repositoriesPresenter.selectRepository(0);
+
+        verify(repositoriesView).changeActionBarWhenRepositorySelected();
+    }
+
+    @Test
+    public void clickOnBackButton_UnselectRepository() {
+        //pre-condition
+        repositoriesPresenter.selectRepository(4);
+
+        repositoriesPresenter.unselectRepository(4);
+        verify(repositoriesView).changeActionBarWhenRepositoryUnselected(4);
+    }
+
+    @Test
+    public void clickOnDeleteButton_DeleteRepository() {
+        //precondition
+        repositoriesPresenter.selectRepository(0);
+
+        repositoriesPresenter.deleteSelectedRepository();
+        verify(repositoriesView).changeActionBarWhenRepositoryUnselected(0);
+        verify(repositoriesView).removeRepository(0);
+    }
+
 }
