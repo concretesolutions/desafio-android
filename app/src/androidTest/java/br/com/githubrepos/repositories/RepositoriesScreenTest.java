@@ -15,10 +15,22 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import br.com.githubrepos.R;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.longClick;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.hamcrest.Matchers.allOf;
@@ -33,6 +45,7 @@ public class RepositoriesScreenTest {
 
     private String repositoryName0 = "repositoryName0";
     private String repositoryName8 = "repositoryName8";
+
 
     // A custom Matcher which matches an item in a RecyclerView by its text.
     // View constraints:
@@ -82,6 +95,7 @@ public class RepositoriesScreenTest {
         };
     }
 
+
     @Before
     public void registerIdlingResource() {
         //https://medium.com/azimolabs/wait-for-it-idlingresource-and-conditionwatcher-602055f32356#.vsyeol9wp
@@ -97,6 +111,82 @@ public class RepositoriesScreenTest {
     public void unregisterIdlingResource() {
         //Unregister your Idling Resource so it can be garbage collected and does not leak any memory.
         Espresso.unregisterIdlingResources(repositoriesActivityTestRule.getActivity().getCountingIdlingResource());
+    }
+
+
+    @Test
+    public void loadRepositoryList_showOnScreen() {
+        //scroll to the item and check if its displayed
+        onView(withId(R.id.repositories_list))
+                .perform(scrollToPosition(5)).check(matches(isDisplayed()));
+
+        //Another way
+        //onView(withId(R.id.repositories_list)).perform(scrollTo(hasDescendant(withText(repositoryName0))));
+        //onView(withItemText(repositoryName0)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void loadRepositoryListScrollDown_showOnScreen() {
+        onView(withId(R.id.repositories_list))
+                .perform(scrollToPosition(9), scrollToPosition(19), scrollToPosition(29))
+                .check(matches(isDisplayed()));
+
+        //Another way
+        //onView(withItemText("repositoryName29")).check(matches(isDisplayed()));
+
+        //Another way
+        //onView(withId(R.id.repositories_list)).perform(scrollToHolder(withItemViewHolder("repositoryName9")));
+        //onView(withId(R.id.repositories_list)).perform(scrollToHolder(withItemViewHolder("repositoryName19")));
+    }
+
+    @Test
+    public void clickRepository_openNewScreen() {
+
+        onView(withId(R.id.repositories_list))
+                .perform(scrollToPosition(4), click());
+        //        .perform(scrollTo(hasDescendant(withText("repositoryName4"))), click());
+
+        onView(withText("PullRequests")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void longClickRepository_changeActionBarIcons() {
+        onView(withId(R.id.repositories_list))
+                .perform(scrollToPosition(5), longClick());
+        //        .perform(scrollTo(hasDescendant(withText("repositoryName5"))), longClick());
+
+        onView(withText("Repositories")).check(doesNotExist());
+        onView(withId(R.id.delete_repository)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void clickBackButton_unselectRepository() {
+        onView(withId(R.id.repositories_list))
+                .perform(scrollToPosition(5), longClick());
+        //        .perform(scrollTo(hasDescendant(withText("repositoryName5"))), longClick());
+
+        String actionBarUpDescription = repositoriesActivityTestRule.getActivity()
+                .getString(android.support.v7.appcompat.R.string.abc_action_bar_up_description);
+        onView(withContentDescription(actionBarUpDescription)).perform(click());
+
+        onView(withText("Repositories")).check(matches(isDisplayed()));
+        onView(withId(R.id.delete_repository)).check(doesNotExist());
+    }
+
+    @Test
+    public void clickDeleteButton_deleteRepository() {
+        //scrolls to repository
+        onView(withId(R.id.repositories_list)).perform(scrollToPosition(3));
+
+        //select repository
+        onView(withItemText("repositoryName2")).perform(longClick());
+        //click delete button
+        onView(withId(R.id.delete_repository)).perform(click());
+        //check if item not displayed more
+        onView(withItemText("repositoryName2")).check(doesNotExist());
+
+        onView(withText("Repositories")).check(matches(isDisplayed()));
+        onView(withId(R.id.delete_repository)).check(doesNotExist());
     }
 
 }
