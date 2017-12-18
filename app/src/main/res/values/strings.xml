@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">githubrepos</string>
+
+    <string name="loren_ipsum_title">Lorem ipsum title</string>
+    <string name="loren_ipsum_description">Lorem ipsum description dolor lorem sit at lorem is ll dororl lorme</string>
+    <string name="loren_ipsum_image_description">Lorem ipsum img lorem</string>
+    <string name="loren_ipsum_name">lorem ipsum</string>
+    <string name="loren_ipsum_number">12</string>
+    <string name="loading">Loading...</string>
 </resources>
