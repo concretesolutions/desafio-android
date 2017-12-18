@@ -20,6 +20,8 @@ import br.com.githubrepos.commons.EndlessScrolling;
 import br.com.githubrepos.commons.ItemListListener;
 import br.com.githubrepos.data.entity.Repository;
 import br.com.githubrepos.util.CircleTransform;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 //Visible only in this package
 class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -188,6 +190,7 @@ class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public ProgressViewHolder(View itemView) {
             super(itemView);
+
             progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
         }
     }
@@ -198,14 +201,36 @@ class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         private ItemListListener<Repository> mItemListener;
 
+        //TODO butterknife aparentemente gerou queda de performance
+        //@BindView(R.id.ll_item_repository)
         public LinearLayout mLayout;
+
+        //TODO butterknife aparentemente gerou queda de performance
+        //@BindView(R.id.tv_repository_name)
         public TextView tvRepositoryName;
+
+        //TODO butterknife aparentemente gerou queda de performance
+        //@BindView(R.id.tv_repository_description)
         public TextView tvRepositoryDescription;
+
+        //TODO butterknife aparentemente gerou queda de performance
+        //@BindView(R.id.tv_repository_forks_count)
         public TextView tvRepositoryForksCount;
+
+        //TODO butterknife aparentemente gerou queda de performance
+        //@BindView(R.id.tv_repository_stargazers_count)
         public TextView tvRepositoryStargazersCount;
 
+        //TODO butterknife aparentemente gerou queda de performance
+        //@BindView(R.id.iv_owner_picture)
         public ImageView ivOwnerPicture;
+
+        //TODO butterknife aparentemente gerou queda de performance
+        //@BindView(R.id.tv_owner_login)
         public TextView tvOwnerLogin;
+
+        //TODO butterknife aparentemente gerou queda de performance
+        //@BindView(R.id.tv_owner_fullname)
         public TextView tvOwnerFullname;
 
         public ItemViewHolder(View itemView, final ItemListListener<Repository> itemListener) {
@@ -221,6 +246,9 @@ class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ivOwnerPicture = (ImageView) itemView.findViewById(R.id.iv_owner_picture);
             tvOwnerLogin = (TextView) itemView.findViewById(R.id.tv_owner_login);
             tvOwnerFullname = (TextView) itemView.findViewById(R.id.tv_owner_fullname);
+
+            //TODO butterknife aparentemente gerou queda de performance
+            //ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

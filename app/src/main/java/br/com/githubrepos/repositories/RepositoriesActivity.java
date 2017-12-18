@@ -26,16 +26,24 @@ import br.com.githubrepos.commons.ItemListListener;
 import br.com.githubrepos.data.entity.Repository;
 import br.com.githubrepos.pullrequests.PullRequestsActivity;
 import br.com.githubrepos.util.IdleResourceHandler;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class RepositoriesActivity extends AppCompatActivity implements RepositoriesContract.View {
 
     private RepositoriesContract.UserActionsListener mActionsListener;
+
+    //TODO butterknife aparentemente gerou queda de performance
+    //@BindView(R.id.refresh_layout)
     private SwipeRefreshLayout mSwipeRefresh;
+
     private Menu mMenu;
     private RepositoriesAdapter mAdapter;
 
     private boolean isAnyRepositorySelected;
 
+    //TODO butterknife aparentemente gerou queda de performance
+    //@BindView(R.id.repositories_list)
     private RecyclerView mRecyclerView;
 
     private ItemListListener<Repository> mRepositoryItemListener = new ItemListListener<Repository>() {
@@ -75,6 +83,9 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repositories);
+
+        //TODO butterknife aparentemente gerou queda de performance
+        //ButterKnife.bind(this);
 
         mActionsListener = new RepositoriesPresenter(Injection.provideRepositoryServiceApi(), this);
         isAnyRepositorySelected = false;
