@@ -1,5 +1,5 @@
 # Description
-Android application that consumes data from Github API and display them for users
+Android application that consumes data from Github API and display them for users.
 
 ## Screens
 
