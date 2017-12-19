@@ -1,55 +1,57 @@
-# Description
-Android application that consumes data from Github API and display them for users.
+# Descrição
+Um aplicativo Android que consume dados da API GitHub e os exibe para os usuários
 
-## Screens
+## Telas
 
-- Repositories screen: displays all best ranked repositories in an infinity scroll list. 
-You can press any repository to select it and the delete it locally or you can just press 
-one repository to open the next screen.
+- Tela de repositórios: exibe todos os repositórios mais bem avaliados em uma lista infinita. 
+É possível pressionar qualquer repositório para selecioná-lo e deletá-lo localmente ou apenas clicar
+em um repositório para abrir a próxima tela.
 
-- Pull requests screen: displays all pull requests from specific repository selected on the
-previous screen.
+- Tela de pull requests: exibe todos os pull requests de um específico repositório que foi selecionado
+na tela anterior
 
-## Requirements
+## Requisitos
 
 - Java 7
-- Android Studio
-- Android Device or AVD(Android Virtual Device)
+- IDE Android Studio
+- Dispositivo Android ou AVD(Dispositivo Android Virtual)
 
-## Running
+## Executando
 
-- Download or clone the project: git clone https://github.com/bedrickprokop/githubrepos.git
-- Open your Android Studio and point to the project
-- Wait until gradle load dependencies
-- Choose one flavor(The flavors are described below)
-- Plug your android device with the "Developer options" enabled and "USB debugging" checked or
-create an AVD(Android Virtual Device)
+- Baixe ou clone o projeto: git clone https://github.com/bedrickprokop/githubrepos.git
+- Abra o Android Studio e aponte para o projeto
+- Espere o gradle carregar as dependencias
+- Escolha o flavor(serão descritos no próximo tópico)
+- Plugue seu dispositivo android com a opção "Developer options" habilitada e o checkbox "USB debugging" marcado ou crie um AVD.
 - Run
 
-## Flavors
+## Flavors ou sabores
 
-I've created two flavors to use while developing and testing. One for test the application with 
-mock data and the other to use real data.
+Foi criado dois flavors para usar durante o desenvolvimento e teste. Um para testar a aplicação com dados
+mockados e o outro para testar com os dados reais.
 
-- Mock: Open the "Build Variants" side menu and choose in "Build Variant" section the "mockDebug" flavor. 
-In this flavor you can test the application without connect to internet just using mock values.
+- Mock: Abra o menu lateral "Build Variants" e escolha na seção "Build Variant" o flavor "mockDebug". 
+Neste flavor você pode testar a aplicação sem conectar na internet apenas usando dados mockados.
 
-- Prod: Open the "Build Variants" side menu and choose in "Build Variant" section the "prodDebug" or "prodRelease" 
-flavors. In these flavors you can run the application in real mode, with real data.
+- Prod: Abra o menu lateral "Build Variants" e escolha na seção "Build Variant" o flavor "prodDebug" ou "prodRelease". 
+Nestes flavors você pode executar a aplicação com dados reais.
 
-## Screen Tests
+## Testes unitários
 
-- You can run the screen tests by right clicking on the java classes inside the "androidTest" package and
-selecting the option "Run ClassTestScreenName".
+- Nos testes unitários não é preciso plugar o celular no computador via USB, pois eles executam no seu próprio computador. 
+- Eles estão dentro da pasta "test" e você pode executá-los clicando com o botão direito na classe e selecionando a opção 
+"Run".
 
-Note: Unlock your phone for you see the tests running in your phone and use the flavor "mock" for this kind of test
+## Testes de tela
 
-## Unit Tests
+- Para este tipo de teste, você deve estar com o celular ligado no USB ou usar o AVD
+- Você pode executar os testes de tela clicando com o botão direito nas classes que estão dentro do pacote "androidTest"
+e depois selecionando a opção "Run".
 
-- They are in "test" folder and you can run them by right clicking on the test class and selecting 
-"Run ClassTestName".
+Observação: Desbloqueie seu celular para ver os testes executando e use o flavor "mock" para este tipo de teste.
 
-## App Specification
+
+## Especificações da aplicação
 
 A aplicação foi escrita usado o padrão arquiterural MVP(Model View Presenter) e design patterns como Facade, Adapter e View holder.
 
@@ -83,7 +85,7 @@ Como exemplo, ao inicializar a aplicação as seguintes classes e métodos são 
 
 - RepositoryServiceApiImpl: Classe que implementa as funcionalidades de acesso a dados do servidor
 
-## Libraries and Frameworks
+## Bibliotecas e Frameworks
 
 - Retrofit: Um cliente HTTP. Foi usado para fazer as requisições http
 - OkHTTP: Um cliente HTTP. Foi usado para fazer cache de requisições http
