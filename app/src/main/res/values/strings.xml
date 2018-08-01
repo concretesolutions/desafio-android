@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Concrete_Solutions_Desafio</string>
+    <string name="descri_o_do_pullrequest">Descrição do pullrequest</string>
+    <string name="ownername">OwnerName</string>
+    <string name="_22_01_1990">22/01/1990</string>
+    <string name="nome_do_pull_request">Nome do Pull Request</string>
+    <string name="nome_do_reposit_rio">Nome do Repositório</string>
+    <string name="descricao_do_repositorio">Descrição do repositório</string>
+    <string name="forks_count">3.333</string>
+    <string name="favorited_Count">4.444</string>
+    <string name="lucas">Lucas</string>
+    <string name="forksicon">ForksIcon</string>
+    <string name="favoritedicon">FavoritedIcon</string>
+    <string name="ownerpicture">OwnerPicture</string>
+</resources>
