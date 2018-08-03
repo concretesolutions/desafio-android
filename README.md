@@ -31,8 +31,7 @@ Criar um aplicativo para consultar a [API do GitHub](https://developer.github.co
 
 As sugestões de bibliotecas fornecidas são só um guideline, sintam-se a vontade para usar diferentes e nos surpreenderem. O importante de fato é que os objetivos macros sejam atingidos. =)
 
-* AndroidAnnotations
-* Retrofit | Volley | Spring-Android
+* Retrofit | Volley 
 * Picasso | Universal Image Loader | Glide
 * Espresso | Robotium | Robolectric
 
