@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="8dp"
+        android:id="@+id/mainActivity_cvItemList">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toStartOf="@+id/mainActivity_clPictureContainer"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/mainActivity_tvRepositoryTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="8dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="@string/nome_do_reposit_rio"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/mainActivity_vwRepositoryDivider"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainActivity_tvRepositoryDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="4"
+                    android:ellipsize="end"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:paddingBottom="6dp"
+                    android:text="@string/descricao_do_repositorio"
+                    android:textColor="#787c87"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@+id/mainActivity_vwRepositoryDivider"
+                    app:layout_constraintTop_toBottomOf="@+id/mainActivity_tvRepositoryTitle" />
+
+                <View
+                    android:id="@+id/mainActivity_vwRepositoryDivider"
+                    android:layout_width="5dp"
+                    android:layout_height="145dp"
+                    android:background="@color/colorAccent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+
+                <ImageView
+                    android:id="@+id/mainActivity_ivForksIcon"
+                    android:layout_width="34dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/mainActivity_vwRepositoryDivider"
+                    app:srcCompat="@drawable/ic_shared"
+                    android:paddingBottom="6dp"
+                    android:contentDescription="@string/forksicon"
+                    android:src="@drawable/ic_shared"/>
+
+                <TextView
+                    android:id="@+id/mainActivity_tvForksCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forks_count"
+                    android:textColor="#787c87"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/mainActivity_ivForksIcon"
+                    app:layout_constraintTop_toTopOf="@+id/mainActivity_ivForksIcon" />
+
+                <ImageView
+                    android:id="@+id/mainActivity_ivFavoritedIcon"
+                    android:layout_width="38dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="30dp"
+                    android:paddingBottom="9dp"
+                    app:layout_constraintStart_toEndOf="@+id/mainActivity_tvForksCount"
+                    app:layout_constraintTop_toTopOf="@+id/mainActivity_ivForksIcon"
+                    app:srcCompat="@drawable/ic_favorited"
+                    android:contentDescription="@string/favoritedicon"
+                    android:src="@drawable/ic_favorited"/>
+
+
+                <TextView
+                    android:id="@+id/mainActivity_tvFavoritedCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/favorited_Count"
+                    android:textColor="#787c87"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/mainActivity_ivFavoritedIcon"
+                    app:layout_constraintTop_toTopOf="@+id/mainActivity_ivForksIcon" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/mainActivity_clPictureContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/mainActivity_ivRepositoryOwnerPicture"
+                    android:layout_width="83dp"
+                    android:layout_height="63dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/ownerpicture"
+                    app:srcCompat="@drawable/izuku_midoriya_boku_no_hero" />
+
+                <TextView
+                    android:id="@+id/mainActivity_tvRepositoryOwnerLogin"
+                    android:layout_width="83dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
+                    android:text="@string/lucas"
+                    android:textColor="#787c87"
+                    android:textSize="12sp"
+
+                    app:layout_constraintStart_toStartOf="@id/mainActivity_ivRepositoryOwnerPicture"
+                    app:layout_constraintTop_toBottomOf="@+id/mainActivity_ivRepositoryOwnerPicture" />
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v7.widget.CardView>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:id="@+id/pullRequest_cvIemList">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<View-->
+            <!--android:id="@+id/pullRequest_vwPullRequestDivider"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="2dp"-->
+            <!--android:background="#ccbb66"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/pullRequest_ivPullRequestOwnerPicture"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginTop="8dp"/>-->
+
+        <TextView
+            android:id="@+id/pullRequest_tvPullRequestTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/nome_do_pull_request"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pullRequest_tvPullRequestDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/descri_o_do_pullrequest"
+            android:textColor="#787c87"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pullRequest_tvPullRequestTitle" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/pullRequest_ivPullRequestOwnerPicture"
+            android:layout_width="93dp"
+            android:layout_height="73dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pullRequest_tvPullRequestDescription"
+            app:srcCompat="@drawable/izuku_midoriya_boku_no_hero" />
+
+        <TextView
+            android:id="@+id/pullRequest_tvPullRequestOwnerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ownername"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="@id/pullRequest_ivPullRequestOwnerPicture"
+            app:layout_constraintStart_toEndOf="@id/pullRequest_ivPullRequestOwnerPicture" />
+
+        <TextView
+            android:id="@+id/pullRequest_tvPullRequestDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/_22_01_1990"
+            android:textColor="#787c87"
+            android:textSize="16sp"
+
+            app:layout_constraintStart_toEndOf="@id/pullRequest_ivPullRequestOwnerPicture"
+            app:layout_constraintTop_toBottomOf="@id/pullRequest_tvPullRequestOwnerName" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
