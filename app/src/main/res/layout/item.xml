@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/item_margin"
+    android:baselineAligned="false"
+    android:id="@+id/item_layout">
+
+    <LinearLayout
+        android:id="@+id/author_layout"
+        android:layout_width="@dimen/linear_layout"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="3"
+        android:layout_marginEnd="@dimen/item_inner_horizontal_margin"
+        android:layout_marginRight="@dimen/item_inner_horizontal_margin">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/author_image"
+            android:layout_width="@dimen/author_image"
+            android:layout_height="@dimen/author_image"
+            android:layout_marginBottom="@dimen/item_inner_vertical_margin" />
+
+        <TextView
+            android:id="@+id/author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/text_subtitle"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/repository_layout"
+        android:layout_width="@dimen/linear_layout"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="7">
+
+        <LinearLayout
+            android:id="@+id/features_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/item_inner_vertical_margin">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_inner_vertical_margin"
+                android:text=""
+                android:textSize="@dimen/text_title"
+                android:textColor="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_inner_vertical_margin"
+                android:textSize="@dimen/text_subtitle"
+                android:text=""
+                android:layout_marginBottom="@dimen/item_inner_vertical_margin" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/details_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/item_inner_vertical_margin">
+
+            <ImageView
+                android:id="@+id/fork_icon"
+                android:layout_width="@dimen/icons_image"
+                android:layout_height="@dimen/icons_image"
+                android:contentDescription="@android:string/untitled"
+                android:scaleType="center"
+                app:srcCompat="@drawable/fork_icon" />
+
+            <TextView
+                android:id="@+id/fork_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_inner_horizontal_margin"
+                android:layout_marginLeft="@dimen/item_inner_horizontal_margin"
+                android:text=""
+                android:textSize="@dimen/text_subtitle" />
+
+            <ImageView
+                android:id="@+id/stars_icon"
+                android:layout_width="@dimen/icons_image"
+                android:layout_height="@dimen/icons_image"
+                android:layout_marginLeft="@dimen/icons_margin"
+                android:layout_marginStart="@dimen/icons_margin"
+                android:contentDescription="@android:string/untitled"
+                android:scaleType="center"
+                app:srcCompat="@drawable/star_icon" />
+
+            <TextView
+                android:id="@+id/stars_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_inner_horizontal_margin"
+                android:layout_marginLeft="@dimen/item_inner_horizontal_margin"
+                android:contentDescription="@android:string/untitled"
+                android:textSize="@dimen/text_subtitle"
+                android:text="" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
