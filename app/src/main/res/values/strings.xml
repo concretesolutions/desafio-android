@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Consulta Git</string>
+    <string name="title_activity_repositories">RepositoriesActivity</string>
+    <string name="error">Error</string>
+    <!-- Main Activity -->
+    <string name="main_activity_name">Servicio de Bilbioteca UdeA</string>
+    <string name="welcome">Bienvenida(o)</string>
+    <string name="select_technology">Seleccione la tecnología a consultar en los repositorios de GitHub:</string>
+    <string-array name="technologies">
+        <item> </item>
+        <item>PHP</item>
+        <item>Java</item>
+        <item>JavaScript</item>
+        <item>CSS</item>
+        <item>html</item>
+        <item>c++</item>
+        <item>SQL</item>
+    </string-array>
+
+    <!--Repositories Activity-->
+    <string name="repositories">Repositorios más populares</string>
+
+    <!--Pulls Activity-->
+    <string name="pulls">Pull Requests</string>
+    <string name="example">Ejemplo de Pull Request</string>
+</resources>

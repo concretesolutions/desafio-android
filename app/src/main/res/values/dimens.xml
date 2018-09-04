@@ -1,0 +1,16 @@
+<resources>
+    <dimen name="linear_layout">0dp</dimen>
+    <dimen name="padding_layout">10dp</dimen>
+    <dimen name="item_margin">5dp</dimen>
+    <dimen name="item_inner_horizontal_margin">10dp</dimen>
+    <dimen name="item_inner_vertical_margin">2dp</dimen>
+    <dimen name="author_image">60dp</dimen>
+    <dimen name="icons_margin">40dp</dimen>
+    <dimen name="icons_image">20dp</dimen>
+    <dimen name="icon_main">150dp</dimen>
+
+    <dimen name="welcome">40sp</dimen>
+    <dimen name="text_title">22sp</dimen>
+    <dimen name="text_subtitle">16sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
