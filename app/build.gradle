@@ -1,0 +1,110 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersionExt
+    buildToolsVersion rootProject.buildToolsVersionExt
+    defaultConfig {
+
+        applicationId "com.example.rafaelanastacioalves"
+        minSdkVersion rootProject.minSdkVersionExt
+        targetSdkVersion rootProject.targetSdkVersionExt
+        versionCode 11
+        versionName "0.1.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    testBuildType "instrumentation"
+    buildTypes {
+
+        buildTypes.each {
+            it.buildConfigField "String", "API_BASE_URL", '"https://api.github.com"'
+            it.buildConfigField "boolean", "IS_TEST", 'false'
+
+        }
+        debug {
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        instrumentation {
+            initWith(buildTypes.debug)
+            testCoverageEnabled = true
+            buildConfigField "String", "API_BASE_URL", '"http://localhost:1234"'
+            buildConfigField "boolean", "IS_TEST", 'true'
+
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$rootProject.espressoExt", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation "com.android.support.test:runner:$rootProject.testRunnerExt"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.espressoExt"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoExt"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$rootProject.mockWebServerExt"
+    androidTestImplementation "android.arch.core:core-testing:$rootProject.archLifecycleVersion"
+
+
+
+    implementation "com.android.support:support-annotations:$rootProject.androidSupportLibrariesExt"
+    implementation "com.android.support:recyclerview-v7:$rootProject.androidSupportLibrariesExt"
+    implementation "com.android.support:design:$rootProject.androidSupportLibrariesExt"
+    implementation "com.android.support:appcompat-v7:$rootProject.androidSupportLibrariesExt"
+    implementation "com.android.support:support-v4:$rootProject.androidSupportLibrariesExt"
+    implementation "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoExt"
+
+    //retrofit + gson
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitExt"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitExt"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3Ext"
+
+
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.androidConstraintLayout"
+    implementation "com.jakewharton:butterknife:$rootProject.jakewhartonStuff"
+    implementation "com.jakewharton.timber:timber:$rootProject.timberExt"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.jakewhartonStuff"
+
+
+    // picasso
+
+    implementation "com.squareup.picasso:picasso:$rootProject.picassoExt"
+
+    // architecture components
+
+    implementation 'android.arch.lifecycle:extensions:' + rootProject.archLifecycleVersion
+    annotationProcessor 'android.arch.lifecycle:compiler:' + rootProject.archLifecycleVersion
+
+    // circular imageview
+
+    implementation "de.hdodenhof:circleimageview:$rootProject.circImageViewExt"
+
+
+    // rx
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJavaVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.retrofitRxJavaAdapterExt"
+
+    // paging
+
+    implementation "android.arch.paging:runtime:$rootProject.pagingVersion"
+
+
+    // dbflow
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.dbflowVersion"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:$rootProject.dbflowVersion"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:$rootProject.dbflowVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+
+}

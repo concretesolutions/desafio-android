@@ -1,59 +1,52 @@
-# Criar um aplicativo de consulta a API do [GitHub](https://github.com)#
+# 3º Desafio Android
 
-Criar um aplicativo para consultar a [API do GitHub](https://developer.github.com/v3/) e trazer os repositórios mais populares de Java. Basear-se no mockup fornecido:
+## Descrição Geral
 
-![Captura de tela de 2015-10-22 11-28-03.png](https://bitbucket.org/repo/7ndaaA/images/3102804929-Captura%20de%20tela%20de%202015-10-22%2011-28-03.png)
+Desafio técnico da empresa Concrete.
 
-### **Deve conter** ###
+![tela de listagem](captures/Screenshot_1530769637.png =200x200)
 
-- __Lista de repositórios__. Exemplo de chamada na API: `https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1`
-  * Paginação na tela de lista, com endless scroll / scroll infinito (incrementando o parâmetro `page`).
-  * Cada repositório deve exibir Nome do repositório, Descrição do Repositório, Nome / Foto do autor, Número de Stars, Número de Forks
-  * Ao tocar em um item, deve levar a lista de Pull Requests do repositório
-- __Pull Requests de um repositório__. Exemplo de chamada na API: `https://api.github.com/repos/<criador>/<repositório>/pulls`
-  * Cada item da lista deve exibir Nome / Foto do autor do PR, Título do PR, Data do PR e Body do PR
-  * Ao tocar em um item, deve abrir no browser a página do Pull Request em questão
+![tela de detalhes](captures/Screenshot_1530769694.png =200x200)
 
-### **A solução DEVE conter** ##
-* Sistema de build Gradle
-* Mapeamento JSON -> Objeto (GSON / Jackson / Moshi / etc)
-* Material Design
+## Descrição técnica
 
-### **Ganha + pontos se conter** ###
+### Resumo
+Na solução para este app, propus a utilização de RxJava, em conjunto com a proposta do Android Architecture Components (AAC), recomendada pelo Google.
 
-* Framework para comunicação com API
-* Testes no projeto (unitários e por tela)
-* Testes funcionais (que naveguem pelo aplicativo como casos de uso)
-* Cache de imagens e da API
-* Suportar mudanças de orientação das telas sem perder estado
+Ambas utilizam o conceito de "reativo". Porém AAC faz uso da vantagem de livrar o desenvolvedor das preocupações do ciclo de vida da aplicação em Android.
+Conseqüentemente, para lógica entre View e Model, utilizei AAC.
 
-### **Sugestões** ###
-
-As sugestões de bibliotecas fornecidas são só um guideline, sintam-se a vontade para usar diferentes e nos surpreenderem. O importante de fato é que os objetivos macros sejam atingidos. =)
-
-* AndroidAnnotations
-* Retrofit | Volley | Spring-Android
-* Picasso | Universal Image Loader | Glide
-* Espresso | Robotium | Robolectric
-
-### **OBS** ###
-
-A foto do mockup é meramente ilustrativa.  
+Para a lógica de chamadas ao repositório HTTP e ao repositório em DB cacheado, utilizei RxJava + RxAndroid.
 
 
-### **Processo de submissão** ###
+### Principais bibliotecas
+- `android.arch.lifecycle`: Usei componentes como Mutable Live Data e ViewModel que ajudam a representar o Model e a unir esta à view, mantendo o estado dos componentes ao longo do ciclo de vida da activity ou fragment. Também utilizamos o recurso de ouvir à mudanças no Model de modo que podemos refletir as mudanças na View correspondente. Link: https://developer.android.com/topic/libraries/architecture/
 
-O candidato deverá implementar a solução e enviar um pull request para este repositório com a solução.
+- `android.arch.paging`: Usei componentes responsáveis por gerenciar a lógica de paginação e que é totalmente integrada com `android.arch.lifecycle`. Link: https://developer.android.com/topic/libraries/architecture/paging/.
 
-O processo de Pull Request funciona da seguinte maneira:
+- `com.github.Raizlabs.DBFlow`: Biblioteca requisitada no desafio para facilitar a construção de DB do SQLite para cache. Link: https://github.com/Raizlabs/DBFlow
 
-1. Candidato fará um fork desse repositório (não irá clonar direto!)
-2. Fará seu projeto nesse fork.
-3. Commitará e subirá as alterações para o __SEU__ fork.
-4. Pela interface do Bitbucket, irá enviar um Pull Request.
+- `com.squareup.retrofit2`: Biblioteca para interfacemento com APIs Web sob protocolo HTTP. Link: http://square.github.io/retrofit/
 
-Se possível deixar o fork público para facilitar a inspeção do código.
+- `io.reactivex.rxjava2`: Bilioteca que permite realizar uma programação assíncrona em Java. Link: https://github.com/ReactiveX/RxJava
 
-### **ATENÇÃO** ###
+Adaptei soluções de:
+- https://github.com/eclipse/egit-github/blob/master/org.eclipse.egit.github.core/src/org/eclipse/egit/github/core/client/PageLinks.java
 
-Não se deve tentar fazer o PUSH diretamente para ESTE repositório!
+### Itens não implementados
+
+- **Testes unitários**
+- **Cache de imagens**
+    - Deixou-se apenas a política padrão de cache em memória e em disco da biblioteca Picasso.
+- **minAPI 15**
+    - Consegui fazer funcionar para minAPI 16. Motivo: API 15 não tem suporte nativo para tls "TLSv1.2" nos protocolos de conexões de socket. Por motivos de segurança, a API do Github não aceita versões defasadas e inseguras. Fonte: https://developer.github.com/changes/2018-02-01-weak-crypto-removal-notice/
+
+### Possíveis melhorias
+
+- Considerando o crescimento do app, seria interessante utilizar "injeção de dependência" ou "service locator" para as variáveis referentes ao repositório, de onde as informação são carregadas. Isso facilitaria o isolamento das classes e, consequentemente, os testes unitários e instrumentados.
+- Tratamento de erros em caso de falha na conexão. Exemplo: carregar uma das páginas novamente em caso de restabelecimento de conexão, ou caso o usuário solicite recarregar.
+
+
+## Testes
+
+Os testes utilizam o buildtype ```instrumentation``` para rodar, pois nessa build forçamos que o app seja buildado para apontar para localhost com porta fixa durante os testes.
