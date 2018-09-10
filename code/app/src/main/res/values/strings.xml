@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DesafioAndroid</string>
+
+    <string name="pull_requests_header_opened_text">%1$d opened</string>
+    <string name="pull_requests_header_closed_text">/ %1$d closed</string>
+    <string name="empty_pull_requests_text">Não há pull requests para este git</string>
+
+</resources>
