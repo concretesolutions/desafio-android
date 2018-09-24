@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvRepositoryTitle"
+                android:textColor="@color/colorTitle"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:text="Titulo de Repositorio"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvRepositoryDescr"
+                android:layout_marginBottom="10sp"
+                android:text="Descricao"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/civRepositoryUser"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@android:drawable/alert_dark_frame"/>
+            <TextView
+                android:id="@+id/tvRepositoryUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/colorTitle"
+                android:textSize="12sp"
+                android:text="Username" />
+
+
+            <TextView
+                android:id="@+id/tvRepositoryFullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:text="Nome Sobrenome" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/tvRepositoryQtdFork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorFork"
+            android:textSize="12sp"
+            android:text="{fa-code-fork} 0" />
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/tvRepositoryQtdStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/colorFork"
+            android:textSize="12sp"
+            android:text="{fa-star} 0" />
+    </LinearLayout>
+
+
+</LinearLayout>
