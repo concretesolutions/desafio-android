@@ -12,4 +12,19 @@ public class Owner {
     String avatarUrl;
     String name;
 
+    public long getID() {
+        return ID;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
