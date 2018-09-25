@@ -4,8 +4,8 @@
 
 Desafio técnico da empresa Concrete.
 
-<img src="captures/Screenshot_1530769637.png" width="400">
-<img src="captures/Screenshot_1530769694.png" width="400">
+<img src="captures/Screenshot_1530769637.png" width="300">
+<img src="captures/Screenshot_1530769694.png" width="300">
 
 ## Descrição técnica
 
