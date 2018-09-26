@@ -56,8 +56,8 @@
 
     <ImageView
         android:id="@+id/item_java_pop_imagem_usuario"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="8dp"

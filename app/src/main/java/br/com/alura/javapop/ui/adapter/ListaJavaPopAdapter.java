@@ -41,13 +41,21 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
 
     class RepositorioViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView nomeRepositorio;
+        private final TextView nome;
         private final TextView descricao;
+        private final TextView nomeUsuario;
+        private final TextView sobrenome;
+        private final TextView quantidadeForks;
+        private final TextView quantidadeEstrelas;
 
         public RepositorioViewHolder(View itemView) {
             super(itemView);
-            nomeRepositorio = itemView.findViewById(R.id.item_java_pop_nome_repositorio);
+            nome = itemView.findViewById(R.id.item_java_pop_nome_repositorio);
             descricao = itemView.findViewById(R.id.item_java_pop_descricao);
+            nomeUsuario = itemView.findViewById(R.id.item_java_pop_nome_usuario);
+            sobrenome = itemView.findViewById(R.id.item_java_pop_sobrenome_usuario);
+            quantidadeForks = itemView.findViewById(R.id.item_java_pop_quantidade_forks);
+            quantidadeEstrelas = itemView.findViewById(R.id.item_java_pop_quantidade_estrelas);
         }
 
         public void vincula(Repositorio repositorio){
@@ -55,13 +63,17 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
         }
 
         private void preencheCampo(Repositorio repositorio) {
-            nomeRepositorio.setText(repositorio.getNomeRepositorio());
+            nome.setText(repositorio.getNome());
             descricao.setText(repositorio.getDescricao());
+            nomeUsuario.setText(repositorio.getNomeUsuario());
+            sobrenome.setText(repositorio.getSobrenomeUsuario());
+            quantidadeForks.setText(String.valueOf(repositorio.getQuantidadeForks()));
+            quantidadeEstrelas.setText(String.valueOf(repositorio.getQuantidadeEstrelas()));
         }
     }
 
-    public void adiciona(Repositorio repositorio){
-        repositorios.add(repositorio);
+    public void adiciona(List<Repositorio> repositorios){
+        this.repositorios.addAll(repositorios);
         notifyDataSetChanged();
     }
 }
