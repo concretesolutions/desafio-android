@@ -1,0 +1,38 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = '0.7.4+'
+}
+
+task(name: "jacocoTestReport", type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+
+    final fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*',
+                        '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*',
+                        '**/*_.*', '**/*_*.*', '**/*_$*.*', '**/*$ViewBinder*.*',
+                        '**/*$ViewBinding*.*', '**/*$Lambda$*', '**/*$lambda$*',
+                        '**/lambda$*']
+
+    final fileFilterKt = fileFilter + ['**/*$*$*.*']
+
+    final debugTreeJava = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    final debugTreeKotlin = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilterKt)
+    final mainSrcJava = "${project.projectDir}/src/main/java"
+    final mainSrcKotlin = "${project.projectDir}/src/main/kotlin"
+
+    sourceDirectories = files([mainSrcJava, mainSrcKotlin])
+    classDirectories = files([debugTreeJava, debugTreeKotlin])
+    executionData = fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec",
+            "outputs/code-coverage/connected/*coverage.ec"
+    ])
+
+    doLast {
+        println "JaCoCo report has been generated to file://${reports.html.destination}/index.html"
+    }
+}

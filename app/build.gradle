@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+final app_name = "Desafio Android"
+
+android {
+
+    defaultConfig {
+        applicationId "br.com.concrete.desafio"
+
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('../distribution/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file('../distribution/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        debug {
+            resValue 'string', 'app_name', app_name + " - DEV"
+
+            signingConfig signingConfigs.debug
+            applicationIdSuffix '.dev'
+            versionNameSuffix '_dev'
+
+            debuggable true
+            testCoverageEnabled true
+        }
+
+        release {
+            resValue 'string', 'app_name', app_name
+
+            signingConfig signingConfigs.release
+
+            debuggable false
+
+            minifyEnabled true
+            useProguard true
+            shrinkResources true
+        }
+    }
+}
+
+dependencies {
+
+    // Core Modules
+    implementation project(':core:base')
+    implementation project(':core:data')
+
+    // Feature Modules
+    implementation project(':feature:repo')
+    implementation project(':feature:pullrequest')
+
+}

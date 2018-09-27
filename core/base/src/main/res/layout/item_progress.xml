@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemProgressRoot"
+    android:layout_width="match_parent"
+    android:layout_height="65dp">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:padding="5dp" />
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/paginating_try_again"
+        android:textAllCaps="true"
+        android:textColor="?attr/colorAccent"
+        android:textStyle="bold" />
+
+</FrameLayout>

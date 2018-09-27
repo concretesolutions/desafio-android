@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+
+    defaultConfig {
+        consumerProguardFiles 'consumer-proguard-rules.pro'
+    }
+
+    def baseUrl = [
+            debug  : '"https://api.github.com/"',
+            release: '"https://api.github.com/"'
+    ]
+
+    buildTypes {
+        debug {
+            buildConfigField 'String', 'BASE_URL', baseUrl.debug
+        }
+
+        release {
+            buildConfigField 'String', 'BASE_URL', baseUrl.release
+        }
+    }
+}
+
+dependencies {
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Support
+    api "com.android.support:support-annotations:$versions.androidSupport"
+
+    // Gson
+    api "com.google.code.gson:gson:$versions.gson"
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    implementation("com.squareup.okhttp3:logging-interceptor:$versions.okHttp") {
+        exclude module: 'okhttp'
+    }
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:$versions.retrofit") {
+        exclude module: 'okhttp'
+    }
+    implementation("com.squareup.retrofit2:converter-gson:$versions.retrofit") {
+        exclude module: 'retrofit'
+        exclude module: 'gson'
+    }
+
+    // Log Tracking
+    api "com.jakewharton.timber:timber:$versions.timber"
+
+    // Android Arch
+    api "android.arch.lifecycle:runtime:$versions.arch"
+    api "android.arch.lifecycle:extensions:$versions.arch"
+
+}

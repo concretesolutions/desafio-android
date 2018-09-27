@@ -1,0 +1,16 @@
+apply plugin: 'com.android.feature'
+apply plugin: 'kotlin-android'
+
+android {
+
+    defaultConfig {
+        consumerProguardFiles 'consumer-proguard-rules.pro'
+    }
+}
+
+dependencies {
+
+    // Core Modules
+    implementation project(':core:base')
+    implementation project(':core:data')
+}
