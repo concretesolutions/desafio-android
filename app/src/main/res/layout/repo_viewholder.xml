@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/repo_linear_layout_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_material_light"
+    android:orientation="vertical"
+    tools:ignore="PrivateResource">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_material_screen_edge_margin">
+
+        <LinearLayout
+            android:id="@+id/repo_linear_layout_item"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/repo_text_view_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/color_blue_bold"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/repo_text_view_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="normal"
+                tools:ignore="InefficientWeight"
+                tools:text="@string/fake_description_text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/repo_imageview_forks"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/git_icon_forks_black"
+                    android:tint="@color/colorAccent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/repo_textview_number_forks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/between_items_margin"
+                    android:layout_marginLeft="@dimen/between_items_margin"
+                    android:text="@string/blank_value"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    tools:text="100"
+                     />
+
+                <ImageView
+                    android:id="@+id/repo_imageview_stars"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/default_internal_margin"
+                    android:layout_marginStart="@dimen/default_internal_margin"
+                    app:srcCompat="@drawable/git_icon_star_black"
+                    android:tint="@color/colorAccent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/repo_textview_number_stars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/between_items_margin"
+                    android:layout_marginStart="@dimen/between_items_margin"
+                    android:text="@string/blank_value"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    tools:text="100" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.35"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/repo_owner_photo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/placeholder_user"
+                tools:mockup="@drawable/placeholder_user" />
+
+            <TextView
+                android:id="@+id/repo_textview_owner_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLength="22"
+                android:text="@string/small_text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/color_blue_light"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/view_divider_horizontal" />
+
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="fab_margin">16dp</dimen>
+	<dimen name="app_bar_height">200dp</dimen>
+	<dimen name="item_width">200dp</dimen>
+	<dimen name="text_margin">16dp</dimen>
+	<dimen name="default_internal_margin">16dp</dimen>
+	<dimen name="default_margin">8dp</dimen>
+
+
+	<dimen name="activity_horizontal_margin">16dp</dimen>
+	<dimen name="activity_vertical_margin">16dp</dimen>
+	<dimen name="divider_height">1dp</dimen>
+	<dimen name="spacing_four">4dp</dimen>
+	<dimen name="between_items_margin">2dp</dimen>
+	<dimen name="default_material_screen_edge_margin">16dp</dimen>
+	<dimen name="material_appbar_elevation">8dp</dimen>
+	<dimen name="space_between_content_areas">8dp</dimen>
+</resources>
