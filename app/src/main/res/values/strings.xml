@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Java Repositories</string>
+    <string name="pull_requests_toolbar">Pull Requests</string>
+    <string name="no_pull_requests_toolbar">Nenhum pull request\npara este repositório.\n\n<b>Sua chance de ser o primeiro</b></string>
+    <string name="unexpected_error"><b>Desculpe</b>\nOcorreu um erro inesperado</string>
+    <string name="info_menu">Sobre</string>
+    <string name="about_title">Sobre</string>
+
+    <string name="about">
+        <![CDATA[
+        <b>Bibliotecas de código aberto</b><br></br>
+
+        retrofit<br>
+        koin<br>
+        glide<br>
+        nopaginate<br>
+
+        <p>
+        Copyright 2013 Square, Inc.
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+           http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+        </p>
+
+        <b>Créditos a direitos autorais</b><br>
+
+        <p>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        </p>
+
+        <p>
+        <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        </p>
+
+        <p>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/iconnice" title="Iconnice">Iconnice</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        </p>
+
+        ]]>
+    </string>
+</resources>
