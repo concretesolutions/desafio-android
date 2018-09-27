@@ -1,14 +1,13 @@
 package br.com.concrete.desafio
 
 import android.app.Application
-import timber.log.Timber
+import br.com.concrete.desafio.data.setupTimber
 
 class DesafioApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG)
-            Timber.plant(Timber.DebugTree())
+        setupTimber(BuildConfig.DEBUG)
     }
 
 }

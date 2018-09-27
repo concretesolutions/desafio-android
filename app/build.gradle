@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply from: "$rootDir/tools/tools.gradle"
 
 final app_name = "Desafio Android"
 
@@ -54,17 +52,14 @@ android {
     }
 }
 
-final versions = rootProject.ext
-
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    api project(':sdk')
+    // Core Modules
+    implementation project(':core:base')
+    implementation project(':core:data')
 
-    // Picasso
-    implementation "com.squareup.picasso:picasso:$versions.picasso"
+    // Feature Modules
+    implementation project(':feature:repo')
+    implementation project(':feature:pullrequest')
 
-    // Android Support
-    implementation "com.android.support:design:$versions.androidSupport"
-    implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
 }

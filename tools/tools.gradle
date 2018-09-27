@@ -1,3 +1,0 @@
-apply from: "$rootDir/tools/jacoco.gradle"
-apply from: "$rootDir/tools/layoutIds.gradle"
-apply from: "$rootDir/tools/linters.gradle"

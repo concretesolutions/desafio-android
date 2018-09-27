@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="PullRequestItemViewStyle">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:padding">@dimen/default_margin</item>
+    </style>
+
+</resources>

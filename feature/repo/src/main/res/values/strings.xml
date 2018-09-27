@@ -1,0 +1,6 @@
+<resources>
+    <!-- RepoDTO List -->
+    <string name="repo_list_name">Lista de repositórios</string>
+    <string name="repo_list_empty">EMPTY</string>
+    <string name="repo_list_error">ERROR</string>
+</resources>

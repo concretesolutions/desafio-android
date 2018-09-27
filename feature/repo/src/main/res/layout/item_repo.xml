@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemRepoRoot"
+    style="@style/RepoItemViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/white"
+    tools:parentTag="android.widget.RelativeLayout">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/Desafio.TextView.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/userLogin"
+        tools:text="Nome Repositório" />
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/Desafio.TextView.Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_toStartOf="@+id/userLogin"
+        tools:text="Descrição do repositório que consegue ser realmente muito grande mesmo" />
+
+    <ImageView
+        android:id="@+id/forks_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_below="@+id/description"
+        android:layout_marginTop="@dimen/default_margin"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_fork" />
+
+    <TextView
+        android:id="@+id/forks"
+        style="@style/Desafio.TextView.Counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/forks_icon"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@+id/forks_icon"
+        tools:text="640" />
+
+    <ImageView
+        android:id="@+id/starts_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_below="@+id/description"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_toEndOf="@+id/forks"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_star" />
+
+    <TextView
+        android:id="@+id/stars"
+        style="@style/Desafio.TextView.Counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/starts_icon"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@+id/starts_icon"
+        tools:text="98" />
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignStart="@+id/userLogin"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@null"
+        android:scaleType="fitEnd"
+        tools:src="@drawable/ic_avatar" />
+
+    <TextView
+        android:id="@+id/userLogin"
+        style="@style/Desafio.TextView.UserLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/avatar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/small_margin"
+        tools:text="username" />
+
+</merge>

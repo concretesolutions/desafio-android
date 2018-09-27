@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+
+    defaultConfig {
+        consumerProguardFiles 'consumer-proguard-rules.pro'
+    }
+}
+
+dependencies {
+    api project(':core:data')
+
+    // Picasso
+    api "com.squareup.picasso:picasso:$versions.picasso"
+
+    // Android Support
+    api "com.android.support:design:$versions.androidSupport"
+    api "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+
+    // Toolkit
+    api "br.com.arch.toolkit:statemachine:$versions.statemachine"
+    api "br.com.arch.toolkit:recycler-adapter:$versions.recycler_adapter"
+}

@@ -1,19 +1,16 @@
 apply plugin: 'jacoco'
 
-def jacocoRetrolambdaMap = [:]
-
 jacoco {
     toolVersion = '0.7.4+'
 }
 
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+task(name: "jacocoTestReport", type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
 
     reports {
         xml.enabled = true
         html.enabled = true
     }
 
-    jacocoClasspath = configurations['androidJacocoAnt']
 
     final fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*',
                         '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*',
@@ -35,19 +32,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
             "outputs/code-coverage/connected/*coverage.ec"
     ])
 
-    doFirst {
-        new File("${buildDir}/intermediates/classes/debug").eachFileRecurse { file ->
-            if (file.name.contains('$$')) {
-                final renamed = file.path.replace '$$', '$'
-                jacocoRetrolambdaMap[renamed] = file.path
-                file.renameTo renamed
-            }
-        }
-    }
-
     doLast {
-        // Revert renamed files back to their generated names
-        jacocoRetrolambdaMap.each { renamed, original -> new File(renamed).renameTo original }
         println "JaCoCo report has been generated to file://${reports.html.destination}/index.html"
     }
 }

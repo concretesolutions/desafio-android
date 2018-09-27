@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/PullRequestItemViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/white"
+    tools:parentTag="android.widget.RelativeLayout">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/Desafio.TextView.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Título do pull request" />
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/Desafio.TextView.Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="@dimen/small_margin"
+        tools:text="Body do pull request que consegue ser realmente muito grande mesmo" />
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_below="@+id/description"
+        android:layout_marginTop="@dimen/small_margin"
+        android:contentDescription="@null"
+        android:scaleType="fitEnd"
+        tools:src="@drawable/ic_avatar" />
+
+    <TextView
+        android:id="@+id/userLogin"
+        style="@style/Desafio.TextView.UserLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/avatar"
+        android:layout_alignBottom="@+id/avatar"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_toEndOf="@+id/avatar"
+        tools:text="username" />
+
+</merge>
