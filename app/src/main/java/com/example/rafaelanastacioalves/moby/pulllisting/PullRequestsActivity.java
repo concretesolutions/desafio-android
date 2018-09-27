@@ -14,7 +14,7 @@ public class PullRequestsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_package_detail);
+        setContentView(R.layout.pull_request_activity);
         setupActionBar();
 
 

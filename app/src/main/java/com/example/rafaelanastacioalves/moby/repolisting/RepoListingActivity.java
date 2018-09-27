@@ -61,7 +61,7 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
     }
 
     private void setupViews() {
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.repo_listing_activity);
         Timber.tag("LifeCycles");
         Timber.i("onCreate Activity");
     }
