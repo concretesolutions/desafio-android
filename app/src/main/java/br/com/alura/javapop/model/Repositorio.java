@@ -1,18 +1,25 @@
 package br.com.alura.javapop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Repositorio {
 
+    @JsonProperty("name")
     private String nome;
-    private String descricao;
-    private String nomeUsuario;
-    private String sobrenomeUsuario;
-    private int quantidadeForks;
-    private int quantidadeEstrelas;
 
-    public Repositorio(String nome, String nomeUsuario) {
-        this.nome = nome;
-        this.nomeUsuario = nomeUsuario;
-    }
+    @JsonProperty("description")
+    private String descricao;
+
+    @JsonProperty("owner")
+    private Usuario usuario;
+
+    @JsonProperty("forks")
+    private int quantidadeForks;
+
+    @JsonProperty("stargazers_count")
+    private int quantidadeEstrelas;
 
     public String getNome() {
         return nome;
@@ -30,14 +37,6 @@ public class Repositorio {
         this.descricao = descricao;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
-
-    public void setSobrenomeUsuario(String sobrenomeUsuario) {
-        this.sobrenomeUsuario = sobrenomeUsuario;
-    }
-
     public void setQuantidadeForks(int quantidadeForks) {
         this.quantidadeForks = quantidadeForks;
     }
@@ -46,19 +45,15 @@ public class Repositorio {
         this.quantidadeEstrelas = quantidadeEstrelas;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public String getSobrenomeUsuario() {
-        return sobrenomeUsuario;
-    }
-
     public int getQuantidadeForks() {
         return quantidadeForks;
     }
 
     public int getQuantidadeEstrelas() {
         return quantidadeEstrelas;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 }

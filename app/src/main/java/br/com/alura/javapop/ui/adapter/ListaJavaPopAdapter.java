@@ -1,11 +1,15 @@
 package br.com.alura.javapop.ui.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,6 +51,7 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
         private final TextView sobrenome;
         private final TextView quantidadeForks;
         private final TextView quantidadeEstrelas;
+        private final ImageView avatar;
 
         public RepositorioViewHolder(View itemView) {
             super(itemView);
@@ -56,6 +61,7 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
             sobrenome = itemView.findViewById(R.id.item_java_pop_sobrenome_usuario);
             quantidadeForks = itemView.findViewById(R.id.item_java_pop_quantidade_forks);
             quantidadeEstrelas = itemView.findViewById(R.id.item_java_pop_quantidade_estrelas);
+            avatar = (ImageView) itemView.findViewById(R.id.item_java_pop_imagem_usuario);
         }
 
         public void vincula(Repositorio repositorio){
@@ -65,10 +71,11 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
         private void preencheCampo(Repositorio repositorio) {
             nome.setText(repositorio.getNome());
             descricao.setText(repositorio.getDescricao());
-            nomeUsuario.setText(repositorio.getNomeUsuario());
-            sobrenome.setText(repositorio.getSobrenomeUsuario());
+            nomeUsuario.setText(repositorio.getUsuario().getNome());
+            sobrenome.setText(repositorio.getUsuario().getSobrenome());
             quantidadeForks.setText(String.valueOf(repositorio.getQuantidadeForks()));
             quantidadeEstrelas.setText(String.valueOf(repositorio.getQuantidadeEstrelas()));
+            Picasso.get().load(repositorio.getUsuario().getUrlAvatar()).into(avatar);
         }
     }
 
