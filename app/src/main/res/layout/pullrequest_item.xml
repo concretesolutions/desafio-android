@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_default"
+    android:background="?selectableItemBackground">
+
+    <TextView
+        style="@style/TitleTextView"
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome Repositório"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/DescriptionTextView"
+        android:layout_marginTop="3dp"
+        android:id="@+id/tvBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descrição xdfgdgdfgdfgdfgertertregergdfgdfgdfgfdgfdfgdfgd"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <ImageView
+        android:id="@+id/ivAccount"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_account"
+        app:layout_constraintTop_toBottomOf="@+id/tvBody"
+        tools:ignore="UnknownIdInLayout" />
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:id="@+id/tvUsername"
+        style="@style/LoginTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="100dp"
+        android:text="username"
+        app:layout_constraintBottom_toBottomOf="@+id/ivAccount"
+        app:layout_constraintLeft_toRightOf="@+id/ivAccount"
+        app:layout_constraintTop_toTopOf="@+id/ivAccount" />
+
+
+</android.support.constraint.ConstraintLayout>

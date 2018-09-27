@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_default"
+    android:background="?selectableItemBackground">
+
+    <TextView
+        style="@style/TitleTextView"
+        android:id="@+id/tvRepoName"
+        android:layout_width="wrap_content"
+        android:maxWidth="200dp"
+        android:layout_height="wrap_content"
+        android:text="Nome Repositório"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/DescriptionTextView"
+        android:layout_marginTop="3dp"
+        android:id="@+id/tvRepoDescription"
+        android:layout_width="wrap_content"
+        android:maxWidth="200dp"
+        android:layout_height="wrap_content"
+        android:text="Descrição"
+        app:layout_constraintTop_toBottomOf="@+id/tvRepoName" />
+
+    <ImageView
+        android:tint="#E29132"
+        android:id="@+id/ivBranch"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_git_branch"
+        app:layout_constraintTop_toBottomOf="@+id/tvRepoDescription" />
+
+    <TextView
+        android:id="@+id/tvForksCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="0"
+        android:textColor="#E29132"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBranch"
+        app:layout_constraintLeft_toRightOf="@+id/ivBranch"
+        app:layout_constraintTop_toTopOf="@+id/ivBranch" />
+
+    <ImageView
+        android:tint="#E29132"
+        android:id="@+id/ivStars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_star"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBranch"
+        app:layout_constraintLeft_toRightOf="@+id/tvForksCount"
+        app:layout_constraintTop_toTopOf="@+id/ivBranch" />
+
+    <TextView
+        android:id="@+id/tvStarsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="0"
+        android:textColor="#E29132"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBranch"
+        app:layout_constraintLeft_toRightOf="@+id/ivStars"
+        app:layout_constraintTop_toTopOf="@+id/ivBranch" />
+
+    <ImageView
+        android:scaleType="fitCenter"
+        android:id="@+id/ivAccount"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="25dp"
+        android:src="@drawable/ic_account"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        style="@style/LoginTextView"
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:maxWidth="100dp"
+        android:text="username"
+        app:layout_constraintEnd_toEndOf="@+id/ivAccount"
+        app:layout_constraintStart_toStartOf="@+id/ivAccount"
+        app:layout_constraintTop_toBottomOf="@+id/ivAccount" />
+
+    <TextView
+        android:id="@+id/tvFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxWidth="100dp"
+        android:text="Nome Completo"
+        android:textSize="12sp"
+        android:textColor="#9C98C3"
+        app:layout_constraintEnd_toEndOf="@+id/ivAccount"
+        app:layout_constraintStart_toStartOf="@+id/ivAccount"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+
+</android.support.constraint.ConstraintLayout>

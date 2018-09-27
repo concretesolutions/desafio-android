@@ -1,0 +1,26 @@
+<resources>
+
+    <style name="TitleTextView">
+        <item name="android:textColor">@color/highlight_text</item>
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="DescriptionTextView">
+        <item name="android:textColor">@color/text_description</item>
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="LoginTextView">
+        <item name="android:textColor">@color/highlight_text</item>
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+</resources>
+
