@@ -2,6 +2,7 @@ package br.com.alura.javapop.ui.adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +21,12 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
 
     private final List<Repositorio> repositorios;
     private final Context context;
+    private final OnItemClickListener listener;
 
-    public ListaJavaPopAdapter(Context context, List<Repositorio> repositorios){
+    public ListaJavaPopAdapter(Context context, List<Repositorio> repositorios, OnItemClickListener listener){
         this.context = context;
         this.repositorios = repositorios;
+        this.listener = listener;
     }
 
     @Override
@@ -35,12 +38,18 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
     @Override
     public void onBindViewHolder(ListaJavaPopAdapter.RepositorioViewHolder holder, int position) {
         Repositorio repositorio = repositorios.get(position);
-        holder.vincula(repositorio);
+        holder.vincula(repositorio, listener);
     }
 
     @Override
     public int getItemCount() {
         return repositorios.size();
+    }
+
+    public List<Repositorio> adiciona(List<Repositorio> repositorios){
+        this.repositorios.addAll(repositorios);
+        notifyDataSetChanged();
+        return this.repositorios;
     }
 
     class RepositorioViewHolder extends RecyclerView.ViewHolder {
@@ -51,6 +60,7 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
         private final TextView sobrenome;
         private final TextView quantidadeForks;
         private final TextView quantidadeEstrelas;
+
         private final ImageView avatar;
 
         public RepositorioViewHolder(View itemView) {
@@ -64,11 +74,7 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
             avatar = (ImageView) itemView.findViewById(R.id.item_java_pop_imagem_usuario);
         }
 
-        public void vincula(Repositorio repositorio){
-            preencheCampo(repositorio);
-        }
-
-        private void preencheCampo(Repositorio repositorio) {
+        public void vincula(final Repositorio repositorio, final OnItemClickListener listener){
             nome.setText(repositorio.getNome());
             descricao.setText(repositorio.getDescricao());
             nomeUsuario.setText(repositorio.getUsuario().getNome());
@@ -76,11 +82,22 @@ public class ListaJavaPopAdapter extends RecyclerView.Adapter<ListaJavaPopAdapte
             quantidadeForks.setText(String.valueOf(repositorio.getQuantidadeForks()));
             quantidadeEstrelas.setText(String.valueOf(repositorio.getQuantidadeEstrelas()));
             Picasso.get().load(repositorio.getUsuario().getUrlAvatar()).into(avatar);
+            itemView.setOnClickListener(clickRepositorio(repositorio, listener));
         }
+
+        @NonNull
+        private View.OnClickListener clickRepositorio(final Repositorio repositorio, final OnItemClickListener listener) {
+            return new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(repositorio);
+                }
+            };
+        }
+
     }
 
-    public void adiciona(List<Repositorio> repositorios){
-        this.repositorios.addAll(repositorios);
-        notifyDataSetChanged();
+    public interface OnItemClickListener{
+        void onItemClick(Repositorio repositorio);
     }
 }

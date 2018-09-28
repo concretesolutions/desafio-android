@@ -18,7 +18,7 @@ public class RetrofitInicializador {
         client.addInterceptor(interceptor);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/search/")
+                .baseUrl("https://api.github.com/")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .client(client.build())
                 .build();
