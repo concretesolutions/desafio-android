@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.RepositorioActivity"
+            android:name=".ui.activity.PullRequestActivity"
             android:parentActivityName=".ui.activity.JavaPopActivity" >
 
         </activity>

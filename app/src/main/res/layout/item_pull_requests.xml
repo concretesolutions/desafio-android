@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/item_pull_reques_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Título do Pull Request" />
+
+    <TextView
+        android:id="@+id/item_pull_request_corpo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/item_pull_reques_titulo"
+        app:layout_constraintTop_toBottomOf="@+id/item_pull_reques_titulo"
+        tools:text="Corpo do pull request" />
+
+    <ImageView
+        android:id="@+id/item_pull_reques_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="Avatar do usuario que fez pull request"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_pull_request_data"
+        app:layout_constraintTop_toBottomOf="@+id/item_pull_request_data"
+        app:srcCompat="@drawable/ic_person_black_24dp" />
+
+    <TextView
+        android:id="@+id/item_pull_reques_nome_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/item_pull_reques_avatar"
+        app:layout_constraintStart_toEndOf="@+id/item_pull_reques_avatar"
+        app:layout_constraintTop_toTopOf="@+id/item_pull_reques_avatar"
+        tools:text="Nome do usuario" />
+
+    <TextView
+        android:id="@+id/item_pull_request_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/item_pull_request_corpo"
+        app:layout_constraintTop_toBottomOf="@+id/item_pull_request_corpo"
+        tools:text="28/09/2018" />
+</android.support.constraint.ConstraintLayout>

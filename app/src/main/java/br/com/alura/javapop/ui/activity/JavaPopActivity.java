@@ -68,10 +68,10 @@ public class JavaPopActivity extends AppCompatActivity {
     }
 
     private void configuraRecyclerView(List<Repositorio> repositorios) {
-        recyclerView = findViewById(R.id.java_pop_recyclerview);
-        LinearLayoutManager linearLayoutManager = configuraManager(recyclerView);
+        recyclerView = findViewById(R.id.pull_request_recyclerview);
+        LinearLayoutManager manager = configuraManager(recyclerView);
         configuraAdapter(repositorios, recyclerView);
-        scrollListener = configuraListaInfinita(linearLayoutManager);
+        scrollListener = configuraListaInfinita(manager);
         recyclerView.addOnScrollListener(scrollListener);
     }
 
@@ -92,7 +92,7 @@ public class JavaPopActivity extends AppCompatActivity {
         return new ListaJavaPopAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Repositorio repositorio) {
-                Intent vaiParaRepositorio = new Intent(JavaPopActivity.this, RepositorioActivity.class);
+                Intent vaiParaRepositorio = new Intent(JavaPopActivity.this, PullRequestActivity.class);
 
                 PendingIntent pendingIntent =TaskStackBuilder.create(JavaPopActivity.this)
                                 .addNextIntentWithParentStack(vaiParaRepositorio)

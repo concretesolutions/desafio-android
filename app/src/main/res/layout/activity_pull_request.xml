@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.PullRequestActivity">
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/pull_request_recyclerview"
@@ -16,6 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/item_java_pop" />
+        tools:listitem="@layout/item_pull_requests" />
 
 </android.support.constraint.ConstraintLayout>

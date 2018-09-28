@@ -8,6 +8,7 @@ import java.util.Calendar;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PullRequest {
 
+    @JsonProperty("html_url")
     private String url;
 
     @JsonProperty("title")
@@ -22,4 +23,23 @@ public class PullRequest {
     @JsonProperty("created_at")
     private Calendar data;
 
+    public String getUrl() {
+        return url;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getCorpo() {
+        return corpo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Calendar getData() {
+        return data;
+    }
 }
