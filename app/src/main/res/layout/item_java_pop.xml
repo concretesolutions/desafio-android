@@ -6,92 +6,155 @@
     android:layout_height="wrap_content">
 
 
-    <TextView
-        android:id="@+id/item_java_pop_nome_repositorio"
+    <android.support.v7.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/item_java_pop_imagem_usuario"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Nome Do Repositório" />
+        app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:id="@+id/item_java_pop_descricao"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/item_java_pop_nome_repositorio"
-        app:layout_constraintStart_toStartOf="@+id/item_java_pop_nome_repositorio"
-        app:layout_constraintTop_toBottomOf="@+id/item_java_pop_nome_repositorio"
-        tools:text="Descrição do repositõrio Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sollicitudin nisi id tortor vehicula, dictum aliquam velit hendrerit. Quisque eget nulla urna" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/item_java_pop_quantidade_forks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:drawableLeft="@drawable/ic_star_black_24dp"
-        android:drawableStart="@drawable/ic_star_black_24dp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/item_java_pop_descricao"
-        app:layout_constraintTop_toBottomOf="@+id/item_java_pop_descricao"
-        tools:text="640" />
+            <TextView
+                android:id="@+id/item_java_pop_nome_repositorio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/item_java_pop_card_corner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/item_java_pop_card_corner"
+                app:layout_constraintTop_toTopOf="@+id/item_java_pop_card_corner"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Nome Do Repositório" />
 
-    <TextView
-        android:id="@+id/item_java_pop_quantidade_estrelas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:drawableLeft="@drawable/ic_star_black_24dp"
-        android:drawableStart="@drawable/ic_star_black_24dp"
-        android:gravity="center"
-        app:layout_constraintStart_toEndOf="@+id/item_java_pop_quantidade_forks"
-        app:layout_constraintTop_toTopOf="@+id/item_java_pop_quantidade_forks"
-        tools:text="98" />
+            <TextView
+                android:id="@+id/item_java_pop_descricao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/black"
+                android:maxLines="3"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="@+id/item_java_pop_nome_repositorio"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/item_java_pop_nome_repositorio"
+                app:layout_constraintTop_toBottomOf="@+id/item_java_pop_nome_repositorio"
+                tools:text="Descrição do repositõrio Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sollicitudin nisi id tortor vehicula, dictum aliquam velit hendrerit. Quisque eget nulla urna" />
 
-    <ImageView
-        android:id="@+id/item_java_pop_imagem_usuario"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="24dp"
-        android:contentDescription="@string/imagem_usuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/item_java_pop_nome_repositorio"
-        app:layout_constraintTop_toTopOf="@+id/item_java_pop_nome_repositorio"
-        app:srcCompat="@drawable/ic_person_black_24dp" />
+            <TextView
+                android:id="@+id/item_java_pop_sobrenome_usuario"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/item_java_pop_card_corner"
+                app:layout_constraintStart_toStartOf="@+id/item_java_pop_card_corner"
+                app:layout_constraintTop_toBottomOf="@+id/item_java_pop_nome_usuario"
+                tools:text="Sobrenome" />
 
-    <TextView
-        android:id="@+id/item_java_pop_nome_usuario"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="@+id/item_java_pop_imagem_usuario"
-        app:layout_constraintStart_toStartOf="@+id/item_java_pop_imagem_usuario"
-        app:layout_constraintTop_toBottomOf="@+id/item_java_pop_imagem_usuario"
-        tools:text="username" />
+            <TextView
+                android:id="@+id/item_java_pop_quantidade_forks"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/roxo"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:drawableStart="@drawable/ic_code_fork_symbol"
+                android:drawableLeft="@drawable/ic_code_fork_symbol"
+                android:gravity="center|start"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/item_java_pop_quantidade_estrelas"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/item_java_pop_sobrenome_usuario"
+                app:layout_constraintStart_toStartOf="@+id/item_java_pop_descricao"
+                app:layout_constraintTop_toBottomOf="@+id/item_java_pop_descricao"
+                tools:text="640" />
 
-    <TextView
-        android:id="@+id/item_java_pop_sobrenome_usuario"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/item_java_pop_nome_usuario"
-        app:layout_constraintTop_toBottomOf="@+id/item_java_pop_nome_usuario"
-        tools:text="Nome Sobrenome" />
+            <TextView
+                android:id="@+id/item_java_pop_quantidade_estrelas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/roxo"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:drawableStart="@drawable/ic_star_black_24dp"
+                android:drawableLeft="@drawable/ic_star_black_24dp"
+                android:gravity="center|start"
+                app:layout_constraintBottom_toBottomOf="@+id/item_java_pop_quantidade_forks"
+                app:layout_constraintEnd_toEndOf="@+id/item_java_pop_descricao"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/item_java_pop_quantidade_forks"
+                app:layout_constraintTop_toTopOf="@+id/item_java_pop_quantidade_forks"
+                tools:text="98" />
+
+            <TextView
+                android:id="@+id/item_java_pop_nome_usuario"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/item_java_pop_card_corner"
+                app:layout_constraintStart_toStartOf="@+id/item_java_pop_card_corner"
+                app:layout_constraintTop_toBottomOf="@+id/item_java_pop_card_corner"
+                tools:text="username" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/item_java_pop_card_corner"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:cardCornerRadius="39dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/item_java_pop_nome_repositorio"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/item_java_pop_imagem_usuario"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:contentDescription="@string/imagem_usuario"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+                </android.support.constraint.ConstraintLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
 
 
 </android.support.constraint.ConstraintLayout>
