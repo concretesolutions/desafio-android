@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:titleTextColor="@android:color/white"
+        android:navigationIcon="?attr/homeAsUpIndicator"
+        style="@style/DetailToolbarStyle"/>
+
+    <ProgressBar
+        android:id="@+id/pb_pr_centered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_pr_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/small_margin"
+        android:layout_below="@+id/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/ll_error_container"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_height="@dimen/default_height"
+        android:layout_width="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_error" />
+
+        <TextView
+            android:id="@+id/tv_pr_error_message"
+            android:text="@string/app_name"
+            style="@style/ErrorMessageStyle" />
+
+        <ImageView
+            android:id="@+id/iv_try_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:src="@drawable/ic_try_again" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
