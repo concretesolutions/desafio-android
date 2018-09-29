@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:titleTextColor="@android:color/white"
+        android:title="@string/app_name"
+        style="@style/DetailToolbarStyle"/>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_repo_list"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_centered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
+
+    <ProgressBar
+        android:id="@+id/pb_footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:layout_marginBottom="@dimen/medium_margin"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_error_container"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_height="@dimen/default_height"
+        android:visibility="gone"
+        android:layout_width="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_error" />
+
+        <TextView
+            android:id="@+id/tv_repo_error_message"
+            android:text="@string/app_name"
+            style="@style/ErrorMessageStyle" />
+
+        <ImageView
+            android:id="@+id/iv_try_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:src="@drawable/ic_try_again" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

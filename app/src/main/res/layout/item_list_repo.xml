@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/small_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_toStartOf="@+id/tv_username"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_repo_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/basicBlue"
+                android:textSize="@dimen/medium_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_repo_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/medium_margin"
+                    android:layout_height="@dimen/medium_margin"
+                    android:src="@drawable/ic_git_branch20" />
+
+                <TextView
+                    android:id="@+id/tv_repo_branches"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="@dimen/medium_margin" />
+
+                <ImageView
+                    android:layout_width="@dimen/medium_margin"
+                    android:layout_height="@dimen/medium_margin"
+                    android:src="@drawable/ic_star20" />
+
+                <TextView
+                    android:id="@+id/tv_repo_stars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_user_fullname"
+            android:layout_width="@dimen/profile_box_size"
+            android:layout_height="@dimen/profile_box_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="@dimen/profile_box_size"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/iv_user_fullname"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_user_fullname"
+            android:layout_width="@dimen/profile_box_size"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iv_user_fullname"
+            android:layout_below="@+id/tv_username"
+            android:gravity="center" />
+
+    </RelativeLayout>
+</LinearLayout>

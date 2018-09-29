@@ -1,0 +1,38 @@
+<resources>
+
+<!-- Base application theme. -->
+<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+</style>
+
+<style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+    <!-- Customize color of navigation drawer icon and back arrow -->
+    <item name="colorControlNormal">@android:color/white</item>
+</style>
+
+<style name="DetailToolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+    <item name="android:layout_height">56dp</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:contentInsetLeft">0dp</item>
+    <item name="android:contentInsetStart">0dp</item>
+    <item name="android:theme">@style/ToolbarTheme</item>
+    <item name="android:minHeight">?android:attr/actionBarSize</item>
+    <item name="android:background">?android:attr/colorPrimary</item>
+</style>
+
+<style name="ErrorMessageStyle" parent="AppTheme">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:visibility">visible</item>
+    <item name="android:textSize">@dimen/medium_text_size</item>
+    <item name="android:textColor">@android:color/black</item>
+    <item name="android:layout_marginTop">@dimen/small_margin</item>
+</style>
+
+
+</resources>
