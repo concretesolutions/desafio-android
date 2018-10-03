@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">desafio-android</string>
+    <string name="title_activity_pull_request">PullRequestActivity</string>
+</resources>
