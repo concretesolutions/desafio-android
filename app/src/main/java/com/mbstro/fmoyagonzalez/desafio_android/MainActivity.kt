@@ -13,8 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.AbsListView
-
-
+import kotlinx.android.synthetic.main.pull_request.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private var viewManager =  LinearLayoutManager(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = getString(R.string.title_repo)
         setContentView(R.layout.activity_main)
         getHTTPVolley("https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1")
         viewAdapter = RepoAdapter(repos){

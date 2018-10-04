@@ -12,18 +12,20 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.google.gson.Gson
 import android.content.Intent
 import android.net.Uri
+import android.view.View
+import kotlinx.android.synthetic.main.activity_pull_request.*
 
 
 class PullRequestActivity : AppCompatActivity() {
 
-    var pullRequestsList  = arrayListOf<PullRequest>()
-
+    private var pullRequestsList  = arrayListOf<PullRequest>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_request)
         val autor = intent.getStringExtra("AUTOR")
         val repo = intent.getStringExtra("REPO")
+        title = "${getString(R.string.title_pull_request)} $repo"
         getHTTPVolley("https://api.github.com/repos/${autor}/${repo}/pulls")
 
     }
@@ -50,14 +52,18 @@ class PullRequestActivity : AppCompatActivity() {
                         startActivity(browserIntent)
                     }
                     val recyclerView = findViewById<RecyclerView>(R.id.recycler_view_pull_request).apply {
-                        // use this setting to improve performance if you know that changes
-                        // in content do not change the layout size of the RecyclerView
-                        //setHasFixedSize(true)
-                        // use a linear layout manager
                         layoutManager = viewManager
-                        // specify an viewAdapter (see also next example)
                         adapter = viewAdapter
 
+                    }
+                    progressBar_pull_request.visibility= View.GONE
+                    if (pullRequestsList.isEmpty()) {
+                        recyclerView.visibility = View.GONE;
+                        empty_pull_request.visibility = View.VISIBLE;
+                    }
+                    else {
+                        recyclerView.visibility = View.VISIBLE;
+                        empty_pull_request.visibility = View.GONE;
                     }
 
                 },
