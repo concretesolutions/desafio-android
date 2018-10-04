@@ -14,11 +14,15 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import kotlinx.android.synthetic.main.activity_pull_request.*
+import org.json.JSONArray
 
 
 class PullRequestActivity : AppCompatActivity() {
 
     private var pullRequestsList  = arrayListOf<PullRequest>()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private var viewManager =  LinearLayoutManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,32 +42,19 @@ class PullRequestActivity : AppCompatActivity() {
 
         val jsonArrayRequest = JsonArrayRequest(Request.Method.GET, url, null,
                 Response.Listener { response ->
-
-                    for(i in 0 until response.length()) {
-                        val gson = Gson()
-                        val item = gson.fromJson(response[i].toString(), PullRequest::class.java)
-                        this.pullRequestsList.add(item)
-                    }
-                    val viewManager = LinearLayoutManager(this)
-                    val viewAdapter = PullRequestAdapter(pullRequestsList){
+                    this.populatePullRequest(response)
+                    viewManager = LinearLayoutManager(this)
+                    viewAdapter = PullRequestAdapter(pullRequestsList){
                         Log.w("CLICKED", it.html_url)
                         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it.html_url))
                         startActivity(browserIntent)
                     }
-                    val recyclerView = findViewById<RecyclerView>(R.id.recycler_view_pull_request).apply {
+                    recyclerView = findViewById<RecyclerView>(R.id.recycler_view_pull_request).apply {
                         layoutManager = viewManager
                         adapter = viewAdapter
 
                     }
-                    progressBar_pull_request.visibility= View.GONE
-                    if (pullRequestsList.isEmpty()) {
-                        recyclerView.visibility = View.GONE
-                        empty_pull_request.visibility = View.VISIBLE
-                    }
-                    else {
-                        recyclerView.visibility = View.VISIBLE
-                        empty_pull_request.visibility = View.GONE
-                    }
+                    this.changeVisibility()
 
                 },
                 Response.ErrorListener { error ->
@@ -74,6 +65,26 @@ class PullRequestActivity : AppCompatActivity() {
         // Add the request to the RequestQueue.
         //queue.add(jsonArrayRequest)
         VolleySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest)
+    }
+
+    private fun changeVisibility(){
+        progressBar_pull_request.visibility= View.GONE
+        if (this.pullRequestsList.isEmpty()) {
+            this.recyclerView.visibility = View.GONE
+            empty_pull_request.visibility = View.VISIBLE
+        }
+        else {
+            this.recyclerView.visibility = View.VISIBLE
+            empty_pull_request.visibility = View.GONE
+        }
+    }
+
+    private fun populatePullRequest(response: JSONArray){
+        for(i in 0 until response.length()) {
+            val gson = Gson()
+            val item = gson.fromJson(response[i].toString(), PullRequest::class.java)
+            this.pullRequestsList.add(item)
+        }
     }
 
 }

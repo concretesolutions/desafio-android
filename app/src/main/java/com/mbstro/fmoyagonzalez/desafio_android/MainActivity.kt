@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.AbsListView
+import org.json.JSONArray
 
 /**
  * Esta clase contiene la lista de repositorios de java comenzando con la pagina 1
@@ -45,7 +46,6 @@ class MainActivity : AppCompatActivity() {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
-
         }
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -57,17 +57,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                visibleItemCount = viewManager.childCount
-                totalItemCount = viewManager.itemCount
-                pastVisiblesItems = viewManager.findFirstVisibleItemPosition()
-
-                if (isScrolling && visibleItemCount + pastVisiblesItems == totalItemCount) {
-                    isScrolling = false
-                    page += 1
-                    botton_progressBar.visibility = View.VISIBLE
-                    getHTTPVolley("$PAGE$page")
-                    Log.d("SCROLL", "LA PAGINA ES: " + page.toString() )
-                }
+                changePage()
             }
         })
     }
@@ -79,11 +69,7 @@ class MainActivity : AppCompatActivity() {
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener { response ->
                     val json = response.getJSONArray("items")
-                    for(i in 0 until json.length()) {
-                        val gson = Gson()
-                        val item = gson.fromJson(json.getJSONObject(i).toString(), Repo::class.java)
-                        this.repos.add(item)
-                    }
+                    this.populateRepo(json)
                     viewAdapter.notifyDataSetChanged()
                     first_progressBar.visibility = View.INVISIBLE
                     botton_progressBar.visibility = View.INVISIBLE
@@ -95,5 +81,23 @@ class MainActivity : AppCompatActivity() {
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
         //queue.add(jsonObjectRequest)
     }
+    private fun populateRepo(json: JSONArray){
+        for(i in 0 until json.length()) {
+            val gson = Gson()
+            val item = gson.fromJson(json.getJSONObject(i).toString(), Repo::class.java)
+            this.repos.add(item)
+        }
+    }
+    private fun changePage(){
+        visibleItemCount = viewManager.childCount
+        totalItemCount = viewManager.itemCount
+        pastVisiblesItems = viewManager.findFirstVisibleItemPosition()
 
+        if (isScrolling && visibleItemCount + pastVisiblesItems == totalItemCount) {
+            isScrolling = false
+            page += 1
+            botton_progressBar.visibility = View.VISIBLE
+            getHTTPVolley("$PAGE$page")
+        }
+    }
 }
