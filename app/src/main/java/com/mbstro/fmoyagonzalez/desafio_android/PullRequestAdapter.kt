@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import java.text.DateFormat
 
 
-class PullRequestAdapter(val items: ArrayList<PullRequest>, val listener: (PullRequest) -> Unit) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>() {
+class PullRequestAdapter(private val items: ArrayList<PullRequest>, private val listener: (PullRequest) -> Unit) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context)
@@ -21,11 +21,11 @@ class PullRequestAdapter(val items: ArrayList<PullRequest>, val listener: (PullR
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title: TextView = itemView.findViewById(R.id.title_pull_request)
-        val description: TextView = itemView.findViewById(R.id.body_pull_request)
-        val username: TextView = itemView.findViewById(R.id.name_user)
-        val avatar: ImageView = itemView.findViewById(R.id.avatar_user)
-        val date: TextView = itemView.findViewById(R.id.date_pull_request)
+        private val title: TextView = itemView.findViewById(R.id.title_pull_request)
+        private val description: TextView = itemView.findViewById(R.id.body_pull_request)
+        private val username: TextView = itemView.findViewById(R.id.name_user)
+        private val avatar: ImageView = itemView.findViewById(R.id.avatar_user)
+        private val date: TextView = itemView.findViewById(R.id.date_pull_request)
 
         fun bind(pullRequest: PullRequest, listener: (PullRequest) -> Unit) = with(itemView) {
             title.text = pullRequest.title

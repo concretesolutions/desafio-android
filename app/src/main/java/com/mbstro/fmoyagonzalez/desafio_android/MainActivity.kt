@@ -13,9 +13,10 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.AbsListView
-import kotlinx.android.synthetic.main.pull_request.*
 
-
+/**
+ * Esta clase contiene la lista de repositorios de java comenzando con la pagina 1
+ */
 class MainActivity : AppCompatActivity() {
 
     private var repos  = arrayListOf<Repo>()
@@ -23,16 +24,16 @@ class MainActivity : AppCompatActivity() {
     private var visibleItemCount:Int = 0
     private var totalItemCount:Int = 0
     private var page = 1
-    //var viewAdapter: RepoAdapter? = null
     private var isScrolling = false
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private val PAGE = "https://api.github.com/search/repositories?q=language:Java&sort=stars&page="
     private var viewManager =  LinearLayoutManager(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         title = getString(R.string.title_repo)
         setContentView(R.layout.activity_main)
-        getHTTPVolley("https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1")
+        getHTTPVolley("$PAGE$page")
         viewAdapter = RepoAdapter(repos){
             Log.w("CLICKED", it.name)
             val intent = Intent(this, PullRequestActivity::class.java)
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                     isScrolling = false
                     page += 1
                     botton_progressBar.visibility = View.VISIBLE
-                    getHTTPVolley("https://api.github.com/search/repositories?q=language:Java&sort=stars&page=$page")
+                    getHTTPVolley("$PAGE$page")
                     Log.d("SCROLL", "LA PAGINA ES: " + page.toString() )
                 }
             }
@@ -88,10 +89,11 @@ class MainActivity : AppCompatActivity() {
                     botton_progressBar.visibility = View.INVISIBLE
                 },
                 Response.ErrorListener { error ->
-                    Log.w("ERROR","That didn't work!")
+                    Log.w("ERROR", error)
                 }
         )
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
+        //queue.add(jsonObjectRequest)
     }
 
 }

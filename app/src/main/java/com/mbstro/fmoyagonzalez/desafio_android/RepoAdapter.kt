@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.repo.view.*
 
 
-class RepoAdapter(val items: ArrayList<Repo>, val listener: (Repo) -> Unit) : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
+class RepoAdapter(private val items: ArrayList<Repo>, private val listener: (Repo) -> Unit) : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context)
@@ -21,15 +21,15 @@ class RepoAdapter(val items: ArrayList<Repo>, val listener: (Repo) -> Unit) : Re
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name_repo: TextView = itemView.findViewById(R.id.name_repo)
-        val description: TextView = itemView.findViewById(R.id.description_repo)
-        val name: TextView = itemView.findViewById(R.id.name_user)
-        val avatar: ImageView = itemView.findViewById(R.id.avatar_user)
-        val forks: TextView = itemView.findViewById(R.id.fork_count)
-        val starts: TextView = itemView.findViewById(R.id.start_count)
+        private val nameRepo: TextView = itemView.findViewById(R.id.name_repo)
+        private val description: TextView = itemView.findViewById(R.id.description_repo)
+        private val name: TextView = itemView.findViewById(R.id.name_user)
+        private val avatar: ImageView = itemView.findViewById(R.id.avatar_user)
+        private val forks: TextView = itemView.findViewById(R.id.fork_count)
+        private val starts: TextView = itemView.findViewById(R.id.start_count)
 
         fun bind(repo: Repo, listener: (Repo) -> Unit) = with(itemView) {
-            name_repo.text = repo.name
+            nameRepo.text = repo.name
             description.text = repo.description
             name.text = repo.owner.login
             Glide.with(itemView).load(repo.owner.avatar_url).into(avatar)

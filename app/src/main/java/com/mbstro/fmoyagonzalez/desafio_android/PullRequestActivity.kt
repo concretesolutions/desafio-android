@@ -32,7 +32,6 @@ class PullRequestActivity : AppCompatActivity() {
 
     private fun getHTTPVolley(url: String){
 
-        Log.d("PAGE", url)
         // Get a RequestQueue
         val queue = VolleySingleton.getInstance(this.applicationContext).requestQueue
         // Request a string response from the provided URL.
@@ -58,21 +57,22 @@ class PullRequestActivity : AppCompatActivity() {
                     }
                     progressBar_pull_request.visibility= View.GONE
                     if (pullRequestsList.isEmpty()) {
-                        recyclerView.visibility = View.GONE;
-                        empty_pull_request.visibility = View.VISIBLE;
+                        recyclerView.visibility = View.GONE
+                        empty_pull_request.visibility = View.VISIBLE
                     }
                     else {
-                        recyclerView.visibility = View.VISIBLE;
-                        empty_pull_request.visibility = View.GONE;
+                        recyclerView.visibility = View.VISIBLE
+                        empty_pull_request.visibility = View.GONE
                     }
 
                 },
                 Response.ErrorListener { error ->
                     // TODO: Handle error
-                    Log.w("ERROR","That didn't work!")
+                    Log.w("ERROR",error)
                 }
         )
         // Add the request to the RequestQueue.
+        //queue.add(jsonArrayRequest)
         VolleySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest)
     }
 
