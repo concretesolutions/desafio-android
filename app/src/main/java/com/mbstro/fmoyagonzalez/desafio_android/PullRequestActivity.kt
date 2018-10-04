@@ -10,6 +10,8 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.google.gson.Gson
+import android.content.Intent
+import android.net.Uri
 
 
 class PullRequestActivity : AppCompatActivity() {
@@ -28,14 +30,13 @@ class PullRequestActivity : AppCompatActivity() {
 
     private fun getHTTPVolley(url: String){
 
-
+        Log.d("PAGE", url)
         // Get a RequestQueue
         val queue = VolleySingleton.getInstance(this.applicationContext).requestQueue
         // Request a string response from the provided URL.
 
         val jsonArrayRequest = JsonArrayRequest(Request.Method.GET, url, null,
                 Response.Listener { response ->
-                    //val repo = gson.fromJson(response.["items"][0], Repo::class.java)
 
                     for(i in 0 until response.length()) {
                         val gson = Gson()
@@ -44,7 +45,9 @@ class PullRequestActivity : AppCompatActivity() {
                     }
                     val viewManager = LinearLayoutManager(this)
                     val viewAdapter = PullRequestAdapter(pullRequestsList){
-                        Log.w("CLICKED", it.title)
+                        Log.w("CLICKED", it.html_url)
+                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it.html_url))
+                        startActivity(browserIntent)
                     }
                     val recyclerView = findViewById<RecyclerView>(R.id.recycler_view_pull_request).apply {
                         // use this setting to improve performance if you know that changes
