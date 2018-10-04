@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">APIGithub</string>
+    <string name="hint_busca">usuário/repositório</string>
+    <string name="hint_search">Digite aqui...</string>
+    <string name="aviso_busca_vazia">Utilize o campo de busca na barra acima para pesquisar o repositório de um usuário no Github</string>
+    <string name="aviso_issues_vazia">Não há issues no repositório informado</string>
+    <string name="aviso_prs_vazia">Não há pull requests no repositório informado</string>
+    <string name="text_carregando">Carregando...</string>
+</resources>
