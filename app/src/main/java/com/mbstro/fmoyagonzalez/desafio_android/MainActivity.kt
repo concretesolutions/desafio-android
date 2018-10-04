@@ -7,74 +7,91 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.AbsListView
+
+
 
 
 class MainActivity : AppCompatActivity() {
 
-    var repos  = arrayListOf<Repo>();
-
+    private var repos  = arrayListOf<Repo>()
+    private var pastVisiblesItems: Int = 0
+    private var visibleItemCount:Int = 0
+    private var totalItemCount:Int = 0
+    private var page = 1
+    //var viewAdapter: RepoAdapter? = null
+    private var isScrolling = false
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private var viewManager =  LinearLayoutManager(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         getHTTPVolley("https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1")
+        viewAdapter = RepoAdapter(repos){
+            Log.w("CLICKED", it.name)
+            val intent = Intent(this, PullRequestActivity::class.java)
+            intent.putExtra("REPO",it.name)
+            intent.putExtra("AUTOR",it.owner.login)
+            startActivity(intent)
+        }
+        recyclerView = findViewById<RecyclerView>(R.id.recycler_view).apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewAdapter
+
+        }
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScrolling = true
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                visibleItemCount = viewManager.childCount
+                totalItemCount = viewManager.itemCount
+                pastVisiblesItems = viewManager.findFirstVisibleItemPosition()
+
+                if (isScrolling && visibleItemCount + pastVisiblesItems == totalItemCount) {
+                    isScrolling = false
+                    page += 1
+                    botton_progressBar.visibility = View.VISIBLE
+                    getHTTPVolley("https://api.github.com/search/repositories?q=language:Java&sort=stars&page=$page")
+                    Log.d("SCROLL", "LA PAGINA ES: " + page.toString() )
+                }
+            }
+        })
     }
 
 
     private fun getHTTPVolley(url: String){
-
-        // Get a RequestQueue
         val queue = VolleySingleton.getInstance(this.applicationContext).requestQueue
         // Request a string response from the provided URL.
-        first_progressBar.visibility = VISIBLE
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener { response ->
-                    //val repo = gson.fromJson(response.["items"][0], Repo::class.java)
                     val json = response.getJSONArray("items")
                     for(i in 0 until json.length()) {
-                        val gson = Gson();
+                        val gson = Gson()
                         val item = gson.fromJson(json.getJSONObject(i).toString(), Repo::class.java)
                         this.repos.add(item)
                     }
-                    val viewManager = LinearLayoutManager(this)
-                    val viewAdapter = RepoAdapter(repos){
-                        Log.w("CLICKED", it.name)
-                        val intent = Intent(this, PullRequestActivity::class.java)
-                        intent.putExtra("REPO",it.name)
-                        intent.putExtra("AUTOR",it.owner.login)
-                        startActivity(intent)
-                    }
-                    val recyclerView = findViewById<RecyclerView>(R.id.recycler_view).apply {
-                        // use this setting to improve performance if you know that changes
-                        // in content do not change the layout size of the RecyclerView
-                        //setHasFixedSize(true)
-                        // use a linear layout manager
-                        layoutManager = viewManager
-                        // specify an viewAdapter (see also next example)
-                        adapter = viewAdapter
-
-                    }
-
+                    viewAdapter.notifyDataSetChanged()
+                    first_progressBar.visibility = View.INVISIBLE
+                    botton_progressBar.visibility = View.INVISIBLE
                 },
                 Response.ErrorListener { error ->
-                    // TODO: Handle error
                     Log.w("ERROR","That didn't work!")
                 }
         )
-        // Add the request to the RequestQueue.
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
-        first_progressBar.visibility = GONE
     }
 
-
-    fun onClick(v: View) {
-        val id = v.getId()
-
-    }
 }

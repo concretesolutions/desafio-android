@@ -20,7 +20,6 @@ class PullRequestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_request)
-        //setSupportActionBar(toolbar)
         val autor = intent.getStringExtra("AUTOR")
         val repo = intent.getStringExtra("REPO")
         getHTTPVolley("https://api.github.com/repos/${autor}/${repo}/pulls")
