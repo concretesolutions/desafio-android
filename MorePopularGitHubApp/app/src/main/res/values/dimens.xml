@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="loading_margin">30dp</dimen>
+
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_big">32dp</dimen>
+
+    <dimen name="margin_card_view">148dp</dimen>
+    <dimen name="margin_card_view_small">72dp</dimen>
+    <dimen name="margin_card_view_big">194dp</dimen>
+
+
+    <dimen name="load_img_size">60dp</dimen>
+    <dimen name="margin_card_erro_view">100dp</dimen>
+    <dimen name="text_size_big">32sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+</resources>

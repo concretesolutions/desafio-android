@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MorePopularGitHubApp</string>
+
+    <string name="error_list_repository">"Não foi possível carregar os repositórios. \nToque aqui para recarregar"</string>
+    <string name="error_list_pull_resquests">"Não foi possível carregar os "Pull Requests". \nToque aqui para recarregar"</string>
+    <string name="search_repositories_url">https://api.github.com/search/repositories?q=language:Java&amp;sort=stars</string>
+    <string name="search_pull_request_url">https://api.github.com/repos/</string>
+    <string name="search_user_url">https://api.github.com/users/</string>
+    <string name="path_complement">pulls</string>
+    <string name="nao_existe_pull_request">Não há pull requests para esse repositório</string>
 </resources>

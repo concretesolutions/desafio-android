@@ -9,6 +9,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions{
+            annotationProcessorOptions {
+                arguments = [
+                        "androidManifestFile": "app/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml"
+                ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -19,9 +27,39 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def AAVersion = '4.4.0' //Anotações
+
+    implementation 'com.android.support:design:27.1.1'
+    annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
+    implementation "org.androidannotations:androidannotations-api:$AAVersion"
+
+    def parcelerVersion = '1.1.9'
+    implementation "org.parceler:parceler-api:$parcelerVersion"
+    annotationProcessor "org.parceler:parceler:$parcelerVersion"
+
+
+    implementation 'com.google.code.gson:gson:2.8.1'  // gson
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2' //ProgressBar
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:support-annotations:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+
+
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.volley:volley:1.1.0' // http request
+    implementation 'com.squareup.picasso:picasso:2.5.2' // Imagens
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
+    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.0'
+
+    implementation 'de.hdodenhof:circleimageview:2.1.0' // imagem circular
+
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

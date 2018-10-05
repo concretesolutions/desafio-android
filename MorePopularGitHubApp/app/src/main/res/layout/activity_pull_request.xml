@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/progress"
+        android:id="@+id/progressPullResquest"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -26,31 +26,14 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewPullRequest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:layout_alignBottom="@id/recyclerView"
-            android:layout_centerInParent="true"
-            android:id="@+id/fetchDataProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            tools:visibility="visible">
-
-            <include
-                layout="@layout/view_progress"
-                android:layout_width="@dimen/loading_margin"
-                android:layout_height="@dimen/loading_margin"
-                android:layout_centerInParent="true" />
-
-        </RelativeLayout>
 
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/areaErro"
+        android:id="@+id/areaErroPullRequest"
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_card_erro_view"
         android:layout_gravity="center"
@@ -70,7 +53,7 @@
             android:src="@mipmap/ic_reload" />
 
         <TextView
-            android:id="@+id/textMsgErroView"
+            android:id="@+id/msgErroPullRequest"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
