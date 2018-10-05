@@ -5,4 +5,8 @@
     <color name="colorPrimaryLight">#6d6d6d</color>
     <color name="colorAccent">#f44336</color>
     <color name="branco">#FFFFFF</color>
+
+    <color name="colorTitle">#1565c0</color>
+    <color name="primaryTextColor">@color/colorPrimary</color>
+    <color name="primaryLightTextColor">@color/colorPrimaryLight</color>
 </resources>

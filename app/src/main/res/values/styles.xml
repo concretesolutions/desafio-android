@@ -8,4 +8,67 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="RecyclerViewMargin">
+        <item name="android:layout_marginLeft">@dimen/margin_left_rv</item>
+        <item name="android:layout_marginStart">@dimen/margin_start_rv</item>
+        <item name="android:layout_marginRight">@dimen/margin_right_rv</item>
+        <item name="android:layout_marginEnd">@dimen/margin_end_rv</item>
+        <item name="android:layout_marginTop">@dimen/margin_top_rv</item>
+        <item name="android:layout_marginBottom">@dimen/margin_bottom_rv</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="RepositoryTitle">
+        <item name="android:layout_marginLeft">@dimen/tv_title_margin_left</item>
+        <item name="android:layout_marginStart">@dimen/tv_title_margin_start</item>
+        <item name="android:layout_marginRight">@dimen/tv_title_margin_right</item>
+        <item name="android:layout_marginEnd">@dimen/tv_title_margin_end</item>
+        <item name="android:layout_marginTop">@dimen/tv_title_margin_top</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/tv_title_text_size</item>
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RepositoryDescription">
+        <item name="android:layout_marginLeft">@dimen/tv_desc_margin_left</item>
+        <item name="android:layout_marginStart">@dimen/tv_desc_margin_start</item>
+        <item name="android:layout_marginRight">@dimen/tv_desc_margin_right</item>
+        <item name="android:layout_marginEnd">@dimen/tv_desc_margin_end</item>
+        <item name="android:layout_marginTop">@dimen/tv_desc_margin_top</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <style name="RepositoryUsername">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/tv_user_name_repository_margin_left</item>
+        <item name="android:layout_marginStart">@dimen/tv_user_name_repository_margin_start</item>
+        <item name="android:layout_marginRight">@dimen/tv_user_name_repository_margin_right</item>
+        <item name="android:layout_marginEnd">@dimen/tv_user_name_repository_margin_end</item>
+        <item name="android:layout_marginTop">@dimen/tv_user_name_repository_margin_top</item>
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textSize">@dimen/tv_user_name_text_size</item>
+    </style>
+
+    <style name="RepositoryFullname">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/tv_full_name_repository_margin_left</item>
+        <item name="android:layout_marginStart">@dimen/tv_full_name_repository_margin_start</item>
+        <item name="android:layout_marginRight">@dimen/tv_full_name_repository_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/tv_full_name_repository_margin_end</item>
+        <item name="android:layout_marginTop">@dimen/tv_full_name_repository_margin_top</item>
+        <item name="android:textColor">@color/primaryLightTextColor</item>
+        <item name="android:textSize">@dimen/tv_full_name_text_size</item>
+    </style>
+
+    <style name="CircleImageViewMargin_Repository">
+        <item name="android:layout_marginLeft">@dimen/margin_left_civ_repository</item>
+        <item name="android:layout_marginStart">@dimen/margin_start_civ_repository</item>
+        <item name="android:layout_marginTop">@dimen/margin_top_civ_repository</item>
+        <item name="android:layout_width">@dimen/width_civ_repository</item>
+        <item name="android:layout_height">@dimen/height_civ_repository</item>
+    </style>
 </resources>

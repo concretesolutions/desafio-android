@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_left_rv">8dp</dimen>
+    <dimen name="margin_right_rv">8dp</dimen>
+    <dimen name="margin_start_rv">@dimen/margin_left_rv</dimen>
+    <dimen name="margin_end_rv">@dimen/margin_right_rv</dimen>
+    <dimen name="margin_top_rv">8dp</dimen>
+    <dimen name="margin_bottom_rv">8dp</dimen>
+
+    <dimen name="tv_title_margin_left">8dp</dimen>
+    <dimen name="tv_title_margin_start">@dimen/tv_title_margin_left</dimen>
+    <dimen name="tv_title_margin_right">8dp</dimen>
+    <dimen name="tv_title_margin_end">@dimen/tv_title_margin_right</dimen>
+    <dimen name="tv_title_margin_top">8dp</dimen>
+    <dimen name="tv_title_text_size">18sp</dimen>
+
+    <dimen name="tv_desc_margin_left">0dp</dimen>
+    <dimen name="tv_desc_margin_start">@dimen/tv_desc_margin_left</dimen>
+    <dimen name="tv_desc_margin_right">8dp</dimen>
+    <dimen name="tv_desc_margin_end">@dimen/tv_desc_margin_right</dimen>
+    <dimen name="tv_desc_margin_top">0dp</dimen>
+    <dimen name="tv_desc_text_size">14sp</dimen>
+
+    <dimen name="tv_user_name_repository_margin_left">8dp</dimen>
+    <dimen name="tv_user_name_repository_margin_start">@dimen/tv_user_name_repository_margin_left</dimen>
+    <dimen name="tv_user_name_repository_margin_right">8dp</dimen>
+    <dimen name="tv_user_name_repository_margin_end">@dimen/tv_user_name_repository_margin_right</dimen>
+    <dimen name="tv_user_name_repository_margin_top">8dp</dimen>
+    <dimen name="tv_user_name_text_size">12sp</dimen>
+
+    <dimen name="tv_full_name_repository_margin_left">8dp</dimen>
+    <dimen name="tv_full_name_repository_margin_start">@dimen/tv_full_name_repository_margin_left</dimen>
+    <dimen name="tv_full_name_repository_margin_right">8dp</dimen>
+    <dimen name="tv_full_name_repository_margin_end">@dimen/tv_full_name_repository_margin_end</dimen>
+    <dimen name="tv_full_name_repository_margin_top">0dp</dimen>
+    <dimen name="tv_full_name_text_size">10sp</dimen>
+
+    <dimen name="margin_left_civ_repository">8dp</dimen>
+    <dimen name="margin_start_civ_repository">@dimen/margin_left_civ_repository</dimen>
+    <dimen name="margin_top_civ_repository">8dp</dimen>
+    <dimen name="width_civ_repository">56dp</dimen>
+    <dimen name="height_civ_repository">56dp</dimen>
+</resources>
+
+<!--mudanca@sicoob.com.br-->

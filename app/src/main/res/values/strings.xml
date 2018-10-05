@@ -6,4 +6,8 @@
     <string name="aviso_issues_vazia">Não há issues no repositório informado</string>
     <string name="aviso_prs_vazia">Não há pull requests no repositório informado</string>
     <string name="text_carregando">Carregando...</string>
+    <string name="repository_name">Nome repositório</string>
+    <string name="repository_description">Descrição do repositório</string>
+    <string name="username">Username</string>
+    <string name="fullname">Name Last Name</string>
 </resources>
