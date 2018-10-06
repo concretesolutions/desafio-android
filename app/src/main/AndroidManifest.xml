@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.concrete.andresdavid.desafioandroid.DisplayMessageActivity"
+        <activity android:name="com.concrete.andresdavid.desafioandroid.PullRequestsActivity"
             android:parentActivityName="com.concrete.andresdavid.desafioandroid.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.concrete.andresdavid.desafioandroid.MainActivity"/>

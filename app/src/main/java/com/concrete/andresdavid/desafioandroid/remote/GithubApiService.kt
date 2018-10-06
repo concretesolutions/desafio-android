@@ -17,9 +17,8 @@ interface GithubApiService {
                          @Query("page") page: Int = 0,
                          @Query("per_page") pageSize: Int = 10): Observable<RepositoryResponse>
 
-    @GET("repos/{owner}/{repo}/pulls")
-    fun repoPullRequest(@Path("owner") owner: String,
-                        @Path("repo") repoName: String): Observable<List<PullRequest>>
+    @GET("repos/{full_name}/pulls")
+    fun repoPullRequest(@Path("full_name", encoded = true) fullName: String): Observable<List<PullRequest>>
 
     companion object Factory {
         val BASE_URL = "https://api.github.com/"

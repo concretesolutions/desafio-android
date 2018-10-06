@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 
 
-class Owner {
+class User {
     @SerializedName("login")
     @Expose var login: String = ""
 

@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Desafio Android Concrete</string>
+    <string name="app_name">Github JavaPop</string>
     <string name="edit_message">Enter a Message</string>
     <string name="button_send">Send</string>
+    <string name="loading">Cargando...</string>
+    <string name="empty_list_message">No hay items en la lista</string>
 </resources>

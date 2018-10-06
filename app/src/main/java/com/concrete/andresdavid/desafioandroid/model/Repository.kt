@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 
 
-class Repository {
+class Repository(var type: String = "REPOSITORY") {
     @SerializedName("id")
     @Expose var id: Long = 0
 
@@ -19,7 +19,7 @@ class Repository {
     @Expose var description: String? = null
 
     @SerializedName("owner")
-    @Expose var owner: Owner? = null
+    @Expose var owner: User? = null
 
     @SerializedName("forks_count")
     @Expose var forksCount: Int? = null

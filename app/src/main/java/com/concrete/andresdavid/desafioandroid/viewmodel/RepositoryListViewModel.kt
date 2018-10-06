@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
 import com.concrete.andresdavid.desafioandroid.model.Repository
+import com.concrete.andresdavid.desafioandroid.model.Resource
 import com.concrete.andresdavid.desafioandroid.repository.RepositoryRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -12,30 +13,37 @@ import io.reactivex.schedulers.Schedulers
 
 class RepositoryListViewModel : ViewModel() {
     private val repository: RepositoryRepository = RepositoryRepository()
-    private lateinit var repositories: MutableLiveData<List<Repository>>
+    private lateinit var repositoryData: MutableLiveData<Resource<List<Repository>>>
+    private var page = 1
 
-    fun getJavaRepositories(): LiveData<List<Repository>> {
-        if (!::repositories.isInitialized) {
-            repositories = MutableLiveData()
-            loadRepositories()
+    fun getJavaRepositories(): LiveData<Resource<List<Repository>>> {
+        if (!::repositoryData.isInitialized) {
+            repositoryData = MutableLiveData()
+            load()
         }
-        return repositories
+
+        return repositoryData
     }
 
-    private fun loadRepositories() {
-        repository.searchUsers(1)
+    fun load() {
+        repository.searchUsers(page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ result ->
-                    repositories.value = result
-                    Log.d("Result", "There are ${result.size} Java developers in Lagos")
+                    addItems(result)
+                    ++page
                 }, { error ->
-                    error.printStackTrace()
-                    //TODO("inform page error")
+                    this.repositoryData.value = Resource.error(error.message!!, mutableListOf())
                 })
     }
 
-    private fun appendRepositories(page: Int){
-        //TODO("add pagination")
+    fun addItems(newItems: List<Repository>){
+        val newResultList = mutableListOf<Repository>()
+        if(page != 1) {
+            newResultList.addAll(this.repositoryData.value?.data!!)
+        }
+        newResultList.addAll(newItems!!)
+        this.repositoryData.value = Resource.success(newResultList)
     }
+
 }
