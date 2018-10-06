@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.api.morepopulargithubapp.util.ConstantsUitl.*;
+
 @EBean(scope = EBean.Scope.Singleton)
 public class RepositoryRequest {
 
@@ -79,10 +81,10 @@ public class RepositoryRequest {
     private String validateMessagStatusCodeError(VolleyError error, String errorMessage, NetworkResponse response) {
 
         switch (response.statusCode) {
-            case 404: // não encontrado
-            case 422: // servidor não conseguiu porcessar as intruções de request
-            case 400: // bad request
-            case 401: // não autorizado
+            case NOT_FOUND_CODE: // não encontrado
+            case SERVER_UNABLE_PROCESS_INSTRUCTIONS_CODE: // servidor não conseguiu porcessar as intruções de request
+            case BAD_REQUEST: // bad request
+            case UNAUTHORIZED_ERROR: // não autorizado
 
                 try {
                     String string = new String(error.networkResponse.data);

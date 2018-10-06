@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.github.api.morepopulargithubapp.util.ConstantsUitl.SERVER_UNABLE_PROCESS_INSTRUCTIONS_CODE;
 
 @EBean
 public class RepositoryPresenterImpl implements RepositoryPresenter {
@@ -61,7 +62,7 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
             showRepositories(repositories);
         } else {
             pageNumber = 1;
-            searchRepositories();
+            searchRepositories(isGenricError);
         }
     }
 
@@ -88,8 +89,10 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
 
     private void showRepositories(List<Repository> repositories) {
         if (pageNumber == 1 || isChangingOrientation) {
+            isChangingOrientation = false;
+
             repositoryView.showView(VISIBLE, GONE, GONE, GONE);
-            repositoryView.showRepositories(repositories);
+            repositoryView.showRepositories(repositories, isChangingOrientation);
         }
         // Verifica se a requisição foi chamda a partir da área erro em busca da próxima página
         else if (isGenricError && !isChangingOrientation) {
@@ -104,12 +107,12 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
 
     private void showError(Map errorMap){
         // Verifica se o erro retornado é 422
-        if (pageNumber != 1 && errorMap != null && errorMap.containsKey(422)) {
-            repositoryView.showView(VISIBLE, GONE, GONE, GONE);
-            String errorMessage = (String) errorMap.get(422);
+        if (pageNumber != 1 && errorMap != null && errorMap.containsKey(SERVER_UNABLE_PROCESS_INSTRUCTIONS_CODE)) {
             isLastPage = true;
+            repositoryView.showView(VISIBLE, GONE, GONE, GONE);
+            String errorMessage = (String) errorMap.get(SERVER_UNABLE_PROCESS_INSTRUCTIONS_CODE);
             // Não será mais disponível uma outra página
-            repositoryView.showMessageError(errorMessage);
+            repositoryView.showMessageError(errorMessage, isLastPage);
         } else {
             repositoryView.showError(errorMap);
         }
@@ -121,24 +124,27 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
         currentItens = mLayoutManager.getChildCount();
         totalItems = mLayoutManager.getItemCount();
         scrollOutItems = mLayoutManager.findFirstVisibleItemPosition();
+        this.isScrolling = isScrolling;
 
         // Verifica se foi feito um scroll, se está no ultimo registro e
         // se ultima página de repósitorios não foi obtida
-        if (isScrolling && (currentItens + scrollOutItems == totalItems) && !isLastPage) {
-            isScrolling = false;
+        if (this.isScrolling && (currentItens + scrollOutItems == totalItems) && !isLastPage) {
+            this.isScrolling = false;
+            // Informar o valor atual do scorlling para view
+            repositoryView.setIsScrolling(this.isScrolling);
             // Incrementa próxima página
             pageNumber++;
             // Obtem próxima página de repositorios
-            searchRepositories();
+            searchRepositories(isGenricError);
         }
     }
 
     @Override
-    public void searchRepositories() {
+    public void searchRepositories(boolean isGenricError) {
         if (pageNumber == 1 || isGenricError) {
             repositoryView.showView(GONE, VISIBLE, GONE, GONE);
         } else {
-            repositoryView.showView(VISIBLE, GONE, VISIBLE, VISIBLE);
+            repositoryView.showView(VISIBLE, GONE, GONE, VISIBLE);
         }
         repositoryRequest.requestRepositorie(presenterApiCallBack, pageNumber);
     }

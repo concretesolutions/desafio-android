@@ -7,13 +7,15 @@ import java.util.Map;
 
 public interface RepositoryView {
 
+    void setIsScrolling(boolean isScrolling);
+
     void showView(int recyclerViewVisibility, int progressVisibility, int areaErroVisibility, int fetchDataProgressVisibility);
 
-    void showRepositories(List<Repository> repositories);
+    void showRepositories(List<Repository> repositories, boolean isChangingOrientation);
 
     void showAddMoreRepositories(List<Repository> repositories);
 
     void showError(Map errorMap);
 
-    void showMessageError(String errorMessage);
+    void showMessageError(String errorMessage, boolean isLastPage);
 }

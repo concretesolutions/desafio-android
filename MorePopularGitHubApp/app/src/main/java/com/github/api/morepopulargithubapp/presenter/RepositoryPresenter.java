@@ -17,7 +17,7 @@ public interface RepositoryPresenter {
 
     void obtainNextReposotoriesPage(LinearLayoutManager mLayoutManager, boolean isScrolling, boolean isLastPage);
 
-    void searchRepositories();
+    void searchRepositories(boolean isGenricError);
 
     void onDestroy();
 

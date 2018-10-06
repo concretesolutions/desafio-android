@@ -101,6 +101,11 @@ public class MainActivity extends AppCompatActivity implements RepositoryView {
     }
 
     @Override
+    public void setIsScrolling(boolean isScrolling) {
+        this.isScrolling = isScrolling;
+    }
+
+    @Override
     public void showView(int recyclerViewVisibility, int progressVisibility,
                          int areaErroVisibility, int fetchDataProgressVisibility) {
 
@@ -112,10 +117,10 @@ public class MainActivity extends AppCompatActivity implements RepositoryView {
 
     @UiThread
     @Override
-    public void showRepositories(List<Repository> repositories) {
+    public void showRepositories(List<Repository> repositories, boolean isChangingOrientation) {
         this.repositories = repositories;
         repositoryAdapter.setItems(this.repositories);
-        isChangingOrientation = false;
+        this.isChangingOrientation = isChangingOrientation;
         repositoryAdapter.notifyDataSetChanged();
     }
 
@@ -134,7 +139,8 @@ public class MainActivity extends AppCompatActivity implements RepositoryView {
 
     @UiThread
     @Override
-    public void showMessageError(String errorMessage) {
+    public void showMessageError(String errorMessage, boolean isLastPage) {
+        this.isLastPage = isLastPage;
         ViewUtil.alert(this, errorMessage);
     }
 
@@ -142,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements RepositoryView {
     @Click(R.id.areaErro)
     protected void reloadRepositories() {
         isGenricError = true;
-        repositoryPresenter.searchRepositories();
+        repositoryPresenter.searchRepositories(isGenricError);
     }
 
     @Override
