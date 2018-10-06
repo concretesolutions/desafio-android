@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Desafio Android Concrete</string>
+    <string name="edit_message">Enter a Message</string>
+    <string name="button_send">Send</string>
 </resources>

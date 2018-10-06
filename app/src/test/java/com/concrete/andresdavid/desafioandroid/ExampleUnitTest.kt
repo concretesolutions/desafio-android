@@ -1,4 +1,4 @@
-package com.concrete.andresdavid.desafioandroidconcrete
+package com.concrete.andresdavid.desafioandroid
 
 import org.junit.Test
 
