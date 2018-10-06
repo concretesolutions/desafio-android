@@ -55,7 +55,7 @@ public class IssueFragment extends Fragment {
 
             if (!((MainActivity) getActivity()).getProgressDialog().isShowing() && !isLastPage && dy > 0) {
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0 && totalItemCount >= PAGE_SIZE) {
-                    ((MainActivity) getActivity()).getRepoViewModel().updateIssues(++page, PAGE_SIZE);
+//                    ((MainActivity) getActivity()).getRepoViewModel().updateIssues(++page, PAGE_SIZE);
                     ((MainActivity) getActivity()).getProgressDialog().show();
                     isLastPage = true;
                 }

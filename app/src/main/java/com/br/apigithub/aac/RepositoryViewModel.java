@@ -32,8 +32,12 @@ public class RepositoryViewModel extends ViewModel implements INotifyViewModelAb
         MyApplication.getComponent().inject(this);
     }
 
-    public void listRepos() {
+    public void listRepos(Integer page) {
+        serviceProvider.listReposJava("star", page, this);
+    }
 
+    public void updateListRepos(Integer page, Integer limit) {
+        serviceProvider.getPulls(userName, repo, page, limit, true, this);
     }
 
     public void updatePulls(Integer page, Integer limit) {

@@ -64,6 +64,21 @@
         <item name="android:textSize">@dimen/tv_full_name_text_size</item>
     </style>
 
+    <style name="RepositoryImageView">
+        <item name="android:layout_marginLeft">@dimen/margin_left_iv_repository</item>
+        <item name="android:layout_marginStart">@dimen/margin_start_iv_repository</item>
+        <item name="android:layout_marginTop">@dimen/margin_top_iv_repository</item>
+        <item name="android:layout_width">@dimen/width_image_repository</item>
+        <item name="android:layout_height">@dimen/height_image_repository</item>
+    </style>
+
+    <style name="RepositoryTextQuantImageView">
+        <item name="android:layout_marginLeft">@dimen/tv_quant_iv_repository_margin_left</item>
+        <item name="android:layout_marginStart">@dimen/tv_quant_iv_repository_margin_start</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="CircleImageViewMargin_Repository">
         <item name="android:layout_marginLeft">@dimen/margin_left_civ_repository</item>
         <item name="android:layout_marginStart">@dimen/margin_start_civ_repository</item>

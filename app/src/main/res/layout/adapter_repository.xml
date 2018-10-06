@@ -60,14 +60,41 @@
         app:layout_constraintGuide_begin="96dp" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/ic_fork"
+        style="@style/RepositoryImageView"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_repo_desc"
         app:srcCompat="@drawable/ic_fork_github" />
+
+    <TextView
+        android:id="@+id/tv_quant_fork"
+        style="@style/RepositoryTextQuantImageView"
+        app:layout_constraintBottom_toTopOf="@+id/ic_fork"
+        app:layout_constraintStart_toEndOf="@+id/ic_fork"
+        app:layout_constraintTop_toBottomOf="@+id/ic_fork"
+        tools:text="@string/forks" />
+
+    <ImageView
+        android:id="@+id/ic_star"
+        style="@style/RepositoryImageView"
+        android:tint="@color/colorIconsGithub"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_desc"
+        app:srcCompat="@drawable/ic_star" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="236dp" />
+
+    <TextView
+        android:id="@+id/tv_quant_star"
+        style="@style/RepositoryTextQuantImageView"
+        app:layout_constraintBottom_toTopOf="@+id/ic_star"
+        app:layout_constraintStart_toEndOf="@+id/ic_star"
+        app:layout_constraintTop_toBottomOf="@+id/ic_star"
+        tools:text="@string/stars" />
 
 </android.support.constraint.ConstraintLayout>

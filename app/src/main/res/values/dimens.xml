@@ -22,16 +22,20 @@
     <dimen name="tv_desc_text_size">14sp</dimen>
 
     <dimen name="tv_user_name_repository_margin_left">8dp</dimen>
-    <dimen name="tv_user_name_repository_margin_start">@dimen/tv_user_name_repository_margin_left</dimen>
+    <dimen name="tv_user_name_repository_margin_start">@dimen/tv_user_name_repository_margin_left
+    </dimen>
     <dimen name="tv_user_name_repository_margin_right">8dp</dimen>
-    <dimen name="tv_user_name_repository_margin_end">@dimen/tv_user_name_repository_margin_right</dimen>
+    <dimen name="tv_user_name_repository_margin_end">@dimen/tv_user_name_repository_margin_right
+    </dimen>
     <dimen name="tv_user_name_repository_margin_top">8dp</dimen>
     <dimen name="tv_user_name_text_size">12sp</dimen>
 
     <dimen name="tv_full_name_repository_margin_left">8dp</dimen>
-    <dimen name="tv_full_name_repository_margin_start">@dimen/tv_full_name_repository_margin_left</dimen>
+    <dimen name="tv_full_name_repository_margin_start">@dimen/tv_full_name_repository_margin_left
+    </dimen>
     <dimen name="tv_full_name_repository_margin_right">8dp</dimen>
-    <dimen name="tv_full_name_repository_margin_end">@dimen/tv_full_name_repository_margin_end</dimen>
+    <dimen name="tv_full_name_repository_margin_end">@dimen/tv_full_name_repository_margin_end
+    </dimen>
     <dimen name="tv_full_name_repository_margin_top">0dp</dimen>
     <dimen name="tv_full_name_text_size">10sp</dimen>
 
@@ -40,6 +44,13 @@
     <dimen name="margin_top_civ_repository">8dp</dimen>
     <dimen name="width_civ_repository">56dp</dimen>
     <dimen name="height_civ_repository">56dp</dimen>
-</resources>
 
-<!--mudanca@sicoob.com.br-->
+    <dimen name="tv_quant_iv_repository_margin_left">8dp</dimen>
+    <dimen name="tv_quant_iv_repository_margin_start">@dimen/tv_quant_iv_repository_margin_left</dimen>
+
+    <dimen name="width_image_repository">32dp</dimen>
+    <dimen name="height_image_repository">32dp</dimen>
+    <dimen name="margin_left_iv_repository">8dp</dimen>
+    <dimen name="margin_start_iv_repository">@dimen/margin_left_iv_repository</dimen>
+    <dimen name="margin_top_iv_repository">8dp</dimen>
+</resources>

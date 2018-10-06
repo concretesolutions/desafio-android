@@ -9,4 +9,6 @@
     <color name="colorTitle">#1565c0</color>
     <color name="primaryTextColor">@color/colorPrimary</color>
     <color name="primaryLightTextColor">@color/colorPrimaryLight</color>
+
+    <color name="colorIconsGithub">#FFF1AD13</color>
 </resources>
