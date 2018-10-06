@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface GithubApiService {
     @GET("search/repositories")
     fun javaRepositories(@Query("q") q: String = "language:Java",
-                         @Query("sort") sort: String = "starts",
+                         @Query("sort") sort: String = "stars",
                          @Query("page") page: Int = 0,
                          @Query("per_page") pageSize: Int = 10): Observable<RepositoryResponse>
 

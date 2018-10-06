@@ -31,11 +31,11 @@ class RepositoryListViewModel : ViewModel() {
                     Log.d("Result", "There are ${result.size} Java developers in Lagos")
                 }, { error ->
                     error.printStackTrace()
-                    TODO("informar de error en la pagina")
+                    //TODO("inform page error")
                 })
     }
 
     private fun appendRepositories(page: Int){
-        TODO("agregar accion al paginar")
+        //TODO("add pagination")
     }
 }

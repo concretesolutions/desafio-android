@@ -10,11 +10,8 @@ class Owner {
     @Expose var login: String = ""
 
     @SerializedName("id")
-    @Expose var id: Int = 0
+    @Expose var id: Long = 0
 
     @SerializedName("avatar_url")
     @Expose var avatarUrl: String = ""
-
-    @SerializedName("url")
-    @Expose var url: String = ""
 }

@@ -4,14 +4,8 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.EditText
-import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import com.concrete.andresdavid.desafioandroid.adapters.RepositoryAdapter
-import com.concrete.andresdavid.desafioandroid.model.Owner
-import com.concrete.andresdavid.desafioandroid.model.Repository
 import com.concrete.andresdavid.desafioandroid.viewmodel.RepositoryListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 

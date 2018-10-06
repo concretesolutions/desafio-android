@@ -18,7 +18,8 @@
         android:layout_marginRight="16dp"
         android:layout_weight="1"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/image_user"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_repository_description"
-        app:srcCompat="@android:drawable/btn_star" />
+        app:srcCompat="@drawable/ic_detail_fork" />
 
     <TextView
         android:id="@+id/tv_fork_count"
@@ -86,7 +87,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_fork_count"
         app:layout_constraintTop_toBottomOf="@+id/tv_repository_description"
-        app:srcCompat="@android:drawable/btn_star" />
+        app:srcCompat="@drawable/ic_detail_star" />
 
     <TextView
         android:id="@+id/tv_stars_count"
@@ -107,18 +108,18 @@
         android:id="@+id/image_user"
         android:layout_width="@dimen/ly_user_width"
         android:layout_height="@dimen/ly_user_height"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tv_user_name"
-        android:layout_width="@dimen/ly_user_width"
-        android:layout_height="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="91dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:gravity="center"

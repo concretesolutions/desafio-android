@@ -51,7 +51,8 @@ class RepositoryHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListen
     fun bindRepository(repository: Repository) {
         this.repository = repository
         Picasso.get().load(repository.owner?.avatarUrl).transform(CircleTransform()).into(view.image_user)
-        //Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView)
+
+        //TODO("validate when image does not work or does not exist")
 
         view.tv_repository_name.text = repository.name
         view.tv_repository_description.text = repository.description

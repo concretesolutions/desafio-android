@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 class Repository {
     @SerializedName("id")
-    @Expose var id: Int = 0
+    @Expose var id: Long = 0
 
     @SerializedName("name")
     @Expose var name: String = ""
