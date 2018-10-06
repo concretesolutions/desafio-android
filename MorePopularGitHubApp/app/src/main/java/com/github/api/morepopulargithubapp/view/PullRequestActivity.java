@@ -85,7 +85,7 @@ public class PullRequestActivity extends AppCompatActivity {
 //        pullRepositoryBO.RequestPullRequest(new ApiCallBack() {
 //            @Override
 //            public void onSuccess(Object response) {
-//                showList((List<PullRequest>) response);
+//                onSucess((List<PullRequest>) response);
 //            }
 //
 //            @Override

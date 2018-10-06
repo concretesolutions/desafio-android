@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.github.api.morepopulargithubapp.R;
 import com.github.api.morepopulargithubapp.adapter.RepositoryAdapter;
 import com.github.api.morepopulargithubapp.model.vo.Repository;
+import com.github.api.morepopulargithubapp.presenter.RepositoryPresenter;
+import com.github.api.morepopulargithubapp.presenterImpl.RepositoryPresenterImpl;
 import com.github.api.morepopulargithubapp.util.ViewUtil;
 
 import org.androidannotations.annotations.AfterViews;
@@ -19,63 +21,57 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RepositoryView {
 
-//    @Bean
-//    RepositoryBO repositoryBO;
-//
+    private boolean isChangingOrientation = false;
+
+    private LinearLayoutManager mLayoutManager;
+
+    @Bean(RepositoryPresenterImpl.class)
+    protected RepositoryPresenter repositoryPresenter;
+
     @Bean
-    RepositoryAdapter repositoryAdapter;
+    protected RepositoryAdapter repositoryAdapter;
 
     @ViewById
-    RecyclerView recyclerView;
+    protected RecyclerView recyclerView;
 
     @ViewById
-    View progress;
+    protected View progress;
 
     @ViewById
-    View fetchDataProgress;
+    protected View fetchDataProgress;
 
     @ViewById
-    View areaErro;
+    protected View areaErro;
 
     @ViewById
-    TextView textMsgErroView;
+    protected TextView textMsgErroView;
 
     @InstanceState
     protected List<Repository> repositories;
 
     @InstanceState
-    protected int pageNumber;
-
-    protected LinearLayoutManager mLayoutManager;
+    protected boolean isScrolling, isLastPage, isGenricError = false;
 
     @InstanceState
-    protected boolean isScrolling, isLastPage, isErrorGenric = false;
-
-    private boolean isChangingOrientation = false;
-
-    @InstanceState
-    protected int currentItens, totalItems, scrollOutItems;
+    protected int pageNumber, currentItens, totalItems, scrollOutItems;
 
     @AfterViews
     void init() {
         textMsgErroView.setText(getString(R.string.error_list_repository));
         initRecyclerView();
-
-        if (CollectionUtils.isNotEmpty(repositories)) {
-            isChangingOrientation = true;
-            showList(repositories);
-        } else {
-            pageNumber = 1;
-            searchRepositories();
-        }
+        repositoryPresenter.initPresenter(isChangingOrientation, isScrolling, isLastPage, isGenricError);
+        repositoryPresenter.initPresenter(pageNumber, currentItens,totalItems, scrollOutItems);
+        repositoryPresenter.initPresenter(this, repositories);
     }
 
     private void initRecyclerView() {
@@ -99,96 +95,59 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
-                currentItens = mLayoutManager.getChildCount();
-                totalItems = mLayoutManager.getItemCount();
-                scrollOutItems = mLayoutManager.findFirstVisibleItemPosition();
-
-                // Verifica se foi feito um scroll, se está no ultimo registro e
-                // se ultima página de repósitorios não foi obtida
-                if (isScrolling && (currentItens + scrollOutItems == totalItems) && !isLastPage) {
-                    isScrolling = false;
-                    // Incrementa próxima página
-                    pageNumber++;
-                    // Obtem próxima página de reppsitorios
-                    searchRepositories();
-                }
+                repositoryPresenter.obtainNextReposotoriesPage(mLayoutManager,isScrolling, isLastPage);
             }
         });
     }
 
-    private void searchRepositories() {
+    @Override
+    public void showView(int recyclerViewVisibility, int progressVisibility,
+                         int areaErroVisibility, int fetchDataProgressVisibility) {
 
-        if (pageNumber == 1 || isErrorGenric) {
-            showView(progress);
-        } else {
-            fetchDataProgress.setVisibility(View.VISIBLE);
-        }
-
-//        repositoryBO.RequestRepositorie(new ApiCallBack() {
-//            @Override
-//            public void onSuccess(Object response) {
-//                showList((List<Repository>) response);
-//            }
-//
-//            @Override
-//            public void onError(Map error) {
-//                showError(error);
-//            }
-//
-//        }, pageNumber);
+        recyclerView.setVisibility(recyclerViewVisibility);
+        progress.setVisibility(progressVisibility);
+        areaErro.setVisibility(areaErroVisibility);
+        fetchDataProgress.setVisibility(fetchDataProgressVisibility);
     }
-
-    void showView(View view) {
-        recyclerView.setVisibility(View.GONE);
-        progress.setVisibility(View.GONE);
-        areaErro.setVisibility(View.GONE);
-        fetchDataProgress.setVisibility(View.GONE);
-
-        if (view != null) {
-            view.setVisibility(View.VISIBLE);
-        }
-    }
-
 
     @UiThread
-    protected void showList(List<Repository> repositories) {
-        if (pageNumber == 1 || isChangingOrientation) {
-            showView(recyclerView);
-            this.repositories = repositories;
-            repositoryAdapter.setItems(this.repositories);
-            isChangingOrientation = false;
-        }
-        // Verifica se a requisição foi chamda a partir da área erro em busca da próxima página
-        else if (isErrorGenric && !isChangingOrientation) {
-            showView(recyclerView);
-            this.repositories.addAll(repositories);
-            isErrorGenric = false;
-        } else {
-            this.repositories.addAll(repositories);
-            fetchDataProgress.setVisibility(View.GONE);
-        }
+    @Override
+    public void showRepositories(List<Repository> repositories) {
+        this.repositories = repositories;
+        repositoryAdapter.setItems(this.repositories);
+        isChangingOrientation = false;
         repositoryAdapter.notifyDataSetChanged();
     }
 
     @UiThread
-    protected void showError(Map errorMap) {
-        // Verifica se o erro retornado é 422
-        if (pageNumber != 1 && errorMap != null && errorMap.containsKey(422)) {
-            progress.setVisibility(View.GONE);
-            fetchDataProgress.setVisibility(View.GONE);
-            String errorMessage = (String) errorMap.get(422);
-            // Não será mais disponível uma outra página
-            ViewUtil.alert(this, errorMessage);
-            isLastPage = true;
-        } else {
-            showView(areaErro);
-        }
+    @Override
+    public void showAddMoreRepositories(List<Repository> repositories) {
+        this.repositories.addAll(repositories);
+        repositoryAdapter.notifyDataSetChanged();
     }
+
+    @UiThread
+    @Override
+    public void showError(Map errorMap) {
+        showView(GONE, GONE, VISIBLE, GONE);
+    }
+
+    @UiThread
+    @Override
+    public void showMessageError(String errorMessage) {
+        ViewUtil.alert(this, errorMessage);
+    }
+
 
     @Click(R.id.areaErro)
     protected void reloadRepositories() {
-        isErrorGenric = true;
-        searchRepositories();
+        isGenricError = true;
+        repositoryPresenter.searchRepositories();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        repositoryPresenter.onDestroy();
     }
 }
