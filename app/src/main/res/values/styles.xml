@@ -8,4 +8,28 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextListTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorListTitle</item>
+        <item name="android:textSize">@dimen/listTitle</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextListDescription" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorListDescription</item>
+        <item name="android:textSize">@dimen/listDescription</item>
+    </style>
+
+    <style name="TextListCount" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorListCount</item>
+        <item name="android:textSize">@dimen/listCount</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextListAvatar" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorListAvatar</item>
+        <item name="android:textSize">@dimen/listAvatar</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
 </resources>

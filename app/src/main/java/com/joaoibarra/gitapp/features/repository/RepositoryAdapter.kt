@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.joaoibarra.gitapp.R
 import com.joaoibarra.gitapp.api.model.Item
+import com.joaoibarra.gitapp.extensions.loadCircle
 
 import kotlinx.android.synthetic.main.item_repository.view.*
 
@@ -24,6 +25,7 @@ class RepositoryAdapter : PagedListAdapter<Item, RepositoryAdapter.ItemViewHolde
         holder.tvForkCount.text = repository?.forksCount
         holder.tvStarGazerCount.text = repository?.stargazersCount
         holder.tvOwnerLogin.text = repository?.owner?.login
+        holder.ivAvatar.loadCircle(repository?.owner?.avatarUrl)
     }
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,6 +34,7 @@ class RepositoryAdapter : PagedListAdapter<Item, RepositoryAdapter.ItemViewHolde
         val tvForkCount = itemView.tvForkCount
         val tvStarGazerCount = itemView.tvStarGazerCount
         val tvOwnerLogin = itemView.tvOwnerLogin
+        val ivAvatar = itemView.ivAvatar
     }
 
     companion object {
