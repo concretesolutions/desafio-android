@@ -9,6 +9,4 @@ public interface IGithubServiceProvider {
 
     void getPulls(String ownerRepo, String repoName, Integer page, INotifyViewModelAboutService listener);
 
-    void getInfoPullRequest(String fullNameRepo, Integer number);
-
 }

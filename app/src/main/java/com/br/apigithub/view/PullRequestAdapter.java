@@ -24,18 +24,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.PullRequestViewHolder> {
     private List<Pull> list;
-    private Context context;
+    private Context mContext;
     private ItemClickListener itemClickListener;
 
-    public PullRequestAdapter(Context context, ItemClickListener itemClickListener) {
-        this.context = context;
+    public PullRequestAdapter(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 
     @Override
     public PullRequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        View v = LayoutInflater.from(context).inflate(R.layout.adapter_pull, parent, false);
+        mContext = parent.getContext();
+        View v = LayoutInflater.from(mContext).inflate(R.layout.adapter_pull, parent, false);
         return new PullRequestViewHolder(v);
     }
 
@@ -46,8 +45,8 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
         holder.tvUsername.setText(pr.getUser().getName());
         holder.tvDescription.setText(pr.getDescription());
         if (pr.getUser().getAvatarUrl() != null && !pr.getUser().getAvatarUrl().isEmpty()) {
-            Glide.with(context).load(pr.getUser().getAvatarUrl()).into(holder.ivUser);
-            holder.ivUser.setBackgroundColor(ContextCompat.getColor(context, R.color.branco));
+            Glide.with(mContext).load(pr.getUser().getAvatarUrl()).into(holder.ivUser);
+            holder.ivUser.setBackgroundColor(ContextCompat.getColor(mContext, R.color.branco));
         }
     }
 

@@ -48,7 +48,6 @@ public class PullRequestFragment extends Fragment implements PullRequestAdapter.
     ProgressBar progressBar;
     @BindView(R.id.layout_no_pull_request)
     ConstraintLayout layoutNoPullRequest;
-    private List<Pull> pulls;
     private LinearLayoutManager layoutManager;
     private boolean isLastPage = false;
     private int page = 1;
@@ -58,23 +57,7 @@ public class PullRequestFragment extends Fragment implements PullRequestAdapter.
         @Override
         public void onChanged(@Nullable String s) {
             msgError = s;
-            ((MainActivity) getActivity()).getProgressDialog().dismiss();
             Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
-        }
-    };
-
-    Observer<List<Pull>> observerPullRequests = new Observer<List<Pull>>() {
-        @Override
-        public void onChanged(@Nullable List<Pull> pulls) {
-            if (pulls == null || pulls.isEmpty()) {
-                layoutNoPullRequest.setVisibility(View.VISIBLE);
-                recyclerView.setVisibility(View.INVISIBLE);
-            } else {
-                recyclerView.setVisibility(View.VISIBLE);
-                layoutNoPullRequest.setVisibility(View.INVISIBLE);
-                adapter.setPullRequests(pulls);
-            }
-            progressBar.setVisibility(View.INVISIBLE);
         }
     };
 
@@ -97,7 +80,7 @@ public class PullRequestFragment extends Fragment implements PullRequestAdapter.
             int totalItemCount = layoutManager.getItemCount();
             int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
 
-            if (!((MainActivity) getActivity()).getProgressDialog().isShowing() && !isLastPage && dy > 0) {
+            if (!isLastPage && dy > 0) {
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0 && totalItemCount >= PAGE_SIZE) {
                     repoViewModel.updatePulls(++page);
                     progressBar.setVisibility(View.VISIBLE);
@@ -127,7 +110,7 @@ public class PullRequestFragment extends Fragment implements PullRequestAdapter.
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         if (adapter == null) {
-            adapter = new PullRequestAdapter(getActivity(), this);
+            adapter = new PullRequestAdapter(this);
         }
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), View.SCROLL_AXIS_HORIZONTAL));
@@ -139,7 +122,19 @@ public class PullRequestFragment extends Fragment implements PullRequestAdapter.
     private void configViewModel() {
         repoViewModel = ViewModelProviders.of(getActivity()).get(RepositoryViewModel.class);
         repoViewModel.getMsgError().observe(getActivity(), observerMsgError);
-        repoViewModel.getPullsLiveData().observe(getActivity(), observerPullRequests);
+    }
+
+    public void showEmptyLayout() {
+        layoutNoPullRequest.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    public void showPullRequests(List<Pull> pulls) {
+        recyclerView.setVisibility(View.VISIBLE);
+        layoutNoPullRequest.setVisibility(View.INVISIBLE);
+        adapter.setPullRequests(pulls);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public void verifyInternetConnection() {

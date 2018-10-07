@@ -50,7 +50,6 @@ public class RepositoryFragment extends Fragment {
         @Override
         public void onChanged(@Nullable String s) {
             msgError = s;
-            ((MainActivity) getActivity()).getProgressDialog().dismiss();
             Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
         }
     };
@@ -76,7 +75,7 @@ public class RepositoryFragment extends Fragment {
             int totalItemCount = layoutManager.getItemCount();
             int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
 
-            if (!((MainActivity) getActivity()).getProgressDialog().isShowing() && !isLastPage && dy > 0) {
+            if (!isLastPage && dy > 0) {
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0 && totalItemCount >= PAGE_SIZE) {
                     repoViewModel.listRepos(++page);
                     progressBar.setVisibility(View.VISIBLE);
@@ -86,9 +85,8 @@ public class RepositoryFragment extends Fragment {
         }
     };
 
-    public static RepositoryFragment newInstance(RepositoryViewModel repoViewModel) {
+    public static RepositoryFragment newInstance() {
         RepositoryFragment fragment = new RepositoryFragment();
-        fragment.repoViewModel = repoViewModel;
         return fragment;
     }
 
@@ -118,7 +116,7 @@ public class RepositoryFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         if (adapter == null) {
-            adapter = new RepositoryAdapter(getActivity(), (MainActivity) getActivity());
+            adapter = new RepositoryAdapter((MainActivity) getActivity());
         } else {
             progressBar.setVisibility(View.INVISIBLE);
         }

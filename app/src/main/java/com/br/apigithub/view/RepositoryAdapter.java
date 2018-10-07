@@ -21,15 +21,14 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
     private Context mContext;
     private ItemClickListener itemClickListener;
 
-    public RepositoryAdapter(Context mContext, ItemClickListener itemClickListener) {
-        this.mContext = mContext;
+    public RepositoryAdapter(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 
     @Override
     public RepositoryVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.adapter_repository, parent, false);
+        mContext = parent.getContext();
+        View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_repository, parent, false);
         return new RepositoryVH(view);
     }
 

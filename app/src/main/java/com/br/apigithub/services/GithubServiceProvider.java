@@ -1,16 +1,12 @@
 package com.br.apigithub.services;
 
-import android.support.annotation.NonNull;
-
 import com.br.apigithub.beans.GithubRepository;
-import com.br.apigithub.beans.Issue;
 import com.br.apigithub.beans.Pull;
 import com.br.apigithub.interfaces.GithubEndpoints;
 import com.br.apigithub.interfaces.IGithubServiceProvider;
 import com.br.apigithub.interfaces.INotifyViewModelAboutService;
 import com.br.apigithub.interfaces.RetrofitServiceContract;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,24 +44,6 @@ public class GithubServiceProvider implements IGithubServiceProvider {
         });
     }
 
-    /**
-     * De acordo com a documentação do github, um pull request é considerado uma issue. Sendo assim,
-     * se o elemento não contiver pull_request, ele é uma issue legítima.
-     *
-     * @param response
-     * @return
-     */
-    @NonNull
-    private List<Issue> getRealIssues(Response<List<Issue>> response) {
-        List<Issue> list = new ArrayList<>();
-        for (Issue issue : response.body()) {
-            if (issue.getPull_request() == null) {
-                list.add(issue);
-            }
-        }
-        return list;
-    }
-
     @Override
     public void getPulls(String ownerRepo, String repoName, Integer page, final INotifyViewModelAboutService listener) {
         service.getRetrofitService().getRetrofit().create(GithubEndpoints.class).getPullsFromRepo(ownerRepo, repoName, page).enqueue(new Callback<List<Pull>>() {
@@ -85,18 +63,4 @@ public class GithubServiceProvider implements IGithubServiceProvider {
         });
     }
 
-    @Override
-    public void getInfoPullRequest(String fullNameRepo, Integer number) {
-        service.getRetrofitService().getRetrofit().create(GithubEndpoints.class).getSinglePull(fullNameRepo, number).enqueue(new Callback<Pull>() {
-            @Override
-            public void onResponse(Call<Pull> call, Response<Pull> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Pull> call, Throwable t) {
-
-            }
-        });
-    }
 }
