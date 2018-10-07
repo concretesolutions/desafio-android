@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="listTitle">18sp</dimen>
+    <dimen name="listDescription">14sp</dimen>
+    <dimen name="listCount">12sp</dimen>
+    <dimen name="listAvatar">12sp</dimen>
+</resources>
