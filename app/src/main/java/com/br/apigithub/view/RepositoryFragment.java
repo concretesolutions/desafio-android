@@ -13,15 +13,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.br.apigithub.R;
 import com.br.apigithub.aac.RepositoryViewModel;
 import com.br.apigithub.beans.GithubRepository;
 import com.br.apigithub.utils.NetworkUtils;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,10 +45,10 @@ public class RepositoryFragment extends Fragment {
         }
     };
 
-    Observer<List<GithubRepository>> observerRepos = new Observer<List<GithubRepository>>() {
+    Observer<GithubRepository> observerRepos = new Observer<GithubRepository>() {
         @Override
-        public void onChanged(@Nullable List<GithubRepository> githubRepositories) {
-            adapter.setRepositories(githubRepositories);
+        public void onChanged(@Nullable GithubRepository githubRepositories) {
+            adapter.setRepository(githubRepositories);
         }
     };
 
@@ -100,7 +97,7 @@ public class RepositoryFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
-        adapter = new RepositoryAdapter();
+        adapter = new RepositoryAdapter(getActivity());
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), View.SCROLL_AXIS_HORIZONTAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

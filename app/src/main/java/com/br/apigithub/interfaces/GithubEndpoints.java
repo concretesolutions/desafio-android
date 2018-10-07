@@ -17,8 +17,8 @@ import retrofit2.http.Query;
 
 public interface GithubEndpoints {
     @GET("/search/repositories?q=language:Java")
-    Call<List<GithubRepository>> listRepositoriesJava(@Query("sort") String sort, @Query("page") Integer page); //&sort=stars&page=1
-
+    Call<GithubRepository> listRepositoriesJava(@Query("sort") String sort, @Query("page") Integer page); //&sort=stars&page=1
+//"https://api.github.com/repos/iluwatar/java-design-patterns/pulls{/number}"
     @Headers({
             "User-Agent: com.br.apigithub"
     })

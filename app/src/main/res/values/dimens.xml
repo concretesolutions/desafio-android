@@ -47,6 +47,7 @@
 
     <dimen name="tv_quant_iv_repository_margin_left">8dp</dimen>
     <dimen name="tv_quant_iv_repository_margin_start">@dimen/tv_quant_iv_repository_margin_left</dimen>
+    <dimen name="tv_quant_iv_repository_margin_top">8dp</dimen>
 
     <dimen name="width_image_repository">32dp</dimen>
     <dimen name="height_image_repository">32dp</dimen>

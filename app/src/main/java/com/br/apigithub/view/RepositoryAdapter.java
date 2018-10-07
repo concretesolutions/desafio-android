@@ -9,15 +9,20 @@ import android.widget.TextView;
 
 import com.br.apigithub.R;
 import com.br.apigithub.beans.GithubRepository;
-
-import java.util.List;
+import com.br.apigithub.beans.Item;
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryVH> {
-    private List<GithubRepository> repositories;
+    private GithubRepository repository;
+    private Context mContext;
+
+    public RepositoryAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
 
     @Override
     public RepositoryVH onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -28,19 +33,28 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryVH> {
 
     @Override
     public void onBindViewHolder(RepositoryVH holder, int position) {
-
+        Item item = repository.getItems().get(position);
+        holder.tvRepoName.setText(item.getName());
+        holder.tvUsername.setText(item.getOwner().getLogin());
+        holder.tvRepoDesc.setText(item.getDescription());
+        holder.tvStar.setText(String.valueOf(item.getStarsCount()));
+        holder.tvFork.setText(String.valueOf(item.getForksCount()));
+        if (item.getOwner().getAvatarUrl() != null && !item.getOwner().getAvatarUrl().isEmpty()) {
+            Glide.with(mContext).load(item.getOwner().getAvatarUrl()).into(holder.ivUser);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return repository != null && repository.getItems() != null
+                && !repository.getItems().isEmpty() ? repository.getItems().size() : 0;
     }
 
-    public void setRepositories(List<GithubRepository> repositories) {
-        if (this.repositories != null) {
-            this.repositories.addAll(repositories);
+    public void setRepository(GithubRepository repository) {
+        if (this.repository != null) {
+            this.repository.getItems().addAll(repository.getItems());
         } else {
-            this.repositories = repositories;
+            this.repository = repository;
         }
         notifyDataSetChanged();
     }
@@ -57,13 +71,10 @@ class RepositoryVH extends RecyclerView.ViewHolder implements View.OnClickListen
     @BindView(R.id.tv_username)
     TextView tvUsername;
 
-    @BindView(R.id.tv_fullname)
-    TextView tvFullname;
-
     @BindView(R.id.circleImageView)
     CircleImageView ivUser;
 
-    @BindView(R.id.tv_quant_fork)
+    @BindView(R.id.tv_fork)
     TextView tvFork;
 
     @BindView(R.id.tv_quant_star)

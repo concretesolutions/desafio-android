@@ -31,9 +31,9 @@ public class GithubServiceProvider implements IGithubServiceProvider {
 
     @Override
     public void listReposJava(final String sort, final Integer page, final INotifyViewModelAboutService listener) {
-        service.getRetrofitService().getRetrofit().create(GithubEndpoints.class).listRepositoriesJava(sort, page).enqueue(new Callback<List<GithubRepository>>() {
+        service.getRetrofitService().getRetrofit().create(GithubEndpoints.class).listRepositoriesJava(sort, page).enqueue(new Callback<GithubRepository>() {
             @Override
-            public void onResponse(Call<List<GithubRepository>> call, Response<List<GithubRepository>> response) {
+            public void onResponse(Call<GithubRepository> call, Response<GithubRepository> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     listener.returnListRepos(response.body());
                 } else {
@@ -42,7 +42,7 @@ public class GithubServiceProvider implements IGithubServiceProvider {
             }
 
             @Override
-            public void onFailure(Call<List<GithubRepository>> call, Throwable t) {
+            public void onFailure(Call<GithubRepository> call, Throwable t) {
                 listener.notifyOnError(t);
             }
         });
@@ -51,6 +51,7 @@ public class GithubServiceProvider implements IGithubServiceProvider {
     /**
      * De acordo com a documentação do github, um pull request é considerado uma issue. Sendo assim,
      * se o elemento não contiver pull_request, ele é uma issue legítima.
+     *
      * @param response
      * @return
      */

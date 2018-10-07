@@ -10,6 +10,6 @@
     <string name="repository_description">Descrição do repositório</string>
     <string name="username">Username</string>
     <string name="fullname">Name Last Name</string>
-    <string name="forks">100</string>
+    <string name="forks">abc</string>
     <string name="stars">48</string>
 </resources>

@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface INotifyViewModelAboutService {
-    void returnListRepos(List<GithubRepository> list);
+    void returnListRepos(GithubRepository list);
 
     void updateListRepos(List<GithubRepository> list);
 

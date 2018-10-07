@@ -75,6 +75,7 @@
     <style name="RepositoryTextQuantImageView">
         <item name="android:layout_marginLeft">@dimen/tv_quant_iv_repository_margin_left</item>
         <item name="android:layout_marginStart">@dimen/tv_quant_iv_repository_margin_start</item>
+        <item name="android:layout_marginTop">@dimen/tv_quant_iv_repository_margin_top</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

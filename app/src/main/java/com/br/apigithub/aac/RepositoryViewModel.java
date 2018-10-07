@@ -5,12 +5,10 @@ import android.arch.lifecycle.ViewModel;
 
 import com.br.apigithub.MyApplication;
 import com.br.apigithub.beans.GithubRepository;
-import com.br.apigithub.beans.Issue;
 import com.br.apigithub.beans.Pull;
 import com.br.apigithub.interfaces.IGithubServiceProvider;
 import com.br.apigithub.interfaces.INotifyViewModelAboutService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,7 +20,7 @@ import javax.inject.Inject;
 public class RepositoryViewModel extends ViewModel implements INotifyViewModelAboutService {
     @Inject
     IGithubServiceProvider serviceProvider;
-    private MutableLiveData<List<GithubRepository>> githubLiveData;
+    private MutableLiveData<GithubRepository> githubLiveData;
     private MutableLiveData<List<Pull>> pullsLiveData;
     private MutableLiveData<String> msgError;
     private String userName;
@@ -44,7 +42,7 @@ public class RepositoryViewModel extends ViewModel implements INotifyViewModelAb
         serviceProvider.getPulls(userName, repo, page, limit, true, this);
     }
 
-    public MutableLiveData<List<GithubRepository>> getGithubLiveData() {
+    public MutableLiveData<GithubRepository> getGithubLiveData() {
         if (githubLiveData == null) {
             githubLiveData = new MutableLiveData<>();
         }
@@ -66,7 +64,7 @@ public class RepositoryViewModel extends ViewModel implements INotifyViewModelAb
     }
 
     @Override
-    public void returnListRepos(List<GithubRepository> list) {
+    public void returnListRepos(GithubRepository list) {
         githubLiveData.postValue(list);
     }
 
