@@ -1,10 +1,8 @@
 package com.br.apigithub.view;
 
 import android.app.ProgressDialog;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,67 +13,29 @@ import android.widget.Toast;
 
 import com.br.apigithub.R;
 import com.br.apigithub.aac.RepositoryViewModel;
-import com.br.apigithub.beans.GithubRepository;
-import com.br.apigithub.beans.Issue;
-import com.br.apigithub.beans.Pull;
-import com.br.apigithub.fragments.IssueFragment;
-
-import java.util.List;
 
 /**
  * Created by rlima on 04/10/18.
  */
 
 public class MainActivity extends AppCompatActivity {
-    private List<GithubRepository> repository;
+    public static final int INITIAL_PAGE = 1;
     private RepositoryViewModel repoViewModel;
-    private String query;
-    private String msgError;
     private ProgressDialog progressDialog;
-
-    Observer<List<GithubRepository>> observerRepository = new Observer<List<GithubRepository>>() {
-        @Override
-        public void onChanged(@Nullable List<GithubRepository> githubRepositories) {
-            repository = githubRepositories;
-        }
-    };
-
-//    Observer<List<Pull>> observerPulls = new Observer<List<Pull>>() {
-//        @Override
-//        public void onChanged(@Nullable List<Pull> pulls) {
-//            getProgressDialog().show();
-//            FragmentManager fm = getSupportFragmentManager();
-//            PullRequestFragment fragment = (PullRequestFragment) fm.getFragments().get(2);
-//            fragment.setPulls(pulls);
-//
-//            if (repository.getPulls() == null) {
-//                fragment.setAdapter();
-//            } else {
-//                fragment.updateAdapter();
-//            }
-//            repository.setPulls(pulls);
-//        }
-//    };
-
-    Observer<String> observerMsgError = new Observer<String>() {
-        @Override
-        public void onChanged(@Nullable String s) {
-            msgError = s;
-            getProgressDialog().dismiss();
-            Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        repoViewModel = ViewModelProviders.of(this).get(RepositoryViewModel.class);
+
         if (savedInstanceState == null) {
+            repoViewModel.listRepos(INITIAL_PAGE);
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            RepositoryFragment fragment = RepositoryFragment.newInstance();
+            RepositoryFragment fragment = RepositoryFragment.newInstance(repoViewModel);
             transaction.add(R.id.fragment_container, fragment).commit();
         }
     }
@@ -94,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 if (!query.contains("/")) {
                     Toast.makeText(getApplicationContext(), "A busca deve seguir o padrão usuário/repositório", Toast.LENGTH_LONG).show();
                 } else {
-                    setQuery(query);
 //                    repoViewModel.searchRepo(query, 1, 10);
                 }
                 return false;
@@ -107,10 +66,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return true;
-    }
-
-    public void setQuery(String query) {
-        this.query = query;
     }
 
     public RepositoryViewModel getRepoViewModel() {
@@ -135,4 +90,5 @@ public class MainActivity extends AppCompatActivity {
             getProgressDialog().dismiss();
         }
     }
+
 }

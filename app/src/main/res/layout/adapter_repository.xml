@@ -8,7 +8,6 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView"
         style="@style/CircleImageViewMargin_Repository"
-        android:background="@color/colorPrimaryLight"
         android:src="@drawable/ic_person"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"

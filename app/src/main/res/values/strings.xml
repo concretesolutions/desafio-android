@@ -12,4 +12,5 @@
     <string name="fullname">Name Last Name</string>
     <string name="forks">abc</string>
     <string name="stars">48</string>
+    <string name="msg_no_wifi">Sem conexão com a internet</string>
 </resources>

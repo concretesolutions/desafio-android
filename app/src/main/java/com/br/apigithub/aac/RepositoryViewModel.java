@@ -1,7 +1,9 @@
 package com.br.apigithub.aac;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
 
 import com.br.apigithub.MyApplication;
 import com.br.apigithub.beans.GithubRepository;
@@ -17,7 +19,7 @@ import javax.inject.Inject;
  * Created by rlima on 30/05/18.
  */
 
-public class RepositoryViewModel extends ViewModel implements INotifyViewModelAboutService {
+public class RepositoryViewModel extends AndroidViewModel implements INotifyViewModelAboutService {
     @Inject
     IGithubServiceProvider serviceProvider;
     private MutableLiveData<GithubRepository> githubLiveData;
@@ -25,6 +27,11 @@ public class RepositoryViewModel extends ViewModel implements INotifyViewModelAb
     private MutableLiveData<String> msgError;
     private String userName;
     private String repo;
+
+    public RepositoryViewModel(@NonNull Application application) {
+        super(application);
+        init();
+    }
 
     public void init() {
         MyApplication.getComponent().inject(this);

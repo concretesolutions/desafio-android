@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.br.apigithub.R;
@@ -23,13 +25,19 @@ import com.br.apigithub.utils.NetworkUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RepositoryFragment extends Fragment {
+public class RepositoryFragment extends Fragment implements RepositoryAdapter.ItemClickListener {
     private RepositoryViewModel repoViewModel;
     private String msgError;
     public static int PAGE_SIZE = 10;
 
     @BindView(R.id.rv_repository)
     RecyclerView mRecyclerView;
+
+    @BindView(R.id.ll_no_wifi)
+    LinearLayout layoutNoWifi;
+
+    @BindView(R.id.progressbar)
+    ProgressBar progressBar;
 
     private RepositoryAdapter adapter;
     private LinearLayoutManager layoutManager;
@@ -49,6 +57,7 @@ public class RepositoryFragment extends Fragment {
         @Override
         public void onChanged(@Nullable GithubRepository githubRepositories) {
             adapter.setRepository(githubRepositories);
+            progressBar.setVisibility(View.INVISIBLE);
         }
     };
 
@@ -75,8 +84,9 @@ public class RepositoryFragment extends Fragment {
         }
     };
 
-    public static RepositoryFragment newInstance() {
+    public static RepositoryFragment newInstance(RepositoryViewModel repoViewModel) {
         RepositoryFragment fragment = new RepositoryFragment();
+        fragment.repoViewModel = repoViewModel;
         return fragment;
     }
 
@@ -85,32 +95,50 @@ public class RepositoryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repository, container, false);
         ButterKnife.bind(this, view);
+        setRetainInstance(true);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        repoViewModel = ViewModelProviders.of(getActivity()).get(RepositoryViewModel.class);
-        repoViewModel.getMsgError().observe(this, observerMsgError);
-        repoViewModel.getGithubLiveData().observe(this, observerRepos);
-        repoViewModel.init();
+        configViewModel();
+        configRecyclerView();
+        verifyInternetConnection();
+    }
 
+    private void configViewModel() {
+        repoViewModel = ViewModelProviders.of(getActivity()).get(RepositoryViewModel.class);
+        repoViewModel.getMsgError().observe(getActivity(), observerMsgError);
+        repoViewModel.getGithubLiveData().observe(getActivity(), observerRepos);
+    }
+
+    private void configRecyclerView() {
         layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
-        adapter = new RepositoryAdapter(getActivity());
+        adapter = new RepositoryAdapter(getActivity(), this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), View.SCROLL_AXIS_HORIZONTAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnScrollListener(recyclerViewOnScrollListener);
-        verifyInternetConnection();
     }
 
     public void verifyInternetConnection() {
         if (NetworkUtils.isConnected(getActivity())) {
-            repoViewModel.listRepos(page);
+            mRecyclerView.setVisibility(View.VISIBLE);
         } else {
-//            showLayoutNoConnectivity(View.VISIBLE);
+            showLayoutNoConnectivity(View.VISIBLE);
         }
+    }
+
+    private void showLayoutNoConnectivity(int visible) {
+        layoutNoWifi.setVisibility(visible);
+        mRecyclerView.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onItemClick(String repoName, String userName) {
+
     }
 }

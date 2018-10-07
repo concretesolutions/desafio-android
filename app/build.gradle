@@ -35,6 +35,7 @@ dependencies {
     implementation "com.android.support:design:$androidVersion"
     implementation "com.android.support:recyclerview-v7:$androidVersion"
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycleVersion"
     implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"

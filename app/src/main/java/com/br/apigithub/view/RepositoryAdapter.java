@@ -16,12 +16,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryVH> {
+public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.RepositoryVH> {
     private GithubRepository repository;
     private Context mContext;
+    private ItemClickListener itemClickListener;
 
-    public RepositoryAdapter(Context mContext) {
+    public RepositoryAdapter(Context mContext, ItemClickListener itemClickListener) {
         this.mContext = mContext;
+        this.itemClickListener = itemClickListener;
     }
 
     @Override
@@ -58,35 +60,41 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryVH> {
         }
         notifyDataSetChanged();
     }
-}
 
-class RepositoryVH extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-    @BindView(R.id.tv_repo_name)
-    TextView tvRepoName;
-
-    @BindView(R.id.tv_repo_desc)
-    TextView tvRepoDesc;
-
-    @BindView(R.id.tv_username)
-    TextView tvUsername;
-
-    @BindView(R.id.circleImageView)
-    CircleImageView ivUser;
-
-    @BindView(R.id.tv_fork)
-    TextView tvFork;
-
-    @BindView(R.id.tv_quant_star)
-    TextView tvStar;
-
-    public RepositoryVH(View itemView) {
-        super(itemView);
-        ButterKnife.bind(this, itemView);
+    public interface ItemClickListener {
+        void onItemClick(String repoName, String userName);
     }
 
-    @Override
-    public void onClick(View v) {
-        int position = getAdapterPosition();
+    class RepositoryVH extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.tv_repo_name)
+        TextView tvRepoName;
+
+        @BindView(R.id.tv_repo_desc)
+        TextView tvRepoDesc;
+
+        @BindView(R.id.tv_username)
+        TextView tvUsername;
+
+        @BindView(R.id.circleImageView)
+        CircleImageView ivUser;
+
+        @BindView(R.id.tv_fork)
+        TextView tvFork;
+
+        @BindView(R.id.tv_quant_star)
+        TextView tvStar;
+
+        public RepositoryVH(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            itemClickListener.onItemClick(tvRepoName.getText().toString(), tvUsername.getText().toString());
+        }
     }
+
 }
