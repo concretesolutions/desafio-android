@@ -28,9 +28,9 @@ import java.util.Map;
 import static com.github.api.morepopulargithubapp.util.ConstantsUitl.*;
 
 @EBean(scope = EBean.Scope.Singleton)
-public class RepositoryRequest {
+public class RepositoryVolleyRequest {
 
-    private static final String TAG = RepositoryRequest.class.getSimpleName();
+    private static final String TAG = RepositoryVolleyRequest.class.getSimpleName();
     public static final String PAGE = "page";
 
     @RootContext

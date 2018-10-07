@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.github.api.morepopulargithubapp.model.vo.Repository;
-import com.github.api.morepopulargithubapp.model.web.RepositoryRequest;
+import com.github.api.morepopulargithubapp.model.web.RepositoryVolleyRequest;
 import com.github.api.morepopulargithubapp.presenter.PresenterApiCallBack;
 import com.github.api.morepopulargithubapp.presenter.RepositoryPresenter;
 import com.github.api.morepopulargithubapp.view.RepositoryView;
@@ -33,7 +33,7 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
     protected Context context;
 
     @Bean
-    protected RepositoryRequest repositoryRequest;
+    protected RepositoryVolleyRequest repositoryRequest;
 
 
     @Override

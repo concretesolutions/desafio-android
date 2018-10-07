@@ -3,7 +3,6 @@ package com.github.api.morepopulargithubapp.view;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +10,8 @@ import com.github.api.morepopulargithubapp.R;
 import com.github.api.morepopulargithubapp.adapter.PullRequestAdapter;
 import com.github.api.morepopulargithubapp.model.vo.PullRequest;
 import com.github.api.morepopulargithubapp.model.vo.Repository;
+import com.github.api.morepopulargithubapp.presenter.PullRequestPresenter;
+import com.github.api.morepopulargithubapp.presenterImpl.PullRequestPresenterImpl;
 import com.github.api.morepopulargithubapp.util.ViewUtil;
 
 import org.androidannotations.annotations.AfterViews;
@@ -21,109 +22,87 @@ import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
 
-@EActivity(R.layout.activity_pull_request)
-public class PullRequestActivity extends AppCompatActivity {
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
-//    @Bean
-//    PullRequestBO pullRepositoryBO;
+@EActivity(R.layout.activity_pull_request)
+public class PullRequestActivity extends AppCompatActivity implements PullRequestView {
+
+    private LinearLayoutManager mLayoutManager;
+
+    @Bean(PullRequestPresenterImpl.class)
+    protected PullRequestPresenter pullRequestPresenter;
 
     @Bean
-    PullRequestAdapter repositoryAdapter;
+    protected PullRequestAdapter pullRequestAdapter;
 
     @ViewById
-    RecyclerView recyclerViewPullRequest;
+    protected RecyclerView recyclerViewPullRequest;
 
     @ViewById
-    View progressPullResquest;
+    protected View progressPullResquest;
 
     @ViewById
-    View areaErroPullRequest;
+    protected View areaErroPullRequest;
 
     @ViewById
-    TextView msgErroPullRequest;
+    protected TextView msgErroPullRequest;
 
     @InstanceState
     protected List<PullRequest> pullRequests;
 
     @Extra
+    @InstanceState
     protected Repository repository;
-
-    private LinearLayoutManager mLayoutManager;
-
 
     @AfterViews
     void init() {
         msgErroPullRequest.setText(getString(R.string.error_list_pull_resquests));
-        String nameRepository = repository.getName();
-        if (repository != null && !TextUtils.isEmpty(nameRepository)) {
-            getSupportActionBar().setTitle(nameRepository);
-        }
-
         initRecyclerView();
-
-        if (CollectionUtils.isNotEmpty(pullRequests)) {
-            showList(pullRequests);
-        } else {
-//            searchPullRequest();
-        }
+        pullRequestPresenter.initPresenter(this, repository, pullRequests);
     }
 
     private void initRecyclerView() {
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewPullRequest.setLayoutManager(mLayoutManager);
-        recyclerViewPullRequest.setAdapter(repositoryAdapter);
+        recyclerViewPullRequest.setAdapter(pullRequestAdapter);
     }
 
-//    private void searchPullRequest() {
-//        showView(progressPullResquest);
-//
-//        pullRepositoryBO.RequestPullRequest(new ApiCallBack() {
-//            @Override
-//            public void onSuccess(Object response) {
-//                onSucess((List<PullRequest>) response);
-//            }
-//
-//            @Override
-//            public void onError(Map error) {
-//                showError(error);
-//            }
-//
-//        }, repository);
-//    }
-
-    void showView(View view) {
-        recyclerViewPullRequest.setVisibility(View.GONE);
-        progressPullResquest.setVisibility(View.GONE);
-        areaErroPullRequest.setVisibility(View.GONE);
-
-        if (view != null) {
-            view.setVisibility(View.VISIBLE);
-        }
+    @Override
+    public void setTitleActionBar(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
-
-    @UiThread
-    protected void showList(List<PullRequest> pullRequests) {
-        // Verifica se existe pullRequest para o repositório
-        if (CollectionUtils.isNotEmpty(pullRequests)) {
-            showView(recyclerViewPullRequest);
-            this.pullRequests = pullRequests;
-            repositoryAdapter.setItems(this.pullRequests);
-            repositoryAdapter.notifyDataSetChanged();
-        } else {
-            showView(null);
-            ViewUtil.alert(this, getString(R.string.nao_existe_pull_request));
-        }
+    @Override
+    public void showView(int recyclerViewVisibility, int progressVisibility, int areaErroVisibility) {
+        recyclerViewPullRequest.setVisibility(recyclerViewVisibility);
+        progressPullResquest.setVisibility(progressVisibility);
+        areaErroPullRequest.setVisibility(areaErroVisibility);
     }
 
     @UiThread
-    protected void showError(Map errorMap) {
-        showView(areaErroPullRequest);
+    @Override
+    public void showPullRequests(List<PullRequest> pullRequests) {
+        showView(VISIBLE, GONE, GONE);
+        this.pullRequests = pullRequests;
+        pullRequestAdapter.setItems(this.pullRequests);
+        pullRequestAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showMessageNotFound() {
+        showView(GONE, GONE, GONE);
+        ViewUtil.alert(this, getString(R.string.nao_existe_pull_request));
+    }
+
+    @UiThread
+    @Override
+    public void showError(Map errorMap) {
+        showView(GONE, GONE, VISIBLE);
     }
 
     @Click(R.id.areaErroPullRequest)
@@ -131,4 +110,9 @@ public class PullRequestActivity extends AppCompatActivity {
 //        searchPullRequest();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pullRequestPresenter.onDestroy();
+    }
 }
