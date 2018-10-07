@@ -9,7 +9,7 @@ import io.reactivex.Observable
 class RepositoryRepository {
     private val api: GithubApiService = GithubApiService.create()
 
-    fun searchUsers(page: Int): Observable<List<Repository>> {
+    fun searchJavaRepositories(page: Int): Observable<List<Repository>> {
         return api.javaRepositories("language:Java", "stars", page, Constants.PAGE_SIZE).map { response: RepositoryResponse ->
             response.items
         }

@@ -50,7 +50,7 @@ class PullRequestAdapter(private val pullRequestList: MutableList<PullRequest>, 
 
     fun pushItems(resultList: List<PullRequest>?) {
         val newResultList = ArrayList<PullRequest>()
-        newResultList.addAll(this.pullRequestList!!)
+        newResultList.addAll(this.pullRequestList)
         newResultList.addAll(resultList!!)
         this.pullRequestList.addAll(resultList)
     }
@@ -62,7 +62,7 @@ class PullRequestAdapter(private val pullRequestList: MutableList<PullRequest>, 
 
     fun popItem() {
         pullRequestList?.removeAt(pullRequestList.size - 1)
-        notifyItemRemoved(pullRequestList!!.size)
+        notifyItemRemoved(pullRequestList.size)
     }
 }
 

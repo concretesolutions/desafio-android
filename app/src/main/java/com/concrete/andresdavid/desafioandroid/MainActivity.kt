@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (result?.status == Resource.SUCCESS) {
-                if (result?.data?.isNotEmpty()!!) {
+                if (result.data?.isNotEmpty()!!) {
                     if (repositoryAdapter.itemCount > 0) {
                         repositoryAdapter.pushItems(result.data.takeLast(Constants.PAGE_SIZE))
                     } else {

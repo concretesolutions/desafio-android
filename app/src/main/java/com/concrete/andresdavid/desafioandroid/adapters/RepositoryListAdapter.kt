@@ -80,8 +80,6 @@ class RepositoryHolder(val view: View, private val context: Context) : RecyclerV
         this.repository = repository
         Picasso.get().load(repository.owner?.avatarUrl).transform(CircleTransform()).into(view.image_user)
 
-        //TODO("validate when image does not work or does not exist")
-
         view.tv_repository_name.text = repository.name
         view.tv_repository_description.text = repository.description
         view.tv_user_name.text = repository.owner?.login

@@ -3,7 +3,6 @@ package com.concrete.andresdavid.desafioandroid.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.util.Log
 import com.concrete.andresdavid.desafioandroid.model.Repository
 import com.concrete.andresdavid.desafioandroid.model.Resource
 import com.concrete.andresdavid.desafioandroid.repository.RepositoryRepository
@@ -26,7 +25,7 @@ class RepositoryListViewModel : ViewModel() {
     }
 
     fun load() {
-        repository.searchUsers(page)
+        repository.searchJavaRepositories(page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ result ->
