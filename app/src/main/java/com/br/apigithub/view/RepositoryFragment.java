@@ -25,7 +25,9 @@ import com.br.apigithub.utils.NetworkUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RepositoryFragment extends Fragment implements RepositoryAdapter.ItemClickListener {
+public class RepositoryFragment extends Fragment {
+    public static final String TAG = RepositoryFragment.class.getSimpleName().toUpperCase();
+
     private RepositoryViewModel repoViewModel;
     private String msgError;
     public static int PAGE_SIZE = 10;
@@ -76,8 +78,8 @@ public class RepositoryFragment extends Fragment implements RepositoryAdapter.It
 
             if (!((MainActivity) getActivity()).getProgressDialog().isShowing() && !isLastPage && dy > 0) {
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0 && totalItemCount >= PAGE_SIZE) {
-                    repoViewModel.updateListRepos(++page, PAGE_SIZE);
-                    ((MainActivity) getActivity()).getProgressDialog().show();
+                    repoViewModel.listRepos(++page);
+                    progressBar.setVisibility(View.VISIBLE);
                     isLastPage = true;
                 }
             }
@@ -115,7 +117,11 @@ public class RepositoryFragment extends Fragment implements RepositoryAdapter.It
     private void configRecyclerView() {
         layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
-        adapter = new RepositoryAdapter(getActivity(), this);
+        if (adapter == null) {
+            adapter = new RepositoryAdapter(getActivity(), (MainActivity) getActivity());
+        } else {
+            progressBar.setVisibility(View.INVISIBLE);
+        }
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), View.SCROLL_AXIS_HORIZONTAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -137,8 +143,4 @@ public class RepositoryFragment extends Fragment implements RepositoryAdapter.It
         progressBar.setVisibility(View.INVISIBLE);
     }
 
-    @Override
-    public void onItemClick(String repoName, String userName) {
-
-    }
 }

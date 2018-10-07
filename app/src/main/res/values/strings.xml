@@ -13,4 +13,7 @@
     <string name="forks">abc</string>
     <string name="stars">48</string>
     <string name="msg_no_wifi">Sem conexão com a internet</string>
+    <string name="title_pull_request">Título do pull request</string>
+    <string name="description_pull_request">Descrição das atividades realizadas para a nova versão do sistema.</string>
+    <string name="empty_pull_request">O diretório não possui Pull Requests no momento</string>
 </resources>

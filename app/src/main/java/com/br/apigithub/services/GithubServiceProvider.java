@@ -67,16 +67,12 @@ public class GithubServiceProvider implements IGithubServiceProvider {
     }
 
     @Override
-    public void getPulls(String userName, String nameRepository, Integer page, Integer limit, final boolean isUpdating, final INotifyViewModelAboutService listener) {
-        service.getRetrofitService().getRetrofit().create(GithubEndpoints.class).getPullsFromRepo(userName, nameRepository, page, limit).enqueue(new Callback<List<Pull>>() {
+    public void getPulls(String ownerRepo, String repoName, Integer page, final INotifyViewModelAboutService listener) {
+        service.getRetrofitService().getRetrofit().create(GithubEndpoints.class).getPullsFromRepo(ownerRepo, repoName, page).enqueue(new Callback<List<Pull>>() {
             @Override
             public void onResponse(Call<List<Pull>> call, Response<List<Pull>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    if (!isUpdating) {
-                        listener.returnPullRequests(response.body());
-                    } else {
-                        listener.updatePullRequests(response.body());
-                    }
+                    listener.returnPullRequests(response.body());
                 } else {
                     listener.returnPullRequests(null);
                 }

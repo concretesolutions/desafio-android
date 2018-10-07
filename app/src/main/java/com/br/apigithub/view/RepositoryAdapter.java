@@ -62,7 +62,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
     }
 
     public interface ItemClickListener {
-        void onItemClick(String repoName, String userName);
+        void onItemClick(String ownerRepo, String repoName);
     }
 
     class RepositoryVH extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -93,7 +93,9 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
 
         @Override
         public void onClick(View v) {
-            itemClickListener.onItemClick(tvRepoName.getText().toString(), tvUsername.getText().toString());
+            int position = getAdapterPosition();
+            Item item = repository.getItems().get(position);
+            itemClickListener.onItemClick(item.getOwner().getLogin(), item.getName());
         }
     }
 

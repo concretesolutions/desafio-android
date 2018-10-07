@@ -25,8 +25,8 @@ public class RepositoryViewModel extends AndroidViewModel implements INotifyView
     private MutableLiveData<GithubRepository> githubLiveData;
     private MutableLiveData<List<Pull>> pullsLiveData;
     private MutableLiveData<String> msgError;
-    private String userName;
-    private String repo;
+    private String ownerRepo;
+    private String repoName;
 
     public RepositoryViewModel(@NonNull Application application) {
         super(application);
@@ -41,12 +41,14 @@ public class RepositoryViewModel extends AndroidViewModel implements INotifyView
         serviceProvider.listReposJava("star", page, this);
     }
 
-    public void updateListRepos(Integer page, Integer limit) {
-        serviceProvider.getPulls(userName, repo, page, limit, true, this);
+    public void listPullRequests(String ownerRepo, String nameRepo, Integer page) {
+        this.ownerRepo = ownerRepo;
+        this.repoName = repoName;
+        serviceProvider.getPulls(ownerRepo, nameRepo, page, this);
     }
 
-    public void updatePulls(Integer page, Integer limit) {
-        serviceProvider.getPulls(userName, repo, page, limit, true, this);
+    public void updatePulls(Integer page) {
+        serviceProvider.getPulls(ownerRepo, repoName, page, this);
     }
 
     public MutableLiveData<GithubRepository> getGithubLiveData() {

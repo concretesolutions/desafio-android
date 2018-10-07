@@ -1,20 +1,37 @@
 package com.br.apigithub.beans;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by rlima on 04/10/18.
  */
 
 public class Pull {
-    private Integer number;
+    @SerializedName("id")
+    private Integer id;
+    @SerializedName("html_url")
+    private String htmlUrl;
+    @SerializedName("title")
     private String title;
-    private String body;
+    @SerializedName("body")
+    private String description;
+    @SerializedName("user")
+    private User user;
 
-    public Integer getNumber() {
-        return number;
+    public Integer getId() {
+        return id;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
     }
 
     public String getTitle() {
@@ -25,11 +42,19 @@ public class Pull {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

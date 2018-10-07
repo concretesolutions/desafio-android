@@ -7,7 +7,7 @@ package com.br.apigithub.interfaces;
 public interface IGithubServiceProvider {
     void listReposJava(String sort, Integer page, INotifyViewModelAboutService listener);
 
-    void getPulls(String userName, String nameRepository, Integer page, Integer limit, boolean isUpdating, INotifyViewModelAboutService listener);
+    void getPulls(String ownerRepo, String repoName, Integer page, INotifyViewModelAboutService listener);
 
     void getInfoPullRequest(String fullNameRepo, Integer number);
 

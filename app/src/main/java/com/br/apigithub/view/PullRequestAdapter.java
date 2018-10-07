@@ -1,6 +1,7 @@
 package com.br.apigithub.view;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,73 +10,87 @@ import android.widget.TextView;
 
 import com.br.apigithub.R;
 import com.br.apigithub.beans.Pull;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by rlima on 04/10/18.
  */
 
-public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestViewHolder> {
+public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.PullRequestViewHolder> {
     private List<Pull> list;
     private Context context;
+    private ItemClickListener itemClickListener;
 
-    public PullRequestAdapter(List<Pull> list, Context context) {
-        this.list = list;
+    public PullRequestAdapter(Context context, ItemClickListener itemClickListener) {
         this.context = context;
+        this.itemClickListener = itemClickListener;
     }
 
     @Override
     public PullRequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
         View v = LayoutInflater.from(context).inflate(R.layout.adapter_pull, parent, false);
         return new PullRequestViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(PullRequestViewHolder holder, int position) {
-        Pull i = list.get(position);
-        holder.getTitulo().setText(i.getTitle());
-        holder.getNumero().setText(i.getNumber().toString());
+        Pull pr = list.get(position);
+        holder.tvTitle.setText(pr.getTitle());
+        holder.tvUsername.setText(pr.getUser().getName());
+        holder.tvDescription.setText(pr.getDescription());
+        if (pr.getUser().getAvatarUrl() != null && !pr.getUser().getAvatarUrl().isEmpty()) {
+            Glide.with(context).load(pr.getUser().getAvatarUrl()).into(holder.ivUser);
+            holder.ivUser.setBackgroundColor(ContextCompat.getColor(context, R.color.branco));
+        }
     }
 
     @Override
     public int getItemCount() {
         return list != null && !list.isEmpty() ? list.size() : 0;
     }
-}
 
-class PullRequestViewHolder extends RecyclerView.ViewHolder {
-    private TextView numero;
-    private TextView titulo;
-    private TextView descricao;
-
-    public PullRequestViewHolder(View itemView) {
-        super(itemView);
-        setTitulo((TextView) itemView.findViewById(R.id.titulo_pull));
-        setNumero((TextView) itemView.findViewById(R.id.numero_pull));
+    public void setPullRequests(List<Pull> list) {
+        if (this.list != null) {
+            this.list.addAll(list);
+        } else {
+            this.list = list;
+        }
+        notifyDataSetChanged();
     }
 
-    public TextView getNumero() {
-        return numero;
+    public interface ItemClickListener {
+        void onItemClick(String url);
     }
 
-    public void setNumero(TextView numero) {
-        this.numero = numero;
+    class PullRequestViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.tv_titulo)
+        TextView tvTitle;
+        @BindView(R.id.tv_description)
+        TextView tvDescription;
+        @BindView(R.id.iv_user)
+        CircleImageView ivUser;
+        @BindView(R.id.tv_username)
+        TextView tvUsername;
+
+        public PullRequestViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            Pull pull = list.get(adapterPosition);
+            itemClickListener.onItemClick(pull.getHtmlUrl());
+        }
     }
 
-    public TextView getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(TextView titulo) {
-        this.titulo = titulo;
-    }
-
-    public TextView getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(TextView descricao) {
-        this.descricao = descricao;
-    }
 }

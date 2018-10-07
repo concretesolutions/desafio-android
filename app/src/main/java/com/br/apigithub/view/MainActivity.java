@@ -18,7 +18,7 @@ import com.br.apigithub.aac.RepositoryViewModel;
  * Created by rlima on 04/10/18.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RepositoryAdapter.ItemClickListener {
     public static final int INITIAL_PAGE = 1;
     private RepositoryViewModel repoViewModel;
     private ProgressDialog progressDialog;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
             RepositoryFragment fragment = RepositoryFragment.newInstance(repoViewModel);
-            transaction.add(R.id.fragment_container, fragment).commit();
+            transaction.add(R.id.fragment_container, fragment, RepositoryFragment.TAG).commit();
         }
     }
 
@@ -91,4 +91,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onItemClick(String ownerRepo, String repoName) {
+        repoViewModel.listPullRequests(ownerRepo, repoName, INITIAL_PAGE);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        PullRequestFragment fragment = PullRequestFragment.newInstance();
+
+        transaction.replace(R.id.fragment_container, fragment, PullRequestFragment.TAG).addToBackStack(PullRequestFragment.TAG).commit();
+    }
 }

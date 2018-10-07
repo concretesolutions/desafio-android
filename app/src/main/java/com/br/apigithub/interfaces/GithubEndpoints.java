@@ -23,7 +23,7 @@ public interface GithubEndpoints {
             "User-Agent: com.br.apigithub"
     })
     @GET("/repos/{user}/{repo}/pulls")
-    Call<List<Pull>> getPullsFromRepo(@Path("user") String user, @Path("repo") String repo, @Query("page") Integer page, @Query("per_page") Integer perPage);
+    Call<List<Pull>> getPullsFromRepo(@Path("user") String user, @Path("repo") String repo, @Query("page") Integer page);
 
     @Headers({
             "User-Agent: com.br.apigithub"
