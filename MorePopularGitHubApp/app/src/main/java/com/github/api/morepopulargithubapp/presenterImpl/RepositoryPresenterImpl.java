@@ -152,7 +152,7 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
         } else {
             repositoryView.showView(VISIBLE, GONE, GONE, VISIBLE);
         }
-        repositoryRequest.requestRepositorie(presenterApiCallBack, pageNumber);
+        repositoryRequest.requestRepositories(presenterApiCallBack, pageNumber);
     }
 
 

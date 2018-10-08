@@ -87,10 +87,10 @@ public class RepositoryItemView extends FrameLayout {
 
     @Click(R.id.cardViewContainer)
     void initPullRequest() {
-        PullRequestActivity_.intent(getContext())
-                .flags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .repository( (Repository) cardViewContainer.getTag())
-                .start();
+            PullRequestActivity_.intent(getContext())
+                    .flags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .repository( (Repository) cardViewContainer.getTag())
+                    .start();
     }
 
 }
