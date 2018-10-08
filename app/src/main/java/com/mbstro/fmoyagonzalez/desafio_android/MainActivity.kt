@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun getHTTPVolley(url: String){
+    fun getHTTPVolley(url: String){
         val queue = VolleySingleton.getInstance(this.applicationContext).requestQueue
         // Request a string response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
@@ -81,14 +81,14 @@ class MainActivity : AppCompatActivity() {
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
         //queue.add(jsonObjectRequest)
     }
-    private fun populateRepo(json: JSONArray){
+    fun populateRepo(json: JSONArray){
         for(i in 0 until json.length()) {
             val gson = Gson()
             val item = gson.fromJson(json.getJSONObject(i).toString(), Repo::class.java)
             this.repos.add(item)
         }
     }
-    private fun changePage(){
+    fun changePage(){
         visibleItemCount = viewManager.childCount
         totalItemCount = viewManager.itemCount
         pastVisiblesItems = viewManager.findFirstVisibleItemPosition()

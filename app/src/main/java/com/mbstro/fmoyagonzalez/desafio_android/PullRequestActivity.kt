@@ -23,12 +23,14 @@ class PullRequestActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private var viewManager =  LinearLayoutManager(this)
+    private lateinit var autor:String
+    private lateinit var repo:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_request)
-        val autor = intent.getStringExtra("AUTOR")
-        val repo = intent.getStringExtra("REPO")
+        autor = intent.getStringExtra("AUTOR")
+        repo = intent.getStringExtra("REPO")
         title = "${getString(R.string.title_pull_request)} $repo"
         getHTTPVolley("https://api.github.com/repos/${autor}/${repo}/pulls")
 
@@ -67,10 +69,11 @@ class PullRequestActivity : AppCompatActivity() {
         VolleySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest)
     }
 
-    private fun changeVisibility(){
+    fun changeVisibility(){
         progressBar_pull_request.visibility= View.GONE
         if (this.pullRequestsList.isEmpty()) {
             this.recyclerView.visibility = View.GONE
+            empty_pull_request.text = getString(R.string.empty_pull_request,this.repo)
             empty_pull_request.visibility = View.VISIBLE
         }
         else {
@@ -79,7 +82,7 @@ class PullRequestActivity : AppCompatActivity() {
         }
     }
 
-    private fun populatePullRequest(response: JSONArray){
+    fun populatePullRequest(response: JSONArray){
         for(i in 0 until response.length()) {
             val gson = Gson()
             val item = gson.fromJson(response[i].toString(), PullRequest::class.java)

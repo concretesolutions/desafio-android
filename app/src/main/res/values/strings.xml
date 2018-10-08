@@ -2,5 +2,5 @@
     <string name="app_name">desafio-android</string>
     <string name="title_pull_request">Pull Request</string>
     <string name="title_repo">Repositorios de java en Github</string>
-    <string name="empty_pull_request">Este repositorio no contiene pull request</string>
+    <string name="empty_pull_request">El repositorio %1$s no contiene pull request</string>
 </resources>
