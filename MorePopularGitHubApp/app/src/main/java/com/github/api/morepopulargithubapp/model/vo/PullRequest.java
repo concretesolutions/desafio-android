@@ -15,10 +15,25 @@ public class PullRequest {
     @SerializedName("html_url")
     protected String urlWebSite;
 
-
     public Integer getId() {
-
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof PullRequest)){
+            return false;
+        }
+        PullRequest that = (PullRequest) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     public void setId(Integer id) {

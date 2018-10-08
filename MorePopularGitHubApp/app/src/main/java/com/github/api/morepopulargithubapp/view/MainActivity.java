@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements RepositoryView {
 
     @UiThread
     @Override
-    public void showMessageError(String errorMessage, boolean isLastPage) {
+    public void showMessageLimitMaxRecords(String errorMessage, boolean isLastPage) {
         this.isLastPage = isLastPage;
         ViewUtil.alert(this, errorMessage);
     }

@@ -19,6 +19,23 @@ public class Repository {
 
     protected User owner;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Repository)){
+            return false;
+        }
+        Repository that = (Repository) o;
+
+        return  id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 
     public Integer getId() {
         return id;

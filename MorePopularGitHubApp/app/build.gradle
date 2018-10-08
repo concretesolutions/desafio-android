@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testOptions.unitTests.includeAndroidResources true
 
         javaCompileOptions{
             annotationProcessorOptions {
@@ -58,8 +59,10 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:2.1.0' // imagem circular
 
-
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    testImplementation "org.robolectric:robolectric:3.8"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

@@ -35,14 +35,8 @@ public class PullRequestPresenterImpl implements PullRequestPresenter {
 
     @Override
     public void initPresenter(PullRequestView pullRequestView, Repository repository, List<PullRequest> pullRequests) {
-        this.pullRequestView = pullRequestView;
-        this.repository = repository;
+        initView(pullRequestView, repository);
         initPresenterApiCallBack();
-
-        if (repository != null && !TextUtils.isEmpty(repository.getName())) {
-            this.pullRequestView.setTitleActionBar(repository.getName());
-        }
-
         if (CollectionUtils.isNotEmpty(pullRequests)) {
             showPullRequests(pullRequests);
         } else {
@@ -50,7 +44,16 @@ public class PullRequestPresenterImpl implements PullRequestPresenter {
         }
     }
 
-    private void showPullRequests(List<PullRequest> pullRequests) {
+    public void initView(PullRequestView pullRequestView, Repository repository) {
+        this.pullRequestView = pullRequestView;
+        this.repository = repository;
+
+        if (repository != null && !TextUtils.isEmpty(repository.getName())) {
+            this.pullRequestView.setTitleActionBar(repository.getName());
+        }
+    }
+
+    public void showPullRequests(List<PullRequest> pullRequests) {
         // Verifica se existe pullRequest para o repositório
         if (CollectionUtils.isNotEmpty(pullRequests)) {
             pullRequestView.showPullRequests(pullRequests);

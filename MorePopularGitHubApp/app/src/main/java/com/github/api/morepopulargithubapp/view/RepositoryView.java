@@ -17,5 +17,5 @@ public interface RepositoryView {
 
     void showError(Map errorMap);
 
-    void showMessageError(String errorMessage, boolean isLastPage);
+    void showMessageLimitMaxRecords(String errorMessage, boolean isLastPage);
 }

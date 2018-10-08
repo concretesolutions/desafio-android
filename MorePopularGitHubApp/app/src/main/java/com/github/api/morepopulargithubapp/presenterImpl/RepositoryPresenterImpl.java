@@ -52,9 +52,11 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
         this.scrollOutItems = scrollOutItems;
     }
 
+
+
     @Override
     public void initPresenter(RepositoryView repositoryView, List<Repository> repositories) {
-        this.repositoryView = repositoryView;
+        setRepositoryView(repositoryView);
         initPresenterApiCallBack();
 
         if (CollectionUtils.isNotEmpty(repositories)) {
@@ -64,6 +66,10 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
             pageNumber = 1;
             searchRepositories(isGenricError);
         }
+    }
+
+    public void setRepositoryView(RepositoryView repositoryView) {
+        this.repositoryView = repositoryView;
     }
 
     private void initPresenterApiCallBack() {
@@ -87,7 +93,7 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
         };
     }
 
-    private void showRepositories(List<Repository> repositories) {
+    public void showRepositories(List<Repository> repositories) {
         if (pageNumber == 1 || isChangingOrientation) {
             isChangingOrientation = false;
 
@@ -105,14 +111,14 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
         }
     }
 
-    private void showError(Map errorMap){
+    public void showError(Map errorMap){
         // Verifica se o erro retornado é 422
         if (pageNumber != 1 && errorMap != null && errorMap.containsKey(SERVER_UNABLE_PROCESS_INSTRUCTIONS_CODE)) {
             isLastPage = true;
             repositoryView.showView(VISIBLE, GONE, GONE, GONE);
             String errorMessage = (String) errorMap.get(SERVER_UNABLE_PROCESS_INSTRUCTIONS_CODE);
             // Não será mais disponível uma outra página
-            repositoryView.showMessageError(errorMessage, isLastPage);
+            repositoryView.showMessageLimitMaxRecords(errorMessage, isLastPage);
         } else {
             repositoryView.showError(errorMap);
         }
