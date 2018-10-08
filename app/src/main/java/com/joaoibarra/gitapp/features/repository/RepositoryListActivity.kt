@@ -1,6 +1,7 @@
 package com.joaoibarra.gitapp.features.repository
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
@@ -18,7 +19,12 @@ class RepositoryListActivity : AppCompatActivity() {
     }
 
     private val adapter: RepositoryAdapter by lazy {
-        RepositoryAdapter()
+        RepositoryAdapter {
+            val intent = Intent(this, PullListActivity::class.java)
+            intent.putExtra("USER", it?.owner?.login)
+            intent.putExtra("REPO", it?.name)
+            startActivity(intent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +59,7 @@ class RepositoryListActivity : AppCompatActivity() {
                             }
                         },
                         { e ->
-                            Log.e("NGVL", "Error", e)
+                            Log.e("Error OnLoad", "Error", e)
                         }
                 )
     }

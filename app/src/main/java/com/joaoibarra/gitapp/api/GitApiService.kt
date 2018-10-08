@@ -7,17 +7,24 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.Gson
+
+
 
 object GitApiService {
     fun create(): GitApi{
         val builder = OkHttpClient.Builder()
 
-        val gsonBuilder = GsonBuilder().disableHtmlEscaping().create()
-
         // Logging
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         builder.interceptors().add(interceptor)
+
+        val gsonBuilder = GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                .create()
 
         val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(

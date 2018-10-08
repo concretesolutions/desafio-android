@@ -2,7 +2,7 @@ package com.joaoibarra.gitapp.api.model
 
 import com.google.gson.annotations.SerializedName
 
-class Owner (
+class User (
     @SerializedName("login") val login: String,
     @SerializedName("id") val id: Int,
     @SerializedName("node_id") val nodeId: String,
