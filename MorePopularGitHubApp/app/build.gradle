@@ -42,7 +42,6 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.1'  // gson
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2' //ProgressBar
-//    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
@@ -61,9 +60,14 @@ dependencies {
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
-    testImplementation "org.robolectric:robolectric:3.8"
+    implementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.2'
 
+
+    testImplementation "org.robolectric:robolectric:3.8" // UnitTest
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:3.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

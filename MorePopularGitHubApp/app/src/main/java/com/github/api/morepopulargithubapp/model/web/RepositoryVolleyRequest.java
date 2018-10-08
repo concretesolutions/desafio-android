@@ -25,7 +25,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.api.morepopulargithubapp.util.ConstantsUitl.*;
+import static com.github.api.morepopulargithubapp.util.ConstantsUitl.BAD_REQUEST;
+import static com.github.api.morepopulargithubapp.util.ConstantsUitl.NOT_FOUND_CODE;
+import static com.github.api.morepopulargithubapp.util.ConstantsUitl.SERVER_UNABLE_PROCESS_INSTRUCTIONS_CODE;
+import static com.github.api.morepopulargithubapp.util.ConstantsUitl.UNAUTHORIZED_ERROR;
 
 @EBean(scope = EBean.Scope.Singleton)
 public class RepositoryVolleyRequest {
@@ -36,8 +39,12 @@ public class RepositoryVolleyRequest {
     @RootContext
     Context context;
 
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     @Background
-    public void requestRepositorie(final PresenterApiCallBack presenterApiCallBack, int pageNumber) {
+    public void requestRepositories(final PresenterApiCallBack presenterApiCallBack, int pageNumber) {
         final Map<Integer, String> responseMap = new HashMap<Integer, String>();
         Uri uri = buildRepositoriesUri(String.valueOf(pageNumber));
 

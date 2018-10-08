@@ -107,7 +107,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
 
     @Click(R.id.areaErroPullRequest)
     protected void reloadRepositories() {
-//        searchPullRequest();
+        pullRequestPresenter.searchPullRequest();
     }
 
     @Override
