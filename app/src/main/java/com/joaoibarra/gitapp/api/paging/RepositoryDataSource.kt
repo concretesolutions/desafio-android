@@ -23,7 +23,7 @@ class RepositoryDataSource (
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Repo>) {
-        createObservable( pageNumber - 1, null, callback)
+        //createObservable( pageNumber - 1, null, callback)
     }
 
     override fun getKey(item: Repo): Int {
