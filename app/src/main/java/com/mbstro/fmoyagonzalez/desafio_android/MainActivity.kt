@@ -1,18 +1,18 @@
 package com.mbstro.fmoyagonzalez.desafio_android
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.widget.AbsListView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
-import android.widget.AbsListView
 import org.json.JSONArray
 
 /**
@@ -20,7 +20,7 @@ import org.json.JSONArray
  */
 class MainActivity : AppCompatActivity() {
 
-    private var repos  = arrayListOf<Repo>()
+    var repos  = arrayListOf<Repo>()
     private var pastVisiblesItems: Int = 0
     private var visibleItemCount:Int = 0
     private var totalItemCount:Int = 0
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun getHTTPVolley(url: String){
+    private fun getHTTPVolley(url: String){
         val queue = VolleySingleton.getInstance(this.applicationContext).requestQueue
         // Request a string response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
@@ -81,14 +81,14 @@ class MainActivity : AppCompatActivity() {
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
         //queue.add(jsonObjectRequest)
     }
-    fun populateRepo(json: JSONArray){
+    private fun populateRepo(json: JSONArray){
         for(i in 0 until json.length()) {
             val gson = Gson()
             val item = gson.fromJson(json.getJSONObject(i).toString(), Repo::class.java)
             this.repos.add(item)
         }
     }
-    fun changePage(){
+    private fun changePage(){
         visibleItemCount = viewManager.childCount
         totalItemCount = viewManager.itemCount
         pastVisiblesItems = viewManager.findFirstVisibleItemPosition()

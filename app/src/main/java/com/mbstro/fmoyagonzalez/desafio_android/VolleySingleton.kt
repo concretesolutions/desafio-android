@@ -3,7 +3,7 @@ package com.mbstro.fmoyagonzalez.desafio_android
 import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.*
+import com.android.volley.toolbox.Volley
 
 class VolleySingleton constructor(context: Context) {
     companion object {

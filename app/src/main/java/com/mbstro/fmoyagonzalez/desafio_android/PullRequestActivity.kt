@@ -1,18 +1,17 @@
 package com.mbstro.fmoyagonzalez.desafio_android
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.google.gson.Gson
-import android.content.Intent
-import android.net.Uri
-import android.view.View
 import kotlinx.android.synthetic.main.activity_pull_request.*
 import org.json.JSONArray
 
@@ -69,7 +68,7 @@ class PullRequestActivity : AppCompatActivity() {
         VolleySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest)
     }
 
-    fun changeVisibility(){
+    private fun changeVisibility(){
         progressBar_pull_request.visibility= View.GONE
         if (this.pullRequestsList.isEmpty()) {
             this.recyclerView.visibility = View.GONE
@@ -82,7 +81,7 @@ class PullRequestActivity : AppCompatActivity() {
         }
     }
 
-    fun populatePullRequest(response: JSONArray){
+    private fun populatePullRequest(response: JSONArray){
         for(i in 0 until response.length()) {
             val gson = Gson()
             val item = gson.fromJson(response[i].toString(), PullRequest::class.java)
