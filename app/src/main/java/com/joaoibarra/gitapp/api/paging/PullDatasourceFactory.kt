@@ -3,7 +3,6 @@ package com.joaoibarra.gitapp.api.paging
 import android.arch.paging.DataSource
 import com.joaoibarra.gitapp.api.GitApi
 import com.joaoibarra.gitapp.api.model.Pull
-import com.joaoibarra.gitapp.api.model.Repo
 import io.reactivex.disposables.CompositeDisposable
 
 class PullDatasourceFactory (

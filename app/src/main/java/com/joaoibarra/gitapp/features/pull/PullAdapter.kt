@@ -12,7 +12,6 @@ import com.joaoibarra.gitapp.extensions.formatDate
 import com.joaoibarra.gitapp.extensions.loadCircle
 import kotlinx.android.synthetic.main.item_pull.view.*
 
-
 class PullAdapter(val listener: (Pull?) -> Unit) : PagedListAdapter<Pull, PullAdapter.PullViewHolder>(itemDiff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PullViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_pull, parent, false)

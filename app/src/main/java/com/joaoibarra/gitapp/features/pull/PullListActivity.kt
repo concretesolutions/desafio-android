@@ -24,9 +24,11 @@ class PullListActivity : AppCompatActivity() {
     }
 
     private val adapter: PullAdapter by lazy {
+
         PullAdapter {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it?.htmlUrl)))
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

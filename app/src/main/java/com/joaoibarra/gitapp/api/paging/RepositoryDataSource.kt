@@ -6,8 +6,6 @@ import com.joaoibarra.gitapp.api.GitApi
 import com.joaoibarra.gitapp.api.model.Repo
 import io.reactivex.disposables.CompositeDisposable
 
-
-
 class RepositoryDataSource (
         private val gitApi: GitApi,
         private val compositeDisposable: CompositeDisposable

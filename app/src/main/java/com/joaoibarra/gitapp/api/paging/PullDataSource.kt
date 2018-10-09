@@ -4,10 +4,7 @@ import android.arch.paging.ItemKeyedDataSource
 import android.util.Log
 import com.joaoibarra.gitapp.api.GitApi
 import com.joaoibarra.gitapp.api.model.Pull
-import com.joaoibarra.gitapp.api.model.Repo
 import io.reactivex.disposables.CompositeDisposable
-
-
 
 class PullDataSource (
         private val gitApi: GitApi,
@@ -33,8 +30,6 @@ class PullDataSource (
         return item.id
     }
 
-
-
     private fun createObservable(requestedPage: Int,
                                  initialCallback: LoadInitialCallback<Pull>?,
                                  callback: LoadCallback<Pull>?) {
@@ -51,7 +46,7 @@ class PullDataSource (
                                         Log.d("Error On Load", "Error loading page: $requestedPage", t)
                                     }
                             )
-            );
+            )
         }
     }
 }
