@@ -125,11 +125,10 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
     }
 
     @Override
-    public void obtainNextReposotoriesPage(LinearLayoutManager mLayoutManager, boolean isScrolling, boolean isLastPage) {
+    public void obtainNextReposotoriesPage(LinearLayoutManager mLayoutManager, boolean isScrolling, boolean isLastPage, int  scrollOutItems) {
 
         currentItens = mLayoutManager.getChildCount();
         totalItems = mLayoutManager.getItemCount();
-        scrollOutItems = mLayoutManager.findFirstVisibleItemPosition();
         this.isScrolling = isScrolling;
 
         // Verifica se foi feito um scroll, se está no ultimo registro e

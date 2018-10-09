@@ -95,7 +95,8 @@ public class MainActivity extends AppCompatActivity implements RepositoryView {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                repositoryPresenter.obtainNextReposotoriesPage(mLayoutManager,isScrolling, isLastPage);
+                scrollOutItems = mLayoutManager.findFirstVisibleItemPosition();
+                repositoryPresenter.obtainNextReposotoriesPage(mLayoutManager,isScrolling, isLastPage, scrollOutItems);
             }
         });
     }
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements RepositoryView {
     @Override
     public void showRepositories(List<Repository> repositories, boolean isChangingOrientation) {
         this.repositories = repositories;
+        this.recyclerView.scrollToPosition(scrollOutItems);
         repositoryAdapter.setItems(this.repositories);
         this.isChangingOrientation = isChangingOrientation;
         repositoryAdapter.notifyDataSetChanged();

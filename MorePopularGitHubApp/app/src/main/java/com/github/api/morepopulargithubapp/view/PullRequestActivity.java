@@ -59,6 +59,9 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
     @InstanceState
     protected Repository repository;
 
+    @InstanceState
+    protected int scrollOutItems;
+
     @AfterViews
     void init() {
         msgErroPullRequest.setText(getString(R.string.error_list_pull_resquests));
@@ -70,6 +73,18 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewPullRequest.setLayoutManager(mLayoutManager);
         recyclerViewPullRequest.setAdapter(pullRequestAdapter);
+        recyclerViewPullRequest.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                scrollOutItems = mLayoutManager.findFirstVisibleItemPosition();
+            }
+        });
     }
 
     @Override
@@ -89,6 +104,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
     public void showPullRequests(List<PullRequest> pullRequests) {
         showView(VISIBLE, GONE, GONE);
         this.pullRequests = pullRequests;
+        this.recyclerViewPullRequest.scrollToPosition(scrollOutItems);
         pullRequestAdapter.setItems(this.pullRequests);
         pullRequestAdapter.notifyDataSetChanged();
     }
