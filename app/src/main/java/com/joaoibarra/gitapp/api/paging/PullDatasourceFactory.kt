@@ -15,4 +15,5 @@ class PullDatasourceFactory (
     override fun create(): DataSource<Int, Pull> {
         return PullDataSource(gitApi, compositeDisposable, user, repo)
     }
+
 }

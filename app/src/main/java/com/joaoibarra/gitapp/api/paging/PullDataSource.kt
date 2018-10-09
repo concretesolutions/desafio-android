@@ -12,6 +12,7 @@ class PullDataSource (
         private val user: String,
         private val repo: String
 ): ItemKeyedDataSource<Int, Pull>(){
+    
     private var pageNumber = 1
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Pull>) {
@@ -23,7 +24,7 @@ class PullDataSource (
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Pull>) {
-        //createObservable( pageNumber - 1, null, callback)
+        //Empty method
     }
 
     override fun getKey(item: Pull): Int {
@@ -36,17 +37,18 @@ class PullDataSource (
         pageNumber = requestedPage
         if(requestedPage > 0) {
             compositeDisposable.add(
-                    gitApi.searchPullByRepository(user, repo, requestedPage)
-                            .subscribe(
-                                    { response ->
-                                        initialCallback?.onResult(response)
-                                        callback?.onResult(response)
-                                    },
-                                    { t ->
-                                        Log.d("Error On Load", "Error loading page: $requestedPage", t)
-                                    }
-                            )
+                gitApi.searchPullByRepository(user, repo, requestedPage)
+                    .subscribe(
+                        { response ->
+                            initialCallback?.onResult(response)
+                            callback?.onResult(response)
+                        },
+                        { t ->
+                            Log.d("Error On Load", "Error loading page: $requestedPage", t)
+                        }
+                    )
             )
         }
     }
+
 }
