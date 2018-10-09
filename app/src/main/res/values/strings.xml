@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Repository</string>
+    <string name="reposit_rios_indispon_veis">Repositórios indisponíveis!</string>
+    <string name="lorem_ipsum_ante">Lorem ipsum ante dapibus mattis tortor augue eleifend, condimentum etiam magna tellus platea cras, taciti vel eleifend torquent elit cursus. convallis.</string>
+    <string name="name_owner">Name Owner</string>
+    <string name="name_repo">Name Repository</string>
+    <string name="aguarde_o_carregamento">Aguarde o carregamento!</string>
+    <string name="parece_que_voce_nao_esta_conectado">Parece que você não está conectado a uma rede de internet! :\'(</string>
+    <string name="no_momento_nao_ha_repositorio">No momento não há repositório!</string>
+    <string name="date_format">dd/MM/yyyy</string>
+    <string name="data">Data:</string>
+    <string name="no_pull_request">No momento não há pull request neste repositório ou ocorreu algum erro!</string>
+</resources>
