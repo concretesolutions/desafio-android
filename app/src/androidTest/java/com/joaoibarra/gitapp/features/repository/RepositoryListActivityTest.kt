@@ -37,4 +37,5 @@ class RepositoryListActivityTest {
         repositoriesActivityRule.launchActivity(intent)
         onView(withId(R.id.recyclerRepositories)).check(matches(isDisplayed()))
     }
+
 }

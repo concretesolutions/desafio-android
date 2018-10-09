@@ -13,6 +13,7 @@ import com.joaoibarra.gitapp.extensions.loadCircle
 import kotlinx.android.synthetic.main.item_repository.view.*
 
 class RepositoryAdapter(val listener: (Repo?) -> Unit) : PagedListAdapter<Repo, RepositoryAdapter.ItemViewHolder>(itemDiff) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_repository, parent, false)
         return ItemViewHolder(view)
@@ -48,4 +49,5 @@ class RepositoryAdapter(val listener: (Repo?) -> Unit) : PagedListAdapter<Repo, 
 
         }
     }
+
 }

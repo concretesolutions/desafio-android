@@ -12,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_repository_list.*
 
 class RepositoryListActivity : AppCompatActivity() {
+
     private var recyclerState: Parcelable? = null
 
     private val viewModel: RepositoryViewModel by lazy {
@@ -49,18 +50,19 @@ class RepositoryListActivity : AppCompatActivity() {
 
     private fun subscribeToList() {
         val disposable = viewModel.repositories
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { list ->
-                            adapter.submitList(list)
-                            if (recyclerState != null) {
-                                recyclerRepositories.layoutManager?.onRestoreInstanceState(recyclerState)
-                                recyclerState = null
-                            }
-                        },
-                        { e ->
-                            Log.e("Error OnLoad", "Error", e)
-                        }
-                )
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { list ->
+                    adapter.submitList(list)
+                    if (recyclerState != null) {
+                        recyclerRepositories.layoutManager?.onRestoreInstanceState(recyclerState)
+                        recyclerState = null
+                    }
+                },
+                { e ->
+                    Log.e("Error OnLoad", "Error", e)
+                }
+            )
     }
+
 }

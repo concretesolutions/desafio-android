@@ -6,6 +6,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.joaoibarra.gitapp.GlideApp
 
 fun ImageView.loadCircle(url: String?) {
+
     val requestOptions = RequestOptions()
     requestOptions.fitCenter()
     GlideApp.with(context)
@@ -14,4 +15,5 @@ fun ImageView.loadCircle(url: String?) {
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .load(url)
             .into(this)
+
 }

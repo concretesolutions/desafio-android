@@ -11,6 +11,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object GitApiService {
+
     fun create(): GitApi{
         val builder = OkHttpClient.Builder()
         val gsonBuilder = GsonBuilder()
@@ -34,4 +35,5 @@ object GitApiService {
         builder.add("Accept", "application/vnd.github.v3.text-match+json")
         return builder.build()
     }
+
 }

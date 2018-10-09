@@ -11,6 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class PullViewModel(val user: String, val repo: String) : ViewModel() {
+
     var pulls: Observable<PagedList<Pull>>
 
     private val compositeDisposable = CompositeDisposable()
@@ -40,4 +41,5 @@ class PullViewModel(val user: String, val repo: String) : ViewModel() {
         super.onCleared()
         compositeDisposable.clear()
     }
+
 }
