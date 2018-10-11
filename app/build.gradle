@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: "androidx.navigation.safeargs"
+
+def cfg = rootProject.ext.configuration
+def libs = rootProject.ext.libraries;
+def test = rootProject.ext.testingLibraries;
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.diegoferreiracaetano.github"
+        minSdkVersion cfg.minSdk
+        targetSdkVersion cfg.targetSdk
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'END_POINT', '"https://api.github.com/"'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$libs.supportLibrary"
+    implementation "androidx.recyclerview:recyclerview:$libs.recyclerview"
+    implementation "androidx.constraintlayout:constraintlayout:$libs.constraintlayout"
+    implementation "androidx.cardview:cardview:$libs.cardView"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$libs.swipe"
+    implementation "com.google.android.material:material:$libs.materialVersion"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$libs.extensions"
+
+    implementation "org.koin:koin-androidx-viewmodel:$libs.koin"
+    implementation "com.squareup.retrofit2:converter-gson:$libs.retrofit"
+    implementation "io.reactivex.rxjava2:rxkotlin:$libs.rxkotlin"
+    implementation "io.reactivex.rxjava2:rxandroid:$libs.rxandroid"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$libs.retrofitRx"
+
+    implementation "com.squareup.okhttp3:okhttp:$libs.okhttp"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$libs.okhttpUrlconnection"
+    implementation "com.squareup.okhttp3:logging-interceptor:$libs.loggingInterceptor"
+    implementation "com.github.bumptech.glide:glide:$libs.glide"
+
+
+    implementation "androidx.paging:paging-runtime:$libs.paging"
+    testImplementation "androidx.paging:paging-common:$libs.paging"
+
+    implementation "android.arch.navigation:navigation-fragment-ktx:$libs.nav_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$libs.nav_version"
+    implementation "android.arch.navigation:navigation-fragment:$libs.nav_version"
+
+    implementation "de.hdodenhof:circleimageview:$libs.circleImage"
+
+    implementation "androidx.room:room-rxjava2:$libs.room"
+    kapt "androidx.room:room-compiler:$libs.room"
+
+    testImplementation "junit:junit:$test.junit"
+    androidTestImplementation "androidx.test:runner:$test.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$test.espresso"
+    testImplementation "androidx.arch.core:core-testing:$libs.extensions"
+    testImplementation "org.koin:koin-test:$test.koin"
+
+
+
+
+
+    api project(path: ':data')
+    api project(path: ':domain')
+
+}

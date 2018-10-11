@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+def cfg = rootProject.ext.configuration
+def libs = rootProject.ext.libraries;
+def test = rootProject.ext.testingLibraries;
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion cfg.minSdk
+        targetSdkVersion cfg.targetSdk
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$libs.rxkotlin"
+    implementation "io.reactivex.rxjava2:rxandroid:$libs.rxandroid"
+    implementation "androidx.paging:paging-runtime:$libs.paging"
+
+    implementation "org.koin:koin-androidx-viewmodel:$libs.koin"
+    implementation "com.squareup.retrofit2:converter-gson:$libs.retrofit"
+    implementation "androidx.room:room-rxjava2:$libs.room"
+    kapt "androidx.room:room-compiler:$libs.room"
+
+    testImplementation "junit:junit:$test.junit"
+    androidTestImplementation "androidx.test:runner:$test.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$test.espresso"
+}
+repositories {
+    mavenCentral()
+}

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Github</string>
+    <string name="description">Deescrição</string>
+    <string name="retry">Repetir</string>
+    <string name="error">Ops .. algo deu errado</string>
+    <string name="repository_name">Nome Repositório</string>
+    <string name="starts">starts</string>
+    <string name="forks">forks</string>
+    <string name="pull_request">Pull Request</string>
+    <string name="dateFormat">%1$td/%1$tm/%1$tY - %1$tH:%1$tM</string>
+    <string name="not_found_pull_request">Nenhum Pull request</string>
+    <string name="not_found_repo">Nenhum repositório</string>
+</resources>
