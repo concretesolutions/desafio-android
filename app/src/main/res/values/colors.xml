@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!--Concrete colors-->
+    <color name="purple">#533E7F</color>
+    <color name="green_water">#18DBAF</color>
+
+    <color name="tealA400">#1DE9B6</color>
+    <color name="tealA700">#00BFA5</color>
+</resources>
