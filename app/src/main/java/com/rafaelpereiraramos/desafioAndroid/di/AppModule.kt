@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.rafaelpereiraramos.desafioAndroid.App
 import com.rafaelpereiraramos.desafioAndroid.api.GithubService
+import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,6 +14,7 @@ import javax.inject.Singleton
 /**
  * Created by Rafael P. Ramos on 12/10/2018.
  */
+@Module
 class AppModule {
 
     @Provides
