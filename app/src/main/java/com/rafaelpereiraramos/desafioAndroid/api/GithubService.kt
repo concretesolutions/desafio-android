@@ -1,5 +1,6 @@
 package com.rafaelpereiraramos.desafioAndroid.api
 
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -8,6 +9,8 @@ import retrofit2.http.Query
  */
 interface GithubService {
 
-    @GET("search/repositories")
-    fun search(@Query("q") query: String)
+    @GET("search/repositories?sort=stars")
+    fun searchRepos(@Query("q") query: String,
+                    @Query("page") page: Int,
+                    @Query("per_page") itemsPerPage: Int): Call<RepoSearchResponse>
 }
