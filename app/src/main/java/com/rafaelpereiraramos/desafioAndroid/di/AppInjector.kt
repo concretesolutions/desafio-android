@@ -3,6 +3,7 @@ package com.rafaelpereiraramos.desafioAndroid.di
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -15,14 +16,14 @@ import dagger.android.support.HasSupportFragmentInjector
 /**
  * Created by Rafael P. Ramos on 12/10/2018.
  */
-class AppInjector() {
+class AppInjector {
 
     companion object {
-        public fun inject(application: App) {
+        fun inject(application: App) {
             DaggerAppComponent.builder().application(application).build().inject(application)
 
             application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-                override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
+                override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                     handleActivity(activity)
                 }
 
@@ -53,9 +54,7 @@ class AppInjector() {
         }
 
         private fun handleActivity(activity: Activity) {
-            if (activity is HasSupportFragmentInjector) {
-                AndroidInjection.inject(activity)
-            }
+            AndroidInjection.inject(activity)
 
             if (activity is FragmentActivity) {
                 activity.supportFragmentManager.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {

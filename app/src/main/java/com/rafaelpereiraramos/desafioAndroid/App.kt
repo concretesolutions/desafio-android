@@ -19,7 +19,7 @@ class App : Application(), HasActivityInjector {
     }
 
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
@@ -28,6 +28,6 @@ class App : Application(), HasActivityInjector {
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {
-        return dispatchingAndroidInjector
+        return activityInjector
     }
 }
