@@ -40,8 +40,18 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
+    //paging api
+    implementation 'androidx.paging:paging-common:2.1.0-alpha01'
+    implementation 'androidx.paging:paging-runtime:2.1.0-alpha01'
+
+    //room api
+    implementation 'androidx.room:room-common:2.1.0-alpha01'
+    implementation 'androidx.room:room-runtime:2.1.0-alpha01'
+    kapt 'androidx.room:room-compiler:2.1.0-alpha01'
+
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:3.9.0"
 
     def daggerVersion = '2.16'
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
