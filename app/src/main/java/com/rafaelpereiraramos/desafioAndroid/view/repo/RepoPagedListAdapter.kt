@@ -1,5 +1,6 @@
 package com.rafaelpereiraramos.desafioAndroid.view.repo
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelpereiraramos.desafioAndroid.R
 import com.rafaelpereiraramos.desafioAndroid.database.model.RepoTO
+import com.rafaelpereiraramos.desafioAndroid.view.pull.PullActivity
 
 /**
  * Created by Rafael P. Ramos on 13/10/2018.
@@ -41,6 +43,16 @@ class RepoPagedListAdapter : PagedListAdapter<RepoTO, RepoPagedListAdapter.RepoV
                 val view = LayoutInflater.from(parent.context)
                         .inflate(R.layout.row_repo_list, parent, false)
                 return RepoViewHolder(view)
+            }
+        }
+
+        init {
+            view.setOnClickListener {
+                val intent = Intent(view.context, PullActivity::class.java)
+
+                intent.putExtra(PullActivity.REP, repo!!)
+
+                view.context.startActivity(intent)
             }
         }
 

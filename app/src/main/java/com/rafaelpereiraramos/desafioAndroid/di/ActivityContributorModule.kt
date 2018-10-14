@@ -1,5 +1,6 @@
 package com.rafaelpereiraramos.desafioAndroid.di
 
+import com.rafaelpereiraramos.desafioAndroid.view.pull.PullActivity
 import com.rafaelpereiraramos.desafioAndroid.view.repo.RepoActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -12,4 +13,7 @@ abstract class ActivityContributorModule {
 
     @ContributesAndroidInjector
     abstract fun contributeRepoActivity(): RepoActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributePullActivity(): PullActivity
 }

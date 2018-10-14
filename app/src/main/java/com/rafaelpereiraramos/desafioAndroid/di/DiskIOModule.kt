@@ -3,6 +3,7 @@ package com.rafaelpereiraramos.desafioAndroid.di
 import android.content.Context
 import androidx.room.Room
 import com.rafaelpereiraramos.desafioAndroid.database.AppDatabase
+import com.rafaelpereiraramos.desafioAndroid.database.dao.PullDAO
 import com.rafaelpereiraramos.desafioAndroid.database.dao.RepoDAO
 import dagger.Module
 import dagger.Provides
@@ -24,9 +25,13 @@ class DiskIOModule {
     @Singleton
     @Provides
     fun provideDatabase(context: Context): AppDatabase =
-            Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DATABASE_NAME).build()
+            Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DATABASE_NAME).fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides
     fun provideRepoDAO(db: AppDatabase): RepoDAO = db.reposDao()
+
+    @Singleton
+    @Provides
+    fun providePullDAO(db: AppDatabase): PullDAO = db.pullDao()
 }

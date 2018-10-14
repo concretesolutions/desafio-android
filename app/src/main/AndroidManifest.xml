@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.rafaelpereiraramos.desafioAndroid">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -14,13 +14,17 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.rafaelpereiraramos.desafioAndroid.view.repo.RepoActivity">
+        <activity android:name=".view.repo.RepoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.pull.PullActivity"
+            android:label="@string/title_activity_pull"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

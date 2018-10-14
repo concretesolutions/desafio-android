@@ -14,7 +14,7 @@ import com.rafaelpereiraramos.desafioAndroid.database.model.RepoTO
 interface RepoDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(posts: List<RepoTO>)
+    fun insert(repos: List<RepoTO>)
 
     @Query("SELECT * FROM repos WHERE (name LIKE :queryString) OR (description LIKE " +
             ":queryString) ORDER BY stargazers DESC, name ASC")

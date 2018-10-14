@@ -16,6 +16,7 @@ class App : Application(), HasActivityInjector {
     companion object {
         const val URL_BASE = "https://api.github.com/"
         const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        const val NETWORK_SNAPSHOT_SIZE = 35
     }
 
     @Inject

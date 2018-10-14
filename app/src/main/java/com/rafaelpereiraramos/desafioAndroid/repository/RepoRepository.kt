@@ -3,6 +3,7 @@ package com.rafaelpereiraramos.desafioAndroid.repository
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PagedList
+import com.rafaelpereiraramos.desafioAndroid.App
 import com.rafaelpereiraramos.desafioAndroid.api.GithubService
 import com.rafaelpereiraramos.desafioAndroid.api.RepoSearchResponse
 import com.rafaelpereiraramos.desafioAndroid.database.dao.RepoDAO
@@ -22,11 +23,6 @@ class RepoRepository @Inject constructor(
         private val repoDAO: RepoDAO,
         @Named("diskIOExecutor") private val ioExecutor: Executor)
     : PagedList.BoundaryCallback<RepoTO>() {
-
-    companion object {
-        private const val NETWORK_CHUNCK_SIZE = 35
-        //private val LOCAL_SNAPSHOT_SIZE = 10
-    }
 
     private lateinit var query: String
     private var lastRequestedPage = 1
@@ -64,7 +60,7 @@ class RepoRepository @Inject constructor(
 
         isRequestInProgress = true
 
-        service.searchRepos(query, lastRequestedPage, NETWORK_CHUNCK_SIZE).enqueue(
+        service.searchRepos(query, lastRequestedPage, App.NETWORK_SNAPSHOT_SIZE).enqueue(
                 object : Callback<RepoSearchResponse> {
                     override fun onFailure(call: Call<RepoSearchResponse>, t: Throwable) {
                         networkErrors.postValue(t.message)

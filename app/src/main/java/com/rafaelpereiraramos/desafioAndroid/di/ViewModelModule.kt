@@ -3,6 +3,7 @@ package com.rafaelpereiraramos.desafioAndroid.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rafaelpereiraramos.desafioAndroid.core.ViewModelFactory
+import com.rafaelpereiraramos.desafioAndroid.view.pull.PullViewModel
 import com.rafaelpereiraramos.desafioAndroid.view.repo.RepoViewModel
 import dagger.Binds
 import dagger.Module
@@ -18,6 +19,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RepoViewModel::class)
     abstract fun bindRepoViewModel(viewModel: RepoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PullViewModel::class)
+    abstract fun bindPullViewModel(viewModel: PullViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
