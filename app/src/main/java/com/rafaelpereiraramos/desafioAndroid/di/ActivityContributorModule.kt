@@ -1,6 +1,6 @@
 package com.rafaelpereiraramos.desafioAndroid.di
 
-import com.rafaelpereiraramos.desafioAndroid.view.RepoActivity
+import com.rafaelpereiraramos.desafioAndroid.view.repo.RepoActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

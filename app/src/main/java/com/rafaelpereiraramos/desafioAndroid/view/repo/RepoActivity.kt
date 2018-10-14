@@ -1,4 +1,4 @@
-package com.rafaelpereiraramos.desafioAndroid.view
+package com.rafaelpereiraramos.desafioAndroid.view.repo
 
 import android.app.SearchManager
 import android.content.Context
@@ -9,24 +9,30 @@ import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import com.rafaelpereiraramos.desafioAndroid.R
 import com.rafaelpereiraramos.desafioAndroid.core.ViewModelFactory
 import com.rafaelpereiraramos.desafioAndroid.database.model.RepoTO
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_repo.*
 import javax.inject.Inject
 
 /**
  * Created by Rafael P. Ramos on 12/10/2018.
  */
-class RepoActivity : AppCompatActivity() {
+class RepoActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     companion object {
         private const val LAST_SEARCH_QUERY: String = "last_search_query"
         private const val DEFAULT_QUERY = "Java"
     }
+
+    @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
 
@@ -73,6 +79,8 @@ class RepoActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
 
     private fun subscribe() {
         viewModel.repos.observe(this, Observer<PagedList<RepoTO>> {

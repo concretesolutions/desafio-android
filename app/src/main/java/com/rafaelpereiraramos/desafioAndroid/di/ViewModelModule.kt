@@ -3,7 +3,7 @@ package com.rafaelpereiraramos.desafioAndroid.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rafaelpereiraramos.desafioAndroid.core.ViewModelFactory
-import com.rafaelpereiraramos.desafioAndroid.view.RepoViewModel
+import com.rafaelpereiraramos.desafioAndroid.view.repo.RepoViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

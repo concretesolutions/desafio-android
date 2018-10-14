@@ -1,4 +1,4 @@
-package com.rafaelpereiraramos.desafioAndroid.view
+package com.rafaelpereiraramos.desafioAndroid.view.repo
 
 import android.view.LayoutInflater
 import android.view.View

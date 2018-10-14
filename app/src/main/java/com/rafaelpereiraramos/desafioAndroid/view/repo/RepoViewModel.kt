@@ -1,10 +1,9 @@
-package com.rafaelpereiraramos.desafioAndroid.view
+package com.rafaelpereiraramos.desafioAndroid.view.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.rafaelpereiraramos.desafioAndroid.database.model.RepoTO
