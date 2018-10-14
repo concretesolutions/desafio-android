@@ -15,7 +15,7 @@ import com.rafaelpereiraramos.desafioAndroid.database.model.RepoTO
 /**
  * Created by Rafael P. Ramos on 13/10/2018.
  */
-class RepoPagedListaAdapter : PagedListAdapter<RepoTO, RepoPagedListaAdapter.RepoViewHolder>(REPO_COMPARATOR) {
+class RepoPagedListAdapter : PagedListAdapter<RepoTO, RepoPagedListAdapter.RepoViewHolder>(REPO_COMPARATOR) {
 
     companion object {
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<RepoTO>() {

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="150dp"
+    android:layout_height="170dp"
     android:clickable="true"
     android:focusable="true"
     app:cardUseCompatPadding="true">
@@ -12,16 +11,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="4dp">
+        android:padding="10dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/repo_info"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
-            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/left_container"
@@ -31,32 +27,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2.5dp"
-                android:paddingBottom="2.5dp"/>
+                android:paddingBottom="2.5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                style="?android:attr/textAppearanceMedium"/>
             <TextView
                 android:id="@+id/repo_description"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:paddingTop="2.5dp"
-                android:paddingBottom="2.5dp"/>
+                android:paddingBottom="2.5dp"
+                android:ellipsize="marquee"
+                android:lines="5"
+                app:layout_constraintTop_toBottomOf="@id/repo_title"
+                app:layout_constraintBottom_toTopOf="@id/buttons_container"
+                style="?android:attr/textAppearanceSmall"/>
             <LinearLayout
+                android:id="@+id/buttons_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 style="?android:attr/buttonBarStyle">
                 <Button
                     android:id="@+id/stargazers"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:drawableLeft="@drawable/ic_star"
                     style="?android:attr/buttonBarButtonStyle"/>
                 <Button
                     android:id="@+id/forks"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:drawableLeft="@drawable/ic_git_branch"
                     style="?android:attr/buttonBarButtonStyle"/>
             </LinearLayout>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/left_container"

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.rafaelpereiraramos.desafioAndroid.database.model.RepoTO
@@ -22,17 +23,16 @@ class RepoViewModel @Inject constructor(private val repoRepository: RepoReposito
     private val queryLiveData = MutableLiveData<String>()
 
     val repos: LiveData<PagedList<RepoTO>> =
-            Transformations.map(queryLiveData) {
-                var result = repoRepository.search(it)
-                return@map LivePagedListBuilder(result, LOCAL_SNAPSHOT_SIZE)
+            Transformations.switchMap(queryLiveData) {
+                it -> LivePagedListBuilder(repoRepository.search(it), LOCAL_SNAPSHOT_SIZE)
                         .setBoundaryCallback(repoRepository)
-                        .build().value
+                        .build()
             }
 
     val networkError: LiveData<String> =
             Transformations.map(repoRepository.networkErrors) {input -> input}
 
-    fun searchRepo(queryString: String) {
-        queryLiveData.postValue(queryString)
-    }
+    fun searchRepo(queryString: String) = queryLiveData.postValue(queryString)
+
+    fun lastQueryValue(): String? = queryLiveData.value
 }

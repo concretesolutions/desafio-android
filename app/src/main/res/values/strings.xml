@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Github Java Searcher</string>
+    <string name="prompt_search_repository">Search Repository</string>
 </resources>
