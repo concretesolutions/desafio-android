@@ -61,32 +61,23 @@ class RepoPagedListAdapter : PagedListAdapter<RepoTO, RepoPagedListAdapter.RepoV
         private val _starts: Button = view.findViewById(R.id.stargazers)
         private val _forks: Button = view.findViewById(R.id.forks)
         private val _repoImg: ImageView = view.findViewById(R.id.repo_img)
-        private val _ownerName: TextView = view.findViewById(R.id.owner_name)
+        private val _ownerLogin: TextView = view.findViewById(R.id.owner_name)
 
         private var repo: RepoTO? = null
 
         fun bind(repo: RepoTO?) {
-            if (repo == null) {
-                /*val resources = itemView.resources
-                name.text = resources.getString(R.string.loading)
-                description.visibility = View.GONE
-                language.visibility = View.GONE
-                stars.text = resources.getString(R.string.unknown)
-                forks.text = resources.getString(R.string.unknown)*/
-            } else {
-                showRepoData(repo)
-            }
+            this.repo = repo
+            showRepoData(repo!!)
         }
 
         private fun showRepoData(repo: RepoTO) {
-            this.repo = repo
             _repoTitle.text = repo.fullName
             _repoDescription.text = repo.description
 
             _starts.text = repo.stargazers.toString()
             _forks.text = repo.forks.toString()
 
-            _ownerName.text = repo.owner.login
+            _ownerLogin.text = repo.owner.login
         }
     }
 }

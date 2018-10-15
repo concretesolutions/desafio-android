@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/pull_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/left_container"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/pull_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="2.5dp"
+                android:paddingBottom="2.5dp"
+                android:lines="1"
+                android:ellipsize="end"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/purple"
+                style="?android:attr/textAppearanceMedium"/>
+            <TextView
+                android:id="@+id/pull_description"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingTop="2.5dp"
+                android:paddingBottom="2.5dp"
+                android:ellipsize="marquee"
+                app:layout_constraintTop_toBottomOf="@id/pull_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                style="?android:attr/textAppearanceSmall"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/left_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+            <ImageView
+                android:id="@+id/pull_img"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+            <TextView
+                android:id="@+id/owner_name"
+                android:layout_marginTop="2dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -10,7 +10,7 @@ import com.rafaelpereiraramos.desafioAndroid.database.model.RepoTO
 /**
  * Created by Rafael P. Ramos on 13/10/2018.
  */
-@Database(entities = [RepoTO::class, PullTO::class], version = 2, exportSchema = false)
+@Database(entities = [RepoTO::class, PullTO::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {

@@ -1,5 +1,6 @@
 package com.rafaelpereiraramos.desafioAndroid.api
 
+import com.rafaelpereiraramos.desafioAndroid.database.model.PullTO
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,9 +16,15 @@ interface GithubService {
                     @Query("page") page: Int,
                     @Query("per_page") itemsPerPage: Int): Call<RepoSearchResponse>
 
-    @GET("repos/{owner}/{repo}/pulls")
-    fun getPull(@Path("owner") owner: String,
+    /*@GET("repos/{owner}/{repo}/pulls")
+    fun getPull(@Path("owner") login: String,
                 @Path("repo") repo:String,
                 @Query("page") page:Int,
-                @Query("per_page") itemsPerPage: Int): Call<PullGetResponse>
+                @Query("per_page") itemsPerPage: Int): Call<PullGetResponse>*/
+
+    @GET("repos/{owner}/{repo}/pulls")
+    fun getPull(@Path("owner") ownerLogin: String,
+                @Path("repo") repo:String,
+                @Query("page") page:Int,
+                @Query("per_page") itemsPerPage: Int): Call<List<PullTO>>
 }
