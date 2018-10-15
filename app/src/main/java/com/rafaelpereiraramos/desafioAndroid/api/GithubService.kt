@@ -16,15 +16,13 @@ interface GithubService {
                     @Query("page") page: Int,
                     @Query("per_page") itemsPerPage: Int): Call<RepoSearchResponse>
 
-    /*@GET("repos/{owner}/{repo}/pulls")
-    fun getPull(@Path("owner") login: String,
-                @Path("repo") repo:String,
-                @Query("page") page:Int,
-                @Query("per_page") itemsPerPage: Int): Call<PullGetResponse>*/
-
     @GET("repos/{owner}/{repo}/pulls")
     fun getPull(@Path("owner") ownerLogin: String,
                 @Path("repo") repo:String,
                 @Query("page") page:Int,
                 @Query("per_page") itemsPerPage: Int): Call<List<PullTO>>
+
+    @GET("repos/{owner}/{repo}/pulls")
+    fun getAllPull(@Path("owner") ownerLogin: String,
+                   @Path("repo") repo:String) : Call<List<PullTO>>
 }

@@ -2,6 +2,7 @@ package com.rafaelpereiraramos.desafioAndroid.view.pull
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer
@@ -57,6 +58,7 @@ class PullActivity : AppCompatActivity() {
 
     private fun subscribe() {
         viewModel.pulls.observe(this, Observer {
+            Log.d("Activity", "list: ${it?.size}")
             adapter.submitList(it)
         })
 

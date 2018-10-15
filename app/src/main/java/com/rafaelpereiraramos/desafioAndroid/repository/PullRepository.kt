@@ -23,6 +23,7 @@ class PullRepository @Inject constructor(
         val database: AppDatabase,
         val pullDAO: PullDAO,
         @Named("diskIOExecutor") val ioExecutor: Executor,
+        @Named("networkExecutor") val networkExecutor: Executor,
         val service: GithubService
 ) : PagedList.BoundaryCallback<PullTO>() {
 
@@ -64,27 +65,28 @@ class PullRepository @Inject constructor(
 
         isRequestInProgress = true
 
-        service.getPull(ownerLogin!!, repoName!!, lastRequestedPage, App.NETWORK_SNAPSHOT_SIZE)
-                .enqueue(object : Callback<List<PullTO>> {
-                    override fun onFailure(call: Call<List<PullTO>>, t: Throwable) {
-                        networkErrors.postValue(t.message)
-                        t.printStackTrace()
-                        isRequestInProgress = false
-                    }
-
-                    override fun onResponse(call: Call<List<PullTO>>, response: Response<List<PullTO>>) {
-                        if (response.isSuccessful) {
-                            val pulls = response.body() ?: emptyList()
-                            insert(pulls) {
-                                lastRequestedPage++
-                                isRequestInProgress = false
-                            }
-                        } else {
-                            networkErrors.postValue(response.errorBody()?.string())
+        networkExecutor.execute {
+            service.getPull(ownerLogin!!, repoName!!, lastRequestedPage, App.NETWORK_SNAPSHOT_SIZE)
+                    .enqueue(object : Callback<List<PullTO>> {
+                        override fun onFailure(call: Call<List<PullTO>>, t: Throwable) {
+                            networkErrors.postValue(t.message)
+                            t.printStackTrace()
                             isRequestInProgress = false
                         }
-                    }
-                })
 
+                        override fun onResponse(call: Call<List<PullTO>>, response: Response<List<PullTO>>) {
+                            if (response.isSuccessful) {
+                                val pulls = response.body() ?: emptyList()
+                                insert(pulls) {
+                                    lastRequestedPage++
+                                    isRequestInProgress = false
+                                }
+                            } else {
+                                networkErrors.postValue(response.errorBody()?.string())
+                                isRequestInProgress = false
+                            }
+                        }
+                    })
+        }
     }
 }
