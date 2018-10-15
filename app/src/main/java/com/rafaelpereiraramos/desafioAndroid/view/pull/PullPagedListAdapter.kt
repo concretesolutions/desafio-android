@@ -1,5 +1,7 @@
 package com.rafaelpereiraramos.desafioAndroid.view.pull
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +40,15 @@ class PullPagedListAdapter : PagedListAdapter<PullTO, PullPagedListAdapter.PullV
                 val view = LayoutInflater.from(parent.context)
                         .inflate(R.layout.row_pull_list, parent, false)
                 return PullPagedListAdapter.PullViewHolder(view)
+            }
+        }
+
+        init {
+            view.setOnClickListener {
+                pull?.htmlUrl?.let { url ->
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    view.context.startActivity(intent)
+                }
             }
         }
 

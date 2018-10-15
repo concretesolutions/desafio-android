@@ -33,7 +33,7 @@ class RepoRepository @Inject constructor(
     private var isRequestInProgress = false
 
     init {
-        lastRequestedPage = sharedPreferences.getInt(LAST_PAGE_FETCHED_REPO, 1)
+        //lastRequestedPage = sharedPreferences.getInt(LAST_PAGE_FETCHED_REPO, 1)
     }
 
     override fun onZeroItemsLoaded() {

@@ -17,6 +17,9 @@ class PullTO {
     @SerializedName("body")
     var body: String? = null
 
+    @SerializedName("html_url")
+    var htmlUrl: String? = null
+
     @PrimaryKey
     @SerializedName("id")
     lateinit var id: String
@@ -58,8 +61,6 @@ class PullTO {
             result = 31 * result + (login?.hashCode() ?: 0)
             return result
         }
-
-
     }
 
     override fun equals(other: Any?): Boolean {

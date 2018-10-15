@@ -25,6 +25,7 @@ class DiskIOModule {
     @Singleton
     @Provides
     fun provideDatabase(context: Context): AppDatabase =
+            /*For demonstration only, migration schema should be included into the app*/
             Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DATABASE_NAME).fallbackToDestructiveMigration().build()
 
     @Singleton

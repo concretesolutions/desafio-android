@@ -9,16 +9,12 @@ import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import com.rafaelpereiraramos.desafioAndroid.R
 import com.rafaelpereiraramos.desafioAndroid.core.ViewModelFactory
 import com.rafaelpereiraramos.desafioAndroid.database.model.RepoTO
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_repo.*
 import javax.inject.Inject
 
