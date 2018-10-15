@@ -1,6 +1,8 @@
 package com.rafaelpereiraramos.desafioAndroid.di
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.rafaelpereiraramos.desafioAndroid.App
 import dagger.Module
 import dagger.Provides
@@ -16,4 +18,9 @@ class AppModule {
     @Provides
     @Singleton
     fun provideContext(application: App): Context = application
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(context: Context): SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(context)
 }

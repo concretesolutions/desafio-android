@@ -1,5 +1,7 @@
 package com.rafaelpereiraramos.desafioAndroid.repository
 
+import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PagedList
@@ -21,13 +23,18 @@ import javax.inject.Inject
 class RepoRepository @Inject constructor(
         private val service: GithubService,
         private val repoDAO: RepoDAO,
-        @Named("diskIOExecutor") private val ioExecutor: Executor)
+        @Named("diskIOExecutor") private val ioExecutor: Executor,
+        private val sharedPreferences: SharedPreferences)
     : PagedList.BoundaryCallback<RepoTO>() {
 
     private lateinit var query: String
     private var lastRequestedPage = 1
     val networkErrors = MutableLiveData<String>()
     private var isRequestInProgress = false
+
+    init {
+        lastRequestedPage = sharedPreferences.getInt(LAST_PAGE_FETCHED_REPO, 1)
+    }
 
     override fun onZeroItemsLoaded() {
         requestAndSaveData()
@@ -67,12 +74,13 @@ class RepoRepository @Inject constructor(
                         isRequestInProgress = false
                     }
 
+                    @SuppressLint("ApplySharedPref")
                     override fun onResponse(call: Call<RepoSearchResponse>,
                                             response: Response<RepoSearchResponse>) {
                         if (response.isSuccessful) {
                             val repos = response.body()?.items ?: emptyList()
                             insert(repos) {
-                                lastRequestedPage++
+                                sharedPreferences.edit().putInt(LAST_PAGE_FETCHED_REPO, ++lastRequestedPage).commit()
                                 isRequestInProgress = false
                             }
                         } else {
@@ -83,5 +91,9 @@ class RepoRepository @Inject constructor(
 
                 }
         )
+    }
+
+    companion object {
+        private const val LAST_PAGE_FETCHED_REPO = "lastPageFetched"
     }
 }
