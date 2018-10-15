@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.rafaelpereiraramos.desafioAndroid.R
 import com.rafaelpereiraramos.desafioAndroid.database.model.RepoTO
 import com.rafaelpereiraramos.desafioAndroid.view.pull.PullActivity
@@ -78,6 +79,8 @@ class RepoPagedListAdapter : PagedListAdapter<RepoTO, RepoPagedListAdapter.RepoV
             _forks.text = repo.forks.toString()
 
             _ownerLogin.text = repo.owner.login
+
+            Glide.with(_repoImg).load(repo.owner.avatarUrl).into(_repoImg)
         }
     }
 }

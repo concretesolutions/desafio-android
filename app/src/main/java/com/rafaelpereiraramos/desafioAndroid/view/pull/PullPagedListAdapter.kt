@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.rafaelpereiraramos.desafioAndroid.R
 import com.rafaelpereiraramos.desafioAndroid.database.model.PullTO
 
@@ -56,6 +57,8 @@ class PullPagedListAdapter : PagedListAdapter<PullTO, PullPagedListAdapter.PullV
             _pullTitle.text = pull.title
             _pullDesc.text = pull.body
             _ownerName.text = pull.user!!.login
+
+            Glide.with(_ownerImg).load(pull.user!!.avatarUrl).into(_ownerImg)
         }
     }
 }
