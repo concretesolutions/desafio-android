@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GitHub</string>
+    <string name="URL_BASE">https://api.github.com/</string>
+    <string name="connection_error">Verifique sua conexão com a internet</string>
+    <string name="try_again">Tentar novamente</string>
+    <string name="empty_result">Não foram encontrados registros</string>
+</resources>
