@@ -33,7 +33,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:text="nombre"
+                    android:text="name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -60,12 +60,11 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:id="@+id/cv_repo_name"
-
                     android:textSize="@dimen/title_card_size"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_gravity="center"
-                    android:text="nombre"
+                    android:text="Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
@@ -75,7 +74,8 @@
                     android:minLines="3"
                     android:textSize="@dimen/subtitle_card_size"
                     android:textColor="@color/black"
-                    android:text="sobrenombre"
+                    android:typeface="monospace"
+                    android:text="subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <LinearLayout

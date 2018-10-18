@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.text.Html
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,6 @@ import com.example.consultor.testacc.data.pojos.Repository
 import com.example.consultor.testacc.mvvm.viewmodel.RepoDetailViewModel
 import com.example.consultor.testacc.presentation.adapters.SimplePullAdapter
 import kotlinx.android.synthetic.main.repo_detail_fragment.*
-import kotlinx.android.synthetic.main.repo_detail_fragment.view.*
-import kotlinx.android.synthetic.main.repository_list_fragment.*
 
 class RepoDetailFragment : Fragment() {
 
@@ -51,6 +48,15 @@ class RepoDetailFragment : Fragment() {
         viewModel.myList.observe(this, Observer {
             rv_pulls.adapter = SimplePullAdapter(context!!, it!!)
             rv_pulls.adapter?.notifyDataSetChanged()
+
+            if(it.size>0){
+                rv_pulls.visibility=View.VISIBLE
+                tv_no_pulls.visibility=View.GONE
+            }else{
+                rv_pulls.visibility=View.GONE
+                tv_no_pulls.visibility=View.VISIBLE
+            }
+
         })
 
 

@@ -13,6 +13,7 @@ import com.example.consultor.testacc.R
 import com.example.consultor.testacc.data.pojos.PullModel
 import kotlinx.android.synthetic.main.item_pull_info.view.*
 import com.example.consultor.testacc.utils.giveCustomFormat
+import com.example.consultor.testacc.utils.setvalidText
 
 class SimplePullAdapter(val context: Context, var pullList: MutableList<PullModel>) :
     RecyclerView.Adapter<SimplePullAdapter.SimplePullViewHolder>() {
@@ -36,7 +37,7 @@ class SimplePullAdapter(val context: Context, var pullList: MutableList<PullMode
         fun bindView(pullModel: PullModel) {
             itemView.cv_pull_name.text = pullModel.title
             itemView.cv_contributor_alias.text = pullModel.creationDate.giveCustomFormat()
-            itemView.cv_pull_desc.text = pullModel.body
+            itemView.cv_pull_desc.text = pullModel.body.setvalidText()
             itemView.cv_contributor_name.text = pullModel.user.name
             Glide.with(itemView.context).load(pullModel.user.avatar).apply(RequestOptions().circleCrop())
                 .into(itemView.cv_contributor_avatar)
@@ -48,5 +49,7 @@ class SimplePullAdapter(val context: Context, var pullList: MutableList<PullMode
 
     }
 }
+
+
 
 

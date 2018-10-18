@@ -16,7 +16,6 @@ class SimpleDataSource : PageKeyedDataSource<Int, Repository>() {
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Repository>) {
         val initPage = 1
         val serverRequest = TestACApp.retrofit?.create(ApiGithub::class.java)
-
         val responseGithub = serverRequest?.getRepositoriesAt(initPage)
         responseGithub?.enqueue(object : Callback<RepoPage> {
             override fun onFailure(call: Call<RepoPage>, t: Throwable) {
@@ -27,7 +26,7 @@ class SimpleDataSource : PageKeyedDataSource<Int, Repository>() {
 
             override fun onResponse(call: Call<RepoPage>, response: Response<RepoPage>) {
 
-                Log.e("Get Repo value", response.body()?.items?.size.toString())
+                Log.i("Get Repo value", response.body()?.items?.size.toString())
                 callback.onResult(response.body()!!.items, null, initPage + 1)
             }
 
@@ -39,7 +38,7 @@ class SimpleDataSource : PageKeyedDataSource<Int, Repository>() {
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Repository>) {
 
         val serverRequest = TestACApp.retrofit?.create(ApiGithub::class.java)
-        Log.e("Params key", params.key?.toString())
+        Log.i("Params key", params.key?.toString())
 
         val responseGithub = serverRequest?.getRepositoriesAt(params.key)
         responseGithub?.enqueue(object : Callback<RepoPage> {
@@ -51,7 +50,7 @@ class SimpleDataSource : PageKeyedDataSource<Int, Repository>() {
 
             override fun onResponse(call: Call<RepoPage>, response: Response<RepoPage>) {
 
-                Log.e("Get Repo value", response.body()?.items?.size.toString())
+                Log.i("Get Repo value", response.body()?.items?.size.toString())
 
 
                 if (response.body() != null) {

@@ -45,6 +45,9 @@ class RepositoryListFragment : Fragment() {
         val adapter = RepositoriesAdapter(context!!, diffCallback)
         viewModel.itemPagedList.observe(this, Observer {
             adapter.submitList(it)
+                tv_no_results.visibility = View.GONE
+                rv_repositories.visibility=View.VISIBLE
+
         })
         rv_repositories.adapter = adapter
 

@@ -20,7 +20,7 @@ class RepositoryListViewModel : ViewModel() {
         val itemSourceFact = SimpleDataSourceFactory()
         liveDatyaSource = itemSourceFact.itemLiveDS
         val config = (PagedList.Config.Builder()).setEnablePlaceholders(false)
-            .setPageSize(30).build()
+            .setPageSize(20).build()
         itemPagedList = (LivePagedListBuilder(itemSourceFact, config)).build()
     }
 

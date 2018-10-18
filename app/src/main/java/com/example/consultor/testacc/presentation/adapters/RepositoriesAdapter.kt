@@ -47,10 +47,7 @@ class RepositoriesAdapter(val context: Context, diffCallback: DiffUtil.ItemCallb
                 val bundle = Bundle()
                 bundle.putSerializable("repopull", repository)
                 itemView.context.startActivity(
-                    Intent(
-                        itemView.context,
-                        RepoDetailActivity::class.java
-                    ).putExtra("mybun", bundle)
+                    Intent(itemView.context, RepoDetailActivity::class.java).putExtra("mybun", bundle)
                 )
             }
 

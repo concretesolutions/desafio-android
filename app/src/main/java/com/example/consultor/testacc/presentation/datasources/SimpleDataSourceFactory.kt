@@ -10,7 +10,7 @@ class SimpleDataSourceFactory : DataSource.Factory<Int, Repository>() {
     //este data source factory envia la data gradualmente
     var itemLiveDS=MutableLiveData<PageKeyedDataSource<Int,Repository>>()
     override fun create(): DataSource<Int, Repository> {
-       var itemdataSource=SimpleDataSource()
+       val itemdataSource=SimpleDataSource()
         itemLiveDS.postValue(itemdataSource)
         return itemdataSource
     }
