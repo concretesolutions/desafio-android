@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/java"
+            android:icon="@drawable/ic_icons_java"
+            android:title="Java" />
+        <item
+            android:id="@+id/python"
+            android:icon="@drawable/ic_icons_python"
+            android:title="Python" />
+        <item
+            android:id="@+id/php"
+            android:icon="@drawable/ic_icons_php"
+            android:title="PHP" />
+        <item
+            android:id="@+id/javascript"
+            android:icon="@drawable/ic_icons_js"
+            android:title="JavaScript" />
+    </group>
+
+</menu>

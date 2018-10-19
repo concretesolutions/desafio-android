@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Concrete Solutions Desafio - Android</string>
+    <string name="verify_connection">Verifique sua conexão e tente novamente!</string>
+    <string name="issue_not_known">Ocorreu um problema desconhecido ao carregar os dados!</string>
+    <string name="connection_problem">Ocorreu um problema na conexão com o GitHub, por favor tente novamente mais tarde!</string>
+    <string name="load_all">Parece que chegamos ao final da lista e não podemos carregar mais itens!</string>
+    <string name="opened">Abertos</string>
+    <string name="closed">Fechados</string>
+    <string name="title_activity_main">Desafio - Android</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Desafio - Android</string>
+    <string name="nav_header_subtitle">desafio.concrete@concrete.com.br</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="loading">Por favor aguarde enquanto carregamos os dados...</string>
+    <string name="git_hub">As vezes o Git Hub nega muitas solicitações muito rápidas, espere um pouco e regarregue o App.</string>
+</resources>
