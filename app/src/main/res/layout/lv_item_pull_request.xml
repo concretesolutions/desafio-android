@@ -51,6 +51,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -58,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="username"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
 
                 <TextView
                     android:id="@+id/pull_request_full_name"

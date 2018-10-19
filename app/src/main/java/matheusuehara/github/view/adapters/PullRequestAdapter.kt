@@ -2,6 +2,7 @@ package matheusuehara.github.view.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Transformation
+import com.makeramen.roundedimageview.RoundedTransformationBuilder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.lv_item_pull_request.view.*
 
@@ -18,6 +21,11 @@ import matheusuehara.github.R
 import matheusuehara.github.model.PullRequest
 
 class PullRequestAdapter(var pullRequests: ArrayList<PullRequest>?, var context: Context) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>() {
+
+    private val transformation:Transformation = RoundedTransformationBuilder()
+            .cornerRadius(30F)
+            .oval(false)
+            .build()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         var mPullRequestTitle:TextView = view.pull_request_title
@@ -47,17 +55,19 @@ class PullRequestAdapter(var pullRequests: ArrayList<PullRequest>?, var context:
         val pullRequest = pullRequests?.get(position)
 
         if (pullRequest?.body?.count()!! >= 150) {
-            holder.mPullRequestBody.text = pullRequest?.body?.substring(0,150)
+            holder.mPullRequestBody.text = pullRequest.body.substring(0,150)
         }else{
-            holder.mPullRequestBody.text = pullRequest?.body
+            holder.mPullRequestBody.text = pullRequest.body
         }
 
-        holder.mPullRequestTitle.text = pullRequest?.title
-        holder.mPullRequestUserName.text = pullRequest?.user?.login
+        holder.mPullRequestTitle.text = pullRequest.title
+        holder.mPullRequestUserName.text = pullRequest.user.login
         holder.mPullRequestFullName.text = ""
+
         Picasso.get()
-                .load(pullRequest?.user?.avatar_url)
+                .load(pullRequest.user.avatar_url)
                 .error(R.mipmap.ic_launcher)
+                .transform(transformation)
                 .into(holder.mPullRequestUseImage)
     }
 

@@ -2,103 +2,69 @@ package matheusuehara.github.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
+import android.view.View
 import kotlinx.android.synthetic.main.activity_repository.*
 import matheusuehara.github.R
-import matheusuehara.github.api.GitHubApi
+import matheusuehara.github.contract.RepositoryContract
 import matheusuehara.github.model.Repository
-import matheusuehara.github.model.RepositoryResponse
+import matheusuehara.github.presenter.RepositoryPresenterImpl
 import matheusuehara.github.view.adapters.RepositoryAdapter
 import matheusuehara.github.view.listeners.EndlessRecyclerViewScrollListener
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.ArrayList
 
-class RepositoryActivity : AppCompatActivity() {
+class RepositoryActivity : AppCompatActivity(), RepositoryContract.View {
 
-    private var allRepositories = ArrayList<Repository>()
-    private var adapter: RepositoryAdapter? = null
-    private var pagina = 1
-
-    companion object {
-        private val language = "language:Java"
-        private val sort = "stars"
-    }
+    private var adapter: RepositoryAdapter = RepositoryAdapter(ArrayList(), this)
+    private var presenter:RepositoryContract.Presenter = RepositoryPresenterImpl(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
-
-        this.getRepositories(pagina)
-
-        adapter = RepositoryAdapter(allRepositories, this)
-
         rvRepositories.adapter = adapter
-
         var linearLayoutManager = LinearLayoutManager(this)
-
         rvRepositories.layoutManager = linearLayoutManager
+        rvRepositories.addItemDecoration(DividerItemDecoration(this, linearLayoutManager.orientation))
 
-        val mDividerItemDecoration = DividerItemDecoration(this, linearLayoutManager.orientation
-        )
-        rvRepositories.addItemDecoration(mDividerItemDecoration)
+        presenter.getRepositories(0)
 
-        val scrollListener: EndlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+        rvRepositories.addOnScrollListener(object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                pagina++
-                getRepositories(pagina)
-            }
-        }
-
-        rvRepositories.addOnScrollListener(scrollListener)
-
-    }
-
-    fun getRepositories(pagina: Int) {
-
-        val retrofit = Retrofit.Builder()
-                .baseUrl(getString(R.string.URL_BASE))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-        val service = retrofit.create<GitHubApi>(GitHubApi::class.java)
-
-        val callRepositories = service.getRepositories(language, sort, pagina)
-
-        callRepositories.enqueue(object : Callback<RepositoryResponse> {
-            override fun onResponse(call: Call<RepositoryResponse>, response: Response<RepositoryResponse>) {
-                if (response.code() == 200) {
-
-                    val repositoryResponse = response.body()
-
-                    val moreRepositories = repositoryResponse!!.items
-
-                    val curSize = adapter?.getItemCount()
-
-                    if (moreRepositories != null) {
-                        allRepositories.addAll(moreRepositories)
-                    }
-
-                    if (curSize != null) {
-                        adapter?.notifyItemRangeInserted(curSize, allRepositories.size - 1)
-                    }
-
-                } else {
-                    Log.d("FALHA NA REQUISIÇÃO ", "CÓDIGO:" + response.code())
-                    Log.d(" URL ", call.request().url().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<RepositoryResponse>, t: Throwable) {
-                Log.d("FALHA NA REQUISIÇÃO ", "SEM CONEXAO COM A INTERNET")
+                presenter.getRepositories(page)
             }
         })
     }
+
+    override fun updateRepositories(repositoryResult: List<Repository>) {
+        adapter.repositories.addAll(repositoryResult)
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun showProgressBar(){
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar(){
+        progress_bar.visibility = View.GONE
+    }
+
+    override fun showNetworkError(){
+        Snackbar.make(
+                frame_layout,
+                R.string.connection_error,
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.try_again
+                ) {presenter.getRepositories(0)}.show()
+    }
+
+    override fun showEmptyRepositoryMessage() {
+        Snackbar.make(frame_layout,
+                R.string.empty_result,
+                Snackbar.LENGTH_INDEFINITE).show()
+    }
+
 
 }

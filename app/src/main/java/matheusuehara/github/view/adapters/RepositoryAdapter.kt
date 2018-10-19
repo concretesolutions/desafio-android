@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.makeramen.roundedimageview.RoundedTransformationBuilder
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Transformation
 import kotlinx.android.synthetic.main.lv_item_repository.view.*
 
 import java.util.ArrayList
@@ -17,6 +19,11 @@ import matheusuehara.github.model.Repository
 import matheusuehara.github.view.PullRequestActivity
 
 class RepositoryAdapter(var repositories: ArrayList<Repository>, var context: Context) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
+
+    private val transformation: Transformation = RoundedTransformationBuilder()
+            .cornerRadius(30F)
+            .oval(false)
+            .build()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         var mRepositoryUserImage:ImageView = view.repository_user_image
@@ -60,8 +67,10 @@ class RepositoryAdapter(var repositories: ArrayList<Repository>, var context: Co
         holder.mRepositoryFork.text = repository.forks_count.toString()
         holder.mRepositoryUserName.text = repository.owner.login
         holder.mRepositoryFullName.text = ""
+
         Picasso.get()
                 .load(repository.owner.avatar_url)
+                .transform(transformation)
                 .error(R.mipmap.ic_launcher)
                 .into(holder.mRepositoryUserImage)
     }

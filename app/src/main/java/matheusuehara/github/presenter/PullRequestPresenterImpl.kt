@@ -2,7 +2,7 @@ package matheusuehara.github.presenter
 
 import android.util.Log
 import matheusuehara.github.api.GitHubService
-import matheusuehara.github.api.Service
+import matheusuehara.github.contract.GitHubContract
 import matheusuehara.github.contract.PullRequestContract
 import matheusuehara.github.model.PullRequest
 import retrofit2.Call
@@ -12,7 +12,7 @@ import java.util.ArrayList
 
 class PullRequestPresenterImpl constructor(var view: PullRequestContract.View) : PullRequestContract.Presenter{
 
-    private var service: Service = GitHubService()
+    private var service: GitHubContract.Service = GitHubService()
 
     override fun getPullRequests(owner:String,repository:String,status:String) {
         view.showProgressBar()

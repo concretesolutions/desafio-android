@@ -5,16 +5,17 @@ import matheusuehara.github.model.Repository
 interface RepositoryContract {
 
     interface View {
-        fun updateMovies(repositoryResult: List<Repository>)
+        fun updateRepositories(repositoryResult: List<Repository>)
         fun showProgressBar()
         fun hideProgressBar()
         fun showNetworkError()
-        fun showEmptyMoviesMessage()
+        fun showEmptyRepositoryMessage()
     }
 
     interface Presenter {
+        fun getRepositories(page: Int)
         fun getRepositorySuccess(repositoryResult: List<Repository>?)
-        fun getMoviesError()
+        fun getRepositoryError()
     }
 
 }
