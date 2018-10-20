@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="horizontal_margin_4dp">4dp</dimen>
+    <dimen name="vertical_margin_4dp">4dp</dimen>
+
+    <dimen name="horizontal_margin_8dp">8dp</dimen>
+    <dimen name="vertical_margin_8dp">8dp</dimen>
+
+    <dimen name="horizontal_margin_16dp">16dp</dimen>
+    <dimen name="vertical_margin_16dp">16dp</dimen>
+
+    <dimen name="radius_4dp">4dp</dimen>
+    <dimen name="elevation_1dp">1dp</dimen>
+</resources>

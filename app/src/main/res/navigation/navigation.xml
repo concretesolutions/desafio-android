@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:startDestination="@id/reposFragment">
+    <fragment
+        android:id="@+id/reposFragment"
+        android:name="cl.mauledev.github.view.fragments.ReposFragment"
+        android:label="Github">
+
+        <action
+            android:id="@+id/actionUrl"
+            app:destination="@id/repoFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/repoFragment"
+        android:name="cl.mauledev.github.view.fragments.RepoFragment">
+
+        <argument android:name="title" android:defaultValue="" />
+        <argument android:name="url" android:defaultValue="" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/pullRequestFragment"
+        android:name="cl.mauledev.github.view.fragments.PullRequestFragment">
+
+        <argument android:name="title" android:defaultValue="" />
+        <argument android:name="url" android:defaultValue="" />
+
+    </fragment>
+
+</navigation>

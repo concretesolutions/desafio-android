@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Github</string>
+    <string name="state_disconnected">Desconectado</string>
+    <string name="state_action">Cerrar</string>
+
+    <plurals name="stars">
+        <item quantity="zero">%d Estrellas</item>
+        <item quantity="one">%d Estrella</item>
+        <item quantity="many">%d Estrellas</item>
+        <item quantity="other">%d Estrellas</item>
+    </plurals>
+</resources>
