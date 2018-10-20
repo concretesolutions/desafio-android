@@ -1,11 +1,104 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--Padding Section-->
+    <style name="padding_8dp">
+        <item name="android:paddingStart">@dimen/padding_8dp</item>
+        <item name="android:paddingRight">@dimen/padding_8dp</item>
+        <item name="android:paddingEnd">@dimen/padding_8dp</item>
+        <item name="android:paddingLeft">@dimen/padding_8dp</item>
+    </style>
+
+    <style name="padding_16dp">
+        <item name="android:paddingStart">@dimen/padding_16dp</item>
+        <item name="android:paddingRight">@dimen/padding_16dp</item>
+        <item name="android:paddingEnd">@dimen/padding_16dp</item>
+        <item name="android:paddingLeft">@dimen/padding_16dp</item>
+    </style>
+
+    <style name="padding_24dp">
+        <item name="android:paddingStart">@dimen/padding_24dp</item>
+        <item name="android:paddingRight">@dimen/padding_24dp</item>
+        <item name="android:paddingEnd">@dimen/padding_24dp</item>
+        <item name="android:paddingLeft">@dimen/padding_24dp</item>
+    </style>
+
+    <style name="padding_32dp">
+        <item name="android:paddingStart">@dimen/padding_32dp</item>
+        <item name="android:paddingRight">@dimen/padding_32dp</item>
+        <item name="android:paddingEnd">@dimen/padding_32dp</item>
+        <item name="android:paddingLeft">@dimen/padding_32dp</item>
+    </style>
+
+    <!--Margin Section-->
+    <style name="margin_2dp">
+        <item name="android:layout_marginStart">@dimen/margin_2dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_2dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_2dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_2dp</item>
+    </style>
+
+    <style name="margin_4dp">
+        <item name="android:layout_marginStart">@dimen/margin_4dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_4dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_4dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_4dp</item>
+    </style>
+
+    <style name="margin_8dp">
+        <item name="android:layout_marginStart">@dimen/margin_8dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_8dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_8dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_8dp</item>
+    </style>
+
+    <style name="margin_16dp">
+        <item name="android:layout_marginStart">@dimen/margin_16dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_16dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_16dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_16dp</item>
+    </style>
+
+    <style name="margin_24dp">
+        <item name="android:layout_marginStart">@dimen/margin_24dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_24dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_24dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_24dp</item>
+    </style>
+
+    <style name="margin_32dp">
+        <item name="android:layout_marginStart">@dimen/margin_32dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_32dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_32dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_32dp</item>
+    </style>
+
+    <style name="margin_40dp">
+        <item name="android:layout_marginStart">@dimen/margin_40dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_40dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_40dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_40dp</item>
+    </style>
+
+    <style name="margin_48dp">
+        <item name="android:layout_marginStart">@dimen/margin_48dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_48dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_48dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_48dp</item>
+    </style>
+
+    <style name="margin_64dp">
+        <item name="android:layout_marginStart">@dimen/margin_64dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_64dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_64dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_64dp</item>
     </style>
 
 </resources>

@@ -1,0 +1,83 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_vertical_margin_8dp">8dp</dimen>
+    <dimen name="activity_horizontal_margin_8dp">8dp</dimen>
+
+    <dimen name="small_horizontal_margin">16dp</dimen>
+    <dimen name="small_vertical_margin">16dp</dimen>
+
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+
+    <dimen name="horizontal_margin_32dp">32dp</dimen>
+    <dimen name="vertical_margin_32dp">32dp</dimen>
+
+    <!-- Margin sizes -->
+    <dimen name="margin_2dp">2dp</dimen>
+    <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_6dp">6dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_25dp">25dp</dimen>
+    <dimen name="margin_28dp">28dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_48dp">48dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
+    <dimen name="margin_56dp">56dp</dimen>
+    <dimen name="margin_60dp">60dp</dimen>
+    <dimen name="margin_64dp">64dp</dimen>
+    <dimen name="margin_72dp">72dp</dimen>
+    <dimen name="margin_80dp">80dp</dimen>
+    <dimen name="margin_88dp">88dp</dimen>
+    <dimen name="margin_96dp">96dp</dimen>
+    <dimen name="margin_104dp">104dp</dimen>
+
+    <!-- Padding sizes -->
+    <dimen name="padding_4dp">4dp</dimen>
+    <dimen name="padding_6dp">6dp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
+    <dimen name="padding_12dp">12dp</dimen>
+    <dimen name="padding_14dp">14dp</dimen>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="padding_18dp">18dp</dimen>
+    <dimen name="padding_20dp">20dp</dimen>
+    <dimen name="padding_22dp">22dp</dimen>
+    <dimen name="padding_24dp">24dp</dimen>
+    <dimen name="padding_32dp">32dp</dimen>
+    <dimen name="padding_40dp">40dp</dimen>
+    <dimen name="padding_48dp">48dp</dimen>
+    <dimen name="padding_56dp">56dp</dimen>
+    <dimen name="padding_64dp">64dp</dimen>
+
+    <!-- View size -->
+    <dimen name="view_4dp">4dp</dimen>
+    <dimen name="view_8dp">8dp</dimen>
+    <dimen name="view_16dp">16dp</dimen>
+    <dimen name="view_20dp">20dp</dimen>
+    <dimen name="view_24dp">24dp</dimen>
+    <dimen name="view_32dp">32dp</dimen>
+    <dimen name="view_40dp">40dp</dimen>
+    <dimen name="view_48dp">48dp</dimen>
+    <dimen name="view_56dp">56dp</dimen>
+    <dimen name="view_60dp">60dp</dimen>
+    <dimen name="view_64dp">64dp</dimen>
+    <dimen name="view_76dp">76dp</dimen>
+    <dimen name="view_100dp">100dp</dimen>
+
+    <!--Text sizes-->
+    <dimen name="text_size_4">4sp</dimen>
+    <dimen name="text_size_8">8sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
+
+</resources>
