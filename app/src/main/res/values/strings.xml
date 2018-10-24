@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Desafio Android Concrete</string>
+    <string name="retry">Tentar Novamente</string>
+    <string name="invalid_repositoryId">Id Inválido</string>
+</resources>

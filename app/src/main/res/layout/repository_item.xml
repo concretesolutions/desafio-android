@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+
+        <TextView
+            android:id="@+id/repositoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="200dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Nome Repositório" />
+
+        <TextView
+            android:id="@+id/repositoryDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:maxWidth="200dp"
+            android:maxLines="2"
+            app:layout_constraintTop_toBottomOf="@+id/repositoryName"
+            tools:text="Descrição" />
+
+        <ImageView
+            android:id="@+id/branch"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_git_branch"
+            android:tint="#E29132"
+            app:layout_constraintTop_toBottomOf="@+id/repositoryDescription"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/forks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="#E29132"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/branch"
+            app:layout_constraintLeft_toRightOf="@+id/branch"
+            app:layout_constraintTop_toTopOf="@+id/branch"
+            tools:text="0" />
+
+        <ImageView
+            android:id="@+id/ivStars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_star"
+            android:tint="#E29132"
+            app:layout_constraintBottom_toBottomOf="@+id/branch"
+            app:layout_constraintLeft_toRightOf="@+id/forks"
+            app:layout_constraintTop_toTopOf="@+id/branch"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvStarsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="#E29132"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/branch"
+            app:layout_constraintLeft_toRightOf="@+id/ivStars"
+            app:layout_constraintTop_toTopOf="@+id/branch"
+            tools:text="0" />
+
+        <ImageView
+            android:id="@+id/ivAccount"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="25dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_account"
+            app:layout_constraintBottom_toTopOf="@+id/user"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:maxWidth="100dp"
+            app:layout_constraintEnd_toEndOf="@+id/ivAccount"
+            app:layout_constraintStart_toStartOf="@+id/ivAccount"
+            app:layout_constraintTop_toBottomOf="@+id/ivAccount" />
+
+        <TextView
+            android:id="@+id/fullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxWidth="100dp"
+            android:maxLines="1"
+            android:textColor="#9C98C3"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ivAccount"
+            app:layout_constraintStart_toStartOf="@+id/ivAccount"
+            app:layout_constraintTop_toBottomOf="@+id/user" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <View
+        style="@style/Divider"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
