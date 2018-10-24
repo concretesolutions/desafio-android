@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.henriqueoliveira.desafioandroidconcrete.R
 import br.com.henriqueoliveira.desafioandroidconcrete.helpers.EndlessRecyclerViewScrollListener
+import br.com.henriqueoliveira.desafioandroidconcrete.helpers.launchActivity
+import br.com.henriqueoliveira.desafioandroidconcrete.helpers.show
 import br.com.henriqueoliveira.desafioandroidconcrete.helpers.showSnack
-import br.com.henriqueoliveira.desafioandroidconcrete.helpers.toast
 import br.com.henriqueoliveira.desafioandroidconcrete.service.models.Repository
 import br.com.henriqueoliveira.desafioandroidconcrete.service.repository.Resource
 import br.com.henriqueoliveira.desafioandroidconcrete.view.adapter.RepositoriesAdapter
@@ -50,9 +51,18 @@ class RepoListActivity : BaseActivity() {
             }
         })
 
+        swipeRefreshLayout.setOnRefreshListener {
+            repoViewModel.refreshList()
+        }
+
     }
 
     private fun handleViewModel() {
+
+        repoViewModel.isLoading.observe(this, Observer {
+            it?.let { swipeRefreshLayout.isRefreshing = it }
+        })
+
 
         repoViewModel.state.observe(this, Observer {
             when (it.status) {
@@ -64,7 +74,7 @@ class RepoListActivity : BaseActivity() {
                     it.data?.let { adapter.updateList(it) }
                     it.message?.let { showSnack(it) }
                 }
-                Resource.RequestStatus.LOADING -> TODO()
+                Resource.RequestStatus.LOADING ->  swipeRefreshLayout.isRefreshing = true
             }
         })
 
@@ -78,7 +88,10 @@ class RepoListActivity : BaseActivity() {
     }
 
     private fun onRepositoryItemClick(repository: Repository) {
-        PullRequestActivity.startWithAnimation(this, repository.repoName, repository.owner, view)
+        val extras = Bundle()
+        extras.putString(PullRequestActivity.EXTRA_REPOSITORY_NAME,  repository.repoName)
+        extras.putString(PullRequestActivity.EXTRA_REPOSITORY_OWNER, repository.owner.login)
+        launchActivity<PullRequestActivity>(extras)
     }
 
 

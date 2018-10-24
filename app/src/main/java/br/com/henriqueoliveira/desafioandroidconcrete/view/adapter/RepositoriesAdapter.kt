@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import br.com.henriqueoliveira.desafioandroidconcrete.R
+import br.com.henriqueoliveira.desafioandroidconcrete.helpers.loadUrl
 import br.com.henriqueoliveira.desafioandroidconcrete.service.models.Repository
 import kotlinx.android.synthetic.main.repository_item.view.*
 
@@ -43,7 +44,6 @@ class RepositoriesAdapter(private var repositoryItems: List<Repository>, private
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var repositoryItem: Repository? = null
 
         fun populateItem(item: Repository) {
             item.let {
@@ -52,9 +52,10 @@ class RepositoriesAdapter(private var repositoryItems: List<Repository>, private
                 itemView.repositoryDescription.text = item.description
                 itemView.user.text = item.owner.login
                 itemView.forks.text = item.forksCount.toString()
-                itemView.tvStarsCount.text = item.starsCount.toString()
-                itemView.setOnClickListener { listener.invoke(item) }
-                //ImageLoaderUtil.load(it.context, it.ivAccount, repoItem.owner.avatarUrl, RequestOptions.circleCropTransform())
+                itemView.starsCount.text = item.starsCount.toString()
+                itemView.acount.loadUrl(item.owner.avatarUrl)
+                itemView.setOnClickListener { listener.invoke(item)}
+
             }
         }
 

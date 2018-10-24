@@ -18,6 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="200dp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Nome Repositório" />
@@ -58,7 +61,7 @@
             tools:text="0" />
 
         <ImageView
-            android:id="@+id/ivStars"
+            android:id="@+id/stars"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -71,19 +74,19 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/tvStarsCount"
+            android:id="@+id/starsCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textColor="#E29132"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/branch"
-            app:layout_constraintLeft_toRightOf="@+id/ivStars"
+            app:layout_constraintLeft_toRightOf="@+id/stars"
             app:layout_constraintTop_toTopOf="@+id/branch"
             tools:text="0" />
 
         <ImageView
-            android:id="@+id/ivAccount"
+            android:id="@+id/acount"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="25dp"
@@ -100,9 +103,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:maxWidth="100dp"
-            app:layout_constraintEnd_toEndOf="@+id/ivAccount"
-            app:layout_constraintStart_toStartOf="@+id/ivAccount"
-            app:layout_constraintTop_toBottomOf="@+id/ivAccount" />
+            app:layout_constraintEnd_toEndOf="@+id/acount"
+            app:layout_constraintStart_toStartOf="@+id/acount"
+            app:layout_constraintTop_toBottomOf="@+id/acount" />
 
         <TextView
             android:id="@+id/fullName"
@@ -115,8 +118,8 @@
             android:textColor="#9C98C3"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/ivAccount"
-            app:layout_constraintStart_toStartOf="@+id/ivAccount"
+            app:layout_constraintEnd_toEndOf="@+id/acount"
+            app:layout_constraintStart_toStartOf="@+id/acount"
             app:layout_constraintTop_toBottomOf="@+id/user" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

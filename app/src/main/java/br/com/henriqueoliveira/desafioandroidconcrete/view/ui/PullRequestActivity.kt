@@ -1,85 +1,117 @@
 package br.com.henriqueoliveira.desafioandroidconcrete.view.ui
 
-import android.app.Activity
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.text.method.LinkMovementMethod
-import android.view.View
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.view.ViewCompat
+import android.text.Spanned
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.henriqueoliveira.desafioandroidconcrete.R
+import br.com.henriqueoliveira.desafioandroidconcrete.helpers.toHtmlColored
 import br.com.henriqueoliveira.desafioandroidconcrete.helpers.toast
+import br.com.henriqueoliveira.desafioandroidconcrete.service.models.PullRequest
+import br.com.henriqueoliveira.desafioandroidconcrete.service.repository.Resource
+import br.com.henriqueoliveira.desafioandroidconcrete.view.adapter.PullRequestsAdapter
 import br.com.henriqueoliveira.desafioandroidconcrete.viewmodel.RepositoryListViewModel
 import kotlinx.android.synthetic.main.pull_request_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 class PullRequestActivity : BaseActivity() {
 
-    private var repositoryId: Int = -1
+    private var repositoryOwner: String = ""
+    private var repositoryName: String = ""
     private val repoViewModel: RepositoryListViewModel by viewModel()
+    private lateinit var adapter: PullRequestsAdapter
+    lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pull_request_activity)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportPostponeEnterTransition()
 
-        repositoryId = intent.getIntExtra(EXTRA_MOVIE_ID, -1)
-        if (repositoryId == -1) {
+        setupToolbar(toolbar,R.string.pull_requests, R.drawable.ic_back, true)
+        swipeRefreshLayout.isEnabled = false
+
+        repositoryOwner = intent.getStringExtra(EXTRA_REPOSITORY_OWNER)
+        repositoryName = intent.getStringExtra(EXTRA_REPOSITORY_NAME)
+        if (repositoryOwner.isBlank() || repositoryName.isBlank()) {
             toast(getString(R.string.invalid_repositoryId))
             finish()
             return
         }
 
-        val imageTransitionName = intent.getStringExtra(EXTRA_MOVIE_TRANSITION_NAME)
-        tvStatus.transitionName = imageTransitionName
-        supportStartPostponedEnterTransition() //start the transition animation
+        supportStartPostponedEnterTransition()
 
-        handleViewModel()
+        handleViewModel(repositoryOwner, repositoryName)
+        configRecycler()
+
     }
 
-    private fun handleViewModel() {
-//        moviesVM.getMoviesById(repositoryId)
-//        moviesVM.isLoading.observe(this, Observer {
-//            detailActivityProgress.show(it)
-//        })
-//        moviesVM.state.observe(this, Observer {
-//            when (it.status) {
-//                Resource.RequestStatus.LOADING -> Unit
-//                Resource.RequestStatus.SUCCESS -> {
-//                    fillMovieData(it.data)
-//                }
-//                Resource.RequestStatus.ERROR -> {
-//                    toast(getString(R.string.str_unable_to_load_movie))
-//                }
-//            }
-//        })
+    private fun configRecycler() {
+        adapter = PullRequestsAdapter(arrayListOf()) { pullrequest -> onPRItemClick(pullrequest) }
+        layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        recyclerPR.layoutManager = layoutManager
+        recyclerPR.adapter = adapter
+    }
+
+    private fun handleViewModel(repositoryOwner: String, repositoryName: String) {
+        repoViewModel.loadPullRequests(repositoryOwner, repositoryName)
+
+        repoViewModel.isLoading.observe(this, Observer {
+            it?.let { swipeRefreshLayout.isRefreshing = it }
+        })
+
+        repoViewModel.statePR.observe(this, Observer {
+            when (it.status) {
+
+                Resource.RequestStatus.SUCCESS -> {
+                    it.data?.let { adapter.updateList(it) }
+                    it.data?.let {
+                        setupCounter(it)
+                    }
+
+                }
+                Resource.RequestStatus.ERROR -> {
+                    it.data?.let { adapter.updateList(it) }
+                    it.message?.let {
+                        toast(it)
+                        finish()}
+
+                }
+                Resource.RequestStatus.LOADING -> swipeRefreshLayout.isRefreshing = true
+            }
+        })
+    }
+
+    private fun setupCounter(pullRequests: List<PullRequest>) {
+        val opened = pullRequests.count { status -> status.state == "open" }
+        val closed = pullRequests.count { status -> status.state == "close" }
+
+        val statusOpen = "$opened opened".toHtmlColored("#E29132")
+        val statusClose = " / $closed closed".toHtmlColored("#000000")
+
+        val spanned: Spanned
+        spanned = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(statusOpen + statusClose, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(statusOpen + statusClose)
+        }
+        status.text = spanned
+    }
+
+    private fun onPRItemClick(pr: PullRequest) {
+        val myIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pr.url))
+        startActivity(myIntent)
     }
 
 
     companion object {
 
-        private const val EXTRA_MOVIE_ID = "EXTRA_MOVIE_ID"
-        private const val EXTRA_REPOSITORY_NAME = "EXTRA_REPOSITORY_NAME"
-        private const val EXTRA_REPOSITORY_OWNER = "EXTRA_REPOSITORY_OWNER"
-        private const val EXTRA_MOVIE_TRANSITION_NAME = "EXTRA_MOVIE_TRANSITION_NAME"
+        const val EXTRA_REPOSITORY_NAME = "EXTRA_REPOSITORY_NAME"
+        const val EXTRA_REPOSITORY_OWNER = "EXTRA_REPOSITORY_OWNER"
 
 
-        fun startWithAnimation(activity: Activity, repositoryName: String, repositoryOwner: String, sharedImageView: View) {
-            val intent = Intent(activity, PullRequestActivity::class.java)
-            intent.putExtra(EXTRA_REPOSITORY_NAME, repositoryName)
-            intent.putExtra(EXTRA_REPOSITORY_OWNER, repositoryOwner)
-            intent.putExtra(EXTRA_MOVIE_TRANSITION_NAME, ViewCompat.getTransitionName(sharedImageView))
-
-            val options = ViewCompat.getTransitionName(sharedImageView)?.let {
-                ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        activity,
-                        sharedImageView,
-                        it)
-            }
-
-            activity.startActivity(intent, options?.toBundle())
-        }
     }
 }

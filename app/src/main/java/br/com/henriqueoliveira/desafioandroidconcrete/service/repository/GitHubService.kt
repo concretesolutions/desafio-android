@@ -14,7 +14,7 @@ interface GitHubService {
     fun getRepositoryList(@Query("q") technology: String, @Query("page") page: Int, @Query("sort") sort: String): Call<ServerResponse>
 
     @GET("repos/{owner}/{repository}/pulls")
-    fun fetchPullRequests(@Path("owner") owner: String, @Path("repository") repository: String): Call<List<PullRequest>>
+    fun getPullRequests(@Path("owner") owner: String, @Path("repository") repository: String): Call<List<PullRequest>>
 
 
 
