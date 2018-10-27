@@ -1,5 +1,12 @@
 package br.com.andreyneto.desafioandroid.service
 
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
+
 class ApiService {
     private val BASE_URL = "https://api.github.com/"
 
@@ -12,6 +19,13 @@ class ApiService {
     }
 
     interface GitHubApi {
+        @GET("search/repositories")
+        fun repos(@Query("page") page: Int,
+                  @Query("sort") sort: String = "stars",
+                  @Query("q") q: String = "language:Java"): Call<Any>
 
+        @GET("repos/{owner}/{repo}/pulls")
+        fun pulls(@Path("owner") owner: String,
+                  @Path("repo") repo: String) : Call<Any>
     }
 }
