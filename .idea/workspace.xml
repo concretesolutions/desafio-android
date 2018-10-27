@@ -36,11 +36,20 @@
       <file leaf-file-name="ApiService.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/br/com/andreyneto/desafioandroid/service/ApiService.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+            <state relative-caret-position="299">
+              <caret line="30" column="60" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
               <folding>
-                <element signature="e#50#204#0" expanded="true" />
+                <element signature="e#50#341#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Responses.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/com/andreyneto/desafioandroid/model/Responses.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -2425,6 +2434,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/br/com/andreyneto/desafioandroid/presenter/MainPresenter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/com/andreyneto/desafioandroid/services/MainService.kt" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/com/andreyneto/desafioandroid/model/Responses.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/com/andreyneto/desafioandroid/service/ApiService.kt" />
       </list>
     </option>
@@ -2735,12 +2745,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/com/andreyneto/desafioandroid/model/Responses.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/com/andreyneto/desafioandroid/service/ApiService.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+        <state relative-caret-position="299">
+          <caret line="30" column="60" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
           <folding>
-            <element signature="e#50#204#0" expanded="true" />
+            <element signature="e#50#341#0" expanded="true" />
           </folding>
         </state>
       </provider>
