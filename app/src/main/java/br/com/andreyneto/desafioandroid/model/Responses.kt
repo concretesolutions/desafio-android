@@ -1,6 +1,8 @@
 package br.com.andreyneto.desafioandroid.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class RepoResponse(
     var items: List<Repo>)
@@ -21,4 +23,6 @@ data class User(
 data class Pull(
         var title: String,
         var body: String,
+        var user: User,
+        var state: String,
         @SerializedName("html_url") var url: String)

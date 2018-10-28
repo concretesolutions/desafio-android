@@ -24,12 +24,15 @@ class RepoAdapter(private val repos: List<Repo>,
         p0.bindView(repos[p1])
     }
 
-    class ViewHolder(itemView: View, presenter: ReposContract.Presenter): RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, val presenter: ReposContract.Presenter): RecyclerView.ViewHolder(itemView) {
         fun bindView(repo: Repo) {
             itemView.lblRepoTitle.text = repo.name
             itemView.lblRepoDescripition.text = repo.description
             itemView.lblFork.text = repo.forks.toString()
             itemView.lblStars.text = repo.stars.toString()
+            itemView.setOnClickListener { presenter.openRepo(itemView.context,  repo) }
+            itemView.isClickable = true
+            itemView.separator.visibility = View.VISIBLE
         }
     }
 }
