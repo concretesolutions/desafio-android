@@ -26,6 +26,7 @@ class RepoAdapter(private val repos: List<Repo>,
 
     class ViewHolder(itemView: View, val presenter: ReposContract.Presenter): RecyclerView.ViewHolder(itemView) {
         fun bindView(repo: Repo) {
+            itemView.lblOwner.text = "${repo.owner.name}/"
             itemView.lblRepoTitle.text = repo.name
             itemView.lblRepoDescripition.text = repo.description
             itemView.lblFork.text = repo.forks.toString()

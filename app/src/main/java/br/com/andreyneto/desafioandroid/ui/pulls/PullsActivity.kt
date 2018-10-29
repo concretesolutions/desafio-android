@@ -2,6 +2,7 @@ package br.com.andreyneto.desafioandroid.ui.pulls
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import br.com.andreyneto.desafioandroid.R
@@ -26,6 +27,8 @@ class PullsActivity : AppCompatActivity(), PullsContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pulls)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        title = "Pull Requests"
         PullsPresenter(this, repo)
         populateRepo()
     }

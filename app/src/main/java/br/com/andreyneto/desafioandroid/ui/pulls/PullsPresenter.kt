@@ -30,7 +30,7 @@ class PullsPresenter(
     }
 
     override fun onFailure(call: Call<List<Pull>>, t: Throwable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onResponse(call: Call<List<Pull>>, response: Response<List<Pull>>) {
@@ -41,7 +41,7 @@ class PullsPresenter(
         val customTabsIntentBuilder = CustomTabsIntent.Builder(null)
         customTabsIntentBuilder.setToolbarColor(ContextCompat.getColor(ctx, R.color.colorPrimary));
         val customTabsIntent = customTabsIntentBuilder.build()
-        customTabsIntent.launchUrl(ctx, uri);
+        customTabsIntent.launchUrl(ctx, uri)
     }
 
 

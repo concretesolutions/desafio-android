@@ -36,7 +36,7 @@ class ReposPresenter(
     }
 
     override fun onFailure(call: Call<RepoResponse>, t: Throwable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onResponse(call: Call<RepoResponse>, response: Response<RepoResponse>) {

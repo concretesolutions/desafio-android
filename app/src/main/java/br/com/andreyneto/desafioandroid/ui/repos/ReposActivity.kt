@@ -2,6 +2,7 @@ package br.com.andreyneto.desafioandroid.ui.repos
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import br.com.andreyneto.desafioandroid.R

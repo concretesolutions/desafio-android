@@ -16,6 +16,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Material.Notification.Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,14 +29,15 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Material.Notification"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblPullTitle" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ownerPic"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
@@ -51,6 +53,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="16dp"
         android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Material.Notification.Emphasis"
         app:layout_constraintBottom_toBottomOf="@+id/ownerPic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ownerPic"
@@ -61,6 +64,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
+        android:alpha="0.12"
         android:background="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

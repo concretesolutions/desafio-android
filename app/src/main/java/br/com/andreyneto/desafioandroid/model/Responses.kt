@@ -17,8 +17,7 @@ data class Repo(
 
 data class User(
         @SerializedName("login") var name: String,
-        @SerializedName("avatar_url") var profilePic: String,
-        @SerializedName("name") var fullName: String)
+        @SerializedName("avatar_url") var profilePic: String)
 
 data class Pull(
         var title: String,
