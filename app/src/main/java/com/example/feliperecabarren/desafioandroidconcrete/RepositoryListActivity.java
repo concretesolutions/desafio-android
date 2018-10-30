@@ -1,6 +1,7 @@
 package com.example.feliperecabarren.desafioandroidconcrete;
 
-import android.content.Intent;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -8,7 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,10 +18,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import adapter.RepositoryListAdapter;
+import asynctasks.ProgressBarAsyncTask;
 import asynctasks.RepositoryAsyncTask;
 import constants.UrlConstans;
 import dto.RepositoryList;
 import utils.UtilsRepository;
+
 
 public class RepositoryListActivity extends AppCompatActivity {
 
@@ -34,13 +37,14 @@ public class RepositoryListActivity extends AppCompatActivity {
     int countPage = 1;
     int totalRepository = 0;
     UtilsRepository utilsRepository;
-
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_repositorio);
 
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         repositoryLists = new ArrayList<>();
         urlConstans = new UrlConstans();
         manager = new LinearLayoutManager(this);
@@ -49,6 +53,7 @@ public class RepositoryListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(manager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -67,13 +72,28 @@ public class RepositoryListActivity extends AppCompatActivity {
 
                 if(isScrolling && (currentItems + scrollOutItems == totalItems))
                 {
+                    recyclerView.setAlpha(0.1f);
+                    progressBar.setVisibility(View.VISIBLE);
                     isScrolling = false;
                     countPage++;
-                    callRepositoryUrl();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            callRepositoryUrl();
+                        }
+                    }, 1000);
                 }
             }
         });
-        callRepositoryUrl();
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setAlpha(0.1f);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                callRepositoryUrl();
+            }
+        }, 1000);
 
     }
 
@@ -85,6 +105,8 @@ public class RepositoryListActivity extends AppCompatActivity {
         }
         catch (Exception e){
             String error = e.toString();
+            progressBar.setVisibility(View.VISIBLE);
+            recyclerView.setAlpha(0.1f);
         }
 
     }
@@ -92,8 +114,6 @@ public class RepositoryListActivity extends AppCompatActivity {
     public void loadListRepository(JSONObject jsonObject){
         try{
             JSONArray jsonArray = jsonObject.getJSONArray("items");
-            totalRepository = jsonArray.length();
-
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObjectItem = jsonArray.getJSONObject(i);
                 JSONObject ownerObject = jsonObjectItem.getJSONObject("owner");
@@ -110,11 +130,14 @@ public class RepositoryListActivity extends AppCompatActivity {
                         jsonObjectItem.getString("forks_count")
                 ));
             }
+            totalRepository = repositoryLists.size() / countPage;
+
             repositoryListAdapter =  new RepositoryListAdapter(repositoryLists,this,this);
             repositoryListAdapter.notifyDataSetChanged();
-            //repositoryListAdapter.notifyItemInserted(repositoryLists.size());
             recyclerView.setAdapter(repositoryListAdapter);
-            recyclerView.scrollToPosition(totalRepository - 1);
+            recyclerView.scrollToPosition(totalRepository + 1);
+            progressBar.setVisibility(View.INVISIBLE);
+            recyclerView.setAlpha(1f);
         }catch (JSONException e){
 
         }

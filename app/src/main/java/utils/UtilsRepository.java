@@ -24,7 +24,7 @@ public class UtilsRepository {
     public UtilsRepository() {
     }
 
-    public static String convertStreamToString(InputStream is) {
+    public String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
         String line = null;
@@ -52,7 +52,7 @@ public class UtilsRepository {
         }
     }
     @Nullable
-    public static Bitmap loadBitmap(String url) {
+    public Bitmap loadBitmap(String url) {
         try{
             URL newurl = new URL(url);
             return BitmapFactory.decodeStream(newurl.openConnection().getInputStream());

@@ -12,37 +12,72 @@
     android:layout_marginTop="3dp"
     app:cardElevation="3dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textViewPullRequestTitle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="TextView"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textViewPullRequestBody"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="TextView"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7">
 
-        <TextView
-            android:id="@+id/textViewPullRequestUserName"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="TextView"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5">
+                    <ImageView
+                        android:id="@+id/imageViewPullRequestAvatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@mipmap/github"
+                        />
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageViewPullRequestAvatar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@mipmap/github"
-            />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/textViewPullRequestUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="TextView"/>
 
-    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/textViewPullRequestTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="TextView"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/textViewPullRequestBody"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="TextView"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
 
 </android.support.v7.widget.CardView>

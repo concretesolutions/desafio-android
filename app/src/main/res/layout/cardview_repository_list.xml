@@ -10,7 +10,8 @@
     android:layout_marginLeft="7dp"
     android:layout_marginRight="7dp"
     android:layout_marginTop="3dp"
-    app:cardElevation="3dp">
+    app:cardElevation="3dp"
+    android:id="@+id/CardViewRepositoryList">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,99 +21,116 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="0.5">
+            android:layout_weight="0.3"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_weight="0.7">
+
+                <ImageView
+                    android:id="@+id/imageViewRepositoryAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@mipmap/github" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:orientation="vertical">
-                    <LinearLayout
+
+                    <TextView
+                        android:id="@+id/textViewRepositoryName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="0.5">
-                        <TextView
-                            android:id="@+id/textViewRepositoryName"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="TextView"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="0.5">
-                        <TextView
-                            android:id="@+id/textViewRepositoryDescription"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="TextView"/>
-                    </LinearLayout>
-
-
-
+                        android:text="TextView"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:orientation="vertical">
-                    <LinearLayout
+
+                    <TextView
+                        android:id="@+id/textViewRepositoryDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:id="@+id/imageViewRepositoryAvatar"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:srcCompat="@mipmap/github"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
+                        android:text="TextView"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewRepositoryUsername"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/textViewRepositoryUsername"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="TextView"
-                            />
-                    </LinearLayout>
+                        android:text="TextView"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
                 </LinearLayout>
 
             </LinearLayout>
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="0.5">
+            android:layout_weight="0.7"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textViewRepositoryBranch"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="TextView"
-                android:layout_weight="0.5"/>
-            <TextView
-                android:id="@+id/textViewRepositoryFavorite"
+                android:layout_weight="0.5">
+                <TextView
+                    android:id="@+id/textViewRepositoryBranch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="TextView"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="TextView"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.5">
+                <TextView
+                    android:id="@+id/textViewRepositoryFavorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="TextView"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
-
-
 
     </LinearLayout>
 
