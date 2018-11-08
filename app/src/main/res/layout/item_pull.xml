@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/item_margin"
+    android:baselineAligned="false"
+    android:id="@+id/item_layout">
+
+    <LinearLayout
+        android:id="@+id/pull_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/features_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/item_inner_vertical_margin"
+            android:layout_marginLeft="@dimen/icons_image"
+            android:layout_marginRight="@dimen/icons_image">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_inner_vertical_margin"
+                android:text=""
+                android:textSize="@dimen/text_title"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/description"
+                android:hint="name" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/author_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/item_inner_vertical_margin"
+        android:layout_marginLeft="@dimen/icons_image"
+        android:layout_marginTop="@dimen/icons_image"
+        android:layout_marginRight="@dimen/icons_image">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="@dimen/author_image"
+            android:layout_height="@dimen/author_image"
+            android:layout_marginBottom="@dimen/item_inner_vertical_margin" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/icons_image"
+            android:layout_marginTop="@dimen/icons_image"
+            android:text=""
+            android:textSize="@dimen/text_subtitle"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+
+</LinearLayout>

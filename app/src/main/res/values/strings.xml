@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">desafio-android</string>
+
+    <string name="error_toast">Error, intentalo denuevo</string>
+</resources>
