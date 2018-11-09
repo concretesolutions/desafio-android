@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         languages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                repoList.clear();
                 getRepositoriesData(languages.getSelectedItem().toString());
             }
 
@@ -96,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addRepositories(ArrayList<RepoList> repos) {
-        repoList.clear();
         repoAdapter.notifyItemRangeInserted(repoList.size(), repos.size());
         repoList.addAll(repos);
         callRecyclerView(repoList);
