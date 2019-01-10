@@ -1,4 +1,4 @@
-package br.com.appdesafio.view;
+package br.com.appdesafio.view.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
