@@ -1,0 +1,122 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <variable
+            name="item"
+            type="br.com.appdesafio.model.pojo.Item" />
+    </data>
+
+
+    <RelativeLayout
+        android:id="@+id/rlt_item_repository"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp">
+
+
+
+
+        <TextView
+            android:id="@+id/txt_name_repository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.SubTitle"
+            android:text="@{item.name}" />
+
+        <TextView
+            android:id="@+id/txt_description_repository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_name_repository"
+            android:layout_alignEnd="@id/img_owner"
+            android:layout_alignParentStart="true"
+            style="@style/AppTheme.SubTitle"
+            android:layout_marginEnd="80dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:scrollHorizontally="false"
+            android:text="@{item.description}"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/img_owner" />
+
+        <ImageView
+            android:id="@+id/img_fork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/txt_user_name"
+            android:adjustViewBounds="true"
+            android:background="@drawable/ic_fork"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/txt_fork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/txt_user_name"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="25dp"
+            android:text="@{Integer.toString(item.forksCount)}"/>
+
+        <ImageView
+            android:id="@+id/img_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_fork"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/txt_fork"
+            android:adjustViewBounds="true"
+            android:background="@drawable/ic_star"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/txt_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/txt_user_name"
+            android:layout_toLeftOf="@id/txt_user_name"
+            android:layout_toRightOf="@id/img_star"
+            android:text="@{Double.toString(item.score)}" />
+
+
+        <ImageView
+            android:id="@+id/img_owner"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/txt_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/img_owner"
+            android:layout_below="@+id/img_owner"
+            android:ellipsize="end"
+            android:scrollHorizontally="false"
+            android:text="@{item.owner.login}"
+            />
+
+
+        <TextView
+            android:id="@+id/txt_full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_user_name"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="45dp"
+
+            android:text="" />
+
+
+    </RelativeLayout>
+
+
+</layout>

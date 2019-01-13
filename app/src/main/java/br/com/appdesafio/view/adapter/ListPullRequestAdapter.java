@@ -1,11 +1,10 @@
 package br.com.appdesafio.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
-
 import android.graphics.drawable.Drawable;
-
-import android.os.Bundle;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -17,42 +16,40 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.com.appdesafio.R;
-import br.com.appdesafio.databinding.RowRepositoryBinding;
-import br.com.appdesafio.model.pojo.Item;
-
-import br.com.appdesafio.util.IntentActions;
-import br.com.appdesafio.util.OpenScreenUtil;
-import br.com.appdesafio.view.adapter.viewholder.ListRepositoryViewHolder;
+import br.com.appdesafio.databinding.RowPullRequestBinding;
 
 
-public class LisRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryViewHolder> {
-    private List<Item> mItemList;
+import br.com.appdesafio.model.pojo.PullRequest;
+import br.com.appdesafio.view.adapter.viewholder.ListPullRequestViewHolder;
+
+public class ListPullRequestAdapter extends RecyclerView.Adapter<ListPullRequestViewHolder> {
+    private List<PullRequest> mItemList;
     private LayoutInflater layoutInflater;
     private Context mContext;
 
-    public LisRepositoryAdapter(final Context context) {
+    public ListPullRequestAdapter(final Context context) {
         this.mContext = context;
     }
 
-    public void setRepository(final List<Item> items){
+    public void setRepository(final List<PullRequest> items){
         this.mItemList = items;
         notifyDataSetChanged();
     }
 
     @Override
-    public ListRepositoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListPullRequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
-        RowRepositoryBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.row_repository, parent, false);
-        return new ListRepositoryViewHolder(binding);
+        RowPullRequestBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.row_pull_request, parent, false);
+        return new ListPullRequestViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(ListRepositoryViewHolder holder, int position) {
+    public void onBindViewHolder(ListPullRequestViewHolder holder, int position) {
 
-        holder.binding.setItem(mItemList.get(position));
+        holder.binding.setPull(mItemList.get(position));
 
         final Drawable[] image = new Drawable[1];
 
@@ -60,7 +57,7 @@ public class LisRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryVie
         holder.binding.imgOwner.buildDrawingCache();
         Picasso
                 .get()
-                .load(mItemList.get(position).getOwner().getAvatarUrl())
+                .load(mItemList.get(position).getUser().getAvatarUrl())
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .into(holder.binding.imgOwner, new Callback() {
                     @Override
@@ -72,7 +69,7 @@ public class LisRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryVie
                     public void onError(Exception e) {
                         Picasso
                                 .get()
-                                .load(mItemList.get(position).getOwner().getAvatarUrl())
+                                .load(mItemList.get(position).getUser().getAvatarUrl())
                                 .into(holder.binding.imgOwner, new Callback() {
                                     @Override
                                     public void onSuccess() {
@@ -89,12 +86,10 @@ public class LisRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryVie
 
                 });
         holder.binding.rltItemRepository.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("creator", mItemList.get(position).getOwner().getLogin());
-            bundle.putSerializable("repository", mItemList.get(position).getName());
-            OpenScreenUtil.openScreen(mContext,
-                    IntentActions.LIST_PULL_REQUEST_ACTIVITY.getAction(),
-                    bundle, false);
+            String url = mItemList.get(position).getHtmlUrl();
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            mContext.startActivity(i);
         });
     }
 
@@ -102,5 +97,6 @@ public class LisRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryVie
     public int getItemCount() {
         return mItemList.size();
     }
+
 
 }

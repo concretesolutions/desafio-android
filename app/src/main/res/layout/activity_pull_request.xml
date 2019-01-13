@@ -8,7 +8,7 @@
         <!--       <variable name="user" type="br.com.unasusamazonia.appcdr.model.pojo.User"/>-->
         <variable
             name="viewModel"
-            type="br.com.appdesafio.viewmodel.LisRepositoryViewModel" />
+            type="br.com.appdesafio.viewmodel.ListPullRequestViewModel" />
     </data>
 
     <ScrollView
@@ -33,7 +33,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/colorPrimary"
                     app:layout_collapseMode="pin"
-                    app:title="@string/list_repositorio"
+                    app:title="@string/pull_request"
                     app:titleTextAppearance="@style/title_bar" />
             </android.support.design.widget.AppBarLayout>
 
@@ -50,7 +50,9 @@
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+                    android:orientation="horizontal">
+
+                </android.support.v7.widget.RecyclerView>
 
 
             </LinearLayout>

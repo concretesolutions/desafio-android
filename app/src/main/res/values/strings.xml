@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">appdesafio</string>
     <string name="action_settings">Settings</string>
+    <string name="list_repositorio">Lista de repositório</string>
+    <string name="pull_request">Lista de pull request</string>
+    <string name="font_family_regular">sans-serif</string>
 </resources>
