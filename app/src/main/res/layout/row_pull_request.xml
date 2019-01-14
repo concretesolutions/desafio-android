@@ -37,6 +37,7 @@
                 android:layout_alignStart="@id/img_owner"
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="-35dp"
+                style="@style/AppTheme.SubTitle"
                 android:text="@{pull.user.login}" />
 
 
