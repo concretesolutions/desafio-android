@@ -15,56 +15,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:orientation="vertical">
-
-
-    <TextView
-        android:id="@+id/txt_title_pull"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/AppTheme.SubTitle"
-        android:text="@{pull.title}" />
-
-    <TextView
-        android:id="@+id/txt_description_pull"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:scrollHorizontally="false"
-        style="@style/AppTheme.SubTitle"
-        android:text="@{pull.body}"
-        android:layout_marginBottom="10dp"
- />
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-       >
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/img_owner"
+                android:id="@+id/img_user"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:scaleType="fitXY"
-               />
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/txt_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img_owner"
+                android:layout_below="@+id/img_user"
                 android:layout_alignStart="@id/img_owner"
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="-35dp"
                 android:text="@{pull.user.login}" />
 
 
-
         </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/txt_title_pull"
+            style="@style/AppTheme.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{pull.title}" />
+
+        <TextView
+            android:id="@+id/txt_description_pull"
+            style="@style/AppTheme.SubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:scrollHorizontally="false"
+            android:text="@{pull.body}" />
+
+
 
 
     </LinearLayout>

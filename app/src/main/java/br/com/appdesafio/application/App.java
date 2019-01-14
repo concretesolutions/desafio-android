@@ -15,6 +15,7 @@ import com.squareup.picasso.Request;
 import javax.inject.Inject;
 
 import br.com.appdesafio.di.DaggerAppComponent;
+import br.com.appdesafio.model.persistence.AppDatabase;
 import br.com.appdesafio.task.AppExecutors;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
@@ -29,9 +30,9 @@ public class App extends Application implements HasActivityInjector {
 
     private static App instance;
 
-   /* @Inject
+    @Inject
     public AppDatabase appDatabase;
-*/
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -48,7 +49,7 @@ public class App extends Application implements HasActivityInjector {
 
 
     /**
-     * Ã© uma Ãºnica instancia da biblioteca picasso e configura o cache de imagens.
+     * Unica instancia da biblioteca picasso que  configura o cache de imagens.
      * @return
      */
     private Picasso getPicassoCahe(){
@@ -67,12 +68,8 @@ public class App extends Application implements HasActivityInjector {
         };
         builder.requestTransformer(requestTransformer);
 
-        builder.listener(new Picasso.Listener() {
-            @Override
-            public void onImageLoadFailed(Picasso picasso, Uri uri,
-                                          Exception exception) {
+        builder.listener((picasso, uri, exception) -> {
 
-            }
         });
 
         return builder.build();

@@ -17,11 +17,18 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.Title">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:alpha">0.8</item>
+
+        <item name="android:fontFamily">@string/font_family_regular</item>
+    </style>
+
     <style name="AppTheme.SubTitle">
         <item name="android:textSize">@dimen/text_size_subtitle</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:alpha">0.6</item>
-
+        <item name="android:alpha">0.4</item>
         <item name="android:fontFamily">@string/font_family_regular</item>
     </style>
 
