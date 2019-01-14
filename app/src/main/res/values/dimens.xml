@@ -8,5 +8,6 @@
     <dimen name="width_size_text_fields">426dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="text_size_subtitle">16sp</dimen>
+    <dimen name="text_size_title">18sp</dimen>
     <dimen name="margin_left">83dp</dimen>
 </resources>

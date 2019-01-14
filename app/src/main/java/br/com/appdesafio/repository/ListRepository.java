@@ -15,10 +15,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.appdesafio.model.entity.UrlEntity;
+import br.com.appdesafio.model.persistence.AppDatabase;
 import br.com.appdesafio.model.persistence.SharedPreference;
+import br.com.appdesafio.model.pojo.Item;
 import br.com.appdesafio.model.pojo.PullRequest;
 import br.com.appdesafio.model.pojo.Repository;
 import br.com.appdesafio.service.IService;
+import br.com.appdesafio.task.AppExecutors;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,12 +33,20 @@ public class ListRepository {
     public IService mIservice;
     public SharedPreference sharedPreferences;
     public Context mContext;
+    public AppDatabase mAppDatabase;
+    public AppExecutors mAppExecutors;
 
     @Inject
-    public ListRepository(final  IService service, final SharedPreference preference, final Application application){
+    public ListRepository(final  IService service,
+                          final SharedPreference preference,
+                          final Application application,
+                          final AppExecutors appExecutors,
+                          final AppDatabase appDatabase){
         this.mIservice = service;
         this.sharedPreferences = preference;
         this.mContext = application;
+        this.mAppExecutors = appExecutors;
+        this.mAppDatabase = appDatabase;
 
     }
 
@@ -46,14 +58,13 @@ public class ListRepository {
      */
     public LiveData<Repository> getListRepository(final int page) {
         final MutableLiveData<Repository> data = new MutableLiveData<>();
-
-        //final String token = sharedPreferences.getIsToken(mContext);
         final Call<JsonObject> call = this.mIservice.getListRepository("language:Java", "stars", String.valueOf(page));
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(final Call<JsonObject> call, final Response<JsonObject> response) {
                 Gson gson = new Gson();
                 Repository repository = gson.fromJson(response.body(), Repository.class);
+                save(repository.getItems());
                 data.setValue(repository);
 
             }
@@ -76,8 +87,6 @@ public class ListRepository {
      */
     public LiveData<List<PullRequest>> getListPullRequest(final String creator, final String repository) {
         final MutableLiveData<List<PullRequest> > data = new MutableLiveData<>();
-
-        //final String token = sharedPreferences.getIsToken(mContext);
         final Call<JsonArray> call = this.mIservice.getListPullRequest(creator, repository);
         call.enqueue(new Callback<JsonArray>() {
             @Override
@@ -96,6 +105,23 @@ public class ListRepository {
         });
 
         return data;
+    }
+
+    public void save(final List<Item> listUrl) {
+
+        final Runnable runnable = () -> {
+            for (Item item : listUrl) {
+                UrlEntity url = new UrlEntity();
+                url.setUserName(item.getOwner().getLogin());
+                url.setUrl(item.getOwner().getAvatarUrl());
+                mAppDatabase.urlDAO().insertAll(url);
+            }
+
+
+        };
+
+        mAppExecutors.diskIO().execute(runnable);
+
     }
 
 

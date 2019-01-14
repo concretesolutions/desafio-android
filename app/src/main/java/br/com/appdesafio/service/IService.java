@@ -29,9 +29,7 @@ public interface IService {
     Call<JsonObject> getListRepository(@Query("q") String language,
                                        @Query("sort") String sort,
                                        @Query("page") String page);
-/*    Call<FilterResponse> getFilterList(@Path("Id") long customerId,
-                                       @Query("Type") String responseType,
-                                       @Query("SearchText") String searchText);*/
+
 
     //https://api.github.com/repos/<criador>/<repositório>/pulls
     @GET("/repos/{criador}/{repositorio}/pulls")

@@ -54,15 +54,15 @@ public class ListPullRequestAdapter extends RecyclerView.Adapter<ListPullRequest
         final Drawable[] image = new Drawable[1];
 
 
-        holder.binding.imgOwner.buildDrawingCache();
+        holder.binding.imgUser.buildDrawingCache();
         Picasso
                 .get()
                 .load(mItemList.get(position).getUser().getAvatarUrl())
                 .networkPolicy(NetworkPolicy.OFFLINE)
-                .into(holder.binding.imgOwner, new Callback() {
+                .into(holder.binding.imgUser, new Callback() {
                     @Override
                     public void onSuccess() {
-                        image[0] = holder.binding.imgOwner.getDrawable();
+                        image[0] = holder.binding.imgUser.getDrawable();
                     }
 
                     @Override
@@ -70,10 +70,10 @@ public class ListPullRequestAdapter extends RecyclerView.Adapter<ListPullRequest
                         Picasso
                                 .get()
                                 .load(mItemList.get(position).getUser().getAvatarUrl())
-                                .into(holder.binding.imgOwner, new Callback() {
+                                .into(holder.binding.imgUser, new Callback() {
                                     @Override
                                     public void onSuccess() {
-                                        image[0] = holder.binding.imgOwner.getDrawable();
+                                        image[0] = holder.binding.imgUser.getDrawable();
                                     }
 
                                     @Override

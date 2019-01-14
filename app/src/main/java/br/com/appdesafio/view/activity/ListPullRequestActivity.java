@@ -2,10 +2,11 @@ package br.com.appdesafio.view.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import javax.inject.Inject;
 
@@ -16,9 +17,8 @@ import br.com.appdesafio.viewmodel.ListPullRequestViewModel;
 
 public class ListPullRequestActivity extends BaseActivity {
 
-    ActivityPullRequestBinding mBinding;
+    ActivityPullRequestBinding activityPullRequestBinding;
     private RecyclerView recyclerView;
-    private EndlessRecyclerViewScrollListener scrollListener;
     private ListPullRequestAdapter adapter;
     @Inject
     public ListPullRequestViewModel mViewModel;
@@ -26,27 +26,16 @@ public class ListPullRequestActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_pull_request);
+        activityPullRequestBinding = DataBindingUtil.setContentView(this, R.layout.activity_pull_request);
         configureRecyclerView();
-        String creator = getIntent().getStringExtra("creator");
-        String repository = getIntent().getStringExtra("repository");
         configureToolbar();
+        getListPullRequest();
 
-        mViewModel.getListPullRequest(creator, repository).observe(this, result -> {
 
-            if (result != null) {
-                adapter.setRepository(result);
-                recyclerView.setAdapter(adapter);
-            } else {
-                //aviso de erro
-                // binding.emptyState.setVisibility(View.VISIBLE);
-            }
-
-        });
     }
 
     public void configureToolbar() {
-        Toolbar toolbar = mBinding.toolbar;
+        Toolbar toolbar = activityPullRequestBinding.toolbar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -55,28 +44,38 @@ public class ListPullRequestActivity extends BaseActivity {
     }
 
     public void configureRecyclerView() {
-        recyclerView = mBinding.recyclerView;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                //addDataToList(page);
-            }
-        };
-        // Adds the scroll listener to RecyclerView
-        recyclerView.addOnScrollListener(scrollListener);
-
+        recyclerView = activityPullRequestBinding.recyclerView;
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         adapter = new ListPullRequestAdapter(this);
+    }
+
+    public void getListPullRequest() {
+        String creator = getIntent().getStringExtra("creator");
+        String repository = getIntent().getStringExtra("repository");
+        mViewModel.getListPullRequest(creator, repository).observe(this, result -> {
+
+            if (result != null && result.size() > 0) {
+                adapter.setRepository(result);
+                recyclerView.setAdapter(adapter);
+
+            } else if (result != null && result.size() == 0) {
+                activityPullRequestBinding.emptyState.setBackground(getDrawable(R.drawable.empty_state_pull_request));
+                activityPullRequestBinding.emptyState.setVisibility(View.VISIBLE);
+            } else {
+                //aviso de erro
+                activityPullRequestBinding.emptyState.setVisibility(View.VISIBLE);
+            }
+
+            activityPullRequestBinding.itemProgressBar.setVisibility(View.GONE);
+
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home)
-        {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

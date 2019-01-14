@@ -1,6 +1,7 @@
 package br.com.appdesafio.di;
 
 import android.app.Application;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -14,6 +15,7 @@ import javax.inject.Singleton;
 
 import br.com.appdesafio.application.App;
 import br.com.appdesafio.constants.Constants;
+import br.com.appdesafio.model.persistence.AppDatabase;
 import br.com.appdesafio.service.IService;
 import br.com.appdesafio.task.AppExecutors;
 import br.com.appdesafio.task.ExecutorsBackground;
@@ -138,12 +140,12 @@ public abstract class AppModule {
      * @param
      * @return
      */
-/*    @Singleton
+   @Singleton
     @Provides
     public static AppDatabase provideDB(final Application context) {
         return Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "git_hub_db")
                 .fallbackToDestructiveMigration().build();
-    }*/
+    }
 
     @Singleton
     @Provides

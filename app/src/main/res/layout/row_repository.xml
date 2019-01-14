@@ -24,7 +24,7 @@
             android:id="@+id/txt_name_repository"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/AppTheme.SubTitle"
+            style="@style/AppTheme.Title"
             android:text="@{item.name}" />
 
         <TextView
