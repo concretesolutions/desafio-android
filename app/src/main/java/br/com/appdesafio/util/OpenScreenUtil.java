@@ -8,7 +8,7 @@ import android.os.Bundle;
 public class OpenScreenUtil {
 
     /**
-     * method responsible for opening an activity.
+     * Method responsible for opening an activity.
      * @param context, activity context.
      * @param action, the action to be taken, in case which activity should be opened.
      * @param bundle, bundle with information that may or may not be passed to the next screen.

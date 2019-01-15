@@ -3,24 +3,21 @@ package br.com.appdesafio.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 import br.com.appdesafio.R;
 import br.com.appdesafio.databinding.RowPullRequestBinding;
-
-
 import br.com.appdesafio.model.pojo.PullRequest;
+import br.com.appdesafio.util.DateUtil;
 import br.com.appdesafio.view.adapter.viewholder.ListPullRequestViewHolder;
+
+
 
 public class ListPullRequestAdapter extends RecyclerView.Adapter<ListPullRequestViewHolder> {
     private List<PullRequest> mItemList;
@@ -50,9 +47,7 @@ public class ListPullRequestAdapter extends RecyclerView.Adapter<ListPullRequest
     public void onBindViewHolder(ListPullRequestViewHolder holder, int position) {
 
         holder.binding.setPull(mItemList.get(position));
-
-        final Drawable[] image = new Drawable[1];
-
+        holder.binding.txtDatePull.setText(DateUtil.formateDate(mItemList.get(position).getUpdatedAt()));
 
         holder.binding.imgUser.buildDrawingCache();
         Picasso
@@ -62,7 +57,7 @@ public class ListPullRequestAdapter extends RecyclerView.Adapter<ListPullRequest
                 .into(holder.binding.imgUser, new Callback() {
                     @Override
                     public void onSuccess() {
-                        image[0] = holder.binding.imgUser.getDrawable();
+
                     }
 
                     @Override
@@ -73,7 +68,6 @@ public class ListPullRequestAdapter extends RecyclerView.Adapter<ListPullRequest
                                 .into(holder.binding.imgUser, new Callback() {
                                     @Override
                                     public void onSuccess() {
-                                        image[0] = holder.binding.imgUser.getDrawable();
                                     }
 
                                     @Override

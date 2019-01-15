@@ -2,7 +2,6 @@ package br.com.appdesafio.model.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 public class Item implements Serializable {
@@ -208,9 +207,6 @@ public class Item implements Serializable {
     @SerializedName("open_issues_count")
     @Expose
     private Integer openIssuesCount;
-    @SerializedName("license")
-    @Expose
-    private License license;
     @SerializedName("forks")
     @Expose
     private Integer forks;
@@ -763,13 +759,7 @@ public class Item implements Serializable {
         this.openIssuesCount = openIssuesCount;
     }
 
-    public License getLicense() {
-        return license;
-    }
 
-    public void setLicense(License license) {
-        this.license = license;
-    }
 
     public Integer getForks() {
         return forks;

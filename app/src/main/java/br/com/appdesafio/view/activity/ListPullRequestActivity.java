@@ -8,25 +8,39 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.appdesafio.R;
-import br.com.appdesafio.databinding.ActivityPullRequestBinding;
+import br.com.appdesafio.databinding.ActivityListPullRequestBinding;
+import br.com.appdesafio.model.pojo.PullRequest;
 import br.com.appdesafio.view.adapter.ListPullRequestAdapter;
 import br.com.appdesafio.viewmodel.ListPullRequestViewModel;
 
+/**
+ * class responsible for displaying the pull request list.
+ */
+
 public class ListPullRequestActivity extends BaseActivity {
 
-    ActivityPullRequestBinding activityPullRequestBinding;
+    ActivityListPullRequestBinding activityPullRequestBinding;
     private RecyclerView recyclerView;
     private ListPullRequestAdapter adapter;
     @Inject
     public ListPullRequestViewModel mViewModel;
+    public boolean stateOnResume;
+
+    /**
+     * Initialize the fundamental components of the activity.
+     *
+     * @param savedInstanceState
+     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityPullRequestBinding = DataBindingUtil.setContentView(this, R.layout.activity_pull_request);
+        activityPullRequestBinding = DataBindingUtil.setContentView(this, R.layout.activity_list_pull_request);
         configureRecyclerView();
         configureToolbar();
         getListPullRequest();
@@ -34,6 +48,10 @@ public class ListPullRequestActivity extends BaseActivity {
 
     }
 
+
+    /**
+     * Configure the activity toolbar.
+     */
     public void configureToolbar() {
         Toolbar toolbar = activityPullRequestBinding.toolbar;
         setSupportActionBar(toolbar);
@@ -43,12 +61,19 @@ public class ListPullRequestActivity extends BaseActivity {
 
     }
 
+    /**
+     * Configure activity recyclerview
+     */
+
     public void configureRecyclerView() {
-        recyclerView = activityPullRequestBinding.recyclerView;
+        recyclerView = activityPullRequestBinding.recyclerPullRequest;
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         adapter = new ListPullRequestAdapter(this);
     }
 
+    /**
+     * Method responsible for fetching the pull request list from a repository.
+     */
     public void getListPullRequest() {
         String creator = getIntent().getStringExtra("creator");
         String repository = getIntent().getStringExtra("repository");
@@ -58,11 +83,10 @@ public class ListPullRequestActivity extends BaseActivity {
                 adapter.setRepository(result);
                 recyclerView.setAdapter(adapter);
 
-            } else if (result != null && result.size() == 0) {
-                activityPullRequestBinding.emptyState.setBackground(getDrawable(R.drawable.empty_state_pull_request));
+            } else if (result != null && result.size() == 0) { /** list empty, server does not return any item**/
+                activityPullRequestBinding.emptyState.setText(getString(R.string.message_list_empty));
                 activityPullRequestBinding.emptyState.setVisibility(View.VISIBLE);
             } else {
-                //aviso de erro
                 activityPullRequestBinding.emptyState.setVisibility(View.VISIBLE);
             }
 
@@ -77,5 +101,11 @@ public class ListPullRequestActivity extends BaseActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.stateOnResume = true;
     }
 }

@@ -13,10 +13,8 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Request;
 
 import javax.inject.Inject;
-
 import br.com.appdesafio.di.DaggerAppComponent;
-import br.com.appdesafio.model.persistence.AppDatabase;
-import br.com.appdesafio.task.AppExecutors;
+import br.com.appdesafio.util.ConnectionUtil;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
@@ -25,13 +23,8 @@ public class App extends Application implements HasActivityInjector {
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingActivityInjector;
 
-    @Inject
-    public AppExecutors appExecutors;
 
     private static App instance;
-
-    @Inject
-    public AppDatabase appDatabase;
 
     @Override
     public void onCreate() {
@@ -49,7 +42,7 @@ public class App extends Application implements HasActivityInjector {
 
 
     /**
-     * Unica instancia da biblioteca picasso que  configura o cache de imagens.
+     * The only instance of the picasso library that configures the cache of images.
      * @return
      */
     private Picasso getPicassoCahe(){
@@ -91,10 +84,16 @@ public class App extends Application implements HasActivityInjector {
 
     public static boolean hasNetwork ()
     {
-        return instance.checkIfHasNetwork();
+        //return instance.checkIfHasNetwork();
+        return ConnectionUtil.isNetworkAvailable(instance);
     }
 
-    public boolean checkIfHasNetwork()
+
+    /**
+     *
+     * @return
+     */
+    public boolean checkConnectionInternet()
     {
         ConnectivityManager cm = (ConnectivityManager) getSystemService( Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();

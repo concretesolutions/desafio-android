@@ -94,12 +94,12 @@ public class PullRequest {
     @SerializedName("statuses_url")
     @Expose
     private String statusesUrl;
-    @SerializedName("head")
+/*    @SerializedName("head")
     @Expose
-    private Head head;
-    @SerializedName("_links")
+    private Head head;*/
+/*    @SerializedName("_links")
     @Expose
-    private Links links;
+    private Links links;*/
     @SerializedName("author_association")
     @Expose
     private String authorAssociation;
@@ -336,21 +336,7 @@ public class PullRequest {
         this.statusesUrl = statusesUrl;
     }
 
-    public Head getHead() {
-        return head;
-    }
 
-    public void setHead(Head head) {
-        this.head = head;
-    }
-
-    public Links getLinks() {
-        return links;
-    }
-
-    public void setLinks(Links links) {
-        this.links = links;
-    }
 
     public String getAuthorAssociation() {
         return authorAssociation;

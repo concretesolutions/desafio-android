@@ -30,7 +30,7 @@
                 android:scaleType="fitXY" />
 
             <TextView
-                android:id="@+id/txt_user_name"
+                android:id="@+id/txt_name_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/img_user"
@@ -58,11 +58,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:scrollHorizontally="false"
             android:text="@{pull.body}" />
+
+        <TextView
+            android:id="@+id/txt_date_pull"
+            style="@style/AppTheme.SubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+        />
 
 
 
