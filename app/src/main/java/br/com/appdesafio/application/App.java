@@ -3,6 +3,9 @@ package br.com.appdesafio.application;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 
 import com.squareup.picasso.LruCache;
@@ -10,9 +13,8 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Request;
 
 import javax.inject.Inject;
-
 import br.com.appdesafio.di.DaggerAppComponent;
-import br.com.appdesafio.task.AppExecutors;
+import br.com.appdesafio.util.ConnectionUtil;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
@@ -21,15 +23,13 @@ public class App extends Application implements HasActivityInjector {
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingActivityInjector;
 
-    @Inject
-    public AppExecutors appExecutors;
 
-   /* @Inject
-    public AppDatabase appDatabase;
-*/
+    private static App instance;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         Picasso.setSingletonInstance(getPicassoCahe());
         DaggerAppComponent.builder().application(this)
                 .build().inject(this);
@@ -42,7 +42,7 @@ public class App extends Application implements HasActivityInjector {
 
 
     /**
-     * Ã© uma Ãºnica instancia da biblioteca picasso e configura o cache de imagens.
+     * The only instance of the picasso library that configures the cache of images.
      * @return
      */
     private Picasso getPicassoCahe(){
@@ -61,12 +61,8 @@ public class App extends Application implements HasActivityInjector {
         };
         builder.requestTransformer(requestTransformer);
 
-        builder.listener(new Picasso.Listener() {
-            @Override
-            public void onImageLoadFailed(Picasso picasso, Uri uri,
-                                          Exception exception) {
+        builder.listener((picasso, uri, exception) -> {
 
-            }
         });
 
         return builder.build();
@@ -79,5 +75,28 @@ public class App extends Application implements HasActivityInjector {
         activityManager.getMemoryInfo(memoryInfo);
         double availableMemory= memoryInfo.availMem;
         return (int)(percent*availableMemory/100);
+    }
+
+    public static App getInstance ()
+    {
+        return instance;
+    }
+
+    public static boolean hasNetwork ()
+    {
+        //return instance.checkIfHasNetwork();
+        return ConnectionUtil.isNetworkAvailable(instance);
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    public boolean checkConnectionInternet()
+    {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService( Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

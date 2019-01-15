@@ -2,24 +2,42 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.appdesafio">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:name=".application.App"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_git_hub"
+        android:roundIcon="@mipmap/ic_git_hub"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.activity.LisRepositoryActivity"
+        android:name=".view.activity.ListRepositoryActivity"
+        android:label="@string/app_name"
+        android:configChanges="orientation|screenSize"
+        android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
+        <activity
+            android:name=".view.activity.ListPullRequestActivity"
             android:label="@string/app_name"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="br.com.appdesafio.LIST_PULL_REQUEST_ACTIVITY" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>
