@@ -33,12 +33,16 @@
                 app:titleTextAppearance="@style/title_bar" />
         </android.support.design.widget.AppBarLayout>
 
-        <ImageView
+        <TextView
             android:id="@+id/empty_state"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/empty_state"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="@string/message_error"
             android:visibility="gone" />
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -60,7 +64,7 @@
 
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view"
+                        android:id="@+id/recycler_pull_request"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">

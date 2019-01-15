@@ -2,14 +2,10 @@ package br.com.appdesafio.view.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-
-import android.graphics.drawable.Drawable;
-
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -25,16 +21,16 @@ import br.com.appdesafio.util.OpenScreenUtil;
 import br.com.appdesafio.view.adapter.viewholder.ListRepositoryViewHolder;
 
 
-public class LisRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryViewHolder> {
+public class ListRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryViewHolder> {
     private List<Item> mItemList;
     private LayoutInflater layoutInflater;
     private Context mContext;
 
-    public LisRepositoryAdapter(final Context context) {
+    public ListRepositoryAdapter(final Context context) {
         this.mContext = context;
     }
 
-    public void setRepository(final List<Item> items){
+    public void setRepository(final List<Item> items) {
         this.mItemList = items;
         notifyDataSetChanged();
     }
@@ -53,10 +49,6 @@ public class LisRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryVie
     public void onBindViewHolder(ListRepositoryViewHolder holder, int position) {
 
         holder.binding.setItem(mItemList.get(position));
-
-        final Drawable[] image = new Drawable[1];
-
-
         holder.binding.imgOwner.buildDrawingCache();
         Picasso
                 .get()
@@ -65,7 +57,6 @@ public class LisRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryVie
                 .into(holder.binding.imgOwner, new Callback() {
                     @Override
                     public void onSuccess() {
-                        image[0] = holder.binding.imgOwner.getDrawable();
                     }
 
                     @Override
@@ -76,7 +67,6 @@ public class LisRepositoryAdapter extends RecyclerView.Adapter<ListRepositoryVie
                                 .into(holder.binding.imgOwner, new Callback() {
                                     @Override
                                     public void onSuccess() {
-                                        image[0] = holder.binding.imgOwner.getDrawable();
                                     }
 
                                     @Override

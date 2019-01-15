@@ -19,11 +19,6 @@ public abstract class ActivityBindingsModule {
     abstract ListPullRequestActivity listPullRequestActivityInjector();
 
 
-/*    @ContributesAndroidInjector(modules = LoginActivityModule.class)
-    abstract LoginActivity loginActivityInjector();
-
-    @ContributesAndroidInjector(modules = {ListRepositoryActivityModule.class*//*, FragmentBindingsModule.class*//*})
-    abstract MainActivity mainActivityInjector();*/
 
 
 }

@@ -8,9 +8,6 @@ public enum IntentActions {
     LIST_PULL_REQUEST_ACTIVITY("br.com.appdesafio.LIST_PULL_REQUEST_ACTIVITY");
 
 
-
-
-
     private final String action;
 
     /**

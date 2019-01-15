@@ -2,11 +2,9 @@ package br.com.appdesafio.view.activity;
 
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 
@@ -17,29 +15,37 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.appdesafio.R;
-import br.com.appdesafio.databinding.ActivityMainBinding;
+
+import br.com.appdesafio.databinding.ActivityListRepositoryBinding;
 import br.com.appdesafio.model.pojo.Item;
-import br.com.appdesafio.view.adapter.LisRepositoryAdapter;
-import br.com.appdesafio.viewmodel.LisRepositoryViewModel;
+import br.com.appdesafio.view.adapter.ListRepositoryAdapter;
+import br.com.appdesafio.viewmodel.ListRepositoryViewModel;
 
-
+/**
+ * Class responsible for displaying the repository list.
+ */
 public class ListRepositoryActivity extends BaseActivity {
 
     private List<Item> mItemList = new ArrayList<>();
-    ActivityMainBinding mActivityMainBinding;
+    ActivityListRepositoryBinding mActivityMainBinding;
     private RecyclerView recyclerView;
-    private LisRepositoryAdapter adapter;
+    private ListRepositoryAdapter adapter;
     @Inject
-    public LisRepositoryViewModel mViewModel;
+    public ListRepositoryViewModel mViewModel;
     private EndlessRecyclerViewScrollListener scrollListener;
+    private int page = 1;
 
 
+     /**
+     * Initialize the fundamental components of the activity.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_list_repository);
         configureRecyclerView();
-        mViewModel.getListRepository(1).observe(this, result -> {
+        mViewModel.getListRepository(page).observe(this, result -> {
 
             if (result != null) {
 
@@ -48,8 +54,6 @@ public class ListRepositoryActivity extends BaseActivity {
                 recyclerView.setAdapter(adapter);
 
             } else {
-                //aviso de erro
-              //  mActivityMainBinding.itemProgressBar.setVisibility(View.GONE);
                 mActivityMainBinding.emptyState.setVisibility(View.VISIBLE);
             }
             mActivityMainBinding.itemProgressBar.setVisibility(View.GONE);
@@ -60,6 +64,9 @@ public class ListRepositoryActivity extends BaseActivity {
     }
 
 
+    /**
+     * Configures the activity's recyclerview and is also responsible for infinite scroll logic.
+     */
     public void configureRecyclerView() {
         recyclerView = mActivityMainBinding.recyclerView;
 
@@ -68,16 +75,20 @@ public class ListRepositoryActivity extends BaseActivity {
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                addDataToList(page);
+                onGetMoreItemList(page);
             }
         };
 
         recyclerView.addOnScrollListener(scrollListener);
 
-        adapter = new LisRepositoryAdapter(this);
+        adapter = new ListRepositoryAdapter(this);
     }
 
-    private void addDataToList(int page) {
+    /**
+     *method called by the onLoadMore method of infinite scroll.
+     * @param page number that is sent as a parameter to the server.
+     */
+    private void onGetMoreItemList(int page) {
         mViewModel.getListRepository(page).observe(this, result -> {
 
 
@@ -88,18 +99,20 @@ public class ListRepositoryActivity extends BaseActivity {
                 adapter.notifyDataSetChanged();
                 mActivityMainBinding.itemProgressBar.setVisibility(View.GONE);
 
-                Log.i("###", "resss: " + result);
 
             } else {
                 mActivityMainBinding.itemProgressBar.setVisibility(View.GONE);
-                //aviso de erro
-                // binding.emptyState.setVisibility(View.VISIBLE);
             }
 
         });
 
     }
 
+    /**
+     * method responsible for saving the state of the screen when the
+     * screen orientation change happens.
+     * @param newConfig
+     */
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

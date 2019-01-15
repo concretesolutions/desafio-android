@@ -1,8 +1,8 @@
 package br.com.appdesafio.view.adapter.viewholder;
 
-import android.support.annotation.NonNull;
+
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
+
 
 import br.com.appdesafio.databinding.RowRepositoryBinding;
 

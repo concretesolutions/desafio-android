@@ -4,4 +4,6 @@
     <string name="list_repositorio">Lista de repositório</string>
     <string name="pull_request">Lista de pull request</string>
     <string name="font_family_regular">sans-serif</string>
+    <string name="message_error">Ooops! Algo deu errado. \n Tente novamente mais tarde.</string>
+    <string name="message_list_empty">Ooops!. \n Não encontramos nenhum resultado!</string>
 </resources>
