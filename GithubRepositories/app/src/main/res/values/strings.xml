@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GithubRepositories</string>
+    <string name="forkImgContentDesc">Fork Icon for number of repositories</string>
+    <string name="starImgContentDesc">Star Icon for number of valorations</string>
+    <string name="avatarImgContentDesc">avatar from repository owner</string>
+
+    <string name="errorNoPullRequests">There is no pull requests to show</string>
+    <string name="generalError">Error: </string>
+</resources>
