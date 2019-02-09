@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#594691</color>
+    <color name="colorPrimaryDark">#3e2d70</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorRed">#FF2F48</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGray">#949191</color>
+    <color name="colorGreen">#67D26E</color>
+    <color name="colorBlue">#0364CA</color>
+    <color name="colorBlueBottom">#2D93FF</color>
+    <color name="bgBackSideColor">#e8e7ea</color>
+    <color name="bgTitleLeft">#594691</color>
+    <color name="bgTitleRight">#ffffff</color>
+    <color name="bgContentTop">#594691</color>
+    <color name="bgContent">#ffffff</color>
+    <color name="contentDividerLine">#e0e0e0</color>
+    <color name="contentBadgeTitle">#a9a9a9</color>
+    <color name="titleBadgeTitle">#adafb1</color>
+    <color name="titleBadgeText">#adafb1</color>
+    <color name="mainTextColor">#343d43</color>
+    <color name="btnRequest">#ffbf12</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBtc">#F68819</color>
+    <color name="coloEther">#5B6FE0</color>
+    <color name="coloXlm">#00ADE5</color>
+    <color name="coloEos">#000000</color>
+</resources>
