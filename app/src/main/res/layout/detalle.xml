@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/icono"
+            android:layout_width="40dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txttitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtdescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="descripton" />
+
+            <TextView
+                android:id="@+id/txtusername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="Username" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:background="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"/>
+
+</LinearLayout>
