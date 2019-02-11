@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import com.example.rpanaquecavana.gitandroid.DetalleModelo.Detalle;
+
+import com.example.rpanaquecavana.gitandroid.DetalleModelo.Detail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,7 +23,7 @@ public class DetalleActivity extends AppCompatActivity
 {
 
     private RecyclerView recyclerView;
-    private ArrayList<Detalle> detalles;
+    private ArrayList<Detail> data = new ArrayList<>();
     private ListDetalleAdapter adapter;
 
 
@@ -28,17 +32,19 @@ public class DetalleActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalle_body);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerdetalle);
-        recyclerView.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
 
         if(getIntent().hasExtra("autor") && getIntent().hasExtra("repo")){
 
             String autor = getIntent().getStringExtra("autor");
             final String repositorio = getIntent().getStringExtra("repo");
 
+
+            recyclerView = (RecyclerView) findViewById(R.id.recyclerdetalle);
+            recyclerView.setHasFixedSize(true);
+
+
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+            recyclerView.setLayoutManager(layoutManager);
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://api.github.com/")
@@ -47,29 +53,29 @@ public class DetalleActivity extends AppCompatActivity
 
             PostService postService = retrofit.create(PostService.class);
 
-            final Call<DetailBody> requestDetalle = postService.getDetalle(autor, repositorio);
-            Log.e("Tag", "REQUEST DETALLE : ");
-            Log.e("Tag", "REQUEST DETALLE : " +requestDetalle.request());
+            final Call<ArrayList<Detail>> requestDetalle = postService.getDetalle(autor, repositorio);
 
-            requestDetalle.enqueue(new Callback<DetailBody>()
+            requestDetalle.enqueue(new Callback<ArrayList<Detail>>()
             {
                 @Override
-                public void onResponse(Call<DetailBody> call, Response<DetailBody> response) {
+                public void onResponse(Call<ArrayList<Detail>> call, Response<ArrayList<Detail>> response) {
                     Log.e("tag" , "ENTRO AQUI: " +response.code());
 
-                    DetailBody detailBody = response.body();
+                /*    List<Detail>  body = response.body();
+                    data = new ArrayList<>(body);
+                    adapter = new ListDetalleAdapter(data);
+                    recyclerView.setAdapter(adapter);
+*/
+                    ArrayList<Detail> body = response.body();
+                    data = new ArrayList<>(body);
+                    adapter = new ListDetalleAdapter(data);
+                    recyclerView.setAdapter(adapter);
 
-                        detalles = new ArrayList<>(detailBody.getDetalles());
-                        adapter = new ListDetalleAdapter(detalles);
-                        recyclerView.setAdapter(adapter);
-
-
-
-                    Log.e("tag" , "ENTRO AQUI: " );
+                    Log.e("HASIL", "onResponse: "+data);
                 }
 
                 @Override
-                public void onFailure(Call<DetailBody> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Detail>> call, Throwable t) {
                     Log.e("tag" , "Paso Error : " +t.getMessage());
                 }
             });

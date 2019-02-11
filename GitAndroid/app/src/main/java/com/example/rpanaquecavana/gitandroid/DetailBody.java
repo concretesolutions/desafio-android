@@ -1,19 +1,29 @@
 package com.example.rpanaquecavana.gitandroid;
 
-import com.example.rpanaquecavana.gitandroid.DetalleModelo.Detalle;
+import com.example.rpanaquecavana.gitandroid.DetalleModelo.Detail;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class DetailBody {
     @SerializedName("data")
-    private List<Detalle> detalles;
+    //private List<Detail> detalles;
 
-    public List<Detalle> getDetalles() {
+    private Detail[] detalles;
+
+    public Detail[] getDetalles() {
         return detalles;
     }
 
-    public void setDetalles(List<Detalle> detalles) {
+    public void setDetalles(Detail[] detalles) {
         this.detalles = detalles;
     }
+    /*
+    public List<Detail> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<Detail> detalles) {
+        this.detalles = detalles;
+    }*/
 }

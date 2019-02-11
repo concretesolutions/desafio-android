@@ -1,9 +1,9 @@
 package com.example.rpanaquecavana.gitandroid;
 
-import com.example.rpanaquecavana.gitandroid.DetalleModelo.Detalle;
+import com.example.rpanaquecavana.gitandroid.DetalleModelo.Detail;
 import com.example.rpanaquecavana.gitandroid.Modelos.RepoGit;
-import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,7 +24,7 @@ public interface PostService
      String API_DETALLE = "repos/{autor}/{repo}/pulls";
 
      @GET(API_DETALLE)
-     Call<DetailBody> getDetalle(@Path("autor") String autor, @Path("repo") String repositorio);
+     Call<ArrayList<Detail>> getDetalle(@Path("autor") String autor, @Path("repo") String repositorio);
 
 
 }
