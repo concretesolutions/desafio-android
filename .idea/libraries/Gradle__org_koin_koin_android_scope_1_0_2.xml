@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.koin:koin-android-scope-1.0.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/koin-android-scope-1.0.2.aar/bab086a9c93ff26627433755dc900149/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/koin-android-scope-1.0.2.aar/bab086a9c93ff26627433755dc900149/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.koin/koin-android-scope/1.0.2/1866eb031dbe7effe3f3b67369297876b28fef03/koin-android-scope-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Concrete_Solutions_Desafio</string>
+    <string name="repositoryListItem_title">Title</string>
+    <string name="repositoryListItem_description">Description</string>
+    <string name="repositoryListItem_starcount">starCount</string>
+    <string name="repositoryListItem_forkcount">forkCount</string>
+    <string name="repositoryListItem_ForkIconContentDescription">Fork icon</string>
+    <string name="repositoryListItem_favoriteIconContentDescription">Favorite icon</string>
+    <string name="repositoryListItem_ownerName">OwnerName</string>
+    <string name="repositoryListItem_repositoryOwnerPictureContentDescription">Repository owner picture</string>
+    <string name="pullRequest_title">Title</string>
+    <string name="pullRequest_description">Description</string>
+    <string name="pullRequest_ownername">OwnerName</string>
+    <string name="pullRequest_date">Date</string>
+    <string name="pullRequest_forkOwnerPicture">Fork owner picture</string>
+    <string name="disconnected_message">Você está desconectado</string>
+    <string name="connected_message">Você está conectado</string>
+    <string name="forbidden_request_toast">Não foi possível carregar mais repositórios. Tente novamente em breve.</string>
+</resources>
