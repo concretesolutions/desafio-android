@@ -32,6 +32,9 @@ dependencies {
     implementation deps.androidx.constraint_layout
     implementation deps.androidx.lifecycle_ext
     implementation deps.androidx.lifecycle_viewmodel
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+    implementation deps.okhttp_logging_interceptor
 
     //Testing
     testImplementation deps.testing.junit
