@@ -1,0 +1,32 @@
+
+ext.deps = [:]
+
+def versions = [:]
+versions.kotlin = "1.3.21"
+versions.gradle = "3.3.2"
+
+def deps = [:]
+
+def project = [:]
+project.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+project.gradle = "com.android.tools.build:gradle:$versions.gradle"
+deps.project = project
+
+def buildVersions = [:]
+buildVersions.min_sdk = 21
+buildVersions.target_sdk = 28
+buildVersions.build_tools = "28.0.3"
+deps.build_versions = buildVersions
+
+def kotlin = [:]
+kotlin.version = "$versions.kotlin"
+deps.kotlin = kotlin
+
+ext.deps = deps
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+ext.addRepos = this.&addRepos
