@@ -11,6 +11,7 @@ versions.androidx_lifecycle_ext = "2.0.0"
 versions.androidx_lifecycle_viewmodel = "2.0.0"
 versions.okhttp_logging_interceptor = "3.9.0"
 versions.retrofit = "2.5.0"
+versions.timber = "4.7.1"
 //Testing
 versions.junit = "4.12"
 versions.runner = "1.1.1"
@@ -56,7 +57,8 @@ deps.testing = testing
 
 // Singles
 
-deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
+deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp_logging_interceptor"
+deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 
 ext.deps = deps
 
