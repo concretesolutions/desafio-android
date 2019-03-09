@@ -12,6 +12,7 @@ versions.androidx_lifecycle_viewmodel = "2.0.0"
 versions.okhttp_logging_interceptor = "3.9.0"
 versions.retrofit = "2.5.0"
 versions.timber = "4.7.1"
+versions.room = "2.0.0"
 //Testing
 versions.junit = "4.12"
 versions.runner = "1.1.1"
@@ -48,6 +49,11 @@ retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
 retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
 retrofit.mock = "com.squareup.retrofit2:retrofit-mock:$versions.retrofit"
 deps.retrofit = retrofit
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+deps.room = room
 
 def testing = [:]
 testing.junit = "junit:junit:$versions.junit"
