@@ -1,4 +1,4 @@
-package com.hako.githubapi.util
+package com.hako.githubapi.data.retrofit
 
 sealed class NetworkStatus {
     object Ready : NetworkStatus()

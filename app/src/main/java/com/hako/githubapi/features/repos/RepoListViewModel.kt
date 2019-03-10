@@ -2,15 +2,13 @@ package com.hako.githubapi.features.repos
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.DiffUtil
 import com.hako.githubapi.data.database.dao.RepositoryDao
+import com.hako.githubapi.data.retrofit.NetworkStatus
+import com.hako.githubapi.data.retrofit.NetworkStatus.Loading
+import com.hako.githubapi.data.retrofit.NetworkStatus.Ready
 import com.hako.githubapi.data.retrofit.RemoteDatasource
 import com.hako.githubapi.domain.entities.Repository
 import com.hako.githubapi.domain.requests.QueryRepository
-import com.hako.githubapi.util.NetworkStatus
-import com.hako.githubapi.util.NetworkStatus.Loading
-import com.hako.githubapi.util.NetworkStatus.Ready
-import com.hako.githubapi.util.RepoDiffUtilCallback
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -21,9 +19,9 @@ import timber.log.Timber
 
 class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(), KoinComponent {
 
+    val repositories = MutableLiveData<List<Repository>>()
     private val api: RemoteDatasource = get()
 
-    private val repositories = MutableLiveData<List<Repository>>()
     private var index = 1
     private var networkStatus: NetworkStatus = Ready
     private lateinit var subscription: Disposable
@@ -33,7 +31,6 @@ class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(),
             Ready -> getRepos()
             Loading -> Timber.d("There's a thread running")
         }
-
     }
 
     private fun getRepos() {
@@ -63,8 +60,7 @@ class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(),
     }
 
     private fun onRetrievedRepos(repos: List<Repository>) {
-        val diffResult = DiffUtil.calculateDiff(RepoDiffUtilCallback(repos, repositories))
-        repositories.value = repos
+        repositories.value = repositories.value?.plus(repos) ?: repos
         repos.forEach {
             Timber.d(it.name)
         }
