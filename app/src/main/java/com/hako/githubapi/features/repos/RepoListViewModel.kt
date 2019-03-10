@@ -61,8 +61,5 @@ class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(),
 
     private fun onRetrievedRepos(repos: List<Repository>) {
         repositories.value = repositories.value?.plus(repos) ?: repos
-        repos.forEach {
-            Timber.d(it.name)
-        }
     }
 }
