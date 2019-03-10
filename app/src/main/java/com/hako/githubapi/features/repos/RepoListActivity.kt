@@ -1,4 +1,4 @@
-package com.hako.githubapi.ui.repositories
+package com.hako.githubapi.features.repos
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

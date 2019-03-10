@@ -1,20 +1,24 @@
-package com.hako.githubapi.ui.repositories
+package com.hako.githubapi.features.repos
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.hako.githubapi.R
+import com.hako.githubapi.data.repository.retrofit.RetrofitDatasource
+import com.hako.githubapi.domain.requests.QueryRepository
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepoListFragment : Fragment() {
+
+    private val githubApi: RetrofitDatasource by inject()
+    private val viewModel: RepoListViewModel by viewModel()
 
     companion object {
         fun newInstance() = RepoListFragment()
     }
-
-    private lateinit var viewModel: RepoListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +29,7 @@ class RepoListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RepoListViewModel::class.java)
-        // TODO: Use the ViewModel
+        githubApi.getRepositories(QueryRepository())
+        viewModel.loadRepositories()
     }
-
 }

@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+
+    def baseEndpoint = "\"https://api.github.com/\""
+
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
     defaultConfig {
@@ -18,6 +21,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", 'BASE_ENDPOINT', baseEndpoint
+        }
+        debug {
+            buildConfigField "String", 'BASE_ENDPOINT', baseEndpoint
         }
     }
     compileOptions {
@@ -34,9 +41,17 @@ dependencies {
     implementation deps.androidx.constraint_layout
     implementation deps.androidx.lifecycle_ext
     implementation deps.androidx.lifecycle_viewmodel
+    implementation deps.androidx.paging
+    implementation deps.androidx.recycler_view
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
+    implementation deps.retrofit.rx
     implementation deps.room.runtime
+    implementation deps.koin.core
+    implementation deps.koin.scope
+    implementation deps.koin.viewmodel
+    implementation deps.rx.core
+    implementation deps.rx.android
     implementation deps.okhttp_logging_interceptor
     implementation deps.timber
 
