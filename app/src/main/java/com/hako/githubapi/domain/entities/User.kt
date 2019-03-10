@@ -1,7 +1,6 @@
 package com.hako.githubapi.domain.entities
 
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 

@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hako.githubapi.R
-import com.hako.githubapi.data.repository.retrofit.RetrofitDatasource
+import com.hako.githubapi.data.retrofit.RemoteDatasource
 import com.hako.githubapi.domain.requests.QueryRepository
+import kotlinx.android.synthetic.main.repo_list_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepoListFragment : Fragment() {
 
-    private val githubApi: RetrofitDatasource by inject()
+    private val githubApi: RemoteDatasource by inject()
     private val viewModel: RepoListViewModel by viewModel()
 
     companion object {
@@ -30,6 +31,6 @@ class RepoListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         githubApi.getRepositories(QueryRepository())
-        viewModel.loadRepositories()
+        buttonNextPage.setOnClickListener { viewModel.loadRepositories() }
     }
 }
