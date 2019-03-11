@@ -8,22 +8,24 @@
 
     <TextView
             android:id="@+id/repo_item_title"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Repo Name"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/colorTextAccent"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:maxWidth="220dp"/>
 
     <TextView
             android:id="@+id/repo_item_description"
             app:layout_constraintStart_toStartOf="@+id/repo_item_title"
             android:textColor="@color/colorPrimary"
-            android:textSize="12sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             tools:text="Repo Description"
             app:layout_constraintTop_toBottomOf="@+id/repo_item_title"
@@ -31,31 +33,19 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:lines="2"
-            app:layout_constraintEnd_toEndOf="@+id/repo_item_title"
-            android:layout_width="200dp"
-            android:layout_height="0dp"/>
-
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="24dp"
-            android:background="@color/colorHighlight">
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:maxWidth="220dp"/>
 
     <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/ic_git_branch"
             android:id="@+id/branchIcon"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/repo_item_description"
             app:layout_constraintStart_toStartOf="@+id/repo_item_title"
-            android:layout_marginStart="2dp"/>
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
             android:layout_width="48dp"
@@ -66,17 +56,18 @@
             app:layout_constraintTop_toTopOf="@+id/branchIcon"
             app:layout_constraintBottom_toBottomOf="@+id/branchIcon"
             android:textColor="@color/colorAccent"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textSize="16sp"/>
 
     <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/ic_git_star"
             android:id="@+id/starIcon"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/repo_item_description"
             android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/repo_item_forks"/>
+            app:layout_constraintStart_toEndOf="@+id/repo_item_forks"
+            app:layout_constraintTop_toTopOf="@+id/branchIcon"
+            app:layout_constraintBottom_toBottomOf="@+id/branchIcon"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -88,7 +79,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/branchIcon"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
-            />
+            android:textSize="16sp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="48dp"
@@ -96,7 +87,7 @@
             android:src="@drawable/ic_default_user"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="56dp"
+            android:layout_marginEnd="48dp"
             app:civ_circle_background_color="#b7b7b7"
             android:id="@+id/circleImageView"
             android:layout_marginBottom="24dp"
@@ -113,7 +104,22 @@
             app:layout_constraintStart_toStartOf="@+id/circleImageView"
             app:layout_constraintEnd_toEndOf="@+id/circleImageView"
             android:textColor="@color/colorTextAccent"
-            android:textSize="14sp"
-            android:gravity="center"/>
+            android:textSize="16sp"
+            android:gravity="center"
+            android:maxWidth="150dp"
+            android:singleLine="true"/>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="24dp"
+            android:background="@color/colorHighlight"
+            android:id="@+id/linearLayout">
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
