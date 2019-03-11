@@ -14,19 +14,19 @@ import java.util.HashMap
 object DummyContent {
 
     /**
-     * An array of sample (dummy) items.
+     * An array of sample (dummy) repos.
      */
     val ITEMS: MutableList<Repo> = ArrayList()
 
     /**
-     * A map of sample (dummy) items, by ID.
+     * A map of sample (dummy) repos, by ID.
      */
     val ITEM_MAP: MutableMap<String, Repo> = HashMap()
 
     private val COUNT = 25
 
     init {
-        // Add some sample items.
+        // Add some sample repos.
         for (i in 1..COUNT) {
             addItem(createDummyItem(i))
         }

@@ -1,16 +1,20 @@
 package cl.getapps.githubjavarepos.feature.repos.data
 
-import cl.getapps.githubjavarepos.feature.repos.domain.Repo
-
+import cl.getapps.githubjavarepos.core.extension.DataRepo
+import cl.getapps.githubjavarepos.core.extension.DomainRepo
+import com.google.gson.annotations.SerializedName
 
 data class Repo(
     val id: Int,
     val node_id: String,
+    @SerializedName("name")
     val name: String,
     val full_name: String,
     val private: Boolean,
+    @SerializedName("owner")
     val owner: Owner,
     val html_url: String,
+    @SerializedName("description")
     val description: String,
     val fork: Boolean,
     val url: String,
@@ -59,6 +63,7 @@ data class Repo(
     val svn_url: String,
     val homepage: String,
     val size: Int,
+    @SerializedName("stargazers_count")
     val stargazers_count: Int,
     val watchers_count: Int,
     val language: String,
@@ -72,11 +77,19 @@ data class Repo(
     val archived: Boolean,
     val open_issues_count: Int,
     val license: License,
+    @SerializedName("forks")
     val forks: Int,
     val open_issues: Int,
     val watchers: Int,
     val default_branch: String,
     val score: Int
 ) {
-    fun toRepo() = Repo(name, description, owner.toOwner(), stargazers_count, forks)
+    fun toDomainRepo(dataRepo: DataRepo) =
+        DomainRepo(
+            dataRepo.name,
+            dataRepo.description,
+            dataRepo.owner.toDomainOwner(dataRepo.owner),
+            dataRepo.stargazers_count,
+            dataRepo.forks
+        )
 }

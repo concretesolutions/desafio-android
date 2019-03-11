@@ -1,12 +1,16 @@
 package cl.getapps.githubjavarepos.feature.repos.data
 
-import cl.getapps.githubjavarepos.feature.repos.domain.Owner
+import cl.getapps.githubjavarepos.core.extension.DataOwner
+import cl.getapps.githubjavarepos.core.extension.DomainOwner
+import com.google.gson.annotations.SerializedName
 
 
 data class Owner(
+    @SerializedName("login")
     val login: String,
     val id: Int,
     val node_id: String,
+    @SerializedName("avatar_url")
     val avatar_url: String,
     val gravatar_id: String,
     val url: String,
@@ -23,5 +27,5 @@ data class Owner(
     val type: String,
     val site_admin: Boolean
 ) {
-    fun toOwner() = Owner(login, avatar_url)
+    fun toDomainOwner(dataOwner: DataOwner) = DomainOwner(dataOwner.login, dataOwner.avatar_url)
 }
