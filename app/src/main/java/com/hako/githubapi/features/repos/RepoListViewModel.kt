@@ -4,8 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hako.githubapi.data.database.dao.RepositoryDao
 import com.hako.githubapi.data.retrofit.NetworkStatus
-import com.hako.githubapi.data.retrofit.NetworkStatus.Loading
-import com.hako.githubapi.data.retrofit.NetworkStatus.Ready
+import com.hako.githubapi.data.retrofit.NetworkStatus.*
 import com.hako.githubapi.data.retrofit.RemoteDatasource
 import com.hako.githubapi.domain.entities.Repository
 import com.hako.githubapi.domain.requests.QueryRepository
@@ -20,17 +19,47 @@ import timber.log.Timber
 class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(), KoinComponent {
 
     val repositories = MutableLiveData<List<Repository>>()
+    var networkStatus = MutableLiveData<NetworkStatus>()
     private val api: RemoteDatasource = get()
-
-    private var index = 1
-    private var networkStatus: NetworkStatus = Ready
+    private var index = INITIAL_PAGE
     private lateinit var subscription: Disposable
 
+    companion object {
+        const val INITIAL_PAGE = 1
+    }
+
+    init {
+        networkStatus.value = Ready
+    }
+
     fun loadRepositories() {
-        when (networkStatus) {
+        when (networkStatus.value) {
             Ready -> getRepos()
             Loading -> Timber.d("There's a thread running")
         }
+    }
+
+    fun refreshRepositories() {
+        when (networkStatus.value) {
+            Ready -> {
+                deleteRepos()
+            }
+            Loading -> Timber.d("There's a thread running")
+        }
+    }
+
+    private fun deleteRepos() {
+        subscription = Observable.fromCallable { daoRepository.nukeDatabase() }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    index = INITIAL_PAGE
+                    repositories.value = null //esto es un comentario no tan importante
+                    getRepos()
+                },
+                { networkStatus.value = Errored }
+            )
     }
 
     private fun getRepos() {
@@ -48,14 +77,14 @@ class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(),
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { networkStatus = Loading }
-            .doOnTerminate { networkStatus = Ready }
+            .doOnSubscribe { networkStatus.value = Loading }
+            .doOnTerminate { networkStatus.value = Ready }
             .subscribe(
                 { result ->
                     onRetrievedRepos(result)
                     index++
                 },
-                { e -> Timber.e("Error loading: ${e.localizedMessage}") }
+                { e -> networkStatus.value = Errored }
             )
     }
 

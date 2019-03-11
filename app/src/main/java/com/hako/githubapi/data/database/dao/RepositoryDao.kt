@@ -1,9 +1,6 @@
 package com.hako.githubapi.data.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.hako.githubapi.domain.entities.Repository
 
 @Dao
@@ -23,5 +20,8 @@ interface RepositoryDao {
 
     @Query("SELECT COUNT(*) FROM repositories WHERE page = :page")
     fun count(page: Int): Int
+
+    @Query("DELETE FROM repositories")
+    fun nukeDatabase()
 
 }

@@ -1,11 +1,10 @@
 package com.hako.githubapi.features.repos
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.hako.githubapi.R
 
 class RepoListActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.repo_list_activity)
@@ -15,5 +14,4 @@ class RepoListActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
-
 }

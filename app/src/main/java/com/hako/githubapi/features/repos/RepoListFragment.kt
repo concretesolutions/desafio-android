@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hako.githubapi.R
+import com.hako.githubapi.data.retrofit.NetworkStatus
 import com.hako.githubapi.data.retrofit.RemoteDatasource
 import com.hako.githubapi.domain.entities.Repository
 import com.hako.githubapi.domain.requests.QueryRepository
@@ -38,6 +40,19 @@ class RepoListFragment : Fragment() {
         githubApi.getRepositories(QueryRepository())
         initRepoAdapter()
         viewModel.loadRepositories()
+        viewModel.networkStatus.observe(this, Observer {
+            when (it) {
+                NetworkStatus.Ready -> repo_refresh.isRefreshing = false
+                NetworkStatus.Errored -> Toast.makeText(context, "Error cargando datos", Toast.LENGTH_LONG).show()
+            }
+        })
+        initRefresh()
+    }
+
+    private fun initRefresh() {
+        repo_refresh.setOnRefreshListener {
+            viewModel.refreshRepositories()
+        }
     }
 
     private fun initRepoAdapter() {
