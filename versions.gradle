@@ -17,6 +17,7 @@ versions.room = "2.0.0"
 versions.koin = "1.0.2"
 versions.rx_core = "2.2.3"
 versions.rx_android = "2.1.0"
+versions.circle_image = "3.0.0"
 //Testing
 versions.junit = "4.12"
 versions.runner = "1.1.1"
@@ -83,6 +84,7 @@ deps.testing = testing
 
 deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp_logging_interceptor"
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
+deps.circle_image = "de.hdodenhof:circleimageview:$versions.circle_image"
 
 ext.deps = deps
 

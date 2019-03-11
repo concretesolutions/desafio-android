@@ -54,6 +54,7 @@ dependencies {
     implementation deps.rx.android
     implementation deps.okhttp_logging_interceptor
     implementation deps.timber
+    implementation deps.circle_image
 
     //Testing
     testImplementation deps.testing.junit

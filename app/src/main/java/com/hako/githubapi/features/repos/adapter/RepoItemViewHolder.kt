@@ -10,5 +10,9 @@ class RepoItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         set(value) {
             field = value
             view.repo_item_title.text = repo?.name
+            view.repo_item_description.text = repo?.description
+            view.repo_item_forks.text = repo?.forks
+            view.repo_item_stars.text = repo?.stars
+            view.repo_item_author.text = repo?.owner?.author
         }
 }
