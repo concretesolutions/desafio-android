@@ -6,4 +6,5 @@
     <color name="colorHighlight">#f0f0f0</color>
     <color name="colorTextAccent">#3977aa</color>
     <color name="colorTextSubtitle">#969ab3</color>
+    <color name="colorDarkText">#4D4D52</color>
 </resources>

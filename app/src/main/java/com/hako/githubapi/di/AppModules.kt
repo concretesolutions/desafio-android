@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.hako.githubapi.data.database.GithubDatabase
 import com.hako.githubapi.data.retrofit.GithubClient
 import com.hako.githubapi.data.retrofit.RemoteDatasource
+import com.hako.githubapi.features.pullRequest.PullListViewModel
 import com.hako.githubapi.features.repos.RepoListViewModel
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
@@ -21,6 +22,7 @@ val database = module {
 
 val views = module {
     viewModel { RepoListViewModel(get()) }
+    viewModel { PullListViewModel() }
 }
 
 val threads = module {

@@ -14,6 +14,7 @@ import com.hako.githubapi.data.retrofit.NetworkStatus
 import com.hako.githubapi.data.retrofit.RemoteDatasource
 import com.hako.githubapi.domain.entities.Repository
 import com.hako.githubapi.domain.requests.QueryRepository
+import com.hako.githubapi.features.pullRequest.PullListActivity
 import com.hako.githubapi.features.repos.adapter.RepoAdapter
 import kotlinx.android.synthetic.main.repo_list_fragment.*
 import org.koin.android.ext.android.inject
@@ -26,7 +27,7 @@ class RepoListFragment : Fragment() {
     private val viewModel: RepoListViewModel by viewModel()
 
     companion object {
-        const val PREFETCH_THRESHOLD = 30
+        const val PREFETCH_THRESHOLD = 25
 
         fun newInstance() = RepoListFragment()
     }
@@ -43,7 +44,10 @@ class RepoListFragment : Fragment() {
         viewModel.networkStatus.observe(this, Observer {
             when (it) {
                 NetworkStatus.Ready -> repo_refresh.isRefreshing = false
-                NetworkStatus.Errored -> Toast.makeText(context, "Error cargando datos", Toast.LENGTH_LONG).show()
+                NetworkStatus.Errored -> {
+                    Toast.makeText(context, "Error cargando datos", Toast.LENGTH_LONG).show()
+                    repo_refresh.isRefreshing = false
+                }
             }
         })
         initRefresh()
@@ -82,6 +86,6 @@ class RepoListFragment : Fragment() {
     }
 
     private fun itemClicked(repo: Repository) {
-        Timber.w(repo.name)
+        startActivity(PullListActivity.newIntent(context!!, repo.owner.author, repo.name))
     }
 }
