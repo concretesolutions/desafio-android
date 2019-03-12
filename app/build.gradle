@@ -1,15 +1,18 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+
+    def baseEndpoint = "\"https://api.github.com/\""
+
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
     defaultConfig {
         applicationId "com.hako.githubapi"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -18,16 +21,43 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", 'BASE_ENDPOINT', baseEndpoint
         }
+        debug {
+            buildConfigField "String", 'BASE_ENDPOINT', baseEndpoint
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
-    implementation 'androidx.core:core-ktx:1.1.0-alpha04'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    kapt deps.room.compiler
+    implementation deps.kotlin.std_lib
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.core_ktx
+    implementation deps.androidx.constraint_layout
+    implementation deps.androidx.lifecycle_ext
+    implementation deps.androidx.lifecycle_viewmodel
+    implementation deps.androidx.paging
+    implementation deps.androidx.recycler_view
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.rx
+    implementation deps.room.runtime
+    implementation deps.koin.core
+    implementation deps.koin.scope
+    implementation deps.koin.viewmodel
+    implementation deps.rx.core
+    implementation deps.rx.android
+    implementation deps.okhttp_logging_interceptor
+    implementation deps.timber
+    implementation deps.circle_image
+
+    //Testing
+    testImplementation deps.testing.junit
+    androidTestImplementation deps.testing.runner
+    androidTestImplementation deps.testing.espresso
 }
