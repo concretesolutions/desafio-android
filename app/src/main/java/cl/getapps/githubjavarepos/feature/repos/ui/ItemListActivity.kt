@@ -14,7 +14,7 @@ import cl.getapps.githubjavarepos.core.extension.DomainRepo
 import cl.getapps.githubjavarepos.feature.repopullrequests.ui.ItemDetailActivity
 import cl.getapps.githubjavarepos.feature.repopullrequests.ui.ItemDetailFragment
 import cl.getapps.githubjavarepos.feature.repos.data.ReposResponse
-import cl.getapps.githubjavarepos.feature.repos.data.ReposAPI
+import cl.getapps.githubjavarepos.feature.repos.data.remote.ReposAPI
 import cl.getapps.githubjavarepos.feature.repos.domain.Repo
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_item_list.*
