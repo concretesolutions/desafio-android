@@ -1,5 +1,7 @@
 package com.hako.githubapi.features.pullRequest
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +24,6 @@ import kotlinx.android.synthetic.main.pull_list_fragment.*
 import kotlinx.android.synthetic.main.repo_list_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class PullListFragment : Fragment() {
 
@@ -85,6 +86,12 @@ class PullListFragment : Fragment() {
     }
 
     private fun itemClicked(pull: PullRequest) {
-        Timber.w(pull.title)
+        openUrlBrowser(pull.url)
+    }
+
+    private fun openUrlBrowser(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 }

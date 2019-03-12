@@ -11,6 +11,6 @@ data class PullRequest(
     val title: String,
     @SerializedName("body")
     val description: String,
-    @SerializedName("url")
+    @SerializedName("html_url")
     val url: String
 )
