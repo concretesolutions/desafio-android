@@ -2,9 +2,10 @@ package com.hako.githubapi.di
 
 import androidx.room.Room
 import com.hako.githubapi.data.database.GithubDatabase
-import com.hako.githubapi.data.retrofit.github.GithubClient
 import com.hako.githubapi.data.retrofit.RemoteDatasource
+import com.hako.githubapi.data.retrofit.github.GithubClient
 import com.hako.githubapi.domain.usecases.DeleteRepositories
+import com.hako.githubapi.domain.usecases.GetPullRequests
 import com.hako.githubapi.domain.usecases.GetRepositories
 import com.hako.githubapi.features.pullRequest.PullListViewModel
 import com.hako.githubapi.features.repos.RepoListViewModel
@@ -25,6 +26,7 @@ val database = module {
 val usecases = module {
     single { GetRepositories(get()) }
     single { DeleteRepositories(get()) }
+    single { GetPullRequests() }
 }
 
 val threads = module {
