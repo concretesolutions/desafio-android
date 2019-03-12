@@ -40,12 +40,8 @@ class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(),
     }
 
     fun refreshRepositories() {
-        when (networkStatus.value) {
-            Ready -> {
-                deleteRepos()
-            }
-            Loading -> Timber.d("There's a thread running")
-        }
+        networkStatus.value = Ready
+        deleteRepos()
     }
 
     private fun deleteRepos() {
