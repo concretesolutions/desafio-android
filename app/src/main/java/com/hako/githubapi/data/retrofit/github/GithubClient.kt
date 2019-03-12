@@ -1,4 +1,4 @@
-package com.hako.githubapi.data.retrofit
+package com.hako.githubapi.data.retrofit.github
 
 import com.hako.githubapi.BuildConfig
 import okhttp3.OkHttpClient

@@ -2,26 +2,24 @@ package com.hako.githubapi.features.repos
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hako.githubapi.data.database.dao.RepositoryDao
 import com.hako.githubapi.data.retrofit.NetworkStatus
 import com.hako.githubapi.data.retrofit.NetworkStatus.*
-import com.hako.githubapi.data.retrofit.RemoteDatasource
 import com.hako.githubapi.domain.entities.Repository
-import com.hako.githubapi.domain.requests.QueryRepository
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.hako.githubapi.domain.usecases.DeleteRepositories
+import com.hako.githubapi.domain.usecases.GetRepositories
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.get
 import timber.log.Timber
 
-class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(), KoinComponent {
+class RepoListViewModel : ViewModel(), KoinComponent {
 
     val repositories = MutableLiveData<List<Repository>>()
     var networkStatus = MutableLiveData<NetworkStatus>()
-    private val api: RemoteDatasource = get()
+
     private var index = INITIAL_PAGE
+    private val getRepositories: GetRepositories = get()
+    private val deleteRepositories: DeleteRepositories = get()
     private lateinit var subscription: Disposable
 
     companion object {
@@ -48,13 +46,11 @@ class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(),
     }
 
     private fun deleteRepos() {
-        subscription = Observable.fromCallable { daoRepository.nukeDatabase() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        subscription = deleteRepositories.execute()
             .subscribe(
                 {
                     index = INITIAL_PAGE
-                    repositories.value = null //esto es un comentario no tan importante
+                    repositories.value = null
                     getRepos()
                 },
                 { networkStatus.value = Errored }
@@ -62,20 +58,7 @@ class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(),
     }
 
     private fun getRepos() {
-        subscription = Observable.fromCallable { daoRepository.getPage(index) }
-            .concatMap { dbRepository ->
-                // This is simple logic is good enough for the ocation, but a more desireable approach
-                // would be to use some kind of paging.
-                if (dbRepository.isEmpty() || daoRepository.count(index) == 0)
-                    api.getRepositories(QueryRepository(page = index)).concatMap { repoList ->
-                        daoRepository.saveAll(repoList)
-                        Observable.just(repoList)
-                    } else {
-                    Observable.just(dbRepository)
-                }
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        subscription = getRepositories.execute(index)
             .doOnSubscribe { networkStatus.value = Loading }
             .doOnTerminate { networkStatus.value = Ready }
             .subscribe(
@@ -83,7 +66,7 @@ class RepoListViewModel(private val daoRepository: RepositoryDao) : ViewModel(),
                     onRetrievedRepos(result)
                     index++
                 },
-                { e -> networkStatus.value = Errored }
+                { networkStatus.value = Errored }
             )
     }
 
