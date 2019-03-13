@@ -1,5 +1,7 @@
 package com.hako.githubapi.data.retrofit
 
+import com.hako.githubapi.data.retrofit.github.GithubApi
+import com.hako.githubapi.data.retrofit.github.GithubContract
 import com.hako.githubapi.domain.entities.PullRequest
 import com.hako.githubapi.domain.entities.Repository
 import com.hako.githubapi.domain.requests.QueryPullRequest

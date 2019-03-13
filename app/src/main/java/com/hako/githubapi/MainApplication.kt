@@ -1,10 +1,7 @@
 package com.hako.githubapi
 
 import android.app.Application
-import com.hako.githubapi.di.database
-import com.hako.githubapi.di.network
-import com.hako.githubapi.di.threads
-import com.hako.githubapi.di.views
+import com.hako.githubapi.di.*
 import org.koin.android.ext.android.startKoin
 import timber.log.Timber
 
@@ -26,6 +23,7 @@ class MainApplication : Application() {
                 network,
                 threads,
                 database,
+                usecases,
                 views
             )
         )

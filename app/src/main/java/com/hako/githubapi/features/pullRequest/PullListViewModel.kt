@@ -4,12 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hako.githubapi.data.retrofit.NetworkStatus
 import com.hako.githubapi.data.retrofit.NetworkStatus.*
-import com.hako.githubapi.data.retrofit.RemoteDatasource
 import com.hako.githubapi.domain.entities.PullRequest
 import com.hako.githubapi.domain.requests.QueryPullRequest
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.hako.githubapi.domain.usecases.GetPullRequests
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.get
 import timber.log.Timber
@@ -18,7 +16,7 @@ class PullListViewModel : ViewModel(), KoinComponent {
 
     val pullRequests = MutableLiveData<List<PullRequest>>()
     var networkStatus = MutableLiveData<NetworkStatus>()
-    private val api: RemoteDatasource = get()
+    private val getPullRequest: GetPullRequests = get()
     private lateinit var subscription: Disposable
 
     init {
@@ -33,9 +31,7 @@ class PullListViewModel : ViewModel(), KoinComponent {
     }
 
     private fun getPulls(query: QueryPullRequest) {
-        subscription = api.getPullsRequests(query)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        subscription = getPullRequest.execute(query)
             .doOnSubscribe { networkStatus.value = Loading }
             .doOnTerminate { networkStatus.value = Ready }
             .subscribe(
