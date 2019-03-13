@@ -1,11 +1,15 @@
 package cl.getapps.githubjavarepos.feature.repopullrequests.data.remote
 
-import cl.getapps.githubjavarepos.feature.repopullrequests.data.PullRequest
+import cl.getapps.githubjavarepos.feature.repopullrequests.data.PullRequests
+import cl.getapps.githubjavarepos.feature.repopullrequests.data.source.RemoteDataSource
 import io.reactivex.Flowable
 
 
-class PullRequestsRemote(val pullRequestAPI: PullRequestAPI) {
+class PullRequestsRemote(val pullRequestAPI: PullRequestAPI): RemoteDataSource {
 
-    fun fetchPullRequest(owner: String, repository: String): Flowable<List<PullRequest>> =
-        pullRequestAPI.fetchPullRequests(owner, repository)
+    override fun fetchPullRequests(params: PullRequestParams): Flowable<PullRequests> {
+        return pullRequestAPI.fetchPullRequests(params.owner, params.repository)
+    }
 }
+
+data class PullRequestParams(val owner: String, val repository: String)

@@ -1,6 +1,6 @@
 package cl.getapps.githubjavarepos.feature.repopullrequests.data.remote
 
-import cl.getapps.githubjavarepos.feature.repopullrequests.data.PullRequest
+import cl.getapps.githubjavarepos.feature.repopullrequests.data.PullRequests
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,5 +16,5 @@ interface PullRequestAPI {
     fun fetchPullRequests(
         @Path("owner") owner: String,
         @Path("repository") repository: String
-    ) : Flowable<List<PullRequest>>
+    ): Flowable<PullRequests>
 }

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import cl.getapps.githubjavarepos.R
 import cl.getapps.githubjavarepos.dummy.DummyContent
-import cl.getapps.githubjavarepos.feature.repos.domain.Repo
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
