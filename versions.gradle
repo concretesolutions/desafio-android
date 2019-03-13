@@ -20,7 +20,11 @@ versions.rx_android = "2.1.0"
 versions.circle_image = "3.0.0"
 //Testing
 versions.junit = "4.12"
+versions.core = "1.0.0"
+versions.rules = "1.1.1"
 versions.runner = "1.1.1"
+versions.ext = "1.1.0"
+versions.koin_test = "1.0.2"
 versions.espresso = "3.1.1"
 
 def deps = [:]
@@ -76,7 +80,11 @@ deps.rx = rx
 
 def testing = [:]
 testing.junit = "junit:junit:$versions.junit"
+testing.core = "androidx.test:core:$versions.core"
+testing.rules = "androidx.test:rules:$versions.rules"
 testing.runner = "androidx.test:runner:$versions.runner"
+testing.ext = "androidx.test.ext:junit:$versions.ext"
+testing.koin_test = "org.koin:koin-test:$versions.koin_test"
 testing.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
 deps.testing = testing
 
