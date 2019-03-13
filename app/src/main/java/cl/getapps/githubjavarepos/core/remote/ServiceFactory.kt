@@ -1,5 +1,6 @@
 package cl.getapps.githubjavarepos.core.remote
 
+import cl.getapps.githubjavarepos.feature.repopullrequests.data.remote.PullRequestAPI
 import cl.getapps.githubjavarepos.feature.repos.data.remote.ReposAPI
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -13,19 +14,34 @@ import java.util.concurrent.TimeUnit
 
 
 object ServiceFactory {
-    fun makeBuffeoorService(isDebug: Boolean): ReposAPI {
+
+    private var httpClient: OkHttpClient? = null
+    private var gson: Gson? = null
+    private var httpLoggingInterceptor: HttpLoggingInterceptor? = null
+
+    fun makeRepoService(isDebug: Boolean): ReposAPI {
         val okHttpClient = makeOkHttpClient(
             makeLoggingInterceptor(isDebug)
         )
-        return makeBufferooService(
+        return makeReposService(
             okHttpClient,
             makeGson()
         )
     }
 
-    private fun makeBufferooService(okHttpClient: OkHttpClient, gson: Gson): ReposAPI {
+    fun makePullRequestsService(isDebug: Boolean): PullRequestAPI {
+        val okHttpClient = makeOkHttpClient(
+            makeLoggingInterceptor(isDebug)
+        )
+        return makePullRequestService(
+            okHttpClient,
+            makeGson()
+        )
+    }
+
+    private fun makeReposService(okHttpClient: OkHttpClient, gson: Gson): ReposAPI {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://joe-birch-dsdb.squarespace.com/s/")
+            .baseUrl("https://api.github.com/")
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -33,28 +49,51 @@ object ServiceFactory {
         return retrofit.create(ReposAPI::class.java)
     }
 
-    private fun makeOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
+    private fun makePullRequestService(okHttpClient: OkHttpClient, gson: Gson): PullRequestAPI {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://api.github.com/")
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+        return retrofit.create(PullRequestAPI::class.java)
+    }
+
+    private fun makeOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        if (httpClient != null) return httpClient as OkHttpClient
+        else {
+            httpClient = OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS)
+                .build()
+            return httpClient as OkHttpClient
+        }
     }
 
     private fun makeGson(): Gson {
-        return GsonBuilder()
-            .setLenient()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .create()
+        if (gson != null) return gson as Gson
+        else {
+            gson = GsonBuilder()
+                .setLenient()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .create()
+            return gson as Gson
+        }
     }
 
     private fun makeLoggingInterceptor(isDebug: Boolean): HttpLoggingInterceptor {
-        val logging = HttpLoggingInterceptor()
-        logging.level = if (isDebug)
-            HttpLoggingInterceptor.Level.BODY
-        else
-            HttpLoggingInterceptor.Level.NONE
-        return logging
+        if (httpLoggingInterceptor != null) {
+            return httpLoggingInterceptor as HttpLoggingInterceptor
+        } else {
+            httpLoggingInterceptor = HttpLoggingInterceptor()
+            httpLoggingInterceptor!!.level = if (isDebug)
+                HttpLoggingInterceptor.Level.BODY
+            else
+                HttpLoggingInterceptor.Level.NONE
+
+            return httpLoggingInterceptor as HttpLoggingInterceptor
+        }
     }
 }

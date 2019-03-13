@@ -5,5 +5,5 @@ import cl.getapps.githubjavarepos.feature.repopullrequests.data.remote.PullReque
 import io.reactivex.Flowable
 
 interface PullRequestsRepository {
-    fun fetchPullRequests(params: PullRequestParams) : Flowable<PullRequests>
+    fun fetchPullRequests(params: PullRequestParams): Flowable<PullRequests>
 }

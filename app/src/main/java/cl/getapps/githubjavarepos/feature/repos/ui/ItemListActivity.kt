@@ -8,25 +8,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import cl.getapps.githubjavarepos.BuildConfig
 import cl.getapps.githubjavarepos.R
 import cl.getapps.githubjavarepos.core.extension.DomainRepo
+import cl.getapps.githubjavarepos.dummy.DummyContent
 import cl.getapps.githubjavarepos.feature.repopullrequests.ui.ItemDetailActivity
 import cl.getapps.githubjavarepos.feature.repopullrequests.ui.ItemDetailFragment
-import cl.getapps.githubjavarepos.feature.repos.data.ReposResponse
-import cl.getapps.githubjavarepos.feature.repos.data.remote.ReposAPI
+import cl.getapps.githubjavarepos.feature.repos.domain.GetRepos
 import cl.getapps.githubjavarepos.feature.repos.domain.Repo
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import org.koin.android.ext.android.inject
 
 /**
  * An activity representing a list of Pings. This activity
@@ -43,6 +36,7 @@ class ItemListActivity : AppCompatActivity() {
      * device.
      */
     private var twoPane: Boolean = false
+    val getRepos: GetRepos by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,36 +58,7 @@ class ItemListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
-            .client(createClient())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val reposAPI = retrofit.create(ReposAPI::class.java)
-
-        //val reposresponse = reposAPI.fetchRepos()
-
-        /*reposresponse.enqueue(object : Callback<ReposResponse> {
-            override fun onFailure(call: Call<ReposResponse>, t: Throwable) {
-                println("TERRIBLE ${t.message}")
-            }
-
-            override fun onResponse(call: Call<ReposResponse>, response: Response<ReposResponse>) {
-                println(response.body())
-                setupRecyclerView(item_list, response.body()?.toDomainRepos())
-                println("cosas")
-            }
-        })*/
-    }
-
-    private fun createClient(): OkHttpClient {
-        val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
-        if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
-            okHttpClientBuilder.addInterceptor(loggingInterceptor)
-        }
-        return okHttpClientBuilder.build()
+        setupRecyclerView(item_list, DummyContent.ITEMS)
     }
 
     private fun setupRecyclerView(

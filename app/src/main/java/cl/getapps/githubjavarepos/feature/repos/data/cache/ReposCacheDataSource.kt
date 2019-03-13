@@ -7,7 +7,7 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
-class ReposCache: CacheDataSource {
+class ReposCacheDataSource: CacheDataSource {
 
     override fun <T> save(items: T): Completable {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

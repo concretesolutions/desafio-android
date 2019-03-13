@@ -18,6 +18,8 @@ package cl.getapps.githubjavarepos.core.interactor
 
 import cl.getapps.githubjavarepos.core.exception.Failure
 import cl.getapps.githubjavarepos.core.functional.Either
+import cl.getapps.githubjavarepos.feature.repos.data.ReposResponse
+import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -33,11 +35,11 @@ import kotlinx.coroutines.launch
  */
 abstract class UseCase<out Type, in Params> where Type : Any {
 
-    abstract suspend fun run(params: Params): Either<Failure, Type>
+    abstract suspend fun run(params: Params): Flowable<ReposResponse>
 
     fun execute(onResult: (Either<Failure, Type>) -> Unit, params: Params) {
-        val job = GlobalScope.async(start = CoroutineStart.LAZY) { run(params) }
-        GlobalScope.launch { onResult.invoke(job.await()) }
+        /*val job = GlobalScope.async(start = CoroutineStart.LAZY) { run(params) }
+        GlobalScope.launch { onResult.invoke(job.await()) }*/
     }
 
     class None
