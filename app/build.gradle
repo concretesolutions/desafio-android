@@ -4,9 +4,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-
+    signingConfigs {
+        test {
+        }
+    }
     def baseEndpoint = "\"https://api.github.com/\""
-
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
     defaultConfig {
@@ -55,9 +57,12 @@ dependencies {
     implementation deps.okhttp_logging_interceptor
     implementation deps.timber
     implementation deps.circle_image
-
     //Testing
     testImplementation deps.testing.junit
+    testImplementation deps.testing.koin_test
+    androidTestImplementation deps.testing.core
+    androidTestImplementation deps.testing.rules
     androidTestImplementation deps.testing.runner
+    androidTestImplementation deps.testing.ext
     androidTestImplementation deps.testing.espresso
 }
