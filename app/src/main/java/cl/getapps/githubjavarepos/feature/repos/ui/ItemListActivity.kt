@@ -15,6 +15,7 @@ import cl.getapps.githubjavarepos.feature.repopullrequests.ui.ItemDetailActivity
 import cl.getapps.githubjavarepos.feature.repopullrequests.ui.ItemDetailFragment
 import cl.getapps.githubjavarepos.feature.repos.data.ReposResponse
 import cl.getapps.githubjavarepos.feature.repos.data.remote.ReposAPI
+import cl.getapps.githubjavarepos.feature.repos.domain.Repo
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list.*
@@ -71,9 +72,9 @@ class ItemListActivity : AppCompatActivity() {
 
         val reposAPI = retrofit.create(ReposAPI::class.java)
 
-        val reposresponse = reposAPI.fetchRepos()
+        //val reposresponse = reposAPI.fetchRepos()
 
-        reposresponse.enqueue(object : Callback<ReposResponse> {
+        /*reposresponse.enqueue(object : Callback<ReposResponse> {
             override fun onFailure(call: Call<ReposResponse>, t: Throwable) {
                 println("TERRIBLE ${t.message}")
             }
@@ -83,7 +84,7 @@ class ItemListActivity : AppCompatActivity() {
                 setupRecyclerView(item_list, response.body()?.toDomainRepos())
                 println("cosas")
             }
-        })
+        })*/
     }
 
     private fun createClient(): OkHttpClient {
