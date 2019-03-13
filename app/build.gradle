@@ -4,10 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    signingConfigs {
-        test {
-        }
-    }
     def baseEndpoint = "\"https://api.github.com/\""
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
