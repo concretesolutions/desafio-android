@@ -17,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar
  */
 abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
-    abstract fun layoutId(): Int
+    /*abstract fun layoutId(): Int
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(layoutId(), container, false)
@@ -46,5 +46,5 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
             )
         )
         snackBar.show()
-    }
+    }*/
 }

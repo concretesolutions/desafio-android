@@ -1,25 +1,20 @@
 package cl.getapps.githubjavarepos.feature.repos.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import cl.getapps.githubjavarepos.R
 import cl.getapps.githubjavarepos.core.extension.DomainRepo
-import cl.getapps.githubjavarepos.dummy.DummyContent
 import cl.getapps.githubjavarepos.feature.repopullrequests.ui.ItemDetailActivity
-import cl.getapps.githubjavarepos.feature.repopullrequests.ui.ItemDetailFragment
-import cl.getapps.githubjavarepos.feature.repos.domain.GetRepos
-import cl.getapps.githubjavarepos.feature.repos.domain.Repo
+import cl.getapps.githubjavarepos.feature.repos.data.remote.ReposParams
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list.*
-import kotlinx.android.synthetic.main.item_list_content.view.*
 import org.koin.android.ext.android.inject
+import org.koin.android.scope.ext.android.bindScope
+import org.koin.android.scope.ext.android.getOrCreateScope
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * An activity representing a list of Pings. This activity
@@ -36,11 +31,15 @@ class ItemListActivity : AppCompatActivity() {
      * device.
      */
     private var twoPane: Boolean = false
-    val getRepos: GetRepos by inject()
+
+    val reposRecyclerViewAdapter: ReposRecyclerViewAdapter by inject()
+    val reposViewModel: ReposViewModel by viewModel()
+    val repos: MutableList<DomainRepo>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
+        bindScope(getOrCreateScope("Repos"))
 
         setSupportActionBar(toolbar)
         toolbar.title = title
@@ -58,74 +57,20 @@ class ItemListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        setupRecyclerView(item_list, DummyContent.ITEMS)
+        setupRecyclerView()
+
+        reposViewModel.getReposs().observe(this, Observer<MutableList<DomainRepo>> {
+            if (it != null) setupRecyclerViewData(it)
+        })
+        reposViewModel.fetchRepos(ReposParams())
     }
 
-    private fun setupRecyclerView(
-        recyclerView: RecyclerView,
-        repos: MutableList<DomainRepo>?
-    ) {
-        recyclerView.adapter =
-            SimpleItemRecyclerViewAdapter(
-                this,
-                repos,
-                twoPane
-            )
+    private fun setupRecyclerViewData(repos: MutableList<DomainRepo>?) {
+        reposRecyclerViewAdapter.values = repos
+        reposRecyclerViewAdapter.notifyDataSetChanged()
     }
 
-    class SimpleItemRecyclerViewAdapter(
-        private val parentActivity: ItemListActivity,
-        private val values: List<Repo>?,
-        private val twoPane: Boolean
-    ) :
-        RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
-
-        private val onClickListener: View.OnClickListener
-
-        init {
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as Repo
-                if (twoPane) {
-                    val fragment = ItemDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putString(ItemDetailFragment.ARG_ITEM_ID, item.name)
-                        }
-                    }
-                    parentActivity.supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.item_detail_container, fragment)
-                        .commit()
-                } else {
-                    val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.name)
-                    }
-                    v.context.startActivity(intent)
-                }
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_list_content, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = values?.get(position)
-            holder.idView.text = item?.name
-            holder.contentView.text = item?.description
-
-            with(holder.itemView) {
-                tag = item
-                setOnClickListener(onClickListener)
-            }
-        }
-
-        override fun getItemCount() = values?.size ?: 0
-
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.id_text
-            val contentView: TextView = view.content
-        }
+    private fun setupRecyclerView() {
+        item_list.adapter = reposRecyclerViewAdapter
     }
 }

@@ -13,8 +13,8 @@ class GithubJavaRepos: Application() {
         super.onCreate()
         startKoin(this, listOf(
             applicationModule,
-            reposModule,
-            pullRequestsModule
+            reposModule
+            //pullRequestsModule
         ))
     }
 }

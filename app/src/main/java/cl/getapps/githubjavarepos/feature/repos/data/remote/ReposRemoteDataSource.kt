@@ -5,7 +5,7 @@ import cl.getapps.githubjavarepos.feature.repos.data.source.RemoteDataSource
 
 class ReposRemoteDataSource(private val reposAPI: ReposAPI): RemoteDataSource {
 
-    override fun fetchRepos(repoParams: ReposParams) = reposAPI.fetchRepos(repoParams.page)
+    override fun fetchRepos(params: ReposParams) = reposAPI.fetchRepos(params.page)
 }
 
-data class ReposParams(val page: String)
+data class ReposParams(val page: String = "1")

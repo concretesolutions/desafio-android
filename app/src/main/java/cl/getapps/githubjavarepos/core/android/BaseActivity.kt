@@ -27,7 +27,7 @@ import androidx.appcompat.app.AppCompatActivity
  */
 abstract class BaseActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_layout)
         setSupportActionBar(toolbar)
@@ -44,5 +44,5 @@ abstract class BaseActivity : AppCompatActivity() {
         savedInstanceState ?: supportFragmentManager.inTransaction { add(
             id.fragmentContainer, fragment()) }
 
-    abstract fun fragment(): BaseFragment
+    abstract fun fragment(): BaseFragment*/
 }

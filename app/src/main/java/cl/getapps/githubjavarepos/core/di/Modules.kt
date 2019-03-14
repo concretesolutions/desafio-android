@@ -17,6 +17,9 @@ import cl.getapps.githubjavarepos.feature.repos.data.remote.ReposRemoteDataSourc
 import cl.getapps.githubjavarepos.feature.repos.data.repository.ReposRepository
 import cl.getapps.githubjavarepos.feature.repos.data.source.DataSourceFactory
 import cl.getapps.githubjavarepos.feature.repos.domain.GetRepos
+import cl.getapps.githubjavarepos.feature.repos.ui.ReposRecyclerViewAdapter
+import cl.getapps.githubjavarepos.feature.repos.ui.ReposViewModel
+import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
 val applicationModule = module {
@@ -24,7 +27,7 @@ val applicationModule = module {
     single { UiThread() as PostExecutionThread }
 }
 
-val reposModule = module("Repos", override = true) {
+val reposModule = module {
     factory { ServiceFactory.makeRepoService(BuildConfig.DEBUG) }
 
     factory<RemoteSource> { ReposRemoteDataSource(get()) }
@@ -32,12 +35,16 @@ val reposModule = module("Repos", override = true) {
 
     factory { DataSourceFactory(get(), get()) }
 
-    single { ReposRepository(get()) }
+    single<cl.getapps.githubjavarepos.feature.repos.domain.repository.ReposRepository> { ReposRepository(get()) }
 
     factory { GetRepos(get(), get(), get()) }
+
+    viewModel { ReposViewModel(get()) }
+
+    factory { ReposRecyclerViewAdapter() }
 }
 
-val pullRequestsModule = module("PullRequests", override = true) {
+val pullRequestsModule = module {
     factory { ServiceFactory.makePullRequestsService(BuildConfig.DEBUG) }
 
     factory<RemoteSource> { PullRequestsRemote(get()) }

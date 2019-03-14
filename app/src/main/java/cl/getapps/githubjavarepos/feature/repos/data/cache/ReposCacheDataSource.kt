@@ -10,7 +10,7 @@ import io.reactivex.Single
 class ReposCacheDataSource: CacheDataSource {
 
     override fun <T> save(items: T): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Completable.complete()
     }
 
     override fun clear(): Completable {
@@ -22,6 +22,7 @@ class ReposCacheDataSource: CacheDataSource {
     }
 
     override fun isCached(): Single<Boolean> {
+        return Single.just(false)
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

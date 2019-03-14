@@ -21,6 +21,7 @@ class PullRequestCache: CacheDataSource {
     }
 
     override fun isCached(): Single<Boolean> {
+        return Single.just(false)
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

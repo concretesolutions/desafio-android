@@ -14,6 +14,7 @@ class GetRepos(
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
 ) : FlowableUseCase<ReposResponse, ReposParams>(threadExecutor, postExecutionThread) {
+
     override fun buildUseCaseObservable(params: ReposParams): Flowable<ReposResponse> {
         return reposRepository.fetchRepos(params)
     }

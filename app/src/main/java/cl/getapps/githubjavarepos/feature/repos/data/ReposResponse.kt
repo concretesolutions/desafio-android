@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 data class ReposResponse(
     val total_count: Int,
     val incomplete_results: Boolean,
-    @SerializedName("repos")
+    @SerializedName("items")
     val repos: List<Repo>
 ) {
     fun toDomainRepos() = repos.mapTo(mutableListOf<DomainRepo>(), fromDataRepo)
