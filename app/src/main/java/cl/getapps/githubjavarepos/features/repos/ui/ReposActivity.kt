@@ -64,9 +64,9 @@ class ReposActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        reposViewModel.getReposLiveData().observe(this, Observer<MutableList<RepoModel>> {
-            if (it.isNotEmpty()) setRecyclerViewData(it)
-            else if (it[0].name == "Error") showSnackBar("Error loading items :(", isError = true)
+        reposViewModel.getReposLiveData().observe(this, Observer<MutableList<RepoModel>> { repos ->
+            if (repos.isNotEmpty() && repos[0].name != "Error") setRecyclerViewData(repos)
+            else if (repos[0].name == "Error") showSnackBar("Error loading items :(", isError = true)
         })
     }
 

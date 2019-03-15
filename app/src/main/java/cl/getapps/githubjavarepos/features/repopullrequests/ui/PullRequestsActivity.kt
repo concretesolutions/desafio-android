@@ -63,10 +63,11 @@ class PullRequestsActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        pullRequestsViewModel.getPullRequestsLiveData().observe(this, Observer<MutableList<PullRequestModel>> {
-            if (it.isNotEmpty()) setRecyclerViewData(it)
-            else if (it[0].title == "Error") showSnackBar("Error loading items :(", isError = true)
-        })
+        pullRequestsViewModel.getPullRequestsLiveData()
+            .observe(this, Observer<MutableList<PullRequestModel>> { pullRequests ->
+                if (pullRequests.isNotEmpty() && pullRequests[0].title != "Error") setRecyclerViewData(pullRequests)
+                else if (pullRequests[0].title == "Error") showSnackBar("Error loading items :(", isError = true)
+            })
     }
 
     private fun loadPullRequests() = if (!loadingFromServer) {
