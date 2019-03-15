@@ -1,7 +1,7 @@
 package cl.getapps.githubjavarepos.core.remote
 
-import cl.getapps.githubjavarepos.feature.repopullrequests.data.remote.PullRequestAPI
-import cl.getapps.githubjavarepos.feature.repos.data.remote.ReposAPI
+import cl.getapps.githubjavarepos.features.repopullrequests.data.remote.PullRequestAPI
+import cl.getapps.githubjavarepos.features.repos.data.remote.ReposAPI
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit
 
 object ServiceFactory {
 
+    private const val GH_BASE_URL = "https://api.github.com/"
     private var httpClient: OkHttpClient? = null
     private var gson: Gson? = null
     private var httpLoggingInterceptor: HttpLoggingInterceptor? = null
@@ -41,7 +42,7 @@ object ServiceFactory {
 
     private fun makeReposService(okHttpClient: OkHttpClient, gson: Gson): ReposAPI {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl(GH_BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -51,7 +52,7 @@ object ServiceFactory {
 
     private fun makePullRequestService(okHttpClient: OkHttpClient, gson: Gson): PullRequestAPI {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl(GH_BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))

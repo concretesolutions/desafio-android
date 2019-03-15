@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <TextView
+        android:id="@+id/repo_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Repo Name"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorTextAccent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:maxWidth="200dp"/>
+
+    <TextView
+        android:id="@+id/repo_item_description"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:lines="2"
+        android:maxWidth="220dp"
+        android:maxLines="2"
+        android:singleLine="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/repo_item_title"
+        app:layout_constraintTop_toBottomOf="@+id/repo_item_title"
+        tools:text="Repo Description" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/ic_git_branch"
+        android:id="@+id/branchIcon"
+        app:layout_constraintStart_toStartOf="@+id/repo_item_title"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/repo_item_forks"
+        tools:text="8"
+        app:layout_constraintStart_toEndOf="@+id/branchIcon"
+        app:layout_constraintTop_toTopOf="@+id/branchIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/branchIcon"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"/>
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/ic_git_star"
+        android:id="@+id/starIcon"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/repo_item_forks"
+        app:layout_constraintTop_toTopOf="@+id/branchIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/branchIcon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/repo_item_stars"
+        tools:text="42"
+        app:layout_constraintStart_toEndOf="@+id/starIcon"
+        app:layout_constraintTop_toTopOf="@+id/branchIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/branchIcon"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:srcCompat="@drawable/ic_default_user"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="48dp"
+        app:civ_circle_background_color="#b7b7b7"
+        android:id="@+id/repo_item_image"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/repo_item_author"
+        android:layout_marginTop="4dp"
+        tools:text="Repo Author"
+        app:layout_constraintTop_toBottomOf="@+id/repo_item_image"
+        app:layout_constraintStart_toStartOf="@+id/repo_item_image"
+        app:layout_constraintEnd_toEndOf="@+id/repo_item_image"
+        android:textColor="@color/colorTextAccent"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:maxWidth="150dp"
+        android:singleLine="true"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="2px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp"
+        android:background="@color/colorHighlight"
+        android:id="@+id/linearLayout">
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
