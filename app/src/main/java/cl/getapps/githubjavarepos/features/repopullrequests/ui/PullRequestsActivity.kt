@@ -49,7 +49,7 @@ class PullRequestsActivity : AppCompatActivity() {
     private fun setToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.title = title
+        toolbar.title = "$title ${ARGS.REPO_NAME}"
     }
 
     private fun makeSnackBar() {
@@ -65,6 +65,7 @@ class PullRequestsActivity : AppCompatActivity() {
     private fun setupViewModel() {
         pullRequestsViewModel.getPullRequestsLiveData().observe(this, Observer<MutableList<PullRequestModel>> {
             if (it.isNotEmpty()) setRecyclerViewData(it)
+            else if (it[0].title == "Error") showSnackBar("Error loading items :(", isError = true)
         })
     }
 
@@ -77,13 +78,17 @@ class PullRequestsActivity : AppCompatActivity() {
                 intent.getStringExtra(ARGS.REPO_NAME)
             )
         )
-        showSnackBar("Loading items...")
+        showSnackBar("Loading items...", isError = false)
     } else {
-        showSnackBar("Loading more items...")
+        showSnackBar("Loading more items...", isError = false)
     }
 
-    private fun showSnackBar(message: String) {
-        snackBar?.setText(message)?.setDuration(BaseTransientBottomBar.LENGTH_INDEFINITE)?.show()
+    private fun showSnackBar(message: String, isError: Boolean) {
+        snackBar?.setText(message)?.setDuration(BaseTransientBottomBar.LENGTH_INDEFINITE)?.run {
+            if (isError) setAction("Retry") {
+                loadPullRequests()
+            }.show() else show()
+        }
     }
 
     private fun setRecyclerViewData(repos: MutableList<PullRequestModel>) {

@@ -1,6 +1,7 @@
 package cl.getapps.githubjavarepos.features.repos.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,6 +66,7 @@ class ReposActivity : AppCompatActivity() {
     private fun setupViewModel() {
         reposViewModel.getReposLiveData().observe(this, Observer<MutableList<RepoModel>> {
             if (it.isNotEmpty()) setRecyclerViewData(it)
+            else if (it[0].name == "Error") showSnackBar("Error loading items :(", isError = true)
         })
     }
 
@@ -72,13 +74,17 @@ class ReposActivity : AppCompatActivity() {
         loadingFromServer = true
         pageParam++
         reposViewModel.fetchRepos(ReposParams(pageParam.toString()))
-        showSnackBar("Loading items...")
+        showSnackBar("Loading items...", isError = false)
     } else {
-        showSnackBar("Loading more items...")
+        showSnackBar("Loading more items...", isError = false)
     }
 
-    private fun showSnackBar(message: String) {
-        snackBar?.setText(message)?.setDuration(BaseTransientBottomBar.LENGTH_INDEFINITE)?.show()
+    private fun showSnackBar(message: String, isError: Boolean) {
+        snackBar?.setText(message)?.setDuration(BaseTransientBottomBar.LENGTH_INDEFINITE)?.run {
+            if (isError) setAction("Retry") {
+                loadRepos()
+            }.show() else show()
+        }
     }
 
     private fun setRecyclerViewData(repos: MutableList<RepoModel>) {

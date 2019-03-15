@@ -43,7 +43,7 @@ class ReposRecyclerViewAdapter :
         holder.description.text = item.description
         holder.forks.text = item.forks.toString()
         holder.starts.text = item.stargazers_count.toString()
-        holder.userAvatar.loadFromUrl(item.ownerModel.avatarUrl)
+        holder.ownerAvatar.loadFromUrl(item.ownerModel.avatarUrl)
 
         with(holder.itemView) {
             tag = item
@@ -59,6 +59,6 @@ class ReposRecyclerViewAdapter :
         val description: TextView = view.repo_item_description
         val forks: TextView = view.repo_item_forks
         val starts: TextView = view.repo_item_stars
-        val userAvatar: CircleImageView = view.repo_item_image
+        val ownerAvatar: CircleImageView = view.repo_item_image
     }
 }

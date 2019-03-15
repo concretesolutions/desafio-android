@@ -3,6 +3,7 @@ package cl.getapps.githubjavarepos.features.repos.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cl.getapps.githubjavarepos.features.repos.data.remote.ReposParams
+import cl.getapps.githubjavarepos.features.repos.domain.model.OwnerModel
 import cl.getapps.githubjavarepos.features.repos.domain.model.RepoModel
 import cl.getapps.githubjavarepos.features.repos.domain.usecase.GetRepos
 import io.reactivex.disposables.Disposable
@@ -19,7 +20,7 @@ class ReposViewModel(private val getRepos: GetRepos) : ViewModel() {
             .subscribe({
                 repos.postValue(it.toReposModel())
             }, {
-                repos.postValue(mutableListOf())
+                repos.postValue(mutableListOf(RepoModel("Error", "Error", OwnerModel("Error", "Error"), -1, -1)))
             })
     }
 

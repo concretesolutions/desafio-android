@@ -6,7 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
+import cl.getapps.githubjavarepos.core.extension.invisible
+import cl.getapps.githubjavarepos.core.extension.loadFromUrl
 import cl.getapps.githubjavarepos.features.repopullrequests.domain.model.PullRequestModel
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.pull_list_content.view.*
 
 class PullRequestsRecyclerViewAdapter : RecyclerView.Adapter<PullRequestsRecyclerViewAdapter.ViewHolder>() {
@@ -22,8 +25,9 @@ class PullRequestsRecyclerViewAdapter : RecyclerView.Adapter<PullRequestsRecycle
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.title.text = item.title
-        holder.description.text = item.body
+        holder.description.text = if (item.body.isNotEmpty()) item.body else "No description"
         holder.owner.text = item.user.login
+        holder.ownerAvatar.loadFromUrl(item.user.avatarUrl)
     }
 
     override fun getItemCount() = values.size
@@ -32,5 +36,6 @@ class PullRequestsRecyclerViewAdapter : RecyclerView.Adapter<PullRequestsRecycle
         val title: TextView = view.pull_item_title
         val description: TextView = view.pull_item_description
         val owner: TextView = view.pull_item_author
+        val ownerAvatar: CircleImageView = view.pull_item_image
     }
 }

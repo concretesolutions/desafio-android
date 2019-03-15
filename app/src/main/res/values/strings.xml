@@ -1,4 +1,4 @@
 <resources>
   <string name="app_name">Github Java Repos</string>
-  <string name="title_item_detail">Item Detail</string>
+  <string name="title_item_detail">Pull Requests</string>
 </resources>
