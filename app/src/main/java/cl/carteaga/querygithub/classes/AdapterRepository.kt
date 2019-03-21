@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import cl.carteaga.querygithub.PullRequestActivity
 import cl.carteaga.querygithub.R
+import cl.carteaga.querygithub.classes.responseJson.ItemsItem
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.item_repository.view.*
 
-class AdapterRepository(var data: MutableList<Repository>) :
+class AdapterRepository(var data: MutableList<ItemsItem>) :
     RecyclerView.Adapter<AdapterRepository.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,19 +21,19 @@ class AdapterRepository(var data: MutableList<Repository>) :
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(data[position])
+        holder.bindView(data?.get(position))
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(repository: Repository) {
+        fun bindView(repository: ItemsItem) {
             itemView.txtNameRepository.text = repository.name
-            itemView.txtAuthorName.text = repository.author.name
+            itemView.txtAuthorName.text = repository.owner?.login
             itemView.txtDescriptionRepository.text = repository.name
             itemView.txtDescriptionRepository.text = repository.description
-            itemView.txtNumberForks.text = repository.numberForks.toString()
-            itemView.txtNumberStarts.text = repository.numberStar.toString()
+            itemView.txtNumberForks.text = repository.forksCount.toString()
+            itemView.txtNumberStarts.text = repository.stargazersCount.toString()
             Glide.with(itemView.context)
-                .load(repository.author.urlPhotoAuthor)
+                .load(repository.owner?.avatarUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(itemView.imgAvatar)
 
@@ -45,17 +46,19 @@ class AdapterRepository(var data: MutableList<Repository>) :
         }
     }
 
-    fun add(repository: Repository)
+    fun add(repository: ItemsItem?)
     {
-        data.add(repository)
+        repository?.let { data.add(it) }
         notifyItemInserted(data.size - 1)
     }
 
-    fun add(repositories: List<Repository>)
+    fun add(repositories: List<ItemsItem?>?)
     {
-        for(repository in repositories)
-        {
-            add(repository)
+        if (repositories != null) {
+            for(repository in repositories)
+            {
+                add(repository)
+            }
         }
     }
 }

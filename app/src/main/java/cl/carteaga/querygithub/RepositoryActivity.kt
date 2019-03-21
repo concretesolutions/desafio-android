@@ -7,8 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
 import cl.carteaga.querygithub.classes.*
-import cl.carteaga.querygithub.classes.responseJson.ItemsItem
-import cl.carteaga.querygithub.classes.responseJson.ResponseRepository
+import cl.carteaga.querygithub.models.Repository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,44 +53,21 @@ class RepositoryActivity : AppCompatActivity() {
 
     private fun loadPage() {
         progressBar.visibility = View.VISIBLE
-        callRepositoryService()?.enqueue(object: Callback<ResponseRepository> {
-            override fun onFailure(call: Call<ResponseRepository>, t: Throwable) {
+        callRepositoryService()?.enqueue(object: Callback<Repository> {
+            override fun onFailure(call: Call<Repository>,t: Throwable) {
             }
 
-            override fun onResponse(call: Call<ResponseRepository>,
-                                    response: Response<ResponseRepository>) {
+            override fun onResponse(call: Call<Repository>,
+                                    response: Response<Repository>) {
                 if(response.code() == 200) {
-                    val repositories = generateRepository(response.body()?.items)
-                    adapterRepository.add(repositories)
+                    adapterRepository.add(response.body()?.items)
                     progressBar.visibility = View.GONE
                 }
             }
         })
     }
 
-    private fun  callRepositoryService(): Call<ResponseRepository>? {
+    private fun  callRepositoryService(): Call<Repository>? {
         return repositoryService?.getRepositories(QUERY_JAVA, QUERY_SORT, currentPage)
     }
-
-    private fun generateRepository(items: List<ItemsItem?>?) : MutableList<Repository> {
-        var repositories: MutableList<Repository> = mutableListOf()
-        items?.map { item ->
-            item?.let {
-                repositories.add(
-                    Repository(
-                        item.name?: "",
-                        item.description?: "",
-                        item.stargazersCount?: 0,
-                        item.forksCount?: 0,
-                        Author(
-                            item.owner?.avatarUrl?: "",
-                            item.owner?.login?: ""
-                        )
-                    )
-                )
-            }
-        }
-        return repositories
-    }
-
 }

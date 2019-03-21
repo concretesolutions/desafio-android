@@ -1,7 +1,7 @@
 package cl.carteaga.querygithub.classes
 
 import cl.carteaga.querygithub.models.PullRequest
-import cl.carteaga.querygithub.classes.responseJson.ResponseRepository
+import cl.carteaga.querygithub.models.Repository
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,7 +12,7 @@ interface GitHubEndPoints {
         @Query("q") q: String,
         @Query("sort") sort: String,
         @Query("page") page: Int
-    ) : Call<ResponseRepository>
+    ) : Call<Repository>
 
     @GET("repos/{user}/{repository}/pulls")
     fun getPullRequestRepository(

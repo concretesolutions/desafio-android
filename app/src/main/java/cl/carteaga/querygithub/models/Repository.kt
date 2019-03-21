@@ -1,8 +1,9 @@
-package cl.carteaga.querygithub.classes.responseJson
+package cl.carteaga.querygithub.models
 
+import cl.carteaga.querygithub.classes.responseJson.ItemsItem
 import com.google.gson.annotations.SerializedName
 
-data class ResponseRepository(
+data class Repository(
 
 	@field:SerializedName("total_count")
 	val totalCount: Int? = null,
