@@ -1,4 +1,4 @@
-package cl.carteaga.querygithub.classes
+package cl.carteaga.querygithub.apis
 
 import cl.carteaga.querygithub.models.PullRequest
 import cl.carteaga.querygithub.models.Repository

@@ -1,6 +1,6 @@
 package cl.carteaga.querygithub.models
 
-import cl.carteaga.querygithub.classes.responseJson.ItemsItem
+import cl.carteaga.querygithub.utils.responseJson.ItemsItem
 import com.google.gson.annotations.SerializedName
 
 data class Repository(

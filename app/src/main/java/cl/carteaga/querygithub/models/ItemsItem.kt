@@ -1,4 +1,4 @@
-package cl.carteaga.querygithub.classes.responseJson
+package cl.carteaga.querygithub.utils.responseJson
 
 import cl.carteaga.querygithub.models.Owner
 import com.google.gson.annotations.SerializedName

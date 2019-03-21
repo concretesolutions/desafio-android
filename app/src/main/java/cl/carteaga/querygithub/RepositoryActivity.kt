@@ -6,12 +6,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
-import cl.carteaga.querygithub.classes.*
+import cl.carteaga.querygithub.adapters.AdapterRepository
+import cl.carteaga.querygithub.apis.GitHubApi
+import cl.carteaga.querygithub.apis.GitHubEndPoints
 import cl.carteaga.querygithub.models.Repository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import cl.carteaga.querygithub.classes.EndlessRecyclerViewScrollListener
+import cl.carteaga.querygithub.utils.EndlessRecyclerViewScrollListener
 
 
 

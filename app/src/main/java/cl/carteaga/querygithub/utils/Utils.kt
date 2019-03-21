@@ -1,4 +1,4 @@
-package cl.carteaga.querygithub.classes
+package cl.carteaga.querygithub.utils
 
 import android.view.LayoutInflater
 import android.view.View
