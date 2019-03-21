@@ -9,7 +9,7 @@ import android.widget.ProgressBar
 import cl.carteaga.querygithub.adapters.AdapterRepository
 import cl.carteaga.querygithub.apis.GitHubApi
 import cl.carteaga.querygithub.apis.GitHubEndPoints
-import cl.carteaga.querygithub.models.Repository
+import cl.carteaga.querygithub.models.HeadRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,12 +55,12 @@ class RepositoryActivity : AppCompatActivity() {
 
     private fun loadPage() {
         progressBar.visibility = View.VISIBLE
-        callRepositoryService()?.enqueue(object: Callback<Repository> {
-            override fun onFailure(call: Call<Repository>,t: Throwable) {
+        callRepositoryService()?.enqueue(object: Callback<HeadRepository> {
+            override fun onFailure(call: Call<HeadRepository>,t: Throwable) {
             }
 
-            override fun onResponse(call: Call<Repository>,
-                                    response: Response<Repository>) {
+            override fun onResponse(call: Call<HeadRepository>,
+                                    response: Response<HeadRepository>) {
                 if(response.code() == 200) {
                     adapterRepository.add(response.body()?.items)
                     progressBar.visibility = View.GONE
@@ -69,7 +69,7 @@ class RepositoryActivity : AppCompatActivity() {
         })
     }
 
-    private fun  callRepositoryService(): Call<Repository>? {
+    private fun  callRepositoryService(): Call<HeadRepository>? {
         return repositoryService?.getRepositories(QUERY_JAVA, QUERY_SORT, currentPage)
     }
 }

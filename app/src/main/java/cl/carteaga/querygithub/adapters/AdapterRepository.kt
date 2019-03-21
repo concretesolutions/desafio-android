@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import cl.carteaga.querygithub.PullRequestActivity
 import cl.carteaga.querygithub.R
 import cl.carteaga.querygithub.utils.inflate
-import cl.carteaga.querygithub.models.ItemsItem
+import cl.carteaga.querygithub.models.Repository
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.item_repository.view.*
 
-class AdapterRepository(var data: MutableList<ItemsItem>) :
+class AdapterRepository(var data: MutableList<Repository>) :
     RecyclerView.Adapter<AdapterRepository.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +26,7 @@ class AdapterRepository(var data: MutableList<ItemsItem>) :
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(repository: ItemsItem) {
+        fun bindView(repository: Repository) {
             itemView.txtNameRepository.text = repository.name
             itemView.txtAuthorName.text = repository.owner?.login
             itemView.txtDescriptionRepository.text = repository.name
@@ -47,13 +47,13 @@ class AdapterRepository(var data: MutableList<ItemsItem>) :
         }
     }
 
-    fun add(repository: ItemsItem?)
+    fun add(repository: Repository?)
     {
         repository?.let { data.add(it) }
         notifyItemInserted(data.size - 1)
     }
 
-    fun add(repositories: List<ItemsItem?>?)
+    fun add(repositories: List<Repository?>?)
     {
         if (repositories != null) {
             for(repository in repositories)
