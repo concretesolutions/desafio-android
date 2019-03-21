@@ -27,9 +27,9 @@ class PullRequestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_request)
 
-        val extras: Bundle = this.intent.extras
-        nameRepository = extras["nameRepository"] as String
-        nameAuthorRepository = extras["authorName"] as String
+        val extras: Bundle? = this.intent.extras
+        nameRepository = extras?.get("nameRepository") as String
+        nameAuthorRepository = extras?.get("authorName") as String
 
         this.title = nameRepository
         this.supportActionBar?.setDisplayHomeAsUpEnabled(true)

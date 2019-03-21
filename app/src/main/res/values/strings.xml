@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">GitHub JavaPop</string>
-    <string name="action_settings">Settings</string>
     <string name="name_repository">Nombre Repositorio</string>
     <string name="desc_repository">Descripción Repositorio</string>
     <string name="number_forks">9999</string>
     <string name="name_author">Nombre Autor</string>
-    <string name="nickname_author">Sobrenombre Autor</string>
     <string name="title_pull_request">Titulo Pull Request</string>
     <string name="desc_pull_request">Descripción pull request</string>
+    <string name="desc_img_avatar">Avatar</string>
 </resources>

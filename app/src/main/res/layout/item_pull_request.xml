@@ -18,7 +18,7 @@
                 android:layout_marginBottom="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/name_repository"/>
+                android:text="@string/title_pull_request"/>
 
         <TextView
                 android:id="@+id/txtBodyPullRequest"
@@ -37,8 +37,9 @@
 
             <ImageView
                     android:id="@+id/imgAvatarPullRequest"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:contentDescription="@string/desc_img_avatar"
+                    android:layout_width="@dimen/avatar_small"
+                    android:layout_height="@dimen/avatar_small"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginRight="4dp"
                     android:src="@drawable/avatar_default"/>

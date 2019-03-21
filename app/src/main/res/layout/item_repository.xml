@@ -8,6 +8,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/layout_padding"
+            android:baselineAligned="false"
             android:orientation="horizontal">
 
         <LinearLayout
@@ -79,8 +80,9 @@
 
             <ImageView
                     android:id="@+id/imgAvatar"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/avatar_large"
+                    android:layout_height="@dimen/avatar_large"
+                    android:contentDescription="@string/desc_img_avatar"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/avatar_default"/>
 
@@ -90,7 +92,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="@string/name_author"/>
+                    android:text="@string/name_author" />
 
         </LinearLayout>
 

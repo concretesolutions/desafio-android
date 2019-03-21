@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import cl.carteaga.querygithub.PullRequestActivity
 import cl.carteaga.querygithub.R
 import cl.carteaga.querygithub.utils.inflate
-import cl.carteaga.querygithub.utils.responseJson.ItemsItem
+import cl.carteaga.querygithub.models.ItemsItem
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.item_repository.view.*
@@ -22,7 +22,7 @@ class AdapterRepository(var data: MutableList<ItemsItem>) :
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: ViewHolder,position: Int) {
-        holder.bindView(data?.get(position))
+        holder.bindView(data.get(position))
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

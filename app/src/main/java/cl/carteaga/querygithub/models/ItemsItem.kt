@@ -1,6 +1,5 @@
-package cl.carteaga.querygithub.utils.responseJson
+package cl.carteaga.querygithub.models
 
-import cl.carteaga.querygithub.models.Owner
 import com.google.gson.annotations.SerializedName
 
 data class ItemsItem(
