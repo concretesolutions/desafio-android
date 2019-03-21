@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
 import cl.carteaga.querygithub.classes.*
-import cl.carteaga.querygithub.classes.responseJson.ResponsePullRequest
+import cl.carteaga.querygithub.models.PullRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,16 +45,15 @@ class PullRequestActivity : AppCompatActivity() {
 
     private fun loadPage() {
         progressBar.visibility = View.VISIBLE
-        callPullRequestService()?.enqueue(object: Callback<List<ResponsePullRequest>> {
-            override fun onFailure(call: Call<List<ResponsePullRequest>>,t: Throwable) {
+        callPullRequestService()?.enqueue(object: Callback<List<PullRequest>> {
+            override fun onFailure(call: Call<List<PullRequest>>,t: Throwable) {
             }
 
-            override fun onResponse(call: Call<List<ResponsePullRequest>>,
-                                    response: Response<List<ResponsePullRequest>>
+            override fun onResponse(call: Call<List<PullRequest>>,
+                                    response: Response<List<PullRequest>>
             ) {
                 if(response.code() == 200) {
-                    var pullRequests = generatePullRequest(response.body())
-                    adapterPullRequest = AdapterPullRequest(pullRequests)
+                    adapterPullRequest = AdapterPullRequest(response.body())
                     recyclerView.adapter = adapterPullRequest
                     progressBar.visibility = View.GONE
                 }
@@ -62,27 +61,7 @@ class PullRequestActivity : AppCompatActivity() {
         })
     }
 
-    private fun callPullRequestService(): Call<List<ResponsePullRequest>>? {
+    private fun callPullRequestService(): Call<List<PullRequest>>? {
         return pullRequestService?.getPullRequestRepository(nameAuthorRepository, nameRepository)
-    }
-
-    private fun generatePullRequest(items: List<ResponsePullRequest>?) : MutableList<PullRequest> {
-        var pullrequests: MutableList<PullRequest> = mutableListOf()
-        items?.map { item ->
-            item.let {
-                pullrequests.add(
-                    PullRequest(
-                        item.title?: "",
-                        item.body?: "",
-                        User(
-                            item.user?.avatarUrl?: "",
-                            item.user?.login?: ""
-                        ),
-                        item.htmlUrl?: ""
-                    )
-                )
-            }
-        }
-        return pullrequests
     }
 }

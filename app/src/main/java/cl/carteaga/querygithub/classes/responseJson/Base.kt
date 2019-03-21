@@ -1,5 +1,6 @@
 package cl.carteaga.querygithub.classes.responseJson
 
+import cl.carteaga.querygithub.models.User
 import com.google.gson.annotations.SerializedName
 
 data class Base(
