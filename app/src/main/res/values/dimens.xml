@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="txtNumberStarts_margin">16dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="layout_padding">20dp</dimen>
+    <dimen name="icon_size">20dp</dimen>
+    <dimen name="icon_margin">2dp</dimen>
+</resources>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:orientation="horizontal">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/txtNameRepository"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/name_repository"/>
+
+            <TextView
+                    android:id="@+id/txtDescriptionRepository"
+                    android:textColor="@color/colorSecondaryText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/desc_repository"></TextView>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:src="@drawable/code_fork_24"
+                        android:layout_marginRight="@dimen/icon_margin"/>
+
+                <TextView
+                        android:id="@+id/txtNumberForks"
+                        android:textColor="@color/colorSecondaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number_forks"/>
+
+                <ImageView
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:src="@drawable/star_24"
+                        android:layout_marginLeft="@dimen/icon_margin"
+                        android:layout_marginRight="@dimen/icon_margin"/>
+
+                <TextView
+                        android:id="@+id/txtNumberStarts"
+                        android:layout_marginLeft="@dimen/icon_margin"
+                        android:textColor="@color/colorSecondaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number_forks"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_weight="0.5">
+
+            <ImageView
+                    android:id="@+id/imgAvatar"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/avatar_default"/>
+
+            <TextView
+                    android:id="@+id/txtAuthorName"
+                    android:textColor="@color/colorSecondaryText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/name_author"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+            android:layout_width="fill_parent"
+            android:background="@color/ColorDivider"
+            android:layout_height="@dimen/divider_height"/>
+</android.support.v7.widget.CardView>
