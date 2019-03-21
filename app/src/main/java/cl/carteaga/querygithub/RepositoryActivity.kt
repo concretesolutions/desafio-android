@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
 import cl.carteaga.querygithub.adapters.AdapterRepository
-import cl.carteaga.querygithub.apis.GitHubApi
-import cl.carteaga.querygithub.apis.GitHubEndPoints
+import cl.carteaga.querygithub.api.GitHubApi
+import cl.carteaga.querygithub.api.GitHubEndPoints
 import cl.carteaga.querygithub.models.HeadRepository
 import retrofit2.Call
 import retrofit2.Callback
