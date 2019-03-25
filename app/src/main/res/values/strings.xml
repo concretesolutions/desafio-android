@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Github Repos</string>
+
+    <string name="project_owner_name">Nome do criador do projeto</string>
+
+    <string name="error">Erro</string>
+    <string name="error_"></string>
+    <string name="error_connection">Sem conexão com a internet\ntoque aqui para tentar novamente</string>
+    <string name="error_unexpected">Não foi possível recuperar os dados, toque aqui para tentar novamente</string>
+    <string name="error_no_pull_requests">Nenhum pull-request encontrado</string>
+</resources>

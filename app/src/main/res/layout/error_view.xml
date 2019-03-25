@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="baseViewModel"
+                type="dev.renatoneto.githubrepos.base.BaseViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="gone">
+
+        <ImageView
+                android:id="@+id/imgError"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_error"
+                android:tint="@android:color/darker_gray"
+                android:contentDescription="@string/error"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/txtError"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/txtError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{(baseViewModel.error > 0) ? context.getString(baseViewModel.error) : ""}'
+                android:textAlignment="center"
+                tools:text="Erro de teste"
+                android:layout_marginStart="@dimen/size_12x"
+                android:layout_marginEnd="@dimen/size_12x"
+                android:layout_marginTop="@dimen/size_12x"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgError"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

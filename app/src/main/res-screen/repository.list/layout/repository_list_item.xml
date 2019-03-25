@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="repository"
+                type="dev.renatoneto.githubrepos.model.github.GithubRepository"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_8x"
+            android:layout_marginBottom="@dimen/size_8x"
+            app:contentPadding="@dimen/size_12x"
+            android:foreground="?selectableItemBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/txtRepositoryName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{repository.name}"
+                    tools:text="Nome repositório"
+                    android:textAppearance="?textAppearanceHeadline6"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginEnd="@dimen/size_20x"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.70"/>
+
+            <TextView
+                    android:id="@+id/txtRepositoryDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{repository.description}"
+                    tools:text="Descrição repositório"
+                    android:textAppearance="?textAppearanceBody2"
+                    app:layout_constraintStart_toStartOf="@id/txtRepositoryName"
+                    app:layout_constraintEnd_toEndOf="@id/txtRepositoryName"
+                    app:layout_constraintTop_toBottomOf="@id/txtRepositoryName"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/containerOwnerDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintWidth_percent="0.30">
+
+                <ImageView
+                        android:id="@+id/imgOwnerAvatar"
+                        android:layout_width="@dimen/size_50x"
+                        android:layout_height="@dimen/size_50x"
+                        tools:background="@color/colorAccent"
+                        android:contentDescription="@string/project_owner_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                        android:id="@+id/txtOwnerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{repository.owner.login}"
+                        tools:text="Nome dono"
+                        android:textColor="@color/colorAccent"
+                        android:textAppearance="?textAppearanceCaption"
+                        app:layout_constraintTop_toBottomOf="@id/imgOwnerAvatar"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                    android:id="@+id/txtTotalForks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`` + repository.totalForks}"
+                    android:textAppearance="?textAppearanceSubtitle2"
+                    tools:text="10000"
+                    android:gravity="center_vertical"
+                    android:drawableStart="@drawable/ic_fork"
+                    android:drawablePadding="@dimen/size_4x"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:layout_marginTop="@dimen/size_8x"
+                    app:layout_constraintTop_toBottomOf="@id/txtRepositoryDescription"
+                    app:layout_constraintStart_toStartOf="@id/txtRepositoryName"/>
+
+            <TextView
+                    android:id="@+id/txtTotalStars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`` + repository.totalStars}"
+                    tools:text="10000"
+                    android:textAppearance="?textAppearanceSubtitle2"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:layout_marginStart="@dimen/size_12x"
+                    android:gravity="center_vertical"
+                    android:drawableStart="@drawable/ic_star"
+                    android:drawablePadding="@dimen/size_4x"
+                    app:layout_constraintTop_toTopOf="@id/txtTotalForks"
+                    app:layout_constraintStart_toEndOf="@id/txtTotalForks"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

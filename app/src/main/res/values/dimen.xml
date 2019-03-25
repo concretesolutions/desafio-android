@@ -1,0 +1,14 @@
+<resources>
+
+    <dimen name="size_4x">4dp</dimen>
+    <dimen name="size_8x">8dp</dimen>
+    <dimen name="size_12x">12dp</dimen>
+    <dimen name="size_16x">16dp</dimen>
+    <dimen name="size_20x">20dp</dimen>
+    <dimen name="size_30x">30dp</dimen>
+    <dimen name="size_40x">40dp</dimen>
+    <dimen name="size_50x">50dp</dimen>
+
+    <dimen name="text_12x">12sp</dimen>
+
+</resources>

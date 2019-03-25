@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="pullRequest"
+                type="dev.renatoneto.githubrepos.model.github.GithubPullRequest"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_8x"
+            android:layout_marginBottom="@dimen/size_8x"
+            app:contentPadding="@dimen/size_12x"
+            android:foreground="?selectableItemBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/txtPullRequestTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{pullRequest.title}"
+                    tools:text="Título pull request"
+                    android:textAppearance="?textAppearanceHeadline6"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginEnd="@dimen/size_20x"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                    android:id="@+id/txtPullRequestDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{pullRequest.body}"
+                    tools:text="Descrição"
+                    android:textAppearance="?textAppearanceBody2"
+                    app:layout_constraintStart_toStartOf="@id/txtPullRequestTitle"
+                    app:layout_constraintEnd_toEndOf="@id/txtPullRequestTitle"
+                    app:layout_constraintTop_toBottomOf="@id/txtPullRequestTitle"/>
+
+            <ImageView
+                    android:id="@+id/imgOwnerAvatar"
+                    android:layout_width="@dimen/size_30x"
+                    android:layout_height="@dimen/size_30x"
+                    tools:background="@color/colorAccent"
+                    android:contentDescription="@string/project_owner_name"
+                    android:layout_marginTop="@dimen/size_8x"
+                    app:layout_constraintTop_toBottomOf="@id/txtPullRequestDescription"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/txtOwnerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{pullRequest.user.login}"
+                    tools:text="Nome"
+                    android:textColor="@color/colorAccent"
+                    android:textAppearance="?textAppearanceCaption"
+                    android:layout_marginStart="@dimen/size_12x"
+                    app:layout_constraintTop_toTopOf="@id/imgOwnerAvatar"
+                    app:layout_constraintBottom_toBottomOf="@id/imgOwnerAvatar"
+                    app:layout_constraintStart_toEndOf="@id/imgOwnerAvatar"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
