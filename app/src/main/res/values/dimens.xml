@@ -1,0 +1,8 @@
+<resources>
+  <dimen name="space_medium">16dp</dimen>
+  <dimen name="space_small">8dp</dimen>
+
+  <dimen name="space_title">3dp</dimen>
+
+  <dimen name="dimen_image">50dp</dimen>
+</resources>

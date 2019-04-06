@@ -1,0 +1,130 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <data>
+        <variable
+            name="repositoryViewModel"
+            type="com.example.desafioandroid.viewModel.ItemRepositoryViewModel"/>
+    </data>
+    <LinearLayout
+        android:id="@+id/linear_repository"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_medium"
+        android:baselineAligned="false">
+
+    <LinearLayout
+        android:id="@+id/linear_content_image"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical||center_horizontal
+"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle_imageusername"
+            android:layout_width="@dimen/dimen_image"
+            android:layout_height="@dimen/dimen_image"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_margin="@dimen/space_medium"/>
+
+        <TextView
+            android:id="@+id/text_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="UserName"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_content_description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/text_title_repository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titulo del repositorio"
+            android:layout_margin="@dimen/space_title"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+
+        <TextView
+            android:id="@+id/text_content_repository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="descripcion del rehjgjiugliuggliggglglglgliglyflyflfflflkuyfuyfufyuyfuuyfukpositorio"
+            android:layout_margin="@dimen/space_title"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
+            android:maxLines="2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_weight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_fork"
+                    android:layout_margin="@dimen/space_small"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="300"
+                    android:layout_margin="@dimen/space_title"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_weight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_watcher"
+                    android:layout_margin="@dimen/space_small"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="300"
+                    android:layout_margin="@dimen/space_title"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_weight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_star"
+                    android:layout_margin="@dimen/space_small"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="300"
+                    android:layout_margin="@dimen/space_title"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
