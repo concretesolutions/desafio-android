@@ -75,7 +75,8 @@
           android:layout_width="@dimen/dimen_image"
           android:layout_height="@dimen/dimen_image"
           android:src="@mipmap/ic_launcher_round"
-          android:layout_margin="@dimen/space_small"/>
+          android:layout_margin="@dimen/space_small"
+          app:imageUrl="@{pullViewModel.pictureProfile}"/>
       <TextView
           android:id="@+id/text_username"
           android:layout_width="wrap_content"
