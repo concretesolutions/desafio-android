@@ -5,4 +5,5 @@
   <dimen name="space_title">3dp</dimen>
 
   <dimen name="dimen_image">50dp</dimen>
+  <dimen name="fab_margin">16dp</dimen>
 </resources>

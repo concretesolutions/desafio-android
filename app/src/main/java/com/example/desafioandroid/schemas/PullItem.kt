@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 
 
-class Pull {
+class PullItem {
     @SerializedName("url")
     @Expose
     var url: String? = null

@@ -1,130 +1,152 @@
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-    <data>
-        <variable
-            name="repositoryViewModel"
-            type="com.example.desafioandroid.viewModel.ItemRepositoryViewModel"/>
-    </data>
-    <LinearLayout
-        android:id="@+id/linear_repository"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/space_medium"
-        android:baselineAligned="false">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <variable
+        name="repositoryViewModel"
+        type="com.example.desafioandroid.viewModel.ItemRepositoryViewModel"/>
+  </data>
+  <android.support.constraint.ConstraintLayout
+      android:id="@+id/constraint_repository"
+      android:layout_width="match_parent"
+      android:layout_height="150dp"
+      android:padding="@dimen/space_small"
+      android:baselineAligned="false"
+      android:onClick="@{repositoryViewModel::onItemClick}"
+  >
 
-    <LinearLayout
-        android:id="@+id/linear_content_image"
-        android:layout_width="100dp"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint_content_image"
+        android:layout_width="90dp"
         android:layout_height="match_parent"
-        android:gravity="center_vertical||center_horizontal
-"
-        android:orientation="vertical">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/constraint_content_description"
+    >
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circle_imageusername"
-            android:layout_width="@dimen/dimen_image"
-            android:layout_height="@dimen/dimen_image"
-            android:src="@mipmap/ic_launcher_round"
-            android:layout_margin="@dimen/space_medium"/>
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/circle_imageusername"
+          android:layout_width="@dimen/dimen_image"
+          android:layout_height="@dimen/dimen_image"
+          android:gravity="center"
+          android:layout_margin="@dimen/space_medium"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintRight_toRightOf="parent"/>
 
-        <TextView
-            android:id="@+id/text_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="UserName"/>
+      <TextView
+          android:id="@+id/text_username"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="UserName"
+          android:text="@{repositoryViewModel.username}"
+          android:gravity="center_vertical"
+          app:layout_constraintTop_toBottomOf="@+id/circle_imageusername"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintRight_toRightOf="parent"/>
 
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear_content_description"
-        android:layout_width="match_parent"
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint_content_description"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/text_title_repository"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Titulo del repositorio"
-            android:layout_margin="@dimen/space_title"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+        android:orientation="vertical"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+      <TextView
+          android:id="@+id/text_title_repository"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@{repositoryViewModel.titleRepository}"
+          tools:text="Titulo del repositorio"
+          android:layout_margin="@dimen/space_title"
+          android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+          app:layout_constraintTop_toTopOf="@id/constraint_content_description"
+          app:layout_constraintLeft_toLeftOf="@+id/constraint_content_description"/>
 
-        <TextView
-            android:id="@+id/text_content_repository"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="descripcion del rehjgjiugliuggliggglglglgliglyflyflfflflkuyfuyfufyuyfuuyfukpositorio"
-            android:layout_margin="@dimen/space_title"
-            android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
-            android:maxLines="2"/>
+      <TextView
+          android:id="@+id/text_content_repository"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@{repositoryViewModel.descriptionRepository}"
+          tools:text="Descripcion del Repositorio"
+          android:layout_margin="@dimen/space_title"
+          android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
+          android:lines="3"
+          app:layout_constraintTop_toBottomOf="@id/text_title_repository"
+          app:layout_constraintLeft_toLeftOf="@id/constraint_content_description"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          app:layout_constraintTop_toBottomOf="@id/text_content_repository">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_weight="1">
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_fork"
-                    android:layout_margin="@dimen/space_small"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="300"
-                    android:layout_margin="@dimen/space_title"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_weight="1">
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_watcher"
-                    android:layout_margin="@dimen/space_small"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="300"
-                    android:layout_margin="@dimen/space_title"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_weight="1">
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_star"
-                    android:layout_margin="@dimen/space_small"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="300"
-                    android:layout_margin="@dimen/space_title"/>
-            </LinearLayout>
+          <android.support.v7.widget.AppCompatImageView
+              android:layout_width="25dp"
+              android:layout_height="25dp"
+              android:src="@drawable/ic_fork"
+              android:layout_margin="@dimen/space_title"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@{repositoryViewModel.cantFork}"
+              tools:text="300"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
 
-    </LinearLayout>
+          <android.support.v7.widget.AppCompatImageView
+              android:layout_width="25dp"
+              android:layout_height="25dp"
+              android:src="@drawable/ic_watcher"
+              android:layout_margin="@dimen/space_title"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@{repositoryViewModel.cantWatcher}"
+              tools:text="300"/>
+        </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+
+          <android.support.v7.widget.AppCompatImageView
+              android:layout_width="25dp"
+              android:layout_height="25dp"
+              android:src="@drawable/ic_star"
+              android:layout_margin="@dimen/space_title"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@{repositoryViewModel.cantLike}"
+              tools:text="300"/>
+        </LinearLayout>
+      </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+  </android.support.constraint.ConstraintLayout>
 
 </layout>
