@@ -13,9 +13,6 @@ class License {
     @SerializedName("spdx_id")
     @Expose
     var spdxId: String? = null
-    @SerializedName("url")
-    @Expose
-    var url: Any? = null
     @SerializedName("node_id")
     @Expose
     var nodeId: String? = null

@@ -8,7 +8,7 @@
         type="com.example.desafioandroid.viewModel.ItemRepositoryViewModel"/>
   </data>
   <android.support.constraint.ConstraintLayout
-      android:id="@+id/constraint_repository"
+      android:id="@+id/card_repository"
       android:layout_width="match_parent"
       android:layout_height="150dp"
       android:padding="@dimen/space_small"

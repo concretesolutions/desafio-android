@@ -196,9 +196,6 @@ class RepositoryItem {
     @SerializedName("forks_count")
     @Expose
     var forksCount: Int? = null
-    @SerializedName("mirror_url")
-    @Expose
-    var mirrorUrl: Any? = null
     @SerializedName("archived")
     @Expose
     var archived: Boolean? = null
@@ -225,6 +222,6 @@ class RepositoryItem {
     var defaultBranch: String? = null
     @SerializedName("score")
     @Expose
-    var score: Int? = null
+    var score: Double? = null
 
 }

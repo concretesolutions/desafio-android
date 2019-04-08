@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.desafioandroid.schemas.PullItem
 import de.hdodenhof.circleimageview.CircleImageView
 
+
 class ItemPullViewModel(private val mPullItem:PullItem, private val mContext: Context): BaseObservable() {
 
     @BindingAdapter("imageUrl")

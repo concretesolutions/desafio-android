@@ -10,17 +10,17 @@ import android.databinding.BindingAdapter
 import de.hdodenhof.circleimageview.CircleImageView
 
 
-class ItemRepositoryViewModel(private val mRepositoryItem: RepositoryItem, private val context: Context): BaseObservable() {
+class ItemRepositoryViewModel(var mRepositoryItem: RepositoryItem, private val context: Context): BaseObservable() {
     val TAG = javaClass.name
 
     fun onItemClick(view: View) {
         Log.e(TAG, "onItemClick")
     }
 
-    @BindingAdapter("imageUrl")
+  /*  @BindingAdapter("imageUrl")
     fun setImageUrl(imageView: CircleImageView, url:String) {
         Glide.with(imageView.context).load(url).into(imageView)
-    }
+    }*/
 
     fun pictureProfile (): String {
         return mRepositoryItem.owner!!.avatarUrl!!
