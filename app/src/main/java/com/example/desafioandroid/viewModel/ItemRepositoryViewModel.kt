@@ -7,6 +7,7 @@ import android.view.View
 import com.example.desafioandroid.schemas.RepositoryItem
 import com.bumptech.glide.Glide
 import android.databinding.BindingAdapter
+import android.widget.ImageView
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -17,10 +18,13 @@ class ItemRepositoryViewModel(var mRepositoryItem: RepositoryItem, private val c
         Log.e(TAG, "onItemClick")
     }
 
-  /*  @BindingAdapter("imageUrl")
-    fun setImageUrl(imageView: CircleImageView, url:String) {
-        Glide.with(imageView.context).load(url).into(imageView)
-    }*/
+   companion object{
+       @JvmStatic
+       @BindingAdapter("imageUrl")
+       fun loadPicture(view: ImageView, loadPicture: String) {
+           Glide.with(view.context).load(loadPicture).into(view)
+       }
+   }
 
     fun pictureProfile (): String {
         return mRepositoryItem.owner!!.avatarUrl!!
