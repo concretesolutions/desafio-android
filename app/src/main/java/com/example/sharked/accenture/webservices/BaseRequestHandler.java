@@ -7,11 +7,13 @@ import android.util.Log;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.greenrobot.eventbus.EventBus;
@@ -19,6 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BaseRequestHandler<T> extends AsyncTask<Object, Void, T>{
 
@@ -26,9 +31,9 @@ public abstract class BaseRequestHandler<T> extends AsyncTask<Object, Void, T>{
     protected T doInBackground(Object[] urls) {
         try {
 
-            HttpGet httppost = new HttpGet(getURL());
+            HttpGet httpGet = new HttpGet(getURL());
             HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse response = httpclient.execute(httppost);
+            HttpResponse response = httpclient.execute(httpGet);
 
             // StatusLine stat = response.getStatusLine();
             int status = response.getStatusLine().getStatusCode();
@@ -38,24 +43,20 @@ public abstract class BaseRequestHandler<T> extends AsyncTask<Object, Void, T>{
                 String data = EntityUtils.toString(entity);
 
 
-                JSONObject jsono = new JSONObject(data);
                 Gson gson = this.getGsonBuilder().create();
-                Log.e("json",jsono.toString());
-
-                T output = gson.fromJson(jsono.toString() , this.getResponseClass());
+                T output = gson.fromJson(data , this.getResponseClass());
                 return output;
             }
 
 
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
         return null;
     }
 
     protected void onPostExecute(T result) {
+        Log.e("Error",(null == result)?"NULL":"NOT NULL");
         Log.e("Class",result.getClass().toString());
         EventBus.getDefault().post(result);
     }
@@ -70,6 +71,8 @@ public abstract class BaseRequestHandler<T> extends AsyncTask<Object, Void, T>{
     protected abstract String getURL();
 
     protected abstract Class<T> getResponseClass();
+
+    public boolean isList() {return false;}
 
     protected abstract String getHttpMethod();
 

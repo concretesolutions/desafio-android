@@ -1,74 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/li_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:paddingBottom="0dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="0.3"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/delivery_location"
+            android:id="@+id/repository_name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:text="Entrega en"
-            android:textColor="@color/colorPrimary"
+            android:text="Nombre del repositorio"
+            android:textColor="#3e78aa"
+            android:textSize="16sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/repository_description_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:text="Descripción del repositorio. Lorem ipsum dolor sit amet lorem ..." />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/icon_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                app:srcCompat="@drawable/cast_abc_scrubber_control_off_mtrl_alpha" />
-
-            <TextView
-                android:id="@+id/wrapper_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="Title"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text=" - " />
-
-            <TextView
-                android:id="@+id/wrapper_name_date"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text=" Nombre - fecha " />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/rfid_scan_tag"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/cast_abc_scrubber_control_off_mtrl_alpha" />
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@android:drawable/ic_menu_share" />
+
+            <TextView
+                android:id="@+id/repository_pr_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="640"
+                android:textColor="#e09513"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@android:drawable/ic_menu_compass" />
+
+            <TextView
+                android:id="@+id/repository_star_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="98"
+                android:textColor="#e09513"
+                android:textStyle="bold" />
+
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/materials_to_LL"
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
+        <TextView
+            android:id="@+id/repository_owner_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="username"
+            android:textColor="#6294c4" />
+
+        <TextView
+            android:id="@+id/repository_owner_nick_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="sobrenombre"
+            android:textSize="12sp" />
     </LinearLayout>
 
 

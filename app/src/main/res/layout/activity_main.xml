@@ -5,13 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="100dp"
-    tools:context=".MainActivity">
+    tools:context=".views.activities.MainActivity">
 
 
     <ListView
         android:id="@+id/repository_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/repository_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </android.support.constraint.ConstraintLayout>

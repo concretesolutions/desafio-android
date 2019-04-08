@@ -23,7 +23,7 @@ public class SearchRepositories extends BaseRequestHandler {
 
     @Override
     protected String getHttpMethod() {
-        return null;
+        return "GET";
     }
 
 }

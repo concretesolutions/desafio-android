@@ -2,21 +2,82 @@ package com.example.sharked.accenture.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Repository {
-    public Float id;
+import java.io.Serializable;
+
+public class Repository  implements Serializable {
+    @SerializedName("id")
+    public String id;
+
+    @SerializedName("name")
     public String name;
+
+    @SerializedName("description")
+    public String description;
+
+    @SerializedName("forks")
+    public String forks;
+
+    @SerializedName("stargazersCount")
+    public String stargazersCount;
+
+    @SerializedName("owner")
+    public Owner owner;
 
     @SerializedName("node_id")
     public String nodeId;
+
     @SerializedName("full_name")
     public String fullName;
 
+    @SerializedName("forks_url")
+    public String forksUrl;
 
-    public Float getId() {
+
+    public String getForksUrl() {
+        return forksUrl;
+    }
+
+    public void setForksUrl(String forksUrl) {
+        this.forksUrl = forksUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getForks() {
+        return forks;
+    }
+
+    public void setForks(String forks) {
+        this.forks = forks;
+    }
+
+    public String getStargazersCount() {
+        return stargazersCount;
+    }
+
+    public void setStargazersCount(String stargazersCount) {
+        this.stargazersCount = stargazersCount;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Float id) {
+    public void setId(String id) {
         this.id = id;
     }
 
