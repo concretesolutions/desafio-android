@@ -1,13 +1,11 @@
 package com.example.desafioandroid.viewModel
 
 import android.databinding.BaseObservable
-import android.util.Log
 import android.view.View
 import com.example.desafioandroid.schemas.RepositoryItem
 import com.bumptech.glide.Glide
 import android.databinding.BindingAdapter
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import de.hdodenhof.circleimageview.CircleImageView
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -16,16 +14,17 @@ import com.example.desafioandroid.view.PullFragment
 import com.example.desafioandroid.view.RepositoryFragment
 
 
-class ItemRepositoryViewModel(var mRepositoryItem: RepositoryItem, val fragmentManager: FragmentManager): BaseObservable() {
+class ItemRepositoryViewModel(var mRepositoryItem: RepositoryItem, private val fragmentManager: FragmentManager): BaseObservable() {
     val TAG = javaClass.simpleName
 
     fun onItemClick(view: View) {
         val bundle = Bundle()
-        bundle.putString(getString(R.string.bundle_amount), amount)
+        bundle.putInt(view.context.getString(R.string.bundle_id_repository), mRepositoryItem.id!!)
 
         val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
         val repositoryFragment = PullFragment()
-        fragmentTransaction.replace(R.id.fragment_container, repositoryFragment)
+        repositoryFragment.arguments = bundle
+        fragmentTransaction.add(R.id.fragment_container, repositoryFragment)
             .addToBackStack(RepositoryFragment().TAG)
             .commit()
     }

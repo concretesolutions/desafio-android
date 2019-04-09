@@ -13,10 +13,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import java.util.*
 
-
-
-
-
 class RepositoryViewModel(private var context: FragmentActivity?): Observable(){
 
     var repositoryProgress: ObservableInt = ObservableInt(View.GONE)
@@ -41,10 +37,8 @@ class RepositoryViewModel(private var context: FragmentActivity?): Observable(){
     }
 
     private fun fetchPeopleList() {
-
         val challengeApplication = ChallengeApplication()[context!!.baseContext]
         val apiService: ApiInterface = challengeApplication.apiService!!
-
 
         val disposable : Disposable = apiService.getRepositories("java","stars",1)
             .subscribeOn(challengeApplication.subscribeScheduler())

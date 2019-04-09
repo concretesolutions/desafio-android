@@ -35,12 +35,11 @@ class RepositoryAdapter(private val fragmentManager: FragmentManager) : Recycler
         val itemPeopleBinding: CardRepositoryBinding = DataBindingUtil.inflate( LayoutInflater.from(parent.context), R.layout.card_repository,
             parent, false)
 
-        return RepositoryAdapterViewHolder(itemPeopleBinding, fragmentManager)
+        return RepositoryAdapterViewHolder(itemPeopleBinding)
     }
 
     class RepositoryAdapterViewHolder(
-        var mItemRepositoryBinding: CardRepositoryBinding,
-        val activity: FragmentManager
+        var mItemRepositoryBinding: CardRepositoryBinding
     ) :
         RecyclerView.ViewHolder(mItemRepositoryBinding.cardRepository) {
 
