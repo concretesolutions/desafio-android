@@ -42,7 +42,7 @@ class RepositoryFragment : Fragment(), Observer {
     }
 
     private fun setupListRepositoryView(listPeople: RecyclerView) {
-        val adapter = RepositoryAdapter()
+        val adapter = RepositoryAdapter(activity!!.supportFragmentManager)
         listPeople.adapter = adapter
         listPeople.layoutManager = LinearLayoutManager(context)
     }

@@ -2,4 +2,5 @@
   <string name="app_name">Desafio Android</string>
   <string name="title_activity_main">MainActivity</string>
   <string name="action_settings">Settings</string>
+  <string name="bundle_id_repository">bundleIdRepository</string>
 </resources>

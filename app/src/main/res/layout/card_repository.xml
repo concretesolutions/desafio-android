@@ -13,7 +13,8 @@
       android:layout_height="150dp"
       android:padding="@dimen/space_small"
       android:baselineAligned="false"
-      android:onClick="@{repositoryViewModel::onItemClick}">
+      android:onClick="@{repositoryViewModel::onItemClick}"
+      android:layout_margin="@dimen/space_title">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint_content_image"
@@ -23,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/constraint_content_description">
 
-      <ImageView
+      <de.hdodenhof.circleimageview.CircleImageView
           android:id="@+id/circle_imageusername"
           android:layout_width="@dimen/dimen_image"
           android:layout_height="@dimen/dimen_image"
@@ -34,7 +35,7 @@
           app:layout_constraintLeft_toLeftOf="parent"
           app:layout_constraintRight_toRightOf="parent"
           android:src="@mipmap/ic_launcher_round"
-          app:imageUrl="@{repositoryViewModel.pictureProfile}"
+          app:imageUrl="@{repositoryViewModel.mRepositoryItem.owner.avatarUrl}"
       />
 
       <TextView
@@ -42,7 +43,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           tools:text="UserName"
-          android:text="@{repositoryViewModel.username}"
+          android:text="@{repositoryViewModel.mRepositoryItem.owner.login}"
           android:gravity="center_vertical"
           app:layout_constraintTop_toBottomOf="@+id/circle_imageusername"
           app:layout_constraintLeft_toLeftOf="parent"
@@ -64,7 +65,7 @@
           android:id="@+id/text_title_repository"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="@{repositoryViewModel.titleRepository}"
+          android:text="@{repositoryViewModel.mRepositoryItem.name}"
           tools:text="Titulo del repositorio"
           android:layout_margin="@dimen/space_title"
           android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
@@ -75,7 +76,7 @@
           android:id="@+id/text_content_repository"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="@{repositoryViewModel.descriptionRepository}"
+          android:text="@{repositoryViewModel.mRepositoryItem.description}"
           tools:text="Descripcion del Repositorio"
           android:layout_margin="@dimen/space_title"
           android:textAppearance="@style/TextAppearance.Compat.Notification.Info"

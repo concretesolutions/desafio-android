@@ -9,11 +9,14 @@ import com.example.desafioandroid.R
 
 class PullFragment : Fragment() {
     val TAG = javaClass.name
+    var idRepository: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_pull, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_pull, container, false )
+        idRepository = arguments!!.getString(getString(R.string.bundle_id_repository))
+        return view
     }
 }
