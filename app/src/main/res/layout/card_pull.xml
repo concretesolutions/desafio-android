@@ -8,22 +8,28 @@
         name="pullViewModel"
         type="com.example.desafioandroid.viewModel.ItemPullViewModel"/>
   </data>
-  <android.support.constraint.ConstraintLayout
-      android:id="@+id/constraint_principal"
+  <LinearLayout
+      android:id="@+id/card_pull"
       android:layout_width="match_parent"
-      android:layout_height="120dp">
+      android:layout_height="150dp"
+      android:orientation="horizontal"
+      android:layout_margin="@dimen/space_card"
+      android:background="@color/colorIcons">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint_content_description"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="3"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/linear_content_user">
+        app:layout_constraintRight_toLeftOf="@id/linear_content_user"
+        android:orientation="vertical"
+        >
 
       <TextView
           android:id="@+id/text_pull_title"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           app:layout_constraintTop_toTopOf="@id/constraint_content_description"
           app:layout_constraintLeft_toLeftOf="@id/constraint_content_description"
@@ -31,10 +37,11 @@
           android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
           android:text="@{pullViewModel.pullTitle}"
           android:layout_margin="@dimen/space_medium"
+          android:maxLines="2"
       />
       <TextView
           android:id="@+id/text_pull_description"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           app:layout_constraintTop_toBottomOf="@id/text_pull_title"
           app:layout_constraintLeft_toLeftOf="@id/constraint_content_description"
@@ -50,19 +57,20 @@
           android:id="@+id/text_pull_date"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          app:layout_constraintTop_toBottomOf="@id/text_pull_description"
+          app:layout_constraintBottom_toBottomOf="@id/constraint_content_description"
           app:layout_constraintLeft_toLeftOf="@id/constraint_content_description"
           tools:text="04/04/2019"
           android:text="@{pullViewModel.pullDate}"
           android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+          android:textStyle="bold"
           android:layout_marginLeft="@dimen/space_medium"
-          android:layout_marginStart="@dimen/space_medium"
+          android:layout_marginBottom="@dimen/space_medium"
       />
 
     </android.support.constraint.ConstraintLayout>
     <LinearLayout
         android:id="@+id/linear_content_user"
-        android:layout_width="150dp"
+        android:layout_width="110dp"
         android:layout_height="match_parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -76,21 +84,29 @@
           android:layout_height="@dimen/dimen_image"
           android:src="@mipmap/ic_launcher_round"
           android:layout_margin="@dimen/space_small"
-          app:imageUrl="@{pullViewModel.pictureProfile}"/>
+          app:imageUrl="@{pullViewModel.pictureProfile}"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintLeft_toRightOf="parent"
+      />
       <TextView
           android:id="@+id/text_username"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           tools:text="username"
           android:text="@{pullViewModel.username}"
-          android:layout_marginBottom="@dimen/space_small"/>
+          android:layout_marginBottom="@dimen/space_small"
+          app:layout_constraintTop_toBottomOf="@id/image_user"
+          app:layout_constraintRight_toRightOf="parent"/>
       <TextView
           android:id="@+id/text_pull_state"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@{pullViewModel.pullState}"
-          tools:text="Abierto"/>
+          tools:text="Abierto"
+          app:layout_constraintTop_toBottomOf="@id/text_username"
+          app:layout_constraintRight_toRightOf="parent"
+      />
 
     </LinearLayout>
-  </android.support.constraint.ConstraintLayout>
+  </LinearLayout>
 </layout>

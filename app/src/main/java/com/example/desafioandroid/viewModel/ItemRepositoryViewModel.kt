@@ -19,7 +19,8 @@ class ItemRepositoryViewModel(var mRepositoryItem: RepositoryItem, private val f
 
     fun onItemClick(view: View) {
         val bundle = Bundle()
-        bundle.putInt(view.context.getString(R.string.bundle_id_repository), mRepositoryItem.id!!)
+        bundle.putString(view.context.getString(R.string.bundle_id_creator), mRepositoryItem.owner!!.login)
+        bundle.putString(view.context.getString(R.string.bundle_name_repository), mRepositoryItem.name)
 
         val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
         val repositoryFragment = PullFragment()
@@ -28,8 +29,6 @@ class ItemRepositoryViewModel(var mRepositoryItem: RepositoryItem, private val f
             .addToBackStack(RepositoryFragment().TAG)
             .commit()
     }
-
-
 
    companion object{
        @JvmStatic

@@ -33,10 +33,10 @@ class RepositoryViewModel(private var context: FragmentActivity?): Observable(){
         repositoryLabel.set(View.GONE)
         repositoryRecycler.set(View.GONE)
         repositoryProgress.set(View.VISIBLE)
-        fetchPeopleList()
+        fetchRepositoryList()
     }
 
-    private fun fetchPeopleList() {
+    private fun fetchRepositoryList() {
         val challengeApplication = ChallengeApplication()[context!!.baseContext]
         val apiService: ApiInterface = challengeApplication.apiService!!
 

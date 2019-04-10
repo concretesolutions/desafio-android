@@ -46,9 +46,6 @@ class RepositoryAdapter(private val fragmentManager: FragmentManager) : Recycler
         fun bindPeople(repositoryItem: RepositoryItem, fragmentManager: FragmentManager) {
             if (mItemRepositoryBinding.repositoryViewModel == null) {
                 mItemRepositoryBinding.repositoryViewModel = ItemRepositoryViewModel(repositoryItem, fragmentManager)
-
-            } else {
-                mItemRepositoryBinding.repositoryViewModel!!.mRepositoryItem = repositoryItem
             }
         }
     }

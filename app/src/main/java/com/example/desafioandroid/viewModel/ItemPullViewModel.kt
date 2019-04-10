@@ -8,7 +8,7 @@ import com.example.desafioandroid.schemas.PullItem
 import de.hdodenhof.circleimageview.CircleImageView
 
 
-class ItemPullViewModel(private val mPullItem:PullItem, private val mContext: Context): BaseObservable() {
+class ItemPullViewModel(var mPullItem:PullItem): BaseObservable() {
 
     @BindingAdapter("imageUrl")
     fun setImageUrl(imageView: CircleImageView, url:String) {

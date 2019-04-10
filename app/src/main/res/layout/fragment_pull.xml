@@ -16,12 +16,13 @@
       tools:showIn="@layout/activity_main"
       android:orientation="vertical"
       android:gravity="center"
+      android:background="@color/colorIcons"
   >
     <ProgressBar
-        android:id="@+id/progress"
+        android:id="@+id/pull_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:visibility="@{fragmentRepositoryViewModel.repositoryProgress}"/>
+        app:visibility="@{fragmentPullViewModel.pullProcess}"/>
 
     <TextView
         android:id="@+id/label_status"
@@ -29,15 +30,16 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@{fragmentPullViewModel.messageLabel}"
-        app:visibility="@{fragmentRepositoryViewModel.repositoryLabel}"/>
+        app:visibility="@{fragmentPullViewModel.labelStatus}"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_pull"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:visibility="@{fragmentPullViewModel.pullRecycler}"
+        app:visibility="@{fragmentPullViewModel.recyclerPull}"
         tools:listitem="@layout/card_repository"
+        android:background="@color/colorDivider"
     />
 
   </LinearLayout>

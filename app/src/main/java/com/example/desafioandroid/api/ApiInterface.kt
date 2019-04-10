@@ -19,9 +19,9 @@ interface ApiInterface {
                         : Observable<SearchRepository>
 
     //trae todos los pull request asociados a ese repositorio
-    @GET("repos/{creator}/{name_repositores}/pulls")
-    fun getAllCardIssuers(@Path("creator") creator: String,
-                          @Query("name_repository") name_repository: String): Call<List<PullItem>>
+    @GET("repos/{creator}/{name_repository}/pulls")
+    fun getPull(@Path("creator") creator: String,
+                @Path("name_repository") name_repository: String): Observable<List<PullItem>>
 
 
 

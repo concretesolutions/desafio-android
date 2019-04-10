@@ -16,6 +16,7 @@
       tools:showIn="@layout/activity_main"
       android:orientation="vertical"
       android:gravity="center"
+      android:background="@color/colorIcons"
     >
     <ProgressBar
         android:id="@+id/progress"
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         app:visibility="@{fragmentRepositoryViewModel.repositoryRecycler}"
         tools:listitem="@layout/card_repository"
+        android:background="@color/colorDivider"
     />
 
   </LinearLayout>

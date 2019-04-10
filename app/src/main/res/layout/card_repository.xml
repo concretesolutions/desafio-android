@@ -14,7 +14,8 @@
       android:padding="@dimen/space_small"
       android:baselineAligned="false"
       android:onClick="@{repositoryViewModel::onItemClick}"
-      android:layout_margin="@dimen/space_title">
+      android:layout_margin="@dimen/space_card"
+      android:background="@color/colorIcons">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint_content_image"
