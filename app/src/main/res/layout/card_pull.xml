@@ -35,7 +35,7 @@
           app:layout_constraintLeft_toLeftOf="@id/constraint_content_description"
           tools:text="Titulo del pull"
           android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-          android:text="@{pullViewModel.pullTitle}"
+          android:text="@{pullViewModel.mPullItem.title}"
           android:layout_margin="@dimen/space_medium"
           android:maxLines="2"
       />
@@ -46,7 +46,7 @@
           app:layout_constraintTop_toBottomOf="@id/text_pull_title"
           app:layout_constraintLeft_toLeftOf="@id/constraint_content_description"
           tools:text="Descripcion del pull"
-          android:text="@{pullViewModel.pullDescription}"
+          android:text="@{pullViewModel.mPullItem.body}"
           android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
           android:lines="2"
           android:layout_marginLeft="@dimen/space_medium"
@@ -84,7 +84,7 @@
           android:layout_height="@dimen/dimen_image"
           android:src="@mipmap/ic_launcher_round"
           android:layout_margin="@dimen/space_small"
-          app:imageUrl="@{pullViewModel.pictureProfile}"
+          app:imageUrl="@{pullViewModel.mPullItem.user.avatarUrl}"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintLeft_toRightOf="parent"
       />
@@ -93,7 +93,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           tools:text="username"
-          android:text="@{pullViewModel.username}"
+          android:text="@{pullViewModel.mPullItem.user.login}"
           android:layout_marginBottom="@dimen/space_small"
           app:layout_constraintTop_toBottomOf="@id/image_user"
           app:layout_constraintRight_toRightOf="parent"/>

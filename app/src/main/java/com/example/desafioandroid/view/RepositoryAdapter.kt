@@ -28,7 +28,7 @@ class RepositoryAdapter(private val fragmentManager: FragmentManager) : Recycler
 
     override fun onBindViewHolder(holder: RepositoryAdapter.RepositoryAdapterViewHolder, position: Int) {
         Log.e(TAG,repositoryList!![position].name)
-        holder.bindPeople(repositoryList!![position], fragmentManager)
+        holder.bindRepository(repositoryList!![position], fragmentManager)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryAdapterViewHolder {
@@ -42,11 +42,10 @@ class RepositoryAdapter(private val fragmentManager: FragmentManager) : Recycler
         var mItemRepositoryBinding: CardRepositoryBinding
     ) :
         RecyclerView.ViewHolder(mItemRepositoryBinding.cardRepository) {
+        val TAG = javaClass.simpleName
 
-        fun bindPeople(repositoryItem: RepositoryItem, fragmentManager: FragmentManager) {
-            if (mItemRepositoryBinding.repositoryViewModel == null) {
-                mItemRepositoryBinding.repositoryViewModel = ItemRepositoryViewModel(repositoryItem, fragmentManager)
-            }
+        fun bindRepository(repositoryItem: RepositoryItem, fragmentManager: FragmentManager) {
+            mItemRepositoryBinding.repositoryViewModel = ItemRepositoryViewModel(repositoryItem, fragmentManager)
         }
     }
 }

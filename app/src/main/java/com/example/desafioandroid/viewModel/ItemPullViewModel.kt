@@ -1,11 +1,12 @@
 package com.example.desafioandroid.viewModel
 
-import android.content.Context
 import android.databinding.BaseObservable
 import android.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.desafioandroid.schemas.PullItem
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ItemPullViewModel(var mPullItem:PullItem): BaseObservable() {
@@ -15,28 +16,18 @@ class ItemPullViewModel(var mPullItem:PullItem): BaseObservable() {
         Glide.with(imageView.context).load(url).into(imageView)
     }
 
-    fun pullTitle():String{
-        return mPullItem.title!!
-    }
-
-    fun username():String{
-        return mPullItem.user!!.login!!
-    }
-
-    fun pullDescription():String{
-        return mPullItem.body!!
-    }
-
     fun pullDate():String{
-        return mPullItem.createdAt!!
-    }
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+        format.timeZone = TimeZone.getTimeZone("UTC")
+        val parse = format.parse(mPullItem.createdAt)
 
-    fun pictureProfile():String{
-        return mPullItem.user!!.avatarUrl!!
+        val formatResult = SimpleDateFormat("dd/MM/yyy HH:mm", Locale.US)
+        return formatResult.format(parse)
+
     }
 
     fun pullState():String{
-        return mPullItem.state!!
+        return mPullItem.number.toString()
     }
 
 

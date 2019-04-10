@@ -41,12 +41,7 @@ class PullAdapter : RecyclerView.Adapter<PullAdapter.PullAdapterViewHolder>() {
         RecyclerView.ViewHolder(mItemPullBinding.cardPull) {
 
         fun bindPull(pullItem: PullItem) {
-            if (mItemPullBinding.pullViewModel == null) {
-                mItemPullBinding.pullViewModel = ItemPullViewModel(pullItem)
-
-            } else {
-                mItemPullBinding.pullViewModel!!.mPullItem = pullItem
-            }
+            mItemPullBinding.pullViewModel = ItemPullViewModel(pullItem)
         }
     }
 }
