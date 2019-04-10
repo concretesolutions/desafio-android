@@ -1,58 +1,58 @@
-# Criar um aplicativo de consulta a API do [GitHub](https://github.com)#
+# Crear una app de consulta a la API del [GitHub](https://github.com/)
 
-Criar um aplicativo para consultar a [API do GitHub](https://developer.github.com/v3/) e trazer os repositórios mais populares de Java. Basear-se no mockup fornecido:
+Desarrollar una app para consultar la [API do GitHub](https://developer.github.com/v3/) y cargar los repositorios más populares del Java. Básese en el mockup fornecido: 
 
 ![Captura de tela de 2015-10-22 11-28-03.png](https://bitbucket.org/repo/7ndaaA/images/3102804929-Captura%20de%20tela%20de%202015-10-22%2011-28-03.png)
 
-### **Deve conter** ###
+### **Debe contener**
 
-- __Lista de repositórios__. Exemplo de chamada na API: `https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1`
-  * Paginação na tela de lista, com endless scroll / scroll infinito (incrementando o parâmetro `page`).
-  * Cada repositório deve exibir Nome do repositório, Descrição do Repositório, Nome / Foto do autor, Número de Stars, Número de Forks
-  * Ao tocar em um item, deve levar a lista de Pull Requests do repositório
-- __Pull Requests de um repositório__. Exemplo de chamada na API: `https://api.github.com/repos/<criador>/<repositório>/pulls`
-  * Cada item da lista deve exibir Nome / Foto do autor do PR, Título do PR, Data do PR e Body do PR
-  * Ao tocar em um item, deve abrir no browser a página do Pull Request em questão
+- **Lista de repositorios**. Ejemplo de llamada en la API: `https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1` 
+  * Paginación en la pantalla de lista, con endless scroll / scroll infinito (incrementando el parámetro `page`).
+  * Cada repositorio debe presentar Nombre del repositorio, Descripción del Repositorio, Nombre / Foto del autor, Cantidad de Stars, Cantidad de Forks
+  * Al tocar em um articulo, debe llevar a la lista de Pull Requests del repositorio
+- **Pull Requests de un repositorio**. Ejemplo de llamada en la API: `https://api.github.com/repos/<criador>/<repositório>/pulls` 
+  * Cada artículo de la lista debe presentar Nombre / Foto del autor del Pull Request, Título del  Pull Request, Data do Pull Request e Body do Pull Request
+  * Al tocar en un artículo, debe abrir en el navegador la pantalla del Pull Request seleccionado
 
-### **A solução DEVE conter** ##
+### **La solución DEBE contener**
+
 * Sistema de build Gradle
-* Mapeamento JSON -> Objeto (GSON / Jackson / Moshi / etc)
+* Mapeo JSON -> Objeto (GSON / Jackson / Moshi / etc)
 * Material Design
 
-### **Ganha + pontos se conter** ###
+### **Logra  + pontos si se presenta**
 
-* Framework para comunicação com API
-* Testes no projeto (unitários e por tela)
-* Testes funcionais (que naveguem pelo aplicativo como casos de uso)
-* Cache de imagens e da API
-* Suportar mudanças de orientação das telas sem perder estado
+* Framework para comunicación con API
+* Pruebas en el proyecto (de unidad e por pantalla)
+* Pruebas funcionales (que naveguen por la aplicación cómo casos de uso)
+* Cache de imágenes e de la API
+* Soportar cambios de orientación de las pantallas sin perder el estado
 
-### **Sugestões** ###
+### **Sugerências**
 
-As sugestões de bibliotecas fornecidas são só um guideline, sintam-se a vontade para usar diferentes e nos surpreenderem. O importante de fato é que os objetivos macros sejam atingidos. =)
+La sugerencia de librerías que sigue es solamente un *guideline*. Quédate tranquilo en usar otras que nos sorprenda. Lo que cuenta es lograr los objetivos macro. =) 
 
-* Retrofit | Volley 
-* Picasso | Universal Image Loader | Glide
+* Retrofit | Volley
+* Picasso | Fresco | Glide
 * Espresso | Robotium | Robolectric
 
-### **OBS** ###
+### **OBSERVACIONES**
 
-A foto do mockup é meramente ilustrativa.  
+La foto del mockup es meramente ilustrativa.   
 
+### **Submissión**
 
-### **Processo de submissão** ###
+El candidato debe implementar la solución y enviar un pull request para este repositorio con la solución. 
 
-O candidato deverá implementar a solução e enviar um pull request para este repositório com a solução.
+El processo de Pull Request funciona así: 
 
-O processo de Pull Request funciona da seguinte maneira:
+1. Candidato hace *fork* de ese repositorio (¡no lo clones directamente!)
+2. Haga tú proyecto en ese *fork*.
+3. Haga *commit* y vas a subir las modificaciones para **TÚ** *fork*.
+4. Por la interface del Bitbucket, vas a enviar un *Pull Request*.
 
-1. Candidato fará um fork desse repositório (não irá clonar direto!)
-2. Fará seu projeto nesse fork.
-3. Commitará e subirá as alterações para o __SEU__ fork.
-4. Pela interface do Bitbucket, irá enviar um Pull Request.
+Si caso sea posible, dejar el *fork* público para tornar más simple inspeccionar el código. 
 
-Se possível deixar o fork público para facilitar a inspeção do código.
+### **ATENCIÓN**
 
-### **ATENÇÃO** ###
-
-Não se deve tentar fazer o PUSH diretamente para ESTE repositório!
+No intentes hacer PUSH directamente para ESTE repositorio! 

@@ -1,3 +1,5 @@
+# File generated
+
 *.iml
 .gradle
 /local.properties
@@ -8,3 +10,7 @@
 /build
 /captures
 .externalNativeBuild
+
+# Android-studio @eramirez
+.idea
+.navigation
