@@ -37,7 +37,7 @@ class RepositoryViewModel(private var context: FragmentActivity?): Observable(){
     }
 
     private fun fetchRepositoryList() {
-        val challengeApplication = ChallengeApplication()[context!!.baseContext]
+      /*  val challengeApplication = ChallengeApplication()[context!!.baseContext]
         val apiService: ApiInterface = challengeApplication.apiService!!
 
         val disposable : Disposable = apiService.getRepositories("java","stars",1)
@@ -57,7 +57,7 @@ class RepositoryViewModel(private var context: FragmentActivity?): Observable(){
                 repositoryRecycler.set(View.GONE)
             })
 
-        compositeDisposable!!.add(disposable)
+        compositeDisposable!!.add(disposable)*/
     }
 
     private fun changeRepositoryDataSet(responseRepositoryList: List<RepositoryItem>) {

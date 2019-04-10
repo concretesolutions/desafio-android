@@ -4,7 +4,9 @@ import com.example.desafioandroid.schemas.PullItem
 import com.example.desafioandroid.schemas.RepositoryItem
 import com.example.desafioandroid.schemas.SearchRepository
 import io.reactivex.Observable
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -16,7 +18,7 @@ interface ApiInterface {
     fun getRepositories(@Query("q") language: String,
                          @Query("sort") sort: String,
                          @Query("page") page: Int)
-                        : Observable<SearchRepository>
+                        : Deferred<Response<SearchRepository>>
 
     //trae todos los pull request asociados a ese repositorio
     @GET("repos/{creator}/{name_repository}/pulls")
