@@ -53,13 +53,17 @@ public class MainActivity extends BaseActivity {
     void init() {
 
         Log.i("MainActivity", "___init____");
+        initRecycler();
 
+
+    }
+
+    private void initRecycler(){
         recyclerLayoutManager = new LinearLayoutManager(this);
         repositoryRecycler.setLayoutManager(recyclerLayoutManager);
         mAdapter = new RepositoryAdapter(this, mItems);
         repositoryRecycler.setAdapter(mAdapter);
         repositoryRecycler.addOnScrollListener(getOnScrollEvent());
-
     }
 
     private RecyclerView.OnScrollListener getOnScrollEvent(){
@@ -86,23 +90,18 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        mItems.clear();
-        page = 0;
 
         //TODO: Handle request from database
+        mItems.clear();
+        page = 0;
+        initRecycler();
         getNewRepositoryPage();
     }
 
     @Subscribe
     void handleResponse(InfoContainer response) {
-        Log.i("handleResponse", response.getTotalCount());
-
         mItems.addAll(Arrays.asList(response.getItems()));
-
-        Log.i("mItems", mItems.size() + "<--- Size");
-
         mAdapter.notifyDataSetChanged();
-
 
     }
 
