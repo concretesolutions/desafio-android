@@ -33,12 +33,11 @@ public class MainActivity extends BaseActivity {
 
     RepositoryAdapter adapter;
 
-    @ViewById(R.id.repository_list_view)
-    ListView repositoryListView;
-
-
     @ViewById(R.id.repository_recycler)
     RecyclerView repositoryRecycler;
+
+    @ViewById(R.id.progress_bar)
+    View progressBar;
 
 
     private SearchRepositories call = new SearchRepositories(0);
@@ -51,11 +50,8 @@ public class MainActivity extends BaseActivity {
 
     @AfterViews
     void init() {
-
         Log.i("MainActivity", "___init____");
-        initRecycler();
-
-
+        //initRecycler();
     }
 
     private void initRecycler(){
@@ -86,20 +82,20 @@ public class MainActivity extends BaseActivity {
 
 
 
-
     @Override
     public void onResume() {
         super.onResume();
-
         //TODO: Handle request from database
         mItems.clear();
         page = 0;
         initRecycler();
+        exchangeVisibility(progressBar, repositoryRecycler);
         getNewRepositoryPage();
     }
 
     @Subscribe
-    void handleResponse(InfoContainer response) {
+    public void handleResponse(InfoContainer response) {
+        exchangeVisibility(repositoryRecycler, progressBar);
         mItems.addAll(Arrays.asList(response.getItems()));
         mAdapter.notifyDataSetChanged();
 

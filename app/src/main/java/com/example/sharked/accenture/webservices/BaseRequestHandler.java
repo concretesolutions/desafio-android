@@ -22,7 +22,6 @@ import java.io.IOException;
 public abstract class BaseRequestHandler<T> extends AsyncTask<Object, Void, T> {
 
     private HttpClient httpclient = new DefaultHttpClient();
-    private String errorMessage;
     private Exception error;
     private boolean debug = true;
 
@@ -47,9 +46,7 @@ public abstract class BaseRequestHandler<T> extends AsyncTask<Object, Void, T> {
 
             if (status == 200) {
                 Gson gson = this.getGsonBuilder().create();
-                T output = gson.fromJson(data , this.getResponseClass());
-                return output;
-            }else{
+                return gson.fromJson(data , this.getResponseClass());
             }
 
         } catch (IOException e) {
@@ -74,6 +71,8 @@ public abstract class BaseRequestHandler<T> extends AsyncTask<Object, Void, T> {
         builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
         return builder;
     }
+
+    public Exception getException(){return error;}
 
     public void setDebug(boolean b) {
         debug = b;

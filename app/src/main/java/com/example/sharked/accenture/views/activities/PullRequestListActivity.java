@@ -3,6 +3,7 @@ package com.example.sharked.accenture.views.activities;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.sharked.accenture.BaseActivity;
@@ -29,11 +30,16 @@ public class PullRequestListActivity extends BaseActivity {
     @Extra
     Serializable repo;
 
+    @ViewById(R.id.progress_bar)
+    public View progressBar;
+
     @ViewById(R.id.repository_recycler)
     public  RecyclerView pullRequestRecycler;
+
     private PullRequestAdapter mAdapter;
     private LinearLayoutManager recyclerLayoutManager;
     private ArrayList<PullRequest> mItems = new ArrayList<>();
+
 
 
     @AfterViews
@@ -49,14 +55,14 @@ public class PullRequestListActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+        exchangeVisibility(progressBar, pullRequestRecycler);
         new SearchPRRequest(((Repository) repo).getFullName()).execute();
 
     }
 
     @Subscribe
-    void handleResponse(PullRequest[] pullRequests) {
-        Log.i("handleResponse", String.valueOf(pullRequests.length));
-        for (PullRequest item : pullRequests) {Log.i("PR", item.getTitle());}
+    public void handleResponse(PullRequest[] pullRequests) {
+        exchangeVisibility(pullRequestRecycler, progressBar);
         mItems.addAll(Arrays.asList(pullRequests));
         mAdapter.notifyDataSetChanged();
     }
