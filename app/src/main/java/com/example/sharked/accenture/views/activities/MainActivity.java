@@ -1,7 +1,7 @@
 package com.example.sharked.accenture.views.activities;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,6 +29,8 @@ import java.util.Arrays;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
+    private static final int VISIBLE_DO_CALL = 25;
+
     RepositoryAdapter adapter;
 
     @ViewById(R.id.repository_list_view)
@@ -37,75 +39,72 @@ public class MainActivity extends BaseActivity {
 
     @ViewById(R.id.repository_recycler)
     RecyclerView repositoryRecycler;
-    private LinearLayoutManager recyclerLayoutManager;
-    private RecyclerView.Adapter<CustomViewHolder> mAdapter;
-    private ArrayList<Repository> mItems;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
+    private SearchRepositories call = new SearchRepositories(0);
+    private LinearLayoutManager recyclerLayoutManager;
+    private RepositoryAdapter mAdapter;
+    private ArrayList<Repository> mItems = new ArrayList<>();
+
+    private int page = 0;
+
+
     @AfterViews
-    void init(){
-        Log.i("init","___init____");
-        Toast.makeText(this,"___init____", Toast.LENGTH_SHORT).show();
-        mItems = new ArrayList<>();
+    void init() {
+
+        Log.i("MainActivity", "___init____");
+
         recyclerLayoutManager = new LinearLayoutManager(this);
         repositoryRecycler.setLayoutManager(recyclerLayoutManager);
-        mAdapter = new RecyclerView.Adapter<CustomViewHolder>() {
-            @Override
-            public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.li_repository, viewGroup, false);
-                return new CustomViewHolder(view);
-            }
-
-
-
-            @Override
-            public void onBindViewHolder(CustomViewHolder viewHolder, int i) {
-                viewHolder.noticeSubject.setText(mItems.get(i).getFullName());
-            }
-
-            @Override
-            public int getItemCount() {
-                return mItems.size();
-            }
-
-        };
+        mAdapter = new RepositoryAdapter(this, mItems);
         repositoryRecycler.setAdapter(mAdapter);
-
+        repositoryRecycler.addOnScrollListener(getOnScrollEvent());
 
     }
-    private class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView noticeSubject;
-
-        public CustomViewHolder(View itemView) {
-            super(itemView);
-            noticeSubject = (TextView) itemView.findViewById(R.id.repository_name_text);
-        }
+    private RecyclerView.OnScrollListener getOnScrollEvent(){
+        return new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItemvisible = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                if (((call.getStatus() == AsyncTask.Status.FINISHED)) && (mItems.size() - lastItemvisible <= VISIBLE_DO_CALL)) {
+                    getNewRepositoryPage();
+                }
+            }
+        };
     }
+
+    private void getNewRepositoryPage(){
+        call = new SearchRepositories(page++);
+        call.execute();
+    }
+
+
+
 
     @Override
     public void onResume() {
         super.onResume();
-        new SearchRepositories(1).execute();
+        mItems.clear();
+        page = 0;
 
+        //TODO: Handle request from database
+        getNewRepositoryPage();
     }
 
     @Subscribe
-    void handleResponse (InfoContainer response){
-        Log.i("handleResponse",response.getTotalCount());
+    void handleResponse(InfoContainer response) {
+        Log.i("handleResponse", response.getTotalCount());
 
         mItems.addAll(Arrays.asList(response.getItems()));
+
+        Log.i("mItems", mItems.size() + "<--- Size");
 
         mAdapter.notifyDataSetChanged();
 
 
     }
-
-
-
-
-
-
 
 
 }

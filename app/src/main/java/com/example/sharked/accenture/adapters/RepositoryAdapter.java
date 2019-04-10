@@ -3,65 +3,67 @@ package com.example.sharked.accenture.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.example.sharked.accenture.R;
+import com.example.sharked.accenture.holders.RepositoryHolder;
 import com.example.sharked.accenture.models.Repository;
 import com.example.sharked.accenture.views.activities.PullRequestListActivity;
 import com.example.sharked.accenture.views.activities.PullRequestListActivity_;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
 
-public class RepositoryAdapter extends ArrayAdapter<Repository> {
+public class RepositoryAdapter extends  RecyclerView.Adapter<RepositoryHolder>  {
     private Context ctx;
-    public RepositoryAdapter(@NonNull Context context, @NonNull Repository[] objects) {
-        super(context, R.layout.li_repository, objects);
+    private ArrayList<Repository> items;
+    public RepositoryAdapter(@NonNull Context context, @NonNull ArrayList<Repository> objects) {
         ctx = context;
-
+        items = objects;
     }
 
-
-
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public RepositoryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(ctx).inflate(R.layout.li_repository, parent, false);
+        return new RepositoryHolder(view);
+    }
 
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    @Override
+    public void onBindViewHolder(RepositoryHolder holder, int position) {
+        Repository item = items.get(position);
 
-        View view = (convertView != null)? convertView :inflater.inflate(R.layout.li_repository, parent, false);
+        //Despliego en pantalla
+        holder.repositoryNameTV.             setText(item.getName());
+        holder.repositoryStarTV.             setText(item.getStargazersCount());
+        holder.repositoryPRTV.               setText(item.getForks());
+        holder.repositoryOwnerTV.            setText(item.getOwner().getLogin());
+        holder.repositoryOwnerNickTV.        setText(item.getOwner().getType());
+        holder.repositoryDescriptionTV.      setText(item.getDescription());
 
-        final Repository item = getItem(position);
+        //Asigno onClick
+        holder.repositoryContainerLL.setOnClickListener(getActionListener(item));
+    }
 
-        ((TextView) view.findViewById(R.id.repository_name_text)).setText(item.getName());
-        ((TextView) view.findViewById(R.id.repository_description_text)).setText(item.getDescription());
-        ((TextView) view.findViewById(R.id.repository_star_text)).setText(item.getStargazersCount());
-        ((TextView) view.findViewById(R.id.repository_pr_text)).setText(item.getForks());
-        ((TextView) view.findViewById(R.id.repository_owner_text)).setText(item.getOwner().getLogin());
-        ((TextView) view.findViewById(R.id.repository_owner_nick_text)).setText(item.getOwner().getType());
-
-        view.findViewById(R.id.li_container).setOnClickListener( getActionListener(item));
-
-        return view;
+    @Override
+    public int getItemCount() {
+        return items.size();
     }
 
 
-    private View.OnClickListener getActionListener(final Repository item){
+    private View.OnClickListener getActionListener(final Repository repo){
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Envio el objeto serializado en caso de ser necesaria mas info
                 Intent intent;
                 intent = new Intent(ctx, PullRequestListActivity_.class);
-                intent.putExtra(PullRequestListActivity.REPOSITORY_EXTRA, item);
+                intent.putExtra(PullRequestListActivity.REPOSITORY_EXTRA, repo);
                 ctx.startActivity(intent);
             }
         };
     }
-
 
 }

@@ -17,7 +17,7 @@ public class Repository  implements Serializable {
     @SerializedName("forks")
     public String forks;
 
-    @SerializedName("stargazersCount")
+    @SerializedName("stargazers_count")
     public String stargazersCount;
 
     @SerializedName("owner")
