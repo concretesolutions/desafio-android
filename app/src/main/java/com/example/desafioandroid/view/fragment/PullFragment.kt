@@ -1,5 +1,6 @@
 package com.example.desafioandroid.view.fragment
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,19 +21,17 @@ class PullFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_pull, container, false)
-        arguments!!.getString(getString(R.string.bundle_id_creator))
-        arguments!!.getString(getString(R.string.bundle_name_repository))
-
         pullViewModel = ViewModelProviders.of(this).get(PullViewModel::class.java)
-
+        pullViewModel.creator = arguments!!.getString(getString(R.string.bundle_id_creator))
+        pullViewModel.nameRepository = arguments!!.getString(getString(R.string.bundle_name_repository))
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pullViewModel.initializeViews()
         setupListPullView()
         observeLiveData()
-        pullViewModel.initializeViews()
     }
 
     private fun setupListPullView() {
@@ -43,8 +42,14 @@ class PullFragment : Fragment() {
     private fun observeLiveData() {
         //observe live data emitted by view model
         pullViewModel.fetchPullList().observe(this, Observer {
-            adapter.setPullList(it)
-            pullViewModel.goneView()
+
+            it?.let {
+                adapter.setPullList(it)
+                pull_progress.visibility =  View.GONE
+                recycler_pull.visibility = View.VISIBLE
+                label_status.visibility = View.GONE
+            }
+
 
         })
 

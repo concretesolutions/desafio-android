@@ -1,6 +1,5 @@
 package com.example.desafioandroid.view.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -17,21 +16,8 @@ class RepositoryAdapter(private val fragmentManager: FragmentManager) : PagedLis
     DiffUtilCallBack()
 ) {
     val TAG = javaClass.simpleName
-    private var repositoryList: List<RepositoryItem>? = null
-
-    override fun getItemCount(): Int {
-        if (repositoryList == null)
-            return 0
-        return repositoryList!!.size
-    }
-
-    internal fun setRepositoryList(repositoryList: List<RepositoryItem>) {
-        this.repositoryList = repositoryList
-        notifyDataSetChanged()
-    }
 
     override fun onBindViewHolder(holder: RepositoryAdapterViewHolder, position: Int) {
-        Log.e(TAG,repositoryList!![position].name)
         getItem(position)?.let { holder.bindRepository(it,fragmentManager) }
     }
 

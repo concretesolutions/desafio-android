@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_repository.*
 class RepositoryFragment : Fragment() {
 
     val TAG = javaClass.name
-    private var adapter = RepositoryAdapter(activity!!.supportFragmentManager)
+    private var adapter: RepositoryAdapter? = null
     lateinit var repositoryViewModel : RepositoryViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,12 +31,13 @@ class RepositoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeLiveData()
         setupListRepositoryView(recycler_repository)
         repositoryViewModel.initializeViews()
+        observeLiveData()
     }
 
     private fun setupListRepositoryView(listPeople: RecyclerView) {
+        adapter = RepositoryAdapter(activity!!.supportFragmentManager)
         recycler_repository.adapter = adapter
         listPeople.layoutManager = LinearLayoutManager(context)
     }
@@ -45,8 +46,10 @@ class RepositoryFragment : Fragment() {
     private fun observeLiveData() {
         //observe live data emitted by view model
         repositoryViewModel.getRepositoryList().observe(this, Observer {
-            adapter.submitList(it)
-            repositoryViewModel.goneView()
+            adapter!!.submitList(it)
+            progress.visibility = View.GONE
+            label_status.visibility = View.GONE
+            recycler_repository.visibility = View.VISIBLE
         })
 
     }

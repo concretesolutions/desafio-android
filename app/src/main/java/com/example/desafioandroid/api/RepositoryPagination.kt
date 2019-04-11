@@ -18,7 +18,8 @@ class RepositoryPagination : PageKeyedDataSource<String, RepositoryItem>(){
                 when{
                     response.isSuccessful-> {
                         val listing = response.body()!!.items
-                        callback.onResult(listing ?: listOf(),null, "2")                    }
+                        callback.onResult(listing ?: listOf(),null, "2")
+                    }
                 }
             }catch (exception : Exception){
                 Log.e(TAG, "Failed to fetch data!")

@@ -3,13 +3,10 @@ package com.example.desafioandroid.viewModel.fragment
 import android.content.Context
 import android.util.Log
 import android.view.View
-import androidx.annotation.UiThread
-import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.desafioandroid.R
 import com.example.desafioandroid.api.ApiInterface
 import com.example.desafioandroid.api.RetrofitClient
 import com.example.desafioandroid.schema.PullItem
@@ -17,13 +14,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class PullViewModel(private var context: Context, private var creator: String, private var nameRepository:String): ViewModel() {
+class PullViewModel: ViewModel() {
     val TAG = javaClass.simpleName
 
-    private var pullProcess: ObservableInt = ObservableInt(View.GONE)
-    private var recyclerPull: ObservableInt = ObservableInt(View.GONE)
-    private var labelStatus: ObservableInt = ObservableInt(View.VISIBLE)
-    private var messageLabel: ObservableField<String> = ObservableField(context.getString(R.string.app_name))
+    var context : Context? = null
+    var creator : String? = ""
+    var nameRepository : String? = ""
+    var pullProcess: ObservableInt = ObservableInt(View.GONE)
+    var recyclerPull: ObservableInt = ObservableInt(View.GONE)
+    var labelStatus: ObservableInt = ObservableInt(View.VISIBLE)
+//    var messageLabel: ObservableField<String> = ObservableField(context!!.getString(R.string.app_name))
 
     private lateinit var pullList: MutableLiveData<List<PullItem>>
 
@@ -34,37 +34,30 @@ class PullViewModel(private var context: Context, private var creator: String, p
         fetchPullList()
     }
 
-    @UiThread
-    fun fetchPullList(): LiveData<List<PullItem>> {
+    fun fetchPullList(): LiveData<List<PullItem>>  {
+        pullList = MutableLiveData()
+        loadTeams()
+        return pullList
+    }
+
+    fun loadTeams(){
         val apiService = RetrofitClient.getClient().create(ApiInterface::class.java)
-        if (::pullList.isInitialized) {
-            pullList = MutableLiveData()
-            GlobalScope.launch(Dispatchers.Main) {
-                try {
-                    val response = apiService.getPull(creator,nameRepository).await()
-                    when{
-
-                        response.isSuccessful ->{
-                            val liveData = MutableLiveData<List<PullItem>>()
-                            liveData.value = response.body()
-
-                            pullList = liveData
-                            pullProcess.set(View.GONE)
-                            labelStatus.set(View.GONE)
-                            recyclerPull.set(View.VISIBLE)
-                        }else ->{
-                        messageLabel.set(context.getString(R.string.app_name))
-                        pullProcess.set(View.GONE)
-                        labelStatus.set(View.VISIBLE)
-                        recyclerPull.set(View.GONE)
-                    }
-                    }
-                }catch (exception : Exception){
-                    Log.e(TAG, "Failed to fetch data!")
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                apiService.getPull(creator!!,nameRepository!!).await().let {
+                    pullList.value = it.body()
                 }
+
+            }catch (exception : Exception){
+                Log.e(TAG, "Failed to fetch data!")
+
+                pullProcess.set(View.GONE)
+                labelStatus.set(View.VISIBLE)
+                recyclerPull.set(View.GONE)
             }
         }
-        return pullList
+
+
     }
 
     fun goneView() {
