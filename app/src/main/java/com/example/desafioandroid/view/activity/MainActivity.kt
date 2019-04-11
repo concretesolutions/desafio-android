@@ -1,4 +1,4 @@
-package com.example.desafioandroid.view
+package com.example.desafioandroid.view.activity
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.example.desafioandroid.R
+import com.example.desafioandroid.view.fragment.RepositoryFragment
 
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*

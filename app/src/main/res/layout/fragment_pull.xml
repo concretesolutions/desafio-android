@@ -7,7 +7,7 @@
 
     <variable
         name="fragmentPullViewModel"
-        type="com.example.desafioandroid.viewModel.PullViewModel"/>
+        type="com.example.desafioandroid.viewModel.fragment.PullViewModel"/>
   </data>
 
   <LinearLayout
@@ -32,13 +32,13 @@
         android:text="@{fragmentPullViewModel.messageLabel}"
         app:visibility="@{fragmentPullViewModel.labelStatus}"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_pull"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:visibility="@{fragmentPullViewModel.recyclerPull}"
-        tools:listitem="@layout/card_repository"
+        tools:listitem="@layout/card_pull"
         android:background="@color/colorDivider"
     />
 

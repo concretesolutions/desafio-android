@@ -1,9 +1,9 @@
-package com.example.desafioandroid.viewModel
+package com.example.desafioandroid.viewModel.itemAdapter
 
-import android.databinding.BaseObservable
-import android.databinding.BindingAdapter
+import androidx.databinding.BaseObservable
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.example.desafioandroid.schemas.PullItem
+import com.example.desafioandroid.schema.PullItem
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.util.*

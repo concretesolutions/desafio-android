@@ -1,18 +1,39 @@
 package com.example.desafioandroid.api
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
 
     private const val BASE_URL = "https://api.github.com/"
 
-    fun create(): ApiInterface {
-        val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-        return retrofit.create(ApiInterface::class.java)
+    private val loggingInterceptor = HttpLoggingInterceptor().apply {
+        this.level = HttpLoggingInterceptor.Level.BODY
+    }
+    private val okHttpClient = OkHttpClient().newBuilder()
+        .connectTimeout(2, TimeUnit.MINUTES)
+        .readTimeout(2, TimeUnit.MINUTES)
+        .writeTimeout(2, TimeUnit.MINUTES)
+        .retryOnConnectionFailure(true)
+        .addInterceptor(loggingInterceptor)
+        .build()
+
+
+    var retrofit: Retrofit? = null
+
+    fun getClient(): Retrofit {
+        when (retrofit) {
+            null -> retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .client(okHttpClient)
+                .build()
+        }
+        return retrofit as Retrofit
     }
 }

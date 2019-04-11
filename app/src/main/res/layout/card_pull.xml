@@ -6,7 +6,7 @@
   <data>
     <variable
         name="pullViewModel"
-        type="com.example.desafioandroid.viewModel.ItemPullViewModel"/>
+        type="com.example.desafioandroid.viewModel.itemAdapter.ItemPullViewModel"/>
   </data>
   <LinearLayout
       android:id="@+id/card_pull"
@@ -16,7 +16,7 @@
       android:layout_margin="@dimen/space_card"
       android:background="@color/colorIcons">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_content_description"
         android:layout_width="0dp"
         android:layout_weight="3"
@@ -67,7 +67,7 @@
           android:layout_marginBottom="@dimen/space_medium"
       />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
         android:id="@+id/linear_content_user"
         android:layout_width="110dp"

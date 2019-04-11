@@ -7,7 +7,7 @@
 
     <variable
         name="fragmentRepositoryViewModel"
-        type="com.example.desafioandroid.viewModel.RepositoryViewModel"/>
+        type="com.example.desafioandroid.viewModel.fragment.RepositoryViewModel"/>
   </data>
 
   <LinearLayout
@@ -32,7 +32,7 @@
         android:text="@{fragmentRepositoryViewModel.messageLabel}"
         app:visibility="@{fragmentRepositoryViewModel.repositoryLabel}"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_repository"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"

@@ -1,17 +1,21 @@
-package com.example.desafioandroid.view
+package com.example.desafioandroid.view.adapter
 
-import android.databinding.DataBindingUtil
-import android.support.v4.app.FragmentManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioandroid.R
 import com.example.desafioandroid.databinding.CardRepositoryBinding
-import com.example.desafioandroid.schemas.RepositoryItem
-import com.example.desafioandroid.viewModel.ItemRepositoryViewModel
+import com.example.desafioandroid.schema.RepositoryItem
+import com.example.desafioandroid.util.DiffUtilCallBack
+import com.example.desafioandroid.viewModel.itemAdapter.ItemRepositoryViewModel
 
-class RepositoryAdapter(private val fragmentManager: FragmentManager) : RecyclerView.Adapter<RepositoryAdapter.RepositoryAdapterViewHolder>() {
+class RepositoryAdapter(private val fragmentManager: FragmentManager) : PagedListAdapter<RepositoryItem, RepositoryAdapter.RepositoryAdapterViewHolder>(
+    DiffUtilCallBack()
+) {
     val TAG = javaClass.simpleName
     private var repositoryList: List<RepositoryItem>? = null
 
@@ -26,9 +30,9 @@ class RepositoryAdapter(private val fragmentManager: FragmentManager) : Recycler
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: RepositoryAdapter.RepositoryAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RepositoryAdapterViewHolder, position: Int) {
         Log.e(TAG,repositoryList!![position].name)
-        holder.bindRepository(repositoryList!![position], fragmentManager)
+        getItem(position)?.let { holder.bindRepository(it,fragmentManager) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryAdapterViewHolder {
@@ -45,7 +49,11 @@ class RepositoryAdapter(private val fragmentManager: FragmentManager) : Recycler
         val TAG = javaClass.simpleName
 
         fun bindRepository(repositoryItem: RepositoryItem, fragmentManager: FragmentManager) {
-            mItemRepositoryBinding.repositoryViewModel = ItemRepositoryViewModel(repositoryItem, fragmentManager)
+            mItemRepositoryBinding.repositoryViewModel =
+                ItemRepositoryViewModel(
+                    repositoryItem,
+                    fragmentManager
+                )
         }
     }
 }

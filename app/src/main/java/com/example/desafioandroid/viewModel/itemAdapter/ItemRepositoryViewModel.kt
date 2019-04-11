@@ -1,17 +1,17 @@
-package com.example.desafioandroid.viewModel
+package com.example.desafioandroid.viewModel.itemAdapter
 
-import android.databinding.BaseObservable
 import android.view.View
-import com.example.desafioandroid.schemas.RepositoryItem
+import com.example.desafioandroid.schema.RepositoryItem
 import com.bumptech.glide.Glide
-import android.databinding.BindingAdapter
 import android.os.Bundle
+import androidx.databinding.BaseObservable
+import androidx.databinding.BindingAdapter
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import de.hdodenhof.circleimageview.CircleImageView
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import com.example.desafioandroid.R
-import com.example.desafioandroid.view.PullFragment
-import com.example.desafioandroid.view.RepositoryFragment
+import com.example.desafioandroid.view.fragment.PullFragment
+import com.example.desafioandroid.view.fragment.RepositoryFragment
 
 
 class ItemRepositoryViewModel(var mRepositoryItem: RepositoryItem, private val fragmentManager: FragmentManager): BaseObservable() {
@@ -25,7 +25,7 @@ class ItemRepositoryViewModel(var mRepositoryItem: RepositoryItem, private val f
         val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
         val repositoryFragment = PullFragment()
         repositoryFragment.arguments = bundle
-        fragmentTransaction.add(R.id.fragment_container, repositoryFragment)
+        fragmentTransaction.add(R.id.fragment_container,repositoryFragment)
             .addToBackStack(RepositoryFragment().TAG)
             .commit()
     }

@@ -1,4 +1,4 @@
-package com.example.desafioandroid.schemas
+package com.example.desafioandroid.schema
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

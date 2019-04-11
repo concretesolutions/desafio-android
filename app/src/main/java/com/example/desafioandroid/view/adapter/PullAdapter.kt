@@ -1,13 +1,13 @@
-package com.example.desafioandroid.view
+package com.example.desafioandroid.view.adapter
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioandroid.R
 import com.example.desafioandroid.databinding.CardPullBinding
-import com.example.desafioandroid.schemas.PullItem
-import com.example.desafioandroid.viewModel.ItemPullViewModel
+import com.example.desafioandroid.schema.PullItem
+import com.example.desafioandroid.viewModel.itemAdapter.ItemPullViewModel
 
 class PullAdapter : RecyclerView.Adapter<PullAdapter.PullAdapterViewHolder>() {
     val TAG = javaClass.simpleName
@@ -19,12 +19,12 @@ class PullAdapter : RecyclerView.Adapter<PullAdapter.PullAdapterViewHolder>() {
         return pullList!!.size
     }
 
-    internal fun setRepositoryList(pullList: List<PullItem>) {
+    internal fun setPullList(pullList: List<PullItem>) {
         this.pullList = pullList
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: PullAdapter.PullAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PullAdapterViewHolder, position: Int) {
         holder.bindPull(pullList!![position])
     }
 
@@ -41,7 +41,8 @@ class PullAdapter : RecyclerView.Adapter<PullAdapter.PullAdapterViewHolder>() {
         RecyclerView.ViewHolder(mItemPullBinding.cardPull) {
 
         fun bindPull(pullItem: PullItem) {
-            mItemPullBinding.pullViewModel = ItemPullViewModel(pullItem)
+            mItemPullBinding.pullViewModel =
+                ItemPullViewModel(pullItem)
         }
     }
 }
