@@ -23,9 +23,10 @@ class PullViewModel: ViewModel() {
     var pullProcess: ObservableInt = ObservableInt(View.GONE)
     var recyclerPull: ObservableInt = ObservableInt(View.GONE)
     var labelStatus: ObservableInt = ObservableInt(View.VISIBLE)
-//    var messageLabel: ObservableField<String> = ObservableField(context!!.getString(R.string.app_name))
 
-    private lateinit var pullList: MutableLiveData<List<PullItem>>
+    var pullList: List<PullItem>? = null
+
+    private lateinit var pullListLiveData: MutableLiveData<List<PullItem>>
 
     fun initializeViews() {
         labelStatus.set(View.GONE)
@@ -35,9 +36,9 @@ class PullViewModel: ViewModel() {
     }
 
     fun fetchPullList(): LiveData<List<PullItem>>  {
-        pullList = MutableLiveData()
+        pullListLiveData = MutableLiveData()
         loadTeams()
-        return pullList
+        return pullListLiveData
     }
 
     fun loadTeams(){
@@ -45,7 +46,8 @@ class PullViewModel: ViewModel() {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 apiService.getPull(creator!!,nameRepository!!).await().let {
-                    pullList.value = it.body()
+                    pullList = it.body()
+                    pullListLiveData.value = it.body()
                 }
 
             }catch (exception : Exception){

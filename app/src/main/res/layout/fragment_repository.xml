@@ -24,14 +24,6 @@
         android:layout_height="wrap_content"
         app:visibility="@{fragmentRepositoryViewModel.repositoryProgress}"/>
 
-    <TextView
-        android:id="@+id/label_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@{fragmentRepositoryViewModel.messageLabel}"
-        app:visibility="@{fragmentRepositoryViewModel.repositoryLabel}"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_repository"
         app:layout_constraintTop_toTopOf="parent"

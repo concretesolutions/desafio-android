@@ -21,19 +21,29 @@ class RepositoryFragment : Fragment() {
 
     val TAG = javaClass.name
     private var adapter: RepositoryAdapter? = null
-    lateinit var repositoryViewModel : RepositoryViewModel
+
+    private val repositoryViewModel: RepositoryViewModel by lazy {
+        ViewModelProviders.of(this).get(RepositoryViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_repository, container, false)
-        repositoryViewModel = ViewModelProviders.of(this).get(RepositoryViewModel::class.java)
-        return view
+        return inflater.inflate(R.layout.fragment_repository, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupListRepositoryView(recycler_repository)
-        repositoryViewModel.initializeViews()
-        observeLiveData()
+
+        if (repositoryViewModel.listRepository != null) {
+            adapter!!.submitList(repositoryViewModel.listRepository)
+            recycler_repository.visibility = View.VISIBLE
+            progress.visibility = View.GONE
+        }else{
+            repositoryViewModel.initializeViews()
+            observeLiveData()
+        }
+
     }
 
     private fun setupListRepositoryView(listPeople: RecyclerView) {
@@ -48,9 +58,12 @@ class RepositoryFragment : Fragment() {
         repositoryViewModel.getRepositoryList().observe(this, Observer {
             adapter!!.submitList(it)
             progress.visibility = View.GONE
-            label_status.visibility = View.GONE
             recycler_repository.visibility = View.VISIBLE
         })
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        repositoryViewModel.listRepository = adapter!!.currentList
     }
 }

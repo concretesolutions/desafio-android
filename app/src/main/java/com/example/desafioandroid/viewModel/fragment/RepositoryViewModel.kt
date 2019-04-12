@@ -2,7 +2,6 @@ package com.example.desafioandroid.viewModel.fragment
 
 
 import android.view.View
-import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -17,9 +16,8 @@ class RepositoryViewModel: ViewModel(){
 
     var repositoryProgress: ObservableInt = ObservableInt(View.GONE)
     var repositoryRecycler: ObservableInt = ObservableInt(View.GONE)
-    var repositoryLabel: ObservableInt = ObservableInt(View.VISIBLE)
-    var messageLabel: ObservableField<String> = ObservableField("No se cargo nada")
 
+    var listRepository : PagedList<RepositoryItem>? = null
     var postsLiveData  : LiveData<PagedList<RepositoryItem>>
 
     init {
@@ -31,7 +29,6 @@ class RepositoryViewModel: ViewModel(){
     }
 
     fun initializeViews() {
-        repositoryLabel.set(View.GONE)
         repositoryRecycler.set(View.GONE)
         repositoryProgress.set(View.VISIBLE)
     }
@@ -48,10 +45,4 @@ class RepositoryViewModel: ViewModel(){
     }
 
     fun getRepositoryList(): LiveData<PagedList<RepositoryItem>> = postsLiveData
-
-    fun goneView() {
-        repositoryLabel.set(View.GONE)
-        repositoryRecycler.set(View.VISIBLE)
-        repositoryProgress.set(View.GONE)
-    }
 }

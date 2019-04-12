@@ -1,6 +1,5 @@
 package com.example.desafioandroid.view.fragment
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +16,12 @@ import kotlinx.android.synthetic.main.fragment_pull.*
 class PullFragment : Fragment() {
     private var adapter = PullAdapter()
     val TAG = javaClass.name
-    private lateinit var pullViewModel : PullViewModel
+    private val pullViewModel: PullViewModel by lazy {
+        ViewModelProviders.of(this).get(PullViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_pull, container, false)
-        pullViewModel = ViewModelProviders.of(this).get(PullViewModel::class.java)
         pullViewModel.creator = arguments!!.getString(getString(R.string.bundle_id_creator))
         pullViewModel.nameRepository = arguments!!.getString(getString(R.string.bundle_name_repository))
         return view
@@ -29,9 +29,16 @@ class PullFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pullViewModel.initializeViews()
-        setupListPullView()
-        observeLiveData()
+        if(pullViewModel.pullList != null){
+            setupListPullView()
+            adapter.setPullList(pullViewModel.pullList!!)
+            recycler_pull.visibility = View.VISIBLE
+            pull_progress.visibility = View.GONE
+        }else {
+            pullViewModel.initializeViews()
+            setupListPullView()
+            observeLiveData()
+        }
     }
 
     private fun setupListPullView() {

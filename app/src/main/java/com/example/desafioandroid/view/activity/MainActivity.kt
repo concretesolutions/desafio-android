@@ -4,27 +4,39 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
 
 import com.example.desafioandroid.R
 import com.example.desafioandroid.view.fragment.RepositoryFragment
+import com.example.desafioandroid.viewModel.activity.MainActivityViewModel
 import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    val TAG : String = javaClass.simpleName
+    private val viewModel: MainActivityViewModel by lazy {
+        ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        showView()
-
+        if (viewModel.backStackEntryCount == 0) {
+            showView()
+        }
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1)
+            finish()
+        super.onBackPressed()
     }
 
     private fun showView() {
@@ -34,6 +46,11 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.fragment_container, repositoryFragment)
             .addToBackStack(RepositoryFragment().TAG)
             .commit()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.backStackEntryCount = supportFragmentManager.backStackEntryCount
     }
 
 }
