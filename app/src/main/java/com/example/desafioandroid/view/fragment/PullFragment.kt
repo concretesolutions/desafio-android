@@ -54,10 +54,7 @@ class PullFragment : Fragment() {
                 adapter.setPullList(it)
                 pull_progress.visibility =  View.GONE
                 recycler_pull.visibility = View.VISIBLE
-                label_status.visibility = View.GONE
             }
-
-
         })
 
     }

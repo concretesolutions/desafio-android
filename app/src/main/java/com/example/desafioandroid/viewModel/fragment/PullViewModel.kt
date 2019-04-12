@@ -22,14 +22,11 @@ class PullViewModel: ViewModel() {
     var nameRepository : String? = ""
     var pullProcess: ObservableInt = ObservableInt(View.GONE)
     var recyclerPull: ObservableInt = ObservableInt(View.GONE)
-    var labelStatus: ObservableInt = ObservableInt(View.VISIBLE)
-
     var pullList: List<PullItem>? = null
 
     private lateinit var pullListLiveData: MutableLiveData<List<PullItem>>
 
     fun initializeViews() {
-        labelStatus.set(View.GONE)
         recyclerPull.set(View.GONE)
         pullProcess.set(View.VISIBLE)
         fetchPullList()
@@ -52,20 +49,11 @@ class PullViewModel: ViewModel() {
 
             }catch (exception : Exception){
                 Log.e(TAG, "Failed to fetch data!")
-
                 pullProcess.set(View.GONE)
-                labelStatus.set(View.VISIBLE)
                 recyclerPull.set(View.GONE)
             }
         }
 
 
     }
-
-    fun goneView() {
-        labelStatus.set(View.GONE)
-        recyclerPull.set(View.VISIBLE)
-        pullProcess.set(View.GONE)
-    }
-
 }

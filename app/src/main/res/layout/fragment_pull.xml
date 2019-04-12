@@ -24,13 +24,6 @@
         android:layout_height="wrap_content"
         app:visibility="@{fragmentPullViewModel.pullProcess}"/>
 
-    <TextView
-        android:id="@+id/label_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:visibility="@{fragmentPullViewModel.labelStatus}"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_pull"
         app:layout_constraintTop_toTopOf="parent"
