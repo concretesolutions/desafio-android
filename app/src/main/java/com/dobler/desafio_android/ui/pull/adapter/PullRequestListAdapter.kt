@@ -38,10 +38,6 @@ class PullRequestListAdapter() :
         notifyDataSetChanged()
     }
 
-    fun setPullRequestsList(data: ArrayList<RepositoryPullRequest>) {
-        myDataset =  data
-        notifyDataSetChanged()
-    }
 
     override fun onBindViewHolder(holder: PullRequestViewHolder, position: Int) {
 

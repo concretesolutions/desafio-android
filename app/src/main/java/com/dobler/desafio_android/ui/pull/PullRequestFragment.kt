@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dobler.desafio_android.R
 import com.dobler.desafio_android.ui.pull.adapter.PullRequestListAdapter
 import kotlinx.android.synthetic.main.fragment_pull_request_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class PullRequestFragment : Fragment() {
 
@@ -18,7 +20,6 @@ class PullRequestFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let {
             val safeArgs = PullRequestFragmentArgs.fromBundle(it)
             viewModel.user = safeArgs.user
@@ -45,13 +46,24 @@ class PullRequestFragment : Fragment() {
 
         var adapter = PullRequestListAdapter()
 
+        val resId = R.anim.layout_rv_animation
+
+        val controller = AnimationUtils.loadLayoutAnimation(context, resId)
+
         rvPullRequestList.apply {
             this.adapter = adapter
             this.layoutManager = LinearLayoutManager(context)
+            this.layoutAnimation = controller
         }
 
         viewModel.pullRequest.observe(this, androidx.lifecycle.Observer {
             adapter.addPullRequestsList(it)
+            rvPullRequestList.adapter?.notifyDataSetChanged();
+            rvPullRequestList.scheduleLayoutAnimation()
+            if (it != null) {
+                pbPullRequest.visibility = View.GONE
+            }
+
         })
     }
 

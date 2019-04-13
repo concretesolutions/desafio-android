@@ -7,22 +7,22 @@
     <fragment
             android:id="@+id/repositoryListFragment"
             android:name="com.dobler.desafio_android.ui.repository.ListRepositoryFragment"
-            android:label="Blank"
+            android:label="Java Repos"
             tools:layout="@layout/fragment_repository_list">
         <action android:id="@+id/action_repositoryListFragment_to_pullRequestFragment"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
                 app:destination="@id/pullRequestFragment"/>
     </fragment>
 
     <fragment android:id="@+id/pullRequestFragment"
               android:name="com.dobler.desafio_android.ui.pull.PullRequestFragment"
-              tools:layout="@layout/fragment_pull_request_list"
-              android:label="PullRequestFragment">
+              android:label="Pull Requests">
         <argument android:name="user" app:argType="string"/>
         <argument android:name="repositoryName" app:argType="string"/>
+
     </fragment>
 
 </navigation>
