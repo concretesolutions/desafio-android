@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="material_2dp">2dp</dimen>
+    <dimen name="material_4dp">4dp</dimen>
+    <dimen name="material_8dp">8dp</dimen>
+    <dimen name="material_16dp">16dp</dimen>
+</resources>

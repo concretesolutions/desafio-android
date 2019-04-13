@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="pulls" type="com.dobler.desafio_android.data.model.RepositoryPullRequest"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/material_8dp"
+            android:layout_marginTop="@dimen/material_8dp"
+            android:layout_marginRight="@dimen/material_8dp" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/material_16dp" >
+
+            <TextView android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/rvPullRequestTitle"
+                      tools:text="name"
+                      app:layout_constraintWidth_percent="0.70"
+                      android:text="@{pulls.title}"
+                      app:layout_constraintTop_toTopOf="@+id/rvPullRequestUser"
+                      android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                      app:layout_constraintStart_toStartOf="@+id/rvPullRequestDescription"
+                      app:layout_constraintBottom_toBottomOf="@+id/rvPullRequestUser"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/rvPullRequestDescription"
+                      tools:text="description"
+                      android:text="@{pulls.body}"
+                      android:layout_marginTop="8dp"
+                      app:layout_constraintTop_toBottomOf="@+id/rvPullRequestUser"
+                      android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                      app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <androidx.constraintlayout.widget.Guideline
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/guideline"
+                    app:layout_constraintGuide_percent="0.70"
+            />
+
+            <include
+                    android:id="@+id/rvPullRequestUser"
+                    layout="@layout/list_rv_user"
+                    app:user="@{pulls.user}" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    android:layout_marginStart="@dimen/material_8dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

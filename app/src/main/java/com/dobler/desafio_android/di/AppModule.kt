@@ -6,6 +6,8 @@ import com.dobler.desafio_android.data.api.githubRepository.GithubRepositoryServ
 import com.dobler.desafio_android.data.api.repositoryPullRequest.RepositoryPullRequestService
 import com.dobler.desafio_android.data.repository.githubRepository.GithubRepositoryDataSource
 import com.dobler.desafio_android.data.repository.githubRepository.Repository
+import com.dobler.desafio_android.data.repository.pullRequest.PullRequestRepository
+import com.dobler.desafio_android.ui.pull.PullRequestViewModel
 import com.dobler.desafio_android.ui.repository.ListRepositoryViewModel
 import com.dobler.desafio_android.util.rx.SchedulerContract
 import com.dobler.desafio_android.util.rx.SchedulerProvider
@@ -41,7 +43,8 @@ object AppModule {
     val repositoriesModule = module {
 
         single { GithubRepositoryDataSource(get()) }
-        single { Repository(get(), get()) }
+        single { Repository(get()) }
+        single { PullRequestRepository(get()) }
     }
 
     val rxModule = module {
@@ -55,6 +58,7 @@ object AppModule {
     val vieModelModule = module {
 
         viewModel { ListRepositoryViewModel(get(), get()) }
+        viewModel { PullRequestViewModel(get(), get()) }
 
     }
 

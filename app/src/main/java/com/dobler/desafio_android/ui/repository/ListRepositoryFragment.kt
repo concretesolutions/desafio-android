@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dobler.desafio_android.R
@@ -46,9 +47,9 @@ class ListRepositoryFragment : Fragment() {
     fun setUpRecycleView() {
 
         val adapter = RepositoryListAdapter {
-            //            val action = RepositoryListFragmentDirections.actionMovieListFragmentToDetailsFragment(it.id)
-//            findNavController().navigate(action)
-//            Log.e("TAG", "Navigate")
+            val action = ListRepositoryFragmentDirections.
+                actionRepositoryListFragmentToPullRequestFragment( it.owner.login, it.name)
+            findNavController().navigate(action)
         };
 
         rvMainRepositoryList.apply {

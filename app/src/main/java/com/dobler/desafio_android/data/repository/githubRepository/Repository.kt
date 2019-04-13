@@ -3,13 +3,12 @@ package com.dobler.desafio_android.data.repository.githubRepository
 import androidx.annotation.MainThread
 import androidx.lifecycle.Transformations
 import androidx.paging.toLiveData
-import com.dobler.desafio_android.data.api.githubRepository.GithubRepositoryService
 import com.dobler.desafio_android.data.model.GithubRepository
 import com.dobler.desafio_android.util.paging.Listing
 import io.reactivex.Observable
 import java.util.concurrent.Executors
 
-class Repository(private val api: GithubRepositoryService, private val sourceFactory: GithubRepositoryDataSource) :
+class Repository(private val sourceFactory: GithubRepositoryDataSource) :
     RepositoryContract {
 
     private val networkExecutor = Executors.newFixedThreadPool(5)

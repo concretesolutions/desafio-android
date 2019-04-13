@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="user" type="com.dobler.desafio_android.data.model.User"/>
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.70" >
+            android:orientation="vertical">
 
-        <TextView android:layout_width="wrap_content"
+
+        <ImageView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/ivUserImage"
+
+        />
+        <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:id="@+id/rvRepositoryName"
+                  android:id="@+id/tvUserLogin"
+                  android:textAlignment="center"
                   tools:text="Login"
-                  android:text="@{user.login}"
-                  app:layout_constraintTop_toTopOf="parent"
-                  android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                  android:layout_marginTop="8dp" android:layout_marginEnd="8dp"
-                  app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="8dp"
-                  app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                  android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                  android:layout_marginTop="@dimen/material_8dp"
+                  android:text="@{user.login}"/>
+
+
+    </LinearLayout>
 
 
 </layout>

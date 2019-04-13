@@ -5,9 +5,13 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.dobler.desafio_android.data.model.GithubRepository
 import com.dobler.desafio_android.databinding.ListRvRepositoryBinding
 import com.dobler.desafio_android.util.paging.NetworkState
+import kotlinx.android.synthetic.main.list_rv_user.view.*
 
 class RepositoryListAdapter(private val onClick: (GithubRepository) -> Unit) :
     PagedListAdapter<GithubRepository, RepositoryListAdapter.GithubRepositoryViewHolder>(diffCallback) {
@@ -36,10 +40,13 @@ class RepositoryListAdapter(private val onClick: (GithubRepository) -> Unit) :
             holder.view.executePendingBindings()
 
             val repository = it
-//            Glide.with(holder.itemView.context)
-//                .load("https://image.tmdb.org/t/p/w500/" + it.backdrop_path)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .into(holder.itemView.ivListGithubRepositoryPoster)
+
+
+            Glide.with(holder.itemView.context)
+                .load(it.owner.avatar_url)
+                .apply(RequestOptions.circleCropTransform())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.itemView.ivUserImage)
 
             holder.itemView.setOnClickListener {
                 onClick(repository)
