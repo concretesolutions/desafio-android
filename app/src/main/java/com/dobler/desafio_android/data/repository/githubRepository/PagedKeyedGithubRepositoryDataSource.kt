@@ -49,7 +49,7 @@ class PageKeyedSubredditDataSource(
     override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, GithubRepository>) {
         networkState.postValue(NetworkState.LOADING)
 
-        api.getPage("language:Java", "stars", page++).enqueue(
+        api.getPage("language:Java", "stars", ++page).enqueue(
             object : retrofit2.Callback<GithubRepositoryResponse> {
                 override fun onFailure(call: Call<GithubRepositoryResponse>, t: Throwable) {
                     retry = {
