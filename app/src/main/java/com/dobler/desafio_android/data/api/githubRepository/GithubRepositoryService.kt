@@ -14,5 +14,4 @@ interface GithubRepositoryService {
         @Query("page") page: Int
     ): Call<GithubRepositoryResponse>
 
-
 }

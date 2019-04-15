@@ -7,5 +7,4 @@ interface SchedulerContract {
     fun io(): Scheduler
 
     fun ui(): Scheduler
-
 }

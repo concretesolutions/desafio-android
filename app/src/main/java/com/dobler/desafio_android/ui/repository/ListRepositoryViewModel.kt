@@ -22,7 +22,6 @@ class ListRepositoryViewModel(
     val refreshState = Transformations.switchMap(repoResult, { it.refreshState })!!
 
     fun refresh() {
-        Log.e("VIEWMODEL", "Refresh")
         repoResult.value?.refresh?.invoke()
     }
 
@@ -33,7 +32,6 @@ class ListRepositoryViewModel(
 
 
     fun loadList() {
-        Log.e("Viewmodel", "LoadList")
 
         if (!started) {
             repository.getPage()
@@ -42,8 +40,8 @@ class ListRepositoryViewModel(
                 .subscribe({
                     repoResult.postValue(it)
                     started = true
+
                 }, {
-                    Log.e("TAG", it.toString())
                 })
 
         }

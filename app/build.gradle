@@ -25,6 +25,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        androidTest.java.srcDirs += "src/test-common/java"
+        test.java.srcDirs += "src/test-common/java"
+    }
 }
 
 
@@ -32,14 +36,10 @@ ext {
     koinVersion = '2.0.0-rc-1'
     glideVersion = '4.9.0'
     nav_version = "2.1.0-alpha01"
-
-
     retrofitVersion = '2.5.0'
     okHttpVersion = '3.12.0'
-
     espressoVersion = '3.2.0-alpha02'
-    mockitoKotlinVersion = '1.5.0'
-    room = "2.1.0-alpha06"
+
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -70,12 +70,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.7"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
-    //Room
-    implementation "androidx.room:room-runtime:$room"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
-    kapt "androidx.room:room-compiler:$room"
-
     //OKHttp
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
@@ -88,24 +82,13 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
-    //Anko
-    implementation "org.jetbrains.anko:anko-commons:0.10.8"
-
     //##Tests
     androidTestImplementation 'androidx.test:runner:1.2.0-alpha03'
     androidTestImplementation 'androidx.test:rules:1.2.0-alpha03'
+    androidTestImplementation 'androidx.test:core-ktx:1.2.0-alpha03'
+    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.1-alpha03'
     testImplementation 'junit:junit:4.12'
     testImplementation "android.arch.core:core-testing:2.1.0-alpha03"
-
-    //Koin
-    testImplementation "org.koin:koin-test:$koinVersion"
-
-    //Mockito
-    testImplementation 'org.mockito:mockito-core:2.23.0'
-    testImplementation "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"
-
-    //Room
-    androidTestImplementation "androidx.room:room-testing:$room"
 
     //Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
@@ -113,6 +96,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
 
     //okHttp
-    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 
 }

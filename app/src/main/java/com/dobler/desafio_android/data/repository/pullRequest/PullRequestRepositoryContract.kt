@@ -5,6 +5,5 @@ import io.reactivex.Observable
 
 interface PullRequestRepositoryContract {
 
-    fun getAll(user: String, repositoryName: String ): Observable<List<RepositoryPullRequest>>
-
+    fun getAll(user: String, repositoryName: String): Observable<List<RepositoryPullRequest>>
 }

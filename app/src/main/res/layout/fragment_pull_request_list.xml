@@ -2,9 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-        android:layout_height="match_parent"
->
-
+        android:layout_height="match_parent">
 
     <ProgressBar
             android:layout_width="match_parent"
@@ -13,14 +11,24 @@
             android:layout_marginTop="@dimen/material_16dp"
             app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/tvNoPullRequest"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:text="@string/no_pull_requests_found"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_16dp"
+            app:layout_constraintTop_toTopOf="parent"/>
 
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPullRequestList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layoutAnimation="@anim/layout_rv_animation"
             android:scrollbars="vertical"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
-
+            android:layout_marginBottom="@dimen/material_8dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

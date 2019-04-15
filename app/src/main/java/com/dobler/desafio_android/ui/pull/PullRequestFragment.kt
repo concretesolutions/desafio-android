@@ -17,15 +17,14 @@ class PullRequestFragment : Fragment() {
 
     private val viewModel: PullRequestViewModel by viewModel()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             val safeArgs = PullRequestFragmentArgs.fromBundle(it)
             viewModel.user = safeArgs.user
             viewModel.repositoryName = safeArgs.repositoryName
         }
-
     }
 
     override fun onCreateView(
@@ -44,7 +43,7 @@ class PullRequestFragment : Fragment() {
 
     fun setUpRecycleView() {
 
-        var adapter = PullRequestListAdapter()
+        val adapter = PullRequestListAdapter()
 
         val resId = R.anim.layout_rv_animation
 
@@ -60,12 +59,16 @@ class PullRequestFragment : Fragment() {
             adapter.addPullRequestsList(it)
             rvPullRequestList.adapter?.notifyDataSetChanged();
             rvPullRequestList.scheduleLayoutAnimation()
+
             if (it != null) {
                 pbPullRequest.visibility = View.GONE
             }
 
+            if(it.size ==0){
+                tvNoPullRequest.visibility = View.VISIBLE
+            }
         })
     }
 
-
 }
+

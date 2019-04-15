@@ -12,7 +12,6 @@ class Application : Application() {
         super.onCreate()
 
         startKoin {
-            printLogger()
             androidContext(this@Application)
             modules(
                 listOf(
@@ -22,9 +21,6 @@ class Application : Application() {
                     AppModule.repositoriesModule
                 )
             )
-
         }
-
     }
-
 }

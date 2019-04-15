@@ -8,7 +8,6 @@ import io.reactivex.Observable
 class PullRequestRepository(private val api: RepositoryPullRequestService) :
     PullRequestRepositoryContract {
 
-
     @MainThread
     override fun getAll(user: String, repositoryName: String): Observable<List<RepositoryPullRequest>> {
         return api.getList(user, repositoryName)

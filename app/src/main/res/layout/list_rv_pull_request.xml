@@ -20,18 +20,15 @@
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:id="@+id/rvPullRequestTitle"
-                      tools:text="asdasdaiusdaiusdhiausdhiauh diuashd iuahsdi uhasid haisudh iaushd ahusd iuahsdi uhasidu haisudh iuahsd iuahsd iuhasidu hasiud hiuashd iuahsd iuhasdiu hasdiu haiusdh "
                       android:text="@{pulls.title}"
                       android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                       app:layout_constraintStart_toStartOf="parent"
                       app:layout_constraintTop_toTopOf="parent"
             />
 
-
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:id="@+id/rvPullRequestDescription"
-                      tools:text="description"
                       android:text="@{pulls.body}"
                       android:layout_marginTop="@dimen/material_8dp"
                       android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
@@ -39,17 +36,17 @@
                       app:layout_constraintTop_toBottomOf="@+id/rvPullRequestTitle"
             />
 
-            <include
-                    android:id="@+id/rvPullRequestUser"
-                    layout="@layout/list_rv_user"
-                    app:user="@{pulls.user}" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/rvPullRequestDescription"
-                    android:layout_marginTop="@dimen/material_8dp"/>
-
+            <include android:id="@+id/rvPullRequestUser"
+                     layout="@layout/list_rv_user"
+                     app:user="@{pulls.user}"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     app:layout_constraintTop_toBottomOf="@+id/rvPullRequestDescription"
+                     android:layout_marginTop="@dimen/material_8dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
 </layout>

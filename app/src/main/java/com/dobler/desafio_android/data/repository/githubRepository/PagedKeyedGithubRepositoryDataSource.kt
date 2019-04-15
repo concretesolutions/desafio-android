@@ -1,6 +1,5 @@
 package com.dobler.desafio_android.data.repository.githubRepository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.dobler.desafio_android.data.api.githubRepository.GithubRepositoryResponse
@@ -22,10 +21,6 @@ class PageKeyedSubredditDataSource(
 
     var page = 1;
 
-    /**
-     * There is no sync on the state because paging will always call loadInitial first then wait
-     * for it to return some success value before calling loadAfter.
-     */
     val networkState = MutableLiveData<NetworkState>()
 
     val initialLoad = MutableLiveData<NetworkState>()
@@ -86,16 +81,14 @@ class PageKeyedSubredditDataSource(
         callback: LoadInitialCallback<String, GithubRepository>
     ) {
         val currentPage = page
-        Log.e("DataSOurce",params.toString())
         val request = api.getPage("language:Java", "stars", currentPage)
         networkState.postValue(NetworkState.LOADING)
         initialLoad.postValue(NetworkState.LOADING)
 
-        // triggered by a refresh, we better execute sync
         try {
             val response = request.execute()
             val data = response.body()?.items
-            val items = data?.map { it} ?: emptyList()
+            val items = data?.map { it } ?: emptyList()
             retry = null
             networkState.postValue(NetworkState.LOADED)
             initialLoad.postValue(NetworkState.LOADED)

@@ -4,4 +4,5 @@
     <dimen name="material_4dp">4dp</dimen>
     <dimen name="material_8dp">8dp</dimen>
     <dimen name="material_16dp">16dp</dimen>
+    <dimen name="material_image_card_80dp">80dp</dimen>
 </resources>

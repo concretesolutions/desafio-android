@@ -21,7 +21,7 @@ class RepositoryListAdapter(private val onClick: (GithubRepository) -> Unit) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RepositoryListAdapter.GithubRepositoryViewHolder {
+    ): GithubRepositoryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
         val binding: ListRvRepositoryBinding = ListRvRepositoryBinding.inflate(
@@ -41,7 +41,6 @@ class RepositoryListAdapter(private val onClick: (GithubRepository) -> Unit) :
 
             val repository = it
 
-
             Glide.with(holder.itemView.context)
                 .load(it.owner.avatar_url)
                 .apply(RequestOptions.circleCropTransform())
@@ -52,15 +51,9 @@ class RepositoryListAdapter(private val onClick: (GithubRepository) -> Unit) :
                 onClick(repository)
             }
         }
-
-
     }
 
-//    override fun getItemCount() = myDataset.size
-
     class GithubRepositoryViewHolder(val view: ListRvRepositoryBinding) : RecyclerView.ViewHolder(view.root) {
-
-
     }
 
     private fun hasExtraRow() = networkState != null && networkState != NetworkState.LOADED

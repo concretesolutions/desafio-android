@@ -8,5 +8,5 @@ data class GithubRepository(
     val full_name: String,
     val description: String,
     val stargazers_count: Int,
-    val forks_count: Int)
-
+    val forks_count: Int
+)

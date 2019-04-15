@@ -8,11 +8,6 @@ import com.dobler.desafio_android.data.model.GithubRepository
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
-/**
- * A simple data source factory which also provides a way to observe the last created data source.
- * This allows us to channel its network request status etc back to the UI. See the Listing creation
- * in the Repository class.
- */
 class GithubRepositoryDataSource(
     private val api: GithubRepositoryService) : DataSource.Factory<String, GithubRepository>() {
 

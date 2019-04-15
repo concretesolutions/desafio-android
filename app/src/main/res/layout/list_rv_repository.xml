@@ -10,17 +10,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/material_8dp"
             android:layout_marginTop="@dimen/material_8dp"
-            android:layout_marginRight="@dimen/material_8dp" >
+            android:layout_marginRight="@dimen/material_8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/material_16dp" >
+                android:padding="@dimen/material_16dp">
 
             <TextView android:layout_width="0dp"
                       android:layout_height="wrap_content"
                       android:id="@+id/rvPullRequestTitle"
-                      tools:text="name"
                       app:layout_constraintWidth_percent="0.70"
                       android:text="@{repository.name}"
                       app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +29,6 @@
             <TextView android:layout_width="0dp"
                       android:layout_height="wrap_content"
                       android:id="@+id/rvPullRequestDescription"
-                      tools:text="description"
                       app:layout_constraintWidth_percent="0.70"
                       android:text="@{repository.description}"
                       android:layout_marginTop="@dimen/material_4dp"
@@ -83,7 +81,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/guideline" android:layout_marginStart="8dp"/>
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    android:layout_marginStart="@dimen/material_8dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

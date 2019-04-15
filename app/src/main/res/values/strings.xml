@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">desafio-android</string>
+    <string name="app_name">Android Challenge</string>
+    <string name="no_pull_requests_found">No pull requests Found</string>
 </resources>

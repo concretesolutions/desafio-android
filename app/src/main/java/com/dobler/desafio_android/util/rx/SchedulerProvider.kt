@@ -8,5 +8,4 @@ class SchedulerProvider : SchedulerContract {
     override fun io() = Schedulers.io()
 
     override fun ui() = AndroidSchedulers.mainThread()
-
 }

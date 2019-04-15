@@ -5,31 +5,24 @@
         <variable name="user" type="com.dobler.desafio_android.data.model.User"/>
     </data>
 
-
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
         <ImageView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/ivUserImage"
+                android:layout_width="@dimen/material_image_card_80dp"
+                android:layout_height="@dimen/material_image_card_80dp"
+                android:id="@+id/ivUserImage"/>
 
-        />
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:id="@+id/tvUserLogin"
                   android:textAlignment="center"
-                  tools:text="Login"
-
                   android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
                   android:layout_marginTop="@dimen/material_8dp"
                   android:text="@{user.login}"/>
 
-
     </LinearLayout>
-
 
 </layout>
