@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Android Challenge</string>
     <string name="no_pull_requests_found">No pull requests Found</string>
+    <string name="no_repositories_found">No Repositories found</string>
 </resources>

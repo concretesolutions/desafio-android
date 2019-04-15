@@ -19,7 +19,7 @@
 
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:id="@+id/rvPullRequestTitle"
+                      android:id="@+id/tvPullRequestTitle"
                       android:text="@{pulls.title}"
                       android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                       app:layout_constraintStart_toStartOf="parent"
@@ -28,12 +28,12 @@
 
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:id="@+id/rvPullRequestDescription"
+                      android:id="@+id/tvPullRequestDescription"
                       android:text="@{pulls.body}"
                       android:layout_marginTop="@dimen/material_8dp"
                       android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                       app:layout_constraintStart_toStartOf="parent"
-                      app:layout_constraintTop_toBottomOf="@+id/rvPullRequestTitle"
+                      app:layout_constraintTop_toBottomOf="@+id/tvPullRequestTitle"
             />
 
             <include android:id="@+id/rvPullRequestUser"
@@ -42,7 +42,7 @@
                      app:layout_constraintEnd_toEndOf="parent"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     app:layout_constraintTop_toBottomOf="@+id/rvPullRequestDescription"
+                     app:layout_constraintTop_toBottomOf="@+id/tvPullRequestDescription"
                      android:layout_marginTop="@dimen/material_8dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

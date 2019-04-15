@@ -19,20 +19,20 @@
 
             <TextView android:layout_width="0dp"
                       android:layout_height="wrap_content"
-                      android:id="@+id/rvPullRequestTitle"
+                      android:id="@+id/tvPullRequestTitle"
                       app:layout_constraintWidth_percent="0.70"
                       android:text="@{repository.name}"
                       app:layout_constraintTop_toTopOf="parent"
                       android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                      app:layout_constraintStart_toStartOf="@+id/rvPullRequestDescription"/>
+                      app:layout_constraintStart_toStartOf="@+id/tvPullRequestDescription"/>
 
             <TextView android:layout_width="0dp"
                       android:layout_height="wrap_content"
-                      android:id="@+id/rvPullRequestDescription"
+                      android:id="@+id/tvPullRequestDescription"
                       app:layout_constraintWidth_percent="0.70"
                       android:text="@{repository.description}"
                       android:layout_marginTop="@dimen/material_4dp"
-                      app:layout_constraintTop_toBottomOf="@+id/rvPullRequestTitle"
+                      app:layout_constraintTop_toBottomOf="@+id/tvPullRequestTitle"
                       android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                       app:layout_constraintStart_toStartOf="parent"/>
 
@@ -46,8 +46,8 @@
                     android:drawableStart="@drawable/ic_fork"
                     android:drawablePadding="@dimen/material_4dp"
                     android:textColor="@color/colorAccent"
-                    app:layout_constraintTop_toBottomOf="@+id/rvPullRequestDescription"
-                    app:layout_constraintStart_toStartOf="@+id/rvPullRequestDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPullRequestDescription"
+                    app:layout_constraintStart_toStartOf="@+id/tvPullRequestDescription"
                     android:layout_marginTop="@dimen/material_8dp"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 

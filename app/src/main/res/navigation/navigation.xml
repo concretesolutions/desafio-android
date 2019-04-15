@@ -7,7 +7,7 @@
     <fragment
             android:id="@+id/repositoryListFragment"
             android:name="com.dobler.desafio_android.ui.repository.ListRepositoryFragment"
-            android:label="Java Repos"
+            android:label="Github Java Pop"
             tools:layout="@layout/fragment_repository_list">
         <action android:id="@+id/action_repositoryListFragment_to_pullRequestFragment"
                 app:popEnterAnim="@anim/slide_in_left"

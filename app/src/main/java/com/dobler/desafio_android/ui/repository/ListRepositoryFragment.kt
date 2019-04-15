@@ -60,6 +60,10 @@ class ListRepositoryFragment : Fragment() {
         viewModel.githubRepositories.observe(this,
             Observer<PagedList<GithubRepository>> {
                 adapter.submitList(it)
+
+                if(it.size == 0){
+                    tvNoRepositories.visibility = View.VISIBLE
+                }
             })
 
         viewModel.networkState.observe(this, Observer {
