@@ -34,14 +34,14 @@ class RepositoryViewModel: ViewModel(){
     }
 
     private fun initializedPagedListBuilder(config: PagedList.Config):
-            LivePagedListBuilder<String, RepositoryItem> {
+            LivePagedListBuilder<Int, RepositoryItem> {
 
-        val dataSourceFactory = object : DataSource.Factory<String, RepositoryItem>() {
-            override fun create(): DataSource<String, RepositoryItem> {
+        val dataSourceFactory = object : DataSource.Factory<Int, RepositoryItem>() {
+            override fun create(): DataSource<Int, RepositoryItem> {
                 return RepositoryPagination()
             }
         }
-        return LivePagedListBuilder<String, RepositoryItem>(dataSourceFactory, config)
+        return LivePagedListBuilder<Int, RepositoryItem>(dataSourceFactory, config)
     }
 
     fun getRepositoryList(): LiveData<PagedList<RepositoryItem>> = postsLiveData

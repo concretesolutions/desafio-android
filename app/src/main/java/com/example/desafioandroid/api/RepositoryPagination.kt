@@ -7,18 +7,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class RepositoryPagination : PageKeyedDataSource<String, RepositoryItem>(){
+class RepositoryPagination : PageKeyedDataSource<Int, RepositoryItem>(){
     val TAG = javaClass.simpleName
     private val apiService = RetrofitClient.getClient().create(ApiInterface::class.java)
 
-    override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, RepositoryItem>) {
+    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, RepositoryItem>) {
         GlobalScope.launch {
             try {
                 val response = apiService.getRepositories("language:Java", "stars", 1).await()
                 when{
                     response.isSuccessful-> {
                         val listing = response.body()!!.items
-                        callback.onResult(listing ?: listOf(),null, "2")
+                        callback.onResult(listing ?: listOf(),1, 2)
                     }else ->{
                         Log.e(TAG, "Failure")
                     }
@@ -29,16 +29,16 @@ class RepositoryPagination : PageKeyedDataSource<String, RepositoryItem>(){
         }
     }
 
-    override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, RepositoryItem>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, RepositoryItem>) {
         GlobalScope.launch {
             try {
-                val response = apiService.getRepositories("Java","starts", params.key.toInt()).await()
+                val response = apiService.getRepositories("Java","starts", params.key).await()
                 when{
                     response.isSuccessful -> {
                         val listing = response.body()!!.items
-                        val page : String = (params.key.toDouble() + 1).toString()
-                        callback.onResult(listing ?: listOf(), page)
-
+                        val page = params.key + 1
+                        Log.e(TAG,page.toString())
+                        callback.onResult(listing ?: listOf(), params.key+1)
                     }
                 }
 
@@ -48,14 +48,14 @@ class RepositoryPagination : PageKeyedDataSource<String, RepositoryItem>(){
         }
     }
 
-    override fun loadBefore(params: LoadParams<String>, callback: LoadCallback<String, RepositoryItem>) {
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, RepositoryItem>) {
         GlobalScope.launch {
             try {
                 val response = apiService.getRepositories("language:Java","starts", params.key.toInt()).await()
                 when{
                     response.isSuccessful -> {
                         val listing = response.body()!!.items
-                        val page : String = (params.key.toInt() + 1).toString()
+                        val page = params.key.toInt() - 1
                         callback.onResult(listing ?: listOf(), page)
                     }
                 }
