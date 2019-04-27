@@ -1,9 +1,11 @@
 package com.example.desafioandroid.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
+import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioandroid.R
@@ -28,6 +30,12 @@ class RepositoryAdapter(private val fragmentManager: FragmentManager) : PagedLis
         return RepositoryAdapterViewHolder(itemPeopleBinding)
     }
 
+ /*   override fun onViewAttachedToWindow(holder: RepositoryAdapterViewHolder) {
+        Log.e(TAG,holder.toString())
+        if (holder.oldPosition != 0 )
+
+        super.onViewAttachedToWindow(holder)
+    }*/
     class RepositoryAdapterViewHolder(
         var mItemRepositoryBinding: CardRepositoryBinding
     ) :

@@ -10,7 +10,7 @@
         type="com.example.desafioandroid.viewModel.fragment.RepositoryViewModel"/>
   </data>
 
-  <LinearLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       tools:showIn="@layout/activity_main"
@@ -22,7 +22,11 @@
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:visibility="@{fragmentRepositoryViewModel.repositoryProgress}"/>
+        app:visibility="@{fragmentRepositoryViewModel.repositoryProgress}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_repository"
@@ -32,7 +36,8 @@
         app:visibility="@{fragmentRepositoryViewModel.repositoryRecycler}"
         tools:listitem="@layout/card_repository"
         android:background="@color/colorDivider"
+        android:visibility="invisible"
     />
 
-  </LinearLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

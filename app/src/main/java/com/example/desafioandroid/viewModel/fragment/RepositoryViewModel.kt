@@ -14,8 +14,8 @@ import com.example.desafioandroid.schema.RepositoryItem
 
 class RepositoryViewModel: ViewModel(){
 
-    var repositoryProgress: ObservableInt = ObservableInt(View.GONE)
-    var repositoryRecycler: ObservableInt = ObservableInt(View.GONE)
+    var repositoryProgress: ObservableInt = ObservableInt(View.INVISIBLE)
+    var repositoryRecycler: ObservableInt = ObservableInt(View.INVISIBLE)
 
     var listRepository : PagedList<RepositoryItem>? = null
     var postsLiveData  : LiveData<PagedList<RepositoryItem>>
@@ -29,7 +29,7 @@ class RepositoryViewModel: ViewModel(){
     }
 
     fun initializeViews() {
-        repositoryRecycler.set(View.GONE)
+        repositoryRecycler.set(View.INVISIBLE)
         repositoryProgress.set(View.VISIBLE)
     }
 

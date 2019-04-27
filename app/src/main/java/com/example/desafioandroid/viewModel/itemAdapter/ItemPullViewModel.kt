@@ -7,6 +7,8 @@ import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.desafioandroid.R
 import com.example.desafioandroid.schema.PullItem
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
@@ -18,7 +20,12 @@ class ItemPullViewModel(var mPullItem:PullItem): BaseObservable() {
 
     @BindingAdapter("imageUrl")
     fun setImageUrl(imageView: CircleImageView, url:String) {
-        Glide.with(imageView.context).load(url).into(imageView)
+        Glide.with(imageView.context)
+            .load(url)
+            .placeholder(R.drawable.ic_load_image)
+            .error(R.drawable.ic_error_image)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(imageView)
     }
 
     fun pullDate():String{

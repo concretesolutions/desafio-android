@@ -8,6 +8,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import de.hdodenhof.circleimageview.CircleImageView
 import com.example.desafioandroid.R
 import com.example.desafioandroid.view.fragment.PullFragment
@@ -34,7 +35,12 @@ class ItemRepositoryViewModel(var mRepositoryItem: RepositoryItem, private val f
        @JvmStatic
        @BindingAdapter("imageUrl")
        fun loadPicture(view: CircleImageView, loadPicture: String) {
-           Glide.with(view.context).load(loadPicture).into(view)
+           Glide.with(view.context)
+               .load(loadPicture)
+               .placeholder(R.drawable.ic_load_image)
+               .error(R.drawable.ic_error_image)
+               .diskCacheStrategy(DiskCacheStrategy.ALL)
+               .into(view)
        }
    }
 
