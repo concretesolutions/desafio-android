@@ -17,7 +17,7 @@ interface ApiInterface {
                          @Query("page") page: Int)
                         : Deferred<Response<SearchRepository>>
 
-    //trae todos los pull request asociados a ese repositorio
+    //Trae todos los pull request asociados a ese repositorio
     @GET("repos/{creator}/{name_repository}/pulls")
     fun getPull(@Path("creator") creator: String,
                 @Path("name_repository") name_repository: String): Deferred<Response<List<PullItem>>>

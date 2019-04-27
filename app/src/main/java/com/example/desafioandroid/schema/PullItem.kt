@@ -22,4 +22,7 @@ class PullItem {
     @SerializedName("created_at")
     @Expose
     var createdAt: String? = null
+    @SerializedName("html_url")
+    @Expose
+    var htmlUrl: String? = null
 }

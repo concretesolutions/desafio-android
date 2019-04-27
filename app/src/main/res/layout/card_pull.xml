@@ -14,7 +14,9 @@
       android:layout_height="150dp"
       android:orientation="horizontal"
       android:layout_margin="@dimen/space_card"
-      android:background="@color/colorIcons">
+      android:background="@color/colorIcons"
+      android:onClick="@{pullViewModel::onItemClick}"
+  >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_content_description"
