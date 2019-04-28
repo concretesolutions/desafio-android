@@ -16,7 +16,7 @@
       android:layout_margin="@dimen/space_card"
       android:background="@color/colorIcons"
       android:onClick="@{pullViewModel::onItemClick}"
-  >
+      android:baselineAligned="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_content_description"
@@ -51,7 +51,6 @@
           android:text="@{pullViewModel.mPullItem.body}"
           android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
           android:lines="2"
-          android:layout_marginLeft="@dimen/space_medium"
           android:layout_marginStart="@dimen/space_medium"
       />
 

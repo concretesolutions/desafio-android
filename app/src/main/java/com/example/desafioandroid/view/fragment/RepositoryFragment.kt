@@ -1,13 +1,10 @@
 package com.example.desafioandroid.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import androidx.core.view.isVisible
-import androidx.databinding.adapters.ViewGroupBindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -64,7 +61,7 @@ class RepositoryFragment : Fragment() {
 
             recycler_repository.addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener{
                 override fun onChildViewDetachedFromWindow(view: View) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    //TODO("not implemented") To change body of created functions use File | Settings | File Templates.
                 }
 
                 override fun onChildViewAttachedToWindow(view: View) {

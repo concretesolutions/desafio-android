@@ -49,11 +49,14 @@ class PullFragment : Fragment() {
     private fun observeLiveData() {
         //observe live data emitted by view model
         pullViewModel.fetchPullList().observe(this, Observer {
+            pull_progress.visibility =  pullViewModel.pullProgress.get()
+            recycler_pull.visibility = pullViewModel.recyclerPull.get()
 
             it?.let {
                 adapter.setPullList(it)
-                pull_progress.visibility =  View.GONE
-                recycler_pull.visibility = View.VISIBLE
+            }.also {
+                pull_textview.visibility = pullViewModel.visibilityLabel.get()
+                pull_textview.text = pullViewModel.messageLabel.get()
             }
         })
 

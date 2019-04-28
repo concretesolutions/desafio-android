@@ -4,36 +4,46 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
   <data>
-
     <variable
         name="fragmentPullViewModel"
         type="com.example.desafioandroid.viewModel.fragment.PullViewModel"/>
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:showIn="@layout/activity_main"
-    android:background="@color/colorIcons">
+      android:id="@+id/fragment_pull"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:showIn="@layout/activity_main"
+      android:background="@color/colorIcons">
+
     <ProgressBar
       android:id="@+id/pull_progress"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:visibility="@{fragmentPullViewModel.pullProcess}"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+      android:id="@+id/pull_textview"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      android:visibility="invisible"
+      android:gravity="center"/>
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recycler_pull"
       app:layout_constraintTop_toTopOf="parent"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:visibility="@{fragmentPullViewModel.recyclerPull}"
       tools:listitem="@layout/card_pull"
       android:background="@color/colorDivider"
-    />
+      android:visibility="invisible"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

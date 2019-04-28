@@ -18,12 +18,12 @@ class RepositoryPagination : PageKeyedDataSource<Int, RepositoryItem>(){
                 when{
                     response.isSuccessful-> {
                         val listing = response.body()!!.items
-                        callback.onResult(listing ?: listOf(),1, 2)
+                        callback.onResult(listing ?: listOf(),0, 2)
                     }else ->{
                         Log.e(TAG, "Failure")
                     }
                 }
-            }catch (exception : Exception){
+            }catch (exception : Throwable){
                 Log.e(TAG, "Failed to fetch data!")
             }
         }
@@ -38,7 +38,7 @@ class RepositoryPagination : PageKeyedDataSource<Int, RepositoryItem>(){
                         val listing = response.body()!!.items
                         val page = params.key + 1
                         Log.e(TAG,page.toString())
-                        callback.onResult(listing ?: listOf(), params.key+1)
+                        callback.onResult(listing ?: listOf(), page)
                     }
                 }
 
@@ -49,21 +49,22 @@ class RepositoryPagination : PageKeyedDataSource<Int, RepositoryItem>(){
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, RepositoryItem>) {
-        GlobalScope.launch {
-            try {
-                val response = apiService.getRepositories("language:Java","starts", params.key.toInt()).await()
-                when{
-                    response.isSuccessful -> {
-                        val listing = response.body()!!.items
-                        val page = params.key.toInt() - 1
-                        callback.onResult(listing ?: listOf(), page)
+        if (params.key != 0)
+            GlobalScope.launch {
+                try {
+                    val response = apiService.getRepositories("language:Java","starts", params.key).await()
+                    when{
+                        response.isSuccessful -> {
+                            val listing = response.body()!!.items
+                            val page = params.key.toInt() - 1
+                            callback.onResult(listing ?: listOf(), page)
+                        }
                     }
-                }
 
-            }catch (exception : Exception){
-                Log.e(TAG, "Failed to fetch data!")
+                }catch (exception : Exception){
+                    Log.e(TAG, "Failed to fetch data!")
+                }
             }
-        }
     }
 
 }
