@@ -46,18 +46,20 @@ class PullViewModel: ViewModel() {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 apiService.getPull(creator!!,nameRepository!!).await().let {
-                   if (it.errorBody() != null){
-                       pullProgress.set(View.INVISIBLE)
-                       recyclerPull.set(View.INVISIBLE)
-                       visibilityLabel.set(View.VISIBLE)
-                       messageLabel.set(it.errorBody().toString())
-                       pullListLiveData.value = null
-                   }else {
+
+                   if (it.isSuccessful){
                        pullProgress.set(View.INVISIBLE)
                        recyclerPull.set(View.VISIBLE)
                        visibilityLabel.set(View.INVISIBLE)
                        pullList = it.body()
                        pullListLiveData.value = it.body()
+
+                   }else {
+                       pullProgress.set(View.INVISIBLE)
+                       recyclerPull.set(View.INVISIBLE)
+                       visibilityLabel.set(View.VISIBLE)
+                       messageLabel.set(it.errorBody().toString())
+                       pullListLiveData.value = null
                    }
                 }
 
