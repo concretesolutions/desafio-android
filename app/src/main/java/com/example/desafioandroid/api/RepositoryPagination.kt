@@ -18,7 +18,7 @@ class RepositoryPagination : PageKeyedDataSource<Int, RepositoryItem>(){
                 when{
                     response.isSuccessful-> {
                         val listing = response.body()!!.items
-                        callback.onResult(listing ?: listOf(),0, 2)
+                        callback.onResult(listing ?: listOf(),null, 2)
 
                     }else ->{
                         Log.e(TAG, "Failure")
@@ -50,7 +50,6 @@ class RepositoryPagination : PageKeyedDataSource<Int, RepositoryItem>(){
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, RepositoryItem>) {
-        if (params.key != 0)
             GlobalScope.launch {
                 try {
                     val response = apiService.getRepositories("language:Java","starts", params.key).await()
