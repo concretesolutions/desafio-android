@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.desafioandroid.R
 import com.example.desafioandroid.view.fragment.RepositoryFragment
 import com.example.desafioandroid.viewModel.activity.MainActivityViewModel
-import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_main.*
 

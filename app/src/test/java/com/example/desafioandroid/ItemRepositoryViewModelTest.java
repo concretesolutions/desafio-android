@@ -19,21 +19,21 @@ import static org.mockito.Mockito.mock;
     private FragmentManager mockContext = mock(FragmentManager.class);
 
     @Test
-    public void shouldGetRepositoryFork() throws Exception {
+    public void shouldGetRepositoryFork() {
         RepositoryItem repository = new RepositoryItem();
         repository.setForksCount(REPOSITORY_FORK_TEST);
         ItemRepositoryViewModel itemrepositoryViewModel = new ItemRepositoryViewModel(repository, mockContext);
         assertEquals(repository.getForksCount().toString(), itemrepositoryViewModel.cantFork());
     }
 
-    @Test public void shouldGetRepositoryWatcher() throws Exception {
+    @Test public void shouldGetRepositoryWatcher() {
         RepositoryItem repository = new RepositoryItem();
         repository.setWatchersCount(REPOSITORY_WATCHER_TEST);
         ItemRepositoryViewModel itemrepositoryViewModel = new ItemRepositoryViewModel(repository, mockContext);
         assertEquals(repository.getWatchersCount().toString(), itemrepositoryViewModel.cantWatcher());
     }
 
-    @Test public void shouldGetRepositoryLike() throws Exception {
+    @Test public void shouldGetRepositoryLike() {
         RepositoryItem repository = new RepositoryItem();
         repository.setStargazersCount(REPOSITORY_LIKE_TEST);
         ItemRepositoryViewModel itemrepositoryViewModel = new ItemRepositoryViewModel(repository, mockContext);
