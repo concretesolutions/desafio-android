@@ -50,21 +50,8 @@ class RepositoryPagination : PageKeyedDataSource<Int, RepositoryItem>(){
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, RepositoryItem>) {
-            GlobalScope.launch {
-                try {
-                    val response = apiService.getRepositories("language:Java","starts", params.key).await()
-                    when{
-                        response.isSuccessful -> {
-                            val listing = response.body()!!.items
-                            val page = params.key.toInt() - 1
-                            callback.onResult(listing ?: listOf(), page)
-                        }
-                    }
+        //TODO("not implemented") To change body of created functions use File | Settings | File Templates.
 
-                }catch (exception : Exception){
-                    Log.e(TAG, "Failed to fetch data!")
-                }
-            }
     }
 
 }
