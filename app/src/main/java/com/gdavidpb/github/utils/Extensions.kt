@@ -90,7 +90,9 @@ fun View.onClickOnce(onClick: () -> Unit) {
 
 /* Parsing */
 
-private val defaultFormat = SimpleDateFormat("MM/dd/yyyy", Locale.US)
+private val ISO8601format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
 private val cacheFormat = hashMapOf<String, SimpleDateFormat>()
 
-fun Date.format(format: String) = cacheFormat.getOrPut(format, { defaultFormat }).format(this)
+fun String.parseISO8601() = ISO8601format.parse(this)
+
+fun Date.format(format: String) = cacheFormat.getOrPut(format, { ISO8601format }).format(this)
