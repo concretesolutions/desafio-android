@@ -9,11 +9,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.gdavidpb.github.domain.usecase.coroutines.Result
+import com.google.gson.internal.bind.util.ISO8601Utils
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
+import java.text.ParsePosition
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.resume
@@ -93,6 +95,7 @@ fun View.onClickOnce(onClick: () -> Unit) {
 private val ISO8601format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
 private val cacheFormat = hashMapOf<String, SimpleDateFormat>()
 
-fun String.parseISO8601() = ISO8601format.parse(this)
+fun String.parseISO8601() = ISO8601Utils.parse(this, ParsePosition(0))
+fun Date.toISO8601() = ISO8601Utils.format(this)
 
 fun Date.format(format: String) = cacheFormat.getOrPut(format, { ISO8601format }).format(this)

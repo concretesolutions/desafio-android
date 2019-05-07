@@ -1,6 +1,8 @@
 package com.gdavidpb.github
 
+import com.gdavidpb.github.data.model.api.UserEntry
 import com.gdavidpb.github.data.source.remote.GitHubApi
+import com.gdavidpb.github.domain.model.User
 import com.gdavidpb.github.utils.URL_BASE_GITHUB_API
 import okhttp3.OkHttpClient
 import org.koin.dsl.module.module
@@ -31,5 +33,25 @@ val testModule = module {
     single {
         get<Retrofit>()
             .create(GitHubApi::class.java) as GitHubApi
+    }
+
+    /* User for testing */
+
+    single {
+        User(
+            id = 1,
+            login = "sample",
+            url = "https://github.com",
+            avatarUrl = "https://github.com/favicon.ico"
+        )
+    }
+
+    single {
+        UserEntry(
+            id = 1,
+            login = "sample",
+            url = "https://github.com",
+            avatar_url = "https://github.com/favicon.ico"
+        )
     }
 }
