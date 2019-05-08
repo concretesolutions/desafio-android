@@ -3,6 +3,7 @@ package com.gdavidpb.github.data.model.api
 data class RepositoryEntry(
     val id: Long,
     val name: String,
+    val full_name: String,
     val url: String,
     val description: String,
     val owner: UserEntry,
