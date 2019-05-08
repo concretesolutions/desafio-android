@@ -16,9 +16,8 @@ interface GitHubApi {
         @Query("page") page: Int
     ): Call<SearchResultEntry<RepositoryEntry>>
 
-    @GET("repos/{owner}/{repository}/pulls")
+    @GET("repos/{repository}/pulls")
     fun getPulls(
-        @Path("owner") owner: String,
-        @Path("repository") repository: String
+        @Path("repository", encoded = true) repository: String
     ): Call<List<PullEntry>>
 }
