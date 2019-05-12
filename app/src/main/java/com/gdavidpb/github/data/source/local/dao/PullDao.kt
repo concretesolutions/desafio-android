@@ -12,5 +12,5 @@ interface PullDao {
     suspend fun getPulls(repository: String): List<PullEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun savePulls(vararg repositories: PullEntity)
+    suspend fun savePulls(vararg pulls: PullEntity)
 }

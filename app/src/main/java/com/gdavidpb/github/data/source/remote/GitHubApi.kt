@@ -18,6 +18,6 @@ interface GitHubApi {
 
     @GET("repos/{repository}/pulls")
     fun getPulls(
-        @Path("repository", encoded = true) repository: String
+        @Path("repository", encoded = true) repositoryName: String
     ): Call<List<PullEntry>>
 }

@@ -11,13 +11,14 @@ import com.gdavidpb.github.utils.TABLE_REPOSITORIES
 data class RepositoryEntity(
     @PrimaryKey val id: Long,
     val name: String,
+    val fullName: String,
     val url: String,
     val description: String,
     @Embedded val owner: EmbeddedUser,
+    val stargazersCount: Int,
     val watchersCount: Int,
     val openIssuesCount: Int,
     val forksCount: Int,
     val createdAt: Long,
-    val updatedAt: Long,
-    val page: Int
+    val updatedAt: Long
 )
