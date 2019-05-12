@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp16">
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7"/>
+
+    <TextView
+            android:id="@+id/tViewRepositoryName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            android:textColor="@color/colorAccent"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:maxLines="1"
+            tools:text="Repository Example"/>
+
+    <TextView
+            android:id="@+id/tViewRepositoryDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tViewRepositoryName"
+            android:ellipsize="end"
+            android:maxLines="3"
+            tools:text="This is a long description message this is a long description message his is a long description message his is a long description message"/>
+
+    <TextView
+            android:id="@+id/tViewRepositoryForkCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tViewRepositoryUserName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:drawableStart="@drawable/ic_fork"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorAccent"
+            tools:text="50"/>
+
+    <TextView
+            android:id="@+id/tViewRepositoryStarCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tViewRepositoryForkCount"
+            app:layout_constraintTop_toTopOf="@id/tViewRepositoryForkCount"
+            app:layout_constraintBottom_toBottomOf="@id/tViewRepositoryForkCount"
+            android:layout_marginStart="@dimen/dp16"
+            android:drawableStart="@drawable/ic_star"
+            android:drawablePadding="@dimen/dp4"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorAccent"
+            tools:text="34"/>
+
+    <TextView
+            android:id="@+id/tViewRepositoryIssueCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tViewRepositoryStarCount"
+            app:layout_constraintTop_toTopOf="@id/tViewRepositoryForkCount"
+            app:layout_constraintBottom_toBottomOf="@id/tViewRepositoryForkCount"
+            android:layout_marginStart="@dimen/dp16"
+            android:drawableStart="@drawable/ic_issue"
+            android:drawablePadding="@dimen/dp4"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorAccent"
+            tools:text="104"/>
+
+    <ImageView
+            android:id="@+id/iViewRepositoryUserAvatar"
+            android:layout_width="@dimen/size_large_avatar"
+            android:layout_height="@dimen/size_large_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tViewRepositoryDescription"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@mipmap/ic_launcher_round"
+            tools:ignore="ContentDescription"/>
+
+    <TextView
+            android:id="@+id/tViewRepositoryUserName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp8"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iViewRepositoryUserAvatar"
+            android:maxLines="2"
+            android:ellipsize="middle"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-medium"
+            tools:text="User Name Long Example"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

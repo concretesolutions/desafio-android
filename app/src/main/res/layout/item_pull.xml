@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp16">
+
+    <TextView
+            android:id="@+id/tViewPullName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/colorAccent"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:maxLines="1"
+            tools:text="Pull Example"/>
+
+    <TextView
+            android:id="@+id/tViewPullDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tViewPullName"
+            android:ellipsize="end"
+            android:maxLines="3"
+            tools:text="This is a long description message this is a long description message his is a long description message his is a long description message"/>
+
+    <ImageView
+            android:id="@+id/iViewPullUserAvatar"
+            android:layout_width="@dimen/size_small_avatar"
+            android:layout_height="@dimen/size_small_avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tViewPullDescription"
+            android:layout_marginTop="@dimen/dp8"
+            tools:src="@mipmap/ic_launcher_round"
+            tools:ignore="ContentDescription"/>
+
+    <TextView
+            android:id="@+id/tViewPullUserName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/iViewPullUserAvatar"
+            app:layout_constraintEnd_toStartOf="@id/tViewPullInfo"
+            app:layout_constraintTop_toTopOf="@id/iViewPullUserAvatar"
+            app:layout_constraintBottom_toBottomOf="@id/iViewPullUserAvatar"
+            android:layout_marginStart="@dimen/dp8"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            tools:text="User Name Long Example"/>
+
+    <TextView
+            android:id="@+id/tViewPullInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tViewPullUserName"
+            app:layout_constraintBottom_toBottomOf="@id/tViewPullUserName"
+            app:layout_constraintStart_toEndOf="@id/tViewPullUserName"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp8"
+            android:maxLines="1"
+            tools:text="#123 opened on 23 Apr"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
