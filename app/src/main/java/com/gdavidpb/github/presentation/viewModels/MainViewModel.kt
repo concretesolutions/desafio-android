@@ -7,6 +7,8 @@ import com.gdavidpb.github.presentation.model.RepositoryItem
 import com.gdavidpb.github.ui.pagging.RepositoryBoundaryCallback
 
 open class MainViewModel(
-    val boundaryCallback: RepositoryBoundaryCallback,
+    boundaryCallback: RepositoryBoundaryCallback,
     val pagedRepositories: LiveData<PagedList<RepositoryItem>>
-) : ViewModel()
+) : ViewModel() {
+    val fetchRepositories = boundaryCallback.fetchLiveData
+}

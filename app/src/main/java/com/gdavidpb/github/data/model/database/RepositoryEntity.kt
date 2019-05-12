@@ -20,5 +20,6 @@ data class RepositoryEntity(
     val openIssuesCount: Int,
     val forksCount: Int,
     val createdAt: Long,
-    val updatedAt: Long
+    val updatedAt: Long,
+    val page: Int
 )

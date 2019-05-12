@@ -17,12 +17,6 @@ open class GitHubDataRepository(
         }
     }
 
-    override suspend fun getRepositoriesCount(): Long {
-        val cache = factory.retrieveCacheDataStore()
-
-        return cache.getRepositoriesCount()
-    }
-
     override suspend fun getPulls(repository: String): List<Pull> {
         val cache = factory.retrieveCacheDataStore()
 

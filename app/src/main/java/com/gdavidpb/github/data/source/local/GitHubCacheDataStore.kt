@@ -13,10 +13,6 @@ open class GitHubCacheDataStore(
     override suspend fun getRepositories(page: Int) =
         throw UnsupportedOperationException()
 
-    override suspend fun getRepositoriesCount(): Long {
-        return gitHubDatabase.repositories.getRepositoriesCount()
-    }
-
     override suspend fun getPulls(repository: String): List<Pull> {
         return gitHubDatabase.pulls
             .getPulls(repository)

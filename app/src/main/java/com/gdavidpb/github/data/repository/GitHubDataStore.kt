@@ -6,8 +6,6 @@ import com.gdavidpb.github.domain.model.SearchResult
 
 interface GitHubDataStore {
     suspend fun getRepositories(page: Int): SearchResult<Repository>
-    suspend fun getRepositoriesCount(): Long
-
     suspend fun getPulls(repository: String): List<Pull>
 
     suspend fun saveRepositories(repositories: List<Repository>)

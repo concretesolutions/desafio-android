@@ -66,10 +66,11 @@ class MappersTest : KoinTest {
             openIssuesCount = 1,
             forksCount = 1,
             createdAt = Date(0),
-            updatedAt = Date(0)
+            updatedAt = Date(0),
+            page = 1
         )
 
-        val mappedRepository = apiRepository.toRepository()
+        val mappedRepository = apiRepository.toRepository(1)
 
         assertEquals(domainRepository, mappedRepository)
     }
@@ -134,7 +135,8 @@ class MappersTest : KoinTest {
             openIssuesCount = 1,
             forksCount = 1,
             createdAt = Date(0),
-            updatedAt = Date(0)
+            updatedAt = Date(0),
+            page = 1
         )
 
         val apiSearchResult = SearchResultEntry(
@@ -153,7 +155,7 @@ class MappersTest : KoinTest {
             )
         )
 
-        val mappedSearchResult = apiSearchResult.toRepositorySearchResult()
+        val mappedSearchResult = apiSearchResult.toRepositorySearchResult(1)
 
         assertEquals(domainSearchResult, mappedSearchResult)
     }

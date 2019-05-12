@@ -11,14 +11,10 @@ open class GitHubRemoteDataStore(
     private val gitHubApi: GitHubApi
 ) : GitHubDataStore {
     override suspend fun getRepositories(page: Int) =
-        gitHubApi.getRepositories(page = page).await()!!.toRepositorySearchResult()
+        gitHubApi.getRepositories(page = page).await()!!.toRepositorySearchResult(page)
 
     override suspend fun getPulls(repository: String) =
         gitHubApi.getPulls(repository).await()!!.map { it.toPull() }
-
-    override suspend fun getRepositoriesCount(): Long {
-        return gitHubApi.getRepositories(page = 1).await()!!.total_count
-    }
 
     override suspend fun saveRepositories(repositories: List<Repository>) =
         throw UnsupportedOperationException()

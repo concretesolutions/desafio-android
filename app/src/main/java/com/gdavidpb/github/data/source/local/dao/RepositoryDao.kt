@@ -12,9 +12,6 @@ interface RepositoryDao {
     @Query("SELECT * FROM repositories ORDER BY stargazersCount DESC")
     fun browse(): DataSource.Factory<Int, RepositoryEntity>
 
-    @Query("SELECT COUNT(*) FROM repositories")
-    suspend fun getRepositoriesCount(): Long
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveRepositories(vararg repositories: RepositoryEntity)
 }

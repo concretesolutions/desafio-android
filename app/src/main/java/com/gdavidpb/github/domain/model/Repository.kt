@@ -14,5 +14,6 @@ data class Repository(
     val openIssuesCount: Int,
     val forksCount: Int,
     val createdAt: Date,
-    val updatedAt: Date
+    val updatedAt: Date,
+    val page: Int
 )

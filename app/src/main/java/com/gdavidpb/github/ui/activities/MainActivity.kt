@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         with(viewModel) {
-            observe(boundaryCallback.fetchLiveData, ::fetchObserver)
+            observe(fetchRepositories, ::fetchObserver)
             observe(pagedRepositories, ::repositoriesObserver)
         }
     }

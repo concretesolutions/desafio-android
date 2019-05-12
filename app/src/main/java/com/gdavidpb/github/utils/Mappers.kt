@@ -24,7 +24,7 @@ fun UserEntry.toUser() = User(
     avatarUrl = avatar_url ?: ""
 )
 
-fun RepositoryEntry.toRepository() = Repository(
+fun RepositoryEntry.toRepository(page: Int) = Repository(
     id = id,
     name = name,
     fullName = full_name,
@@ -36,7 +36,8 @@ fun RepositoryEntry.toRepository() = Repository(
     openIssuesCount = open_issues_count,
     forksCount = forks_count,
     createdAt = created_at.parseISO8601(),
-    updatedAt = updated_at.parseISO8601()
+    updatedAt = updated_at.parseISO8601(),
+    page = page
 )
 
 fun PullEntry.toPull() = Pull(
@@ -52,10 +53,10 @@ fun PullEntry.toPull() = Pull(
     mergedAt = merged_at?.parseISO8601() ?: Date(-1)
 )
 
-fun SearchResultEntry<RepositoryEntry>.toRepositorySearchResult() = SearchResult(
+fun SearchResultEntry<RepositoryEntry>.toRepositorySearchResult(page: Int) = SearchResult(
     totalCount = total_count,
     incompleteResults = incomplete_results,
-    items = items.map { it.toRepository() }
+    items = items.map { it.toRepository(page) }
 )
 
 /* From database to domain model */
@@ -101,7 +102,8 @@ fun Repository.toRepositoryEntity() = RepositoryEntity(
     openIssuesCount = openIssuesCount,
     forksCount = forksCount,
     createdAt = createdAt.time,
-    updatedAt = updatedAt.time
+    updatedAt = updatedAt.time,
+    page = page
 )
 
 fun Pull.toPullEntity(repository: String) = PullEntity(
@@ -134,7 +136,8 @@ fun RepositoryEntity.toRepositoryItem() = RepositoryItem(
     openIssuesCount = openIssuesCount.readableFormat(),
     forksCount = forksCount.readableFormat(),
     createdAt = Date(createdAt).format("d MMM yyyy"),
-    updatedAt = Date(updatedAt).format("d MMM yyyy")
+    updatedAt = Date(updatedAt).format("d MMM yyyy"),
+    page = page
 )
 
 /* From domain to presentation model */

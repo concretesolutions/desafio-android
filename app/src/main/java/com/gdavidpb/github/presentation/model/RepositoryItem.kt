@@ -14,5 +14,6 @@ data class RepositoryItem(
     val openIssuesCount: String,
     val forksCount: String,
     val createdAt: String,
-    val updatedAt: String
+    val updatedAt: String,
+    val page: Int
 )
