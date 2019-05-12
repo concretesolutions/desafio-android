@@ -4,27 +4,34 @@ import com.gdavidpb.github.data.model.api.PullEntry
 import com.gdavidpb.github.data.model.api.RepositoryEntry
 import com.gdavidpb.github.data.model.api.SearchResultEntry
 import com.gdavidpb.github.data.model.api.UserEntry
+import com.gdavidpb.github.data.model.database.EmbeddedUser
+import com.gdavidpb.github.data.model.database.PullEntity
+import com.gdavidpb.github.data.model.database.RepositoryEntity
 import com.gdavidpb.github.domain.model.Pull
 import com.gdavidpb.github.domain.model.Repository
 import com.gdavidpb.github.domain.model.SearchResult
 import com.gdavidpb.github.domain.model.User
+import com.gdavidpb.github.presentation.model.PullItem
+import com.gdavidpb.github.presentation.model.RepositoryItem
 import java.util.*
 
-/* From api (data layer) to domain layer */
+/* From api to domain model */
 
 fun UserEntry.toUser() = User(
     id = id,
     login = login,
-    url = url,
+    url = html_url,
     avatarUrl = avatar_url ?: ""
 )
 
 fun RepositoryEntry.toRepository() = Repository(
     id = id,
     name = name,
+    fullName = full_name,
     url = url,
     description = description,
     owner = owner.toUser(),
+    stargazersCount = stargazers_count,
     watchersCount = watchers_count,
     openIssuesCount = open_issues_count,
     forksCount = forks_count,
@@ -37,7 +44,7 @@ fun PullEntry.toPull() = Pull(
     title = title,
     body = body,
     number = number,
-    url = url,
+    url = html_url,
     user = user.toUser(),
     createdAt = created_at.parseISO8601(),
     updatedAt = updated_at.parseISO8601(),
@@ -45,8 +52,104 @@ fun PullEntry.toPull() = Pull(
     mergedAt = merged_at?.parseISO8601() ?: Date(-1)
 )
 
-fun SearchResultEntry<RepositoryEntry>.toRepositorySearchResult() = SearchResult<Repository>(
+fun SearchResultEntry<RepositoryEntry>.toRepositorySearchResult() = SearchResult(
     totalCount = total_count,
     incompleteResults = incomplete_results,
     items = items.map { it.toRepository() }
+)
+
+/* From database to domain model */
+
+fun EmbeddedUser.toUser() = User(
+    id = id,
+    login = login,
+    url = url,
+    avatarUrl = avatarUrl
+)
+
+fun PullEntity.toPull() = Pull(
+    id = id,
+    title = title,
+    body = body,
+    number = number,
+    url = url,
+    user = user.toUser(),
+    createdAt = Date(createdAt),
+    updatedAt = Date(updatedAt),
+    closedAt = Date(closedAt),
+    mergedAt = Date(mergedAt)
+)
+
+/* From domain to database model */
+
+fun User.toEmbeddedUser() = EmbeddedUser(
+    id = id,
+    login = login,
+    url = url,
+    avatarUrl = avatarUrl
+)
+
+fun Repository.toRepositoryEntity() = RepositoryEntity(
+    id = id,
+    name = name,
+    fullName = fullName,
+    url = url,
+    description = description,
+    owner = owner.toEmbeddedUser(),
+    stargazersCount = stargazersCount,
+    watchersCount = watchersCount,
+    openIssuesCount = openIssuesCount,
+    forksCount = forksCount,
+    createdAt = createdAt.time,
+    updatedAt = updatedAt.time
+)
+
+fun Pull.toPullEntity(repository: String) = PullEntity(
+    id = id,
+    repository = repository,
+    title = title,
+    body = body,
+    number = number,
+    url = url,
+    user = user.toEmbeddedUser(),
+    createdAt = createdAt.time,
+    updatedAt = updatedAt.time,
+    closedAt = closedAt.time,
+    mergedAt = mergedAt.time
+)
+
+/* From database to presentation model */
+
+fun RepositoryEntity.toRepositoryItem() = RepositoryItem(
+    id = id,
+    name = name,
+    fullName = fullName,
+    url = url,
+    description = description,
+    userLogin = owner.login,
+    userUrl = owner.url,
+    userAvatarUrl = owner.avatarUrl,
+    stargazersCount = stargazersCount.readableFormat(),
+    watchersCount = watchersCount.readableFormat(),
+    openIssuesCount = openIssuesCount.readableFormat(),
+    forksCount = forksCount.readableFormat(),
+    createdAt = Date(createdAt).format("dd MMM yyyy"),
+    updatedAt = Date(updatedAt).format("dd MMM yyyy")
+)
+
+/* From domain to presentation model */
+
+fun Pull.toPullItem() = PullItem(
+    id = id,
+    title = title,
+    body = body,
+    number = number,
+    url = url,
+    userLogin = user.login,
+    userUrl = user.url,
+    userAvatarUrl = user.avatarUrl,
+    createdAt = createdAt.format("dd MMM yyyy"),
+    updatedAt = updatedAt.format("dd MMM yyyy"),
+    closedAt = closedAt.format("dd MMM yyyy"),
+    mergedAt = mergedAt.format("dd MMM yyyy")
 )

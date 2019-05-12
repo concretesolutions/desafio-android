@@ -2,18 +2,34 @@ package com.gdavidpb.github.di
 
 import android.content.Context
 import android.net.ConnectivityManager
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import androidx.room.Room
+import com.gdavidpb.github.data.source.GitHubDataRepository
+import com.gdavidpb.github.data.source.GitHubDataStoreFactory
+import com.gdavidpb.github.data.source.local.GitHubCacheDataStore
 import com.gdavidpb.github.data.source.local.GitHubDatabase
 import com.gdavidpb.github.data.source.remote.GitHubApi
+import com.gdavidpb.github.data.source.remote.GitHubRemoteDataStore
+import com.gdavidpb.github.domain.repository.VCSRepository
+import com.gdavidpb.github.domain.usecase.FetchRepositoriesUseCase
+import com.gdavidpb.github.domain.usecase.GetPullsUseCase
+import com.gdavidpb.github.presentation.model.RepositoryItem
 import com.gdavidpb.github.presentation.viewModels.MainViewModel
-import com.gdavidpb.github.presentation.viewModels.PullViewModel
-import com.gdavidpb.github.utils.DATABASE_NAME
-import com.gdavidpb.github.utils.URL_BASE_GITHUB_API
+import com.gdavidpb.github.presentation.viewModels.PullsViewModel
+import com.gdavidpb.github.ui.adapters.PagedRepositoryAdapter
+import com.gdavidpb.github.ui.adapters.PullAdapter
+import com.gdavidpb.github.ui.pagging.RepositoryBoundaryCallback
+import com.gdavidpb.github.utils.*
 import com.squareup.picasso.Picasso
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.experimental.builder.viewModel
 import org.koin.dsl.module.module
+import org.koin.experimental.builder.factory
+import org.koin.experimental.builder.factoryBy
+import org.koin.experimental.builder.single
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -45,6 +61,11 @@ val appModule = module {
             .build()
     }
 
+    single {
+        get<Retrofit>()
+            .create(GitHubApi::class.java) as GitHubApi
+    }
+
     /* Database */
 
     single {
@@ -55,10 +76,31 @@ val appModule = module {
         ).build()
     }
 
+    /* Paging */
+
     single {
-        get<Retrofit>()
-            .create(GitHubApi::class.java) as GitHubApi
+        get<GitHubDatabase>()
+            .repositories
+            .browse()
+            .map { it.toRepositoryItem() }
     }
+
+    single {
+        PagedList.Config.Builder()
+            .setPageSize(PAGE_SIZE)
+            .build()
+    }
+
+    single {
+        LivePagedListBuilder(get<DataSource.Factory<Int, RepositoryItem>>(), get<PagedList.Config>())
+            .setBoundaryCallback(get<RepositoryBoundaryCallback>())
+            .setInitialLoadKey(1)
+            .build()
+    }
+
+    single<RepositoryBoundaryCallback>()
+
+    factory<LiveCompletable>()
 
     /* Picasso */
 
@@ -69,10 +111,33 @@ val appModule = module {
     /* View models */
 
     viewModel<MainViewModel>()
-    viewModel<PullViewModel>()
+    viewModel<PullsViewModel>()
 
     /* Use cases */
 
-    /* Factories */
+    factory<FetchRepositoriesUseCase>()
+    factory<GetPullsUseCase>()
 
+    /* Repositories */
+
+    factoryBy<VCSRepository, GitHubDataRepository>()
+
+    /* Data stores */
+
+    factory<GitHubCacheDataStore>()
+    factory<GitHubRemoteDataStore>()
+
+    /* Factory */
+
+    factory<GitHubDataStoreFactory>()
+
+    /* Adapters */
+
+    factory { (callback: PagedRepositoryAdapter.AdapterCallback) ->
+        PagedRepositoryAdapter(callback)
+    }
+
+    factory { (callback: PullAdapter.AdapterCallback) ->
+        PullAdapter(callback)
+    }
 }

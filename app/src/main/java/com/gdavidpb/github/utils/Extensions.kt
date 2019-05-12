@@ -1,13 +1,13 @@
 package com.gdavidpb.github.utils
 
 import android.net.ConnectivityManager
+import android.util.SparseArray
 import android.view.View
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.gdavidpb.github.domain.usecase.coroutines.Completable
 import com.gdavidpb.github.domain.usecase.coroutines.Result
 import com.google.gson.internal.bind.util.ISO8601Utils
 import kotlinx.coroutines.*
@@ -29,22 +29,41 @@ fun ConnectivityManager.isNetworkAvailable() = activeNetworkInfo?.isConnected ==
 /* Live data */
 
 typealias LiveResult<T> = MutableLiveData<Result<T>>
+typealias LiveCompletable = MutableLiveData<Completable>
 
 /* LiveResult */
 
+@JvmName("postCompleteResult")
 fun <T> LiveResult<T>.postSuccess(value: T) = postValue(Result.OnSuccess(value))
+
+@JvmName("postThrowableResult")
 fun <T> LiveResult<T>.postThrowable(throwable: Throwable) = postValue(Result.OnError(throwable))
+
+@JvmName("postLoadingResult")
 fun <T> LiveResult<T>.postLoading() = postValue(Result.OnLoading())
+
+@JvmName("postCancelResult")
 fun <T> LiveResult<T>.postCancel() = postValue(Result.OnCancel())
+
+@JvmName("postEmptyResult")
 fun <T> LiveResult<T>.postEmpty() = postValue(Result.OnEmpty())
+
+@JvmName("postCompleteCompletable")
+fun LiveCompletable.postComplete() = postValue(Completable.OnComplete)
+
+@JvmName("postThrowableCompletable")
+fun LiveCompletable.postThrowable(throwable: Throwable) = postValue(Completable.OnError(throwable))
+
+@JvmName("postLoadingCompletable")
+fun LiveCompletable.postLoading() = postValue(Completable.OnLoading)
+
+@JvmName("postCancelCompletable")
+fun LiveCompletable.postCancel() = postValue(Completable.OnCancel)
 
 /* Observers */
 
 fun <T, L : LiveData<T>> FragmentActivity.observe(liveData: L, body: (T?) -> Unit) =
     liveData.observe(this, Observer(body))
-
-fun <T, L : LiveData<T>> Fragment.observe(liveData: L, body: (T?) -> Unit) =
-    liveData.observe(viewLifecycleOwner, Observer(body))
 
 /* Coroutines */
 
@@ -64,13 +83,6 @@ suspend fun <T> Call<T>.await() = suspendCoroutine<T?> { continuation ->
 }
 
 /* View */
-
-fun TextView.drawables(
-    left: Int = 0,
-    top: Int = 0,
-    right: Int = 0,
-    bottom: Int = 0
-) = setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
 
 fun View.onClickOnce(onClick: () -> Unit) {
     setOnClickListener(object : View.OnClickListener {
@@ -92,10 +104,24 @@ fun View.onClickOnce(onClick: () -> Unit) {
 
 /* Parsing */
 
-private val ISO8601format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
-private val cacheFormat = hashMapOf<String, SimpleDateFormat>()
+private val cacheFormat = SparseArray<SimpleDateFormat>()
 
-fun String.parseISO8601() = ISO8601Utils.parse(this, ParsePosition(0))
-fun Date.toISO8601() = ISO8601Utils.format(this)
+fun Int.readableFormat() = when {
+    this < 1000 -> "$this"
+    this < 1000000 -> String.format("%dk", this / 1000)
+    else -> String.format("%.2fM", this / 1000000f)
+}
 
-fun Date.format(format: String) = cacheFormat.getOrPut(format, { ISO8601format }).format(this)
+fun String.parseISO8601(): Date = ISO8601Utils.parse(this, ParsePosition(0))
+
+fun Date.toISO8601(): String = ISO8601Utils.format(this)
+
+fun Date.format(format: String): String {
+    if (time == -1L) return "-"
+
+    val key = format.hashCode()
+
+    return (cacheFormat.get(key) ?: SimpleDateFormat(format, Locale.US).also {
+        cacheFormat.put(key, it)
+    }).format(this)
+}
