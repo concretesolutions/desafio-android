@@ -50,7 +50,7 @@ val testModule = module {
         UserEntry(
             id = 1,
             login = "sample",
-            url = "https://github.com",
+            html_url = "https://github.com",
             avatar_url = "https://github.com/favicon.ico"
         )
     }

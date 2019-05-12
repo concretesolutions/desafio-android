@@ -1,11 +1,11 @@
 package com.gdavidpb.github.data.model.api
 
 data class RepositoryEntry(
-    val id: Long,
+    val id: String,
     val name: String,
     val full_name: String,
     val url: String,
-    val description: String,
+    val description: String?,
     val owner: UserEntry,
     val stargazers_count: Int,
     val watchers_count: Int,

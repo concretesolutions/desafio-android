@@ -3,7 +3,7 @@ package com.gdavidpb.github.domain.model
 import java.util.*
 
 data class Repository(
-    val id: Long,
+    val id: String,
     val name: String,
     val fullName: String,
     val url: String,

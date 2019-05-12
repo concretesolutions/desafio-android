@@ -1,7 +1,7 @@
 package com.gdavidpb.github.presentation.model
 
 data class PullItem(
-    val id: Long,
+    val id: String,
     val title: String,
     val body: String,
     val number: Int,

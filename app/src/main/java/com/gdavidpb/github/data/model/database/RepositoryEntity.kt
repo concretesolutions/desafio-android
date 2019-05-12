@@ -9,7 +9,7 @@ import com.gdavidpb.github.utils.TABLE_REPOSITORIES
     tableName = TABLE_REPOSITORIES
 )
 data class RepositoryEntity(
-    @PrimaryKey val id: Long,
+    @PrimaryKey val id: String,
     val name: String,
     val fullName: String,
     val url: String,

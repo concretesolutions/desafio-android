@@ -29,7 +29,7 @@ fun RepositoryEntry.toRepository() = Repository(
     name = name,
     fullName = full_name,
     url = url,
-    description = description,
+    description = description ?: "",
     owner = owner.toUser(),
     stargazersCount = stargazers_count,
     watchersCount = watchers_count,
@@ -40,9 +40,9 @@ fun RepositoryEntry.toRepository() = Repository(
 )
 
 fun PullEntry.toPull() = Pull(
-    id = id,
+    id = node_id,
     title = title,
-    body = body,
+    body = body ?: "",
     number = number,
     url = html_url,
     user = user.toUser(),
@@ -133,8 +133,8 @@ fun RepositoryEntity.toRepositoryItem() = RepositoryItem(
     watchersCount = watchersCount.readableFormat(),
     openIssuesCount = openIssuesCount.readableFormat(),
     forksCount = forksCount.readableFormat(),
-    createdAt = Date(createdAt).format("dd MMM yyyy"),
-    updatedAt = Date(updatedAt).format("dd MMM yyyy")
+    createdAt = Date(createdAt).format("d MMM yyyy"),
+    updatedAt = Date(updatedAt).format("d MMM yyyy")
 )
 
 /* From domain to presentation model */
@@ -148,8 +148,8 @@ fun Pull.toPullItem() = PullItem(
     userLogin = user.login,
     userUrl = user.url,
     userAvatarUrl = user.avatarUrl,
-    createdAt = createdAt.format("dd MMM yyyy"),
-    updatedAt = updatedAt.format("dd MMM yyyy"),
-    closedAt = closedAt.format("dd MMM yyyy"),
-    mergedAt = mergedAt.format("dd MMM yyyy")
+    createdAt = createdAt.format("d MMM yyyy"),
+    updatedAt = updatedAt.format("d MMM yyyy"),
+    closedAt = closedAt.format("d MMM yyyy"),
+    mergedAt = mergedAt.format("d MMM yyyy")
 )

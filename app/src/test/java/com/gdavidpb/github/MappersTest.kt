@@ -40,7 +40,7 @@ class MappersTest : KoinTest {
     @Test
     fun `should map repository model from api to domain`() {
         val apiRepository = RepositoryEntry(
-            id = 1,
+            id = "123",
             name = "sample",
             url = "https://github.com",
             description = "description",
@@ -55,7 +55,7 @@ class MappersTest : KoinTest {
         )
 
         val domainRepository = Repository(
-            id = 1,
+            id = "123",
             name = "sample",
             url = "https://github.com",
             description = "description",
@@ -77,7 +77,7 @@ class MappersTest : KoinTest {
     @Test
     fun `should map pull model from api to domain`() {
         val apiPull = PullEntry(
-            id = 1,
+            node_id = "123",
             title = "title",
             body = "body",
             number = 1,
@@ -90,7 +90,7 @@ class MappersTest : KoinTest {
         )
 
         val domainPull = Pull(
-            id = 1,
+            id = "123",
             title = "title",
             body = "body",
             number = 1,
@@ -108,7 +108,7 @@ class MappersTest : KoinTest {
     @Test
     fun `should map search result model from api to domain`() {
         val apiRepository = RepositoryEntry(
-            id = 1,
+            id = "123",
             name = "sample",
             url = "https://github.com",
             description = "description",
@@ -123,7 +123,7 @@ class MappersTest : KoinTest {
         )
 
         val domainRepository = Repository(
-            id = 1,
+            id = "123",
             name = "sample",
             fullName = "${domainUser.login}/sample",
             url = "https://github.com",

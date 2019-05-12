@@ -6,4 +6,4 @@ const val EXTRA_NAME = "EXTRA_NAME"
 const val EXTRA_URL = "EXTRA_URL"
 const val EXTRA_TITLE = "EXTRA_TITLE"
 
-const val PAGE_SIZE = 30
+const val SIZE_PAGE = 30

@@ -9,7 +9,7 @@ import com.gdavidpb.github.utils.TABLE_PULLS
     tableName = TABLE_PULLS
 )
 data class PullEntity(
-    @PrimaryKey val id: Long,
+    @PrimaryKey val id: String,
     val repository: String,
     val title: String,
     val body: String,

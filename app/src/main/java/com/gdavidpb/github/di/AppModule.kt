@@ -87,7 +87,7 @@ val appModule = module {
 
     single {
         PagedList.Config.Builder()
-            .setPageSize(PAGE_SIZE)
+            .setPageSize(SIZE_PAGE)
             .build()
     }
 

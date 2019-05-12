@@ -11,6 +11,6 @@ open class PullsViewModel(
     val pulls = LiveResult<List<Pull>>()
 
     fun getPulls(repository: String) {
-        getPullsUseCase.execute(liveData = pulls, params = repository)
+        getPullsUseCase.enqueue(liveData = pulls, params = repository)
     }
 }

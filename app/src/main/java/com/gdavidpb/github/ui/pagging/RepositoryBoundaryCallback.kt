@@ -13,5 +13,5 @@ open class RepositoryBoundaryCallback(
 
     override fun onZeroItemsLoaded() = fetchRepositories()
 
-    private fun fetchRepositories() = fetchRepositoriesUseCase.execute(liveData = fetchLiveData, params = Unit)
+    private fun fetchRepositories() = fetchRepositoriesUseCase.enqueue(liveData = fetchLiveData, params = Unit)
 }

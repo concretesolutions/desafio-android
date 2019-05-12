@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gdavidpb.github.ui.viewholders.BaseViewHolder
 
 abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T>>() {
-    protected val items = mutableListOf<T>()
+    private val items = mutableListOf<T>()
 
     override fun getItemCount() = items.size
 

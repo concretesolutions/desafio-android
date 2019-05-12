@@ -3,7 +3,7 @@ package com.gdavidpb.github.domain.model
 import java.util.*
 
 data class Pull(
-    val id: Long,
+    val id: String,
     val title: String,
     val body: String,
     val number: Int,

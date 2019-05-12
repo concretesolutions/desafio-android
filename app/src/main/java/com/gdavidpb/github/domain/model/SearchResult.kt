@@ -4,6 +4,4 @@ data class SearchResult<T>(
     val totalCount: Long,
     val incompleteResults: Boolean,
     val items: List<T>
-) {
-    fun isNotEmpty() = items.isNotEmpty()
-}
+)

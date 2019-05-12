@@ -1,7 +1,7 @@
 package com.gdavidpb.github.presentation.model
 
 data class RepositoryItem(
-    val id: Long,
+    val id: String,
     val name: String,
     val fullName: String,
     val url: String,

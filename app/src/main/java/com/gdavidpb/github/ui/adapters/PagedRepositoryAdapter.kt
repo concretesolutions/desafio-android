@@ -27,7 +27,7 @@ open class PagedRepositoryAdapter(
     }
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
-        val item = currentList?.get(position) ?: return
+        val item = getItem(position) ?: return
 
         holder.bindView(item)
     }

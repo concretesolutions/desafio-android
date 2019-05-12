@@ -1,9 +1,9 @@
 package com.gdavidpb.github.data.model.api
 
 data class PullEntry(
-    val id: Long,
+    val node_id: String,
     val title: String,
-    val body: String,
+    val body: String?,
     val number: Int,
     val html_url: String,
     val user: UserEntry,
