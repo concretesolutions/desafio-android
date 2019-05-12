@@ -16,7 +16,7 @@ abstract class CompletableUseCase<Q>(
     protected abstract suspend fun executeOnBackground(params: Q)
 
     override fun execute(liveData: LiveCompletable, params: Q) {
-        CoroutineScope(foregroundContext + newJob()).launch {
+        CoroutineScope(foregroundContext).launch {
             liveData.postLoading()
 
             runCatching {

@@ -16,7 +16,7 @@ abstract class ResultUseCase<Q, T>(
     protected abstract suspend fun executeOnBackground(params: Q): T?
 
     override fun execute(liveData: LiveResult<T>, params: Q) {
-        CoroutineScope(foregroundContext + newJob()).launch {
+        CoroutineScope(foregroundContext).launch {
             liveData.postLoading()
 
             runCatching {

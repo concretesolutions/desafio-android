@@ -2,7 +2,7 @@ package com.gdavidpb.github.domain.usecase
 
 import com.gdavidpb.github.domain.repository.VCSRepository
 import com.gdavidpb.github.domain.usecase.coroutines.CompletableUseCase
-import com.gdavidpb.github.utils.PAGE_SIZE
+import com.gdavidpb.github.utils.SIZE_PAGE
 import kotlinx.coroutines.Dispatchers
 
 open class FetchRepositoriesUseCase(
@@ -13,7 +13,7 @@ open class FetchRepositoriesUseCase(
 ) {
     override suspend fun executeOnBackground(params: Unit) {
         val localCount = vcsRepository.getRepositoriesCount()
-        val currentPage = (localCount / PAGE_SIZE).toInt()
+        val currentPage = (localCount / SIZE_PAGE).toInt()
         val nextPage = currentPage + 1
 
         vcsRepository.getRepositories(nextPage)
