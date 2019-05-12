@@ -46,7 +46,7 @@ class GitHubApiTest : KoinTest {
         Assert.assertNotNull(firstRepository); requireNotNull(firstRepository)
 
         val pulls = runBlocking {
-            api.getPulls(repository = firstRepository.full_name).await()
+            api.getPulls(repositoryName = firstRepository.full_name).await()
         }
 
         Assert.assertNotNull(pulls); requireNotNull(pulls)
