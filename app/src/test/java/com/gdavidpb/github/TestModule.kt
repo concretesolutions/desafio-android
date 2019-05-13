@@ -1,6 +1,7 @@
 package com.gdavidpb.github
 
 import com.gdavidpb.github.data.model.api.UserEntry
+import com.gdavidpb.github.data.model.database.EmbeddedUser
 import com.gdavidpb.github.data.source.remote.GitHubApi
 import com.gdavidpb.github.domain.model.User
 import com.gdavidpb.github.utils.URL_BASE_GITHUB_API
@@ -52,6 +53,15 @@ val testModule = module {
             login = "sample",
             html_url = "https://github.com",
             avatar_url = "https://github.com/favicon.ico"
+        )
+    }
+
+    single {
+        EmbeddedUser(
+            id = 1,
+            login = "sample",
+            url = "https://github.com",
+            avatarUrl = "https://github.com/favicon.ico"
         )
     }
 }
