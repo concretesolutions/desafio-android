@@ -1,15 +1,9 @@
 package com.uharris.desafio_android.presentation.sections.main
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.uharris.desafio_android.R
 import com.uharris.desafio_android.domain.models.Repository
 import com.uharris.desafio_android.presentation.base.BaseActivity
@@ -65,7 +59,11 @@ class MainActivity : BaseActivity() {
         }
         repositoryRecyclerView.adapter = adapter
         repositoryRecyclerView.clearOnScrollListeners()
-        repositoryRecyclerView.addOnScrollListener(EndlessScrollListener({ mainViewModel.fetchRepositories(++page) }, linearLayout))
+        repositoryRecyclerView.addOnScrollListener(EndlessScrollListener({
+            mainViewModel.fetchRepositories(
+                ++page
+            )
+        }, linearLayout))
     }
 
     private fun handleDataState(resource: Resource<List<Repository>>) {
