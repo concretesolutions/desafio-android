@@ -46,17 +46,21 @@ class MainActivity : BaseActivity() {
             handleDataState(it)
         })
 
-        setupUI()
+        if (savedInstanceState != null) {
+            page = savedInstanceState.getInt(STATE_PAGE, 0)
+            val list = savedInstanceState.getParcelableArrayList<Repository>(STATE_LIST)
+            setupUI(list ?: ArrayList())
+        } else {
+            setupUI(ArrayList())
 
-        mainViewModel.fetchRepositories(page)
-
-
+            mainViewModel.fetchRepositories(page)
+        }
     }
 
-    private fun setupUI() {
+    private fun setupUI(items: ArrayList<Repository>) {
         val linearLayout = LinearLayoutManager(this)
         repositoryRecyclerView.layoutManager = linearLayout
-        adapter = MainAdapter(mutableListOf()) { repository ->
+        adapter = MainAdapter(items) { repository ->
             PullRequestActivity.startActivity(this, repository)
         }
         repositoryRecyclerView.adapter = adapter
@@ -67,18 +71,27 @@ class MainActivity : BaseActivity() {
     private fun handleDataState(resource: Resource<List<Repository>>) {
         when (resource.status) {
             ResourceState.SUCCESS -> {
-//                hideLoader()
                 resource.data?.let {
                     adapter.setItems(it)
                 }
             }
             ResourceState.LOADING -> {
-//                showLoader()
             }
             ResourceState.ERROR -> {
-//                hideLoader()
                 showMessage(resource.message ?: "")
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        outState?.putInt(STATE_PAGE, page)
+        outState?.putParcelableArrayList(STATE_LIST, adapter.getItems())
+    }
+
+    companion object {
+        const val STATE_PAGE = "page"
+        const val STATE_LIST = "list"
     }
 }

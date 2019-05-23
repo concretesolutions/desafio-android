@@ -21,7 +21,8 @@
         <activity
                 android:name=".presentation.sections.main.MainActivity"
                 android:label="@string/app_name"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme.NoActionBar"
+                android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.uharris.desafio_android.R
 import com.uharris.desafio_android.domain.models.PullRequest
+import com.uharris.desafio_android.utils.CircleTransform
 import kotlinx.android.synthetic.main.item_pull_request.view.*
 
 class PullRequestAdapter(private var pullRequests: MutableList<PullRequest>, private val listener: (PullRequest) -> Unit):
@@ -31,7 +32,7 @@ class PullRequestAdapter(private var pullRequests: MutableList<PullRequest>, pri
             titleTextView.text = item.title
             bodyTextView.text = item.body
 
-            Picasso.get().load(item.user.avatar).into(userImageView)
+            Picasso.get().load(item.user.avatar).transform(CircleTransform()).into(userImageView)
             setOnClickListener { listener(item) }
         }
     }

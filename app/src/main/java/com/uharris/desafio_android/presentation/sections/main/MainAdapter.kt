@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.uharris.desafio_android.R
 import com.uharris.desafio_android.domain.models.Repository
+import com.uharris.desafio_android.utils.CircleTransform
 import kotlinx.android.synthetic.main.item_repository.view.*
 
-class MainAdapter(private var repositories: MutableList<Repository>, private val listener: (Repository) -> Unit):
+class MainAdapter(private var repositories: ArrayList<Repository>, private val listener: (Repository) -> Unit):
     RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_repository, parent, false))
@@ -24,6 +25,10 @@ class MainAdapter(private var repositories: MutableList<Repository>, private val
         notifyDataSetChanged()
     }
 
+    fun getItems(): ArrayList<Repository> {
+        return repositories
+    }
+
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(item: Repository, listener: (Repository) -> Unit) = with(itemView) {
             nameTextView.text = item.owner.login
@@ -32,7 +37,7 @@ class MainAdapter(private var repositories: MutableList<Repository>, private val
             forkTextView.text = item.forks.toString()
             starsTextView.text = item.stars.toString()
 
-            Picasso.get().load(item.owner.avatar).into(userImageView)
+            Picasso.get().load(item.owner.avatar).transform(CircleTransform()).into(userImageView)
 
             setOnClickListener { listener(item) }
         }
