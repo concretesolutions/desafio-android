@@ -3,6 +3,7 @@ package com.uharris.desafio_android.factory
 import com.uharris.desafio_android.domain.models.PullRequest
 import com.uharris.desafio_android.domain.models.Repository
 import com.uharris.desafio_android.domain.models.User
+import com.uharris.desafio_android.domain.models.reponse.RepositoryResponse
 
 object ResponseFactory {
 
@@ -18,6 +19,10 @@ object ResponseFactory {
     fun makePullRequestResponse(): PullRequest {
         return PullRequest(DataFactory.randomInt(), DataFactory.randomString(), DataFactory.randomString(),
             makeUserResponse(), DataFactory.randomString())
+    }
+
+    fun makeRepositoryResponseObject(): RepositoryResponse {
+        return RepositoryResponse(DataFactory.randomInt(), makeRepositoryList().toMutableList())
     }
 
     fun makeRepositoryList(): List<Repository> {

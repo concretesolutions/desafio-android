@@ -71,8 +71,9 @@ dependencies {
     testImplementation testDependencies.kotlinJUnit
     implementation testDependencies.kotlinJUnit
     testImplementation testDependencies.supportRunner
-    testImplementation testDependencies.supportRules
+    testImplementation 'androidx.test:rules:1.2.0-beta01'
     androidTestImplementation testDependencies.mockitoAndroid
     testImplementation testDependencies.retrofit
     testImplementation testDependencies.archTesting
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-beta01'
 }
