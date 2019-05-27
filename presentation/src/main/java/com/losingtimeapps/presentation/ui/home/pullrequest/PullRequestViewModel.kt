@@ -15,7 +15,7 @@ import com.losingtimeapps.presentation.mapper.PullRequestModelMapper
 import com.losingtimeapps.presentation.ui.home.repository.RepositoryView
 
 class PullRequestViewModel(
-    val getGitHubPullRequestsUseCase: GetGitHubPullRequestsUseCase
+    private val getGitHubPullRequestsUseCase: GetGitHubPullRequestsUseCase
 ) : BaseViewModel(), ResponseBoundary {
 
     private var view: PullRequestView? = null

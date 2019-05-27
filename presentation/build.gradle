@@ -46,4 +46,9 @@ dependencies {
     compileOnly commonDependencies.javaxAnnotation
     kapt commonDependencies.kaptDaggerCompiler
     kapt commonDependencies.kaptDaggerAndroidProcessor
+
+    // Unit testing
+    testImplementation commonTestDependencies.junit
+    testImplementation commonTestDependencies.assertj
+    testImplementation commonTestDependencies.mockito
 }
