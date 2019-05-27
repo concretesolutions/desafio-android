@@ -92,18 +92,18 @@ class PresentationTest {
         gitHubRepositoryImpTest.returnError = false
         gitHubRepositoryImpTest.returnEmptyList = true
 
-        pullRequestViewModel.getPullRequests(1)
+        pullRequestViewModel.getPullRequests()
 
         Mockito.verify(pullRequestView as BaseView).notDataLoaded(true)
     }
 
     @Test
-    fun get_pull_request_call_update_data(){
+    fun get_pull_request_call_update_data() {
 
         gitHubRepositoryImpTest.returnError = false
         gitHubRepositoryImpTest.returnEmptyList = false
 
-        pullRequestViewModel.getPullRequests(0)
+        pullRequestViewModel.getPullRequests()
 
         Mockito.verify(pullRequestView).updateRepoLiveData(Mockito.anyList())
     }
