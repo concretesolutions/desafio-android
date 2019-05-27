@@ -1,0 +1,12 @@
+ext {
+    android = [
+
+            minSdkVersion    : 16,
+            targetSdkVersion : 28,
+            compileSdkVersion: 28
+    ]
+
+    endpoints = [
+            endpoint_url = '"https://api.github.com/"'
+    ]
+}

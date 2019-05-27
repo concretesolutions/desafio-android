@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+    <TextView
+            android:id="@+id/tv_pull_request_title"
+            android:text="repo name"
+            android:lines="1"
+            android:maxLines="1"
+            android:textSize="18sp"
+            android:textColor="@color/blue_800"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+    <TextView
+            android:id="@+id/tv_pull_request_body"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="description"
+            android:lines="2"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pull_request_title" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="32dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"/>
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:gravity="center_horizontal"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content"
+                  android:layout_marginEnd="8dp"
+                  android:layout_marginRight="8dp"
+                  android:id="@+id/linearLayout"
+                  android:layout_marginBottom="8dp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
+                  app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
+                  app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                  app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="1.0">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_owner_photo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_star"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/yellow_700"/>
+        <TextView
+
+                android:text="UserName"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:maxLines="1"
+                android:lines="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_owner_name"
+        />
+    </LinearLayout>
+
+    <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>

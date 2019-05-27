@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">javaHub</string>
+    <string name="title_domain">domain</string>
+    <string name="title_data">data</string>
+    <string name="title_presentation">presentation</string>
+    <string name="error_network_connection">Connection Error</string>
+    <string name="error_empty_language">Empty Language</string>
+    <string name="error_not_found">not found</string>
+    <string name="error_internal_server">Server Internal Error</string>
+    <string name="error_invalid_language">Invalid Language</string>
+    <string name="error_empty_repository">Empty Repository Name</string>
+    <string name="error_unexpected">Unexpected Error</string>
+    <string name="no_data">this repository does not have pull request</string>
+</resources>

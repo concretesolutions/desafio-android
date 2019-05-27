@@ -1,0 +1,116 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+ext {
+    // Libraries
+    rxJava2 = '2.1.0'
+    rxAndroid = '2.0.1'
+    kotlin = '1.3.31'
+    architectureComponents = '1.0.0'
+    room = '1.0.0'
+    supportLibrary = '27.0.2'
+    constraintLayout = '1.0.2'
+    dagger2 = '2.11'
+    javaxAnnotation = '10.0-b28'
+    calligraphy = '2.3.0'
+    lottie = '2.0.0'
+    okHttp = '3.8.0'
+    retrofit2 = '2.3.0'
+    gson = '2.8.1'
+    autoValue = '1.4.1'
+    autoValueGson = '0.5.0'
+    options = '1.3.0'
+
+    // Instrumentation
+    stetho = '1.5.0'
+    chuck = '1.0.4'
+    leakCanary = '1.5.1'
+
+    // Testing
+    junit = '4.12'
+    mockito = '2.8.9'
+    assertJ = '3.8.0'
+
+    //lifecycle
+    lifecycle = '2.2.0-alpha01'
+
+    //Glide
+    glide = '4.9.0'
+
+    commonDependencies = [
+
+            glide                           : "com.github.bumptech.glide:glide:${glide}",
+            glideAnotation                  : "com.github.bumptech.glide:compiler:${glide}",
+
+            lifecycle                       : "androidx.lifecycle:lifecycle-extensions:${lifecycle}",
+
+            kotlin                          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin}",
+
+            rxJava2                         : "io.reactivex.rxjava2:rxjava:${rxJava2}",
+            rxAndroid                       : "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
+
+            dagger2Compiler                 : "com.google.dagger:dagger-compiler:${dagger2}",
+            dagger2                         : "com.google.dagger:dagger:${dagger2}",
+            javaxAnnotation                 : "org.glassfish:javax.annotation:${javaxAnnotation}",
+            daggerAndroidSupport            : "com.google.dagger:dagger-android-support:${dagger2}",
+            kaptDaggerCompiler              : "com.google.dagger:dagger-compiler:${dagger2}",
+            kaptDaggerAndroidProcessor      : "com.google.dagger:dagger-android-processor:${dagger2}",
+
+            supportAppCompatV7              : "com.android.support:appcompat-v7:${supportLibrary}",
+            supportDesign                   : "com.android.support:design:${supportLibrary}",
+            supportV13                      : "com.android.support:support-v13:${supportLibrary}",
+            supportAnnotation               : "com.android.support:support-annotations:${supportLibrary}",
+            supportCardView                 : "com.android.support:cardview-v7:${supportLibrary}",
+            supportRecyclerView             : "com.android.support:recyclerview-v7:${supportLibrary}",
+            constraintLayout                : "com.android.support.constraint:constraint-layout:${constraintLayout}",
+
+            calligraphy                     : "uk.co.chrisjenx:calligraphy:${calligraphy}",
+
+            roomRuntime                     : "android.arch.persistence.room:runtime:${room}",
+            roomCompiler                    : "android.arch.persistence.room:compiler:${room}",
+            roomTesting                     : "android.arch.persistence.room:testing:${room}",
+
+            architectureComponentsExtensions: "android.arch.lifecycle:extensions:${architectureComponents}",
+            architectureComponentsCompiler  : "android.arch.lifecycle:compiler:${architectureComponents}",
+
+            autoValue                       : "com.google.auto.value:auto-value:${autoValue}",
+            autoValueGson                   : "com.ryanharter.auto.value:auto-value-gson:${autoValueGson}",
+
+            options                         : "com.github.tomaszpolanski:options:${options}",
+
+            lottie                          : "com.airbnb.android:lottie:${lottie}",
+
+            okHttp                          : "com.squareup.okhttp3:okhttp:${okHttp}",
+            okHttpInterceptor               : "com.squareup.okhttp3:logging-interceptor:${okHttp}",
+
+            retrofit2                       : "com.squareup.retrofit2:retrofit:${retrofit2}",
+            retrofitRxAdapter               : "com.squareup.retrofit2:adapter-rxjava2:${retrofit2}",
+            retrofitConverter               : "com.squareup.retrofit2:converter-gson:${retrofit2}",
+
+            gson                            : "com.google.code.gson:gson:${gson}",
+    ]
+
+    commonTestDependencies = [
+            junit                        : "junit:junit:${junit}",
+            assertj                      : "org.assertj:assertj-core:${assertJ}",
+            mockito                      : "org.mockito:mockito-core:${mockito}",
+            architectureComponentsTesting: "android.arch.core:core-testing:${architectureComponents}",
+
+    ]
+
+    developmentDependencies = [
+            leakcanary    : "com.squareup.leakcanary:leakcanary-android:${leakCanary}",
+            leakcanaryNoOp: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanary}",
+
+            stetho        : "com.facebook.stetho:stetho:${stetho}",
+            stethoOkHttp  : "com.facebook.stetho:stetho-okhttp3:${stetho}",
+
+            chuck         : "com.readystatesoftware.chuck:library:${chuck}",
+            chuckNoOp     : "com.readystatesoftware.chuck:library-no-op:${chuck}"
+    ]
+}

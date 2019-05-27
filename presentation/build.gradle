@@ -1,0 +1,49 @@
+apply plugin: 'com.android.feature'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    def androidVersions = rootProject.ext.android
+    compileSdkVersion androidVersions.compileSdkVersion
+
+
+
+    defaultConfig {
+        minSdkVersion androidVersions.minSdkVersion
+        targetSdkVersion androidVersions.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+
+    }
+
+
+}
+
+dependencies {
+    def commonDependencies = rootProject.ext.commonDependencies
+    def developmentDependencies = rootProject.ext.developmentDependencies
+    def commonTestDependencies = rootProject.ext.commonTestDependencies
+
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+
+    implementation commonDependencies.lifecycle
+    implementation commonDependencies.kotlin
+
+    // RxJava 2
+    implementation commonDependencies.rxJava2
+    implementation commonDependencies.rxAndroid
+
+    // Dagger 2
+    implementation commonDependencies.dagger2
+    annotationProcessor commonDependencies.dagger2Compiler
+    testAnnotationProcessor commonDependencies.dagger2Compiler
+    compileOnly commonDependencies.javaxAnnotation
+    kapt commonDependencies.kaptDaggerCompiler
+    kapt commonDependencies.kaptDaggerAndroidProcessor
+}
