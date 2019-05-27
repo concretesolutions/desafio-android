@@ -1,23 +1,49 @@
 package com.losingtimeapps.javahub.ui.home
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.losingtimeapps.javahub.R
 import com.losingtimeapps.javahub.application.JavaHubApplication
 import com.losingtimeapps.javahub.common.di.modules.ActivityModule
 import com.losingtimeapps.javahub.common.presentation.BaseInjectingActivity
 import com.losingtimeapps.javahub.ui.home.pullrequest.PullRequestFragment
 import com.losingtimeapps.javahub.ui.home.repository.RepositoryFragment
+import com.losingtimeapps.presentation.ui.home.pullrequest.PullRequestViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeActivity : BaseInjectingActivity<HomeActivityComponent>() {
     override val layoutId: Int
         get() = R.layout.activity_main
 
-    private var tag: String = ""
+
+    lateinit var viewModel: HomeActivityViewModel
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showRepositoryFragment()
+        setSupportActionBar(toolbar)
+        viewModel = ViewModelProviders.of(this, HomeActivityViewModelFactory())
+            .get(HomeActivityViewModel::class.java)
+        viewModel.liveData.observe(this, Observer {
+            setTittle(viewModel.title)
+            when (it) {
+                RepositoryFragment::class.java.name -> {
+                }
+                PullRequestFragment::class.java.name -> {
+                    initBackButton()
+                }
+
+                else ->
+                    showRepositoryFragment()
+            }
+
+        })
+        viewModel.initHomeActivity()
+        setTittle(viewModel.title)
+
     }
 
     override fun onInject(component: HomeActivityComponent) {
@@ -32,21 +58,16 @@ class HomeActivity : BaseInjectingActivity<HomeActivityComponent>() {
 
 
     private fun showRepositoryFragment() {
-        tag = RepositoryFragment::class.java.name
-        setSupportActionBar(toolbar)
-        setTittle(getString(R.string.app_name))
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        viewModel.tag = RepositoryFragment::class.java.name
+        viewModel.title = getString(R.string.app_name)
+        setTittle(viewModel.title)
+        viewModel.repositoryFragment = RepositoryFragment.newInstance()
 
-        if (supportFragmentManager.findFragmentByTag(RepositoryFragment::class.java.name) == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frame, RepositoryFragment.newInstance(), RepositoryFragment::class.java.name)
-                .commit()
-        } else {
-            val repoF =
-                supportFragmentManager.findFragmentByTag(RepositoryFragment::class.java.name) as RepositoryFragment
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frame, repoF, RepositoryFragment::class.java.name)
-                .commit()
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frame, viewModel.repositoryFragment!!, RepositoryFragment::class.java.name)
+            .commit()
+
 
     }
 
@@ -54,19 +75,27 @@ class HomeActivity : BaseInjectingActivity<HomeActivityComponent>() {
         supportActionBar!!.title = id
     }
 
+    fun initBackButton() {
+        toolbar.setNavigationIcon(R.drawable.left_arrow)
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
     fun showPullRequestFragment(ownerName: String, repoName: String) {
-        tag = PullRequestFragment::class.java.name
-        setTittle(repoName)
+        viewModel.tag = PullRequestFragment::class.java.name
+        viewModel.title = repoName
+        setTittle(viewModel.title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationIcon(R.drawable.left_arrow)
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
-
+        viewModel.pullrequestFragment = PullRequestFragment.newInstance(ownerName, repoName)
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.frame,
-                PullRequestFragment.newInstance(ownerName, repoName),
+                viewModel.pullrequestFragment!!,
                 PullRequestFragment::class.java.name
             )
             .addToBackStack(RepositoryFragment::class.java.name).commit()
@@ -74,10 +103,12 @@ class HomeActivity : BaseInjectingActivity<HomeActivityComponent>() {
     }
 
     override fun onBackPressed() {
-        if (tag == PullRequestFragment::class.java.name) {
-            setTittle(getString(R.string.app_name))
+        if ((viewModel.tag) == PullRequestFragment::class.java.name) {
+            viewModel.title = getString(R.string.app_name)
+            viewModel.tag = RepositoryFragment::class.java.name
+            setTittle(viewModel.title)
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            tag = RepositoryFragment::class.java.name
+
         }
         super.onBackPressed()
 

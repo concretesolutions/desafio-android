@@ -50,7 +50,7 @@ class PullRequestFragment : BaseGitHubFragment(), PullRequestView {
             this, arguments!!.getString("ownerName", ""),
             arguments!!.getString("repoName", "")
         )
-        viewModel.getPullRequests(1)
+        viewModel.getPullRequests()
     }
 
 
@@ -70,7 +70,7 @@ class PullRequestFragment : BaseGitHubFragment(), PullRequestView {
         return object : EndlessScrollListener(linearLayoutManager) {
             override fun onLoadMore(current_page: Int) {
                 if (!swipe_container.isRefreshing) {
-                    viewModel.getPullRequests(current_page)
+                    viewModel.getPullRequests(current_page,false)
                 }
             }
         }
@@ -82,7 +82,7 @@ class PullRequestFragment : BaseGitHubFragment(), PullRequestView {
             pullRequestListAdapter.resetListAdapter()
             configureRecyclerView(viewModel)
             swipe_container.isRefreshing = false
-            viewModel.getPullRequests(1)
+            viewModel.getPullRequests(1,true)
 
         }
     }

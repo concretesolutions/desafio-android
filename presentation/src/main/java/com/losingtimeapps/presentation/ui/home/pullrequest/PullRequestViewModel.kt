@@ -60,9 +60,23 @@ class PullRequestViewModel(
     }
 
 
-    fun getPullRequests(page: Int) {
+    fun getPullRequests(page: Int, restart: Boolean) {
+        if (restart)
+            pullRequestListData.clear()
+
         view?.showProgress(true)
         getGitHubPullRequestsUseCase.invoke(ownerName, repoName, page, this)
 
+    }
+
+    fun getPullRequests() {
+
+        if (pullRequestListData.size == 0) {
+            view?.showProgress(true)
+            getGitHubPullRequestsUseCase.invoke(ownerName, repoName, 1, this)
+        } else {
+            view?.updateRepoLiveData(PullRequestModelMapper().apply(pullRequestListData))
+            view?.showProgress(false)
+        }
     }
 }
