@@ -5,5 +5,5 @@ import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 
 @Qualifier
-@Retention(RetentionPolicy.RUNTIME)
+@kotlin.annotation.Retention
 annotation class ForApplication
