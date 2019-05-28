@@ -11,8 +11,8 @@ class RepositoryModelMapper {
         return repositoryList.map {
             RepositoryModel(
                 it.id, it.name, it.description,
+                it.starsAmount.toString(),
                 it.forksAmount.toString(),
-                it.startAmount.toString(),
                 AuthorModel(
                     it.author.id,
                     it.author.name,

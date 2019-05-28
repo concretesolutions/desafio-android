@@ -32,7 +32,7 @@ class RepositoriesListAdapter(val repositoryViewModel: RepositoryViewModel) :
             holder.tvRepoName.text = repository.name
             holder.tvRepoDescription.text = repository.description
             holder.tvCountFork.text = repository.forksAmount
-            holder.tvCountStar.text = repository.startAmount
+            holder.tvCountStar.text = repository.starsAmount
 
             holder.tvOwnerName.text = repository.authorModel.name
 
