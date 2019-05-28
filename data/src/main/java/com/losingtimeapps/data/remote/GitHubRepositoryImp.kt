@@ -32,7 +32,7 @@ class GitHubRepositoryImp(
         repositoryName: String,
         page: Int
     ): Single<List<PullRequest>> {
-        return gitHubService.getGitHubPullRequest(ownerName, repositoryName, page).map { input ->
+        return gitHubService.getGitHubPullRequest(ownerName, repositoryName, page,"all").map { input ->
             try {
                 responseMapper.apply(input)
             } catch (t: Throwable) {

@@ -3,11 +3,14 @@ package com.losingtimeapps.javahub.ui.home.pullrequest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.losingtimeapps.javahub.R
 import com.losingtimeapps.javahub.common.presentation.BaseInjectingActivity
 import com.losingtimeapps.javahub.common.presentation.BaseGitHubFragment
 import com.losingtimeapps.javahub.ui.utils.EndlessScrollListener
+import com.losingtimeapps.javahub.utils.Constants
 import com.losingtimeapps.presentation.model.PullRequestModel
 import com.losingtimeapps.presentation.ui.home.pullrequest.PullRequestView
 import com.losingtimeapps.presentation.ui.home.pullrequest.PullRequestViewModel
@@ -26,8 +29,8 @@ class PullRequestFragment : BaseGitHubFragment(), PullRequestView {
     companion object {
         fun newInstance(ownerName: String, repoName: String) = PullRequestFragment().apply {
             arguments = Bundle().apply {
-                putString("ownerName", ownerName)
-                putString("repoName", repoName)
+                putString(Constants.OWNER_NAME_KEY, ownerName)
+                putString(Constants.REPO_NAME_KEY, repoName)
             }
         }
     }
@@ -47,10 +50,16 @@ class PullRequestFragment : BaseGitHubFragment(), PullRequestView {
         configureRecyclerView(viewModel)
         configureSwipeRefresh(viewModel)
         viewModel.setView(
-            this, arguments!!.getString("ownerName", ""),
-            arguments!!.getString("repoName", "")
+            this, arguments!!.getString(Constants.OWNER_NAME_KEY, ""),
+            arguments!!.getString(Constants.REPO_NAME_KEY, "")
         )
         viewModel.getPullRequests()
+    }
+
+    override fun updateOpenClosedNumber(open: Int, closed: Int) {
+        ll_count_container.visibility = View.VISIBLE
+        tv_open_count.text = " $open " + getString(R.string.opened)
+        tv_closet_coount.text = " $closed " + getString(R.string.closed)
     }
 
 
@@ -70,19 +79,18 @@ class PullRequestFragment : BaseGitHubFragment(), PullRequestView {
         return object : EndlessScrollListener(linearLayoutManager) {
             override fun onLoadMore(current_page: Int) {
                 if (!swipe_container.isRefreshing) {
-                    viewModel.getPullRequests(current_page,false)
+                    viewModel.getPullRequests(current_page, false)
                 }
             }
         }
     }
-
 
     fun configureSwipeRefresh(viewModel: PullRequestViewModel) {
         swipe_container.setOnRefreshListener {
             pullRequestListAdapter.resetListAdapter()
             configureRecyclerView(viewModel)
             swipe_container.isRefreshing = false
-            viewModel.getPullRequests(1,true)
+            viewModel.getPullRequests(1, true)
 
         }
     }

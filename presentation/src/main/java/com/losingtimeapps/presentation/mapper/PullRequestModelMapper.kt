@@ -21,7 +21,8 @@ class PullRequestModelMapper {
                     it.author.name,
                     it.author.photoUrl
                 ),
-                it.pullRequestUrl
+                it.pullRequestUrl,
+                it.state
             )
         }
     }

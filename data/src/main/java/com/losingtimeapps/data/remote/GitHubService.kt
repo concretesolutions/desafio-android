@@ -20,9 +20,10 @@ interface GitHubService {
 
     @GET("repos/{ownerName}/{repositoryName}/pulls")
     fun getGitHubPullRequest(
-        @Path(Constants.OWNER_NAME) language: String,
-        @Path(Constants.REPOSITORY_NAME) sort: String,
-        @Query(Constants.PAGE) page: Int
+        @Path(Constants.OWNER_NAME) ownerName: String,
+        @Path(Constants.REPOSITORY_NAME) repoName: String,
+        @Query(Constants.PAGE) page: Int,
+        @Query(Constants.STATE) state: String
     ): Single<List<PullRequestResponse>>
 
 }

@@ -8,4 +8,6 @@ interface PullRequestView : BaseView {
     fun updateRepoLiveData(pullRequestListData: List<PullRequestModel>)
 
     fun navigateToPullRequestView(pullRequestUrl:String)
+
+    fun updateOpenClosedNumber(open:Int, closed:Int)
 }

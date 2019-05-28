@@ -6,5 +6,6 @@ data class PullRequest(
     val data: String,
     val body: String,
     val author: Author,
-    val pullRequestUrl:String
+    val pullRequestUrl: String,
+    val state: String
 )

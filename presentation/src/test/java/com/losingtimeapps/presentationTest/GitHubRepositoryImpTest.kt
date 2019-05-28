@@ -40,6 +40,7 @@ class GitHubRepositoryImpTest : GitHubRepository {
                         0,
                         "", "", "",
                         Author(0, "", ""),
+                        "",
                         ""
                     )
                 )

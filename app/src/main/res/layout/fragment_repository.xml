@@ -4,8 +4,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:gravity="center_vertical"
+                  android:background="@color/colorPrimary"
+                  android:id="@+id/ll_count_container"
+                  android:paddingStart="20dp"
+                  android:paddingBottom="10dp"
+                  android:visibility="gone"
+                  android:paddingEnd="20dp"
+                  android:layout_height="wrap_content">
+
+        <ImageView android:layout_width="wrap_content"
+                   android:src="@drawable/ic_open"
+                   android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:id="@+id/tv_open_count"
+                  android:text=""
+                  android:textColor="@color/yellow_700"
+                  android:layout_height="wrap_content"/>
+
+        <ImageView android:layout_width="wrap_content"
+                   android:src="@drawable/ic_closed"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginLeft="10dp"
+                   android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:id="@+id/tv_closet_coount"
+                  android:text=""
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_container"
+            android:layout_below="@+id/ll_count_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

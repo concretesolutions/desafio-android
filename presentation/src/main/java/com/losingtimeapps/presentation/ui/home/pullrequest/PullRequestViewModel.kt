@@ -21,6 +21,7 @@ class PullRequestViewModel(
     private var view: PullRequestView? = null
     private var ownerName: String = ""
     private var repoName: String = ""
+    private val open = "open"
 
     fun setView(view: PullRequestView, ownerName: String, repoName: String) {
         this.view = view
@@ -40,10 +41,22 @@ class PullRequestViewModel(
             view?.notDataLoaded(true)
         } else {
             view?.updateRepoLiveData(PullRequestModelMapper().apply(pullRequestListData))
-
+            updateOpenClosedNumber()
             view?.notDataLoaded(false)
         }
         view?.showProgress(false)
+    }
+
+    fun updateOpenClosedNumber() {
+        var closedCount = 0
+        var openCount = 0
+        pullRequestListData.forEach {
+            if (it.state == open)
+                openCount++
+            else
+                closedCount++
+        }
+        view?.updateOpenClosedNumber(openCount, closedCount)
     }
 
     override fun onError(error: Error) {
@@ -76,6 +89,7 @@ class PullRequestViewModel(
             getGitHubPullRequestsUseCase.invoke(ownerName, repoName, 1, this)
         } else {
             view?.updateRepoLiveData(PullRequestModelMapper().apply(pullRequestListData))
+            updateOpenClosedNumber()
             view?.showProgress(false)
         }
     }

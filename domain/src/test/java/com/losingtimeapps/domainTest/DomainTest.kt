@@ -38,6 +38,7 @@ class DomainTest {
             0,
             "", "", "",
             Author(0, "", ""),
+            "",
             ""
         )
     )

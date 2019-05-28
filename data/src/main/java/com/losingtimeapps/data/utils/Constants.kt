@@ -8,6 +8,7 @@ class Constants {
         const val PAGE = "page"
         const val OWNER_NAME = "ownerName"
         const val REPOSITORY_NAME = "repositoryName"
+        const val STATE ="state"
     }
 
 }

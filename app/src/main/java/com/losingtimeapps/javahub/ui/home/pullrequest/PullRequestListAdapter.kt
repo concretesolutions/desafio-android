@@ -3,6 +3,7 @@ package com.losingtimeapps.javahub.ui.home.pullrequest
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -34,6 +35,11 @@ class PullRequestListAdapter(val pullRequestViewModel: PullRequestViewModel) :
 
             holder.tvOwnerName.text = pullRequest.authorModel.name
 
+            Glide.with(pullRequestViewModel.getContext())
+                .load(if (pullRequest.state == "open") R.drawable.ic_open else R.drawable.ic_closed)
+                .apply(RequestOptions().error(R.drawable.ic_open).placeholder(R.drawable.ic_open))
+                .into(holder.ivState)
+
             Glide.with(pullRequestViewModel.getContext()).load(pullRequest.authorModel.photoUrl)
                 .apply(RequestOptions().error(R.drawable.ic_defauld_picture).placeholder(R.drawable.ic_defauld_picture))
                 .into(holder.civOwnerPhoto)
@@ -45,6 +51,7 @@ class PullRequestListAdapter(val pullRequestViewModel: PullRequestViewModel) :
         var tvRepoDescription: TextView = itemView.findViewById(R.id.tv_pull_request_body)
         var tvOwnerName: TextView = itemView.findViewById(R.id.tv_owner_name)
         var civOwnerPhoto: CircleImageView = itemView.findViewById(R.id.civ_owner_photo)
+        var ivState: ImageView = itemView.findViewById(R.id.iv_state)
 
         init {
             itemView.setOnClickListener {

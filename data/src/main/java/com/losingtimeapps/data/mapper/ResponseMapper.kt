@@ -21,7 +21,8 @@ class ResponseMapper {
                     it.user.login,
                     it.user.avatarUrl
                 ),
-                it.htmlUrl
+                it.htmlUrl,
+                it.state
             )
         }
     }

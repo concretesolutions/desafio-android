@@ -11,4 +11,6 @@
     <string name="error_empty_repository">Empty Repository Name</string>
     <string name="error_unexpected">Unexpected Error</string>
     <string name="no_data">this repository does not have pull request</string>
+    <string name="opened">opened</string>
+    <string name="closed">closed</string>
 </resources>
