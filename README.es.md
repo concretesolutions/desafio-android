@@ -6,11 +6,11 @@ Desarrollar una app para consultar la [API do GitHub](https://developer.github.
 
 ### **Debe contener**
 
-- **Lista de repositorios**. Ejemplo de llamada en la API: `https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1` 
+- **Lista de repositorios**. Ejemplo de llamada en la API: `https://api.github.com/search/repositoryModels?q=language:Java&sort=stars&page=1`
   * Paginación en la pantalla de lista, con endless scroll / scroll infinito (incrementando el parámetro `page`).
   * Cada repositorio debe presentar Nombre del repositorio, Descripción del Repositorio, Nombre / Foto del autor, Cantidad de Stars, Cantidad de Forks
   * Al tocar em um articulo, debe llevar a la lista de Pull Requests del repositorio
-- **Pull Requests de un repositorio**. Ejemplo de llamada en la API: `https://api.github.com/repos/<criador>/<repositório>/pulls` 
+- **Pull Requests de un repositorio**. Ejemplo de llamada en la API: `https://api.github.com/repos/<criador>/<repositório>/pullModels`
   * Cada artículo de la lista debe presentar Nombre / Foto del autor del Pull Request, Título del  Pull Request, Data do Pull Request e Body do Pull Request
   * Al tocar en un artículo, debe abrir en el navegador la pantalla del Pull Request seleccionado
 

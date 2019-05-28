@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- App -->
+
+    <string name="app_name">Demo Api GitHub in Kotlin</string>
+
+    <!-- MainActivity -->
+
+    <string name="toast_error_unexpected">An error has occurred!</string>
+    <string name="toast_error_network">Check your internet connection!</string>
+
+    <!-- PullsActivity -->
+
+    <string name="label_empty_pulls">This repository has no pull requests</string>
+    <string name="label_info_pulls">#%1$d %2$s</string>
+
+    <!-- BrowserActivity -->
+
+    <string name="label_git_hub">%1$s on GitHub</string>
+
+</resources>
