@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">desafio-android</string>
+
+    <string name="error_update">We could not update the information, please try again</string>
 </resources>

@@ -1,4 +1,4 @@
-package cl.jesualex.desafio_android.fork
+package cl.jesualex.desafio_android.repo.data.domain.entity
 
 /**
  * Created by jesualex on 2019-05-28.

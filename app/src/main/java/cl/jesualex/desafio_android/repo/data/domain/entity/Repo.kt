@@ -1,5 +1,7 @@
 package cl.jesualex.desafio_android.repo.data.domain.entity
 
+import java.util.*
+
 /**
  * Created by jesualex on 2019-05-28.
  */
@@ -10,7 +12,7 @@ data class Repo (
 	val name : String,
 	val full_name : String,
 	val private : Boolean,
-	val owner : RepoOwner,
+	val owner : User,
 	val html_url : String,
 	val description : String,
 	val fork : Boolean,
@@ -51,9 +53,9 @@ data class Repo (
 	val labels_url : String,
 	val releases_url : String,
 	val deployments_url : String,
-	val created_at : String,
-	val updated_at : String,
-	val pushed_at : String,
+	val created_at : Date,
+	val updated_at : Date,
+	val pushed_at : Date,
 	val git_url : String,
 	val ssh_url : String,
 	val clone_url : String,
@@ -73,10 +75,10 @@ data class Repo (
 	val archived : Boolean,
 	val disabled : Boolean,
 	val open_issues_count : Int,
-	val license : String,
+	val license : License,
 	val forks : Int,
 	val open_issues : Int,
 	val watchers : Int,
 	val default_branch : String,
-	val score : Int
+	val score : Double
 )

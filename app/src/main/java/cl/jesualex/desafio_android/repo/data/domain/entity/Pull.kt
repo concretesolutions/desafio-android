@@ -1,10 +1,10 @@
-package cl.jesualex.desafio_android.fork
+package cl.jesualex.desafio_android.repo.data.domain.entity
 
 /**
  * Created by jesualex on 2019-05-28.
  */
 
-data class ForkBase (
+data class Pull (
     val url : String,
     val id : Int,
     val node_id : String,
@@ -34,7 +34,7 @@ data class ForkBase (
     val review_comment_url : String,
     val comments_url : String,
     val statuses_url : String,
-    val head : Link,
+    val head : Base,
     val base : Base,
     val _links : Links,
     val author_association : String
