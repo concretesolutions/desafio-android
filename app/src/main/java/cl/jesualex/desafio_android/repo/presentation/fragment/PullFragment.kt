@@ -24,6 +24,7 @@ class PullFragment: Fragment(), PullContract.View{
     private val pullAdapter = PullAdapter()
     private val presenter = PullPresenter()
     private val posKey = "pos"
+    private val nameKey = "name"
 
     private var fullName: String = ""
 
@@ -61,6 +62,7 @@ class PullFragment: Fragment(), PullContract.View{
 
     override fun onSaveInstanceState(outState: Bundle) {
         if(pullRv.layoutManager is LinearLayoutManager){
+            outState.putString(nameKey, fullName)
             outState.putInt(posKey, (pullRv.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition())
         }
 
@@ -70,7 +72,9 @@ class PullFragment: Fragment(), PullContract.View{
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
 
-        if(pullRv.layoutManager is LinearLayoutManager && savedInstanceState != null) {
+        if(pullRv.layoutManager is LinearLayoutManager && savedInstanceState != null
+            && fullName == savedInstanceState.getString(nameKey)
+        ) {
             pullRv.scrollToPosition(savedInstanceState.getInt(posKey))
         }
     }
