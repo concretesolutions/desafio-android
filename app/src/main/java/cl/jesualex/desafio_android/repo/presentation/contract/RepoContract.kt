@@ -1,6 +1,7 @@
 package cl.jesualex.desafio_android.repo.presentation.contract
 
 import android.support.v4.app.Fragment
+import android.support.v7.widget.RecyclerView
 import cl.jesualex.desafio_android.base.presentation.PresenterBase
 import cl.jesualex.desafio_android.base.presentation.ViewBase
 import cl.jesualex.desafio_android.repo.data.domain.entity.Repo
@@ -19,5 +20,6 @@ interface RepoContract {
         fun loadNewJavaRepoPage()
         fun subscribeRepoViewModel(fragment: Fragment)
         fun unsubscribeRepoViewModel(fragment: Fragment)
+        fun setScrollListener(rv: RecyclerView)
     }
 }

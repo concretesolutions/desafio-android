@@ -2,6 +2,7 @@ package cl.jesualex.desafio_android.repo.presentation.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,9 @@ class RepoFragment: Fragment(), RepoContract.View {
     override fun initView(view: View) {
         presenter.setView(this)
         presenter.updateJavaRepos(true)
+        presenter.setScrollListener(repoRv)
+
+        repoSwipeLayout.setOnRefreshListener { presenter.updateJavaRepos(true) }
 
         repoAdapter.itemClickListener = ItemAdapterListener { item, _ ->
             pullFragment.setFullName(item.full_name)
@@ -47,7 +51,7 @@ class RepoFragment: Fragment(), RepoContract.View {
 
     override fun onSaveInstanceState(outState: Bundle) {
         if(repoRv.layoutManager is LinearLayoutManager){
-            outState.putInt(posKey, (repoRv.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition());
+            outState.putInt(posKey, (repoRv.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition())
         }
 
         super.onSaveInstanceState(outState)
@@ -57,7 +61,7 @@ class RepoFragment: Fragment(), RepoContract.View {
         super.onViewStateRestored(savedInstanceState)
 
         if(repoRv.layoutManager is LinearLayoutManager && savedInstanceState != null) {
-            repoRv.scrollToPosition(savedInstanceState.getInt(posKey));
+            repoRv.scrollToPosition(savedInstanceState.getInt(posKey))
         }
     }
 
@@ -71,6 +75,11 @@ class RepoFragment: Fragment(), RepoContract.View {
     }
 
     override fun updateRepos(repos: List<Repo>) {
+        if(repoSwipeLayout.isRefreshing){
+            repoSwipeLayout.isRefreshing = false
+            repoRv.scrollToPosition(0)
+        }
+
         if(repos.isNotEmpty()){
             repoAdapter.repos = repos
         }

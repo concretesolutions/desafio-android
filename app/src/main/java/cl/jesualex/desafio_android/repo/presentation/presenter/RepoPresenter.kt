@@ -4,6 +4,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import cl.jesualex.desafio_android.R
 import cl.jesualex.desafio_android.base.remote.UseCaseObserver
 import cl.jesualex.desafio_android.repo.data.domain.entity.Repo
@@ -20,11 +22,13 @@ class RepoPresenter: RepoContract.Presenter {
     private val searchJavaRepoUseCase = SearchJavaRepoByStartUseCase()
     private val repoLocalRepo = RepoLocalRepo()
     private val firstPage = 1
+    private val itemsToLoadMore = 5
+
+    private var view: RepoContract.View? = null
+    private var loadingMore = false
+    private var pageIndex = firstPage + 1
 
     private lateinit var allRepoLiveData: LiveData<List<Repo>>
-    private var view: RepoContract.View? = null
-
-    private var pageIndex = firstPage + 1
 
     override fun setView(view: RepoContract.View) {
         this.view = view
@@ -56,6 +60,23 @@ class RepoPresenter: RepoContract.Presenter {
         }
     }
 
+    override fun setScrollListener(rv: RecyclerView) {
+        rv.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if(rv.layoutManager is LinearLayoutManager) {
+                    val pos = (rv.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+
+                    if(!loadingMore && pos >= rv.adapter.itemCount - itemsToLoadMore){
+                        loadingMore = true
+                        loadNewJavaRepoPage()
+                    }
+                }
+            }
+        })
+    }
+
     private fun updateJavaRepos(page: Int, removeOld: Boolean){
         searchJavaRepoUseCase.execute(page, object : UseCaseObserver<SearchBase>(){
             override fun onNext(value: SearchBase) {
@@ -63,6 +84,9 @@ class RepoPresenter: RepoContract.Presenter {
 
                 if(page != firstPage){
                     pageIndex++
+                    loadingMore = false
+                }else{
+
                 }
 
                 if(removeOld){
@@ -75,6 +99,7 @@ class RepoPresenter: RepoContract.Presenter {
             override fun onError(e: Throwable) {
                 super.onError(e)
                 view?.showErrorMessage(R.string.error_update)
+                loadingMore = false
             }
         })
     }
