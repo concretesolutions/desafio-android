@@ -25,7 +25,8 @@ open class UserLocal (
 	var events_url : String = "",
 	var received_events_url : String = "",
 	var type : String = "",
-	var site_admin : Boolean = false
+	var site_admin : Boolean = false,
+	var name : String? = ""
 ): RealmObject(){
 	fun cascadeDelete() {
 		deleteFromRealm()

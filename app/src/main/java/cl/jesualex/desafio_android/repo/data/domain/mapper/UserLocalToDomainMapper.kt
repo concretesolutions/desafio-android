@@ -27,7 +27,8 @@ class UserLocalToDomainMapper: Mapper<UserLocal, User>() {
             events_url = value.events_url,
             received_events_url = value.received_events_url,
             type = value.type,
-            site_admin = value.site_admin
+            site_admin = value.site_admin,
+            name = value.name
         )
     }
 
@@ -50,7 +51,8 @@ class UserLocalToDomainMapper: Mapper<UserLocal, User>() {
             events_url = value.events_url,
             received_events_url = value.received_events_url,
             type = value.type,
-            site_admin = value.site_admin
+            site_admin = value.site_admin,
+            name = value.name
         )
     }
 }
