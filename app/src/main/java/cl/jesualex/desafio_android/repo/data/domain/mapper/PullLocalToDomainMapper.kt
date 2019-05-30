@@ -4,7 +4,7 @@ import cl.jesualex.desafio_android.base.data.Mapper
 import cl.jesualex.desafio_android.repo.data.domain.entity.Link
 import cl.jesualex.desafio_android.repo.data.domain.entity.Links
 import cl.jesualex.desafio_android.repo.data.domain.entity.Pull
-import cl.jesualex.desafio_android.repo.data.local.PullLocal
+import cl.jesualex.desafio_android.repo.data.local.entity.PullLocal
 
 /**
  * Created by jesualex on 2019-05-30.
@@ -61,7 +61,7 @@ class PullLocalToDomainMapper: Mapper<PullLocal, Pull>() {
     }
 
     override fun reverseMap(value: Pull): PullLocal {
-        val resp =  PullLocal(
+        val resp = PullLocal(
             url = value.url,
             id = value.id,
             node_id = value.node_id,
@@ -73,7 +73,7 @@ class PullLocalToDomainMapper: Mapper<PullLocal, Pull>() {
             state = value.state,
             locked = value.locked,
             title = value.title,
-            user = value.user?.let{ userMapper.reverseMap(it)},
+            user = value.user?.let { userMapper.reverseMap(it) },
             body = value.body,
             created_at = value.created_at,
             updated_at = value.updated_at,
@@ -87,8 +87,8 @@ class PullLocalToDomainMapper: Mapper<PullLocal, Pull>() {
             review_comment_url = value.review_comment_url,
             comments_url = value.comments_url,
             statuses_url = value.statuses_url,
-            head = value.head?.let{ baseMapper.reverseMap(it) },
-            base = value.base?.let{ baseMapper.reverseMap(it) },
+            head = value.head?.let { baseMapper.reverseMap(it) },
+            base = value.base?.let { baseMapper.reverseMap(it) },
             self = value._links.self.href,
             html = value._links.html.href,
             issue = value._links.issue.href,

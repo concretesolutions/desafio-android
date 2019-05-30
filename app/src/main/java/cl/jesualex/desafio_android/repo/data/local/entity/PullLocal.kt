@@ -1,10 +1,9 @@
-package cl.jesualex.desafio_android.repo.data.local
+package cl.jesualex.desafio_android.repo.data.local.entity
 
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Created by jesualex on 2019-05-28.

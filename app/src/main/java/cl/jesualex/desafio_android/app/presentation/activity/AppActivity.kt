@@ -13,10 +13,12 @@ class AppActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragmentContainer, RepoFragment())
-            .commit()
+        savedInstanceState?:run {
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragmentContainer, RepoFragment())
+                .commit()
+        }
 
         setContentView(R.layout.activity_app)
     }

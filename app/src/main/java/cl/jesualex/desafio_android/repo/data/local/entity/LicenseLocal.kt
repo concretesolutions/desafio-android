@@ -1,4 +1,4 @@
-package cl.jesualex.desafio_android.repo.data.local
+package cl.jesualex.desafio_android.repo.data.local.entity
 
 import io.realm.RealmObject
 
@@ -10,7 +10,7 @@ open class LicenseLocal(
     var key : String = "",
     var name : String = "",
     var spdx_id : String = "",
-    var url : String = "",
+    var url : String? = "",
     var node_id : String = ""
 ): RealmObject(){
     fun cascadeDelete() {

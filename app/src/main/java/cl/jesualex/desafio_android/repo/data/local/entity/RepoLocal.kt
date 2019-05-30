@@ -1,4 +1,4 @@
-package cl.jesualex.desafio_android.repo.data.local
+package cl.jesualex.desafio_android.repo.data.local.entity
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
@@ -20,7 +20,7 @@ open class RepoLocal (
 	var fork : Boolean = false,
 	var url : String = "",
 	var forks_url : String = "",
-	var keys_urls_url : String = "",
+	var keys_urls_url : String? = null,
 	var collaborators_url : String = "",
 	var teams_url : String = "",
 	var hooks_url : String = "",
@@ -62,18 +62,18 @@ open class RepoLocal (
 	var ssh_url : String = "",
 	var clone_url : String = "",
 	var svn_url : String = "",
-	var homepage : String = "",
+	var homepage : String? = "",
 	var size : Int = 0,
 	var stargazers_count : Int = 0,
 	var watchers_count : Int = 0,
-	var language : String = "",
+	var language : String? = "",
 	var has_issues : Boolean = false,
 	var has_projects : Boolean = false,
 	var has_downloads : Boolean = false,
 	var has_wiki : Boolean = false,
 	var has_pages : Boolean = false,
 	var forks_count : Int = 0,
-	var mirror_url : String = "",
+	var mirror_url : String? = "",
 	var archived : Boolean = false,
 	var disabled : Boolean = false,
 	var open_issues_count : Int = 0,

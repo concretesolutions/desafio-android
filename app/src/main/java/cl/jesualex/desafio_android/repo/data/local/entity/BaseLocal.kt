@@ -1,4 +1,4 @@
-package cl.jesualex.desafio_android.repo.data.local
+package cl.jesualex.desafio_android.repo.data.local.entity
 
 import io.realm.RealmObject
 

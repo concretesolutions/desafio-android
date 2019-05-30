@@ -2,7 +2,7 @@ package cl.jesualex.desafio_android.repo.data.domain.mapper
 
 import cl.jesualex.desafio_android.base.data.Mapper
 import cl.jesualex.desafio_android.repo.data.domain.entity.License
-import cl.jesualex.desafio_android.repo.data.local.LicenseLocal
+import cl.jesualex.desafio_android.repo.data.local.entity.LicenseLocal
 
 /**
  * Created by jesualex on 2019-05-30.

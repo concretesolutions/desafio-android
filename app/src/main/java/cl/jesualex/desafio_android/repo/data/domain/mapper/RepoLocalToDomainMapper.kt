@@ -2,7 +2,7 @@ package cl.jesualex.desafio_android.repo.data.domain.mapper
 
 import cl.jesualex.desafio_android.base.data.Mapper
 import cl.jesualex.desafio_android.repo.data.domain.entity.Repo
-import cl.jesualex.desafio_android.repo.data.local.RepoLocal
+import cl.jesualex.desafio_android.repo.data.local.entity.RepoLocal
 
 /**
  * Created by jesualex on 2019-05-30.
@@ -97,7 +97,7 @@ class RepoLocalToDomainMapper: Mapper<RepoLocal, Repo>() {
             name = value.name,
             full_name = value.full_name,
             private = value.private,
-            owner = value.owner?.let{ userMapper.reverseMap(it) },
+            owner = value.owner?.let { userMapper.reverseMap(it) },
             html_url = value.html_url,
             description = value.description,
             fork = value.fork,
@@ -160,7 +160,7 @@ class RepoLocalToDomainMapper: Mapper<RepoLocal, Repo>() {
             archived = value.archived,
             disabled = value.disabled,
             open_issues_count = value.open_issues_count,
-            license = value.license?.let{ licenseMapper.reverseMap(it) },
+            license = value.license?.let { licenseMapper.reverseMap(it) },
             forks = value.forks,
             open_issues = value.open_issues,
             watchers = value.watchers,
