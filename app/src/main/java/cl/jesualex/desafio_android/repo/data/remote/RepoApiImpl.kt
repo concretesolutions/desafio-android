@@ -9,7 +9,7 @@ import io.reactivex.Observable
  * Created by jesualex on 2019-05-28.
  */
 
-class RepoApiImpl: RepoApi {
+class RepoApiImpl private constructor(): RepoApi {
     private val path = "/repos/"
     private lateinit var api: RepoApi
 
@@ -27,5 +27,17 @@ class RepoApiImpl: RepoApi {
 
     override fun getPulls(repoFull: String): Observable<List<Pull>> {
         return getApiInstance().getPulls(repoFull)
+    }
+
+    companion object{
+        private lateinit var instance: RepoApiImpl
+
+        fun getInstance(): RepoApiImpl{
+            if(!::instance.isInitialized){
+                instance = RepoApiImpl()
+            }
+
+            return instance
+        }
     }
 }

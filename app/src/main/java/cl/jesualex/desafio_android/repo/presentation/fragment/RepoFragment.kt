@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import cl.jesualex.desafio_android.R
 import cl.jesualex.desafio_android.base.presentation.Fragment
+import cl.jesualex.desafio_android.base.presentation.ItemAdapterListener
 import cl.jesualex.desafio_android.repo.data.domain.entity.Repo
 import cl.jesualex.desafio_android.repo.presentation.adapter.RepoAdapter
 import cl.jesualex.desafio_android.repo.presentation.contract.RepoContract
@@ -19,11 +20,23 @@ import kotlinx.android.synthetic.main.fragment_repo.*
 class RepoFragment: Fragment(), RepoContract.View {
     private val presenter = RepoPresenter()
     private val repoAdapter = RepoAdapter()
+    private val pullFragment = PullFragment()
     private val posKey = "pos"
 
     override fun initView(view: View) {
         presenter.setView(this)
         presenter.updateJavaRepos(true)
+
+        repoAdapter.itemClickListener = ItemAdapterListener { item, _ ->
+            pullFragment.setFullName(item.full_name)
+
+            fragmentManager
+                ?.beginTransaction()
+                ?.add(R.id.fragmentContainer, pullFragment)
+                ?.addToBackStack(null)
+                ?.commit()
+        }
+
         repoRv.adapter = repoAdapter
     }
 

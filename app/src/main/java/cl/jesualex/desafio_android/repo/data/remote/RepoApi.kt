@@ -16,6 +16,6 @@ interface RepoApi {
     ): Observable<List<Pull>>
 
     @GET("{${RepoConst.REPO_FULL_NAME}}/pulls") fun getPulls(
-        @Path(RepoConst.REPO_FULL_NAME) repoFull: String
+        @Path(RepoConst.REPO_FULL_NAME, encoded = true) repoFull: String
     ): Observable<List<Pull>>
 }

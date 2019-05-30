@@ -2,4 +2,9 @@
     <string name="app_name">desafio-android</string>
 
     <string name="error_update">We could not update the information, please try again</string>
+    <string name="tryAgain">try again</string>
+    <string name="errorGeneral">An error occurred, please try again</string>
+
+    <string name="opened">%d opened</string>
+    <string name="closed">/ %d closed</string>
 </resources>
