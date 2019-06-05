@@ -23,6 +23,19 @@ allprojects {
     }
 }
 
+ext {
+    constraintVersion = '1.1.3'
+    retrofitVersion = '2.3.0'
+    okhttpVersion = '3.8.1'
+    moshiVersion = '1.4.0'
+    rxVersion = '2.1.5'
+    rxAndroidVersion = '2.1.0'
+    rxKotlinVersion = '2.3.0'
+    calligraphyVersion = '2.3.0'
+    recyclerVersion = '28.0.0'
+    glideVersion = '4.9.0'
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
