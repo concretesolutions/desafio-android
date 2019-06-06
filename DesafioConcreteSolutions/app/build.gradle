@@ -1,0 +1,112 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'com.neenbedankt.android-apt'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'http://repo.spring.io/milestone'
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+apt {
+    arguments {
+        androidManifestFile variant?.outputs[0]?.processResources?.manifestFile
+        resourcePackageName android.defaultConfig.applicationId
+    }
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.0"
+
+    compileOptions {
+        encoding "UTF-8"
+    }
+
+    defaultConfig {
+        applicationId "br.com.desafio"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    packagingOptions {
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'LICENSE.txt'
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = [
+                'src/main/res-main',
+                'src/main/res-screen/repository',
+                'src/main/res-screen/pull_request',
+                'src/main/res-screen/common',
+            ]
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        homolog {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:24.0.0'
+
+    apt "org.androidannotations:androidannotations:3.3.2"
+    compile "org.androidannotations:androidannotations-api:3.3.2"
+
+    provided 'org.projectlombok:lombok:1.16.8'
+    apt "org.projectlombok:lombok:1.16.8"
+
+    apt 'org.parceler:parceler:1.0.4'
+    compile 'org.parceler:parceler-api:1.0.4'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'jp.wasabeef:picasso-transformations:2.0.0'
+
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+
+    compile 'com.android.support:support-annotations:24.0.0'
+    compile 'com.android.support:recyclerview-v7:24.0.0'
+    compile 'com.android.support:cardview-v7:24.0.0'
+
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+    androidTestCompile ('com.android.support.test:rules:0.4'){
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile ('com.android.support.test.espresso:espresso-core:2.2.1'){
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    testCompile 'junit:junit:4.12'
+}

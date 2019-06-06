@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Github App</string>
+    <string name="title_activity_pull_request">Pull Request</string>
+    <string name="without_connection">Você está sem conexão com a Internet.</string>
+    <string name="github">Github JavaPop</string>
+    <string name="without_further_repositories">Acabaram os repositórios</string>
+    <string name="opened">\u0020opened</string>
+    <string name="closed">\u0020closed</string>
+</resources>

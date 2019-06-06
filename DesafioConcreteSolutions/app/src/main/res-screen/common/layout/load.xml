@@ -1,0 +1,18 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"     
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/preto_overlay">
+    <ProgressBar
+	    android:id="@+id/progressBarCircularIndeterminate"
+	    android:layout_width="40dp"
+	    android:layout_height="40dp"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/banco"
+	    android:background="@drawable/arredonda_load" />
+</LinearLayout>
+

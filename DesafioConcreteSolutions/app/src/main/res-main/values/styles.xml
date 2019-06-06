@@ -1,0 +1,46 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="title">
+        <item name="android:textColor">@color/azul</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="description">
+        <item name="android:textColor">@color/preto</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="forks_and_stars">
+        <item name="android:textColor">@color/coral_icon</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="username">
+        <item name="android:textColor">@color/azul</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="fullname">
+        <item name="android:textColor">@color/cinza_escuro</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="open">
+        <item name="android:textColor">@color/coral_icon</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="close">
+        <item name="android:textColor">@color/preto</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>
