@@ -18,15 +18,18 @@ class RepositoryPresenter : IRepositoryContract.Presenter {
     }
 
     override fun requestRepositoryData(userId: Int) {
+        view.showRepositoryLoading()
         repositoryPresenter = ServiceProvides.getRepositoryService()
 
         val requestDisposable: Disposable = repositoryPresenter.getData("language:Java", "stars", 1)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({
-                view.populateRepositorySuccess(it)
+                view.repositorySuccess(it)
+                view.showRepositorySucess()
             },
                 {
+                    view.showRepositoryError()
                     it.stackTrace
                 })
         compositeDisposable?.add(requestDisposable)

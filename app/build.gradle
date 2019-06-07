@@ -60,4 +60,7 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }

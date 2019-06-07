@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.Repository
-import br.com.renan.desafioandroid.model.data.RepositoryItensList
+import br.com.renan.desafioandroid.model.data.RepositoryItemsList
 import br.com.renan.desafioandroid.repository.presentation.IRepositoryContract
 import br.com.renan.desafioandroid.repository.presentation.RepositoryPresenter
 import kotlinx.android.synthetic.main.activity_repository.*
+import kotlinx.android.synthetic.main.error_layout_repository.*
 
 class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
 
@@ -21,16 +23,20 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
 
-//        initView()
+        init()
 
-        repositoryPresenter.bind(this)
-
-        repositoryPresenter.requestRepositoryData(1)
-
+        ivError.setOnClickListener {
+            repositoryPresenter.requestRepositoryData(1)
+        }
     }
 
-    override fun populateRepositorySuccess(repositoryList: RepositoryItensList) {
-        listRepository.addAll(repositoryList.repositoryItensList)
+    private fun init() {
+        repositoryPresenter.bind(this)
+        repositoryPresenter.requestRepositoryData(1)
+    }
+
+    override fun repositorySuccess(repositoryList: RepositoryItemsList) {
+        listRepository.addAll(repositoryList.repositoryItemsList)
         repositoryRecycler.itemAnimator = DefaultItemAnimator()
         repositoryRecycler.layoutManager = LinearLayoutManager(this)
         repositoryAdapter = RepositoryAdapter(listRepository)
@@ -38,8 +44,19 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
         repositoryAdapter.notifyDataSetChanged()
     }
 
-    private fun initView() {
-
+    override fun showRepositoryLoading() {
+        pbRepository.visibility = View.VISIBLE
+        include_error_repository.visibility = View.GONE
     }
 
+    override fun showRepositoryError() {
+        include_error_repository.visibility = View.VISIBLE
+        pbRepository.visibility = View.GONE
+        repositoryRecycler.visibility = View.GONE
+    }
+
+    override fun showRepositorySucess() {
+        pbRepository.visibility = View.GONE
+        repositoryRecycler.visibility = View.VISIBLE
+    }
 }

@@ -2,8 +2,8 @@ package br.com.renan.desafioandroid.model.data
 
 import com.squareup.moshi.Json
 
-data class RepositoryItensList (
-    @field:Json(name = "itens") val repositoryItensList: List<Repository>
+data class RepositoryItemsList (
+    @field:Json(name = "items") val repositoryItemsList: List<Repository>
 )
 
 data class Repository (

@@ -15,17 +15,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/repositoryRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:visibility="visible"
-        tools:listitem="@layout/item_repository"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spaceWithNothing"
-    />
+            android:id="@+id/repositoryRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            tools:listitem="@layout/item_repository"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spaceWithNothing"/>
+
+    <ProgressBar
+            android:id="@+id/pbRepository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/spaceWithNothing"
+            app:layout_constraintStart_toStartOf="@+id/spaceWithNothing"
+            app:layout_constraintBottom_toBottomOf="@+id/repositoryRecycler"
+            app:layout_constraintTop_toTopOf="@+id/repositoryRecycler"/>
+
+    <include
+            android:id="@+id/include_error_repository"
+            layout="@layout/error_layout_repository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/spaceWithNothing"
+            app:layout_constraintStart_toStartOf="@+id/spaceWithNothing"
+            app:layout_constraintBottom_toBottomOf="@+id/repositoryRecycler"
+            app:layout_constraintTop_toTopOf="@+id/repositoryRecycler"/>
 
 </android.support.constraint.ConstraintLayout>

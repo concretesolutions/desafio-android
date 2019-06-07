@@ -41,7 +41,7 @@ class RepositoryAdapter (repositoryItensList: List<Repository>) : RecyclerView.A
             tvRepositoryForks.text = repository.forks.toString()
             tvRepositoryStars.text = repository.starts.toString()
             tvRepositoryUserName.text = repository.owner.login
-            tvRepositoryFullName.text = repository.fullName
+            tvRepositoryFullName.text = repository.fullName.replace("/", " ")
         }
     }
 }
