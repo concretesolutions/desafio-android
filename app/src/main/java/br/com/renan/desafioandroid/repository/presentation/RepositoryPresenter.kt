@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 
 class RepositoryPresenter : IRepositoryContract.Presenter {
 
-    private lateinit var repositoryPresenter: RepositoryService
+    private lateinit var repositoryService: RepositoryService
     private var compositeDisposable: CompositeDisposable? = null
     lateinit var view: IRepositoryContract.View
 
@@ -19,9 +19,9 @@ class RepositoryPresenter : IRepositoryContract.Presenter {
 
     override fun requestRepositoryData(userId: Int) {
         view.showRepositoryLoading()
-        repositoryPresenter = ServiceProvides.getRepositoryService()
+        repositoryService = ServiceProvides.getRepositoryService()
 
-        val requestDisposable: Disposable = repositoryPresenter.getData("language:Java", "stars", 1)
+        val requestDisposable: Disposable = repositoryService.getData("language:Java", "stars", 1)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({

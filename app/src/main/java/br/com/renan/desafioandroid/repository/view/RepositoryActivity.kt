@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import br.com.renan.desafioandroid.PaginationScroll
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.Repository
 import br.com.renan.desafioandroid.model.data.RepositoryItemsList
@@ -18,11 +19,13 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
     private val repositoryPresenter = RepositoryPresenter()
     private lateinit var repositoryAdapter: RepositoryAdapter
     private val listRepository = ArrayList<Repository>()
+    private var releasedLoad: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
 
+        repositoryPresenter.bind(this)
         init()
 
         ivError.setOnClickListener {
@@ -31,16 +34,30 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
     }
 
     private fun init() {
-        repositoryPresenter.bind(this)
         repositoryPresenter.requestRepositoryData(1)
     }
 
     override fun repositorySuccess(repositoryList: RepositoryItemsList) {
-        listRepository.addAll(repositoryList.repositoryItemsList)
-        repositoryRecycler.itemAnimator = DefaultItemAnimator()
-        repositoryRecycler.layoutManager = LinearLayoutManager(this)
-        repositoryAdapter = RepositoryAdapter(listRepository)
+        repositoryAdapter = RepositoryAdapter(repositoryList.repositoryItemsList)
         repositoryRecycler.adapter = repositoryAdapter
+        repositoryRecycler.itemAnimator = DefaultItemAnimator()
+        releasedLoad = true
+
+        repositoryRecycler.addOnScrollListener(object : PaginationScroll(LinearLayoutManager(this)){
+            override fun loadMoreItems() {
+                init()
+                releasedLoad = false
+            }
+
+            override fun hideMoreItems() {
+                pbRepository.visibility = View.GONE
+            }
+
+            override fun isLoading(): Boolean {
+                return releasedLoad
+            }
+        })
+
         repositoryAdapter.notifyDataSetChanged()
     }
 

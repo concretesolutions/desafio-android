@@ -8,9 +8,9 @@ import io.reactivex.schedulers.Schedulers
 
 class PullRequestService {
 
-    fun getData(login: String, name: String): Flowable<PullRequestList> {
+    fun getData(login: String, repoName: String): Flowable<PullRequestList> {
         return NetworkProvider.getApi()
-            .getPullRequests(login, name)
+            .getPullRequests(login, repoName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
