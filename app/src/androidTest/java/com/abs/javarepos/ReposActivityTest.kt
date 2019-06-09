@@ -21,4 +21,11 @@ class ReposActivityTest {
             .check(matches(withChild(withText(R.string.repos_title))))
             .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun whenResumedThenShowList() {
+        reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
+        onView(withId(R.id.rvRepos))
+            .check(matches(isDisplayed()))
+    }
 }
