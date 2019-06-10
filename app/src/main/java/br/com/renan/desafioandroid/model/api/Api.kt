@@ -1,6 +1,6 @@
 package br.com.renan.desafioandroid.model.api
 
-import br.com.renan.desafioandroid.model.data.PullRequestList
+import br.com.renan.desafioandroid.model.data.PullRequest
 import br.com.renan.desafioandroid.model.data.RepositoryItemsList
 import io.reactivex.Flowable
 import retrofit2.http.GET
@@ -15,5 +15,5 @@ interface Api {
 
     @GET("repos/{login}/{name}/pulls")
     fun getPullRequests(@Path(value = "login") login: String,
-                        @Path(value = "name") name: String): Flowable<PullRequestList>
+                        @Path(value = "name") name: String): Flowable<List<PullRequest>>
 }

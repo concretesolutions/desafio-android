@@ -8,11 +8,12 @@
         tools:context=".repository.view.RepositoryActivity">
 
     <TextView
-            android:id="@+id/ivPullRequestAvatar"
-            android:text="16 opened / 800 closed"
+            android:id="@+id/tvPullRequestAvatar"
+            android:text="@string/open_close_pulls"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:paddingTop="16dp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,18 +29,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivPullRequestAvatar"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvPullRequestAvatar"/>
 
     <ProgressBar
-            android:id="@+id/pbRepository"
+            android:id="@+id/pbPullRequest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/ivPullRequestAvatar"
-            app:layout_constraintStart_toStartOf="@+id/ivPullRequestAvatar"
+            app:layout_constraintEnd_toEndOf="@+id/tvPullRequestAvatar"
+            app:layout_constraintStart_toStartOf="@+id/tvPullRequestAvatar"
             app:layout_constraintBottom_toBottomOf="@+id/pullRequestRecycler"
             app:layout_constraintTop_toTopOf="@+id/pullRequestRecycler"/>
 
@@ -52,8 +53,22 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/ivPullRequestAvatar"
-            app:layout_constraintStart_toStartOf="@+id/ivPullRequestAvatar"
+            app:layout_constraintEnd_toEndOf="@+id/tvPullRequestAvatar"
+            app:layout_constraintStart_toStartOf="@+id/tvPullRequestAvatar"
+            app:layout_constraintBottom_toBottomOf="@+id/pullRequestRecycler"
+            app:layout_constraintTop_toTopOf="@+id/pullRequestRecycler"/>
+
+    <include
+            android:id="@+id/include_empty_layout"
+            layout="@layout/empty_layout_pull_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/tvPullRequestAvatar"
+            app:layout_constraintStart_toStartOf="@+id/tvPullRequestAvatar"
             app:layout_constraintBottom_toBottomOf="@+id/pullRequestRecycler"
             app:layout_constraintTop_toTopOf="@+id/pullRequestRecycler"/>
 

@@ -12,21 +12,27 @@ class PullRequestPresenter : IPullRequestContract.Presenter {
     lateinit var pullRequestService: PullRequestService
     private var compositeDisposable: CompositeDisposable? = null
     lateinit var view: IPullRequestContract.View
+    private var open: Int = 0
+    private var close: Int = 0
 
     override fun bind(view: IPullRequestContract.View) {
         this.view = view
     }
 
-    //criador = login
-    //repositorio == name
     override fun requestPullRequestData(login: String, repoName: String) {
+        view.showPullRequestLoading()
         pullRequestService = ServiceProvides.getPullRequestService()
         val requestDisposable: Disposable = pullRequestService.getData(login, repoName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
-                view.pullRequestSuccess(it)
-                view.showPullRequestSucess()
+            .subscribe({
+                if (it.isNullOrEmpty()) {
+                    view.showPullRequestEmpty()
+                } else {
+                    view.pullRequestSuccess(it)
+                    view.showPullRequestSucess()
+                    view.showTotalPulls(it)
+                }
             },
                 {
                     view.showPullRequestError()
@@ -34,4 +40,6 @@ class PullRequestPresenter : IPullRequestContract.Presenter {
                 })
         compositeDisposable?.add(requestDisposable)
     }
+
+
 }

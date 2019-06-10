@@ -7,13 +7,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.PullRequest
-import br.com.renan.desafioandroid.model.data.PullRequestList
 import br.com.renan.desafioandroid.pullrequest.presentation.IPullRequestContract
 import br.com.renan.desafioandroid.pullrequest.presentation.PullRequestPresenter
 import kotlinx.android.synthetic.main.activity_pull_request.*
 
 class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
 
+    private var open: Int = 0
+    private var close: Int = 0
     private val pullRequestPresenter = PullRequestPresenter()
     private lateinit var pullRequestAdapter: PullRequestAdapter
     private val listPullRequest = ArrayList<PullRequest>()
@@ -26,31 +27,60 @@ class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
 
         pullRequestPresenter.bind(this)
 
-        pullRequestPresenter.requestPullRequestData("ReactiveX","RxJava")
+        val (login, creator) = getExtras()
+
+        pullRequestPresenter.requestPullRequestData(login, creator)
+    }
+
+    private fun getExtras(): Pair<String, String> {
+        val login = intent.getStringExtra("creator")
+        val creator = intent.getStringExtra("repository")
+        return Pair(login, creator)
+    }
 
 
+    override fun pullRequestSuccess(pullRequestList: List<PullRequest>) {
+        listPullRequest.addAll(pullRequestList)
         pullRequestAdapter = PullRequestAdapter(listPullRequest)
         pullRequestRecycler.itemAnimator = DefaultItemAnimator()
         linearLayoutManager = LinearLayoutManager(this)
         pullRequestRecycler.layoutManager = linearLayoutManager
         pullRequestRecycler.adapter = pullRequestAdapter
-    }
-
-
-    override fun pullRequestSuccess(pullRequestList: PullRequestList) {
-        listPullRequest.addAll(pullRequestList.pullRequestList)
         pullRequestAdapter.notifyDataSetChanged()
     }
 
+    override fun showTotalPulls(pulls: List<PullRequest>) {
+        for (pull in pulls) {
+            if (pull.state == "open")
+                open++
+            else if (pull.state == "close")
+                close++
+        }
+        tvPullRequestAvatar.text = getString(R.string.open_close_pulls, open, close)
+    }
+
     override fun showPullRequestLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        pbPullRequest.visibility = View.VISIBLE
     }
 
     override fun showPullRequestError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        include_error_repository.visibility = View.VISIBLE
+        pbPullRequest.visibility = View.GONE
+        tvPullRequestAvatar.visibility = View.GONE
     }
 
     override fun showPullRequestSucess() {
+        tvPullRequestAvatar.visibility = View.VISIBLE
         pullRequestRecycler.visibility = View.VISIBLE
+        include_empty_layout.visibility = View.GONE
+        pbPullRequest.visibility = View.GONE
+        include_error_repository.visibility = View.GONE
+    }
+
+    override fun showPullRequestEmpty() {
+        include_empty_layout.visibility = View.VISIBLE
+        pbPullRequest.visibility = View.GONE
+        tvPullRequestAvatar.visibility = View.GONE
+        include_error_repository.visibility = View.GONE
     }
 }

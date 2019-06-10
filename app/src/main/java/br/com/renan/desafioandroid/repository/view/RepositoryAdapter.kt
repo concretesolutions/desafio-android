@@ -1,7 +1,6 @@
 package br.com.renan.desafioandroid.repository.view
 
 import android.content.Intent
-import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,7 @@ import br.com.renan.desafioandroid.pullrequest.view.PullRequestActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_repository.view.*
 
-class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val recyclerList: List<Repository> = repositoryItemsList
 
@@ -48,8 +47,8 @@ class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Ad
 
             itemView.setOnClickListener { itemView ->
                 val intent = Intent(itemView.context, PullRequestActivity::class.java)
-                intent.putExtra("creator", repository.name)
-                intent.putExtra("repository", repository.owner.login)
+                intent.putExtra("creator", repository.owner.login)
+                intent.putExtra("repository", repository.name)
 
                 context.startActivity(intent)
 

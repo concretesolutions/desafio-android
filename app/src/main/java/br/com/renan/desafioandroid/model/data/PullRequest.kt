@@ -2,10 +2,6 @@ package br.com.renan.desafioandroid.model.data
 
 import com.squareup.moshi.Json
 
-data class PullRequestList (
-    val pullRequestList: List<PullRequest>
-)
-
 data class PullRequest (
     @field:Json(name = "title") val title: String,
     @field:Json(name = "created_at") val createDate: String,

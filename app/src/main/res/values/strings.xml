@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Desafio android</string>
+    <string name="open_close_pulls">Html.fromHtml(%d opened / %d closed</string>
 </resources>
