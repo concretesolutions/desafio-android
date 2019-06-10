@@ -1,17 +1,20 @@
 package br.com.renan.desafioandroid.repository.view
 
+import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.Repository
+import br.com.renan.desafioandroid.pullrequest.view.PullRequestActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_repository.view.*
 
-class RepositoryAdapter (repositoryItensList: List<Repository>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    private val recyclerList: List<Repository> = repositoryItensList
+    private val recyclerList: List<Repository> = repositoryItemsList
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): RecyclerView.ViewHolder {
         return ViewHolder(
@@ -42,6 +45,15 @@ class RepositoryAdapter (repositoryItensList: List<Repository>) : RecyclerView.A
             tvRepositoryStars.text = repository.starts.toString()
             tvRepositoryUserName.text = repository.owner.login
             tvRepositoryFullName.text = repository.fullName.replace("/", " ")
+
+            itemView.setOnClickListener { itemView ->
+                val intent = Intent(itemView.context, PullRequestActivity::class.java)
+                intent.putExtra("creator", repository.name)
+                intent.putExtra("repository", repository.owner.login)
+
+                context.startActivity(intent)
+
+            }
         }
     }
 }

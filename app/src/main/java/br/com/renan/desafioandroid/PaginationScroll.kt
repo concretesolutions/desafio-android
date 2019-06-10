@@ -8,7 +8,6 @@ abstract class PaginationScroll(private val layoutManager: LinearLayoutManager) 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
 
-        if (dy > 0) {
             val visibleItemCount = layoutManager.childCount
             val totalItemCount = layoutManager.itemCount
             val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
@@ -16,9 +15,9 @@ abstract class PaginationScroll(private val layoutManager: LinearLayoutManager) 
             if (isLoading()) {
                 if (visibleItemCount + firstVisibleItemPosition >= totalItemCount)
                     loadMoreItems()
+                hideMoreItems()
             }
-        }
-        hideMoreItems()
+
     }
     abstract fun loadMoreItems()
     abstract fun isLoading(): Boolean

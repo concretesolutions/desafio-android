@@ -17,11 +17,11 @@ class RepositoryPresenter : IRepositoryContract.Presenter {
         this.view = view
     }
 
-    override fun requestRepositoryData(userId: Int) {
+    override fun requestRepositoryData(page: Int) {
         view.showRepositoryLoading()
         repositoryService = ServiceProvides.getRepositoryService()
 
-        val requestDisposable: Disposable = repositoryService.getData("language:Java", "stars", 1)
+        val requestDisposable: Disposable = repositoryService.getData("language:Java", "stars", page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({

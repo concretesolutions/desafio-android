@@ -1,6 +1,7 @@
-package br.com.renan.desafioandroid
+package br.com.renan.desafioandroid.pullrequest.presentation
 
 import br.com.renan.desafioandroid.model.service.PullRequestService
+import br.com.renan.desafioandroid.provider.ServiceProvides
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -19,7 +20,8 @@ class PullRequestPresenter : IPullRequestContract.Presenter {
     //criador = login
     //repositorio == name
     override fun requestPullRequestData(login: String, repoName: String) {
-        val requestDisposable: Disposable = pullRequestService.getData("ReactiveX", "RxJava")
+        pullRequestService = ServiceProvides.getPullRequestService()
+        val requestDisposable: Disposable = pullRequestService.getData(login, repoName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({

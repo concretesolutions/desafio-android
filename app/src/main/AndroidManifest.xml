@@ -14,7 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PullRequestActivity">
+        <activity android:name=".pullrequest.view.PullRequestActivity">
         </activity>
         <activity android:name=".repository.view.RepositoryActivity">
             <intent-filter>

@@ -13,6 +13,6 @@ interface IRepositoryContract {
 
     interface Presenter {
         fun bind(view: View)
-        fun requestRepositoryData(userId: Int)
+        fun requestRepositoryData(page: Int)
     }
 }
