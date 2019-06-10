@@ -1,5 +1,6 @@
 package com.abs.javarepos
 
+import android.graphics.drawable.Drawable
 import androidx.lifecycle.Lifecycle
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.scrollTo
@@ -18,7 +19,7 @@ class ReposActivityTest {
 
     @get:Rule
     val reposActivity = ActivityScenarioRule(ReposActivity::class.java)
-    val repo = Repo("Name", "Description", "Name Surname")
+    val repo = Repo("Name", "Description", "Name Surname", "https://randomuser.me/api/portraits/med/men/0.jpg")
 
     @Test
     fun whenResumed_thenShowTitle() {
@@ -63,5 +64,16 @@ class ReposActivityTest {
         }
         onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
         onView(withId(R.id.tvAuthorName)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun givenResumed_whenAddItems_thenShowRepoAuthorPicture() {
+        reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
+        reposActivity.scenario.onActivity { activity ->
+            activity.repoAdapter.addItems(arrayListOf(repo))
+        }
+        onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
+        onView(withId(R.id.ivAuthorPicture)).check(matches(isDisplayed()))
+
     }
 }

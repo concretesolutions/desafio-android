@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.abs.javarepos.R
 import com.abs.javarepos.model.Repo
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_repo.view.*
 
 class RepoAdapter : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
@@ -36,6 +37,9 @@ class RepoAdapter : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
             itemView.tvName.text = repo.name
             itemView.tvDescription.text = repo.description
             itemView.tvAuthorName.text = repo.authorName
+            Glide.with(itemView.context)
+                .load(repo.authorPictureUrl)
+                .into(itemView.ivAuthorPicture)
         }
     }
 }
