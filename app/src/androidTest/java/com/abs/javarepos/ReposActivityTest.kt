@@ -18,10 +18,10 @@ class ReposActivityTest {
 
     @get:Rule
     val reposActivity = ActivityScenarioRule(ReposActivity::class.java)
-    val repo = Repo("Name", "Description")
+    val repo = Repo("Name", "Description", "Name Surname")
 
     @Test
-    fun whenResumedThenShowTitle() {
+    fun whenResumed_thenShowTitle() {
         reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
         onView(withId(R.id.action_bar))
             .check(matches(withChild(withText(R.string.repos_title))))
@@ -29,14 +29,14 @@ class ReposActivityTest {
     }
 
     @Test
-    fun whenResumedThenShowList() {
+    fun whenResumed_thenShowList() {
         reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
         onView(withId(R.id.rvRepos))
             .check(matches(isDisplayed()))
     }
 
     @Test
-    fun givenResumedWhenAddItemsThenShowRepoName() {
+    fun givenResumed_whenAddItems_thenShowRepoName() {
         reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
         reposActivity.scenario.onActivity { activity ->
             activity.repoAdapter.addItems(arrayListOf(repo))
@@ -46,12 +46,22 @@ class ReposActivityTest {
     }
 
     @Test
-    fun givenResumedWhenAddItemsThenShowRepoDescription() {
+    fun givenResumed_whenAddItems_thenShowRepoDescription() {
         reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
         reposActivity.scenario.onActivity { activity ->
             activity.repoAdapter.addItems(arrayListOf(repo))
         }
         onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
         onView(withId(R.id.tvDescription)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun givenResumed_whenAddItems_thenShowRepoAuthorName() {
+        reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
+        reposActivity.scenario.onActivity { activity ->
+            activity.repoAdapter.addItems(arrayListOf(repo))
+        }
+        onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
+        onView(withId(R.id.tvAuthorName)).check(matches(isDisplayed()))
     }
 }

@@ -35,6 +35,7 @@ class RepoAdapter : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
         fun bind(repo: Repo) {
             itemView.tvName.text = repo.name
             itemView.tvDescription.text = repo.description
+            itemView.tvAuthorName.text = repo.authorName
         }
     }
 }
