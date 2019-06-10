@@ -18,6 +18,7 @@ class ReposActivityTest {
 
     @get:Rule
     val reposActivity = ActivityScenarioRule(ReposActivity::class.java)
+    val repo = Repo("Name", "Description")
 
     @Test
     fun whenResumedThenShowTitle() {
@@ -38,9 +39,19 @@ class ReposActivityTest {
     fun givenResumedWhenAddItemsThenShowRepoName() {
         reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
         reposActivity.scenario.onActivity { activity ->
-            activity.repoAdapter.addItems(arrayListOf(Repo("Name")))
+            activity.repoAdapter.addItems(arrayListOf(repo))
         }
         onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
         onView(withId(R.id.tvName)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun givenResumedWhenAddItemsThenShowRepoDescription() {
+        reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
+        reposActivity.scenario.onActivity { activity ->
+            activity.repoAdapter.addItems(arrayListOf(repo))
+        }
+        onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
+        onView(withId(R.id.tvDescription)).check(matches(isDisplayed()))
     }
 }
