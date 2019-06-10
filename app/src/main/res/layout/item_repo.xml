@@ -44,4 +44,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         tools:text="123" />
 
+    <TextView
+        android:id="@+id/tvForks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvStars"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        tools:text="456" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,7 @@ class RepoAdapter : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
                 .load(repo.authorPictureUrl)
                 .into(itemView.ivAuthorPicture)
             itemView.tvStars.text = repo.stars.toString()
+            itemView.tvForks.text = repo.forks.toString()
         }
     }
 }
