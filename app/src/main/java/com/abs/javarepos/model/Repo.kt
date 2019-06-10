@@ -4,5 +4,6 @@ data class Repo(
     val name: String,
     val description: String,
     val authorName: String,
-    val authorPictureUrl: String
+    val authorPictureUrl: String,
+    val stars: Int
 )

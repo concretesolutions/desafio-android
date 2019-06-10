@@ -36,4 +36,12 @@
         app:layout_constraintTop_toBottomOf="@+id/ivAuthorPicture"
         tools:text="Name Surname" />
 
+    <TextView
+        android:id="@+id/tvStars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        tools:text="123" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

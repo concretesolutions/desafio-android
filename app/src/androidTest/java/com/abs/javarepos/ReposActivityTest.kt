@@ -19,7 +19,7 @@ class ReposActivityTest {
 
     @get:Rule
     val reposActivity = ActivityScenarioRule(ReposActivity::class.java)
-    val repo = Repo("Name", "Description", "Name Surname", "https://randomuser.me/api/portraits/med/men/0.jpg")
+    val repo = Repo("Name", "Description", "Name Surname", "https://randomuser.me/api/portraits/med/men/0.jpg", 123)
 
     @Test
     fun whenResumed_thenShowTitle() {
@@ -74,6 +74,17 @@ class ReposActivityTest {
         }
         onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
         onView(withId(R.id.ivAuthorPicture)).check(matches(isDisplayed()))
+
+    }
+
+    @Test
+    fun givenResumed_whenAddItems_thenShowRepoStars() {
+        reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
+        reposActivity.scenario.onActivity { activity ->
+            activity.repoAdapter.addItems(arrayListOf(repo))
+        }
+        onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
+        onView(withId(R.id.tvStars)).check(matches(isDisplayed()))
 
     }
 }

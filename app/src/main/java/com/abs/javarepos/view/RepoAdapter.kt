@@ -40,6 +40,7 @@ class RepoAdapter : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
             Glide.with(itemView.context)
                 .load(repo.authorPictureUrl)
                 .into(itemView.ivAuthorPicture)
+            itemView.tvStars.text = repo.stars.toString()
         }
     }
 }
