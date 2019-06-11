@@ -10,6 +10,7 @@ import br.com.renan.desafioandroid.model.data.PullRequest
 import br.com.renan.desafioandroid.pullrequest.presentation.IPullRequestContract
 import br.com.renan.desafioandroid.pullrequest.presentation.PullRequestPresenter
 import kotlinx.android.synthetic.main.activity_pull_request.*
+import kotlinx.android.synthetic.main.error_layout.*
 
 class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
 
@@ -29,6 +30,18 @@ class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
 
         val (login, creator) = getExtras()
 
+        init(login, creator)
+
+        initListners(login, creator)
+    }
+
+    private fun initListners(login: String, creator: String) {
+        ivError.setOnClickListener {
+            init(login, creator)
+        }
+    }
+
+    private fun init(login: String, creator: String) {
         pullRequestPresenter.requestPullRequestData(login, creator)
     }
 
@@ -61,10 +74,11 @@ class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
 
     override fun showPullRequestLoading() {
         pbPullRequest.visibility = View.VISIBLE
+        include_error_pull_request.visibility = View.GONE
     }
 
     override fun showPullRequestError() {
-        include_error_repository.visibility = View.VISIBLE
+        include_error_pull_request.visibility = View.VISIBLE
         pbPullRequest.visibility = View.GONE
         tvPullRequestAvatar.visibility = View.GONE
     }
@@ -74,13 +88,13 @@ class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
         pullRequestRecycler.visibility = View.VISIBLE
         include_empty_layout.visibility = View.GONE
         pbPullRequest.visibility = View.GONE
-        include_error_repository.visibility = View.GONE
+        include_error_pull_request.visibility = View.GONE
     }
 
     override fun showPullRequestEmpty() {
         include_empty_layout.visibility = View.VISIBLE
         pbPullRequest.visibility = View.GONE
         tvPullRequestAvatar.visibility = View.GONE
-        include_error_repository.visibility = View.GONE
+        include_error_pull_request.visibility = View.GONE
     }
 }

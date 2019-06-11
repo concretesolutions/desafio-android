@@ -1,5 +1,7 @@
 package br.com.renan.desafioandroid.pullrequest.view
 
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -33,13 +35,19 @@ class PullRequestAdapter(pullRequestItemsList: List<PullRequest>) : RecyclerView
 
             Glide.with(itemView.context)
                 .load(pullRequest.user.avatarUrl)
-                .placeholder(R.drawable.image_border)
                 .into(ivPullRequestAvatar)
 
             tvPullRequestName.text = pullRequest.title
-            tvPullRequestDescription.text = pullRequest.body
+            tvPullRequestDescription.text =
+                if (pullRequest.body.isEmpty()) context.getString(R.string.description_not_found) else pullRequest.body
             tvPullRequestUserName.text = pullRequest.user.login
             tvPullRequestFullName.text = pullRequest.user.login
+
+            itemView.setOnClickListener {
+                val openBrowser = Intent(Intent.ACTION_VIEW)
+                openBrowser.data = Uri.parse(pullRequest.html_url)
+                context.startActivity(openBrowser)
+            }
         }
     }
 }

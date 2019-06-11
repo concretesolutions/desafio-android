@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">Desafio android</string>
-    <string name="open_close_pulls">Html.fromHtml(%d opened / %d closed</string>
+    <string name="open_close_pulls"><font color="#01C6DB">%d opened</font> / %d closed</string>
+    <string name="description_not_found">Description not found</string>
+    <string name="image_error_recharge">Toque imagem para recarregar</string>
+    <string name="list_pull_request_empty">Não foi encontrado nenhum pull request para este repositório</string>
+    <string name="title_pull_request">Nome Repositório</string>
+    <string name="description_pull_request">Mussum Ipsum, cacilds vidis litro abertis. Manduma pindureta quium dia nois
+        paga.
+    </string>
+    <string name="username_pull_request">username</string>
+    <string name="full_name_pull_request">Nome Sobrenome</string>
+    <string name="name_repository">Nome Repositório</string>
+    <string name="description_repository">Mussum Ipsum, cacilds vidis litro abertis. Manduma pindureta quium dia nois
+        paga.
+    </string>
+    <string name="forks_repository">640</string>
+    <string name="stars_repository">640</string>
+    <string name="username_repository">username</string>
+    <string name="full_name_repository">Nome Sobrenome</string>
 </resources>

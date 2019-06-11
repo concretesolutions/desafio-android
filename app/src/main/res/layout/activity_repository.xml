@@ -41,7 +41,7 @@
 
     <include
             android:id="@+id/include_error_repository"
-            layout="@layout/error_layout_repository"
+            layout="@layout/error_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"

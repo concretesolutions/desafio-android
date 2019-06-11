@@ -10,9 +10,9 @@
     <TextView
             android:id="@+id/tvPullRequestAvatar"
             android:text="@string/open_close_pulls"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
+            android:background="@color/galery"
             android:paddingTop="16dp"
+            android:paddingLeft="16dp"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -45,8 +45,8 @@
             app:layout_constraintTop_toTopOf="@+id/pullRequestRecycler"/>
 
     <include
-            android:id="@+id/include_error_repository"
-            layout="@layout/error_layout_repository"
+            android:id="@+id/include_error_pull_request"
+            layout="@layout/error_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"

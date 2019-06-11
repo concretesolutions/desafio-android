@@ -17,7 +17,7 @@
 
     <TextView
             android:id="@+id/txError"
-            android:text="Não foi encontrado nenhum \npull request para este repositório"
+            android:text="@string/list_pull_request_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/ivEmptyLayout"

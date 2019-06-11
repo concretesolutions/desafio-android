@@ -7,7 +7,8 @@ data class PullRequest (
     @field:Json(name = "created_at") val createDate: String,
     @field:Json(name = "body") val body: String,
     @field:Json(name = "user") val user: User,
-    @field:Json(name = "state") val state: String
+    @field:Json(name = "state") val state: String,
+    @field:Json(name = "html_url") val html_url: String
 )
 
 data class User (

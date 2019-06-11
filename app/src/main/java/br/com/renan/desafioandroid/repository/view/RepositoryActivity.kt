@@ -4,16 +4,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
-import br.com.renan.desafioandroid.PaginationScroll
+import br.com.renan.desafioandroid.util.PaginationScroll
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.Repository
 import br.com.renan.desafioandroid.model.data.RepositoryItemsList
 import br.com.renan.desafioandroid.repository.presentation.IRepositoryContract
 import br.com.renan.desafioandroid.repository.presentation.RepositoryPresenter
 import kotlinx.android.synthetic.main.activity_repository.*
-import kotlinx.android.synthetic.main.error_layout_repository.*
+import kotlinx.android.synthetic.main.error_layout.*
 
 class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
 

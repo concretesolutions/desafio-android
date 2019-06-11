@@ -11,9 +11,9 @@
 
     <TextView
             android:id="@+id/tvRepositoryName"
-            android:text="Nome Repositório"
+            android:text="@string/name_repository"
             android:textStyle="bold"
-            android:textColor="#4988C1"
+            android:textColor="@color/steelBlue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
 
     <TextView
             android:id="@+id/tvRepositoryDescription"
-            android:text="Mussum Ipsum, cacilds vidis litro abertis. Manduma pindureta quium dia nois paga."
+            android:text="@string/description_repository"
             android:ellipsize="end"
             android:maxLines="2"
             android:layout_marginTop="5dp"
@@ -33,7 +33,7 @@
 
     <TextView
             android:id="@+id/tvRepositoryForks"
-            android:text="640"
+            android:text="@string/forks_repository"
             android:layout_marginTop="8dp"
             android:textSize="20sp"
             android:drawableStart="@drawable/ic_forks"
@@ -45,7 +45,7 @@
 
     <TextView
             android:id="@+id/tvRepositoryStars"
-            android:text="640"
+            android:text="@string/stars_repository"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:textSize="20sp"
@@ -74,8 +74,8 @@
 
     <TextView
             android:id="@+id/tvRepositoryUserName"
-            android:text="username"
-            android:textColor="#4988C1"
+            android:text="@string/username_repository"
+            android:textColor="@color/steelBlue"
             android:textAlignment="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
 
     <TextView
             android:id="@+id/tvRepositoryFullName"
-            android:text="Nome Sobrenome"
+            android:text="@string/full_name_repository"
             android:textAlignment="center"
             android:layout_width="0dp"
             android:maxLines="1"
@@ -98,7 +98,7 @@
     <View
             android:id="@+id/vSeparator"
             android:layout_marginTop="16dp"
-            android:background="#E1E1E1"
+            android:background="@color/mercury"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             app:layout_constraintTop_toBottomOf="@+id/tvRepositoryStars"/>

@@ -35,7 +35,6 @@ class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Ad
 
             Glide.with(itemView.context)
                 .load(repository.owner.avatarUrl)
-                .placeholder(R.drawable.image_border)
                 .into(ivRepositoryAvatar)
 
             tvRepositoryName.text = repository.name
@@ -49,9 +48,7 @@ class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Ad
                 val intent = Intent(itemView.context, PullRequestActivity::class.java)
                 intent.putExtra("creator", repository.owner.login)
                 intent.putExtra("repository", repository.name)
-
                 context.startActivity(intent)
-
             }
         }
     }
