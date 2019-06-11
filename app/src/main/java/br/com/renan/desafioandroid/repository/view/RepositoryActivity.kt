@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import android.view.View
-import br.com.renan.desafioandroid.util.PaginationScroll
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.Repository
 import br.com.renan.desafioandroid.model.data.RepositoryItemsList
 import br.com.renan.desafioandroid.repository.presentation.IRepositoryContract
 import br.com.renan.desafioandroid.repository.presentation.RepositoryPresenter
+import br.com.renan.desafioandroid.util.PaginationScroll
 import kotlinx.android.synthetic.main.activity_repository.*
 import kotlinx.android.synthetic.main.error_layout.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
 
@@ -21,6 +23,7 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
     private val listRepository = ArrayList<Repository>()
     private var releasedLoad: Boolean = true
     private var page = 1
+    private lateinit var toolbar: Toolbar
 
     private lateinit var linearLayoutManager: LinearLayoutManager
 
@@ -28,13 +31,22 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
 
+        toolbar = findViewById(R.id.include_toolbar)
+
+        setupToolbar(toolbar)
+
         repositoryPresenter.bind(this)
 
-        init(1)
+        init(page)
 
         setupLayout()
 
-        initListners()
+        initListeners()
+    }
+
+    private fun setupToolbar(toolbar: Toolbar) {
+        toolbar.setNavigationIcon(R.drawable.ic_menu)
+        toolbar_title.text = getString(R.string.title_toolbar_repository)
     }
 
     private fun setupLayout() {
@@ -45,14 +57,15 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
         repositoryRecycler.adapter = repositoryAdapter
     }
 
-    private fun initListners() {
+    private fun initListeners() {
         ivError.setOnClickListener {
-            repositoryPresenter.requestRepositoryData(1)
+            repositoryPresenter.requestRepositoryData(page)
         }
 
-        repositoryRecycler.addOnScrollListener(object : PaginationScroll(linearLayoutManager){
+        repositoryRecycler.addOnScrollListener(object : PaginationScroll(linearLayoutManager) {
             override fun loadMoreItems() {
                 releasedLoad = false
+                pbBottom.visibility = View.VISIBLE
                 page++
                 init(page)
             }
@@ -71,8 +84,6 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
         repositoryPresenter.requestRepositoryData(page)
     }
 
-
-
     override fun repositorySuccess(repositoryList: RepositoryItemsList) {
         listRepository.addAll(repositoryList.repositoryItemsList)
         releasedLoad = true
@@ -88,10 +99,12 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
         include_error_repository.visibility = View.VISIBLE
         pbRepository.visibility = View.GONE
         repositoryRecycler.visibility = View.GONE
+        pbBottom.visibility = View.GONE
     }
 
     override fun showRepositorySucess() {
         pbRepository.visibility = View.GONE
         repositoryRecycler.visibility = View.VISIBLE
+        pbBottom.visibility = View.GONE
     }
 }

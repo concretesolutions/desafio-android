@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">@color/tuna</color>
+    <color name="colorPrimaryDark">@color/tuna</color>
+    <color name="colorAccent">#DB97AD</color>
+
     <color name="steelBlue">#4988C1</color>
     <color name="mercury">#E1E1E1</color>
     <color name="buttercup">#F5B410</color>
     <color name="galery">#F0F0F0</color>
+    <color name="tuna">#343438</color>
 </resources>

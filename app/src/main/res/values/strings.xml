@@ -4,7 +4,7 @@
     <string name="description_not_found">Description not found</string>
     <string name="image_error_recharge">Toque imagem para recarregar</string>
     <string name="list_pull_request_empty">Não foi encontrado nenhum pull request para este repositório</string>
-    <string name="title_pull_request">Nome Repositório</string>
+    <string name="title_pull_request">Titulo pull request</string>
     <string name="description_pull_request">Mussum Ipsum, cacilds vidis litro abertis. Manduma pindureta quium dia nois
         paga.
     </string>
@@ -18,4 +18,5 @@
     <string name="stars_repository">640</string>
     <string name="username_repository">username</string>
     <string name="full_name_repository">Nome Sobrenome</string>
+    <string name="title_toolbar_repository">Github JavaPop</string>
 </resources>

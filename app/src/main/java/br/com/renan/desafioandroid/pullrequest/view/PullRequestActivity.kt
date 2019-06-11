@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import android.view.View
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.PullRequest
@@ -11,9 +12,13 @@ import br.com.renan.desafioandroid.pullrequest.presentation.IPullRequestContract
 import br.com.renan.desafioandroid.pullrequest.presentation.PullRequestPresenter
 import kotlinx.android.synthetic.main.activity_pull_request.*
 import kotlinx.android.synthetic.main.error_layout.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
 
+    private lateinit var toolbar: Toolbar
+    private lateinit var repoName: String
+    private lateinit var login: String
     private var open: Int = 0
     private var close: Int = 0
     private val pullRequestPresenter = PullRequestPresenter()
@@ -26,29 +31,42 @@ class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_request)
 
+        toolbar = findViewById(R.id.include_toolbar)
+
         pullRequestPresenter.bind(this)
 
-        val (login, creator) = getExtras()
+        val (login, repoName) = getExtras()
 
-        init(login, creator)
+        init(login, repoName)
 
-        initListners(login, creator)
+        setupToolbar(toolbar)
+
+        initListeners(login, repoName)
+
     }
 
-    private fun initListners(login: String, creator: String) {
+    private fun setupToolbar(toolbar: Toolbar) {
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_left)
+        toolbar.setNavigationOnClickListener(View.OnClickListener() {
+            onBackPressed()
+        })
+        toolbar_title.text = repoName
+    }
+
+    private fun initListeners(login: String, creator: String) {
         ivError.setOnClickListener {
             init(login, creator)
         }
     }
 
-    private fun init(login: String, creator: String) {
-        pullRequestPresenter.requestPullRequestData(login, creator)
+    private fun init(login: String, repoName: String) {
+        pullRequestPresenter.requestPullRequestData(login, repoName)
     }
 
     private fun getExtras(): Pair<String, String> {
-        val login = intent.getStringExtra("creator")
-        val creator = intent.getStringExtra("repository")
-        return Pair(login, creator)
+        login = intent.getStringExtra("creator")
+        repoName = intent.getStringExtra("repository")
+        return Pair(login, repoName)
     }
 
 

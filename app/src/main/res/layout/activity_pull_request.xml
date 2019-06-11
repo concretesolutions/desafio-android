@@ -5,7 +5,14 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".repository.view.RepositoryActivity">
+        tools:context=".pullrequest.view.PullRequestActivity">
+
+    <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
             android:id="@+id/tvPullRequestAvatar"
@@ -16,9 +23,9 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/include_toolbar"
+            app:layout_constraintStart_toStartOf="@+id/include_toolbar"/>
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/pullRequestRecycler"
