@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.PullRequest
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_pull_request.view.*
 
 class PullRequestAdapter(pullRequestItemsList: List<PullRequest>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -33,7 +33,7 @@ class PullRequestAdapter(pullRequestItemsList: List<PullRequest>) : RecyclerView
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(pullRequest: PullRequest) = with(itemView) {
 
-            Glide.with(itemView.context)
+            Picasso.get()
                 .load(pullRequest.user.avatarUrl)
                 .into(ivPullRequestAvatar)
 

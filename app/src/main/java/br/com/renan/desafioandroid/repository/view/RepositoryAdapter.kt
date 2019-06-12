@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.Repository
 import br.com.renan.desafioandroid.pullrequest.view.PullRequestActivity
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_repository.view.*
 
 class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -33,7 +33,7 @@ class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Ad
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(repository: Repository) = with(itemView) {
 
-            Glide.with(itemView.context)
+            Picasso.get()
                 .load(repository.owner.avatarUrl)
                 .into(ivRepositoryAvatar)
 

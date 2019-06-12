@@ -97,7 +97,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvRepositoryUserName"/>
 
     <View
-            android:id="@+id/vSeparator"
+            android:id="@+id/vSeparatorRepo"
             android:layout_marginTop="16dp"
             android:background="@color/mercury"
             android:layout_width="match_parent"

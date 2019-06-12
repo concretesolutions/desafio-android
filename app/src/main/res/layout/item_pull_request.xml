@@ -78,7 +78,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/ivPullRequestAvatar"/>
 
     <View
-            android:id="@+id/vSeparator"
+            android:id="@+id/vSeparatorPull"
             android:layout_marginTop="16dp"
             android:background="@color/mercury"
             android:layout_width="match_parent"
