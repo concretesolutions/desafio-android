@@ -84,7 +84,7 @@ class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
         for (pull in pulls) {
             if (pull.state == "open")
                 open++
-            else if (pull.state == "close")
+            else if (pull.state == "closed")
                 close++
         }
         tvPullRequestAvatar.text = getString(R.string.open_close_pulls, open, close)

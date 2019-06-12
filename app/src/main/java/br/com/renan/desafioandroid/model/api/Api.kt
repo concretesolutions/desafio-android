@@ -13,7 +13,7 @@ interface Api {
                         @Query("sort") stars: String,
                         @Query("page") page: Int): Flowable<RepositoryItemsList>
 
-    @GET("repos/{login}/{name}/pulls")
+    @GET("repos/{login}/{name}/pulls?state=all")
     fun getPullRequests(@Path(value = "login") login: String,
                         @Path(value = "name") name: String): Flowable<List<PullRequest>>
 }

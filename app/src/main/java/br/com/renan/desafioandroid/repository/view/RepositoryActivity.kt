@@ -33,7 +33,7 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
 
         toolbar = findViewById(R.id.include_toolbar)
 
-        setupToolbar(toolbar)
+        setupToolbar()
 
         repositoryPresenter.bind(this)
 
@@ -44,8 +44,7 @@ class RepositoryActivity : AppCompatActivity(), IRepositoryContract.View {
         initListeners()
     }
 
-    private fun setupToolbar(toolbar: Toolbar) {
-        toolbar.setNavigationIcon(R.drawable.ic_menu)
+    private fun setupToolbar() {
         toolbar_title.text = getString(R.string.title_toolbar_repository)
     }
 
