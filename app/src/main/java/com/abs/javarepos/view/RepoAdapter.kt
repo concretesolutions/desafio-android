@@ -25,6 +25,7 @@ class RepoAdapter : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
 
     fun addItems(items: ArrayList<Repo>) {
         this.items.addAll(items)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
@@ -36,9 +37,9 @@ class RepoAdapter : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
         fun bind(repo: Repo) {
             itemView.tvName.text = repo.name
             itemView.tvDescription.text = repo.description
-            itemView.tvAuthorName.text = repo.authorName
+            itemView.tvAuthorName.text = repo.owner.login
             Glide.with(itemView.context)
-                .load(repo.authorPictureUrl)
+                .load(repo.owner.avatarUrl)
                 .into(itemView.ivAuthorPicture)
             itemView.tvStars.text = repo.stars.toString()
             itemView.tvForks.text = repo.forks.toString()

@@ -1,10 +1,11 @@
 package com.abs.javarepos.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Repo(
     val name: String,
     val description: String,
-    val authorName: String,
-    val authorPictureUrl: String,
-    val stars: Int,
-    val forks: Int
+    val owner: Owner,
+    @SerializedName("stargazers_count") val stars: Int,
+    @SerializedName("forks_count") val forks: Int
 )
