@@ -6,33 +6,55 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:maxLength="6"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="123456" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvRank"
+        app:layout_constraintRight_toLeftOf="@+id/ivAuthorPicture"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Name" />
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/ivAuthorPicture"
         app:layout_constraintTop_toBottomOf="@+id/tvName"
         tools:text="Description" />
 
     <ImageView
         android:id="@+id/ivAuthorPicture"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@color/colorAccent" />
 
     <TextView
         android:id="@+id/tvAuthorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivAuthorPicture"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ivAuthorPicture"
         app:layout_constraintTop_toBottomOf="@+id/ivAuthorPicture"
         tools:text="Name Surname" />
 
@@ -40,6 +62,7 @@
         android:id="@+id/tvStars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         tools:text="123" />
@@ -49,6 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintLeft_toRightOf="@+id/tvStars"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         tools:text="456" />
