@@ -3,6 +3,7 @@ package com.abs.javarepos.model
 import com.google.gson.annotations.SerializedName
 
 data class Repo(
+    val id: Int,
     val name: String,
     val description: String,
     val owner: Owner,

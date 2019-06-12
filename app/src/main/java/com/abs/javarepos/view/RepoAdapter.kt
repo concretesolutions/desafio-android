@@ -3,15 +3,23 @@ package com.abs.javarepos.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.abs.javarepos.R
 import com.abs.javarepos.model.Repo
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_repo.view.*
 
-class RepoAdapter : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
+class RepoAdapter : PagedListAdapter<Repo, RepoAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private val items = ArrayList<Repo>()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Repo>() {
+            override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean = oldItem == newItem
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_repo, parent, false)
@@ -19,30 +27,25 @@ class RepoAdapter : RecyclerView.Adapter<RepoAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val repo = items[position]
-        holder.bind(repo)
-    }
-
-    fun addItems(items: ArrayList<Repo>) {
-        this.items.addAll(items)
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int {
-        return items.size
+        getItem(position)?.let {
+            holder.bind(it)
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(repo: Repo) {
-            itemView.tvName.text = repo.name
-            itemView.tvDescription.text = repo.description
-            itemView.tvAuthorName.text = repo.owner.login
-            Glide.with(itemView.context)
-                .load(repo.owner.avatarUrl)
-                .into(itemView.ivAuthorPicture)
-            itemView.tvStars.text = repo.stars.toString()
-            itemView.tvForks.text = repo.forks.toString()
+            itemView.apply {
+                tvRank.text = adapterPosition.toString()
+                tvName.text = repo.name
+                tvDescription.text = repo.description
+                tvAuthorName.text = repo.owner.login
+                Glide.with(context)
+                    .load(repo.owner.avatarUrl)
+                    .into(ivAuthorPicture)
+                tvStars.text = repo.stars.toString()
+                tvForks.text = repo.forks.toString()
+            }
         }
     }
 }

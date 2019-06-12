@@ -24,8 +24,10 @@ class ReposActivity : AppCompatActivity() {
         rvRepos.adapter = repoAdapter
 
         viewModel = ViewModelProviders.of(this).get(ReposViewModel::class.java)
-        viewModel.repos.observe(this, Observer {
-            repoAdapter.addItems(it)
+        viewModel.repoPagedList.observe(this, Observer { pagedList ->
+            pagedList?.let {
+                repoAdapter.submitList(it)
+            }
         })
     }
 }
