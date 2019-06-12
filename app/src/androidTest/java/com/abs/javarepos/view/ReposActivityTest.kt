@@ -10,6 +10,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.abs.javarepos.R
 import com.abs.javarepos.model.Owner
 import com.abs.javarepos.model.Repo
+import com.abs.javarepos.view.adapter.RepoAdapter
 import org.junit.Rule
 import org.junit.Test
 
@@ -103,6 +104,5 @@ class ReposActivityTest {
         }
         onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
         onView(withId(R.id.tvForks)).check(matches(isDisplayed()))
-
     }
 }

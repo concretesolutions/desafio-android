@@ -1,4 +1,4 @@
-package com.abs.javarepos.view
+package com.abs.javarepos.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,10 @@ import com.abs.javarepos.model.Repo
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_repo.view.*
 
-class RepoAdapter : PagedListAdapter<Repo, RepoAdapter.ViewHolder>(DIFF_CALLBACK) {
+class RepoAdapter(private val onItemClickListener: OnItemClickListener) :
+    PagedListAdapter<Repo, RepoAdapter.ViewHolder>(
+        DIFF_CALLBACK
+    ) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Repo>() {
@@ -23,7 +26,7 @@ class RepoAdapter : PagedListAdapter<Repo, RepoAdapter.ViewHolder>(DIFF_CALLBACK
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_repo, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(itemView, onItemClickListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,20 +35,29 @@ class RepoAdapter : PagedListAdapter<Repo, RepoAdapter.ViewHolder>(DIFF_CALLBACK
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, private val onItemClickListener: OnItemClickListener) :
+        RecyclerView.ViewHolder(itemView) {
 
         fun bind(repo: Repo) {
             itemView.apply {
+                setOnClickListener { onItemClickListener.onItemClick(repo) }
+
                 tvRank.text = adapterPosition.toString()
                 tvName.text = repo.name
                 tvDescription.text = repo.description
                 tvAuthorName.text = repo.owner.login
+
                 Glide.with(context)
                     .load(repo.owner.avatarUrl)
                     .into(ivAuthorPicture)
+
                 tvStars.text = repo.stars.toString()
                 tvForks.text = repo.forks.toString()
             }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(repo: Repo)
     }
 }
