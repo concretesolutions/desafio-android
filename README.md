@@ -49,7 +49,7 @@ O processo de Pull Request funciona da seguinte maneira:
 1. Candidato fará um fork desse repositório (não irá clonar direto!)
 2. Fará seu projeto nesse fork.
 3. Commitará e subirá as alterações para o __SEU__ fork.
-4. Pela interface do Girhub, irá enviar um Pull Request.
+4. Pela interface do Github, irá enviar um Pull Request.
 
 Se possível deixar o fork público para facilitar a inspeção do código.
 
