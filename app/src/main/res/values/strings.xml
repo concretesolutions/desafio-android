@@ -2,5 +2,7 @@
     <string name="app_name">JavaRepos</string>
 
     <string name="repos_title">Repositórios</string>
-    <string name="pull_requests_title">Pull Requests</string>
+
+    <string name="oldDatePattern">yyyy-MM-dd</string>
+    <string name="newDatePattern">dd/MM/yyyy</string>
 </resources>
