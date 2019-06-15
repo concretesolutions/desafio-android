@@ -16,7 +16,7 @@
         android:layout_margin="16dp">
 
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="#000000"
@@ -25,10 +25,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Name" />
+            tools:text="Title" />
 
         <TextView
-            android:id="@+id/tvDescription"
+            android:id="@+id/tvBody"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -37,8 +37,8 @@
             android:textColor="#666666"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvName"
-            tools:text="Description" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            tools:text="Body" />
 
         <ImageView
             android:id="@+id/ivOwnerPicture"
@@ -47,7 +47,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            app:layout_constraintTop_toBottomOf="@+id/tvBody"
             tools:src="@color/colorAccent" />
 
         <TextView
@@ -59,54 +59,23 @@
             android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/ivOwnerPicture"
-            app:layout_constraintEnd_toStartOf="@+id/ivStars"
+            app:layout_constraintEnd_toStartOf="@+id/tvDate"
             app:layout_constraintStart_toEndOf="@+id/ivOwnerPicture"
             app:layout_constraintTop_toTopOf="@+id/ivOwnerPicture"
             tools:text="Username" />
 
-        <ImageView
-            android:id="@+id/ivStars"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_star"
-            app:layout_constraintBottom_toBottomOf="@+id/ivOwnerPicture"
-            app:layout_constraintEnd_toStartOf="@+id/tvStars"
-            app:layout_constraintTop_toTopOf="@+id/ivOwnerPicture" />
 
         <TextView
-            android:id="@+id/tvStars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/ivStars"
-            app:layout_constraintEnd_toStartOf="@+id/ivForks"
-            app:layout_constraintTop_toTopOf="@+id/ivStars"
-            tools:text="123.4k" />
-
-        <ImageView
-            android:id="@+id/ivForks"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_fork"
-            app:layout_constraintBottom_toBottomOf="@+id/ivOwnerPicture"
-            app:layout_constraintEnd_toStartOf="@+id/tvForks"
-            app:layout_constraintTop_toTopOf="@+id/ivOwnerPicture" />
-
-
-        <TextView
-            android:id="@+id/tvForks"
+            android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:textColor="#000000"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/ivForks"
+            app:layout_constraintBottom_toBottomOf="@+id/ivOwnerPicture"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ivForks"
-            tools:text="45.6k" />
+            app:layout_constraintTop_toTopOf="@+id/ivOwnerPicture"
+            tools:text="01/01/01" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
-

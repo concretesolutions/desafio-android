@@ -66,23 +66,23 @@ class ReposActivityTest {
     }
 
     @Test
-    fun givenResumed_whenAddItems_thenShowRepoAuthorName() {
+    fun givenResumed_whenAddItems_thenShowRepoOwnerName() {
         reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
         reposActivity.scenario.onActivity { activity ->
             activity.repoAdapter.addItems(arrayListOf(repo))
         }
         onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
-        onView(withId(R.id.tvAuthorName)).check(matches(isDisplayed()))
+        onView(withId(R.id.tvOwnerName)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun givenResumed_whenAddItems_thenShowRepoAuthorPicture() {
+    fun givenResumed_whenAddItems_thenShowRepoOwnerPicture() {
         reposActivity.scenario.moveToState(Lifecycle.State.RESUMED)
         reposActivity.scenario.onActivity { activity ->
             activity.repoAdapter.addItems(arrayListOf(repo))
         }
         onView(withId(R.id.rvRepos)).perform(actionOnItemAtPosition<RepoAdapter.ViewHolder>(0, scrollTo()))
-        onView(withId(R.id.ivAuthorPicture)).check(matches(isDisplayed()))
+        onView(withId(R.id.ivOwnerPicture)).check(matches(isDisplayed()))
 
     }
 
