@@ -56,7 +56,7 @@ class RepoAdapter(private val onItemClickListener: OnItemClickListener) :
         }
 
         private fun formatNumber(value: Int): String {
-            return "%.2fk".format(value.toFloat().div(1000))
+            return "%.1fk".format(value.toFloat().div(1000))
 
         }
     }

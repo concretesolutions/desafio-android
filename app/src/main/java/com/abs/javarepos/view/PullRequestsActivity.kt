@@ -1,13 +1,19 @@
 package com.abs.javarepos.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abs.javarepos.R
 import com.abs.javarepos.model.PullRequest
 import com.abs.javarepos.model.Repo
 import com.abs.javarepos.view.adapter.PullRequestAdapter
+import com.abs.javarepos.viewmodel.PullRequestsViewModel
 import kotlinx.android.synthetic.main.activity_pull_requests.*
+
 
 class PullRequestsActivity : AppCompatActivity() {
 
@@ -17,6 +23,7 @@ class PullRequestsActivity : AppCompatActivity() {
 
     lateinit var repo: Repo
     private lateinit var pullRequestAdapter: PullRequestAdapter
+    private lateinit var viewModel: PullRequestsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,15 +31,28 @@ class PullRequestsActivity : AppCompatActivity() {
 
         repo = intent.getSerializableExtra(REPO_KEY) as Repo
 
-        supportActionBar?.title = getString(R.string.pull_requests_title)
+        supportActionBar?.title = repo.name
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         pullRequestAdapter = PullRequestAdapter(object : PullRequestAdapter.OnItemClickListener {
             override fun onItemClick(pullRequest: PullRequest) {
-
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(pullRequest.html_url)))
             }
         })
 
         rvPullRequests.layoutManager = LinearLayoutManager(this)
         rvPullRequests.adapter = pullRequestAdapter
+
+        viewModel = ViewModelProviders.of(this).get(PullRequestsViewModel::class.java)
+        viewModel.fetchPullRequests(repo).observe(this, Observer { items ->
+            pullRequestAdapter.addItems(items)
+        })
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
