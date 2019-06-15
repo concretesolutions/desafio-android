@@ -1,80 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="16dp">
 
-    <TextView
-        android:id="@+id/tvRank"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:maxLength="6"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="123456" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintLeft_toRightOf="@+id/tvRank"
-        app:layout_constraintRight_toLeftOf="@+id/ivAuthorPicture"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name" />
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Name" />
 
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/ivAuthorPicture"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        tools:text="Description" />
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:minLines="3"
+            android:textColor="#666666"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="Description" />
 
-    <ImageView
-        android:id="@+id/ivAuthorPicture"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@color/colorAccent" />
+        <ImageView
+            android:id="@+id/ivOwnerPicture"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            tools:src="@color/colorAccent" />
 
-    <TextView
-        android:id="@+id/tvAuthorName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/ivAuthorPicture"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ivAuthorPicture"
-        app:layout_constraintTop_toBottomOf="@+id/ivAuthorPicture"
-        tools:text="Name Surname" />
+        <TextView
+            android:id="@+id/tvOwnerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivOwnerPicture"
+            app:layout_constraintEnd_toStartOf="@+id/ivStars"
+            app:layout_constraintStart_toEndOf="@+id/ivOwnerPicture"
+            app:layout_constraintTop_toTopOf="@+id/ivOwnerPicture"
+            tools:text="Username" />
 
-    <TextView
-        android:id="@+id/tvStars"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-        tools:text="123" />
+        <ImageView
+            android:id="@+id/ivStars"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="@+id/ivOwnerPicture"
+            app:layout_constraintEnd_toStartOf="@+id/tvStars"
+            app:layout_constraintTop_toTopOf="@+id/ivOwnerPicture" />
 
-    <TextView
-        android:id="@+id/tvForks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintLeft_toRightOf="@+id/tvStars"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-        tools:text="456" />
+        <TextView
+            android:id="@+id/tvStars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivStars"
+            app:layout_constraintEnd_toStartOf="@+id/ivForks"
+            app:layout_constraintTop_toTopOf="@+id/ivStars"
+            tools:text="123.4k" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/ivForks"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_fork"
+            app:layout_constraintBottom_toBottomOf="@+id/ivOwnerPicture"
+            app:layout_constraintEnd_toStartOf="@+id/tvForks"
+            app:layout_constraintTop_toTopOf="@+id/ivOwnerPicture" />
+
+
+        <TextView
+            android:id="@+id/tvForks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivForks"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivForks"
+            tools:text="45.6k" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+

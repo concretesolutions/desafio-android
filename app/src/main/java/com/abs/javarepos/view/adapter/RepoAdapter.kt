@@ -42,18 +42,22 @@ class RepoAdapter(private val onItemClickListener: OnItemClickListener) :
             itemView.apply {
                 setOnClickListener { onItemClickListener.onItemClick(repo) }
 
-                tvRank.text = adapterPosition.toString()
                 tvName.text = repo.name
                 tvDescription.text = repo.description
-                tvAuthorName.text = repo.owner.login
+                tvOwnerName.text = repo.owner.login
 
                 Glide.with(context)
                     .load(repo.owner.avatarUrl)
-                    .into(ivAuthorPicture)
+                    .into(ivOwnerPicture)
 
-                tvStars.text = repo.stars.toString()
-                tvForks.text = repo.forks.toString()
+                tvStars.text = formatNumber(repo.stars)
+                tvForks.text = formatNumber(repo.forks)
             }
+        }
+
+        private fun formatNumber(value: Int): String {
+            return "%.2fk".format(value.toFloat().div(1000))
+
         }
     }
 
