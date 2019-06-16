@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Desafio Concrete</string>
+    <string name="loading">Carregando…</string>
+    <string name="owner">Dono</string>
+    <string name="photo">Foto</string>
+    <string name="name">Nome</string>
+    <string name="description">Descrição</string>
+    <string name="star">Estrelas</string>
+    <string name="fork">Forks</string>
+    <string name="user_open_pull_date">%1$s abriu em %2$s</string>
+    <string name="no_description">Sem descrição.</string>
+    <string name="error">Erro. Verifique sua conexão com a internet.</string>
+</resources>
