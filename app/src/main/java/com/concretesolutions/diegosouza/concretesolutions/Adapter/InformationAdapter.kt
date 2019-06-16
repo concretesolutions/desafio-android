@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.concretesolutions.diegosouza.concretesolutions.Model.InformationList
 import com.concretesolutions.diegosouza.concretesolutions.R
 import kotlinx.android.synthetic.main.information_lista.view.*
+import java.text.SimpleDateFormat
 
 class InformationAdapter(
     private val context: Context
@@ -70,11 +71,15 @@ class InformationAdapter(
             val avatar = itemView.item_avatar
             val full_name = itemView.item_nome_sobrenome
             val name = itemView.item_username
+            val data = itemView.item_date
 
             title.text = lista.title
             description.text = lista.body
-//            full_name.text = lista.repo.full_name
+            full_name.text = lista.base.repo.full_name
             name.text = lista.user.login
+
+            val format = SimpleDateFormat("dd/MM/yyy HH:mm:ss")
+            data.text = format.format(lista.created_at)
 
             Glide.with(itemView.context)
                 .load(lista.user.avatar_url)

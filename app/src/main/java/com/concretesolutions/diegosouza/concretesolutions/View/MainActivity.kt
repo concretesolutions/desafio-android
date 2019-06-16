@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.concretesolutions.diegosouza.concretesolutions.Adapter.ListaAdapter
 import com.concretesolutions.diegosouza.concretesolutions.Api.RetrofitClient
 import com.concretesolutions.diegosouza.concretesolutions.Model.ItemsLista
@@ -103,6 +105,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onFailure(call: Call<Lista>?, t: Throwable?) {
                 loading = false
                 progressBar.visibility = View.GONE
+                alertDialog()
             }
         })
     }
@@ -158,10 +161,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         adapter.setOnItemClickListener(object : ListaAdapter.ClickListener {
             override fun onClick(pos: Int, aView: View) {
                 val intent = Intent(this@MainActivity, InformationActivity::class.java);
-                intent.putExtra("full_name_pulls", lista[pos].full_name)
+                intent.putExtra("login", lista[pos].owner.login)
+                intent.putExtra("nome", lista[pos].name)
                 startActivity(intent);
             }
         })
 
+    }
+
+    fun alertDialog() {
+
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setTitle("Atenção")
+
+        builder.setMessage("Desculpe, não conseguimos concluir a requisição, deseja tentar novamente?")
+
+        builder.setPositiveButton("Sim") { dialog, which ->
+            val intent = Intent(this@MainActivity, MainActivity::class.java);
+            startActivity(intent)
+        }
+
+
+        builder.setNegativeButton("Sair") { dialog, which ->
+            finish()
+        }
+
+        val dialog: AlertDialog = builder.create()
+
+        dialog.show()
     }
 }

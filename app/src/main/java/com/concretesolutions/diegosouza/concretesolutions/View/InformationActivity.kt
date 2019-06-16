@@ -3,6 +3,7 @@ package com.concretesolutions.diegosouza.concretesolutions.View
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
@@ -19,18 +20,19 @@ class InformationActivity : AppCompatActivity() {
 
     private lateinit var adapter: InformationAdapter
 
-    private var full_name_pulls = ""
+    private var login: String? = null
+    private var nome: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
 
+        title = "Pulls"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        title = ""
-
-        full_name_pulls = intent.getStringExtra("full_name_pulls")
+        login = intent.getStringExtra("login")
+        nome = intent.getStringExtra("nome")
 
         carregarLista()
 
@@ -44,18 +46,21 @@ class InformationActivity : AppCompatActivity() {
 
     private fun carregarLista() {
 
-        val call = RetrofitClient().listaService().listaPulls()
-        call.enqueue(object : Callback<List<InformationList>> {
+        val call = login?.let { nome?.let { it1 -> RetrofitClient().listaService().listaPulls(it, it1) } }
+        call?.enqueue(object : Callback<List<InformationList>> {
             override fun onResponse(call: Call<List<InformationList>>, response: Response<List<InformationList>>) {
                 response.body()?.let {
 
                     val lista: List<InformationList> = it
                     configurarListagem(lista)
+
+                    title = "Pulls open: " + lista.size
                 }
             }
 
             override fun onFailure(call: Call<List<InformationList>>, t: Throwable) {
                 progressBar2.visibility = View.GONE
+                alertDialog()
             }
         })
     }
@@ -83,5 +88,22 @@ class InformationActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    fun alertDialog() {
+
+        val builder = AlertDialog.Builder(this@InformationActivity)
+        builder.setTitle("Atenção")
+
+        builder.setMessage("Desculpe, não conseguimos concluir a requisição")
+
+        builder.setPositiveButton("Ok") { dialog, which ->
+            val intent = Intent(this@InformationActivity, MainActivity::class.java);
+            startActivity(intent)
+        }
+
+        val dialog: AlertDialog = builder.create()
+
+        dialog.show()
     }
 }

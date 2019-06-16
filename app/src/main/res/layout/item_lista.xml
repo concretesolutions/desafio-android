@@ -63,12 +63,14 @@
                 app:layout_constraintBottom_toBottomOf="@+id/item_avatar3" android:textColor="@color/laranja"/>
         <TextView
                 android:id="@+id/item_description"
-                android:layout_width="233dp"
-                android:layout_height="38dp"
+                android:layout_width="234dp"
+                android:layout_height="wrap_content"
                 tools:text="Descrição"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/item_title"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/item_avatar" android:layout_marginEnd="8dp"
+                app:layout_constraintHorizontal_bias="0.0"/>
         <TextView
                 android:id="@+id/item_username"
                 android:layout_width="wrap_content"
