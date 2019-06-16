@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/item_repositorio_imgAutor"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_width="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_repositorio_txtNome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/item_repositorio_imgAutor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_repositorio_txtDescricao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            android:textColor="@color/secondaryText"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/item_repositorio_imgAutor"
+            app:layout_constraintStart_toStartOf="@+id/item_repositorio_txtNome"
+            app:layout_constraintTop_toBottomOf="@+id/item_repositorio_txtNome" />
+
+        <TextView
+            android:id="@+id/item_repositorio_txtNomeAutor"
+            android:layout_width="59dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:scrollHorizontally="false"
+            android:text="TextView"
+            android:textColor="@color/primaryText"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/item_repositorio_imgAutor"
+            app:layout_constraintStart_toStartOf="@+id/item_repositorio_imgAutor"
+            app:layout_constraintTop_toBottomOf="@+id/item_repositorio_imgAutor" />
+
+        <TextView
+            android:id="@+id/item_repositorio_txtNumeroForks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
+            android:drawableLeft="@drawable/fork"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textColor="@color/secondaryText"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/item_repositorio_txtDescricao"
+            app:layout_constraintTop_toBottomOf="@+id/item_repositorio_txtDescricao" />
+
+        <TextView
+            android:id="@+id/item_repositorio_txtNumeroStars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:drawableLeft="@drawable/star"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textColor="@color/secondaryText"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/item_repositorio_txtNumeroForks"
+            app:layout_constraintStart_toEndOf="@+id/item_repositorio_txtNumeroForks"
+            app:layout_constraintTop_toTopOf="@+id/item_repositorio_txtNumeroForks" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

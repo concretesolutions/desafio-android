@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ProjetoConcrete</string>
+
+    <string-array name="linguagens">
+        <item>Kotlin</item>
+        <item>Java</item>
+        <item>Swift</item>
+    </string-array>
+
+    <string-array name="ordem">
+        <item>stars</item>
+        <item>forks</item>
+    </string-array>
+
+</resources>
