@@ -25,13 +25,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="@string/nav_header_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            android:text="Desafio Concrete"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" android:textColor="@android:color/white"
+            android:textStyle="bold"/>
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nav_header_subtitle"
-            android:id="@+id/textView"/>
+            android:text="desafio@concrete.com.br"
+            android:id="@+id/textView" android:textColor="@android:color/white"/>
 
 </LinearLayout>

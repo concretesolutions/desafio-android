@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -26,9 +25,10 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private lateinit var adapter: ListaAdapter
+
     var offset = 1
     private var loading = false
-    private var lista: Lista? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.action_settings -> return true
+            R.id.action_help -> return true
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -76,23 +76,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_camera -> {
-
-            }
-            R.id.nav_gallery -> {
-
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
+            R.id.drawer_exit -> {
+                finish()
             }
         }
 
@@ -109,20 +94,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ) {
                 response?.body()?.let {
                     loading = false
-                    lista = it
-                    configurarListagem(lista!!.items)
+                    val lista: Lista = it
+                    configurarListagem(lista.items)
                 }
             }
 
             override fun onFailure(call: Call<Lista>?, t: Throwable?) {
                 loading = false
                 progressBar.visibility = View.GONE
-                Log.e("onFailure error", t?.message)
             }
         })
     }
 
-    private fun addLista(offset: Int): List<ItemsLista>? {
+    private fun addLista(offset: Int) {
 
         loading = true
 
@@ -134,23 +118,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ) {
                 loading = false
                 response?.body()?.let {
-                    lista = it
+                    adapter.addData(it.items)
                 }
             }
 
             override fun onFailure(call: Call<Lista>?, t: Throwable?) {
                 loading = false
-                Log.e("onFailure error", t?.message)
             }
         })
-
-        return lista?.items
     }
 
     private fun configurarListagem(lista: List<ItemsLista>) {
 
         val recyclerView = recyclerView_list
-        var adapter = ListaAdapter(this)
+        adapter = ListaAdapter(this)
 
         recyclerView.adapter = adapter
 
@@ -165,19 +146,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 if (!recyclerView.canScrollVertically(1)) {
 
-                    if(!loading) {
-                        offset + 1
-                        addLista(offset)?.let {
-                            adapter.addData(it as ArrayList<ItemsLista>)
-                        }
-                        Log.i("CHANGE", "teste" + lista.size)
+                    if (!loading) {
+                        offset += 1
+                        addLista(offset)
                     }
                 }
-            }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                Log.i("CHANGE", "$newState")
             }
         })
 

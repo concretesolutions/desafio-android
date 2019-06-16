@@ -7,6 +7,6 @@ import retrofit2.http.Query
 
 interface ListaService {
 
-    @GET("repositories?q=language:Java&sort=stars&page=1")
-    fun lista(@Query("offset") offset: Int) : Call<Lista>
+    @GET("repositories?q=language:Java&sort=stars")
+    fun lista(@Query("page") offset: Int) : Call<Lista>
 }
