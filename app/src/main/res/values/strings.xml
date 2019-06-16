@@ -5,4 +5,8 @@
 
     <string name="oldDatePattern">yyyy-MM-dd</string>
     <string name="newDatePattern">dd/MM/yyyy</string>
+
+    <string name="error_get_repos">Ocorreu um erro ao buscar os repositórios.</string>
+    <string name="error_get_pull_requests">Ocorreu um erro ao buscar os pull requests.</string>
+    <string name="action_reload">Recarregar</string>
 </resources>

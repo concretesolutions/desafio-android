@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.abs.javarepos.R
 import com.abs.javarepos.model.Repo
 import com.abs.javarepos.view.adapter.RepoAdapter
+import com.abs.javarepos.view.util.FadeUtils
 import com.abs.javarepos.viewmodel.ReposViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_repos.*
 
 class ReposActivity : AppCompatActivity() {
@@ -32,13 +34,26 @@ class ReposActivity : AppCompatActivity() {
             }
         })
 
+
         rvRepos.layoutManager = LinearLayoutManager(this)
         rvRepos.adapter = repoAdapter
 
         viewModel = ViewModelProviders.of(this).get(ReposViewModel::class.java)
         viewModel.repoPagedList.observe(this, Observer { pagedList ->
             pagedList?.let {
-                repoAdapter.submitList(it)
+                FadeUtils.fadeOut(progressBar)
+                repoAdapter.submitList(pagedList)
+            }
+        })
+
+        viewModel.networkError.observe(this, Observer { hasNetworkError ->
+            if (hasNetworkError) {
+                Snackbar.make(clRepos, getString(R.string.error_get_repos), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.action_reload)) {
+                        FadeUtils.fadeIn(progressBar)
+                        viewModel.repoDataSource.value?.invalidate()
+                    }
+                    .show()
             }
         })
     }

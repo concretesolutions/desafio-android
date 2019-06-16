@@ -9,6 +9,7 @@ import com.abs.javarepos.model.repository.PullRequestRepository
 class PullRequestsViewModel : ViewModel() {
 
     private val pullRequestRepository = PullRequestRepository()
+    val networkError: LiveData<Boolean> = pullRequestRepository.networkError
 
     fun fetchPullRequests(repo: Repo): LiveData<ArrayList<PullRequest>> = pullRequestRepository.getPullRequests(repo)
 }

@@ -11,7 +11,9 @@ import com.abs.javarepos.R
 import com.abs.javarepos.model.PullRequest
 import com.abs.javarepos.model.Repo
 import com.abs.javarepos.view.adapter.PullRequestAdapter
+import com.abs.javarepos.view.util.FadeUtils
 import com.abs.javarepos.viewmodel.PullRequestsViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_pull_requests.*
 
 
@@ -47,7 +49,20 @@ class PullRequestsActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(PullRequestsViewModel::class.java)
         viewModel.fetchPullRequests(repo).observe(this, Observer { items ->
+            FadeUtils.fadeOut(progressBar)
             pullRequestAdapter.addItems(items)
+        })
+
+        viewModel.networkError.observe(this, Observer { hasNetworkError ->
+            FadeUtils.fadeOut(progressBar)
+            if (hasNetworkError) {
+                Snackbar.make(clPullRequests, getString(R.string.error_get_pull_requests), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.action_reload)) {
+                        FadeUtils.fadeIn(progressBar)
+                        viewModel.fetchPullRequests(repo)
+                    }
+                    .show()
+            }
         })
     }
 
