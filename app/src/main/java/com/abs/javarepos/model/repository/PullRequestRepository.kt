@@ -11,7 +11,8 @@ import retrofit2.Response
 
 class PullRequestRepository {
 
-    private val pullRequests = MutableLiveData<ArrayList<PullRequest>>()
+    private val pullRequests  = MutableLiveData<ArrayList<PullRequest>>()
+    val networkError = MutableLiveData<Boolean>()
 
     fun getPullRequests(repo: Repo): LiveData<ArrayList<PullRequest>> {
         GithubApi.endpoints.getPullRequests(repo.owner.login, repo.name).enqueue(object : Callback<List<PullRequest>> {
@@ -22,7 +23,7 @@ class PullRequestRepository {
             }
 
             override fun onFailure(call: Call<List<PullRequest>>, t: Throwable) {
-
+                networkError.postValue(true)
             }
         })
         return pullRequests

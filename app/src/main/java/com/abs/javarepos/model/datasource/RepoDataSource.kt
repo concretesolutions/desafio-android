@@ -1,5 +1,6 @@
 package com.abs.javarepos.model.datasource
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.abs.javarepos.model.Repo
 import com.abs.javarepos.model.githubapi.GithubApi
@@ -10,6 +11,7 @@ import retrofit2.Response
 
 class RepoDataSource : PageKeyedDataSource<Int, Repo>() {
     private val firstPage: Int = 1
+    val networkError = MutableLiveData<Boolean>()
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Repo>) {
         GithubApi.endpoints.getRepos(firstPage).enqueue(object : Callback<RepoResponse> {
@@ -20,7 +22,7 @@ class RepoDataSource : PageKeyedDataSource<Int, Repo>() {
             }
 
             override fun onFailure(call: Call<RepoResponse>, t: Throwable) {
-
+                networkError.postValue(true)
             }
         })
     }
@@ -34,7 +36,7 @@ class RepoDataSource : PageKeyedDataSource<Int, Repo>() {
             }
 
             override fun onFailure(call: Call<RepoResponse>, t: Throwable) {
-
+                networkError.postValue(true)
             }
         })
     }
