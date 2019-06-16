@@ -1,5 +1,6 @@
 package com.concretesolutions.diegosouza.concretesolutions.View
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -151,6 +152,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         addLista(offset)
                     }
                 }
+            }
+        })
+
+        adapter.setOnItemClickListener(object : ListaAdapter.ClickListener {
+            override fun onClick(pos: Int, aView: View) {
+                val intent = Intent(this@MainActivity, InformationActivity::class.java);
+                intent.putExtra("full_name_pulls", lista[pos].full_name)
+                startActivity(intent);
             }
         })
 
