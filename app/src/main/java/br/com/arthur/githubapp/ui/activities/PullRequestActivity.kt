@@ -42,9 +42,9 @@ class PullRequestActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         repositoryViewModel.mutablePullRequestList.removeObservers(this)
         repositoryViewModel.mutableErrorPullMessage.removeObservers(this)
+        super.onDestroy()
     }
 
     private fun configureData() {
