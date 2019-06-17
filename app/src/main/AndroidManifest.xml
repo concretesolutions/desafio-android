@@ -15,23 +15,22 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <activity
-                android:name=".ui.activities.MainActivity"
-                android:theme="@style/Theme.Design">
-
+        <activity android:name=".ui.activities.SplashActivity"
+                  android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
 
         <activity
-                android:name=".ui.activities.PullRequestActivity"
-                android:theme="@style/Theme.Design.NoActionBar"
-        />
+                android:name=".ui.activities.MainActivity"
+                android:theme="@style/Theme.Design"/>
 
+        <activity
+                android:name=".ui.activities.PullRequestActivity"
+                android:theme="@style/Theme.Design.NoActionBar"/>
 
     </application>
 
