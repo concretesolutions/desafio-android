@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -71,6 +72,10 @@ public class RepositoryActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
 
+        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(pullRequestsRV.getContext(),
+                DividerItemDecoration.VERTICAL);
+
+        pullRequestsRV.addItemDecoration(mDividerItemDecoration);
         pullRequestsRV.setLayoutManager(layout);
 
         retrofit = new Retrofit.Builder()

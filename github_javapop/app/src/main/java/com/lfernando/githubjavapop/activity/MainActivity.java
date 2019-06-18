@@ -3,6 +3,7 @@ package com.lfernando.githubjavapop.activity;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     protected void setup() {
@@ -67,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
+
+        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(repositoryRV.getContext(),
+                DividerItemDecoration.VERTICAL);
+
+        repositoryRV.addItemDecoration(mDividerItemDecoration);
         repositoryRV.setLayoutManager(layout);
 
         retrofit = new Retrofit.Builder()
