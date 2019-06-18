@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Nome Repositório"
         app:layout_constraintEnd_toEndOf="@+id/repoDescriptionTV"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
         android:layout_marginRight="32dp"
         android:maxLines="2"
         android:text="Descrição repositório lorem ipsim dolor sit amet lorem ipsim dolor sit amet lorem ipsim dolor sit amet lorem ipsim dolor sit amet lorem ipsim dolor sit amet"
-        app:layout_constraintEnd_toStartOf="@+id/userNameTV"
+        app:layout_constraintEnd_toStartOf="@+id/repoAvatarIV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repoNameTV" />
 
@@ -78,38 +78,41 @@
         app:layout_constraintTop_toBottomOf="@+id/repoDescriptionTV" />
 
     <ImageView
-        android:id="@+id/avatarIV"
+        android:id="@+id/repoAvatarIV"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/userNameTV"
-        app:layout_constraintEnd_toEndOf="@+id/userNameTV"
-        app:layout_constraintStart_toStartOf="@+id/userNameTV"
+        app:layout_constraintBottom_toTopOf="@+id/repoUserFullNameTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/userNameTV"
+        android:id="@+id/repoUserFullNameTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/nameTV"
-        app:layout_constraintTop_toBottomOf="@+id/avatarIV" />
+        android:text="Username Username"
+        app:layout_constraintEnd_toEndOf="@+id/repoAvatarIV"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="@+id/repoAvatarIV"
+        app:layout_constraintTop_toBottomOf="@+id/repoAvatarIV" />
 
     <TextView
-        android:id="@+id/nameTV"
-        android:layout_width="wrap_content"
+        android:id="@+id/repoUserNameTv"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Nome Sobrenome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameTV" />
+        android:layout_marginTop="4dp"
+        android:text="Nome Sobrenome Nome"
+        app:layout_constraintEnd_toEndOf="@+id/repoUserFullNameTV"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/repoUserFullNameTV"
+        app:layout_constraintTop_toBottomOf="@+id/repoUserFullNameTV" />
 </android.support.constraint.ConstraintLayout>
