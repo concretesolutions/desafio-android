@@ -17,6 +17,9 @@ public class PullRequest {
     @SerializedName("body")
     String body;
 
+    @SerializedName("state")
+    String state;
+
     public String getUrl() {
         return url;
     }
@@ -47,5 +50,13 @@ public class PullRequest {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
