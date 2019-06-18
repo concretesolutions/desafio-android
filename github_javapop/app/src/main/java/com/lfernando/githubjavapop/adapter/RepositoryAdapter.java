@@ -1,13 +1,16 @@
 package com.lfernando.githubjavapop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.lfernando.githubjavapop.R;
+import com.lfernando.githubjavapop.activity.RepositoryActivity;
 import com.lfernando.githubjavapop.model.Repo;
 import com.lfernando.githubjavapop.viewHolder.RepositoryViewHolder;
 import com.squareup.picasso.Picasso;
@@ -34,7 +37,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         RepositoryViewHolder holder = (RepositoryViewHolder) viewHolder;
-        Repo repo = repoList.get(i);
+        final Repo repo = repoList.get(i);
         holder.repoName.setText(repo.getName());
         holder.repoDesc.setText(repo.getDescription());
         holder.forksCount.setText(String.valueOf(repo.getForks()));
@@ -42,6 +45,16 @@ public class RepositoryAdapter extends RecyclerView.Adapter {
         holder.name.setText(repo.getOwner().getLogin());
         holder.userName.setText(repo.getOwner().getName());
         Picasso.get().load(repo.getOwner().getAvatarUrl()).into(holder.avatar);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, RepositoryActivity.class);
+                intent.putExtra("owner", repo.getOwner().getLogin());
+                intent.putExtra("repository", repo.getName());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
