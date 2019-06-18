@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/prTitleTV" />
 
     <ImageView
-        android:id="@+id/avatarIV"
+        android:id="@+id/repoAvatarIV"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
@@ -45,7 +45,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/nameTV"
+        android:id="@+id/repoUserNameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -53,7 +53,7 @@
         android:layout_marginTop="2dp"
         android:text="Nome Sobrenome"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/avatarIV"
+        app:layout_constraintStart_toEndOf="@+id/repoAvatarIV"
         app:layout_constraintTop_toBottomOf="@+id/usernameTV" />
 
     <TextView
@@ -64,6 +64,6 @@
         android:layout_marginLeft="8dp"
         android:text="Username"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/avatarIV"
-        app:layout_constraintTop_toTopOf="@+id/avatarIV" />
+        app:layout_constraintStart_toEndOf="@+id/repoAvatarIV"
+        app:layout_constraintTop_toTopOf="@+id/repoAvatarIV" />
 </android.support.constraint.ConstraintLayout>
