@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/prDescTV"
         android:layout_width="0dp"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/prTitleTV" />
 
     <ImageView
-        android:id="@+id/repoAvatarIV"
+        android:id="@+id/prAvatarIV"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
@@ -45,25 +45,26 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/repoUserNameTv"
+        android:id="@+id/prFullNameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="8dp"
         android:text="Nome Sobrenome"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/repoAvatarIV"
-        app:layout_constraintTop_toBottomOf="@+id/usernameTV" />
+        app:layout_constraintStart_toEndOf="@+id/prAvatarIV"
+        app:layout_constraintTop_toBottomOf="@+id/prUsernameTV" />
 
     <TextView
-        android:id="@+id/usernameTV"
+        android:id="@+id/prUsernameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:text="Username"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/repoAvatarIV"
-        app:layout_constraintTop_toTopOf="@+id/repoAvatarIV" />
+        app:layout_constraintStart_toEndOf="@+id/prAvatarIV"
+        app:layout_constraintTop_toBottomOf="@+id/prDescTV" />
 </android.support.constraint.ConstraintLayout>
