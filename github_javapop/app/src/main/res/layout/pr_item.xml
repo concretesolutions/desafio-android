@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
 
     <TextView
         android:id="@+id/prTitleTV"
@@ -15,6 +16,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Título do PR"
+        android:textColor="@color/title"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,6 +33,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Body do PR lorem ipsim dolor sit amet lorem ipsim dolor sit amet lorem ipsim dolor sit amet"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prTitleTV" />
@@ -64,6 +69,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="Username"
+        android:textColor="@color/subtitle"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/prAvatarIV"
         app:layout_constraintTop_toBottomOf="@+id/prDescTV" />
