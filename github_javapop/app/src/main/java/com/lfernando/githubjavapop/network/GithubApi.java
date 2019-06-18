@@ -11,8 +11,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface GithubApi {
-    @GET("search/repositories")
-    Call<List<Repo>> listRepos(@Query("language") String language, @Query("sort") String sort, @Query("page") int pageNumber);
+    @GET("search/repositories?q=language:Java&sort=stars")
+    Call<RepositoryReponse> listRepos(@Query("page") String pageNumber);
 
     @GET("repos/{owner}/{repo}/pulls")
     Call<List<PullRequest>> listPrs(@Path("owner") String owner, @Path("repo") String repository);
