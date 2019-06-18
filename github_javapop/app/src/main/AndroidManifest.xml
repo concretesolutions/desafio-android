@@ -13,9 +13,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.RepositoryActivity"
-            android:parentActivityName=".activity.MainActivity"/>
+            android:parentActivityName=".activity.MainActivity"
+            android:configChanges="orientation|screenSize"/>
 
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
