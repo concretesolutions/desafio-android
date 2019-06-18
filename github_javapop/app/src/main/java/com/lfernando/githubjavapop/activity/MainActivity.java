@@ -1,9 +1,12 @@
 package com.lfernando.githubjavapop.activity;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.lfernando.githubjavapop.R;
@@ -25,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView repositoryRV;
+    ProgressBar loadingPB;
 
     List<Repo> repoList;
     Retrofit retrofit;
@@ -39,6 +43,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setup();
         loadData();
+
+        repositoryRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1)) {
+                    loadData();
+
+                }
+            }
+        });
     }
 
     protected void setup() {
@@ -47,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RepositoryAdapter(repoList, this);
         repositoryRV = findViewById(R.id.repositoryRV);
         repositoryRV.setAdapter(adapter);
+
+        loadingPB = findViewById(R.id.loadingPB);
 
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
@@ -61,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void loadData() {
         currentPage++;
+        loadingPB.setVisibility(View.VISIBLE);
         service.listRepos(String.valueOf(currentPage)).enqueue(new Callback<RepositoryReponse>() {
             @Override
             public void onResponse(Call<RepositoryReponse> call, Response<RepositoryReponse> response) {
@@ -70,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             adapter.notifyDataSetChanged();
+                            loadingPB.setVisibility(View.GONE);
                         }
                     });
 
