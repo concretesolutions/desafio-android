@@ -13,10 +13,11 @@
         android:layout_height="18dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/repoStarsTV"
         app:layout_constraintStart_toEndOf="@+id/repoForksTV"
         app:layout_constraintTop_toTopOf="@+id/repoStarsTV"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@drawable/star" />
 
     <TextView
         android:id="@+id/repoNameTV"
@@ -55,10 +56,11 @@
         android:layout_height="18dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/repoForksTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/repoForksTV"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@drawable/fork" />
 
     <TextView
         android:id="@+id/repoStarsTV"
