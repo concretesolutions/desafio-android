@@ -28,7 +28,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RepositoryActivity extends AppCompatActivity {
 
-    TextView prOpened, prClosed;
     RecyclerView pullRequestsRV;
     ProgressBar prLoadingPB;
 
@@ -60,8 +59,6 @@ public class RepositoryActivity extends AppCompatActivity {
     }
 
     protected void setup() {
-        prOpened = findViewById(R.id.prOpenedTV);
-        prClosed = findViewById(R.id.prClosedTV);
         pullRequestsRV = findViewById(R.id.prListRV);
         prLoadingPB = findViewById(R.id.prLoadingPB);
 

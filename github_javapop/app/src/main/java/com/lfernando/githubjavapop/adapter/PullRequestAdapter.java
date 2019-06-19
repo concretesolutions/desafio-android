@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 public class PullRequestAdapter extends RecyclerView.Adapter {
     private List<PullRequest> pullRequestList;
     private Context context;
@@ -42,7 +44,7 @@ public class PullRequestAdapter extends RecyclerView.Adapter {
         holder.prDescription.setText(pr.getBody());
         holder.userFullName.setText(pr.getUser().getName());
         holder.userName.setText(pr.getUser().getLogin());
-        Picasso.get().load(pr.getUser().getAvatarUrl()).into(holder.avatar);
+        Picasso.get().load(pr.getUser().getAvatarUrl()).transform(new CropCircleTransformation()).into(holder.avatar);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
