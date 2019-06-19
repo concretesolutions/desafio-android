@@ -20,6 +20,8 @@ import com.lfernando.githubjavapop.network.RepositoryReponse;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Retrofit retrofit;
     GithubApi service;
     RepositoryAdapter adapter;
+    Cache cache;
 
     int currentPage = 0;
 
@@ -76,9 +79,17 @@ public class MainActivity extends AppCompatActivity {
         repositoryRV.addItemDecoration(mDividerItemDecoration);
         repositoryRV.setLayoutManager(layout);
 
+
+        cache = new Cache(getCacheDir(), Constants.cacheSize);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .cache(cache)
+                .build();
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         service = retrofit.create(GithubApi.class);
     }
