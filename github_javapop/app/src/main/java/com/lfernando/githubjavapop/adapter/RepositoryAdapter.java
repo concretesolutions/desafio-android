@@ -17,6 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 public class RepositoryAdapter extends RecyclerView.Adapter {
     private List<Repo> repoList;
     private Context context;
@@ -44,7 +46,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter {
         holder.starsCount.setText(String.valueOf(repo.getStars()));
         holder.name.setText(repo.getOwner().getLogin());
         holder.userName.setText(repo.getOwner().getName());
-        Picasso.get().load(repo.getOwner().getAvatarUrl()).into(holder.avatar);
+        Picasso.get().load(repo.getOwner().getAvatarUrl()).transform(new CropCircleTransformation()).into(holder.avatar);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

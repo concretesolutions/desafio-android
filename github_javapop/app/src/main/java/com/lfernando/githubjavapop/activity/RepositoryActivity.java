@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.lfernando.githubjavapop.network.GithubApi;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +30,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RepositoryActivity extends AppCompatActivity {
 
-    TextView prOpened, prClosed;
     RecyclerView pullRequestsRV;
     ProgressBar prLoadingPB;
 
@@ -36,7 +38,7 @@ public class RepositoryActivity extends AppCompatActivity {
     Retrofit retrofit;
     GithubApi service;
     PullRequestAdapter adapter;
-
+    Cache cache;
     Intent intent;
 
     private String owner;
@@ -59,8 +61,6 @@ public class RepositoryActivity extends AppCompatActivity {
     }
 
     protected void setup() {
-        prOpened = findViewById(R.id.prOpenedTV);
-        prClosed = findViewById(R.id.prClosedTV);
         pullRequestsRV = findViewById(R.id.prListRV);
         prLoadingPB = findViewById(R.id.prLoadingPB);
 
@@ -71,11 +71,22 @@ public class RepositoryActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
 
+        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(pullRequestsRV.getContext(),
+                DividerItemDecoration.VERTICAL);
+
+        pullRequestsRV.addItemDecoration(mDividerItemDecoration);
         pullRequestsRV.setLayoutManager(layout);
+
+        cache = new Cache(getCacheDir(), Constants.cacheSize);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .cache(cache)
+                .build();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         service = retrofit.create(GithubApi.class);
 
