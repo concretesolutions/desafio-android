@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/repositoryItemCL"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/repoStarsTV"
+        app:layout_constraintStart_toEndOf="@+id/repoForksTV"
+        app:layout_constraintTop_toTopOf="@+id/repoStarsTV"
+        app:srcCompat="@drawable/star" />
+
+    <TextView
+        android:id="@+id/repoNameTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Nome Repositório"
+        android:textColor="@color/title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/repoDescriptionTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/repoDescriptionTV"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:maxLines="2"
+        android:text="Descrição repositório lorem ipsim dolor sit amet lorem ipsim dolor sit amet lorem ipsim dolor sit amet lorem ipsim dolor sit amet lorem ipsim dolor sit amet"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toStartOf="@+id/repoAvatarIV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repoNameTV" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/repoForksTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/repoForksTV"
+        app:srcCompat="@drawable/fork" />
+
+    <TextView
+        android:id="@+id/repoStarsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="98"
+        android:textColor="@color/gold"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/repoDescriptionTV" />
+
+    <TextView
+        android:id="@+id/repoForksTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="640"
+        android:textColor="@color/gold"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/repoDescriptionTV" />
+
+    <ImageView
+        android:id="@+id/repoAvatarIV"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/repoUserFullNameTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/repoUserFullNameTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Username Username"
+        android:textColor="@color/subtitle"
+        app:layout_constraintEnd_toEndOf="@+id/repoAvatarIV"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="@+id/repoAvatarIV"
+        app:layout_constraintTop_toBottomOf="@+id/repoAvatarIV" />
+
+    <TextView
+        android:id="@+id/repoUserNameTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Nome Sobrenome Nome"
+        app:layout_constraintEnd_toEndOf="@+id/repoUserFullNameTV"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/repoUserFullNameTV"
+        app:layout_constraintTop_toBottomOf="@+id/repoUserFullNameTV" />
+</android.support.constraint.ConstraintLayout>
