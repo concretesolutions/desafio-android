@@ -5,6 +5,7 @@ import com.lfernando.githubjavapop.constants.Constants;
 import com.lfernando.githubjavapop.model.PullRequest;
 import com.lfernando.githubjavapop.model.Repo;
 import com.lfernando.githubjavapop.network.GithubApi;
+import com.lfernando.githubjavapop.network.RepositoryReponse;
 
 import org.junit.Test;
 
@@ -28,19 +29,19 @@ public class ApiUnitTest {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         GithubApi service = retrofit.create(GithubApi.class);
-        Call<List<Repo>> repos = service.listRepos("Java", "stars", 1);
-        repos.enqueue(new Callback<List<Repo>>() {
+        Call<RepositoryReponse> repos = service.listRepos("1");
+        repos.enqueue(new Callback<RepositoryReponse>() {
             @Override
-            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
-                List<Repo> repos = response.body();
+            public void onResponse(Call<RepositoryReponse> call, Response<RepositoryReponse> response) {
+                List<Repo> repos = response.body().getItems();
                 assertNotNull(repos);
                 assertNotNull(repos.get(0).getName());
                 assertNotNull(repos.get(0).getOwner().getLogin());
             }
 
             @Override
-            public void onFailure(Call<List<Repo>> call, Throwable t) {
-                assertNotNull(t.getCause());
+            public void onFailure(Call<RepositoryReponse> call, Throwable t) {
+
             }
         });
     }
