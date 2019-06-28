@@ -3,7 +3,6 @@ package com.brunorfreitas.desafioconcrete.ui.ActListRepository;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -56,7 +55,7 @@ public class ViewListRepository extends AppCompatActivity implements ContractLis
 
     private void inicializaVariaves() {
         context = getBaseContext();
-
+        //
         toolbar = findViewById(R.id.act_list_repo_tb);
         setSupportActionBar(toolbar);
 
@@ -77,7 +76,7 @@ public class ViewListRepository extends AppCompatActivity implements ContractLis
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-
+        //
         progressBar = findViewById(R.id.act_list_repo_pb);
         recyclerView = findViewById(R.id.act_list_repo_rv);
         recyclerView.setHasFixedSize(true);
@@ -86,9 +85,7 @@ public class ViewListRepository extends AppCompatActivity implements ContractLis
         repoList = new ArrayList<>();
         adapterListRepo = new AdapterListRepo(context, repoList);
         recyclerView.setAdapter(adapterListRepo);
-
-
-
+        //
         presenter = new PresenterListRepository(this);
         presenter.loadListRepo(page);
     }
