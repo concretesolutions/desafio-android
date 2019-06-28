@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group>
+
+        <item android:id="@+id/menu_drawer_nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+
+    </group>
+
+    <group android:id="@+id/group_menu">
+        <item android:id="@+id/menu_drawer_nav_configuracoes"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Configurações" />
+        <item android:id="@+id/menu_drawer_nav_sair"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="Sair" />
+    </group>
+
+</menu>
