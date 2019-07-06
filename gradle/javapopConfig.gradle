@@ -1,0 +1,5 @@
+ext {
+    apiUrl = ext {
+        productionApi = '"https://api.github.com"'
+    }
+}
