@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="branco">#FFFFFF</color>
+    <color name="toolbar">#404040</color>
+    <color name="corNome">#3977AA</color>
+    <color name="corUsername">#3F89D6</color>
+    <color name="corNomeUser">#AFAAA0</color>
+    <color name="corIcone">#DF9305</color>
+</resources>
