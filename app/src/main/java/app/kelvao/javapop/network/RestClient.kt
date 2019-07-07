@@ -1,0 +1,35 @@
+package app.kelvao.javapop.network
+
+import app.kelvao.javapop.BuildConfig
+import app.kelvao.javapop.network.interceptors.BasicInterceptor
+import app.kelvao.javapop.network.service.PullRequestsRestService
+import app.kelvao.javapop.network.service.RepositoriesRestService
+import io.reactivex.schedulers.Schedulers
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+
+object RestClient {
+
+    val retrofit: Retrofit = getRetrofitBuilder(getOkHttpClient()).build()
+
+    val repositoriesService: RepositoriesRestService by lazy { retrofit.create(RepositoriesRestService::class.java) }
+    val pullRequestsService: PullRequestsRestService by lazy { retrofit.create(PullRequestsRestService::class.java) }
+
+    private fun getRetrofitBuilder(okHttpClient: OkHttpClient) =
+        Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+
+    private fun getOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder().apply {
+        retryOnConnectionFailure(true)
+        followRedirects(true)
+        readTimeout(60, TimeUnit.SECONDS)
+        addInterceptor(BasicInterceptor())
+    }.build()
+
+}
