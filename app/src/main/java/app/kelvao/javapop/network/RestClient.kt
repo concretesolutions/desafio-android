@@ -3,6 +3,7 @@ package app.kelvao.javapop.network
 import app.kelvao.javapop.BuildConfig
 import app.kelvao.javapop.network.service.PullRequestsRestService
 import app.kelvao.javapop.network.service.RepositoriesRestService
+import app.kelvao.javapop.network.service.UserRestService
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -16,6 +17,7 @@ object RestClient {
 
     val repositoriesService: RepositoriesRestService by lazy { retrofit.create(RepositoriesRestService::class.java) }
     val pullRequestsService: PullRequestsRestService by lazy { retrofit.create(PullRequestsRestService::class.java) }
+    val userService: UserRestService by lazy { retrofit.create(UserRestService::class.java) }
 
     private fun getRetrofitBuilder(okHttpClient: OkHttpClient) =
         Retrofit.Builder()
