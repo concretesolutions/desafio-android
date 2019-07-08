@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply from: '../gradle/javapopConfig.gradle'
 
 android {
     def config = rootProject.extensions.getByName("ext")
@@ -15,7 +16,7 @@ android {
         versionCode config["version_code"]
         versionName config["version_name"]
         testInstrumentationRunner config["test_runner"]
-
+        buildConfigField "String", 'BASE_URL', apiUrl.productionApi
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath true
@@ -73,6 +74,10 @@ android {
         }
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
     sourceSets {
         main {
             file('src/main/res-screen')
@@ -98,6 +103,7 @@ dependencies {
     implementation applicationDependencies.glideAnnotations
     implementation applicationDependencies.retrofit
     implementation applicationDependencies.retrofitConverter
+    implementation applicationDependencies.retrofitAdapterRxJava
     implementation applicationDependencies.rxJava
 
     //Unit/Integration tests dependencies
