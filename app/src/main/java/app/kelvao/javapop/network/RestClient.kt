@@ -1,7 +1,6 @@
 package app.kelvao.javapop.network
 
 import app.kelvao.javapop.BuildConfig
-import app.kelvao.javapop.network.interceptors.BasicInterceptor
 import app.kelvao.javapop.network.service.PullRequestsRestService
 import app.kelvao.javapop.network.service.RepositoriesRestService
 import io.reactivex.schedulers.Schedulers
@@ -29,7 +28,11 @@ object RestClient {
         retryOnConnectionFailure(true)
         followRedirects(true)
         readTimeout(60, TimeUnit.SECONDS)
-        addInterceptor(BasicInterceptor())
+        addInterceptor { chain ->
+            val builder = chain.request().newBuilder()
+                .addHeader("Content-Type", "application/json")
+            chain.proceed(builder.build())
+        }
     }.build()
 
 }
