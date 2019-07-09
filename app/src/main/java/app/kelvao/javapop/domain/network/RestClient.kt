@@ -1,9 +1,9 @@
-package app.kelvao.javapop.network
+package app.kelvao.javapop.domain.network
 
 import app.kelvao.javapop.BuildConfig
-import app.kelvao.javapop.network.service.PullRequestsRestService
-import app.kelvao.javapop.network.service.RepositoriesRestService
-import app.kelvao.javapop.network.service.UserRestService
+import app.kelvao.javapop.domain.network.service.PullRequestsRestService
+import app.kelvao.javapop.domain.network.service.RepositoriesRestService
+import app.kelvao.javapop.domain.network.service.UserRestService
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

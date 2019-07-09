@@ -1,6 +1,6 @@
-package app.kelvao.javapop.network.service
+package app.kelvao.javapop.domain.network.service
 
-import app.kelvao.javapop.network.response.PullRequestsResponse
+import app.kelvao.javapop.domain.network.response.PullRequestsResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

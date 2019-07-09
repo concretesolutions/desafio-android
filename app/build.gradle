@@ -105,6 +105,8 @@ dependencies {
     implementation applicationDependencies.retrofitConverter
     implementation applicationDependencies.retrofitAdapterRxJava
     implementation applicationDependencies.rxJava
+    implementation applicationDependencies.rxAndroid
+    kapt applicationDependencies.dataBindingCompiler
 
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.junit

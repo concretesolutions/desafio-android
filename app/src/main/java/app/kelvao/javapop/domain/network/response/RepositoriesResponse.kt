@@ -1,4 +1,4 @@
-package app.kelvao.javapop.network.response
+package app.kelvao.javapop.domain.network.response
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
