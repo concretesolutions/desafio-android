@@ -1,0 +1,35 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#161414</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="nameText">
+        <item name="android:textColor">#176DAF</item>
+        <item name="android:fontFamily">@font/robotobold</item>
+    </style>
+
+    <style name="descriptionText">
+        <item name="android:textColor">#000000</item>
+        <item name="android:fontFamily">@font/robotoregular</item>
+    </style>
+
+    <style name="iconText">
+        <item name="android:textColor">#EEB207</item>
+        <item name="android:fontFamily">@font/robotobold</item>
+    </style>
+
+    <style name="usernameText">
+        <item name="android:textColor">#176DAF</item>
+        <item name="android:fontFamily">@font/robotoregular</item>
+    </style>
+
+    <style name="lastNameText">
+        <item name="android:textColor">#779C9494</item>
+        <item name="android:fontFamily">@font/robotoregular</item>
+    </style>
+
+</resources>

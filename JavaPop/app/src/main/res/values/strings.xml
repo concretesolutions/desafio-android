@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">JavaPop</string>
+    <string name="string_javapop">Github JavaPop</string>
+    <string name="loren_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam feugiat ante semper eros
+    porttitor, nec sagittis magna iaculis. Sed porttitor, magna elementum aliquet eleifend, metus odio rutrum dolor, ut
+    ultricies libero eros et purus. Aenean vitae felis sit amet nisl ultrices consequat. Mauris tempus pretium tortor,
+    sit amet pulvinar ipsum. Fusce ac viverra purus, varius tempor mi. Suspendisse blandit, erat sit amet interdum
+    tristique, tortor lorem suscipit justo, non dignissim eros lacus a est. Donec aliquet blandit erat, vitae eleifend
+    lacus congue in. Nunc metus risus, ornare sed sollicitudin vitae, tempus id tellus. Aliquam erat volutpat.
+    Suspendisse potenti. Vestibulum gravida at ipsum ut posuere. Aliquam sed est vel lectus venenatis maximus eu sit
+    amet justo. Mauris eu turpis consequat, luctus tellus sit amet, accumsan magna.
+  </string>
+    <string name="string_name_repository">Nome Repositório</string>
+    <string name="string_opened">%d opened</string>
+</resources>
