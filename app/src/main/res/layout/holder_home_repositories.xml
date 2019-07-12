@@ -45,7 +45,6 @@
             android:maxLines="3"
             android:text="@{repository.description}"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/userImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
@@ -55,10 +54,10 @@
             android:id="@+id/forksIcon"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:layout_marginTop="16dp"
             android:src="@drawable/ic_fork"
+            app:layout_constraintBottom_toBottomOf="@id/forksCount"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description" />
+            app:layout_constraintTop_toTopOf="@id/forksCount" />
 
         <TextView
             android:id="@+id/forksCount"
@@ -69,8 +68,9 @@
             android:textColor="#DF9305"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/forksIcon"
+            app:layout_constraintBottom_toTopOf="@id/divider"
             app:layout_constraintStart_toEndOf="@id/forksIcon"
+            app:layout_constraintTop_toBottomOf="@id/description"
             tools:text="999" />
 
         <ImageView
@@ -78,10 +78,10 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="@id/stargazersCount"
             app:layout_constraintStart_toEndOf="@id/forksCount"
-            app:layout_constraintTop_toBottomOf="@id/description" />
+            app:layout_constraintTop_toTopOf="@id/stargazersCount" />
 
         <TextView
             android:id="@+id/stargazersCount"
@@ -92,8 +92,9 @@
             android:textColor="#DF9305"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/stargazersIcon"
+            app:layout_constraintBottom_toTopOf="@id/divider"
             app:layout_constraintStart_toEndOf="@id/stargazersIcon"
+            app:layout_constraintTop_toBottomOf="@id/description"
             tools:text="999" />
 
         <ImageView
@@ -102,9 +103,11 @@
             android:layout_height="60dp"
             android:layout_margin="12dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:imageUrl="@{repository.owner.avatarUrl}"
+            app:layout_constraintBottom_toTopOf="@id/userLogin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:background="@android:color/black" />
 
         <TextView
@@ -124,10 +127,22 @@
             android:layout_height="wrap_content"
             android:text="@{repository.owner.name}"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/userImage"
             app:layout_constraintStart_toStartOf="@id/userImage"
             app:layout_constraintTop_toBottomOf="@id/userLogin"
             tools:text="Name and Lastname" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userNameLastName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

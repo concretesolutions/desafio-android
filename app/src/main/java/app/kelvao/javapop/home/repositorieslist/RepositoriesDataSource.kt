@@ -8,25 +8,50 @@ import app.kelvao.javapop.R
 import app.kelvao.javapop.domain.network.response.RepositoryResponse
 
 class RepositoriesDataSource(
-    private val data: MutableList<RepositoryResponse> = mutableListOf(),
+    private var data: MutableList<RepositoryResponse> = mutableListOf(),
     val onClickRepository: ((RepositoryViewHolder) -> Unit)? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        RepositoryViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.holder_home_repositories, parent, false
-            ),
-            onClickRepository
-        )
+    private val loaderPosition = itemCount - 1
+    var isLoading: Boolean = false
+        set(value) {
+            field = value
+            notifyItemChanged(loaderPosition)
+        }
 
-    override fun getItemCount(): Int = data.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        if (viewType == REPOSITORIES_VIEW_TYPE) {
+            RepositoryViewHolder(
+                DataBindingUtil.inflate(
+                    LayoutInflater.from(parent.context),
+                    R.layout.holder_home_repositories, parent, false
+                ),
+                onClickRepository
+            )
+        } else {
+            ProgressbarViewHolder(parent)
+        }
+
+    override fun getItemCount(): Int = data.size + 1
+
+    override fun getItemViewType(position: Int): Int =
+        if (position == loaderPosition) LOADER_VIEW_TYPE else REPOSITORIES_VIEW_TYPE
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is RepositoryViewHolder) {
-            holder.bind(data[position])
+            holder.bind(data[position - 1])
+        } else if (holder is ProgressbarViewHolder) {
+            holder.visibility = isLoading
         }
     }
 
+    fun setRepositories(repositories: List<RepositoryResponse>) {
+        data = repositories.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    companion object {
+        private const val LOADER_VIEW_TYPE = 0
+        private const val REPOSITORIES_VIEW_TYPE = 1
+    }
 }

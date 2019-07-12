@@ -1,17 +1,21 @@
 package app.kelvao.javapop.domain.repository
 
 import app.kelvao.javapop.domain.network.RestClient
+import app.kelvao.javapop.domain.network.response.RepositoriesResponse
 import app.kelvao.javapop.domain.network.response.RepositoryResponse
 import io.reactivex.Observable
+import io.reactivex.Single
 
 object RepositoriesRepository {
     private val repositoriesService = RestClient.repositoriesService
-    private val userService = RestClient.userService
 
-    fun fetchRepositories(language: String, page: Int, sort: String, limit: Int): Observable<RepositoryResponse> =
+    fun fetchRepositories(language: String, page: Int, sort: String, limit: Int) =
         repositoriesService.getRepositories(language, page, sort, limit)
             .flatMapIterable { it.items }
-            .doOnNext {
-                userService.getUser(it.owner.login)
-            }
+            .flatMap (
+                { UserRepository.fetchUser(it.owner.login).toObservable() },
+                {repository, user -> repository.apply {
+                    owner.name = user.name
+                } })
+            .toList()
 }

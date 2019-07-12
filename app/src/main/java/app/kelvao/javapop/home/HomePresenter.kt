@@ -2,6 +2,7 @@ package app.kelvao.javapop.home
 
 import app.kelvao.javapop.addTo
 import app.kelvao.javapop.domain.repository.RepositoriesRepository
+import app.kelvao.javapop.domain.repository.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
@@ -20,12 +21,22 @@ class HomePresenter(
             .fetchRepositories(LANGUAGE, page, SORT, LIMIT)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                view?.notifyFetchRepositoriesSuccess()
+                view?.showRepositoriesResult(it)
             }, {
                 view?.notifyFetchRepositoriesError()
             })
             .addTo(disposable)
+    }
 
+    override fun fetchUserInformation(login: String) {
+        UserRepository.fetchUser(login)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            }, {
+
+            })
+            .addTo(disposable)
     }
 
     override fun onDestroy() {
