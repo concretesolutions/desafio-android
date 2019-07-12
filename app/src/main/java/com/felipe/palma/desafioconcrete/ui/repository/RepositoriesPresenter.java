@@ -29,7 +29,7 @@ public class RepositoriesPresenter implements RepositoriesContract.Presenter{
 
             @Override
             public void onError(String error) {
-                mView.showError();
+                mView.showError(error);
                 mView.hideDialog();
             }
         });

@@ -13,7 +13,7 @@ public interface RepositoriesContract {
 
         void hideDialog();
         void showDialog();
-        void showError();
+        void showError(String error);
         void showRepositories(List<Item> itens);
     }
 
