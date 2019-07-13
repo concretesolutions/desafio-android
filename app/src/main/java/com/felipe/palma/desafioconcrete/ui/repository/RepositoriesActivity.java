@@ -20,6 +20,7 @@ import com.felipe.palma.desafioconcrete.domain.response.RepositoriesResponse;
 import com.felipe.palma.desafioconcrete.network.IServiceGithub;
 import com.felipe.palma.desafioconcrete.network.ServiceGithubImp;
 import com.felipe.palma.desafioconcrete.ui.adapter.AnimationItem;
+import com.felipe.palma.desafioconcrete.ui.adapter.InfiniteScrollListener;
 import com.felipe.palma.desafioconcrete.ui.adapter.RecyclerItemClickListener;
 import com.felipe.palma.desafioconcrete.ui.adapter.RepositoryAdapter;
 import com.felipe.palma.desafioconcrete.ui.adapter.decoration.ItemOffsetDecoration;
@@ -44,7 +45,8 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     private ProgressDialog dialog;
 
     private List<Item> mRepoList = new ArrayList<>();
-
+    private InfiniteScrollListener infiniteScrollListener;
+    private LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
     //Views
 
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
@@ -61,9 +63,8 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
          */
         ButterKnife.bind(this);
 
-        mPresenter = new RepositoriesPresenter(this);
-
-        mPresenter.loadRepositories(mPage);
+        setupAdapter();
+        setupPresenter();
 
         setupRecyclerView();
 
@@ -83,6 +84,7 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
 
     }
 
+
     @Override
     public void showError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_LONG).show();
@@ -92,10 +94,8 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     public void showRepositories(List<Item> itens) {
         Log.d("REPO", itens.toString());
         mRepoList = itens;
-        mRepoAdapter = new RepositoryAdapter(this, mRepoList, recyclerItemClickListener);
-        mRecyclerView.setAdapter(mRepoAdapter);
-
-
+        mRepoAdapter.addRepoItems(mRepoList);
+        runLayoutAnimation(mRecyclerView);
 
     }
 
@@ -120,16 +120,32 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         recyclerView.scheduleLayoutAnimation();
     }
 
+
+    private void setupPresenter() {
+        mPresenter = new RepositoriesPresenter(this);
+        mPresenter.loadRepositories(mPage);
+    }
+
+    private void setupAdapter(){
+        mRepoAdapter = new RepositoryAdapter(this, mRepoList, recyclerItemClickListener);
+        mRecyclerView.setAdapter(mRepoAdapter);
+    }
     private void setupRecyclerView() {
         final Context context = mRecyclerView.getContext();
         final int spacing = getResources().getDimensionPixelOffset(R.dimen.default_spacing_small);
-        mRecyclerView.setLayoutManager(getLayoutManager(context));
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new ItemOffsetDecoration(spacing));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        infiniteScrollListener = new InfiniteScrollListener(mLinearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                mPresenter.loadRepositories(page);
+            }
+        };
+
+        mRecyclerView.addOnScrollListener(infiniteScrollListener);
     }
 
-    private RecyclerView.LayoutManager getLayoutManager(Context context) {
-        return new LinearLayoutManager(context);
-    }
+
 }

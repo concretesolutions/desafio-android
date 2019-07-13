@@ -103,6 +103,11 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
     }
 
+    public void addRepoItems(List<Item> items) {
+        itemsListFiltered.addAll(items);
+        //notifyDataSetChanged();
+    }
+
     @Override
     public Filter getFilter() {
         return new Filter() {

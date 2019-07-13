@@ -19,7 +19,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
-            android:textColor="#3658A2"
+            android:textColor="@color/color_name_repo"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="TextView"
-            android:textColor="#535353"
+            android:textColor="@color/color_desc_repo"
             android:textSize="10sp"
             app:layout_constraintBottom_toTopOf="@+id/txt_star_repo"
             app:layout_constraintEnd_toStartOf="@+id/img_user_repo"
@@ -59,7 +59,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             android:text="TextView"
-            android:textColor="#4376D6"
+            android:textColor="@color/color_name_user_repo"
             android:textSize="10sp"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -75,7 +75,7 @@
             android:layout_marginBottom="16dp"
             android:text="TextView"
             android:textAlignment="center"
-            android:textColor="#97535353"
+            android:textColor="@color/color_surmane_user_repo"
             android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +90,7 @@
             android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_fork" />
+            android:src="@drawable/ic_fork" />
 
         <TextView
             android:id="@+id/txt_fork_repo"
@@ -99,7 +99,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginBottom="12dp"
             android:text="TextView"
-            android:textColor="#DDCB5A"
+            android:textColor="@color/color_count"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -113,7 +113,7 @@
             android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/txt_fork_repo"
-            app:srcCompat="@drawable/ic_star" />
+            android:src="@drawable/ic_star" />
 
         <TextView
             android:id="@+id/txt_star_repo"
@@ -123,7 +123,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="12dp"
             android:text="TextView"
-            android:textColor="#DDCB5A"
+            android:textColor="@color/color_count"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
