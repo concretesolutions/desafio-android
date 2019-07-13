@@ -36,7 +36,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtNameRepo, txtDescRepo, txtNameUserRepo, txtSurnameUserRepo;
+        TextView txtNameRepo, txtDescRepo, txtNameUserRepo, txtSurnameUserRepo, txtForkCount,txtStarCount;
         ImageView imgUserRepo;
 
         ViewHolder(View view) {
@@ -45,6 +45,8 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
             txtDescRepo = view.findViewById(R.id.txt_desc_repo);
             txtNameUserRepo = view.findViewById(R.id.txt_name_user_repo);
             txtSurnameUserRepo = view.findViewById(R.id.txt_surname_user_repo);
+            txtForkCount = view.findViewById(R.id.txt_fork_repo);
+            txtStarCount = view.findViewById(R.id.txt_star_repo);
 
             imgUserRepo = view.findViewById(R.id.img_user_repo);
 
@@ -78,6 +80,11 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
         holder.txtNameUserRepo.setText(mRepository.getOwner().getLogin());
         holder.txtSurnameUserRepo.setText(mRepository.getFullName());
+
+        holder.txtForkCount.setText(String.valueOf(mRepository.getForksCount()));
+        holder.txtStarCount.setText(String.valueOf(mRepository.getStargazersCount()));
+
+
 
 
 
