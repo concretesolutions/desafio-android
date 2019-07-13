@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- Generic strings -->
+  <string name="ok">OK</string>
+  <string name="error">Erro</string>
+  <string name="success">Successo</string>
+  <string name="wait">Aguarde</string>
+  <string name="warning">Aviso</string>
+  <string name="confirm">Confirmar</string>
+  <string name="cancel">Cancelar</string>
+  <string name="add">Adicionar</string>
+  <string name="yes">Sim</string>
+  <string name="no">Não</string>
+  <string name="save">Salvar</string>
+  <string name="edit">Editar</string>
+  <string name="proceed">Continuar</string>
+  <string name="change">Mudar</string>
+  <string name="processing">Processando</string>
+  <string name="accept">Aceitar</string>
+  <string name="refuse">Recusar</string>
+  <string name="choose">Escolher</string>
+  <string name="finish">Finalizar</string>
+  <string name="saving_information">Salvando suas informações…</string>
+  <string name="delete">Excluir</string>
+  <string name="next">Próximo</string>
+  <string name="back">Voltar</string>
+
+  <!-- RepositorieFragment Menu -->
+  <string name="search">Pesquisar</string>
+  <string name="nav_repositories">Repositórios</string>
+  <string name="order_by_name">Ordernar por Nome</string>
+  <string name="order_by_stars">Ordernar por Estrelas</string>
+
+  <!-- PullRequestActivity -->
+  <string name="pull_request_opened">%d abertos</string>
+  <string name="pull_request_closed">&#160;/&#160;%d fechados</string>
+</resources>

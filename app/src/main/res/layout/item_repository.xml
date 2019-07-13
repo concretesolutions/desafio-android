@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data>
+    <variable
+        name="viewModel"
+        type="com.concrete.android.challenge.ui.repository.RepositoryItemViewModel"
+        />
+  </data>
+
+  <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/_5sdp"
+      android:layout_marginStart="@dimen/_5sdp"
+      app:cardUseCompatPadding="true"
+      >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:onClick="@{() -> viewModel.onItemClick()}"
+        android:padding="@dimen/_5sdp"
+        >
+
+      <TextView
+          android:id="@+id/repositoryTitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:padding="@dimen/_5sdp"
+          android:text="@{viewModel.title}"
+          android:textColor="@android:color/holo_blue_dark"
+          android:textSize="@dimen/_13sdp"
+          app:layout_constrainedWidth="true"
+          app:layout_constraintEnd_toStartOf="@+id/forkImage"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="Repository Title"
+          />
+
+      <TextView
+          android:id="@+id/repositoryDescription"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="end"
+          android:maxLines="4"
+          android:padding="@dimen/_5sdp"
+          android:text="@{viewModel.content}"
+          android:textColor="@android:color/black"
+          android:textSize="@dimen/_12sdp"
+          android:textStyle="normal"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/repositoryTitle"
+          tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          />
+
+      <ImageView
+          android:id="@+id/forkImage"
+          android:layout_width="@dimen/_20sdp"
+          android:layout_height="@dimen/_20sdp"
+          android:importantForAccessibility="no"
+          android:scaleType="fitCenter"
+          app:layout_constraintBottom_toTopOf="@+id/repositoryDescription"
+          app:layout_constraintEnd_toStartOf="@+id/repositoryForkNumber"
+          app:layout_constraintTop_toTopOf="parent"
+          app:srcCompat="@drawable/ic_fork_orange_24dp"
+          />
+
+      <TextView
+          android:id="@+id/repositoryForkNumber"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="@dimen/_10sdp"
+          android:text="@{viewModel.forkNumber}"
+          android:textColor="#FFC107"
+          android:textSize="@dimen/_15sdp"
+          app:layout_constraintBottom_toTopOf="@+id/repositoryDescription"
+          app:layout_constraintEnd_toStartOf="@id/starImage"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="123"
+          />
+
+      <ImageView
+          android:id="@+id/starImage"
+          android:layout_width="@dimen/_20sdp"
+          android:layout_height="@dimen/_20sdp"
+          android:importantForAccessibility="no"
+          android:scaleType="fitCenter"
+          app:layout_constraintBottom_toTopOf="@+id/repositoryDescription"
+          app:layout_constraintEnd_toStartOf="@id/repositoryStarNumber"
+          app:layout_constraintTop_toTopOf="parent"
+          app:srcCompat="@drawable/ic_star_orange_24dp"
+          />
+
+      <TextView
+          android:id="@+id/repositoryStarNumber"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@{viewModel.starNumber}"
+          android:textColor="#FFC107"
+          android:textSize="@dimen/_15sdp"
+          app:layout_constraintBottom_toTopOf="@+id/repositoryDescription"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="123"
+          />
+
+      <ImageView
+          android:id="@+id/userProfileImage"
+          android:layout_width="@dimen/_50sdp"
+          android:layout_height="@dimen/_50sdp"
+          android:layout_marginStart="@dimen/_3sdp"
+          android:importantForAccessibility="no"
+          android:scaleType="fitCenter"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/repositoryDescription"
+          app:imageUrl="@{viewModel.imageUrl}"
+          tools:src="@drawable/ic_account_circle_black_24dp"
+          />
+
+      <TextView
+          android:id="@+id/repositoryUserName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@{viewModel.userName}"
+          android:textColor="@android:color/holo_blue_dark"
+          android:textSize="@dimen/_13sdp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/userProfileImage"
+          tools:text="username"
+          />
+
+      <TextView
+          android:id="@+id/repositoryLicense"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/_5sdp"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="@{viewModel.licenseName}"
+          android:textColor="@android:color/black"
+          android:textSize="@dimen/_13sdp"
+          app:layout_constrainedWidth="true"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1.0"
+          app:layout_constraintStart_toEndOf="@+id/repositoryUserName"
+          app:layout_constraintTop_toBottomOf="@+id/userProfileImage"
+          app:layout_constraintVertical_bias="0.0"
+          tools:text="MIT License"
+          />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </com.google.android.material.card.MaterialCardView>
+
+</layout>

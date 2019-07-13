@@ -1,0 +1,42 @@
+<resources>
+  <string name="app_name" translatable="false">Github API</string>
+
+  <!-- Generic strings -->
+  <string name="ok">OK</string>
+  <string name="error">Error</string>
+  <string name="success">Success</string>
+  <string name="wait">Wait</string>
+  <string name="warning">Warning</string>
+  <string name="confirm">Confirm</string>
+  <string name="cancel">Cancel</string>
+  <string name="add">Add</string>
+  <string name="yes">Yes</string>
+  <string name="no">No</string>
+  <string name="save">Save</string>
+  <string name="edit">Edit</string>
+  <string name="proceed">Proceed</string>
+  <string name="change">Change</string>
+  <string name="processing">Processing</string>
+  <string name="accept">Accept</string>
+  <string name="refuse">Refuse</string>
+  <string name="choose">Choose</string>
+  <string name="finish">Finish</string>
+  <string name="saving_information">Saving your information…</string>
+  <string name="delete">Delete</string>
+  <string name="next">Next</string>
+  <string name="back">Back</string>
+
+  <!--Drawer-->
+  <string name="open_drawer" translatable="false">Drawer Open</string>
+  <string name="close_drawer" translatable="false">Drawer Close</string>
+
+  <!-- RepositorieFragment Menu -->
+  <string name="search">Search</string>
+  <string name="nav_repositories">Repositories</string>
+  <string name="order_by_name">Order by Name</string>
+  <string name="order_by_stars">Order by Stars</string>
+
+  <!-- PullRequestActivity -->
+  <string name="pull_request_opened">%d opened</string>
+  <string name="pull_request_closed">&#160;/&#160;%d closed</string>
+</resources>

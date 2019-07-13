@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data>
+    <variable
+        name="viewModel"
+        type="com.concrete.android.challenge.ui.main.MainViewModel"
+        />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_180sdp"
+      android:background="@drawable/abstract_code"
+      android:orientation="vertical"
+      android:padding="@dimen/_10sdp"
+      >
+
+    <ImageView
+        android:id="@+id/profilePic"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:importantForAccessibility="no"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:imageUrl="@{viewModel.imageUrl}"
+        app:srcCompat="@drawable/ic_account_circle_black_24dp"
+        />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@{viewModel.userName}"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePic"
+        tools:text="Thiago Corredo Soares"
+        />
+
+    <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{viewModel.userEmail}"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        tools:text="thiagocorredo@gmail.com"
+        />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

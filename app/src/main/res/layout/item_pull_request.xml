@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data>
+    <variable
+        name="viewModel"
+        type="com.concrete.android.challenge.ui.pull_request.PullRequestItemViewModel"
+        />
+  </data>
+
+  <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/_5sdp"
+      android:layout_marginStart="@dimen/_5sdp"
+      app:cardUseCompatPadding="true"
+      >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:onClick="@{() -> viewModel.onItemClick()}"
+        android:padding="@dimen/_5sdp"
+        >
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/firstLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          >
+
+        <TextView
+            android:id="@+id/pullRequestTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="@{viewModel.title}"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Pull Request Title"
+            />
+
+        <TextView
+            android:id="@+id/pullRequestDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="@dimen/_5sdp"
+            android:text="@{viewModel.content}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pullRequestTitle"
+            tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <ImageView
+          android:id="@+id/userProfileImage"
+          android:layout_width="@dimen/_50sdp"
+          android:layout_height="@dimen/_50sdp"
+          android:importantForAccessibility="no"
+          android:scaleType="fitCenter"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/firstLayout"
+          app:imageUrl="@{viewModel.imageUrl}"
+          tools:src="@drawable/ic_account_circle_black_24dp"
+          />
+
+      <TextView
+          android:id="@+id/repositoryUserName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/_5sdp"
+          android:text="@{viewModel.userName}"
+          android:textColor="@android:color/holo_blue_dark"
+          android:textSize="@dimen/_13sdp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toEndOf="@+id/userProfileImage"
+          app:layout_constraintTop_toBottomOf="@+id/firstLayout"
+          tools:text="username"
+          />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </com.google.android.material.card.MaterialCardView>
+
+</layout>

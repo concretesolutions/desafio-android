@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+  <data>
+    <variable
+        name="viewModel"
+        type="com.concrete.android.challenge.ui.main.MainViewModel"
+        />
+  </data>
+
+  <androidx.drawerlayout.widget.DrawerLayout
+      android:id="@+id/drawerView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fitsSystemWindows="true"
+      >
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/clRootView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+      <com.google.android.material.appbar.AppBarLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            />
+
+      </com.google.android.material.appbar.AppBarLayout>
+
+      <FrameLayout
+          android:id="@+id/fragment_container"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:fitsSystemWindows="true"
+          app:layout_behavior="@string/appbar_scrolling_view_behavior"
+          />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/menu_drawer"
+        style="@style/Widget.Design.NavigationView"
+        />
+
+  </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

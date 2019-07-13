@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  defaultConfig {
+    applicationId "com.concrete.android.challenge"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    vectorDrawables.useSupportLibrary = true
+
+    buildConfigField "String", "BASE_URL", "\"https://api.github.com/\""
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  dataBinding {
+    enabled = true
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation "androidx.appcompat:appcompat:$appCompatVersion"
+  implementation "androidx.core:core-ktx:$coreVersion"
+  implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+  implementation "com.google.android.material:material:$materialVersion"
+
+  // RxAndroid
+  implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+  implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
+  // Lifecycle
+  implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+  annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
+
+  // Retrofit
+  implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+  implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+  implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+  // OkHttp3
+  implementation "com.squareup.okhttp3:okhttp:$okHttp3Version"
+  implementation "com.squareup.okhttp3:logging-interceptor:$okHttp3Version"
+
+  // Moshi
+  implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+
+  // Moshi Adapter
+  implementation "com.squareup.moshi:moshi-adapters:$moshiAdapterVersion"
+
+  // Timber
+  implementation "com.jakewharton.timber:timber:$timberVersion"
+
+  // Dagger 2
+  implementation "com.google.dagger:dagger:$daggerVersion"
+  annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+  annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+  implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+
+  // SDP
+  implementation "com.intuit.sdp:sdp-android:$sdpVersion"
+
+  // Glide
+  implementation("com.github.bumptech.glide:glide:$glideVersion") {
+    exclude group: "com.android.support"
+  }
+  annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+  // Lottie
+  implementation "com.airbnb.android:lottie:$lottieVersion"
+
+  testImplementation "org.mockito:mockito-core:2.15.0"
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'androidx.test:runner:1.2.0'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

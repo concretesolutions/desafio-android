@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data>
+    <import type="android.view.View"/>
+
+    <variable
+        name="viewModel"
+        type="com.concrete.android.challenge.ui.repository.RepositoryViewModel"
+        />
+  </data>
+
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/repositoryRecyclerView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:adapter="@{viewModel.repositoryListLiveData}"
+          tools:listitem="@layout/item_repository"
+          />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/loading_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:theme="@style/AppTheme.WhiteAccent"
+        android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+        style="?android:attr/progressBarStyleLarge"
+        />
+  </FrameLayout>
+</layout>

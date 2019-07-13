@@ -1,0 +1,57 @@
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <item name="colorPrimary">@color/primaryColor</item>
+    <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+    <item name="colorAccent">@color/primaryLightColor</item>
+    <item name="android:colorBackground">@color/primaryLightColor</item>
+    <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
+    <item name="shapeAppearanceMediumComponent">@style/AppShapeAppearance.MediumComponent</item>
+    <item name="shapeAppearanceLargeComponent">@style/AppShapeAppearance.LargeComponent</item>
+    <item name="bottomAppBarStyle">@style/AppBottomAppBar</item>
+    <item name="materialButtonStyle">@style/AppButton</item>
+    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    <item name="autoCompleteTextViewStyle">@style/SearchAutoCompleteTextView</item>
+  </style>
+
+  <style name="AppShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <item name="cornerFamily">cut</item>
+    <item name="cornerSize">@dimen/_5sdp</item>
+  </style>
+
+  <style name="AppShapeAppearance.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <item name="cornerFamily">cut</item>
+    <item name="cornerSize">@dimen/_5sdp</item>
+  </style>
+
+  <style name="AppShapeAppearance.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+    <item name="cornerFamily">cut</item>
+    <item name="cornerSize">@dimen/_5sdp</item>
+  </style>
+
+  <style name="AppBottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+    <item name="backgroundTint">@color/primaryColor</item>
+  </style>
+
+  <!--  For the sake of xml preview not breaking  -->
+  <style name="UnelevatedButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+  </style>
+
+  <style name="AppButton" parent="Widget.MaterialComponents.Button">
+    <item name="backgroundTint">@color/button_color</item>
+  </style>
+
+  <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+    <item name="color">@android:color/white</item>
+  </style>
+
+  <style name="AppTheme.WhiteAccent">
+    <item name="colorAccent">@android:color/holo_red_light</item>
+  </style>
+
+  <style name="SearchAutoCompleteTextView" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textColorHint">@android:color/white</item>
+  </style>
+</resources>

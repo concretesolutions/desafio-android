@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data>
+    <import type="android.view.View"/>
+
+    <variable
+        name="viewModel"
+        type="com.concrete.android.challenge.ui.pull_request.PullRequestViewModel"
+        />
+  </data>
+
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?android:attr/actionBarSize"
+          android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+          app:layout_collapseMode="pin"
+          app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+          />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+      <LinearLayout
+          android:id="@+id/state_layout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/stateBgColor"
+          android:padding="@dimen/_10sdp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          >
+
+        <TextView
+            android:id="@+id/stateOpened"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFC107"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            tools:text="16 opened"
+            />
+
+        <TextView
+            android:id="@+id/stateClosed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            tools:text=" / 800 opened"
+            />
+      </LinearLayout>
+
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/state_layout"
+          >
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/pullRequestRecyclerView"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              app:adapter="@{viewModel.pullRequestListLiveData}"
+              tools:listitem="@layout/item_pull_request"
+              />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/loading_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:theme="@style/AppTheme.WhiteAccent"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+            style="?android:attr/progressBarStyleLarge"
+            />
+      </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
