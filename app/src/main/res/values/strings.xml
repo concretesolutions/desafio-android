@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Desafio Concrete</string>
+    <string name="action_search">Pesquisar</string>
 </resources>

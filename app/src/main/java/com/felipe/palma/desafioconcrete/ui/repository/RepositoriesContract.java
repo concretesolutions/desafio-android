@@ -1,5 +1,7 @@
 package com.felipe.palma.desafioconcrete.ui.repository;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.felipe.palma.desafioconcrete.domain.model.Item;
 
 import java.util.List;
@@ -15,6 +17,7 @@ public interface RepositoriesContract {
         void showDialog();
         void showError(String error);
         void showRepositories(List<Item> itens);
+        void showAnimation();
     }
 
     interface Presenter{

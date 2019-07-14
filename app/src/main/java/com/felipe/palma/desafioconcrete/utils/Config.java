@@ -12,5 +12,8 @@ public class Config {
     public static final String PARAM_QUERY = "language:Java";
     public static final String PARAM_SORT = "stars";
 
+    public static final String OWNER = "OWNER";
+    public static final String REPO = "REPO";
+
 
 }

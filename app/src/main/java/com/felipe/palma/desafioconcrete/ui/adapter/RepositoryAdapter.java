@@ -1,8 +1,6 @@
 package com.felipe.palma.desafioconcrete.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Paint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.felipe.palma.desafioconcrete.R;
 import com.felipe.palma.desafioconcrete.domain.model.Item;
-import com.github.abdularis.civ.AvatarImageView;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -41,14 +38,14 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
         ViewHolder(View view) {
             super(view);
-            txtNameRepo = view.findViewById(R.id.txt_name_repo);
-            txtDescRepo = view.findViewById(R.id.txt_desc_repo);
-            txtNameUserRepo = view.findViewById(R.id.txt_name_user_repo);
-            txtSurnameUserRepo = view.findViewById(R.id.txt_surname_user_repo);
+            txtNameRepo = view.findViewById(R.id.txt_name_pull);
+            txtDescRepo = view.findViewById(R.id.txt_desc_pull);
+            txtNameUserRepo = view.findViewById(R.id.txt_name_user_pull);
+            txtSurnameUserRepo = view.findViewById(R.id.txt_surname_user_pull);
             txtForkCount = view.findViewById(R.id.txt_fork_repo);
             txtStarCount = view.findViewById(R.id.txt_star_repo);
 
-            imgUserRepo = view.findViewById(R.id.img_user_repo);
+            imgUserRepo = view.findViewById(R.id.img_user_pull);
 
 
             view.setOnClickListener(view1 -> listener.onItemClick(itemsListFiltered.get(getAdapterPosition())));

@@ -33,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             progressBar.setVisibility(View.GONE);
             startActivity(new Intent(SplashActivity.this, RepositoriesActivity.class));
+            finish();
 
         }, Config.SPLASH_TIME);
 

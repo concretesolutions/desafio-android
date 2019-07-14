@@ -1,6 +1,9 @@
 package com.felipe.palma.desafioconcrete.network;
 
+import com.felipe.palma.desafioconcrete.domain.response.PullRequestResponse;
 import com.felipe.palma.desafioconcrete.domain.response.RepositoriesResponse;
+
+import java.util.List;
 
 
 /**
@@ -15,6 +18,9 @@ public interface IServiceGithub {
 
     void getListRepository(String q, String sort, int page,
                            IServiceCallback<RepositoriesResponse> callback);
+
+    void getPullRequests(String owner, String repo,
+                         IServiceCallback<List<PullRequestResponse>> callback);
 
 
 }

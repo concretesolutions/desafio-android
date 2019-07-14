@@ -1,9 +1,13 @@
 package com.felipe.palma.desafioconcrete.network;
 
+import com.felipe.palma.desafioconcrete.domain.response.PullRequestResponse;
 import com.felipe.palma.desafioconcrete.domain.response.RepositoriesResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -18,4 +22,7 @@ public interface IServiceGithubEndPoint {
             @Query("page") int page
     );
 
+    @GET("repos/{owner}/{repo}/pulls")
+    Call<List<PullRequestResponse>> getPullRequestList(@Path("owner") String owner,
+                                                       @Path("repo") String repo);
 }

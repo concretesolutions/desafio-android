@@ -1,7 +1,10 @@
 package com.felipe.palma.desafioconcrete.network;
 
 
+import com.felipe.palma.desafioconcrete.domain.response.PullRequestResponse;
 import com.felipe.palma.desafioconcrete.domain.response.RepositoriesResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,5 +41,30 @@ public class ServiceGithubImp implements IServiceGithub {
 
 
 
+    }
+
+    @Override
+    public void getPullRequests(String owner, String repo, IServiceCallback<List<PullRequestResponse>> callback) {
+
+        IServiceGithubEndPoint mService = RetrofitInstance.getInstance().create(IServiceGithubEndPoint.class);
+
+        Call<List<PullRequestResponse>> mCall = mService.getPullRequestList(owner,repo);
+
+        mCall.enqueue(new Callback<List<PullRequestResponse>>() {
+            @Override
+            public void onResponse(Call<List<PullRequestResponse>> call, Response<List<PullRequestResponse>> response) {
+                if(!response.isSuccessful()){
+                    callback.onError("Ocorreu um erro: " + response.errorBody().toString() );
+                    return;
+                }
+                callback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<PullRequestResponse>> call, Throwable t) {
+                callback.onError(t.getMessage());
+
+            }
+        });
     }
 }

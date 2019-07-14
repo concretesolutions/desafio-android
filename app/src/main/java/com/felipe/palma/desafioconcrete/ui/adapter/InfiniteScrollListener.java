@@ -21,6 +21,7 @@ public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListen
     public InfiniteScrollListener(LinearLayoutManager layoutManager) {
         this.layoutManager = layoutManager;
         minItemsBeforeNextLoad *= currentPage;
+
     }
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -28,7 +29,6 @@ public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListen
         int totalItemCount = layoutManager.getItemCount();
 
 
-        Log.d("PAGE","teste: " + totalItemCount);
         // Assume list was invalidated -- set back to default
         if (totalItemCount < latestTotalItemCount) {
             this.currentPage = this.startingPage;

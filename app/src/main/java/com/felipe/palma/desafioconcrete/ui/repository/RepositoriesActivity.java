@@ -1,15 +1,21 @@
 package com.felipe.palma.desafioconcrete.ui.repository;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +30,7 @@ import com.felipe.palma.desafioconcrete.ui.adapter.InfiniteScrollListener;
 import com.felipe.palma.desafioconcrete.ui.adapter.RecyclerItemClickListener;
 import com.felipe.palma.desafioconcrete.ui.adapter.RepositoryAdapter;
 import com.felipe.palma.desafioconcrete.ui.adapter.decoration.ItemOffsetDecoration;
+import com.felipe.palma.desafioconcrete.ui.pullrequest.PullRequestActivity;
 import com.felipe.palma.desafioconcrete.utils.Config;
 
 import java.util.ArrayList;
@@ -50,6 +57,8 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     //Views
 
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
+    private SearchView searchView;
+
 
 
 
@@ -95,30 +104,22 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         Log.d("REPO", itens.toString());
         mRepoList = itens;
         mRepoAdapter.addRepoItems(mRepoList);
-        runLayoutAnimation(mRecyclerView);
+        showAnimation();
 
     }
 
-    /**
-     * RecyclerItem click event listener
-     * */
-    private RecyclerItemClickListener recyclerItemClickListener = item -> {
-        Toast.makeText(this,"Click", Toast.LENGTH_LONG).show();
-//        Intent mIntent = new Intent(MainActivity.this,ProductDetailActivity.class);
-//        mIntent.putExtra(Config.PRODUCT_ITEM,item);
-//        startActivity(mIntent);
-    };
-
-    private void runLayoutAnimation(final RecyclerView recyclerView) {
-        final Context context = recyclerView.getContext();
+    @Override
+    public void showAnimation() {
+        Context context = mRecyclerView.getContext();
         AnimationItem mAnimationItem =  new AnimationItem("Slide from bottom", R.anim.layout_animation_from_bottom);
         final LayoutAnimationController controller =
                 AnimationUtils.loadLayoutAnimation(context, mAnimationItem.getResourceId());
 
-        recyclerView.setLayoutAnimation(controller);
-        recyclerView.getAdapter().notifyDataSetChanged();
-        recyclerView.scheduleLayoutAnimation();
+        mRecyclerView.setLayoutAnimation(controller);
+        mRecyclerView.getAdapter().notifyDataSetChanged();
+        mRecyclerView.scheduleLayoutAnimation();
     }
+
 
 
     private void setupPresenter() {
@@ -131,7 +132,6 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         mRecyclerView.setAdapter(mRepoAdapter);
     }
     private void setupRecyclerView() {
-        final Context context = mRecyclerView.getContext();
         final int spacing = getResources().getDimensionPixelOffset(R.dimen.default_spacing_small);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -141,11 +141,60 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 mPresenter.loadRepositories(page);
+
+                Log.d("REPO_TEST", page+"");
             }
         };
 
         mRecyclerView.addOnScrollListener(infiniteScrollListener);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list, menu);
+
+
+        setupSearchView(menu);
+
+
+        return true;
+    }
+
+
+    private void setupSearchView(Menu menu) {
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mRepoAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                mRepoAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
+    }
+
+    /**
+     * RecyclerItem click event listener
+     * */
+    private RecyclerItemClickListener<Item> recyclerItemClickListener = item -> {
+        String owner = item.getOwner().getLogin();
+        String repository = item.getName();
+
+        Intent mIntent = new Intent(this, PullRequestActivity.class);
+        mIntent.putExtra(Config.OWNER,owner);
+        mIntent.putExtra(Config.REPO,repository);
+        startActivity(mIntent);
+    };
 
 }
