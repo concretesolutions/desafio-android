@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class RepositoriesResponse implements Serializable {
     private Boolean incompleteResults;
     @SerializedName("items")
     @Expose
-    private List<Item> items = null;
+    private ArrayList<Item> items = null;
 
     public Integer getTotalCount() {
         return totalCount;
@@ -37,11 +38,11 @@ public class RepositoriesResponse implements Serializable {
         this.incompleteResults = incompleteResults;
     }
 
-    public List<Item> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
 

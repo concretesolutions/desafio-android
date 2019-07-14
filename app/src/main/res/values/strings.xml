@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Desafio Concrete</string>
     <string name="action_search">Pesquisar</string>
+    <string name="no_data_pull_request">Não há Pull Requests para este Repositorio!!!</string>
 </resources>

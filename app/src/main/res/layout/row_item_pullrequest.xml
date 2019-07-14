@@ -63,7 +63,7 @@
             android:text="TextView"
             android:textAlignment="center"
             android:textColor="@color/color_name_user_repo"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/img_user_pull"
             app:layout_constraintTop_toBottomOf="@+id/txt_desc_pull" />
@@ -86,6 +86,26 @@
             app:layout_constraintStart_toEndOf="@+id/img_user_pull"
             app:layout_constraintTop_toBottomOf="@+id/txt_name_user_pull"
             app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Abertura"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txt_status_pull" />
+
+        <TextView
+            android:id="@+id/txt_date_opened"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,5 +15,11 @@ public class Config {
     public static final String OWNER = "OWNER";
     public static final String REPO = "REPO";
 
+    public static final String SAVE_LIST_STATE = "SAVE_LIST";
+    public static final String SAVE_STATE = "SAVE_STATE";
+
+
+
+
 
 }

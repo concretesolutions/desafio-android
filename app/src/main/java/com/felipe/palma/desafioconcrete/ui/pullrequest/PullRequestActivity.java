@@ -1,5 +1,6 @@
 package com.felipe.palma.desafioconcrete.ui.pullrequest;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -7,10 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.felipe.palma.desafioconcrete.R;
@@ -53,18 +57,22 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
 
         ButterKnife.bind(this);
 
-        getValues();
+        setupIntentExtras();
         setupToolBar();
         //setupAdapter();
         setupPresenter();
         setupRecyclerView();
     }
 
-
-    private void getValues(){
-        owner = getIntent().getStringExtra(Config.OWNER);
-        repo = getIntent().getStringExtra(Config.REPO);
+    private void setupIntentExtras() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            owner = extras.getString(Config.OWNER);
+            repo = extras.getString(Config.REPO);
+        }
     }
+
+
 
     private void setupPresenter() {
         mPresenter = new PullRequestPresenter(this);
@@ -87,16 +95,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new ItemOffsetDecoration(spacing));
 
-//        infiniteScrollListener = new InfiniteScrollListener(mLinearLayoutManager) {
-//            @Override
-//            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-//                mPresenter.loadRepositories(page);
-//
-//                Log.d("REPO_TEST", page+"");
-//            }
-//        };
-//
-//        mRecyclerView.addOnScrollListener(infiniteScrollListener);
+
     }
 
 
@@ -104,7 +103,12 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
     public void showPullRequests(List<PullRequestResponse> response) {
         Log.d("DATA", response.size()+"");
         pullRequestResponseList = response;
+
         setupAdapter();
+        if(pullRequestResponseList.size() == 0){
+            hideDialog();
+            noDataPullRequest();
+        }
 
 
     }
@@ -147,5 +151,28 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
      * */
     private RecyclerItemClickListener<PullRequestResponse> recyclerItemClickListener = item -> {
        Toast.makeText(this,"CLICK", Toast.LENGTH_LONG).show();
+        String urlPullRequest = item.getHtmlUrl();
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPullRequest));
+
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.putExtra("url", urlPullRequest);
+        startActivity(intent);
     };
+
+    private void noDataPullRequest(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getResources().getString(R.string.no_data_pull_request))
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                        dialog.dismiss();
+                        //finish();
+                        startActivity(new Intent(PullRequestActivity.this, RepositoriesActivity.class));
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }

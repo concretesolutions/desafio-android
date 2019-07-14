@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,6 +34,7 @@ import com.felipe.palma.desafioconcrete.ui.adapter.RepositoryAdapter;
 import com.felipe.palma.desafioconcrete.ui.adapter.decoration.ItemOffsetDecoration;
 import com.felipe.palma.desafioconcrete.ui.pullrequest.PullRequestActivity;
 import com.felipe.palma.desafioconcrete.utils.Config;
+import com.felipe.palma.desafioconcrete.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,17 +53,20 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     private RepositoryAdapter mRepoAdapter;
     private int mPage = 1;
     private ProgressDialog dialog;
+    private Context context = this;
 
-    private List<Item> mRepoList = new ArrayList<>();
+    private ArrayList<Item> mRepoList = new ArrayList<>();
     private InfiniteScrollListener infiniteScrollListener;
     private LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
+    private Parcelable listState;
+
     //Views
 
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
+
+    @BindView(R.id.toobar) Toolbar toolbar;
+
     private SearchView searchView;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,19 +77,53 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         INSTANCIA BUTTERKNIFE
          */
         ButterKnife.bind(this);
+        Utils utils = new Utils(context);
 
+        setupToolBar();
         setupAdapter();
-        setupPresenter();
 
-        setupRecyclerView();
+        if(!utils.hasNetwork()){
+            Toast.makeText(context, "Verifique sua conexão com a Internet",Toast.LENGTH_LONG).show();
+            finish();
+        }
 
+
+        if (savedInstanceState != null){
+            mRepoList = savedInstanceState.getParcelableArrayList(Config.SAVE_LIST_STATE);
+            listState = savedInstanceState.getParcelable(Config.SAVE_STATE);
+            displayData();
+            restoreLayoutManagerPosition();
+            mRepoAdapter.notifyDataSetChanged();
+        }else {
+            setupPresenter();
+            setupRecyclerView();
+        }
 
 
     }
 
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        listState = mLinearLayoutManager.onSaveInstanceState();
+        state.putParcelableArrayList(Config.SAVE_LIST_STATE, mRepoList);
+        state.putParcelable(Config.SAVE_STATE, mRecyclerView.getLayoutManager().onSaveInstanceState());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+        mRepoList = state.getParcelableArrayList(Config.SAVE_LIST_STATE);
+        listState = state.getParcelable(Config.SAVE_STATE);
+        super.onRestoreInstanceState(state);
+
+    }
+
+
     @Override
     public void hideDialog() {
-        dialog.hide();
+        dialog.dismiss();
     }
 
     @Override
@@ -100,10 +140,11 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     }
 
     @Override
-    public void showRepositories(List<Item> itens) {
-        Log.d("REPO", itens.toString());
-        mRepoList = itens;
-        mRepoAdapter.addRepoItems(mRepoList);
+    public void showRepositories(ArrayList<Item> items) {
+        //setupAdapter();
+        mRepoAdapter.addRepoItems(items);
+
+        mRepoList = mRepoAdapter.getItems();
         showAnimation();
 
     }
@@ -121,32 +162,56 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     }
 
 
+    private void setupToolBar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Github JavaPop");
+    }
 
     private void setupPresenter() {
         mPresenter = new RepositoriesPresenter(this);
         mPresenter.loadRepositories(mPage);
+
     }
 
     private void setupAdapter(){
         mRepoAdapter = new RepositoryAdapter(this, mRepoList, recyclerItemClickListener);
         mRecyclerView.setAdapter(mRepoAdapter);
     }
-    private void setupRecyclerView() {
-        final int spacing = getResources().getDimensionPixelOffset(R.dimen.default_spacing_small);
+    private void displayData(){
+        int spacing = getResources().getDimensionPixelOffset(R.dimen.default_spacing_small);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new ItemOffsetDecoration(spacing));
+        mPresenter = new RepositoriesPresenter(this);
+        setupEndLess();
+        setupAdapter();
 
+    }
+
+    private void setupRecyclerView() {
+        int spacing = getResources().getDimensionPixelOffset(R.dimen.default_spacing_small);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.addItemDecoration(new ItemOffsetDecoration(spacing));
+        setupEndLess();
+    }
+
+    private void setupEndLess(){
         infiniteScrollListener = new InfiniteScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 mPresenter.loadRepositories(page);
 
-                Log.d("REPO_TEST", page+"");
             }
         };
 
         mRecyclerView.addOnScrollListener(infiniteScrollListener);
+    }
+
+    private void restoreLayoutManagerPosition() {
+        if (listState != null) {
+            mRecyclerView.getLayoutManager().onRestoreInstanceState(listState);
+        }
     }
 
     @Override

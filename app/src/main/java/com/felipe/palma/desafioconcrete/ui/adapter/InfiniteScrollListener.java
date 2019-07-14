@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListener {
 
-    private int minItemsBeforeNextLoad = 30;
+    private int minItemsBeforeNextLoad = 5;
     private int startingPage = 1;
     private int currentPage = 1;
     private int latestTotalItemCount = 0;
@@ -20,7 +20,7 @@ public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListen
 
     public InfiniteScrollListener(LinearLayoutManager layoutManager) {
         this.layoutManager = layoutManager;
-        minItemsBeforeNextLoad *= currentPage;
+        //minItemsBeforeNextLoad *= currentPage;
 
     }
     @Override

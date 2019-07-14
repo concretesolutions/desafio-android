@@ -26,8 +26,8 @@ import java.util.List;
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> implements Filterable {
 
     private Context context;
-    private List<Item> itemsList;
-    private List<Item> itemsListFiltered;
+    private ArrayList<Item> itemsList;
+    private ArrayList<Item> itemsListFiltered;
     private RecyclerItemClickListener listener;
 
 
@@ -52,7 +52,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
         }
     }
 
-    public RepositoryAdapter(Context context, List<Item> itemsList, RecyclerItemClickListener listener) {
+    public RepositoryAdapter(Context context, ArrayList<Item> itemsList, RecyclerItemClickListener listener) {
         this.context = context;
         this.listener = listener;
         this.itemsList = itemsList;
@@ -105,6 +105,11 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
         //notifyDataSetChanged();
     }
 
+    public ArrayList<Item> getItems() {
+        return itemsListFiltered;
+    }
+
+
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -114,7 +119,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
                 if (charString.isEmpty()) {
                     itemsListFiltered = itemsList;
                 } else {
-                    List<Item> filteredList = new ArrayList<>();
+                    ArrayList<Item> filteredList = new ArrayList<>();
                     for (Item repo : itemsList) {
                         if (repo.getName().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(repo);
