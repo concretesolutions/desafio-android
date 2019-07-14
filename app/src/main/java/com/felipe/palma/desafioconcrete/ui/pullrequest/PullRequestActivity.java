@@ -139,9 +139,6 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
                 intent = new Intent(getApplicationContext(), RepositoriesActivity.class);
                 startActivity(intent);
                 break;
-
-            default:
-                return super.onOptionsItemSelected(menuItem);
         }
         return true;
     }

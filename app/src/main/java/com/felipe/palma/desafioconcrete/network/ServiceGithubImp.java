@@ -15,10 +15,12 @@ import retrofit2.Response;
  */
 public class ServiceGithubImp implements IServiceGithub {
 
+
+    private IServiceGithubEndPoint mService = RetrofitInstance.getInstance().getService();
+
     @Override
     public void getListRepository(String query, String sort, int page, IServiceCallback<RepositoriesResponse> callback) {
 
-        IServiceGithubEndPoint mService = RetrofitInstance.getInstance().create(IServiceGithubEndPoint.class);
 
         Call<RepositoriesResponse> mCall = mService.getRepositoryList(query,sort,page);
 
@@ -46,7 +48,6 @@ public class ServiceGithubImp implements IServiceGithub {
     @Override
     public void getPullRequests(String owner, String repo, IServiceCallback<List<PullRequestResponse>> callback) {
 
-        IServiceGithubEndPoint mService = RetrofitInstance.getInstance().create(IServiceGithubEndPoint.class);
 
         Call<List<PullRequestResponse>> mCall = mService.getPullRequestList(owner,repo);
 

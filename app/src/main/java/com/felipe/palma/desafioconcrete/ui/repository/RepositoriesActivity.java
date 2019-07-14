@@ -6,10 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
@@ -17,16 +14,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.felipe.palma.desafioconcrete.R;
 import com.felipe.palma.desafioconcrete.domain.model.Item;
-import com.felipe.palma.desafioconcrete.domain.response.RepositoriesResponse;
-import com.felipe.palma.desafioconcrete.network.IServiceGithub;
-import com.felipe.palma.desafioconcrete.network.ServiceGithubImp;
 import com.felipe.palma.desafioconcrete.ui.adapter.AnimationItem;
 import com.felipe.palma.desafioconcrete.ui.adapter.InfiniteScrollListener;
 import com.felipe.palma.desafioconcrete.ui.adapter.RecyclerItemClickListener;
@@ -34,10 +27,9 @@ import com.felipe.palma.desafioconcrete.ui.adapter.RepositoryAdapter;
 import com.felipe.palma.desafioconcrete.ui.adapter.decoration.ItemOffsetDecoration;
 import com.felipe.palma.desafioconcrete.ui.pullrequest.PullRequestActivity;
 import com.felipe.palma.desafioconcrete.utils.Config;
-import com.felipe.palma.desafioconcrete.utils.Utils;
+import com.felipe.palma.desafioconcrete.utils.UnsplashApplication;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,15 +69,15 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         INSTANCIA BUTTERKNIFE
          */
         ButterKnife.bind(this);
-        Utils utils = new Utils(context);
 
         setupToolBar();
         setupAdapter();
 
-        if(!utils.hasNetwork()){
-            Toast.makeText(context, "Verifique sua conexão com a Internet",Toast.LENGTH_LONG).show();
-            finish();
+        if(!UnsplashApplication.hasNetwork() ){
+            Toast.makeText(context, getResources().getString(R.string.internet_offline),Toast.LENGTH_LONG).show();
+            //finish();
         }
+
 
 
         if (savedInstanceState != null){
@@ -98,6 +90,7 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
             setupPresenter();
             setupRecyclerView();
         }
+
 
 
     }
@@ -256,10 +249,14 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         String owner = item.getOwner().getLogin();
         String repository = item.getName();
 
-        Intent mIntent = new Intent(this, PullRequestActivity.class);
-        mIntent.putExtra(Config.OWNER,owner);
-        mIntent.putExtra(Config.REPO,repository);
-        startActivity(mIntent);
+        if(UnsplashApplication.hasNetwork()){
+            Intent mIntent = new Intent(this, PullRequestActivity.class);
+            mIntent.putExtra(Config.OWNER,owner);
+            mIntent.putExtra(Config.REPO,repository);
+            startActivity(mIntent);
+        }else{
+            Toast.makeText(context, getResources().getString(R.string.internet_offline),Toast.LENGTH_LONG).show();
+        }
     };
 
 }
