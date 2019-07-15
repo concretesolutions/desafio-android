@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Github Java Pop</string>
     <string name="title_repositories">@string/app_name</string>
+    <string name="title_pull_requests">Pull Requests</string>
+
+    <string name="text_pull_request_info">#%1$d opened at %2$s\nby %3$s</string>
+    <string name="text_item_without_description"><i>No description provided.</i></string>
+    <string name="description_pull_requests_empty">There aren’t any open pull requests.</string>
+    <string name="title_pull_requests_empty">Everything is quiet here</string>
+    <string name="action_back">Go back</string>
 </resources>

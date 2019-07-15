@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 28
@@ -14,6 +15,9 @@ android {
 
         vectorDrawables.useSupportLibrary = true
         buildConfigField "String", "API_BASE_URL", "\"https://api.github.com/\""
+    }
+    androidExtensions {
+        experimental = true
     }
     buildTypes {
         release {

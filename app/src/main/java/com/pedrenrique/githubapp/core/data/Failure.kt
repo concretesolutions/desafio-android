@@ -1,9 +1,9 @@
 package com.pedrenrique.githubapp.core.data
 
 sealed class Failure(
-    val error: Throwable
+    val error: Throwable?
 ) {
     class Full(error: Throwable) : Failure(error)
     class Item(error: Throwable) : Failure(error)
-    object Empty
+    object Empty : Failure(null)
 }

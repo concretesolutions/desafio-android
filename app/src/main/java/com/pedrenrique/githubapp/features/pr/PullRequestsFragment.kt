@@ -1,32 +1,38 @@
-package com.pedrenrique.githubapp.features.repositories
+package com.pedrenrique.githubapp.features.pr
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pedrenrique.githubapp.R
 import com.pedrenrique.githubapp.core.data.Failure
-import com.pedrenrique.githubapp.core.data.Repository
+import com.pedrenrique.githubapp.core.data.PullRequest
 import com.pedrenrique.githubapp.core.ext.supportActionBar
 import com.pedrenrique.githubapp.core.ext.supportActivity
 import com.pedrenrique.githubapp.core.platform.Adapter
+import com.pedrenrique.githubapp.core.platform.BaseViewHolder
 import com.pedrenrique.githubapp.core.platform.EndlessRecyclerViewScrollListener
 import com.pedrenrique.githubapp.features.common.TypesFactoryAdapter
-import kotlinx.android.synthetic.main.fragment_repositories.*
+import com.pedrenrique.githubapp.features.common.viewholder.EmptyViewHolder
+import kotlinx.android.synthetic.main.fragment_pull_requests.*
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RepositoriesFragment : Fragment() {
-    private val repoViewModel by currentScope.viewModel<RepositoriesViewModel>(this)
 
-    private val repoAdapter by lazy {
-        Adapter(TypesFactory())
+class PullRequestsFragment : Fragment() {
+    private val args by navArgs<PullRequestsFragmentArgs>()
+    private val pullRequestsViewModel by currentScope.viewModel<PullRequestsViewModel>(this)
+
+    private val prAdapter by lazy {
+        val typesFactory = TypesFactory()
+        Adapter(typesFactory)
     }
 
     private val RecyclerView.linearLayoutManager: LinearLayoutManager
@@ -38,38 +44,52 @@ class RepositoriesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View =
-        inflater.inflate(R.layout.fragment_repositories, container, false)
+        inflater.inflate(
+            com.pedrenrique.githubapp.R.layout.fragment_pull_requests,
+            container,
+            false
+        )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        repoViewModel.load()
-        repoViewModel.state.observe(this, Observer {
-            repoAdapter.replace(it?.data ?: listOf())
+        supportActivity?.title = args.repository.fullName
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        pullRequestsViewModel.load(args.repository)
+        pullRequestsViewModel.state.observe(this, Observer {
+            prAdapter.replace(it?.data ?: listOf())
         })
-        rvRepositories.setup()
+        rvPullRequests.setup()
     }
 
     private fun RecyclerView.setup() {
         layoutManager = LinearLayoutManager(context)
         endlessRecyclerViewScrollListener = EndlessRecyclerViewScrollListener(linearLayoutManager) {
-            repoViewModel.loadMore()
+            pullRequestsViewModel.loadMore(args.repository)
         }
 
         val decoration = DividerItemDecoration(context, linearLayoutManager.orientation)
         addItemDecoration(decoration)
 
-        adapter = repoAdapter
+        adapter = prAdapter
         setHasFixedSize(true)
         addOnScrollListener(endlessRecyclerViewScrollListener)
     }
 
     inner class TypesFactory : TypesFactoryAdapter() {
-        override fun click(repo: Repository) {
-            val act = activity ?: return
-            val navController = Navigation.findNavController(act, R.id.navHostFragment)
-            val showPullRequests = RepositoriesFragmentDirections.showPullRequests(repo)
-            navController.navigate(showPullRequests)
+        override fun type(failure: Failure.Empty) =
+            com.pedrenrique.githubapp.R.layout.item_pull_requests_empty
+
+        override fun holder(type: Int, view: View): BaseViewHolder<*> {
+            if (type == com.pedrenrique.githubapp.R.layout.item_pull_requests_empty)
+                return EmptyViewHolder(view)
+            return super.holder(type, view)
+        }
+
+        override fun click(pr: PullRequest) {
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(pr.url)
+            startActivity(i)
         }
 
         override fun click(failure: Failure) {
@@ -77,9 +97,9 @@ class RepositoriesFragment : Fragment() {
                 Failure.Empty ->
                     supportActivity?.onBackPressed()
                 is Failure.Full ->
-                    repoViewModel.load()
+                    pullRequestsViewModel.load(args.repository)
                 is Failure.Item ->
-                    repoViewModel.loadMore()
+                    pullRequestsViewModel.loadMore(args.repository)
             }
         }
     }

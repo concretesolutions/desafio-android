@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/repositoriesFragment"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/repositoriesFragment">
+
 
     <fragment
         android:id="@+id/repositoriesFragment"
-        app:defaultNavHost="true"
         android:name="com.pedrenrique.githubapp.features.repositories.RepositoriesFragment"
         android:label="@string/title_repositories"
-        tools:layout="@layout/fragment_repositories"/>
+        tools:layout="@layout/fragment_repositories">
+
+        <action
+            android:id="@+id/showPullRequests"
+            app:destination="@+id/pullRequestsFragment">
+            <argument
+                android:name="repository"
+                app:argType="com.pedrenrique.githubapp.core.data.Repository"
+                app:nullable="false" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/pullRequestsFragment"
+        android:name="com.pedrenrique.githubapp.features.pr.PullRequestsFragment"
+        android:label="@string/title_pull_requests"
+        tools:layout="@layout/fragment_pull_requests">
+
+        <argument
+            android:name="repository"
+            app:argType="com.pedrenrique.githubapp.core.data.Repository"
+            app:nullable="false" />
+    </fragment>
 </navigation>
