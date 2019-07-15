@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.felipe.palma.desafioconcrete.R;
 import com.felipe.palma.desafioconcrete.domain.model.Item;
@@ -39,7 +40,7 @@ import butterknife.ButterKnife;
  * Created by Felipe Palma on 11/07/2019.
  */
 
-public class RepositoriesActivity extends AppCompatActivity implements RepositoriesContract.View {
+public class RepositoriesActivity extends AppCompatActivity implements RepositoriesContract.View, SwipeRefreshLayout.OnRefreshListener  {
 
     private RepositoriesContract.Presenter mPresenter;
     private RepositoryAdapter mRepoAdapter;
@@ -57,6 +58,7 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
 
     @BindView(R.id.toobar) Toolbar toolbar;
+    @BindView(R.id.refresh) SwipeRefreshLayout mSwipeRefreshLayout;
 
     private SearchView searchView;
 
@@ -69,6 +71,11 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         INSTANCIA BUTTERKNIFE
          */
         ButterKnife.bind(this);
+
+        mPresenter = new RepositoriesPresenter(this);
+
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setEnabled( true );
 
         setupToolBar();
         setupAdapter();
@@ -88,9 +95,9 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
             mRepoAdapter.notifyDataSetChanged();
         }else {
             setupPresenter();
-            setupRecyclerView();
         }
 
+        setupRecyclerView();
 
 
     }
@@ -121,8 +128,10 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
 
     @Override
     public void showDialog() {
-        dialog = ProgressDialog.show(this, "Baixando dados",
-                "Aguarde ...", true);
+        if (!mSwipeRefreshLayout.isRefreshing()){
+            dialog = ProgressDialog.show(this, getResources().getString(R.string.load_data),
+                    getResources().getString(R.string.load_wait), true);
+        }
 
     }
 
@@ -139,6 +148,10 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
 
         mRepoList = mRepoAdapter.getItems();
         showAnimation();
+
+        if (mSwipeRefreshLayout.isRefreshing()){
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
 
     }
 
@@ -171,11 +184,6 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         mRecyclerView.setAdapter(mRepoAdapter);
     }
     private void displayData(){
-        int spacing = getResources().getDimensionPixelOffset(R.dimen.default_spacing_small);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.addItemDecoration(new ItemOffsetDecoration(spacing));
-        mPresenter = new RepositoriesPresenter(this);
         setupEndLess();
         setupAdapter();
 
@@ -258,5 +266,17 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
             Toast.makeText(context, getResources().getString(R.string.internet_offline),Toast.LENGTH_LONG).show();
         }
     };
+
+    @Override
+    public void onRefresh() {
+        mRepoAdapter.clearItems();
+        mPresenter.loadRepositories(mPage);
+        displayData();
+        mRepoAdapter.notifyDataSetChanged();
+
+    }
+
+
+
 
 }

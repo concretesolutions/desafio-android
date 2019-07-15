@@ -8,18 +8,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.felipe.palma.desafioconcrete.R;
 import com.felipe.palma.desafioconcrete.domain.model.Item;
 import com.felipe.palma.desafioconcrete.domain.response.PullRequestResponse;
+import com.felipe.palma.desafioconcrete.ui.adapter.AnimationItem;
 import com.felipe.palma.desafioconcrete.ui.adapter.InfiniteScrollListener;
 import com.felipe.palma.desafioconcrete.ui.adapter.PullRequestAdapter;
 import com.felipe.palma.desafioconcrete.ui.adapter.RecyclerItemClickListener;
@@ -59,7 +63,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
 
         setupIntentExtras();
         setupToolBar();
-        //setupAdapter();
+        setupAdapter();
         setupPresenter();
         setupRecyclerView();
     }
@@ -100,11 +104,27 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
 
 
     @Override
+    public void showAnimation() {
+        Context context = mRecyclerView.getContext();
+        AnimationItem mAnimationItem =  new AnimationItem("Slide from bottom", R.anim.layout_animation_from_bottom);
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(context, mAnimationItem.getResourceId());
+
+        mRecyclerView.setLayoutAnimation(controller);
+        mRecyclerView.getAdapter().notifyDataSetChanged();
+        mRecyclerView.scheduleLayoutAnimation();
+    }
+
+    @Override
     public void showPullRequests(List<PullRequestResponse> response) {
         Log.d("DATA", response.size()+"");
         pullRequestResponseList = response;
 
-        setupAdapter();
+        //setupAdapter();
+        mPullAdapter.addPullRequestItems(response);
+
+        showAnimation();
+
         if(pullRequestResponseList.size() == 0){
             hideDialog();
             noDataPullRequest();
@@ -120,8 +140,8 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
 
     @Override
     public void showDialog() {
-        dialog = ProgressDialog.show(this, "Baixando dados",
-                "Aguarde ...", true);
+        dialog = ProgressDialog.show(this, getResources().getString(R.string.load_data),
+                getResources().getString(R.string.load_wait), true);
 
     }
 
@@ -147,7 +167,6 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
      * RecyclerItem click event listener
      * */
     private RecyclerItemClickListener<PullRequestResponse> recyclerItemClickListener = item -> {
-       Toast.makeText(this,"CLICK", Toast.LENGTH_LONG).show();
         String urlPullRequest = item.getHtmlUrl();
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPullRequest));

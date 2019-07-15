@@ -105,6 +105,11 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
         //notifyDataSetChanged();
     }
 
+    public void clearItems() {
+        itemsListFiltered.clear();
+        //notifyDataSetChanged();
+    }
+
     public ArrayList<Item> getItems() {
         return itemsListFiltered;
     }

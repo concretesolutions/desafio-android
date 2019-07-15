@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface PullRequestContract {
     interface View{
+        void showAnimation();
         void showPullRequests(List<PullRequestResponse> response);
         void showDialog();
         void hideDialog();

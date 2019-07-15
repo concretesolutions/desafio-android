@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.felipe.palma.desafioconcrete.R;
+import com.felipe.palma.desafioconcrete.domain.model.Item;
 import com.felipe.palma.desafioconcrete.domain.response.PullRequestResponse;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -99,6 +100,11 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
                 .into(holder.imgUserPull);
 
 
+    }
+
+    public void addPullRequestItems(List<PullRequestResponse> items) {
+        itemsListFiltered.addAll(items);
+        //notifyDataSetChanged();
     }
 
 
