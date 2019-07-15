@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/repositoriesFragment"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/repositoriesFragment"
+        app:defaultNavHost="true"
+        android:name="com.pedrenrique.githubapp.features.repositories.RepositoriesFragment"
+        android:label="@string/title_repositories"
+        tools:layout="@layout/fragment_repositories"/>
+</navigation>

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Github App</string>
+    <string name="app_name">Github Java Pop</string>
+    <string name="title_repositories">@string/app_name</string>
 </resources>
