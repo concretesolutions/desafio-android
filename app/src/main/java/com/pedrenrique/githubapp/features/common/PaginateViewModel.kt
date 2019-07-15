@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.pedrenrique.githubapp.core.data.PaginatedData
 import com.pedrenrique.githubapp.core.exceptions.EmptyResultException
 import com.pedrenrique.githubapp.core.exceptions.NoMoreResultException
-import com.pedrenrique.githubapp.core.platform.ModelHolder
+import com.pedrenrique.githubapp.features.common.adapter.ModelHolder
 import kotlinx.coroutines.launch
 
 abstract class PaginateViewModel<T> : ViewModel() {

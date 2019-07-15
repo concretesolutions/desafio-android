@@ -1,14 +1,12 @@
-package com.pedrenrique.githubapp.features.common.viewholder
+package com.pedrenrique.githubapp.features.common.adapter.viewholder
 
 import android.text.format.DateFormat
 import android.view.View
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.pedrenrique.githubapp.R
 import com.pedrenrique.githubapp.core.ext.setRemoteImage
-import com.pedrenrique.githubapp.core.platform.BaseViewHolder
-import com.pedrenrique.githubapp.core.platform.TypesFactory
-import com.pedrenrique.githubapp.features.common.model.PullRequestModelHolder
+import com.pedrenrique.githubapp.features.common.adapter.BaseViewHolder
+import com.pedrenrique.githubapp.features.common.adapter.factory.TypesFactory
+import com.pedrenrique.githubapp.features.common.adapter.model.PullRequestModelHolder
 import kotlinx.android.synthetic.main.item_pull_request.view.*
 
 class PullRequestViewHolder(view: View) : BaseViewHolder<PullRequestModelHolder>(view) {

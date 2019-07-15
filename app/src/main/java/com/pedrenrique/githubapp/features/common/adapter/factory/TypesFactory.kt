@@ -1,10 +1,11 @@
-package com.pedrenrique.githubapp.core.platform
+package com.pedrenrique.githubapp.features.common.adapter.factory
 
 import android.view.View
 import com.pedrenrique.githubapp.core.data.Failure
 import com.pedrenrique.githubapp.core.data.Loading
 import com.pedrenrique.githubapp.core.data.PullRequest
 import com.pedrenrique.githubapp.core.data.Repository
+import com.pedrenrique.githubapp.features.common.adapter.BaseViewHolder
 
 interface TypesFactory {
     fun type(repo: Repository): Int

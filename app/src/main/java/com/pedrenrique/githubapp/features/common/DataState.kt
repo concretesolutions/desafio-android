@@ -1,10 +1,9 @@
 package com.pedrenrique.githubapp.features.common
 
-import androidx.annotation.LayoutRes
 import com.pedrenrique.githubapp.core.data.Failure
 import com.pedrenrique.githubapp.core.ext.append
-import com.pedrenrique.githubapp.core.platform.ModelHolder
-import com.pedrenrique.githubapp.features.common.model.*
+import com.pedrenrique.githubapp.features.common.adapter.ModelHolder
+import com.pedrenrique.githubapp.features.common.adapter.model.*
 
 sealed class DataState(val data: List<ModelHolder>) {
     constructor(vararg data: ModelHolder) : this(data.toList())

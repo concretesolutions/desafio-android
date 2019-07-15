@@ -13,11 +13,11 @@ import com.pedrenrique.githubapp.core.data.Failure
 import com.pedrenrique.githubapp.core.data.PullRequest
 import com.pedrenrique.githubapp.core.ext.supportActionBar
 import com.pedrenrique.githubapp.core.ext.supportActivity
-import com.pedrenrique.githubapp.core.platform.Adapter
-import com.pedrenrique.githubapp.core.platform.BaseViewHolder
-import com.pedrenrique.githubapp.features.common.BaseListFragment
-import com.pedrenrique.githubapp.features.common.TypesFactoryAdapter
-import com.pedrenrique.githubapp.features.common.viewholder.EmptyViewHolder
+import com.pedrenrique.githubapp.features.common.adapter.Adapter
+import com.pedrenrique.githubapp.features.common.adapter.BaseViewHolder
+import com.pedrenrique.githubapp.features.common.base.BaseListFragment
+import com.pedrenrique.githubapp.features.common.adapter.factory.TypesFactoryAdapter
+import com.pedrenrique.githubapp.features.common.adapter.viewholder.EmptyViewHolder
 import kotlinx.android.synthetic.main.fragment_pull_requests.*
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel

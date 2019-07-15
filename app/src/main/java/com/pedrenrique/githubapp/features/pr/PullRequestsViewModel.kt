@@ -5,7 +5,7 @@ import com.pedrenrique.githubapp.core.data.Repository
 import com.pedrenrique.githubapp.core.domain.ListPRFromRepository
 import com.pedrenrique.githubapp.core.domain.LoadMorePRFromRepository
 import com.pedrenrique.githubapp.features.common.PaginateViewModel
-import com.pedrenrique.githubapp.features.common.model.PullRequestModelHolder
+import com.pedrenrique.githubapp.features.common.adapter.model.PullRequestModelHolder
 
 class PullRequestsViewModel(
     private val listPRFromRepository: ListPRFromRepository,

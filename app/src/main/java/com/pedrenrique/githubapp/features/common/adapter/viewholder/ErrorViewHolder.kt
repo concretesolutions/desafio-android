@@ -1,12 +1,12 @@
-package com.pedrenrique.githubapp.features.common.viewholder
+package com.pedrenrique.githubapp.features.common.adapter.viewholder
 
 import android.view.View
 import com.pedrenrique.githubapp.core.ext.defaultErrorDrawable
 import com.pedrenrique.githubapp.core.ext.defaultFriendlyMsg
 import com.pedrenrique.githubapp.core.ext.defaultFriendlyTitle
-import com.pedrenrique.githubapp.core.platform.BaseViewHolder
-import com.pedrenrique.githubapp.core.platform.TypesFactory
-import com.pedrenrique.githubapp.features.common.model.ErrorModelHolder
+import com.pedrenrique.githubapp.features.common.adapter.BaseViewHolder
+import com.pedrenrique.githubapp.features.common.adapter.factory.TypesFactory
+import com.pedrenrique.githubapp.features.common.adapter.model.ErrorModelHolder
 import kotlinx.android.synthetic.main.item_error_state.view.*
 
 class ErrorViewHolder(view: View) : BaseViewHolder<ErrorModelHolder>(view) {

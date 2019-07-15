@@ -1,4 +1,4 @@
-package com.pedrenrique.githubapp.core.platform
+package com.pedrenrique.githubapp.features.common.listeners
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +29,8 @@ class EndlessRecyclerViewScrollListener(
     }
 
     constructor(layoutManager: RecyclerView.LayoutManager, onLoadMore: () -> Unit) :
-            this(layoutManager, DEFAULT_VISIBLE_THRESHOLD, onLoadMore)
+            this(layoutManager,
+                DEFAULT_VISIBLE_THRESHOLD, onLoadMore)
 
     fun getLastVisibleItem(lastVisibleItemPositions: IntArray): Int {
         var maxSize = 0

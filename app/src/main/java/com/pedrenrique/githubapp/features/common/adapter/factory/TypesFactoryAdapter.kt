@@ -1,4 +1,4 @@
-package com.pedrenrique.githubapp.features.common
+package com.pedrenrique.githubapp.features.common.adapter.factory
 
 import android.view.View
 import com.pedrenrique.githubapp.R
@@ -6,11 +6,11 @@ import com.pedrenrique.githubapp.core.data.Failure
 import com.pedrenrique.githubapp.core.data.Loading
 import com.pedrenrique.githubapp.core.data.PullRequest
 import com.pedrenrique.githubapp.core.data.Repository
-import com.pedrenrique.githubapp.core.platform.BaseViewHolder
-import com.pedrenrique.githubapp.core.platform.TypesFactory
-import com.pedrenrique.githubapp.features.common.viewholder.*
+import com.pedrenrique.githubapp.features.common.adapter.BaseViewHolder
+import com.pedrenrique.githubapp.features.common.adapter.viewholder.*
 
-abstract class TypesFactoryAdapter : TypesFactory {
+abstract class TypesFactoryAdapter :
+    TypesFactory {
 
     override fun click(repo: Repository) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

@@ -1,4 +1,4 @@
-package com.pedrenrique.githubapp.core.platform
+package com.pedrenrique.githubapp.features.common.adapter
 
 import android.annotation.SuppressLint
 import android.os.AsyncTask
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.MainThread
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.pedrenrique.githubapp.features.common.adapter.factory.TypesFactory
 
 open class Adapter(
     private val typesFactory: TypesFactory

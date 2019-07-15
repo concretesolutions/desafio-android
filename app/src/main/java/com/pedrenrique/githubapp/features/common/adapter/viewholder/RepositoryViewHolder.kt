@@ -1,11 +1,11 @@
-package com.pedrenrique.githubapp.features.common.viewholder
+package com.pedrenrique.githubapp.features.common.adapter.viewholder
 
 import android.view.View
 import com.pedrenrique.githubapp.R
 import com.pedrenrique.githubapp.core.ext.setRemoteImage
-import com.pedrenrique.githubapp.core.platform.BaseViewHolder
-import com.pedrenrique.githubapp.core.platform.TypesFactory
-import com.pedrenrique.githubapp.features.common.model.RepositoryModelHolder
+import com.pedrenrique.githubapp.features.common.adapter.BaseViewHolder
+import com.pedrenrique.githubapp.features.common.adapter.factory.TypesFactory
+import com.pedrenrique.githubapp.features.common.adapter.model.RepositoryModelHolder
 import kotlinx.android.synthetic.main.item_repository.view.*
 import java.text.NumberFormat
 import java.util.*

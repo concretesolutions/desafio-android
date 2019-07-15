@@ -1,12 +1,10 @@
 package com.pedrenrique.githubapp.features.repositories
 
 import com.pedrenrique.githubapp.core.data.Repository
-import com.pedrenrique.githubapp.core.domain.ListPRFromRepository
 import com.pedrenrique.githubapp.core.domain.ListRepositories
-import com.pedrenrique.githubapp.core.domain.LoadMorePRFromRepository
 import com.pedrenrique.githubapp.core.domain.LoadMoreRepositories
 import com.pedrenrique.githubapp.features.common.PaginateViewModel
-import com.pedrenrique.githubapp.features.common.model.RepositoryModelHolder
+import com.pedrenrique.githubapp.features.common.adapter.model.RepositoryModelHolder
 
 class RepositoriesViewModel(
     private val listRepositories: ListRepositories,
