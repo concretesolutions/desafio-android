@@ -17,21 +17,18 @@ import com.pedrenrique.githubapp.core.ext.supportActionBar
 import com.pedrenrique.githubapp.core.ext.supportActivity
 import com.pedrenrique.githubapp.core.platform.Adapter
 import com.pedrenrique.githubapp.core.platform.EndlessRecyclerViewScrollListener
+import com.pedrenrique.githubapp.features.common.BaseListFragment
 import com.pedrenrique.githubapp.features.common.TypesFactoryAdapter
 import kotlinx.android.synthetic.main.fragment_repositories.*
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RepositoriesFragment : Fragment() {
+class RepositoriesFragment : BaseListFragment() {
     private val repoViewModel by currentScope.viewModel<RepositoriesViewModel>(this)
 
     private val repoAdapter by lazy {
         Adapter(TypesFactory())
     }
-
-    private val RecyclerView.linearLayoutManager: LinearLayoutManager
-        get() = layoutManager as LinearLayoutManager
-    private lateinit var endlessRecyclerViewScrollListener: EndlessRecyclerViewScrollListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,23 +42,12 @@ class RepositoriesFragment : Fragment() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         repoViewModel.load()
         repoViewModel.state.observe(this, Observer {
+            it?.data?.showErrorIfNeeded()
             repoAdapter.replace(it?.data ?: listOf())
         })
-        rvRepositories.setup()
-    }
-
-    private fun RecyclerView.setup() {
-        layoutManager = LinearLayoutManager(context)
-        endlessRecyclerViewScrollListener = EndlessRecyclerViewScrollListener(linearLayoutManager) {
+        rvRepositories.setup(repoAdapter) {
             repoViewModel.loadMore()
         }
-
-        val decoration = DividerItemDecoration(context, linearLayoutManager.orientation)
-        addItemDecoration(decoration)
-
-        adapter = repoAdapter
-        setHasFixedSize(true)
-        addOnScrollListener(endlessRecyclerViewScrollListener)
     }
 
     inner class TypesFactory : TypesFactoryAdapter() {

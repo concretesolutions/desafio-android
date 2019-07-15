@@ -4,11 +4,11 @@ import android.view.View
 import com.pedrenrique.githubapp.core.platform.BaseViewHolder
 import com.pedrenrique.githubapp.core.platform.TypesFactory
 import com.pedrenrique.githubapp.features.common.model.ErrorItemModelHolder
-import com.pedrenrique.githubapp.features.common.model.RepositoryModelHolder
+import kotlinx.android.synthetic.main.item_error.view.*
 
 class ErrorItemViewHolder(view: View) : BaseViewHolder<ErrorItemModelHolder>(view) {
     override fun bind(item: ErrorItemModelHolder, typesFactory: TypesFactory) {
-        itemView.setOnClickListener {
+        itemView.btnLoadMore.setOnClickListener {
             typesFactory.click(item.error)
         }
     }

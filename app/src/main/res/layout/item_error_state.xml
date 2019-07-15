@@ -5,47 +5,47 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivStateIcon"
+        android:id="@+id/ivProblem"
         android:layout_width="0dp"
         android:layout_height="130dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@id/tvStateTitle"
+        app:layout_constraintBottom_toTopOf="@id/tvErrorTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/ic_pr" />
+        app:srcCompat="@drawable/ic_robot_error" />
 
     <TextView
-        android:id="@+id/tvStateTitle"
+        android:id="@+id/tvErrorTitle"
         style="@style/AppTheme.Text.Title.Big"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:text="@string/title_pull_requests_empty"
-        app:layout_constraintBottom_toTopOf="@id/tvStateDescription"
-        app:layout_constraintTop_toBottomOf="@id/ivStateIcon" />
+        android:text="@string/title_error_unexpected"
+        app:layout_constraintBottom_toTopOf="@id/tvErrorMessage"
+        app:layout_constraintTop_toBottomOf="@id/ivProblem" />
 
     <TextView
-        android:id="@+id/tvStateDescription"
+        android:id="@+id/tvErrorMessage"
         style="@style/AppTheme.Text.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/description_pull_requests_empty"
-        app:layout_constraintBottom_toTopOf="@id/btnGoBack"
-        app:layout_constraintTop_toBottomOf="@id/tvStateTitle" />
+        android:text="@string/msg_error_unexpected"
+        app:layout_constraintBottom_toTopOf="@id/btnTryAgain"
+        app:layout_constraintTop_toBottomOf="@id/tvErrorTitle" />
 
     <Button
-        android:id="@+id/btnGoBack"
+        android:id="@+id/btnTryAgain"
         style="@style/AppTheme.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/action_back"
+        android:text="@string/action_try_again"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvStateDescription" />
+        app:layout_constraintTop_toBottomOf="@id/tvErrorMessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

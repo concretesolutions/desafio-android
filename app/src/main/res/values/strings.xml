@@ -8,4 +8,12 @@
     <string name="description_pull_requests_empty">There aren’t any open pull requests.</string>
     <string name="title_pull_requests_empty">Everything is quiet here</string>
     <string name="action_back">Go back</string>
+    <string name="action_try_again">Try again</string>
+    <string name="action_load_more">Load more</string>
+
+    <string name="title_error_connection">Oops.. problema de conexão</string>
+    <string name="msg_error_connection">Verifique sua internet e tente novamente</string>
+
+    <string name="title_error_unexpected">Oops.. algo deu errado</string>
+    <string name="msg_error_unexpected">Por favor, tente novamente mais tarde.</string>
 </resources>
