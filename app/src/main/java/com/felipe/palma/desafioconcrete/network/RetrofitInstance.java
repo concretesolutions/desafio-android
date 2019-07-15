@@ -7,6 +7,7 @@ import com.felipe.palma.desafioconcrete.utils.UnsplashApplication;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.Interceptor;
@@ -48,6 +49,7 @@ public class RetrofitInstance {
     }
 
     private OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(20, TimeUnit.SECONDS)
             .addNetworkInterceptor(new ResponseCacheInterceptor())
             .addInterceptor(new OfflineCacheInterceptor())
             .cache(new Cache(new File(

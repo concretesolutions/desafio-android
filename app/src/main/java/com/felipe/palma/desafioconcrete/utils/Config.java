@@ -19,7 +19,5 @@ public class Config {
     public static final String SAVE_STATE = "SAVE_STATE";
 
 
-
-
-
+    public static final String SAVE_STATE_PAGE = "SAVE_STATE_PAGE" ;
 }

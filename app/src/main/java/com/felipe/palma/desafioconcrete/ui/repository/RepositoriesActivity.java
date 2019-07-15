@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -80,25 +81,28 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         setupToolBar();
         setupAdapter();
 
+        setupRecyclerView();
+
         if(!UnsplashApplication.hasNetwork() ){
             Toast.makeText(context, getResources().getString(R.string.internet_offline),Toast.LENGTH_LONG).show();
             //finish();
         }
 
 
-
         if (savedInstanceState != null){
             mRepoList = savedInstanceState.getParcelableArrayList(Config.SAVE_LIST_STATE);
             listState = savedInstanceState.getParcelable(Config.SAVE_STATE);
+            mPage = savedInstanceState.getInt(Config.SAVE_STATE_PAGE);
             displayData();
+
             restoreLayoutManagerPosition();
             mRepoAdapter.notifyDataSetChanged();
         }else {
             setupPresenter();
         }
 
-        setupRecyclerView();
 
+        setupEndLess();
 
     }
 
@@ -110,12 +114,14 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         listState = mLinearLayoutManager.onSaveInstanceState();
         state.putParcelableArrayList(Config.SAVE_LIST_STATE, mRepoList);
         state.putParcelable(Config.SAVE_STATE, mRecyclerView.getLayoutManager().onSaveInstanceState());
+        state.putInt(Config.SAVE_STATE_PAGE, mPage);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle state) {
         mRepoList = state.getParcelableArrayList(Config.SAVE_LIST_STATE);
         listState = state.getParcelable(Config.SAVE_STATE);
+        mPage = state.getInt(Config.SAVE_STATE_PAGE);
         super.onRestoreInstanceState(state);
 
     }
@@ -130,7 +136,8 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     public void showDialog() {
         if (!mSwipeRefreshLayout.isRefreshing()){
             dialog = ProgressDialog.show(this, getResources().getString(R.string.load_data),
-                    getResources().getString(R.string.load_wait), true);
+                    getResources().getString(R.string.load_wait), false);
+
         }
 
     }
@@ -184,7 +191,7 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         mRecyclerView.setAdapter(mRepoAdapter);
     }
     private void displayData(){
-        setupEndLess();
+        //setupEndLess();
         setupAdapter();
 
     }
@@ -194,14 +201,15 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new ItemOffsetDecoration(spacing));
-        setupEndLess();
     }
 
     private void setupEndLess(){
         infiniteScrollListener = new InfiniteScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+
                 mPresenter.loadRepositories(page);
+
 
             }
         };
