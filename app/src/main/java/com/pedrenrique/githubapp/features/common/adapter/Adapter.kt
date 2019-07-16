@@ -62,9 +62,11 @@ open class Adapter(
     private fun getItemForPosition(position: Int) =
         items[position]
 
-    open fun areItemsTheSame(oldItem: Any?, newItem: Any?) = oldItem == newItem
+    open fun areItemsTheSame(oldItem: ModelHolder?, newItem: ModelHolder?) =
+        oldItem == newItem
 
-    open fun areContentsTheSame(oldItem: Any?, newItem: Any?) = oldItem == newItem
+    open fun areContentsTheSame(oldItem: ModelHolder?, newItem: ModelHolder?) =
+        oldItem == newItem
 
     @SuppressLint("StaticFieldLeak")
     inner class Task(

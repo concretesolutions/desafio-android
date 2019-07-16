@@ -59,11 +59,11 @@ abstract class PaginateViewModel<T> : ViewModel() {
         lastData: List<ModelHolder>?,
         result: PaginatedData<T>
     ): DataState.Loaded {
-        val data = (lastData ?: listOf()).toMutableList()
+        val data = (lastData ?: listOf()).toMutableSet()
         data.addAll(result.content.map {
             transformData(it)
         })
         page = result.page
-        return DataState.Loaded(data)
+        return DataState.Loaded(data.toList())
     }
 }

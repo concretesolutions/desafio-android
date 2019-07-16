@@ -24,7 +24,7 @@ class RepositoryViewHolder(view: View) : BaseViewHolder<RepositoryModelHolder>(v
             typesFactory.click(repo)
         }
         tvRepoName.text = repo.fullName
-        tvDescription.text = repo.description.takeIf { it.isNotBlank() }
+        tvDescription.text = repo.description?.takeIf { it.isNotBlank() }
             ?: context.getText(R.string.text_item_without_description)
 
         val numberFormat = NumberFormat.getInstance(Locale.getDefault())
