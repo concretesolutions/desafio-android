@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutRepository"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
@@ -34,8 +35,8 @@
         tools:text="pedrox-hs/github-app-challenge" />
 
     <TextView
-        style="@style/AppTheme.Text.Body"
         android:id="@+id/tvDescription"
+        style="@style/AppTheme.Text.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -47,8 +48,8 @@
         tools:text="Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss deixa as pessoas mais interessantis. Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Aenean aliquam molestie leo, vitae iaculis nisl. Interagi no mé, cursus quis, vehicula ac nisi. " />
 
     <TextView
-        style="@style/AppTheme.Text.Caption"
         android:id="@+id/tvFork"
+        style="@style/AppTheme.Text.Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -62,8 +63,8 @@
         tools:text="12345" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/AppTheme.Text.Caption"
         android:id="@+id/tvStars"
+        style="@style/AppTheme.Text.Caption"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"

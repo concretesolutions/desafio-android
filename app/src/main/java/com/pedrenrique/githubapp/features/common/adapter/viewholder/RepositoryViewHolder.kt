@@ -2,6 +2,7 @@ package com.pedrenrique.githubapp.features.common.adapter.viewholder
 
 import android.view.View
 import com.pedrenrique.githubapp.R
+import com.pedrenrique.githubapp.core.data.Repository
 import com.pedrenrique.githubapp.core.ext.setRemoteImage
 import com.pedrenrique.githubapp.features.common.adapter.BaseViewHolder
 import com.pedrenrique.githubapp.features.common.adapter.factory.TypesFactory
@@ -12,23 +13,27 @@ import java.util.*
 
 class RepositoryViewHolder(view: View) : BaseViewHolder<RepositoryModelHolder>(view) {
     override fun bind(item: RepositoryModelHolder, typesFactory: TypesFactory) {
-        val repo = item.repo
-        itemView.setOnClickListener {
+        itemView.populate(typesFactory, item.repo)
+    }
+
+    private fun View.populate(
+        typesFactory: TypesFactory,
+        repo: Repository
+    ) {
+        setOnClickListener {
             typesFactory.click(repo)
         }
-        itemView.run {
-            tvRepoName.text = repo.fullName
-            tvDescription.text = repo.description.takeIf { it.isNotBlank() }
-                ?: context.getText(R.string.text_item_without_description)
+        tvRepoName.text = repo.fullName
+        tvDescription.text = repo.description.takeIf { it.isNotBlank() }
+            ?: context.getText(R.string.text_item_without_description)
 
-            val numberFormat = NumberFormat.getInstance(Locale.getDefault())
-            tvFork.text = numberFormat.format(repo.forksCount)
-            tvStars.text = numberFormat.format(repo.stargazersCount)
+        val numberFormat = NumberFormat.getInstance(Locale.getDefault())
+        tvFork.text = numberFormat.format(repo.forksCount)
+        tvStars.text = numberFormat.format(repo.stargazersCount)
 
-            ivOwner.setRemoteImage(repo.owner.avatarUrl) {
-                error(R.drawable.ic_person)
-                placeholder(R.drawable.ic_person)
-            }
+        ivOwner.setRemoteImage(repo.owner.avatarUrl) {
+            error(R.drawable.ic_person)
+            placeholder(R.drawable.ic_person)
         }
     }
 }

@@ -9,6 +9,8 @@ import androidx.annotation.MainThread
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.pedrenrique.githubapp.features.common.adapter.factory.TypesFactory
+import com.pedrenrique.githubapp.features.common.adapter.model.LoadingModelHolder
+import com.pedrenrique.githubapp.features.common.adapter.viewholder.GenericViewHolder
 
 open class Adapter(
     private val typesFactory: TypesFactory

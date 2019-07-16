@@ -29,9 +29,5 @@ val repositoriesModule = module {
         factory<RepositoryDataSource> {
             RepositoryDataSource.Impl(get())
         }
-
-        factory<GithubService> {
-            get<Retrofit>().create(GithubService::class.java)
-        }
     }
 }

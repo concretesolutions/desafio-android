@@ -28,7 +28,7 @@ abstract class PaginateViewModel<T> : ViewModel() {
 
     protected fun loadMoreIfNeeded(requestData: suspend (page: Int) -> PaginatedData<T>) {
         val value = state.value
-        val data = (value as? DataState.Loaded)?.data ?: (value as? DataState.NextFailed)?.original
+        val data = (value as? DataState.Loaded)?.data ?: (value as? DataState.NextFailed)?.lastData
         if (data != null) {
             state.value = DataState.NextPending(data)
             retrieveData(data) {

@@ -7,6 +7,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.pedrenrique.githubapp.BuildConfig
+import com.pedrenrique.githubapp.core.di.API_BASE_URL
+import com.pedrenrique.githubapp.core.di.ENABLE_HTTP_LOG
+import com.pedrenrique.githubapp.core.net.services.GithubService
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -17,9 +20,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val netModule = module {
+    factory<GithubService> {
+        get<Retrofit>().create(GithubService::class.java)
+    }
+
     factory {
         Retrofit.Builder()
-            .baseUrl(BuildConfig.API_BASE_URL)
+            .baseUrl(getProperty<String>(API_BASE_URL))
             .addConverterFactory(GsonConverterFactory.create(get<Gson>()))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(get<OkHttpClient.Builder>().build())
@@ -52,8 +59,10 @@ val netModule = module {
      */
     factory {
         HttpLoggingInterceptor().apply {
-            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
-            else HttpLoggingInterceptor.Level.NONE
+            level = if (getProperty(ENABLE_HTTP_LOG))
+                HttpLoggingInterceptor.Level.BODY
+            else
+                HttpLoggingInterceptor.Level.NONE
         }
     }
 

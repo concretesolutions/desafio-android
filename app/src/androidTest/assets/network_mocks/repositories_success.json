@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "name": "Repository",
+      "full_name": "User/Repository",
+      "description": "Description",
+      "forks_count": 28,
+      "stargazers_count": 72,
+      "owner": {
+        "avatar_url": "http://localhost:36004/userimage.png",
+        "login": "User"
+      }
+    }
+  ]
+}
