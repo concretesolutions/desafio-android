@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_repositories">@string/app_name</string>
+    <string name="title_pull_requests">Pull Requests</string>
+
+    <string name="text_pull_request_info">#%1$d aberto em %2$s\npor %3$s</string>
+    <string name="text_item_without_description"><i>Nenhuma descrição fornecida.</i></string>
+    <string name="description_pull_requests_empty">Nenhum pull request aberto.</string>
+    <string name="title_pull_requests_empty">Tudo tranquilo por aqui</string>
+    <string name="action_back">Voltar</string>
+    <string name="action_try_again">Tentar novamente</string>
+    <string name="action_load_more">Ver mais</string>
+
+    <string name="title_error_connection">Oops.. problema de conexão</string>
+    <string name="msg_error_connection">Verifique sua internet e tente novamente</string>
+
+    <string name="title_error_unexpected">Oops.. algo deu errado</string>
+    <string name="msg_error_unexpected">Por favor, tente novamente mais tarde.</string>
+</resources>
