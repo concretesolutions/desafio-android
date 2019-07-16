@@ -20,9 +20,9 @@ Arquitetura foi baseada em MVVM, buscando referência do Clean Architecture.
 ## Bibliotecas
 
 * [Koin 2](https://insert-koin.io/) - Injeção de dependências
-* [Jetpack](https://developer.android.com/jetpack/androidx)
-* [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/)
-* [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
-* [Retrofit 2](http://square.github.io/retrofit/)
-* [Glide](https://bumptech.github.io/glide/)
+* [Jetpack](https://developer.android.com/jetpack/androidx) - Suite de bibliotecas e ferramentas oficiais do Android
+* [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/) - Componentes lifecycle aware como LiveData, ViewModel e outros
+* [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - Programação assincrona e não bloqueante
+* [Retrofit 2](http://square.github.io/retrofit/) - Requisições HTTP
+* [Glide](https://bumptech.github.io/glide/) - Exibição e cache de imagens remotas
 
