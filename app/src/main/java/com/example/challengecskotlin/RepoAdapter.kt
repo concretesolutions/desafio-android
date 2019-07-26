@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.repo_row.view.*
 import retrofit2.Call
 
-class RepoAdapter(var repos: List<Repo>) : RecyclerView.Adapter<RepoAdapter.ViewHolder> () {
+class RepoAdapter(var repos: SearchResponse) : RecyclerView.Adapter<RepoAdapter.ViewHolder> () {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.repo_row, parent,false)
         return ViewHolder(view)
     }
 
-   override fun getItemCount() = repos.size //quantidade de items
+   override fun getItemCount() = repos.items.size //quantidade de items
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val repo = repos[position]
+        val repo = repos.items[position]
         //holder.bind(repo.name, repo.description)
         holder.name.text = repo.name
         holder.description.text = repo.description

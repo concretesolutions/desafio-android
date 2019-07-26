@@ -10,5 +10,5 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("search/repositories")
-    fun fetchAllUsers(@Query("q") query: String) : Call<List<Repo>>
+    fun fetchAllUsers(@Query("q") query: String) : Call<SearchResponse>
 }

@@ -21,18 +21,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        GithubApi.searchService.fetchAllUsers("language:java").enqueue(object : Callback<List<Repo>> {
-            override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
+        GithubApi.searchService.fetchAllUsers("language:java").enqueue(object : Callback<SearchResponse> {
+            override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 showData(response.body()!!)
+                d("Sucess", "onResponse" + response.body())
             }
 
-            override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
+            override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                 d("Erro", "onFailure: " + t.message)
             }
         })
     }
 
-    private fun showData(repos: List<Repo>) {
+    private fun showData(repos: SearchResponse) {
         recyclerView.apply{
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = RepoAdapter(repos)
