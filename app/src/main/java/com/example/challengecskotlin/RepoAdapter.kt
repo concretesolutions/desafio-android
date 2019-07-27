@@ -1,5 +1,6 @@
 package com.example.challengecskotlin
 
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import kotlinx.android.synthetic.main.repo_row.view.*
 import retrofit2.Call
 
 class RepoAdapter(var repos: SearchResponse) : RecyclerView.Adapter<RepoAdapter.ViewHolder> () {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.repo_row, parent,false)
         return ViewHolder(view)
@@ -22,6 +24,10 @@ class RepoAdapter(var repos: SearchResponse) : RecyclerView.Adapter<RepoAdapter.
         //holder.bind(repo.name, repo.description)
         holder.name.text = repo.name
         holder.description.text = repo.description
+
+        holder.itemView.setOnClickListener {
+            d("onClick", "clicado: " + repo.toString())
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
