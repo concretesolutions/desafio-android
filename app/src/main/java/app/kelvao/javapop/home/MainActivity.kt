@@ -2,6 +2,7 @@ package app.kelvao.javapop.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,8 +50,8 @@ class MainActivity : AppCompatActivity(), HomeContract.IView {
         dataSource.setRepositories(repositories)
     }
 
-    override fun showMoreRepositoriesResult(items: List<RepositoryResponse>) {
-        dataSource.addRepositories(items)
+    override fun showMoreRepositoriesResult(repositories: List<RepositoryResponse>) {
+        dataSource.addRepositories(repositories)
     }
 
     override fun showLargeLoader() {
@@ -82,11 +83,8 @@ class MainActivity : AppCompatActivity(), HomeContract.IView {
         dataSource.isLoading = false
     }
 
-    override fun notifyFetchRepositoriesSuccess() {
-
-    }
-
     override fun notifyFetchRepositoriesError() {
+        Toast.makeText(this, getString(R.string.fetch_repositories_error), Toast.LENGTH_SHORT).show()
 
     }
 }

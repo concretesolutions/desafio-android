@@ -2,7 +2,6 @@ package app.kelvao.javapop.home
 
 import app.kelvao.javapop.addTo
 import app.kelvao.javapop.domain.repository.RepositoriesRepository
-import app.kelvao.javapop.domain.repository.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 

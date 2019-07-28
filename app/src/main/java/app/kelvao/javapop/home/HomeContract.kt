@@ -5,9 +5,8 @@ import app.kelvao.javapop.domain.network.response.RepositoryResponse
 interface HomeContract {
     interface IView {
         fun showRepositoriesResult(repositories: List<RepositoryResponse>)
-        fun notifyFetchRepositoriesSuccess()
+        fun showMoreRepositoriesResult(repositories: List<RepositoryResponse>)
         fun notifyFetchRepositoriesError()
-        fun showMoreRepositoriesResult(items: List<RepositoryResponse>)
         fun showListLoader()
         fun hideListLoader()
         fun showLargeLoader()
