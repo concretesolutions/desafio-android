@@ -11,32 +11,34 @@ class HomePresenter(
 ) : HomeContract.IPresenter {
 
     private val disposable = CompositeDisposable()
+    private var currentPage = 1
 
-    override fun onViewReady() {
-        fetchRepositories(0)
-    }
-
-    override fun fetchRepositories(page: Int) {
+    override fun fetchRepositories() {
+        showLoader()
         RepositoriesRepository
-            .fetchRepositories(LANGUAGE, page, SORT, LIMIT)
+            .fetchRepositories(LANGUAGE, currentPage, SORT, LIMIT)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                view?.showRepositoriesResult(it)
+                currentPage++
+                if (currentPage == 1) {
+                    view?.showRepositoriesResult(it.items)
+                    view?.hideLargeLoader()
+                } else {
+                    view?.showMoreRepositoriesResult(it.items)
+                    view?.hideListLoader()
+                }
             }, {
                 view?.notifyFetchRepositoriesError()
             })
             .addTo(disposable)
     }
 
-    override fun fetchUserInformation(login: String) {
-        UserRepository.fetchUser(login)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-
-            }, {
-
-            })
-            .addTo(disposable)
+    private fun showLoader() {
+        if (currentPage == 1) {
+            view?.showLargeLoader()
+        } else {
+            view?.showListLoader()
+        }
     }
 
     override fun onDestroy() {

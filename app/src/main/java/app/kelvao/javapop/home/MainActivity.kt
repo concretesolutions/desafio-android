@@ -1,12 +1,11 @@
 package app.kelvao.javapop.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.kelvao.javapop.R
-import app.kelvao.javapop.databinding.ActivityMainBinding
 import app.kelvao.javapop.domain.network.response.RepositoryResponse
 import app.kelvao.javapop.home.repositorieslist.RepositoriesDataSource
 import app.kelvao.javapop.home.repositorieslist.RepositoryViewHolder
@@ -22,8 +21,7 @@ class MainActivity : AppCompatActivity(), HomeContract.IView {
         setContentView(R.layout.activity_main)
 
         setupRecyclerView()
-
-        presenter.onViewReady()
+        presenter.fetchRepositories()
     }
 
     private fun setupRecyclerView() {
@@ -31,6 +29,15 @@ class MainActivity : AppCompatActivity(), HomeContract.IView {
             setHasFixedSize(true)
             adapter = dataSource
             layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    if (linearLayoutManager.itemCount <= linearLayoutManager.findLastVisibleItemPosition() + 2) {
+                        presenter.fetchRepositories()
+                    }
+                }
+            })
         }
     }
 
@@ -40,6 +47,39 @@ class MainActivity : AppCompatActivity(), HomeContract.IView {
 
     override fun showRepositoriesResult(repositories: List<RepositoryResponse>) {
         dataSource.setRepositories(repositories)
+    }
+
+    override fun showMoreRepositoriesResult(items: List<RepositoryResponse>) {
+        dataSource.addRepositories(items)
+    }
+
+    override fun showLargeLoader() {
+        largeLoader.visibility = View.VISIBLE
+        largeLoader.alpha = 0f
+        largeLoader.animate().apply {
+            alpha(1f)
+            duration = 400
+            startDelay = 1000
+            withEndAction { largeLoader.visibility = View.INVISIBLE }
+        }.start()
+    }
+
+    override fun hideLargeLoader() {
+        largeLoader.visibility = View.VISIBLE
+        largeLoader.alpha = 1f
+        largeLoader.animate().apply {
+            alpha(0f)
+            duration = 400
+            startDelay = 1000
+        }.start()
+    }
+
+    override fun showListLoader() {
+        dataSource.isLoading = true
+    }
+
+    override fun hideListLoader() {
+        dataSource.isLoading = false
     }
 
     override fun notifyFetchRepositoriesSuccess() {

@@ -11,11 +11,4 @@ object RepositoriesRepository {
 
     fun fetchRepositories(language: String, page: Int, sort: String, limit: Int) =
         repositoriesService.getRepositories(language, page, sort, limit)
-            .flatMapIterable { it.items }
-            .flatMap (
-                { UserRepository.fetchUser(it.owner.login).toObservable() },
-                {repository, user -> repository.apply {
-                    owner.name = user.name
-                } })
-            .toList()
 }

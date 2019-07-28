@@ -12,6 +12,7 @@ ext {
 
     //Third party libraries
     retrofit_version = '2.6.0'
+    retrofit_logging_version = '4.0.1'
     glide_version = '4.9.0'
     rxjava_version = '2.2.8'
     rxandroid_version = '2.1.1'
@@ -39,6 +40,7 @@ ext {
             retrofit             : "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofitConverter    : "com.squareup.retrofit2:converter-gson:$retrofit_version",
             retrofitAdapterRxJava: "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+            retrofitLogging      : "com.squareup.okhttp3:logging-interceptor:$retrofit_logging_version",
             rxJava               : "io.reactivex.rxjava2:rxjava:$rxjava_version",
             rxAndroid            : "io.reactivex.rxjava2:rxandroid:$rxandroid_version",
             dataBindingCompiler  : "com.android.databinding:compiler:$databinding_version"

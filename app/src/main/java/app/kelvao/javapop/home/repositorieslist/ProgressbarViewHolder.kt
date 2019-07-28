@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import app.kelvao.javapop.R
 
 class ProgressbarViewHolder(parent: ViewGroup) :
-    ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.progressbar_footer, parent, false)) {
+    ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.holder_progressbar_footer, parent, false)) {
 
     private val loader by lazy { itemView.findViewById<ProgressBar>(R.id.loader) }
     var visibility: Boolean = false
@@ -17,5 +17,4 @@ class ProgressbarViewHolder(parent: ViewGroup) :
             field = value
             loader.visibility = if (value) VISIBLE else GONE
         }
-
 }

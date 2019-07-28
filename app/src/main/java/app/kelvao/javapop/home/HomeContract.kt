@@ -7,12 +7,15 @@ interface HomeContract {
         fun showRepositoriesResult(repositories: List<RepositoryResponse>)
         fun notifyFetchRepositoriesSuccess()
         fun notifyFetchRepositoriesError()
+        fun showMoreRepositoriesResult(items: List<RepositoryResponse>)
+        fun showListLoader()
+        fun hideListLoader()
+        fun showLargeLoader()
+        fun hideLargeLoader()
     }
 
     interface IPresenter {
-        fun onViewReady()
-        fun fetchRepositories(page: Int)
-        fun fetchUserInformation(login: String)
+        fun fetchRepositories()
         fun onDestroy()
     }
 }

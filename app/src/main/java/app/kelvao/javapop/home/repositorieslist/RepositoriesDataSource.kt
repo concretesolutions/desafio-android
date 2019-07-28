@@ -12,7 +12,9 @@ class RepositoriesDataSource(
     val onClickRepository: ((RepositoryViewHolder) -> Unit)? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val loaderPosition = itemCount - 1
+    private val loaderPosition
+        get() = data.size
+
     var isLoading: Boolean = false
         set(value) {
             field = value
@@ -39,7 +41,7 @@ class RepositoriesDataSource(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is RepositoryViewHolder) {
-            holder.bind(data[position - 1])
+            holder.bind(data[position])
         } else if (holder is ProgressbarViewHolder) {
             holder.visibility = isLoading
         }
@@ -48,6 +50,12 @@ class RepositoriesDataSource(
     fun setRepositories(repositories: List<RepositoryResponse>) {
         data = repositories.toMutableList()
         notifyDataSetChanged()
+    }
+
+    fun addRepositories(repositories: List<RepositoryResponse>) {
+        val lastSize = data.size
+        data.addAll(repositories.toMutableList())
+        notifyItemChanged(lastSize, data.size)
     }
 
     companion object {
