@@ -6,9 +6,12 @@ import com.example.challengecskotlin.GithubApi.PARAM_SORT
 import com.example.challengecskotlin.GithubApi.SORT_BY_STARS
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
     @GET("search/repositories")
-    fun fetchAllUsers(@Query("q") query: String) : Call<SearchResponse>
+    fun fetchAllUsers(@Query(PARAM_QUERY) query: String,
+                      @Query(PARAM_SORT) sort: String = SORT_BY_STARS,
+                      @Query(PARAM_PAGE) page: String) : Call<SearchResponse>
 }
