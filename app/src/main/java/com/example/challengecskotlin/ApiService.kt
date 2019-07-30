@@ -14,4 +14,8 @@ interface ApiService {
     fun fetchAllUsers(@Query(PARAM_QUERY) query: String,
                       @Query(PARAM_SORT) sort: String = SORT_BY_STARS,
                       @Query(PARAM_PAGE) page: String) : Call<SearchResponse>
+
+    @GET("/repos/{login}/{name}/pulls")
+    fun fetchPullRequests(@Path("login") login: String,
+                          @Path("name") name: String) : Call<List<PullRequestObject>>
 }

@@ -9,7 +9,6 @@ import android.widget.ProgressBar
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
 
-    private val PAGE_START = 3
+    private val PAGE_START = 1
     var isLoading = false
     private var isLastPage = false
     private val TOTAL_PAGES = 10
@@ -30,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         loadingBar = findViewById<ProgressBar>(R.id.main_progress)
-        val rv = findViewById<RecyclerView>(R.id.recyclerView)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val linearLayoutManager = LinearLayoutManager(this)
-        rv.layoutManager = linearLayoutManager
-        rv.itemAnimator = DefaultItemAnimator()
-        rv.adapter = adapter
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.adapter = adapter
 
         recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager){
             override fun isLastPage(): Boolean {
@@ -51,12 +50,9 @@ class MainActivity : AppCompatActivity() {
             override fun loadMoreItems() {
                 isLoading = true
                 currentPage += 1
-                // mocking network delay for API call
-                Handler().postDelayed(object: Runnable {
-                    public override fun run() {
-                        loadNextPage()
-                    }
-                }, 1000)
+
+                //network delay for API call
+                Handler().postDelayed({ loadNextPage() }, 1000)
             }
         })
         loadFirstPage()
@@ -81,8 +77,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
-                t.printStackTrace()
-                // TODO: 08/11/16 handle failure
+                d("onFailure", "fail:" + t.message)
             }
         })
     }

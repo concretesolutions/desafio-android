@@ -1,9 +1,13 @@
 package com.example.challengecskotlin
 
+import android.content.Context
+import android.content.Intent
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
@@ -12,23 +16,14 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
 
     private val ITEM = 0
     private val LOADING = 1
-
-    private var movieResults: MutableList<Repo> = mutableListOf()
-
+    private var repoResults: MutableList<Repo> = mutableListOf()
+    private var context: Context? = null
     private var isLoadingAdded = false
+    
 
-    fun getMovies(): MutableList<Repo> {
-        return movieResults
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-    fun setMovies(movieResults: MutableList<Repo>) {
-        this.movieResults = movieResults
-    }
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        var viewHolder: RecyclerView.ViewHolder? = null
+        var viewHolder: ViewHolder? = null
         val inflater = LayoutInflater.from(parent.context)
 
         when (viewType) {
@@ -41,26 +36,35 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
         return viewHolder!!
     }
 
-    private fun getViewHolder(parent: ViewGroup, inflater: LayoutInflater): RecyclerView.ViewHolder {
-        val viewHolder: RecyclerView.ViewHolder
+    private fun getViewHolder(parent: ViewGroup, inflater: LayoutInflater): ViewHolder {
+        val viewHolder: ViewHolder
         val v1 = inflater.inflate(R.layout.repo_row, parent, false)
-        viewHolder = MovieVH(v1)
+        viewHolder = RepoVH(v1)
         return viewHolder
     }
 
     override fun getItemCount(): Int {
-        return if (movieResults == null) 0 else movieResults.size
+        return if (repoResults == null) 0 else repoResults.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val repo = movieResults[position]
+        val repo = repoResults[position]
 
         when (getItemViewType(position)) {
             ITEM -> {
-                val movieVH = holder as MovieVH
-                movieVH.name.text = repo.name
-                movieVH.description.text = repo.description
+                val repoVH = holder as RepoVH
+                repoVH.name.text = repo.name
+                repoVH.description.text = repo.description
+                repoVH.login.text = repo.owner!!.login
+                holder.itemView.setOnClickListener {
+                    d("onClick", "clicado: $repo")
+                    context = holder.itemView.context
+                    val intent = Intent(context, PullRequestActivity::class.java)
+                    intent.putExtra("login", repo.owner.login)
+                    intent.putExtra("repositoryName", repo.name)
+                    context!!.startActivity(intent)
+                }
             }
             LOADING -> {
             }
@@ -68,26 +72,11 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == movieResults.size - 1 && isLoadingAdded) LOADING else ITEM
+        return if (position == repoResults.size - 1 && isLoadingAdded) LOADING else ITEM
     }
 
-//    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        val name: TextView = itemView.name
-//        val description: TextView = itemView.description
-//    }
-
-//    private fun populateItemRows(holder: ViewHolder, position: Int) {
-//        val repo = movieResults[position]
-//        //holder.bind(repo.name, repo.description)
-//        holder.name.text = repo.name
-//        holder.description.text = repo.description
-//
-//        holder.itemView.setOnClickListener {
-//            d("onClick", "clicado: $repo")
-//        }
-//    }
-
-    protected inner class MovieVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    protected inner class RepoVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val login: TextView = itemView.findViewById<View>(R.id.login) as TextView
         val name: TextView = itemView.findViewById<View>(R.id.name) as TextView
         val description: TextView = itemView.findViewById<View>(R.id.description) as TextView
     }
@@ -96,8 +85,8 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
     protected inner class LoadingVH(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private fun add(r: Repo) {
-        movieResults.add(r)
-        notifyItemInserted(movieResults.size - 1)
+        repoResults.add(r)
+        notifyItemInserted(repoResults.size - 1)
     }
 
     fun addAll(moveResults: List<Repo>) {
@@ -105,14 +94,7 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
             add(result)
         }
     }
-
-    fun remove(r: Repo) {
-        val position = movieResults.indexOf(r)
-        if (position > -1) {
-            movieResults.removeAt(position)
-            notifyItemRemoved(position)
-        }
-    }
+    
 
     fun addLoadingFooter() {
         isLoadingAdded = true
@@ -122,16 +104,16 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
     fun removeLoadingFooter() {
         isLoadingAdded = false
 
-        val position = movieResults.size - 1
+        val position = repoResults.size - 1
         val result = getItem(position)
 
         if (result != null) {
-            movieResults.removeAt(position)
+            repoResults.removeAt(position)
             notifyItemRemoved(position)
         }
     }
 
     private fun getItem(position: Int): Repo {
-        return movieResults[position]
+        return repoResults[position]
     }
 }
