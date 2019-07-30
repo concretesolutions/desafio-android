@@ -55,13 +55,13 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
             ITEM -> {
                 val repoVH = holder as RepoVH
                 repoVH.name.text = repo.name
-                repoVH.description.text = repo.description
-                repoVH.login.text = repo.owner!!.login
+                //repoVH.description.text = repo.description
+                repoVH.login.text = repo.description
                 holder.itemView.setOnClickListener {
                     d("onClick", "clicado: $repo")
                     context = holder.itemView.context
                     val intent = Intent(context, PullRequestActivity::class.java)
-                    intent.putExtra("login", repo.owner.login)
+                    intent.putExtra("login", repo.owner!!.login)
                     intent.putExtra("repositoryName", repo.name)
                     context!!.startActivity(intent)
                 }
@@ -78,7 +78,7 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
     protected inner class RepoVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val login: TextView = itemView.findViewById<View>(R.id.login) as TextView
         val name: TextView = itemView.findViewById<View>(R.id.name) as TextView
-        val description: TextView = itemView.findViewById<View>(R.id.description) as TextView
+        //val description: TextView = itemView.findViewById<View>(R.id.description) as TextView
     }
 
 
