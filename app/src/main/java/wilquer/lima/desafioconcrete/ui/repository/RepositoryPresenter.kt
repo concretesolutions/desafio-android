@@ -9,20 +9,21 @@ import wilquer.lima.desafioconcrete.network.RepositoryService
 import wilquer.lima.desafioconcrete.network.RetrofitApi
 import wilquer.lima.desafioconcrete.util.Constants
 
-class RepositoryPresenter(val view: RepositoryContract.View) : RepositoryContract.Presenter{
+class RepositoryPresenter(val view: RepositoryContract.View) : RepositoryContract.Presenter {
 
-    override fun initView() {
-        getRepositories(0)
+    override fun initView(countPages: Int) {
+        getRepositories(countPages)
     }
 
     override fun getRepositories(pageNumber: Int) {
-        view.setProgress(true)
+        if (pageNumber == 1) view.setProgress(true)
+
 
         doAsync {
             val apiService = RetrofitApi(Constants.GENERAL_URL).client.create(RepositoryService::class.java)
 
             val call = apiService.getRepositories(pageNumber)
-            call.enqueue(object : Callback<RepositoryResponse>{
+            call.enqueue(object : Callback<RepositoryResponse> {
                 override fun onFailure(call: Call<RepositoryResponse>, t: Throwable) {
                     view.setProgress(false)
                     view.error(t.message.toString())

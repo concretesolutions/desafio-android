@@ -15,6 +15,6 @@ class RepositoryContract {
     interface Presenter {
         fun getRepositories(pageNumber: Int)
 
-        fun initView()
+        fun initView(countPages: Int)
     }
 }
