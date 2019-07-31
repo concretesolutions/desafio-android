@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ChallengeCsKotlin</string>
+    <string name="icon_fork_github">icon fork github</string>
 </resources>

@@ -57,6 +57,7 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
                 repoVH.name.text = repo.name
                 //repoVH.description.text = repo.description
                 repoVH.login.text = repo.description
+                repoVH.forks.text = repo.forks
                 holder.itemView.setOnClickListener {
                     d("onClick", "clicado: $repo")
                     context = holder.itemView.context
@@ -78,7 +79,7 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
     protected inner class RepoVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val login: TextView = itemView.findViewById<View>(R.id.login) as TextView
         val name: TextView = itemView.findViewById<View>(R.id.name) as TextView
-        //val description: TextView = itemView.findViewById<View>(R.id.description) as TextView
+        val forks: TextView = itemView.findViewById<View>(R.id.forks) as TextView
     }
 
 
