@@ -7,8 +7,6 @@ class RepositoryContract {
     interface View {
         fun setProgress(active: Boolean)
 
-        fun initView()
-
         fun repositories(listRepositories: List<Repository>?)
 
         fun error(msg: String)
@@ -16,5 +14,7 @@ class RepositoryContract {
 
     interface Presenter {
         fun getRepositories(pageNumber: Int)
+
+        fun initView()
     }
 }

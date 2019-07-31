@@ -11,8 +11,8 @@ import wilquer.lima.desafioconcrete.util.Constants
 
 class RepositoryPresenter(val view: RepositoryContract.View) : RepositoryContract.Presenter{
 
-    init {
-        view.initView()
+    override fun initView() {
+        getRepositories(0)
     }
 
     override fun getRepositories(pageNumber: Int) {

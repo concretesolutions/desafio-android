@@ -3,49 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_repositoryName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/colorBlue"
-        android:textStyle="bold"
-        android:textSize="19sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:text="Nome Repositório"
+        android:textColor="@color/colorBlue"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/profile_photo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView2"
+        android:id="@+id/txt_repositoryDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintVertical_bias="0"
         android:text="Descrição"
         android:textColor="@color/colorBlack"
-        android:layout_marginEnd="15dp"
+        app:layout_constraintHeight_max="40dp"
+        android:maxLines="2"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView5"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+        app:layout_constraintBottom_toBottomOf="@id/txt_fullName"
+        app:layout_constraintEnd_toStartOf="@+id/txt_fullName"
+        app:layout_constraintStart_toStartOf="@+id/txt_repositoryName"
+        app:layout_constraintTop_toBottomOf="@+id/txt_repositoryName" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView3"
+        android:id="@+id/txt_fork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:drawableStart="@drawable/ic_repo_forked"
         android:drawablePadding="5dp"
         android:text="200"
         android:textColor="@color/colorOrange"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/appCompatTextView5"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView2"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+        app:layout_constraintBottom_toBottomOf="@+id/txt_fullName"
+        app:layout_constraintStart_toStartOf="@+id/txt_repositoryDesc"
+        app:layout_constraintTop_toBottomOf="@+id/txt_repositoryDesc" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -55,38 +62,54 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:text="200"
-        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
-        app:layout_constraintStart_toEndOf="@id/appCompatTextView3"
-        app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" />
+        app:layout_constraintBottom_toBottomOf="@+id/txt_fork"
+        app:layout_constraintStart_toEndOf="@id/txt_fork"
+        app:layout_constraintTop_toTopOf="@+id/txt_fork" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView"
+        android:id="@+id/profile_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView4"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView4"
-        app:layout_constraintTop_toTopOf="@id/appCompatTextView"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txt_repositoryName"
         app:srcCompat="@drawable/ic_user" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView4"
+        android:id="@+id/txt_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="username"
         android:textColor="@color/colorBlue"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView5"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView5"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/profile_photo"
+        app:layout_constraintStart_toStartOf="@+id/profile_photo"
+        app:layout_constraintTop_toBottomOf="@+id/profile_photo" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView5"
+        android:id="@+id/txt_fullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:maxEms="7"
         android:text="Nome sobrenome"
         android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/view"
+        app:layout_constraintEnd_toEndOf="@+id/txt_username"
+        app:layout_constraintStart_toStartOf="@+id/txt_username"
+        app:layout_constraintTop_toBottomOf="@+id/txt_username" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="5dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />
+        app:layout_constraintStart_toStartOf="@+id/txt_fork" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

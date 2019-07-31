@@ -20,11 +20,12 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:liftOnScroll="true">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            app:titleTextColor="#FFF"
+            app:title="Repositórios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorBlack"
