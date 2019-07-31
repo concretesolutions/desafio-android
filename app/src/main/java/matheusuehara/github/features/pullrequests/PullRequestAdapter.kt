@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.lv_item_pull_request.view.pull_request_use
 import java.util.ArrayList
 
 import matheusuehara.github.R
-import matheusuehara.github.model.PullRequest
+import matheusuehara.github.data.model.PullRequest
 
 class PullRequestAdapter(var pullRequests: ArrayList<PullRequest>, var context: Context) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>() {
 

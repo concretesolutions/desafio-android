@@ -4,8 +4,8 @@ import android.util.Log
 import matheusuehara.github.api.GitHubService
 import matheusuehara.github.contract.GitHubContract
 import matheusuehara.github.contract.RepositoryContract
-import matheusuehara.github.model.Repository
-import matheusuehara.github.model.RepositoryResponse
+import matheusuehara.github.data.model.Repository
+import matheusuehara.github.data.model.RepositoryResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

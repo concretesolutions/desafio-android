@@ -1,4 +1,4 @@
-package matheusuehara.github.model
+package matheusuehara.github.data.model
 
 
 data class Repository(var id: Int,

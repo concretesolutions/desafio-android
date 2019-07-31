@@ -1,4 +1,4 @@
-package matheusuehara.github.model
+package matheusuehara.github.data.model
 
 import java.util.*
 

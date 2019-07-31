@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.lv_item_repository.view.*
 
 import java.util.ArrayList
 import matheusuehara.github.R
-import matheusuehara.github.model.Repository
+import matheusuehara.github.data.model.Repository
 import matheusuehara.github.features.pullrequests.PullRequestActivity
 
 class RepositoryAdapter(var repositories: ArrayList<Repository>, var context: Context) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {

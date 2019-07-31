@@ -4,6 +4,8 @@ import android.app.Application
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import matheusuehara.github.di.appModule
+import matheusuehara.github.di.networkModule
+import matheusuehara.github.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import java.lang.Long.MAX_VALUE
@@ -17,7 +19,7 @@ class Application: Application() {
 
         startKoin{
             androidContext(this@Application)
-            modules(appModule)
+            listOf(appModule, networkModule, repositoryModule)
         }
     }
 }

@@ -12,7 +12,7 @@ import android.view.View.VISIBLE
 import kotlinx.android.synthetic.main.activity_pull_request.*
 import matheusuehara.github.R
 import matheusuehara.github.contract.PullRequestContract
-import matheusuehara.github.model.PullRequest
+import matheusuehara.github.data.model.PullRequest
 import java.util.ArrayList
 
 class PullRequestActivity : AppCompatActivity(), PullRequestContract.View{

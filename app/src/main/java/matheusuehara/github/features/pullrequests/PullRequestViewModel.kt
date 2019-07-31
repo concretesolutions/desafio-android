@@ -1,9 +1,9 @@
 package matheusuehara.github.features.pullrequests
 
 import androidx.lifecycle.ViewModel
-import matheusuehara.github.repository.GitHubRepository
+import matheusuehara.github.data.request.RepositoryContract
 
-class PullRequestViewModel( repository: GitHubRepository) : ViewModel() {
+class PullRequestViewModel( private val repository: RepositoryContract) : ViewModel() {
 
 
 }

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_repository.progress_bar
 import kotlinx.android.synthetic.main.activity_repository.frame_layout
 import matheusuehara.github.R
 import matheusuehara.github.contract.RepositoryContract
-import matheusuehara.github.model.Repository
+import matheusuehara.github.data.model.Repository
 import java.util.ArrayList
 
 class RepositoryActivity : AppCompatActivity(), RepositoryContract.View {
