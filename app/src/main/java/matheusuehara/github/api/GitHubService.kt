@@ -1,5 +1,6 @@
 package matheusuehara.github.api
 
+import matheusuehara.github.BuildConfig
 import matheusuehara.github.contract.GitHubContract
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,7 +13,7 @@ class GitHubService: GitHubContract.Service{
         if (retrofit == null) {
             retrofit = Retrofit
                     .Builder()
-                    .baseUrl("https://api.github.com/")
+                    .baseUrl(BuildConfig.API_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
         }

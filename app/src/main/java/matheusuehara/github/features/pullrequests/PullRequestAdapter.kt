@@ -1,10 +1,9 @@
-package matheusuehara.github.view.adapters
+package matheusuehara.github.features.pullrequests
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +12,17 @@ import android.widget.TextView
 import com.squareup.picasso.Transformation
 import com.makeramen.roundedimageview.RoundedTransformationBuilder
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.lv_item_pull_request.view.*
+import kotlinx.android.synthetic.main.lv_item_pull_request.view.pull_request_title
+import kotlinx.android.synthetic.main.lv_item_pull_request.view.pull_request_body
+import kotlinx.android.synthetic.main.lv_item_pull_request.view.pull_request_username
+import kotlinx.android.synthetic.main.lv_item_pull_request.view.pull_request_user_image
 
 import java.util.ArrayList
 
 import matheusuehara.github.R
 import matheusuehara.github.model.PullRequest
 
-class PullRequestAdapter(var pullRequests: ArrayList<PullRequest>?, var context: Context) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>() {
+class PullRequestAdapter(var pullRequests: ArrayList<PullRequest>, var context: Context) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>() {
 
     private val transformation:Transformation = RoundedTransformationBuilder()
             .cornerRadius(30F)
@@ -31,7 +33,6 @@ class PullRequestAdapter(var pullRequests: ArrayList<PullRequest>?, var context:
         var mPullRequestTitle:TextView = view.pull_request_title
         var mPullRequestBody:TextView = view.pull_request_body
         var mPullRequestUserName:TextView = view.pull_request_username
-        var mPullRequestFullName:TextView = view.pull_request_full_name
         var mPullRequestUseImage: ImageView = view.pull_request_user_image
 
         init {
@@ -40,7 +41,7 @@ class PullRequestAdapter(var pullRequests: ArrayList<PullRequest>?, var context:
 
         override fun onClick(v: View) {
             val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(pullRequests?.get(adapterPosition)?.html_url)
+            i.data = Uri.parse(pullRequests[adapterPosition].html_url)
             context.startActivity(i)
         }
     }
@@ -52,17 +53,10 @@ class PullRequestAdapter(var pullRequests: ArrayList<PullRequest>?, var context:
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val pullRequest = pullRequests?.get(position)
-
-        if (pullRequest?.body?.count()!! >= 150) {
-            holder.mPullRequestBody.text = pullRequest.body.substring(0,150)
-        }else{
-            holder.mPullRequestBody.text = pullRequest.body
-        }
-
+        val pullRequest = pullRequests[position]
+        holder.mPullRequestBody.text = pullRequest.body
         holder.mPullRequestTitle.text = pullRequest.title
         holder.mPullRequestUserName.text = pullRequest.user.login
-        holder.mPullRequestFullName.text = ""
 
         Picasso.get()
                 .load(pullRequest.user.avatar_url)
@@ -72,6 +66,6 @@ class PullRequestAdapter(var pullRequests: ArrayList<PullRequest>?, var context:
     }
 
     override fun getItemCount(): Int {
-        return pullRequests!!.size
+        return pullRequests.size
     }
 }

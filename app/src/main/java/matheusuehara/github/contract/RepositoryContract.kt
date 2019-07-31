@@ -13,7 +13,7 @@ interface RepositoryContract {
     }
 
     interface Presenter {
-        fun getRepositories(page: Int)
+        fun getRepositories()
         fun getRepositorySuccess(repositoryResult: List<Repository>?)
         fun getRepositoryError()
     }

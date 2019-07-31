@@ -1,8 +1,8 @@
-package matheusuehara.github.view.adapters
+package matheusuehara.github.features.repository
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.lv_item_repository.view.*
 import java.util.ArrayList
 import matheusuehara.github.R
 import matheusuehara.github.model.Repository
-import matheusuehara.github.view.PullRequestActivity
+import matheusuehara.github.features.pullrequests.PullRequestActivity
 
 class RepositoryAdapter(var repositories: ArrayList<Repository>, var context: Context) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
 

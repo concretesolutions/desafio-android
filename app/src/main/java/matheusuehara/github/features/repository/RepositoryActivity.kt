@@ -1,19 +1,18 @@
-package matheusuehara.github.view
+package matheusuehara.github.features.repository
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
-import kotlinx.android.synthetic.main.activity_repository.*
+import kotlinx.android.synthetic.main.activity_repository.rvRepositories
+import kotlinx.android.synthetic.main.activity_repository.progress_bar
+import kotlinx.android.synthetic.main.activity_repository.frame_layout
 import matheusuehara.github.R
 import matheusuehara.github.contract.RepositoryContract
 import matheusuehara.github.model.Repository
-import matheusuehara.github.presenter.RepositoryPresenterImpl
-import matheusuehara.github.view.adapters.RepositoryAdapter
-import matheusuehara.github.view.listeners.EndlessRecyclerViewScrollListener
 import java.util.ArrayList
 
 class RepositoryActivity : AppCompatActivity(), RepositoryContract.View {
@@ -29,11 +28,18 @@ class RepositoryActivity : AppCompatActivity(), RepositoryContract.View {
         rvRepositories.layoutManager = linearLayoutManager
         rvRepositories.addItemDecoration(DividerItemDecoration(this, linearLayoutManager.orientation))
 
-        presenter.getRepositories(0)
+        presenter.getRepositories()
 
-        rvRepositories.addOnScrollListener(object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                presenter.getRepositories(page)
+        rvRepositories.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) {
+                    val visibleItemCount = linearLayoutManager.childCount
+                    val totalItemCount = linearLayoutManager.itemCount
+                    val pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition()
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount && progress_bar.visibility != View.VISIBLE ) {
+                        presenter.getRepositories()
+                    }
+                }
             }
         })
     }
@@ -57,7 +63,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryContract.View {
                 R.string.connection_error,
                 Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.try_again
-                ) {presenter.getRepositories(0)}.show()
+                ) {presenter.getRepositories()}.show()
     }
 
     override fun showEmptyRepositoryMessage() {

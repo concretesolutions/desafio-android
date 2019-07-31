@@ -1,21 +1,14 @@
-package matheusuehara.github.presenter
+package matheusuehara.github.features.repository
 
 import android.util.Log
-import matheusuehara.github.R
-import matheusuehara.github.api.GitHubApi
 import matheusuehara.github.api.GitHubService
 import matheusuehara.github.contract.GitHubContract
-import matheusuehara.github.contract.PullRequestContract
 import matheusuehara.github.contract.RepositoryContract
-import matheusuehara.github.model.PullRequest
 import matheusuehara.github.model.Repository
 import matheusuehara.github.model.RepositoryResponse
-import matheusuehara.github.view.RepositoryActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.ArrayList
 
 class RepositoryPresenterImpl constructor(var view: RepositoryContract.View) : RepositoryContract.Presenter{
@@ -27,12 +20,12 @@ class RepositoryPresenterImpl constructor(var view: RepositoryContract.View) : R
         private val sort = "stars"
     }
 
-    override fun getRepositories(page:Int) {
-        if (currentPage < page ) this.currentPage = page
+    override fun getRepositories() {
         view.showProgressBar()
-        service.getAPI().getRepositories(language,sort,currentPage).enqueue(object : Callback<RepositoryResponse> {
+        service.getAPI().getRepositories(language, sort,currentPage).enqueue(object : Callback<RepositoryResponse> {
             override fun onResponse(call: Call<RepositoryResponse>, response: Response<RepositoryResponse>) {
                 if (response.code() == 200) {
+                    currentPage++
                     val repositories = response.body()?.items as ArrayList<Repository>
                     getRepositorySuccess(repositories)
                 } else {

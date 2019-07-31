@@ -1,4 +1,4 @@
-package matheusuehara.github.presenter
+package matheusuehara.github.features.pullrequests
 
 import android.util.Log
 import matheusuehara.github.api.GitHubService
@@ -39,17 +39,14 @@ class PullRequestPresenterImpl constructor(var view: PullRequestContract.View) :
 
     override fun getPullRequestSuccess(pullRequestResult: ArrayList<PullRequest>?) {
         view.hideProgressBar()
-        if (pullRequestResult != null) {
-            var opened = 0
-            var closed = 0
-            for (pr in pullRequestResult) {
-                if (pr.state == "closed") closed++ else opened++
-            }
-            view.updateStatus("$opened Opened / $closed Closed")
-            view.updatePullRequests(pullRequestResult)
-        }else{
-            view.showEmptyPullRequestMessage()
+        pullRequestResult?.let { prs ->
+            val closedPr = prs.count{ it.state == "closed" }
+            val openPr = prs.count{ it.state == "open" }
+            view.updateStatus("$openPr Opened / $closedPr Closed")
+            view.updatePullRequests(prs)
+            return
         }
+        view.showEmptyPullRequestMessage()
     }
 
     override fun getPullRequestError() {

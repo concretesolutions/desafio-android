@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="default_padding">5dp</dimen>
+    <dimen name="default_margin">5dp</dimen>
+    <dimen name="image_size">60dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+
+    <!-- Font sizes -->
+    <dimen name="username_size">18sp</dimen>
+    <dimen name="title_size">20sp</dimen>
+
+</resources>

@@ -1,11 +1,11 @@
-package matheusuehara.github.view
+package matheusuehara.github.features.pullrequests
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.design.widget.Snackbar.LENGTH_INDEFINITE
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -13,8 +13,6 @@ import kotlinx.android.synthetic.main.activity_pull_request.*
 import matheusuehara.github.R
 import matheusuehara.github.contract.PullRequestContract
 import matheusuehara.github.model.PullRequest
-import matheusuehara.github.view.adapters.PullRequestAdapter
-import matheusuehara.github.presenter.PullRequestPresenterImpl
 import java.util.ArrayList
 
 class PullRequestActivity : AppCompatActivity(), PullRequestContract.View{
@@ -36,16 +34,16 @@ class PullRequestActivity : AppCompatActivity(), PullRequestContract.View{
         repositoryName = intent.getStringExtra("repositoryName")
         repositoryOwnerName = intent.getStringExtra("repositoryOwnerName")
 
-        presenter.getPullRequests(repositoryOwnerName!!,repositoryName!!,STATUS)
+        presenter.getPullRequests(repositoryOwnerName!!,repositoryName!!, STATUS)
 
-        supportActionBar?.setTitle(repositoryName)
+        supportActionBar?.title = repositoryName
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         rvPullRequest.adapter = adapter
         val linearLayoutManager = LinearLayoutManager(this)
         rvPullRequest.layoutManager = linearLayoutManager
-        rvPullRequest.addItemDecoration(DividerItemDecoration(this, linearLayoutManager!!.orientation))
+        rvPullRequest.addItemDecoration(DividerItemDecoration(this, linearLayoutManager.orientation))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -56,8 +54,8 @@ class PullRequestActivity : AppCompatActivity(), PullRequestContract.View{
     }
 
     override fun updatePullRequests(pullRequestResult: ArrayList<PullRequest>) {
-        adapter!!.pullRequests = pullRequestResult
-        adapter!!.notifyDataSetChanged()
+        adapter.pullRequests = pullRequestResult
+        adapter.notifyDataSetChanged()
     }
 
     override fun showProgressBar(){
@@ -74,7 +72,7 @@ class PullRequestActivity : AppCompatActivity(), PullRequestContract.View{
                 R.string.connection_error,
                 LENGTH_INDEFINITE)
                 .setAction(R.string.try_again
-                ) {presenter.getPullRequests(repositoryOwnerName!!,repositoryName!!,STATUS)}.show()
+                ) {presenter.getPullRequests(repositoryOwnerName!!,repositoryName!!, STATUS)}.show()
     }
 
     override fun showEmptyPullRequestMessage() {
