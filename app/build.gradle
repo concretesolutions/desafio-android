@@ -47,6 +47,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     lintOptions {
         quiet true
         abortOnError false
@@ -104,7 +108,10 @@ dependencies {
     implementation applicationDependencies.retrofit
     implementation applicationDependencies.retrofitConverter
     implementation applicationDependencies.retrofitAdapterRxJava
+    implementation applicationDependencies.retrofitLogging
     implementation applicationDependencies.rxJava
+    implementation applicationDependencies.rxAndroid
+    kapt applicationDependencies.dataBindingCompiler
 
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.junit

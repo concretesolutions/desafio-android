@@ -1,11 +1,13 @@
-package app.kelvao.javapop.network
+package app.kelvao.javapop.domain.network
 
 import app.kelvao.javapop.BuildConfig
-import app.kelvao.javapop.network.service.PullRequestsRestService
-import app.kelvao.javapop.network.service.RepositoriesRestService
-import app.kelvao.javapop.network.service.UserRestService
+import app.kelvao.javapop.domain.network.service.PullRequestsRestService
+import app.kelvao.javapop.domain.network.service.RepositoriesRestService
+import app.kelvao.javapop.domain.network.service.UserRestService
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -30,6 +32,7 @@ object RestClient {
         retryOnConnectionFailure(true)
         followRedirects(true)
         readTimeout(60, TimeUnit.SECONDS)
+        if (BuildConfig.DEBUG) addInterceptor(HttpLoggingInterceptor().apply { level = Level.BODY })
         addInterceptor { chain ->
             val builder = chain.request().newBuilder()
                 .addHeader("Content-Type", "application/json")

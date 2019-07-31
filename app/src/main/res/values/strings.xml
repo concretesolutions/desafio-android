@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Github Java Pop</string>
+    <string name="fetch_repositories_error">Ocorreu um erro ao tentar pegar a lista</string>
 </resources>
