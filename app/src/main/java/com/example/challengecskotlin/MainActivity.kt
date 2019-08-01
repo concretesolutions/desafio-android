@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private var isLastPage = false
     private val TOTAL_PAGES = 10
     private var currentPage = PAGE_START
-    private var adapter: RepoAdapter = RepoAdapter()
+    private var adapter: RepoAdapter = RepoAdapter(this)
     private lateinit var loadingBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {

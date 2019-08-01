@@ -10,14 +10,16 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
+import de.hdodenhof.circleimageview.CircleImageView
 
 
-open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
+open class RepoAdapter(context: Context) : RecyclerView.Adapter<ViewHolder> () {
 
     private val ITEM = 0
     private val LOADING = 1
     private var repoResults: MutableList<Repo> = mutableListOf()
-    private var context: Context? = null
+    private var mContext: Context = context
     private var isLoadingAdded = false
     
 
@@ -61,12 +63,17 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
                 repoVH.stars.text = repo.stargazers_count
                 holder.itemView.setOnClickListener {
                     d("onClick", "clicado: $repo")
-                    context = holder.itemView.context
-                    val intent = Intent(context, PullRequestActivity::class.java)
+                    val intent = Intent(mContext, PullRequestActivity::class.java)
                     intent.putExtra("login", repo.owner!!.login)
                     intent.putExtra("repositoryName", repo.name)
-                    context!!.startActivity(intent)
+                    mContext.startActivity(intent)
                 }
+
+                Glide.with(mContext)
+                     .asBitmap()
+                     .load(repo.owner!!.avatar_url)
+                     .into(holder.photo)
+
             }
             LOADING -> {
             }
@@ -82,6 +89,7 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
         val name: TextView = itemView.findViewById<View>(R.id.name) as TextView
         val forks: TextView = itemView.findViewById<View>(R.id.forks) as TextView
         val stars: TextView = itemView.findViewById<View>(R.id.num_stars) as TextView
+        val photo: CircleImageView = itemView.findViewById(R.id.photo) as CircleImageView
     }
 
 

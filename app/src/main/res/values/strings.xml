@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">ChallengeCsKotlin</string>
+    <string name="app_name">Github JavaPop</string>
+    <string name="second_activity_title">Pull Request</string>
     <string name="icon_fork_github">icon fork github</string>
 </resources>

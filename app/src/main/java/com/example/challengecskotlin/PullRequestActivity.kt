@@ -24,6 +24,7 @@ class PullRequestActivity : AppCompatActivity() {
             val repositoryName = intent.getStringExtra("repositoryName")
             d("SecondActivity", "login clicado: $login")
             getPullRequests(login, repositoryName)
+            title = repositoryName
         }
     }
 
@@ -43,7 +44,7 @@ class PullRequestActivity : AppCompatActivity() {
     private fun showData(pullRequests: List<PullRequestObject>) {
         rv_pull_requests.apply{
             layoutManager = LinearLayoutManager(this@PullRequestActivity)
-            adapter = PullRequestAdapter(pullRequests)
+            adapter = PullRequestAdapter(pullRequests, this@PullRequestActivity)
         }
     }
 
