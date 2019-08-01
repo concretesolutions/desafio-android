@@ -2,9 +2,9 @@ package matheusuehara.github.data.request
 
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import matheusuehara.github.data.network.GitHubService
 import matheusuehara.github.data.model.PullRequest
 import matheusuehara.github.data.model.RepositoryResponse
+import matheusuehara.github.data.network.GitHubService
 
 class Repository(private val gitHubService: GitHubService) : RepositoryContract {
 
@@ -15,7 +15,7 @@ class Repository(private val gitHubService: GitHubService) : RepositoryContract 
                 .observeOn(Schedulers.io())
     }
 
-    override fun getPullRequests(owner: String, repository: String, status: String): Observable<List<PullRequest>>{
+    override fun getPullRequests(owner: String, repository: String, status: String): Observable<ArrayList<PullRequest>> {
         return gitHubService
                 .getPullRequests(owner, repository, status)
                 .subscribeOn(Schedulers.io())

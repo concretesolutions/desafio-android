@@ -1,49 +1,55 @@
 package matheusuehara.github.features.pullrequests
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE
 import kotlinx.android.synthetic.main.activity_pull_request.*
 import matheusuehara.github.R
-import matheusuehara.github.contract.PullRequestContract
 import matheusuehara.github.data.model.PullRequest
-import java.util.ArrayList
+import matheusuehara.github.data.model.ViewStateModel
+import matheusuehara.github.util.Constants.INTENT_REPOSITORY_NAME
+import matheusuehara.github.util.Constants.INTENT_REPOSITORY_OWNER_NAME
+import matheusuehara.github.util.Constants.PULL_REQUEST_STATE_CLOSED
+import matheusuehara.github.util.Constants.PULL_REQUEST_STATE_OPEN
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
-class PullRequestActivity : AppCompatActivity(), PullRequestContract.View{
+class PullRequestActivity : AppCompatActivity(), PullRequestClickListener {
 
     private var adapter: PullRequestAdapter = PullRequestAdapter(ArrayList(), this)
-    private var presenter:PullRequestContract.Presenter = PullRequestPresenterImpl(this)
+    private val pullRequestViewModel: PullRequestViewModel by viewModel()
+    private lateinit var layoutManager: LinearLayoutManager
 
-    private var repositoryName: String? = null
-    private var repositoryOwnerName: String? = null
-
-    companion object {
-        val STATUS:String = "all"
-    }
+    private var repositoryName: String = String()
+    private var repositoryOwnerName: String = String()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_request)
 
-        repositoryName = intent.getStringExtra("repositoryName")
-        repositoryOwnerName = intent.getStringExtra("repositoryOwnerName")
+        intent.getStringExtra(INTENT_REPOSITORY_NAME)?.let {
+            repositoryName = it
+        }
 
-        presenter.getPullRequests(repositoryOwnerName!!,repositoryName!!, STATUS)
+        intent.getStringExtra(INTENT_REPOSITORY_OWNER_NAME)?.let {
+            repositoryOwnerName = it
+        }
 
         supportActionBar?.title = repositoryName
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        rvPullRequest.adapter = adapter
-        val linearLayoutManager = LinearLayoutManager(this)
-        rvPullRequest.layoutManager = linearLayoutManager
-        rvPullRequest.addItemDecoration(DividerItemDecoration(this, linearLayoutManager.orientation))
+        initPullRequests()
+        initObservable()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -53,35 +59,66 @@ class PullRequestActivity : AppCompatActivity(), PullRequestContract.View{
         return super.onOptionsItemSelected(item)
     }
 
-    override fun updatePullRequests(pullRequestResult: ArrayList<PullRequest>) {
-        adapter.pullRequests = pullRequestResult
-        adapter.notifyDataSetChanged()
+    private fun initPullRequests() {
+        layoutManager = LinearLayoutManager(this)
+        rvPullRequest.layoutManager = layoutManager
+        rvPullRequest.adapter = adapter
+        rvPullRequest.addItemDecoration(DividerItemDecoration(this, layoutManager.orientation))
+
     }
 
-    override fun showProgressBar(){
-        progress_bar.visibility = VISIBLE
+    private fun initObservable() {
+        getPullRequests()
+        this.lifecycle.addObserver(pullRequestViewModel)
+        pullRequestViewModel.getPullRequests().observe(this, Observer { stateModel ->
+            when (stateModel.status) {
+                ViewStateModel.Status.LOADING -> {
+                    progress_bar.visibility = VISIBLE
+                }
+                ViewStateModel.Status.SUCCESS -> {
+                    progress_bar.visibility = GONE
+                    stateModel.model?.let { pullrequests ->
+                        if (pullrequests.isEmpty()) showEmptyPullRequestMessage()
+                        else {
+                            adapter.addPullRequests(pullrequests)
+                            val closedPr = pullrequests.count { it.state == PULL_REQUEST_STATE_CLOSED}
+                            val openPr = pullrequests.count { it.state == PULL_REQUEST_STATE_OPEN }
+                            status.text = getString(R.string.status, openPr, closedPr)
+                        }
+                    }
+                }
+                ViewStateModel.Status.ERROR -> {
+                    progress_bar.visibility = GONE
+                    showNetworkError()
+                }
+            }
+        })
     }
 
-    override fun hideProgressBar(){
-        progress_bar.visibility = GONE
+    private fun getPullRequests() {
+        pullRequestViewModel.loadPullRequests(repositoryOwnerName, repositoryName)
     }
 
-    override fun showNetworkError(){
+    private fun showNetworkError() {
         Snackbar.make(
                 frame_layout,
                 R.string.connection_error,
                 LENGTH_INDEFINITE)
-                .setAction(R.string.try_again
-                ) {presenter.getPullRequests(repositoryOwnerName!!,repositoryName!!, STATUS)}.show()
+                .setAction(R.string.try_again) {
+                    getPullRequests()
+                }.show()
     }
 
-    override fun showEmptyPullRequestMessage() {
+    private fun showEmptyPullRequestMessage() {
         Snackbar.make(frame_layout,
                 R.string.empty_result,
                 LENGTH_INDEFINITE).show()
     }
 
-    override fun updateStatus(statusValue: String) {
-        status.text = statusValue
+    override fun onClick(pullRequest: PullRequest) {
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse(pullRequest.html_url)
+        startActivity(i)
     }
+
 }

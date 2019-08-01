@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
@@ -33,32 +34,55 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/default_padding"
         android:layout_weight="@integer/weight_big">
 
         <TextView
             android:id="@+id/pull_request_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="@integer/title_lines"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
             android:ellipsize="end"
+            android:maxLines="@integer/title_lines"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="@dimen/title_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Titulo do Pull Request" />
 
         <TextView
             android:id="@+id/pull_request_body"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:maxLines="@integer/large_description_lines"
+            android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:maxLines="@integer/description_lines"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            tools:text="Descrição do pull resquest lorem impsumDescrição do pull resquest lorem impsum dollor sit amen aoijs assk akaek adoaj s"/>
+            app:layout_constraintBottom_toTopOf="@+id/pull_request_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pull_request_title"
+            tools:text="Descrição do pull resquest lorem impsumDescrição do pull resquest lorem impsum dollor sit amen aoijs assk akaek adoaj s" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/pull_request_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="01/01/2019" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

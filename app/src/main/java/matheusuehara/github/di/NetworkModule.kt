@@ -11,17 +11,19 @@ import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val CONNECTION_TIMEOUT = 15L
 private const val READ_TIMEOUT = 30L
+private const val CACHE_SIZE = (10 * 1024 * 1024).toLong()
+private const val CACHE_TIME = 60 * 60 * 24
 
 val networkModule = module {
 
-    single {
-        val cacheSize = (10 * 1024 * 1024).toLong() //10mb of cache
-        val myCache = Cache(androidContext().cacheDir, cacheSize)
+    single<OkHttpClient> {
+        val myCache = Cache(androidContext().cacheDir, CACHE_SIZE)
         var isConnected = false
 
         val connectivityManager = androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -35,9 +37,9 @@ val networkModule = module {
                 .addInterceptor { chain ->
                     var request = chain.request()
                     request = if (isConnected)
-                        request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
+                        request.newBuilder().header("Cache-Control", "public, max-age=5").build()
                     else
-                        request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
+                        request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=$CACHE_TIME").build()
                     chain.proceed(request)
                 }
                 .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
@@ -45,17 +47,18 @@ val networkModule = module {
                 .build()
     }
 
-    single {
+    single<Retrofit> {
         Retrofit
                 .Builder()
                 .addConverterFactory(GsonConverterFactory.create(Gson()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(BuildConfig.API_URL)
                 .client(get())
                 .build()
     }
 
-    single {
+    single<GitHubService> {
         val retrofit: Retrofit = get()
-        retrofit.create(GitHubService::class.java)
+        retrofit.create<GitHubService>(GitHubService::class.java)
     }
 }

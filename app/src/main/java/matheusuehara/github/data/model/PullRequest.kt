@@ -6,4 +6,5 @@ data class PullRequest(var id: Int,
                        var state: String,
                        var title: String,
                        var body: String,
+                       var created_at: String,
                        var user: User)

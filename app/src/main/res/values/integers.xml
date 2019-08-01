@@ -5,6 +5,5 @@
     <integer name="weight_big">2</integer>
 
     <integer name="title_lines">1</integer>
-    <integer name="description_lines">3</integer>
-    <integer name="large_description_lines">4</integer>
+    <integer name="description_lines">2</integer>
 </resources>

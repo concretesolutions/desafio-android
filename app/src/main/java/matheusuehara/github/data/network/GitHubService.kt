@@ -1,11 +1,11 @@
 package matheusuehara.github.data.network
 
+import io.reactivex.Observable
 import matheusuehara.github.data.model.PullRequest
 import matheusuehara.github.data.model.RepositoryResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import io.reactivex.Observable
 
 interface GitHubService {
 
@@ -17,6 +17,6 @@ interface GitHubService {
     @GET("repos/{owner}/{repository}/pulls")
     fun getPullRequests(@Path("owner") owner: String,
                         @Path("repository") repository: String,
-                        @Query("state") state: String): Observable<List<PullRequest>>
+                        @Query("state") state: String): Observable<ArrayList<PullRequest>>
 
 }
