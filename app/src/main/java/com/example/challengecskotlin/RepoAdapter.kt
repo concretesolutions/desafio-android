@@ -61,17 +61,18 @@ open class RepoAdapter(context: Context) : RecyclerView.Adapter<ViewHolder> () {
                 repoVH.login.text = repo.description
                 repoVH.forks.text = repo.forks
                 repoVH.stars.text = repo.stargazers_count
+                repoVH.username.text = repo.owner!!.login
                 holder.itemView.setOnClickListener {
                     d("onClick", "clicado: $repo")
                     val intent = Intent(mContext, PullRequestActivity::class.java)
-                    intent.putExtra("login", repo.owner!!.login)
+                    intent.putExtra("login", repo.owner.login)
                     intent.putExtra("repositoryName", repo.name)
                     mContext.startActivity(intent)
                 }
 
                 Glide.with(mContext)
                      .asBitmap()
-                     .load(repo.owner!!.avatar_url)
+                     .load(repo.owner.avatar_url)
                      .into(holder.photo)
 
             }
@@ -90,6 +91,7 @@ open class RepoAdapter(context: Context) : RecyclerView.Adapter<ViewHolder> () {
         val forks: TextView = itemView.findViewById<View>(R.id.forks) as TextView
         val stars: TextView = itemView.findViewById<View>(R.id.num_stars) as TextView
         val photo: CircleImageView = itemView.findViewById(R.id.photo) as CircleImageView
+        val username: TextView = itemView.findViewById(R.id.username) as TextView
     }
 
 
