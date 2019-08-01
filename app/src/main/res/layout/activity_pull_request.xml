@@ -6,13 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".PullRequestActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="#ffffff"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ToolbarColoredBackArrow"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintBottom_toTopOf="@id/rv_pull_requests" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:id="@+id/rv_pull_requests"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/my_toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="0dp"/>
 
