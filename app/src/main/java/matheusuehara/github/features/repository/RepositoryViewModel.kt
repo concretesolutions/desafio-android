@@ -7,6 +7,8 @@ import io.reactivex.disposables.CompositeDisposable
 import matheusuehara.github.data.model.RepositoryResponse
 import matheusuehara.github.data.model.ViewStateModel
 import matheusuehara.github.data.request.RepositoryContract
+import matheusuehara.github.util.Constants.QUERY_LANGUAGE
+import matheusuehara.github.util.Constants.QUERY_SORT
 
 class RepositoryViewModel(val repository: RepositoryContract) : ViewModel(), LifecycleObserver {
 
@@ -14,8 +16,6 @@ class RepositoryViewModel(val repository: RepositoryContract) : ViewModel(), Lif
     private val viewStateResponse: MutableLiveData<ViewStateModel<RepositoryResponse>> = MutableLiveData()
 
     companion object {
-        private val language = "language:Java"
-        private val sort = "stars"
         private var currentPage = 0
     }
 
@@ -25,9 +25,9 @@ class RepositoryViewModel(val repository: RepositoryContract) : ViewModel(), Lif
         loadRepositories()
     }
 
-    fun loadRepositories() {
+    fun loadRepositories(language: String = QUERY_LANGUAGE, sort: String = QUERY_SORT, page: Int = currentPage) {
         viewStateResponse.postValue(ViewStateModel(ViewStateModel.Status.LOADING))
-        disposables.add(this.repository.getRepositories(language, sort, currentPage).subscribe(
+        disposables.add(this.repository.getRepositories(language, sort, page).subscribe(
                 { base ->
                     currentPage++
                     viewStateResponse.postValue(ViewStateModel(status = ViewStateModel.Status.SUCCESS, model = base))
