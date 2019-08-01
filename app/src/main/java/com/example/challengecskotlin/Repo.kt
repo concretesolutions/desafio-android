@@ -5,4 +5,5 @@ class Repo {
     val description: String = ""
     val owner: Owner? = null
     val forks: String = ""
+    val stargazers_count: String = ""
 }

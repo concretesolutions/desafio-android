@@ -58,6 +58,7 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
                 //repoVH.description.text = repo.description
                 repoVH.login.text = repo.description
                 repoVH.forks.text = repo.forks
+                repoVH.stars.text = repo.stargazers_count
                 holder.itemView.setOnClickListener {
                     d("onClick", "clicado: $repo")
                     context = holder.itemView.context
@@ -80,6 +81,7 @@ open class RepoAdapter : RecyclerView.Adapter<ViewHolder> () {
         val login: TextView = itemView.findViewById<View>(R.id.login) as TextView
         val name: TextView = itemView.findViewById<View>(R.id.name) as TextView
         val forks: TextView = itemView.findViewById<View>(R.id.forks) as TextView
+        val stars: TextView = itemView.findViewById<View>(R.id.num_stars) as TextView
     }
 
 
