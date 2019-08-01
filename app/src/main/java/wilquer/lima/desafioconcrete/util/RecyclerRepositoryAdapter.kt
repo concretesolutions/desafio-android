@@ -10,15 +10,7 @@ import kotlinx.android.synthetic.main.repository_item.view.*
 import wilquer.lima.desafioconcrete.R
 import wilquer.lima.desafioconcrete.data.model.Repository
 
-class RecyclerRepositoryAdapter(private val listRepositories: List<Repository>, private val context: Context) : RecyclerView.Adapter<RecyclerRepositoryAdapter.ViewHolder>() {
-
-    val VIEW_TYPE_LOADING = 0
-    val VIEW_TYPE_ITEM = 1
-
-    override fun getItemViewType(position: Int): Int {
-        return if (position >= listRepositories.size) VIEW_TYPE_LOADING else VIEW_TYPE_ITEM
-    }
-
+class RecyclerRepositoryAdapter(private val listRepositories: MutableList<Repository>, private val context: Context) : RecyclerView.Adapter<RecyclerRepositoryAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.repository_item, parent, false))
@@ -70,5 +62,5 @@ class RecyclerRepositoryAdapter(private val listRepositories: List<Repository>, 
             }
         }
     }
-
 }
+

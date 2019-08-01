@@ -1,5 +1,8 @@
 package wilquer.lima.desafioconcrete.data.model
 
+import java.io.Serializable
+
+
 data class Repository(
         val id: Int,
         val full_name: String,
@@ -8,4 +11,4 @@ data class Repository(
         val owner: Owner,
         val stargazers_count: Int,
         val forks: Int
-)
+) : Serializable
