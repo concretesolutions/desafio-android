@@ -1,16 +1,16 @@
-package com.example.challengecskotlin
+package com.example.challengecskotlin.adapters
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.challengecskotlin.R
+import com.example.challengecskotlin.models.PullRequestObject
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.pr_row.view.*
 
@@ -28,6 +28,7 @@ class PullRequestAdapter (var pullRequests: List<PullRequestObject>, context: Co
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        //atribuindo os dados de pull requests para as views
         val pr = pullRequests[position]
         holder.name.text = pr.title
         holder.description.text = pr.body
@@ -42,7 +43,6 @@ class PullRequestAdapter (var pullRequests: List<PullRequestObject>, context: Co
             val openURL = Intent(Intent.ACTION_VIEW)
             openURL.data = Uri.parse(pr.html_url)
             mContext.startActivity(openURL)
-            //d("onClick", "clicado: ${pr.html_url}")
         }
     }
 

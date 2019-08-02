@@ -1,4 +1,4 @@
-package com.example.challengecskotlin
+package com.example.challengecskotlin.utils
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +14,7 @@ abstract class PaginationScrollListener (var layoutManager: LinearLayoutManager)
         val totalItemCount = layoutManager.itemCount
         val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
 
+        //verificando a quantidade de itens para executar paginação
         if(!isLoading() && !isLastPage()){
             if(visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0){
                 loadMoreItems()

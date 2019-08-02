@@ -1,4 +1,4 @@
-package com.example.challengecskotlin
+package com.example.challengecskotlin.models
 
 class Repo {
     val name: String = ""

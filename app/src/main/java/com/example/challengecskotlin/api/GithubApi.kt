@@ -1,4 +1,4 @@
-package com.example.challengecskotlin
+package com.example.challengecskotlin.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -7,7 +7,6 @@ object GithubApi {
     private const val GITHUB_BASE_URL = "https://api.github.com/"
     const val PARAM_QUERY = "q"
     const val PARAM_SORT = "sort"
-    //const val SORT_BY_STARS = "stars"
     const val PARAM_PAGE = "page"
     lateinit var searchService: ApiService
     init {
