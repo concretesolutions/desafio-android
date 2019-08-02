@@ -7,7 +7,9 @@ import com.google.gson.Gson
 import matheusuehara.github.BuildConfig
 import matheusuehara.github.data.network.GitHubService
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -34,14 +36,16 @@ val networkModule = module {
 
         OkHttpClient.Builder()
                 .cache(myCache)
-                .addInterceptor { chain ->
-                    var request = chain.request()
-                    request = if (isConnected)
-                        request.newBuilder().header("Cache-Control", "public, max-age=5").build()
-                    else
-                        request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=$CACHE_TIME").build()
-                    chain.proceed(request)
-                }
+                .addInterceptor( object : Interceptor{
+                    override fun intercept(chain: Interceptor.Chain): Response {
+                        var request = chain.request()
+                        request = if (isConnected)
+                            request.newBuilder().header("Cache-Control", "public, max-age=5").build()
+                        else
+                            request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=$CACHE_TIME").build()
+                        return chain.proceed(request)
+                    }
+                })
                 .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .build()
