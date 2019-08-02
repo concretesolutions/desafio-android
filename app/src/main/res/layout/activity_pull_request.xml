@@ -5,13 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/progress_bar"
-        android:visibility="gone"/>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -32,5 +25,10 @@
             tools:listitem="@layout/lv_item_pull_request"/>
 
     </LinearLayout>
+
+    <include
+        layout="@layout/pull_request_loading"
+        android:id="@+id/shimmer_view_container"
+        android:visibility="gone"/>
 
 </FrameLayout>

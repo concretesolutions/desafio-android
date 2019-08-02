@@ -12,12 +12,9 @@ import matheusuehara.github.util.Constants.QUERY_SORT
 
 class RepositoryViewModel(val repository: RepositoryContract) : ViewModel(), LifecycleObserver {
 
+    private var currentPage = 1
     private val disposables = CompositeDisposable()
     private val viewStateResponse: MutableLiveData<ViewStateModel<RepositoryResponse>> = MutableLiveData()
-
-    companion object {
-        private var currentPage = 0
-    }
 
     fun getRepositories() = viewStateResponse
 

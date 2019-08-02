@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_margin"
+    android:weightSum="@integer/weight_sum">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="@integer/weight_small"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:adjustViewBounds="true"
+            android:background="@color/loading_grey"
+            />
+
+        <View
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@color/loading_grey"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/shimmer_height"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="@integer/weight_big"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:orientation="vertical" >
+
+        <View
+            android:background="@color/loading_grey"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/shimmer_title_height"
+            />
+
+        <View
+            android:background="@color/loading_grey"
+            android:layout_width="@dimen/shimmer_row"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_height="@dimen/shimmer_height"/>
+
+        <View
+            android:background="@color/loading_grey"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_height="@dimen/shimmer_height"/>
+
+        <View
+            android:background="@color/loading_grey"
+            android:layout_width="@dimen/shimmer_half_row"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_height="@dimen/shimmer_height"/>
+
+    </LinearLayout>
+
+</LinearLayout>

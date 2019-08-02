@@ -10,4 +10,10 @@
     <dimen name="username_size">18sp</dimen>
     <dimen name="title_size">20sp</dimen>
 
+    <!-- Shimmer sizes -->
+    <dimen name="shimmer_title_height">25dp</dimen>
+    <dimen name="shimmer_row">200dp</dimen>
+    <dimen name="shimmer_half_row">100dp</dimen>
+    <dimen name="shimmer_height">10dp</dimen>
+
 </resources>

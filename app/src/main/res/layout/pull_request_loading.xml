@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/default_margin"
+    android:background="@color/white"
+    android:id="@+id/shimmer_view_container">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/lv_item_loading"/>
+        <include layout="@layout/lv_item_loading"/>
+        <include layout="@layout/lv_item_loading"/>
+        <include layout="@layout/lv_item_loading"/>
+        <include layout="@layout/lv_item_loading"/>
+        <include layout="@layout/lv_item_loading"/>
+
+    </LinearLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

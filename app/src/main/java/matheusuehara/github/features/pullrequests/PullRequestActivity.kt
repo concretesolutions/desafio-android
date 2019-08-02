@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE
-import kotlinx.android.synthetic.main.activity_pull_request.*
+import kotlinx.android.synthetic.main.activity_pull_request.rvPullRequest
+import kotlinx.android.synthetic.main.activity_pull_request.frame_layout
+import kotlinx.android.synthetic.main.activity_pull_request.status
+import kotlinx.android.synthetic.main.activity_pull_request.shimmer_view_container
 import matheusuehara.github.R
 import matheusuehara.github.data.model.PullRequest
 import matheusuehara.github.data.model.ViewStateModel
@@ -73,10 +76,10 @@ class PullRequestActivity : AppCompatActivity(), PullRequestClickListener {
         pullRequestViewModel.getPullRequests().observe(this, Observer { stateModel ->
             when (stateModel.status) {
                 ViewStateModel.Status.LOADING -> {
-                    progress_bar.visibility = VISIBLE
+                    shimmer_view_container.visibility = VISIBLE
                 }
                 ViewStateModel.Status.SUCCESS -> {
-                    progress_bar.visibility = GONE
+                    shimmer_view_container.visibility = GONE
                     stateModel.model?.let { pullrequests ->
                         if (pullrequests.isEmpty()) showEmptyPullRequestMessage()
                         else {
@@ -88,7 +91,7 @@ class PullRequestActivity : AppCompatActivity(), PullRequestClickListener {
                     }
                 }
                 ViewStateModel.Status.ERROR -> {
-                    progress_bar.visibility = GONE
+                    shimmer_view_container.visibility = GONE
                     showNetworkError()
                 }
             }

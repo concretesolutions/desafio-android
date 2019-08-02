@@ -2,14 +2,14 @@ package matheusuehara.github.features.repository
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_repository.*
+import kotlinx.android.synthetic.main.activity_repository.rvRepositories
+import kotlinx.android.synthetic.main.activity_repository.root_layout
 import matheusuehara.github.R
 import matheusuehara.github.data.model.Repository
 import matheusuehara.github.data.model.ViewStateModel
@@ -44,10 +44,10 @@ class RepositoryActivity : AppCompatActivity(), RepositoryClickListener {
         repositoryViewModel.getRepositories().observe(this, Observer { stateModel ->
             when (stateModel.status) {
                 ViewStateModel.Status.LOADING -> {
-                    progress_bar.visibility = View.VISIBLE
+                    repositoryAdapter.startLoading()
                 }
                 ViewStateModel.Status.SUCCESS -> {
-                    progress_bar.visibility = View.GONE
+                    repositoryAdapter.stopLoading()
                     stateModel.model?.items?.let { repositories ->
                         if (repositories.isEmpty()) showEmptyRepositoryMessage()
                         else {
@@ -58,7 +58,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryClickListener {
                                         val visibleItemCount = layoutManager.childCount
                                         val totalItemCount = layoutManager.itemCount
                                         val pastVisiblesItems = layoutManager.findFirstVisibleItemPosition()
-                                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount && progress_bar.visibility != View.VISIBLE) {
+                                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount && !repositoryAdapter.isLoading()) {
                                             repositoryViewModel.loadRepositories()
                                         }
                                     }
@@ -68,7 +68,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryClickListener {
                     }
                 }
                 ViewStateModel.Status.ERROR -> {
-                    progress_bar.visibility = View.GONE
+                    repositoryAdapter.stopLoading()
                     showNetworkError()
                 }
             }
@@ -77,7 +77,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryClickListener {
 
     private fun showNetworkError() {
         Snackbar.make(
-                frame_layout,
+                root_layout,
                 R.string.connection_error,
                 Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.try_again
@@ -85,7 +85,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryClickListener {
     }
 
     private fun showEmptyRepositoryMessage() {
-        Snackbar.make(frame_layout,
+        Snackbar.make(root_layout,
                 R.string.empty_result,
                 Snackbar.LENGTH_INDEFINITE).show()
     }

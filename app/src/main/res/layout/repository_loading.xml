@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_margin"
+    android:background="@color/white"
+    android:id="@+id/shimmer_view_container">
+
+    <include layout="@layout/lv_item_loading"/>
+
+</com.facebook.shimmer.ShimmerFrameLayout>
