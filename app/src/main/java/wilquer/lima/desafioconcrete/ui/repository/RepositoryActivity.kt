@@ -1,5 +1,6 @@
 package wilquer.lima.desafioconcrete.ui.repository
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -10,14 +11,17 @@ import kotlinx.android.synthetic.main.repository_activity.*
 import org.jetbrains.anko.toast
 import wilquer.lima.desafioconcrete.R
 import wilquer.lima.desafioconcrete.data.model.Repository
-import wilquer.lima.desafioconcrete.util.RecyclerRepositoryAdapter
+import wilquer.lima.desafioconcrete.ui.pullrequest.PullRequestActivity
+import wilquer.lima.desafioconcrete.util.Constants
+import wilquer.lima.desafioconcrete.util.RecyclerClickListener
+import wilquer.lima.desafioconcrete.util.adapter.RecyclerRepositoryAdapter
 
-class RepositoryActivity : AppCompatActivity(), RepositoryContract.View {
+class RepositoryActivity : AppCompatActivity(), RepositoryContract.View, RecyclerClickListener {
 
     private var presenter: RepositoryContract.Presenter = RepositoryPresenter(this)
     private var listRepositories = mutableListOf<Repository>()
     private var countPages = 1
-    private val adapterRepository = RecyclerRepositoryAdapter(listRepositories, this@RepositoryActivity)
+    private val adapterRepository = RecyclerRepositoryAdapter(listRepositories, this@RepositoryActivity, this@RepositoryActivity)
     private var isLoading = false
     //private lateinit var endlessScrollListener: EndlessScrollListener
 
@@ -89,5 +93,12 @@ class RepositoryActivity : AppCompatActivity(), RepositoryContract.View {
 
     override fun error(msg: String) {
         toast(msg)
+    }
+
+    override fun onRecyclerClickListener(position: Int) {
+        val intent = Intent(this@RepositoryActivity, PullRequestActivity::class.java)
+        intent.putExtra(Constants.REPOSITORY_NAME, listRepositories[position].name)
+        intent.putExtra(Constants.CREATOR, listRepositories[position].owner.login)
+        startActivity(intent)
     }
 }

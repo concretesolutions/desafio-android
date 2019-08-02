@@ -81,8 +81,9 @@
         android:layout_height="wrap_content"
         android:text="username"
         android:textColor="@color/colorBlue"
-        android:textStyle="bold"
         android:textSize="13sp"
+        android:textStyle="bold"
+        android:maxEms="6"
         app:layout_constraintEnd_toEndOf="@+id/profile_photo"
         app:layout_constraintStart_toStartOf="@+id/profile_photo"
         app:layout_constraintTop_toBottomOf="@+id/profile_photo" />

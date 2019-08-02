@@ -1,4 +1,4 @@
-package wilquer.lima.desafioconcrete.util
+package wilquer.lima.desafioconcrete.util.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,8 +9,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.repository_item.view.*
 import wilquer.lima.desafioconcrete.R
 import wilquer.lima.desafioconcrete.data.model.Repository
+import wilquer.lima.desafioconcrete.util.RecyclerClickListener
 
-class RecyclerRepositoryAdapter(private val listRepositories: MutableList<Repository>, private val context: Context) : RecyclerView.Adapter<RecyclerRepositoryAdapter.ViewHolder>() {
+class RecyclerRepositoryAdapter(private val listRepositories: MutableList<Repository>,
+                                private val context: Context,
+                                private val recyclerRepositoryClickListener: RecyclerClickListener)
+    : RecyclerView.Adapter<RecyclerRepositoryAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.repository_item, parent, false))
@@ -29,13 +33,17 @@ class RecyclerRepositoryAdapter(private val listRepositories: MutableList<Reposi
         holder.txt_star.text = listRepositories[position].stargazers_count.toString()
         holder.txt_repositoryDesc.text = listRepositories[position].description
 
+        holder.itemView.setOnClickListener {
+            recyclerRepositoryClickListener.onRecyclerClickListener(position)
+        }
+
         val lenght = holder.txt_repositoryDesc.text.length
         if (lenght > 55) {
             holder.txt_repositoryDesc.text = listRepositories[position].description.replaceRange(55, lenght, "...")
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var txt_repositoryName = itemView.txt_repositoryName
         var txt_repositoryDesc = itemView.txt_repositoryDesc
         var txt_fork = itemView.txt_fork
@@ -43,6 +51,7 @@ class RecyclerRepositoryAdapter(private val listRepositories: MutableList<Reposi
         var profile_photo = itemView.profile_photo
         var txt_username = itemView.txt_username
         var txt_fullName = itemView.txt_fullName
+
 
         fun loadProfileImage(url: String) {
             if (url.isBlank()) {

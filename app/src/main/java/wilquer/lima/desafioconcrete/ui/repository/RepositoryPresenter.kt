@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import wilquer.lima.desafioconcrete.data.response.RepositoryResponse
-import wilquer.lima.desafioconcrete.network.RepositoryService
+import wilquer.lima.desafioconcrete.network.service.RepositoryService
 import wilquer.lima.desafioconcrete.network.RetrofitApi
 import wilquer.lima.desafioconcrete.util.Constants
 

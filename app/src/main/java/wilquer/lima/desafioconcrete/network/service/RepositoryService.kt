@@ -1,4 +1,4 @@
-package wilquer.lima.desafioconcrete.network
+package wilquer.lima.desafioconcrete.network.service
 
 import retrofit2.Call
 import retrofit2.http.GET
