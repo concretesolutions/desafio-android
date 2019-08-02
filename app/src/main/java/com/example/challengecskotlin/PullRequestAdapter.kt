@@ -40,7 +40,7 @@ class PullRequestAdapter (var pullRequests: List<PullRequestObject>, context: Co
 
         holder.itemView.setOnClickListener {
             val openURL = Intent(Intent.ACTION_VIEW)
-            openURL.data = Uri.parse("${pr.html_url}")
+            openURL.data = Uri.parse(pr.html_url)
             mContext.startActivity(openURL)
             //d("onClick", "clicado: ${pr.html_url}")
         }

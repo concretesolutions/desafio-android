@@ -3,9 +3,9 @@ package com.example.challengecskotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log.d
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,15 +15,15 @@ import retrofit2.Response
 import androidx.recyclerview.widget.DividerItemDecoration
 
 
-
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
-
     private val PAGE_START = 1
-    var isLoading = false
+    private val QUERY = "language:Java"
+    private val SORT = "stars"
+    private var isLoading = false
     private var isLastPage = false
-    private val TOTAL_PAGES = 10
+    private val TOTAL_PAGES = 34
     private var currentPage = PAGE_START
     private var adapter: RepoAdapter = RepoAdapter(this)
     private lateinit var loadingBar: ProgressBar
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
 
-        loadingBar = findViewById<ProgressBar>(R.id.main_progress)
+        loadingBar = findViewById(R.id.main_progress)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val linearLayoutManager = LinearLayoutManager(this)
 
@@ -47,22 +47,15 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager){
-            override fun isLastPage(): Boolean {
-                return isLastPage
-            }
+            override fun isLastPage() = isLastPage
+            override fun isLoading() = isLoading
+            override fun getTotalPageCount() = TOTAL_PAGES
 
-            override fun isLoading(): Boolean {
-                return isLoading
-            }
-
-            override fun getTotalPageCount(): Int {
-                return TOTAL_PAGES
-            }
             override fun loadMoreItems() {
                 isLoading = true
                 currentPage += 1
 
-                //network delay for API call
+                //delay pra chamada de API
                 Handler().postDelayed({ loadNextPage() }, 1000)
             }
         })
@@ -71,12 +64,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFirstPage() {
-        d(TAG, "loadFirstPage: $PAGE_START")
+        //d(TAG, "loadFirstPage: $PAGE_START")
 
-        GithubApi.searchService.fetchAllUsers("language:Java", "stars", PAGE_START.toString()).enqueue(object : Callback<SearchResponse> {
+        GithubApi.searchService.fetchAllUsers(QUERY, SORT, PAGE_START.toString()).enqueue(object : Callback<SearchResponse> {
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
-                // Got data. Send it to adapter
 
+                //Enviando os dados pro adapter
                 val results = fetchResults(response)
                 loadingBar.visibility = View.GONE
                 adapter.addAll(results)
@@ -88,20 +81,22 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
-                d("onFailure", "fail:" + t.message)
+                //d("onFailure", "fail:" + t.message)
+                loadingBar.visibility = View.GONE
+                Toast.makeText(this@MainActivity, "Erro: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
     }
 
     private fun fetchResults(response: Response<SearchResponse>): List<Repo> {
-        val topRatedMovies = response.body()
-        return topRatedMovies!!.getRepos()
+        val repositories = response.body()
+        return repositories!!.getRepos()
     }
 
     private fun loadNextPage() {
-        d(TAG, "loadNextPage: $currentPage")
+        //d(TAG, "loadNextPage: $currentPage")
 
-        GithubApi.searchService.fetchAllUsers("language:Java", "stars", currentPage.toString()).enqueue(object : Callback<SearchResponse> {
+        GithubApi.searchService.fetchAllUsers(QUERY, SORT, currentPage.toString()).enqueue(object : Callback<SearchResponse> {
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 adapter.removeLoadingFooter()
                 isLoading = false
@@ -116,7 +111,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
-                t.printStackTrace()
+                Toast.makeText(this@MainActivity, "Erro: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
     }

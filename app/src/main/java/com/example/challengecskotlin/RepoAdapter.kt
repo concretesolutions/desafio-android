@@ -45,9 +45,7 @@ open class RepoAdapter(context: Context) : RecyclerView.Adapter<ViewHolder> () {
         return viewHolder
     }
 
-    override fun getItemCount(): Int {
-        return if (repoResults == null) 0 else repoResults.size
-    }
+    override fun getItemCount() = repoResults.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
@@ -86,12 +84,12 @@ open class RepoAdapter(context: Context) : RecyclerView.Adapter<ViewHolder> () {
     }
 
     protected inner class RepoVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val login: TextView = itemView.findViewById<View>(R.id.login) as TextView
-        val name: TextView = itemView.findViewById<View>(R.id.name) as TextView
-        val forks: TextView = itemView.findViewById<View>(R.id.forks) as TextView
-        val stars: TextView = itemView.findViewById<View>(R.id.num_stars) as TextView
-        val photo: CircleImageView = itemView.findViewById(R.id.photo) as CircleImageView
-        val username: TextView = itemView.findViewById(R.id.username) as TextView
+        val login: TextView = itemView.findViewById(R.id.login)
+        val name: TextView = itemView.findViewById(R.id.name)
+        val forks: TextView = itemView.findViewById(R.id.forks)
+        val stars: TextView = itemView.findViewById(R.id.num_stars)
+        val photo: CircleImageView = itemView.findViewById(R.id.photo)
+        val username: TextView = itemView.findViewById(R.id.username)
     }
 
 
@@ -102,8 +100,8 @@ open class RepoAdapter(context: Context) : RecyclerView.Adapter<ViewHolder> () {
         notifyItemInserted(repoResults.size - 1)
     }
 
-    fun addAll(moveResults: List<Repo>) {
-        for (result in moveResults) {
+    fun addAll(repoResults: List<Repo>) {
+        for (result in repoResults) {
             add(result)
         }
     }
@@ -116,17 +114,13 @@ open class RepoAdapter(context: Context) : RecyclerView.Adapter<ViewHolder> () {
 
     fun removeLoadingFooter() {
         isLoadingAdded = false
-
         val position = repoResults.size - 1
-        val result = getItem(position)
-
-        if (result != null) {
-            repoResults.removeAt(position)
-            notifyItemRemoved(position)
-        }
+        //val result = getItem(position)
+        repoResults.removeAt(position)
+        notifyItemRemoved(position)
     }
 
-    private fun getItem(position: Int): Repo {
-        return repoResults[position]
-    }
+//    private fun getItem(position: Int): Repo {
+//        return repoResults[position]
+//    }
 }

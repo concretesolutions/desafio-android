@@ -2,7 +2,9 @@ package com.example.challengecskotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log.d
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_pull_request.*
@@ -12,20 +14,27 @@ import retrofit2.Callback
 
 class PullRequestActivity : AppCompatActivity() {
 
+    private lateinit var loadingBar: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_request)
         setSupportActionBar(findViewById(R.id.my_toolbar))
+
+        loadingBar = findViewById(R.id.pr_progress)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         getIncomingIntent()
     }
 
     private fun getIncomingIntent(){
-        d("Second Activity", "recebendo intent")
-        if(intent.hasExtra("login") && intent.hasExtra("repositoryName")){
-            val login = intent.getStringExtra("login")
-            val repositoryName = intent.getStringExtra("repositoryName")
-            d("SecondActivity", "login clicado: $login")
+        val PARAM_LOGIN = "login"
+        val PARAM_REPOSITORY = "repositoryName"
+        //d("Second Activity", "recebendo intent")
+        if(intent.hasExtra(PARAM_LOGIN) && intent.hasExtra(PARAM_REPOSITORY)){
+            val login: String = intent.getStringExtra(PARAM_LOGIN)
+            val repositoryName: String = intent.getStringExtra(PARAM_REPOSITORY)
+
+            //d("SecondActivity", "login clicado: $login")
             getPullRequests(login, repositoryName)
             title = repositoryName
         }
@@ -35,11 +44,17 @@ class PullRequestActivity : AppCompatActivity() {
         GithubApi.searchService.fetchPullRequests(login, name).enqueue(object : Callback<List<PullRequestObject>> {
             override fun onResponse(call: Call<List<PullRequestObject>>, response: Response<List<PullRequestObject>>) {
                 showData(response.body()!!)
-                d("onResponse", "response clicked: " + response.body())
+                if(response.body()!!.isEmpty()){
+                    Toast.makeText(this@PullRequestActivity, "Não há pull requests nesse repositório", Toast.LENGTH_LONG).show()
+                }
+                loadingBar.visibility = View.GONE
+                //d("onResponse", "response clicked: " + response.body())
             }
 
             override fun onFailure(call: Call<List<PullRequestObject>>, t: Throwable) {
-                d("onFailure", "fail: " + t.message)
+                loadingBar.visibility = View.GONE
+                Toast.makeText(this@PullRequestActivity, "Erro: ${t.message}", Toast.LENGTH_LONG).show()
+                //d("onFailure", "fail: " + t.message)
             }
         })
     }

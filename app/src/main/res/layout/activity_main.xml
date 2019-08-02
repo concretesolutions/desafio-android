@@ -6,16 +6,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:titleTextColor="#ffffff"
         android:background="@color/colorPrimary"
-        android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_constraintBottom_toTopOf="@id/recyclerView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:id="@+id/recyclerView"
@@ -24,6 +25,7 @@
         app:layout_constraintTop_toTopOf="@id/my_toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="0dp"/>
+
     <ProgressBar
         android:id="@+id/main_progress"
         android:layout_height="wrap_content"
