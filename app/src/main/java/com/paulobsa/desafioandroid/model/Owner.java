@@ -1,4 +1,4 @@
-package com.paulobsa.desafioandroid.data;
+package com.paulobsa.desafioandroid.model;
 
 import com.google.gson.annotations.SerializedName;
 

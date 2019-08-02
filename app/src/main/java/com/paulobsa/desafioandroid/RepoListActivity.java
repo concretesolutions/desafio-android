@@ -12,10 +12,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.paulobsa.desafioandroid.data.SearchResult;
-import com.paulobsa.desafioandroid.data.Item;
+import com.paulobsa.desafioandroid.model.SearchResult;
+import com.paulobsa.desafioandroid.model.Item;
 
-public class MainActivity extends AppCompatActivity {
+public class RepoListActivity extends AppCompatActivity {
 
     private RequestQueue queue;
     private static final String LOG_TAG = "DESAFIO";
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_repo_list);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
