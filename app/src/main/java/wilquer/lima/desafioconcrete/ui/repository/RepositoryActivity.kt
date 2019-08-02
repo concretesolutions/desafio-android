@@ -21,9 +21,9 @@ class RepositoryActivity : AppCompatActivity(), RepositoryContract.View, Recycle
     private var presenter: RepositoryContract.Presenter = RepositoryPresenter(this)
     private var listRepositories = mutableListOf<Repository>()
     private var countPages = 1
-    private val adapterRepository = RecyclerRepositoryAdapter(listRepositories, this@RepositoryActivity, this@RepositoryActivity)
+    private val adapterRepository =
+        RecyclerRepositoryAdapter(listRepositories, this@RepositoryActivity, this@RepositoryActivity)
     private var isLoading = false
-    //private lateinit var endlessScrollListener: EndlessScrollListener
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,25 +44,13 @@ class RepositoryActivity : AppCompatActivity(), RepositoryContract.View, Recycle
                     val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
                     val totalItemCount = linearLayoutManager.itemCount
                     val lastVisible = linearLayoutManager.findLastVisibleItemPosition()
-                    if (!isLoading && totalItemCount <= lastVisible + 15) {
+                    if (!isLoading && totalItemCount <= lastVisible + 15 * countPages) {
                         isLoading = true
                         (presenter as RepositoryPresenter).getRepositories(++countPages)
                     }
                 }
             })
         }
-
-        /*if(savedInstanceState != null){
-            savedInstanceState.run {
-                getSerializable(Constants.SAVE_REPOSITORIES).run {
-                    listRepositories.clear()
-                    listRepositories.addAll(this as ArrayList<Repository>)
-                }
-            }
-            if(savedInstanceState.getSerializable(Constants.SAVE_REPOSITORIES) is MutableList<*>) {
-                listRepositories.addAll(savedInstanceState.getSerializable(Constants.SAVE_REPOSITORIES))
-            }
-        }*/
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -80,7 +68,6 @@ class RepositoryActivity : AppCompatActivity(), RepositoryContract.View, Recycle
 
     override fun repositories(listRepositories: List<Repository>?) {
         if (countPages > 1) {
-            //toast(countPages.toString())
             val lastPosition = this.listRepositories.size
             this.listRepositories.addAll(listRepositories!!)
             recycleRepositories.adapter?.notifyItemRangeInserted(lastPosition, listRepositories.size)

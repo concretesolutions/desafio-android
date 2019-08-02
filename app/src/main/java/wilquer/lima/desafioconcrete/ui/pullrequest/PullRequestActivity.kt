@@ -1,6 +1,8 @@
 package wilquer.lima.desafioconcrete.ui.pullrequest
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -64,6 +66,11 @@ class PullRequestActivity : AppCompatActivity(), PullRequestContract.View, Recyc
     }
 
     override fun onRecyclerClickListener(position: Int) {
-        toast(position.toString())
+        val url = listPr[position].html_url
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+        if(intent.resolveActivity(packageManager) != null){
+            startActivity(intent)
+        }
     }
 }
