@@ -46,6 +46,7 @@ class RepositoriesListActivity : AppCompatActivity() {
 
     private fun addObservers() {
 
+        swipe_refresh_repositories_list.isRefreshing = true
         viewModel.getRepositories().observe(this, Observer { pagedList ->
             adapter.submitList(pagedList)
             swipe_refresh_repositories_list.isRefreshing = false

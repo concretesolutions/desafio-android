@@ -9,8 +9,10 @@ class RepositoriesListDataSourceFactory(private val remoteDataSource: Repositori
 
     val compositeDisposable = CompositeDisposable()
 
+    var invalidateCache = false
+
     override fun create(): DataSource<Int, RepositoryModel> {
-        return RepositoriesListDataSource(remoteDataSource, compositeDisposable)
+        return RepositoriesListPagedDataSource(remoteDataSource, compositeDisposable, invalidateCache)
     }
 
 }

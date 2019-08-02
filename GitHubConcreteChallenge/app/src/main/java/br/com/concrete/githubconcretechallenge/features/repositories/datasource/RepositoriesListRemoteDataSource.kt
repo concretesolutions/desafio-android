@@ -1,32 +1,28 @@
 package br.com.concrete.githubconcretechallenge.features.repositories.datasource
 
-import br.com.concrete.githubconcretechallenge.features.repositories.model.RepositoriesListResponse
+import br.com.concrete.githubconcretechallenge.cache.CacheProviders
+import br.com.concrete.githubconcretechallenge.features.repositories.model.RepositoryModel
 import br.com.concrete.githubconcretechallenge.features.repositories.service.RepositoriesListRetrofit
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.rx_cache2.DynamicKey
+import io.rx_cache2.EvictProvider
 
-class RepositoriesListRemoteDataSource(private val repositoriesListRetrofit : RepositoriesListRetrofit) {
+class RepositoriesListRemoteDataSource(
+    private val repositoriesListRetrofit: RepositoriesListRetrofit,
+    private val cacheProviders: CacheProviders?
+) {
 
-    fun getRepositoriesList(page: Int) : Single<RepositoriesListResponse> {
-        return repositoriesListRetrofit.getRepositoriesList(page = page)
+    fun getRepositoriesList(page: Int, invalidateCacheForMethod: Boolean = false): Single<List<RepositoryModel>> {
+        val request = repositoriesListRetrofit.getRepositoriesList(page = page)
+            .map { response -> response.items }
             .observeOn(AndroidSchedulers.mainThread())
+
+        cacheProviders?.let { cacheProviders ->
+            return cacheProviders.getRepositories(request, DynamicKey(page), EvictProvider(invalidateCacheForMethod))
+        }
+
+        return request
     }
-
-//    fun getRepositoriesList() : Single<RepositoriesListResponse> {
-//        val repositoriesListResponse = RepositoriesListResponse(items = createItems())
-//        return Single.just(repositoriesListResponse)
-//    }
-
-//    private fun createItems(): List<RepositoryModel> {
-//        val items = mutableListOf<RepositoryModel>()
-//
-//        for (i in 1..10) {
-//            val repositoryModel = RepositoryModel("Repo$i", "Description$i", "${i + 10}", "${i + 20}")
-//            items.add(repositoryModel)
-//        }
-//
-//        return items
-//    }
-
 
 }

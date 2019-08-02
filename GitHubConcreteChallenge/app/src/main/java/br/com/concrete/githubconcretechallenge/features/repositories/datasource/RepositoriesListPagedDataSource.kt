@@ -2,14 +2,14 @@ package br.com.concrete.githubconcretechallenge.features.repositories.datasource
 
 import android.util.Log
 import androidx.paging.PageKeyedDataSource
-import br.com.concrete.githubconcretechallenge.features.repositories.model.RepositoriesListResponse
 import br.com.concrete.githubconcretechallenge.features.repositories.model.RepositoryModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-class RepositoriesListDataSource(
+class RepositoriesListPagedDataSource(
     private val remoteDataSource: RepositoriesListRemoteDataSource,
-    private val compositeDisposable: CompositeDisposable
+    private val compositeDisposable: CompositeDisposable,
+    private var invalidateCache : Boolean = false
 ) : PageKeyedDataSource<Int, RepositoryModel>() {
 
     private fun addDisposable(disposable: Disposable) {
@@ -18,8 +18,9 @@ class RepositoriesListDataSource(
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, RepositoryModel>) {
 
-        val onSuccess = fun(response: RepositoriesListResponse) {
-            callback.onResult(response.items, null, 2)
+        val onSuccess = fun(response: List<RepositoryModel>) {
+            invalidateCache = false
+            callback.onResult(response, null, 2)
         }
 
         val onFailure = fun(error: Throwable) {
@@ -27,15 +28,15 @@ class RepositoriesListDataSource(
         }
 
         addDisposable(
-            remoteDataSource.getRepositoriesList(1)
+            remoteDataSource.getRepositoriesList(1, invalidateCache)
                 .subscribe(onSuccess, onFailure)
         )
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, RepositoryModel>) {
 
-        val onSuccess = fun(response: RepositoriesListResponse) {
-            callback.onResult(response.items, params.key + 1)
+        val onSuccess = fun(response: List<RepositoryModel>) {
+            callback.onResult(response, params.key + 1)
         }
 
         val onFailure = fun(error: Throwable) {
@@ -50,4 +51,5 @@ class RepositoriesListDataSource(
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, RepositoryModel>) {
     }
+
 }

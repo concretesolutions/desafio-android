@@ -1,6 +1,8 @@
 package br.com.concrete.githubconcretechallenge.di
 
+import android.content.Context
 import br.com.concrete.githubconcretechallenge.BuildConfig
+import br.com.concrete.githubconcretechallenge.cache.CacheProviders
 import br.com.concrete.githubconcretechallenge.features.pullrequests.datasource.PullRequestsDataSource
 import br.com.concrete.githubconcretechallenge.features.pullrequests.datasource.PullRequestsRemoteDataSource
 import br.com.concrete.githubconcretechallenge.features.pullrequests.service.PullRequestsRetrofit
@@ -11,7 +13,8 @@ import br.com.concrete.githubconcretechallenge.features.repositories.datasource.
 import br.com.concrete.githubconcretechallenge.features.repositories.service.RepositoriesListRetrofit
 import br.com.concrete.githubconcretechallenge.features.repositories.view.RepositoriesPagedAdapter
 import br.com.concrete.githubconcretechallenge.features.repositories.viewmodel.RepositoriesListViewModel
-import io.reactivex.schedulers.Schedulers
+import io.rx_cache2.internal.RxCache
+import io.victoralbertos.jolyglot.GsonSpeaker
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -23,23 +26,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 val applicationModule = module {
     factory { RepositoriesPagedAdapter() }
     factory { PullRequestsAdapter() }
+    factory { RepositoriesListDataSourceFactory(get()) }
 
     viewModel { RepositoriesListViewModel(get()) }
     viewModel { PullRequestsViewModel(get()) }
 
     single {
         RepositoriesListRemoteDataSource(
-            get()
+            get(),
+            getOrNull()
         )
     }
 
     single<PullRequestsDataSource> {
         PullRequestsRemoteDataSource(
-            get()
+            get(),
+            getOrNull()
         )
     }
 
-    single { RepositoriesListDataSourceFactory(get()) }
 }
 
 val retrofitModule = module {
@@ -47,6 +52,21 @@ val retrofitModule = module {
 
     single<RepositoriesListRetrofit> { provideRetrofit(get()) }
     single<PullRequestsRetrofit> { provideRetrofit(get()) }
+}
+
+val cacheModule = module {
+    single { provideCache(get()) }
+    single { provideCacheProviders(get()) }
+}
+
+fun provideCache(context: Context) : RxCache {
+    return RxCache.Builder()
+        .setMaxMBPersistenceCache(10)
+        .persistence(context.filesDir, GsonSpeaker())
+}
+
+fun provideCacheProviders(rxCache: RxCache): CacheProviders {
+    return rxCache.using(CacheProviders::class.java)
 }
 
 
@@ -64,6 +84,6 @@ inline fun <reified T> provideRetrofit(okHttpClient: OkHttpClient): T {
         .baseUrl(BuildConfig.BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build().create(T::class.java)
 }

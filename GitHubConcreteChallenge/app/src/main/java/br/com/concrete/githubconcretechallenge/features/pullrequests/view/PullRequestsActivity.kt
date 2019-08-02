@@ -67,7 +67,9 @@ class PullRequestsActivity : AppCompatActivity() {
 
     private fun createEvents() {
         swipe_refresh_pull_requests.setOnRefreshListener {
-            loadData()
+            repositoryModel?.let { repositoryModel ->
+                viewModel.refreshPullRequests(repositoryModel)
+            }
         }
 
         adapter.onItemClicked = { pullRequest ->

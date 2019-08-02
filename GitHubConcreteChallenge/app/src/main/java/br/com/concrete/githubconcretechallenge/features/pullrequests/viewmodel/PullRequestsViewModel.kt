@@ -16,12 +16,12 @@ class PullRequestsViewModel(private val pullRequestsDataSource: PullRequestsData
     private val compositeDisposable = CompositeDisposable()
 
     private val _liveDataPullRequestList = MutableLiveData<List<PullRequestModel>>()
-    val liveDataPullRequestList : LiveData<List<PullRequestModel>>
+    val liveDataPullRequestList: LiveData<List<PullRequestModel>>
         get() {
             return _liveDataPullRequestList
         }
 
-    val liveDataOpenedClosedPullRequestCount : LiveData<Pair<Int, Int>> =
+    val liveDataOpenedClosedPullRequestCount: LiveData<Pair<Int, Int>> =
         Transformations.map(_liveDataPullRequestList) { pullRequestList ->
             val openedPrs = pullRequestList.count { pr -> pr.state == "open" }
             val closedPrs = pullRequestList.size - openedPrs
@@ -32,7 +32,7 @@ class PullRequestsViewModel(private val pullRequestsDataSource: PullRequestsData
         compositeDisposable.add(disposable)
     }
 
-    fun loadPullRequests(repositoryModel: RepositoryModel) {
+    private fun loadData(repositoryModel: RepositoryModel, invalidateCache: Boolean = false) {
 
         val onSuccess = fun(response: List<PullRequestModel>) {
             _liveDataPullRequestList.value = response
@@ -43,10 +43,18 @@ class PullRequestsViewModel(private val pullRequestsDataSource: PullRequestsData
         }
 
         addDisposable(
-            pullRequestsDataSource.getPullRequests(repositoryModel.owner.login, repositoryModel.name)
+            pullRequestsDataSource.getPullRequests(repositoryModel.owner.login, repositoryModel.name, invalidateCache)
                 .subscribe(onSuccess, onFailure)
         )
 
+    }
+
+    fun loadPullRequests(repositoryModel: RepositoryModel) {
+        loadData(repositoryModel)
+    }
+
+    fun refreshPullRequests(repositoryModel: RepositoryModel) {
+        loadData(repositoryModel, true)
     }
 
     override fun onCleared() {

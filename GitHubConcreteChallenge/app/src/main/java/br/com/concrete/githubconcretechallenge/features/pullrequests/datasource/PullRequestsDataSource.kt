@@ -5,6 +5,9 @@ import io.reactivex.Single
 
 interface PullRequestsDataSource {
 
-    fun getPullRequests(creatorName: String, repositoryName: String): Single<List<PullRequestModel>>
+    fun getPullRequests(
+        creatorName: String, repositoryName: String,
+        invalidateCacheForMethod: Boolean = false
+    ): Single<List<PullRequestModel>>
 
 }
