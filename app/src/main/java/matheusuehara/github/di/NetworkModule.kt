@@ -10,6 +10,7 @@ import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -25,6 +26,15 @@ private const val CACHE_TIME = 60 * 60 * 24
 val networkModule = module {
 
     single<OkHttpClient> {
+
+        val httpLogInterceptor = HttpLoggingInterceptor()
+
+        if (BuildConfig.DEBUG) {
+            httpLogInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            httpLogInterceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
+
         val myCache = Cache(androidContext().cacheDir, CACHE_SIZE)
         var isConnected = false
 
@@ -46,6 +56,7 @@ val networkModule = module {
                         return chain.proceed(request)
                     }
                 })
+                .addInterceptor(httpLogInterceptor)
                 .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .build()

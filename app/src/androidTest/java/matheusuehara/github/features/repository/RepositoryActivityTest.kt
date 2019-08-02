@@ -1,12 +1,11 @@
 package matheusuehara.github.features.repository
 
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import matheusuehara.github.R
 import matheusuehara.github.base.BaseInstrumentedTest
-import matheusuehara.github.extensions.childAtPosition
 import matheusuehara.github.extensions.waitUntil
 import org.junit.Rule
 import org.junit.Test
@@ -17,23 +16,33 @@ class RepositoryActivityTest : BaseInstrumentedTest() {
     val activityRule = ActivityTestRule(RepositoryActivity::class.java)
 
     @Test
-    fun checkLoadListSuccess() {
+    fun checkItemLoad() {
         mockResponse200("repository_return_success.json")
-
-        Espresso.onView(ViewMatchers.withId(R.id.rvRepositories))
-                .perform(ViewMatchers.isDisplayed().waitUntil())
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.shimmer_view_container)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun checkLoadFirstItemSuccess() {
+    fun checkListSuccess() {
         mockResponse200("repository_return_success.json")
-        Espresso.onView(ViewMatchers.withId(R.id.rvRepositories)
-                .childAtPosition(0)
-                .childAtPosition(0)
-                .childAtPosition(0)
-                .childAtPosition(1))
-                .perform(ViewMatchers.isDisplayed().waitUntil())
-                .check(ViewAssertions.matches(ViewMatchers.withText("android-achitecture")))
+        onView(withId(R.id.rvRepositories))
+                .perform(isDisplayed().waitUntil())
+                .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun checkListNetworkError() {
+        mockResponseError404()
+        onView(withId(R.id.snackbar_text))
+                .perform(isDisplayed().waitUntil())
+                .check(matches(withText(R.string.connection_error)))
+    }
+
+    @Test
+    fun checkEmptyListError() {
+        mockResponse200("return_empty_result.json")
+        onView(withId(R.id.snackbar_text))
+                .perform(isDisplayed().waitUntil())
+                .check(matches(withText(R.string.empty_result)))
+    }
+
 }

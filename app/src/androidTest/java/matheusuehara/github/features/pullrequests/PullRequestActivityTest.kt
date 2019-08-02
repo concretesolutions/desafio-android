@@ -16,9 +16,7 @@ import matheusuehara.github.R
 import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.core.AllOf.allOf
 import androidx.test.espresso.matcher.ViewMatchers.withParent
-import matheusuehara.github.extensions.childAtPosition
 import org.hamcrest.CoreMatchers.instanceOf
-
 
 class PullRequestActivityTest : BaseInstrumentedTest() {
 
@@ -42,25 +40,35 @@ class PullRequestActivityTest : BaseInstrumentedTest() {
                 .check(matches(withText(toolbarTitile)))
     }
 
-        @Test
-    fun checkLoadListSuccess() {
-        mockResponse200("repository_return_success.json")
-
+    @Test
+    fun checkListSuccess() {
+        mockResponse200("pull_request_return_success.json")
         onView(withId(R.id.rvPullRequest))
                 .perform(isDisplayed().waitUntil())
                 .check(matches(isDisplayed()))
     }
 
     @Test
-    fun checkLoadFirstItemSuccess() {
-        mockResponse200("repository_return_success.json")
-
-        onView(withId(R.id.rvPullRequest)
-                .childAtPosition(0)
-                .childAtPosition(0)
-                .childAtPosition(1))
+    fun checkLoadEmptyList() {
+        mockResponse200("return_empty_result.json")
+        onView(withId(R.id.snackbar_text))
                 .perform(isDisplayed().waitUntil())
-                .check(matches(withText("Merge master renames into usecases branch")))
+                .check(matches(withText(R.string.empty_result)))
     }
+
+    @Test
+    fun checkLoadNetworkError() {
+        mockResponseError404()
+        onView(withId(R.id.snackbar_text))
+                .perform(isDisplayed().waitUntil())
+                .check(matches(withText(R.string.connection_error)))
+    }
+
+    @Test
+    fun checkItemLoad() {
+        mockResponse200("pull_request_return_success.json")
+        onView(withId(R.id.shimmer_view_container)).check(matches(isDisplayed()))
+    }
+
 
 }

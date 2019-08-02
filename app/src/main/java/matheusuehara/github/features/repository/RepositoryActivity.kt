@@ -65,6 +65,8 @@ class RepositoryActivity : AppCompatActivity(), RepositoryClickListener {
                                 }
                             })
                         }
+                    }?: run{
+                        showEmptyRepositoryMessage()
                     }
                 }
                 ViewStateModel.Status.ERROR -> {
@@ -80,8 +82,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryClickListener {
                 root_layout,
                 R.string.connection_error,
                 Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.try_again
-                ) { repositoryViewModel.loadRepositories() }.show()
+                .setAction(R.string.try_again) { repositoryViewModel.loadRepositories() }.show()
     }
 
     private fun showEmptyRepositoryMessage() {

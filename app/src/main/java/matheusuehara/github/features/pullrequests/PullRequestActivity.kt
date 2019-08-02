@@ -88,6 +88,8 @@ class PullRequestActivity : AppCompatActivity(), PullRequestClickListener {
                             val openPr = pullrequests.count { it.state == PULL_REQUEST_STATE_OPEN }
                             status.text = getString(R.string.status, openPr, closedPr)
                         }
+                    } ?: run{
+                        showEmptyPullRequestMessage()
                     }
                 }
                 ViewStateModel.Status.ERROR -> {

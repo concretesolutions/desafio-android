@@ -33,6 +33,6 @@ abstract class BaseInstrumentedTest {
     }
 
     fun mockResponseError404() {
-        setResponse("return_error_404", HttpURLConnection.HTTP_NOT_FOUND)
+        setResponse("return_error_404.json", HttpURLConnection.HTTP_NOT_FOUND)
     }
 }
