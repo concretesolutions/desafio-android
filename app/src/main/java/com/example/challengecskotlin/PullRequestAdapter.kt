@@ -46,6 +46,5 @@ class PullRequestAdapter (var pullRequests: List<PullRequestObject>, context: Co
         val description: TextView = itemView.pr_description
         val photo: CircleImageView = itemView.pr_photo
         val user: TextView = itemView.pr_user
-        val userLastName: TextView = itemView.pr_userLastName
     }
 }

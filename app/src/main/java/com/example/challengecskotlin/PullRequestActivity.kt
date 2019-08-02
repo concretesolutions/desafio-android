@@ -3,6 +3,7 @@ package com.example.challengecskotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_pull_request.*
 import retrofit2.Call
@@ -47,6 +48,12 @@ class PullRequestActivity : AppCompatActivity() {
         rv_pull_requests.apply{
             layoutManager = LinearLayoutManager(this@PullRequestActivity)
             adapter = PullRequestAdapter(pullRequests, this@PullRequestActivity)
+
+            val dividerItemDecoration = DividerItemDecoration(
+                rv_pull_requests.context,
+                (layoutManager as LinearLayoutManager).orientation
+            )
+            rv_pull_requests.addItemDecoration(dividerItemDecoration)
         }
     }
 
