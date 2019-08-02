@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_margin_or_padding">
+
+    <TextView
+        android:id="@+id/tv_pull_request_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/default_blue"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Pull request title" />
+
+    <TextView
+        android:id="@+id/tv_pull_request_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="2"
+        android:maxLines="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_pull_request_title"
+        tools:text="Mussum Ipsum, cacilds vidis litro abertis.
+Posuere libero varius. Nullam a nisl ut ante blandit hendrerit.
+Aenean sit amet nisi. Manduma pindureta quium dia nois paga.
+Viva Forevis aptent taciti sociosqu ad litora torquent. Nec orci ornare consequat.
+Praesent lacinia ultrices consectetur. Sed non ipsum felis." />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_pull_request_user_avatar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pull_request_description"
+        app:riv_corner_radius="15dp" />
+
+    <TextView
+        android:id="@+id/tv_pull_request_user_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/default_blue"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toEndOf="@+id/iv_pull_request_user_avatar"
+        app:layout_constraintTop_toTopOf="@id/iv_pull_request_user_avatar"
+        tools:text="username" />
+
+    <TextView
+        android:id="@+id/tv_pull_request_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/tv_pull_request_user_login"
+        app:layout_constraintStart_toEndOf="@+id/iv_pull_request_user_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_pull_request_user_login"
+        tools:text="Name Surname" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

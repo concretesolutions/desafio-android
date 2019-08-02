@@ -1,9 +1,15 @@
 package br.com.concrete.githubconcretechallenge.features.repositories.model
 
-/**
- * Created by georgemcjr on 2019-07-31.
- */
-data class RepositoryModel(val name : String,
-                           val description : String,
-                           val branchesNumber : String,
-                           val starsNumber : String)
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class RepositoryModel(
+    val id: Long,
+    val name: String,
+    val description: String,
+    @SerializedName("forks_count") val forksCount: String,
+    @SerializedName("stargazers_count") val starsCount: String,
+    val owner: UserModel
+) : Parcelable

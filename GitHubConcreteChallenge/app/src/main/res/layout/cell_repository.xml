@@ -21,6 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
+        android:lines="2"
         android:maxLines="2"
         app:layout_constraintEnd_toStartOf="@id/layout_user_profile"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,12 +33,15 @@ Viva Forevis aptent taciti sociosqu ad litora torquent. Nec orci ornare consequa
 Praesent lacinia ultrices consectetur. Sed non ipsum felis." />
 
     <TextView
-        android:id="@+id/tv_repository_branches"
+        android:id="@+id/tv_repository_forks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin_or_padding"
         android:textColor="@android:color/holo_orange_light"
         android:textStyle="bold"
+        android:gravity="center"
+        android:drawableStart="@drawable/source_fork"
+        android:drawableTint="@android:color/holo_orange_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_repository_description"
         tools:text="777" />
@@ -49,13 +53,16 @@ Praesent lacinia ultrices consectetur. Sed non ipsum felis." />
         android:layout_marginStart="@dimen/default_margin_or_padding"
         android:textColor="@android:color/holo_orange_light"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/tv_repository_branches"
-        app:layout_constraintTop_toTopOf="@id/tv_repository_branches"
+        android:gravity="center"
+        android:drawableStart="@drawable/star"
+        android:drawableTint="@android:color/holo_orange_light"
+        app:layout_constraintStart_toEndOf="@id/tv_repository_forks"
+        app:layout_constraintTop_toTopOf="@id/tv_repository_forks"
         tools:text="50" />
 
     <LinearLayout
         android:id="@+id/layout_user_profile"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -63,13 +70,17 @@ Praesent lacinia ultrices consectetur. Sed non ipsum felis." />
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_repository_user_avatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:src="@drawable/ic_launcher_foreground"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="20dp"/>
 
         <TextView
+            android:id="@+id/tv_repository_user_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -78,6 +89,7 @@ Praesent lacinia ultrices consectetur. Sed non ipsum felis." />
             tools:text="username" />
 
         <TextView
+            android:id="@+id/tv_repository_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
