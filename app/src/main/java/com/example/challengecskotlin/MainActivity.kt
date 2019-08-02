@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "MainActivity"
+    //private val TAG = "MainActivity"
     private val PAGE_START = 1
     private val QUERY = "language:Java"
     private val SORT = "stars"
@@ -68,12 +68,13 @@ class MainActivity : AppCompatActivity() {
 
         GithubApi.searchService.fetchAllUsers(QUERY, SORT, PAGE_START.toString()).enqueue(object : Callback<SearchResponse> {
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
+                if(response.isSuccessful){
+                    //Enviando os dados pro adapter
+                    val results = fetchResults(response)
+                    loadingBar.visibility = View.GONE
+                    adapter.addAll(results)
 
-                //Enviando os dados pro adapter
-                val results = fetchResults(response)
-                loadingBar.visibility = View.GONE
-                adapter.addAll(results)
-
+                }
                 if (currentPage <= TOTAL_PAGES)
                     adapter.addLoadingFooter()
                 else

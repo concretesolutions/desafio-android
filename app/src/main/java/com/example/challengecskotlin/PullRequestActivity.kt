@@ -43,9 +43,11 @@ class PullRequestActivity : AppCompatActivity() {
     private fun getPullRequests(login: String, name: String){
         GithubApi.searchService.fetchPullRequests(login, name).enqueue(object : Callback<List<PullRequestObject>> {
             override fun onResponse(call: Call<List<PullRequestObject>>, response: Response<List<PullRequestObject>>) {
-                showData(response.body()!!)
-                if(response.body()!!.isEmpty()){
-                    Toast.makeText(this@PullRequestActivity, "Não há pull requests nesse repositório", Toast.LENGTH_LONG).show()
+                if(response.isSuccessful) {
+                    showData(response.body()!!)
+                    if(response.body()!!.isEmpty()){
+                        Toast.makeText(this@PullRequestActivity, "Não há pull requests nesse repositório", Toast.LENGTH_LONG).show()
+                    }
                 }
                 loadingBar.visibility = View.GONE
                 //d("onResponse", "response clicked: " + response.body())
