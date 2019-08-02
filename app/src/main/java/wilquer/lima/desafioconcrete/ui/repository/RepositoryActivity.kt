@@ -3,6 +3,7 @@ package wilquer.lima.desafioconcrete.ui.repository
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,10 +20,11 @@ import wilquer.lima.desafioconcrete.util.adapter.RecyclerRepositoryAdapter
 class RepositoryActivity : AppCompatActivity(), RepositoryContract.View, RecyclerClickListener {
 
     private var presenter: RepositoryContract.Presenter = RepositoryPresenter(this)
-    private var listRepositories = mutableListOf<Repository>()
+    private var listRepositories = ArrayList<Repository>()
     private var countPages = 1
     private val adapterRepository =
         RecyclerRepositoryAdapter(listRepositories, this@RepositoryActivity, this@RepositoryActivity)
+    private val linearLayoutManager = LinearLayoutManager(this@RepositoryActivity, RecyclerView.VERTICAL, false)
     private var isLoading = false
 
 
@@ -31,12 +33,17 @@ class RepositoryActivity : AppCompatActivity(), RepositoryContract.View, Recycle
         setContentView(R.layout.repository_activity)
 
         window.navigationBarColor = Color.BLACK
-        presenter.initView(countPages)
+        if (savedInstanceState != null) {
+            listRepositories.addAll(savedInstanceState.getParcelableArrayList(Constants.SAVE_REPOSITORIES)!!)
+            countPages = savedInstanceState.getInt(Constants.COUNT_PAGES)
+        } else {
+            presenter.initView(countPages)
+        }
 
 
         recycleRepositories.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@RepositoryActivity, RecyclerView.VERTICAL, false)
+            layoutManager = linearLayoutManager
             adapter = adapterRepository
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -55,7 +62,8 @@ class RepositoryActivity : AppCompatActivity(), RepositoryContract.View, Recycle
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        //outState.putSerializable(Constants.SAVE_REPOSITORIES,listRepositories)
+        outState.putParcelableArrayList(Constants.SAVE_REPOSITORIES, listRepositories)
+        outState.putInt(Constants.COUNT_PAGES, countPages)
     }
 
     override fun setProgress(active: Boolean) {

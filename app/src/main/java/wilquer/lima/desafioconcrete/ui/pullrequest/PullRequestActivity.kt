@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,7 @@ class PullRequestActivity : AppCompatActivity(), PullRequestContract.View, Recyc
     private val presenter = PullRequestPresenter(this)
     private var creator = ""
     private var repository = ""
-    private val listPr = mutableListOf<PullRequest>()
+    private val listPr = ArrayList<PullRequest>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,20 @@ class PullRequestActivity : AppCompatActivity(), PullRequestContract.View, Recyc
             adapter = RecyclerPullRequestAdapter(listPr, this@PullRequestActivity)
         }
 
-        presenter.getPullRequests(creator, repository)
+        if(savedInstanceState != null){
+            listPr.addAll(savedInstanceState.getParcelableArrayList(Constants.SAVE_PULL_REQUEST)!!)
+            creator = savedInstanceState.getString(Constants.CREATOR)!!
+            repository = savedInstanceState.getString(Constants.REPOSITORY_NAME)!!
+        }else{
+            presenter.getPullRequests(creator, repository)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList(Constants.SAVE_PULL_REQUEST,listPr)
+        outState.putString(Constants.CREATOR,creator)
+        outState.putString(Constants.REPOSITORY_NAME,repository)
     }
 
     override fun onSupportNavigateUp(): Boolean {

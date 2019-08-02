@@ -1,6 +1,7 @@
 package wilquer.lima.desafioconcrete.data.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-
-data class Owner(val login: String, val avatar_url: String) : Serializable
+@Parcelize
+data class Owner(val login: String, val avatar_url: String) : Parcelable
