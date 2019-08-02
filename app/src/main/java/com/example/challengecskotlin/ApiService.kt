@@ -12,7 +12,7 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("search/repositories")
     fun fetchAllUsers(@Query(PARAM_QUERY) query: String,
-                      @Query(PARAM_SORT) sort: String = SORT_BY_STARS,
+                      @Query(PARAM_SORT) sort: String,
                       @Query(PARAM_PAGE) page: String) : Call<SearchResponse>
 
     @GET("/repos/{login}/{name}/pulls")

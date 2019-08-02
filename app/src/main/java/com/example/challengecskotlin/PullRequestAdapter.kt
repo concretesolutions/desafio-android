@@ -1,11 +1,14 @@
 package com.example.challengecskotlin
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
@@ -36,7 +39,10 @@ class PullRequestAdapter (var pullRequests: List<PullRequestObject>, context: Co
             .into(holder.photo)
 
         holder.itemView.setOnClickListener {
-            d("onClick", "clicado: $pr")
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data = Uri.parse("${pr.html_url}")
+            mContext.startActivity(openURL)
+            //d("onClick", "clicado: ${pr.html_url}")
         }
     }
 
