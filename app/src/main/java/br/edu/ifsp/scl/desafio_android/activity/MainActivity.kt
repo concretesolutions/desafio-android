@@ -35,10 +35,6 @@ class MainActivity : AppCompatActivity() {
                 modoSelecionado = RepositoriesListFragment()
                 supportActionBar?.title = "${resources.getString(R.string.repo)}"
             }
-            MY_REPOSITORY_MODE -> {
-                //modoSelecionado = ProdutoListFragment()
-                //supportActionBar?.title = "${resources.getString(R.string.my_repo)}"
-            }
         }
         supportFragmentManager.beginTransaction().replace(R.id.container, modoSelecionado!!, modo).commit()
     }
@@ -47,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         var retorno = false
         when (item.itemId) {
             R.id.repo -> {
-                changeFragment(MY_REPOSITORY_MODE)
+                changeFragment(REPOSITORY_MODE)
                 retorno = true
             }
             R.id.close -> {

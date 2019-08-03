@@ -37,20 +37,18 @@
             android:layout_marginTop="@dimen/activity_margin"
             android:background="@android:color/white"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_margin_quarter"
-            android:paddingEnd="@dimen/activity_margin"
-            android:paddingLeft="@dimen/activity_margin_half"
             android:paddingRight="@dimen/activity_margin"
-            android:paddingStart="@dimen/activity_margin_half"
-            android:paddingTop="@dimen/activity_margin_half">
+            android:paddingStart="@dimen/activity_margin_half">
 
         <TextView
                 android:id="@+id/pull_title"
-                style="@style/TextAppearance.AppCompat.Subhead"
+                style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/activity_margin_content"
-                android:layout_marginEnd="@dimen/poster_thumb_width"
+                android:layout_marginEnd="@dimen/pull_thumb_width"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 android:maxLines="1"
                 tools:text="Pull Title"/>
 
@@ -58,27 +56,29 @@
                 android:id="@+id/pull_body"
                 style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/activity_margin_text"
+                android:layout_height="@dimen/activity_margin_pull_text"
                 android:layout_marginRight="@dimen/activity_margin_content"
-                android:layout_marginEnd="@dimen/poster_thumb_width"
+                android:layout_marginEnd="@dimen/pull_thumb_width"
                 android:layout_marginTop="@dimen/activity_margin_quarter"
-                android:ellipsize="end"
-                android:maxLines="2"
+                android:ellipsize="start"
+                android:textSize="10sp"
+                android:maxLines="4"
                 tools:text="It is a pull's body"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="@dimen/activity_margin_quarter"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
             <TextView
                     android:id="@+id/pull_date"
-                    style="@style/TextAppearance.AppCompat.Caption"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:alpha="1"
+                    android:textSize="12sp"
                     android:gravity="start"
                     android:maxLines="1"
                     android:textStyle="bold"
@@ -87,11 +87,11 @@
 
             <TextView
                     android:id="@+id/pull_login"
-                    style="@style/TextAppearance.AppCompat.Caption"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:alpha="1"
+                    android:textSize="12sp"
                     android:gravity="end"
                     android:maxLines="1"
                     android:textStyle="bold"

@@ -2,6 +2,7 @@ package br.edu.ifsp.scl.desafio_android.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ import br.edu.ifsp.scl.desafio_android.util.PaginationScrollListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_repositories_list.*
 import okhttp3.ResponseBody
-import org.jetbrains.anko.design.snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,6 +47,7 @@ class RepositoriesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = "Git repos"
         if (repositoryList.size > 0 ) { bind() }
         else { loadPage() }
         swipe_refresh_layout.setOnRefreshListener {
@@ -86,17 +87,12 @@ class RepositoriesListFragment : Fragment() {
         rv_repository.apply {
             layoutManager = linearLayoutManager
             adapter = RepositoriesAdapter(context!!, repositoryList) {
-
                 val fragment = PullListFragment()
                 val bundle = Bundle()
                 bundle.putString("login", repositoryList.elementAt(it).owner.login)
-                bundle.putString("name", repositoryList.elementAt(it).name)
+                bundle.putString("repo", repositoryList.elementAt(it).name)
                 fragment.arguments = bundle
                 fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)?.addToBackStack(null)?.commit()
-
-                layout_repository.snackbar(
-                    "${repositoryList.elementAt(it).owner.login} " +
-                        "| ${repositoryList.elementAt(it).name}")
             }
             addOnScrollListener(object : PaginationScrollListener(linearLayoutManager!!) {
                 override fun loadMoreItens() {

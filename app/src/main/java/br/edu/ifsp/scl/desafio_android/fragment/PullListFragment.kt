@@ -1,9 +1,11 @@
 package br.edu.ifsp.scl.desafio_android.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,8 +43,9 @@ class PullListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = "Pull requests"
         login = arguments?.get("login") as String
-        repo = arguments?.get("name") as String
+        repo = arguments?.get("repo") as String
         loadPage()
     }
 
@@ -53,7 +56,6 @@ class PullListFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                //Log.d("pull_response", response.body()?.string())
                 pulls = Gson().fromJson((response.body()?.string()), Array<Pull>::class.java).toList()
                 bind()
             }
@@ -61,13 +63,20 @@ class PullListFragment : Fragment() {
     }
 
     fun bind() {
-        linearLayoutManager = LinearLayoutManager(context)
         pb_pull.visibility = View.GONE
-        rv_pull.apply {
-            layoutManager = linearLayoutManager
-            adapter = PullsAdapter(context!!, pulls) {
-
+        if(pulls.isNotEmpty()) {
+            linearLayoutManager = LinearLayoutManager(context)
+            tv_pull_vazio.visibility = View.GONE
+            rv_pull.apply {
+                layoutManager = linearLayoutManager
+                adapter = PullsAdapter(context!!, pulls) {
+                    val openURL = Intent(Intent.ACTION_VIEW)
+                    openURL.data = Uri.parse("${pulls[it].html_url}")
+                    startActivity(openURL)
+                }
             }
+        } else {
+            tv_pull_vazio.visibility = View.VISIBLE
         }
     }
 }

@@ -24,8 +24,8 @@
 
         <ImageView
                 android:id="@+id/repository_poster"
-                android:layout_width="@dimen/poster_thumb_width"
-                android:layout_height="@dimen/poster_thumb_height"/>
+                android:layout_width="@dimen/pull_thumb_width"
+                android:layout_height="@dimen/pull_thumb_width"/>
 
     </android.support.v7.widget.CardView>
 
@@ -44,30 +44,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/activity_margin_half"
+                android:paddingTop="2dp"
                 android:paddingLeft="@dimen/activity_margin"
                 android:weightSum="2">
             <TextView
                     android:id="@+id/repository_title"
-                    style="@style/TextAppearance.AppCompat.Subhead"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/poster_thumb_width"
-                    android:layout_marginStart="@dimen/poster_thumb_width"
+                    android:layout_marginLeft="@dimen/pull_thumb_width"
+                    android:layout_marginStart="@dimen/pull_thumb_width"
                     android:maxLines="1"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
                     android:layout_weight="1"
                     tools:text="Repository Title"/>
             <TextView
                     android:id="@+id/repository_star"
-                    style="@style/TextAppearance.AppCompat.Caption"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:alpha="1"
+                    android:textSize="12sp"
                     android:gravity="end"
                     android:maxLines="1"
-                    android:layout_weight="1"
                     android:textStyle="bold"
+                    android:layout_weight="1"
                     android:drawableRight="@drawable/star_black"
                     tools:text="10 "/>
 
@@ -77,44 +79,45 @@
                 android:id="@+id/repository_desc"
                 style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/activity_margin_text"
-                android:layout_marginLeft="@dimen/poster_thumb_width"
-                android:layout_marginStart="@dimen/poster_thumb_width"
+                android:layout_height="@dimen/activity_margin_pull_text"
+                android:layout_marginLeft="@dimen/pull_thumb_width"
+                android:layout_marginStart="@dimen/pull_thumb_width"
                 android:paddingLeft="@dimen/activity_margin"
                 android:layout_marginTop="@dimen/activity_margin_quarter"
                 android:ellipsize="end"
-                android:maxLines="2"
+                android:textSize="10sp"
+                android:maxLines="4"
                 tools:text="It is a repository's description"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/activity_margin_half"
+                android:paddingLeft="@dimen/activity_margin"
                 android:weightSum="2">
             <TextView
                     android:id="@+id/repository_login"
-                    style="@style/TextAppearance.AppCompat.Caption"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|bottom"
-                    android:alpha="1"
+                    android:textSize="12sp"
                     android:gravity="start"
                     android:maxLines="1"
                     android:layout_weight="1"
                     android:textStyle="bold"
-                    tools:text="10 "/>
+                    tools:text="leohmcx "/>
             <TextView
                     android:id="@+id/repository_fork"
-                    style="@style/TextAppearance.AppCompat.Caption"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:alpha="1"
+                    android:textSize="12sp"
                     android:gravity="end|bottom"
                     android:maxLines="1"
-                    android:layout_weight="1"
                     android:textStyle="bold"
+                    android:layout_weight="1"
                     android:drawableRight="@drawable/fork"
                     tools:text="100 "/>
         </LinearLayout>

@@ -2,6 +2,7 @@ package br.edu.ifsp.scl.desafio_android.adapter
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Build
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,9 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.item_pull_list.view.*
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class PullsAdapter(private val context: Context
                    , private val pull: List<Pull>
@@ -59,9 +63,19 @@ class PullVH(inflater: LayoutInflater, parent: ViewGroup) :
             })
             .into(ivAvatar!!)
 
+        var data = ""
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            var ldt: LocalDateTime = LocalDateTime.parse(pull.created_at.replace("Z", ""))
+            var dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+            data = dtf.format(ldt)
+        } else {
+            var ldt = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+            var dtf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+            data = dtf.format(ldt.parse(pull.created_at))
+        }
 
-        tvBody?.text = " ${pull.body}"
-        tvDate?.text = "${pull.created_at} "
+        tvBody?.text = "${pull.body}"
+        tvDate?.text = "Date -> ${data}"
         tvLogin?.text = "${pull.user.login}"
         tvTitle?.text = "${pull.title}"
 
