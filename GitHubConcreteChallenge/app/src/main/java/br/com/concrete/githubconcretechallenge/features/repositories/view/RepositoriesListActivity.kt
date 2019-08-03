@@ -1,6 +1,7 @@
 package br.com.concrete.githubconcretechallenge.features.repositories.view
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -37,6 +38,7 @@ class RepositoriesListActivity : AppCompatActivity() {
     private fun createEvents() {
         swipe_refresh_repositories_list.setOnRefreshListener {
             viewModel.refreshData()
+            Toast.makeText(this, R.string.invalidating_cache, Toast.LENGTH_LONG).show()
         }
 
         adapter.onItemClicked = { repositoryModel ->

@@ -3,4 +3,6 @@
     <string name="pull_requests_opened">\u0020opened</string>
     <string name="pull_requests_closed">\u0020closed</string>
     <string name="text_separator">\u0020/\u0020</string>
+    <string name="invalidating_cache">Invalidating cache…</string>
+    <string name="failed_request">Failed to retrieve data</string>
 </resources>

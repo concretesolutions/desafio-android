@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import br.com.concrete.githubconcretechallenge.features.pullrequests.datasource.PullRequestsDataSource
 import br.com.concrete.githubconcretechallenge.features.pullrequests.model.PullRequestModel
 import br.com.concrete.githubconcretechallenge.features.repositories.model.RepositoryModel
+import br.com.concrete.githubconcretechallenge.util.forceSetValue
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -28,6 +29,12 @@ class PullRequestsViewModel(private val pullRequestsDataSource: PullRequestsData
             openedPrs to closedPrs
         }
 
+    private val _liveDataRequestFailed = MutableLiveData<Boolean>()
+    val liveDataRequestFailed : LiveData<Boolean>
+        get() {
+            return _liveDataRequestFailed
+        }
+
     private fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }
@@ -36,10 +43,13 @@ class PullRequestsViewModel(private val pullRequestsDataSource: PullRequestsData
 
         val onSuccess = fun(response: List<PullRequestModel>) {
             _liveDataPullRequestList.value = response
+            _liveDataRequestFailed.value = false
         }
 
         val onFailure = fun(error: Throwable) {
             Log.d("errorRepo", error.localizedMessage)
+            _liveDataRequestFailed.value = true
+            _liveDataRequestFailed.forceSetValue()
         }
 
         addDisposable(

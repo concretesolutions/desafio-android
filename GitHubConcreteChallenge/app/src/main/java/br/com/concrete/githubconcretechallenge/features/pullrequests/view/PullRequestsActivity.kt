@@ -5,11 +5,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import br.com.concrete.githubconcretechallenge.R
 import br.com.concrete.githubconcretechallenge.features.pullrequests.viewmodel.PullRequestsViewModel
 import br.com.concrete.githubconcretechallenge.features.repositories.model.RepositoryModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_pull_requests.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,7 +39,7 @@ class PullRequestsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(br.com.concrete.githubconcretechallenge.R.layout.activity_pull_requests)
+        setContentView(R.layout.activity_pull_requests)
 
         repositoryModel = intent.extras?.getParcelable(KEY_EXTRA_REPOSITORY_MODEL)
 
@@ -69,6 +72,7 @@ class PullRequestsActivity : AppCompatActivity() {
         swipe_refresh_pull_requests.setOnRefreshListener {
             repositoryModel?.let { repositoryModel ->
                 viewModel.refreshPullRequests(repositoryModel)
+                Toast.makeText(this, R.string.invalidating_cache, Toast.LENGTH_LONG).show()
             }
         }
 
@@ -84,15 +88,23 @@ class PullRequestsActivity : AppCompatActivity() {
             swipe_refresh_pull_requests.isRefreshing = false
         })
 
-        viewModel.liveDataOpenedClosedPullRequestCount.observe(this, Observer { opendClosedPair ->
-            tv_pull_requests_opened.text = opendClosedPair.first.toString()
-            tv_pull_requests_closed.text = opendClosedPair.second.toString()
+        viewModel.liveDataOpenedClosedPullRequestCount.observe(this, Observer { openedClosedPair ->
+            tv_pull_requests_opened.text = openedClosedPair.first.toString()
+            tv_pull_requests_closed.text = openedClosedPair.second.toString()
+        })
+
+        viewModel.liveDataRequestFailed.observe(this, Observer { hasFailed ->
+            if (hasFailed) {
+                swipe_refresh_pull_requests.isRefreshing = false
+                Snackbar.make(root_layout, R.string.failed_request, Snackbar.LENGTH_LONG).show()
+            }
         })
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home){
-            this.finish()
+
+        when (item?.itemId) {
+            android.R.id.home -> this.finish()
         }
 
         return super.onOptionsItemSelected(item)
