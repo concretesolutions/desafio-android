@@ -22,17 +22,17 @@ class RepositoriesAdapter(private val context: Context
                           , val listener: (Int) -> Unit) : RecyclerView.Adapter<RepositoryVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RepositoryVH(LayoutInflater.from(parent.context), parent)
-    override fun onBindViewHolder(holder: RepositoryVH, position: Int) = holder.bind(repository.elementAt(position)!!, position, listener)
-    override fun getItemCount(): Int = repository.size!!
+    override fun onBindViewHolder(holder: RepositoryVH, position: Int) = holder.bind(repository.elementAt(position), position, listener)
+    override fun getItemCount(): Int = repository.size
 
     /*Helpers - Pagination*/
     fun add(r: Repository) {
         repository.add(r)
         notifyItemInserted(itemCount - 1)
     }
-    fun addAll(ps: HashSet<Repository>) = ps?.forEach { add(it!!) }
+    fun addAll(ps: HashSet<Repository>) = ps.forEach { add(it) }
     fun remove(p: Repository) {
-        var position  = repository.indexOf(p) as Int
+        var position  = repository.indexOf(p)
         if (position > -1) {
             repository.remove(p)
             notifyItemRemoved(position)
@@ -47,6 +47,7 @@ class RepositoryVH(inflater: LayoutInflater, parent: ViewGroup) :
     private var tvFork: TextView? = null
     private var tvDescription: TextView? = null
     private var tvTitle: TextView? = null
+    private var tvLogin: TextView? = null
 
     init {
         ivAvatar = itemView.repository_poster
@@ -54,6 +55,7 @@ class RepositoryVH(inflater: LayoutInflater, parent: ViewGroup) :
         tvFork = itemView.repository_fork
         tvDescription = itemView.repository_desc
         tvTitle = itemView.repository_title
+        tvLogin = itemView.repository_login
     }
 
     fun bind(repository: Repository, pos: Int, listener: (Int) -> Unit) = with(itemView) {
@@ -75,10 +77,11 @@ class RepositoryVH(inflater: LayoutInflater, parent: ViewGroup) :
             .into(ivAvatar!!)
 
 
-        tvStar?.text = " ${repository.stargazers_count}"
+        tvStar?.text = "${repository.stargazers_count} "
         tvFork?.text = "${repository.forks_count} "
         tvDescription?.text = "${repository.description}"
         tvTitle?.text = "${repository.name}"
+        tvLogin?.text = "${repository.owner.login}"
 
         layout_item_repository_list.setOnClickListener {
             listener(pos)

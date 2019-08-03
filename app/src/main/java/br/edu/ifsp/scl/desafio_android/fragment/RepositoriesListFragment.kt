@@ -52,7 +52,7 @@ class RepositoriesListFragment : Fragment() {
         swipe_refresh_layout.setOnRefreshListener {
             isLoading = false
             isLastPage = false
-            currentElement = 0
+            currentElement = 1
             repositoryList.clear()
             loadPage()
         }

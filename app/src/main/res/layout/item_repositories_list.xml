@@ -40,16 +40,38 @@
             android:paddingEnd="@dimen/activity_margin"
             android:paddingRight="@dimen/activity_margin">
 
-        <TextView
-                android:id="@+id/repository_title"
-                style="@style/TextAppearance.AppCompat.Subhead"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/poster_thumb_width"
-                android:layout_marginStart="@dimen/poster_thumb_width"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/activity_margin_half"
                 android:paddingLeft="@dimen/activity_margin"
-                android:maxLines="1"
-                tools:text="Repository Title"/>
+                android:weightSum="2">
+            <TextView
+                    android:id="@+id/repository_title"
+                    style="@style/TextAppearance.AppCompat.Subhead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/poster_thumb_width"
+                    android:layout_marginStart="@dimen/poster_thumb_width"
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    tools:text="Repository Title"/>
+            <TextView
+                    android:id="@+id/repository_star"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:alpha="1"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:drawableRight="@drawable/star_black"
+                    tools:text="10 "/>
+
+        </LinearLayout>
 
         <TextView
                 android:id="@+id/repository_desc"
@@ -68,11 +90,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/activity_margin_half"
-                android:paddingLeft="@dimen/activity_margin"
+                android:paddingLeft="@dimen/activity_margin_half"
                 android:weightSum="2">
             <TextView
-                    android:id="@+id/repository_star"
+                    android:id="@+id/repository_login"
                     style="@style/TextAppearance.AppCompat.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,14 +103,13 @@
                     android:maxLines="1"
                     android:layout_weight="1"
                     android:textStyle="bold"
-                    android:drawableLeft="@drawable/star_black"
-                    tools:text=" 10"/>
+                    tools:text="10 "/>
             <TextView
                     android:id="@+id/repository_fork"
                     style="@style/TextAppearance.AppCompat.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|bottom"
+                    android:layout_gravity="left|bottom"
                     android:alpha="1"
                     android:gravity="end|bottom"
                     android:maxLines="1"
