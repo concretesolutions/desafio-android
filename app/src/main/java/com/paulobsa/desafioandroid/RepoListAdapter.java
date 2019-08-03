@@ -29,7 +29,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.RepoLi
     @Override
     public RepoListAdapter.RepoListAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.repo_info_card, parent, false);
+        View view = inflater.inflate(R.layout.repo_item, parent, false);
 
         return new RepoListAdapter.RepoListAdapterHolder(view);
 
@@ -59,7 +59,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.RepoLi
             super(itemView);
 
             this.mCard = itemView.findViewById(R.id.repo_info_card);
-            this.textView = itemView.findViewById(R.id.repo_name_txt);
+            this.textView = itemView.findViewById(R.id.textViewTitle);
         }
     }
 
