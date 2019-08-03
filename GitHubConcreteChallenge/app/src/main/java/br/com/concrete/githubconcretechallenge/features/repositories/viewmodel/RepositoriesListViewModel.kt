@@ -9,7 +9,7 @@ import br.com.concrete.githubconcretechallenge.features.repositories.datasource.
 import br.com.concrete.githubconcretechallenge.features.repositories.datasource.RepositoriesListPagedDataSource
 import br.com.concrete.githubconcretechallenge.features.repositories.model.RepositoryModel
 
-class RepositoriesListViewModel(val dataSourceFactory: RepositoriesListDataSourceFactory) : ViewModel() {
+class RepositoriesListViewModel(private val dataSourceFactory: RepositoriesListDataSourceFactory) : ViewModel() {
 
     private val pagedListConfig = PagedList.Config.Builder()
         .setInitialLoadSizeHint(Constants.ITEMS_PER_PAGE)
