@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="25dp"
+            android:id="@+id/txt_name"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/textPrimary"
+            android:text="Billayer"/>
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_description"
+            android:textColor="@color/ordinaryText"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Aplicativo feito em Java para ajudar nas financas, com categorização das dívidas e receitas"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/fork"
+                android:tint="@color/textAccent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_forks"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/textAccent"
+                android:text="50"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/star"
+                android:tint="@color/textAccent"
+                android:backgroundTint="@color/textAccent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/textAccent"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:id="@+id/txt_stars"
+                android:text="5"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/star"
+            android:id="@+id/img_login" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/textPrimary"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:id="@+id/txt_username"
+            android:text="CaioV1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

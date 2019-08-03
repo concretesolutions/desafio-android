@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:id="@+id/linear_main">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:id="@+id/txt_title"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/textPrimary"
+            android:text="Alterações de Layout"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_body"
+            android:textColor="@color/ordinaryText"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Mudanças de cores e efeitos de transição do slider. Gradiente na entrada do app."/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/star"
+                android:id="@+id/img_author"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:id="@+id/txt_author"
+                    android:text="CaioV1"/>
+
+                <TextView
+                    android:layout_width="240dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/txt_date"
+                    android:text="22/07/2019 18:30:00"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
