@@ -43,13 +43,15 @@ class RepositoriesAdapter(private val context: Context
 class RepositoryVH(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_repositories_list, parent, false)) {
     private var ivAvatar: ImageView? = null
-    private var tvStarFork: TextView? = null
+    private var tvStar: TextView? = null
+    private var tvFork: TextView? = null
     private var tvDescription: TextView? = null
     private var tvTitle: TextView? = null
 
     init {
         ivAvatar = itemView.repository_poster
-        tvStarFork = itemView.repository_fork_star
+        tvStar = itemView.repository_star
+        tvFork = itemView.repository_fork
         tvDescription = itemView.repository_desc
         tvTitle = itemView.repository_title
     }
@@ -73,7 +75,8 @@ class RepositoryVH(inflater: LayoutInflater, parent: ViewGroup) :
             .into(ivAvatar!!)
 
 
-        tvStarFork?.text = " ${repository.stargazers_count} | ${repository.forks_count} "
+        tvStar?.text = " ${repository.stargazers_count}"
+        tvFork?.text = "${repository.forks_count} "
         tvDescription?.text = "${repository.description}"
         tvTitle?.text = "${repository.name}"
 

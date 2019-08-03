@@ -4,7 +4,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:id="@+id/layout_item_repository_list"
+             android:id="@+id/layout_item_pull_list"
              android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -13,6 +13,7 @@
             android:layout_margin="@dimen/activity_margin_half"
             app:cardBackgroundColor="@android:color/darker_gray"
             app:cardCornerRadius="3dp"
+            android:layout_gravity="right"
             app:cardPreventCornerOverlap="false">
 
         <ProgressBar
@@ -23,9 +24,9 @@
                 android:layout_gravity="center"/>
 
         <ImageView
-                android:id="@+id/repository_poster"
-                android:layout_width="@dimen/poster_thumb_width"
-                android:layout_height="@dimen/poster_thumb_height"/>
+                android:id="@+id/pull_poster"
+                android:layout_width="@dimen/pull_thumb_width"
+                android:layout_height="@dimen/pull_thumb_height"/>
 
     </android.support.v7.widget.CardView>
 
@@ -38,65 +39,64 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/activity_margin_quarter"
             android:paddingEnd="@dimen/activity_margin"
-            android:paddingRight="@dimen/activity_margin">
+            android:paddingLeft="@dimen/activity_margin_half"
+            android:paddingRight="@dimen/activity_margin"
+            android:paddingStart="@dimen/activity_margin_half"
+            android:paddingTop="@dimen/activity_margin_half">
 
         <TextView
-                android:id="@+id/repository_title"
+                android:id="@+id/pull_title"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/poster_thumb_width"
-                android:layout_marginStart="@dimen/poster_thumb_width"
-                android:paddingLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin_content"
+                android:layout_marginEnd="@dimen/poster_thumb_width"
                 android:maxLines="1"
-                tools:text="Repository Title"/>
+                tools:text="Pull Title"/>
 
         <TextView
-                android:id="@+id/repository_desc"
+                android:id="@+id/pull_body"
                 style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_margin_text"
-                android:layout_marginLeft="@dimen/poster_thumb_width"
-                android:layout_marginStart="@dimen/poster_thumb_width"
-                android:paddingLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin_content"
+                android:layout_marginEnd="@dimen/poster_thumb_width"
                 android:layout_marginTop="@dimen/activity_margin_quarter"
                 android:ellipsize="end"
                 android:maxLines="2"
-                tools:text="It is a repository's description"/>
+                tools:text="It is a pull's body"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/activity_margin_half"
-                android:paddingLeft="@dimen/activity_margin"
                 android:weightSum="2">
+
             <TextView
-                    android:id="@+id/repository_star"
+                    android:id="@+id/pull_date"
                     style="@style/TextAppearance.AppCompat.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|bottom"
+                    android:layout_gravity="left"
                     android:alpha="1"
                     android:gravity="start"
                     android:maxLines="1"
-                    android:layout_weight="1"
                     android:textStyle="bold"
-                    android:drawableLeft="@drawable/star_black"
-                    tools:text=" 10"/>
+                    android:layout_weight="1"
+                    tools:text="Pull Date: 10/01/2019"/>
+
             <TextView
-                    android:id="@+id/repository_fork"
+                    android:id="@+id/pull_login"
                     style="@style/TextAppearance.AppCompat.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|bottom"
+                    android:layout_gravity="right"
                     android:alpha="1"
-                    android:gravity="end|bottom"
+                    android:gravity="end"
                     android:maxLines="1"
-                    android:layout_weight="1"
                     android:textStyle="bold"
-                    android:drawableRight="@drawable/fork"
-                    tools:text="100 "/>
+                    android:layout_weight="1"
+                    tools:text="login pull"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

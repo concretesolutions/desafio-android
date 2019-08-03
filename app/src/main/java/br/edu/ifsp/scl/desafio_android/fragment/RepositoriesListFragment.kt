@@ -3,7 +3,6 @@ package br.edu.ifsp.scl.desafio_android.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,7 @@ import br.edu.ifsp.scl.desafio_android.util.PaginationScrollListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_repositories_list.*
 import okhttp3.ResponseBody
+import org.jetbrains.anko.design.snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,23 +47,18 @@ class RepositoriesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (repositoryList.size > 0 ) {
-            bind()
-        }
-        else {
-            loadFirstPage()
-        }
-
+        if (repositoryList.size > 0 ) { bind() }
+        else { loadPage() }
         swipe_refresh_layout.setOnRefreshListener {
             isLoading = false
             isLastPage = false
             currentElement = 0
             repositoryList.clear()
-            loadFirstPage()
+            loadPage()
         }
     }
 
-    fun loadFirstPage(){
+    fun loadPage(){
         rService?.searchRepositories("language:Java", "stars", currentElement)?.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 pb_repository.visibility = View.GONE
@@ -73,32 +68,13 @@ class RepositoriesListFragment : Fragment() {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 repositories = Gson().fromJson((response.body()?.string()), Repositories::class.java)
                 repositories?.items?.forEach { repositoryList.add(it!!) }
+                if(currentElement > 1) {
+                    isLoading = false
+                    pb_repository.visibility = View.GONE
+                    adapter?.addAll(repositoryList)
+                    rv_repository.adapter?.notifyDataSetChanged()
+                } else { bind() }
                 currentElement++
-                Log.d("pageNumber", currentElement.toString())
-                bind()
-                if (currentElement == repositories?.total_count)
-                    isLastPage = true
-            }
-        })
-    }
-
-    fun loadNextPage(){
-        rService?.searchRepositories("language:Java", "stars", currentElement)?.enqueue(object : Callback<ResponseBody> {
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                pb_repository.visibility = View.GONE
-                swipe_refresh_layout.isRefreshing = false
-            }
-
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                isLoading = false
-                pb_repository.visibility = View.GONE
-                repositories = Gson().fromJson((response.body()?.string()), Repositories::class.java)
-                repositories?.items?.forEach { repositoryList.add(it!!) }
-                adapter?.addAll(repositoryList)
-                rv_repository.adapter?.notifyDataSetChanged()
-                currentElement++
-                Log.d("pageNumber", currentElement.toString())
-                //bind()
                 if (currentElement == repositories?.total_count)
                     isLastPage = true
             }
@@ -111,11 +87,21 @@ class RepositoriesListFragment : Fragment() {
             layoutManager = linearLayoutManager
             adapter = RepositoriesAdapter(context!!, repositoryList) {
 
+                val fragment = PullListFragment()
+                val bundle = Bundle()
+                bundle.putString("login", repositoryList.elementAt(it).owner.login)
+                bundle.putString("name", repositoryList.elementAt(it).name)
+                fragment.arguments = bundle
+                fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)?.addToBackStack(null)?.commit()
+
+                layout_repository.snackbar(
+                    "${repositoryList.elementAt(it).owner.login} " +
+                        "| ${repositoryList.elementAt(it).name}")
             }
             addOnScrollListener(object : PaginationScrollListener(linearLayoutManager!!) {
                 override fun loadMoreItens() {
                     isLoading = true
-                    loadNextPage()
+                    loadPage()
                     pb_repository.visibility = View.VISIBLE
                 }
                 override fun isLastPage(): Boolean = isLastPage
