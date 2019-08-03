@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import br.edu.ifsp.scl.desafio_android.R
-import br.edu.ifsp.scl.desafio_android.model.Repositories
 import br.edu.ifsp.scl.desafio_android.model.Repository
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -18,24 +17,24 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.item_repositories_list.view.*
 
-class RepositoriesAdapter (private val context: Context
-                     , private val repository: Repositories
-                     , val listener: (Int) -> Unit) : RecyclerView.Adapter<RepositoryVH>() {
+class RepositoriesAdapter(private val context: Context
+                          , private val repository: HashSet<Repository>
+                          , val listener: (Int) -> Unit) : RecyclerView.Adapter<RepositoryVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RepositoryVH(LayoutInflater.from(parent.context), parent)
-    override fun onBindViewHolder(holder: RepositoryVH, position: Int) = holder.bind(repository.items?.elementAt(position)!!, position, listener)
-    override fun getItemCount(): Int = repository.items?.size!!
+    override fun onBindViewHolder(holder: RepositoryVH, position: Int) = holder.bind(repository.elementAt(position)!!, position, listener)
+    override fun getItemCount(): Int = repository.size!!
 
     /*Helpers - Pagination*/
     fun add(r: Repository) {
-        repository.items?.add(r)
+        repository.add(r)
         notifyItemInserted(itemCount - 1)
     }
-    fun addAll(ps: HashSet<Repository>) = ps.forEach { add(it) }
+    fun addAll(ps: HashSet<Repository>) = ps?.forEach { add(it!!) }
     fun remove(p: Repository) {
-        var position  = repository.items?.indexOf(p) as Int
+        var position  = repository.indexOf(p) as Int
         if (position > -1) {
-            repository.items?.remove(p)
+            repository.remove(p)
             notifyItemRemoved(position)
         }
     }
