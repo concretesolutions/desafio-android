@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/repo"
+            android:icon="@android:drawable/btn_star_big_off"
+            android:title="@string/repo"/>
+    <item
+            android:id="@+id/my_repo"
+            android:icon="@android:drawable/btn_star_big_off"
+            android:title="@string/my_repo"/>
+    <item
+            android:id="@+id/close"
+            android:icon="@android:drawable/btn_star_big_off"
+            android:title="@string/close"/>
+</menu>

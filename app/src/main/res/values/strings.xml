@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">desafio-android</string>
+    <string name="repo">Repositories</string>
+    <string name="my_repo">My repositories</string>
+    <string name="close">Close</string>
+    <string name="open_menu">Open Menu</string>
+    <string name="close_menu">Close Menu</string>
+    <string name="title_activity_main">Git Repo</string>
 </resources>
