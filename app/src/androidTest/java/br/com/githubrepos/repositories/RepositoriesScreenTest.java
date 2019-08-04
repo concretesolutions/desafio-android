@@ -1,13 +1,14 @@
 package br.com.githubrepos.repositories;
 
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.matcher.BoundedMatcher;
-import android.support.test.filters.LargeTest;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.IdlingRegistry;
+import androidx.test.espresso.matcher.BoundedMatcher;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -20,20 +21,20 @@ import org.junit.runner.RunWith;
 
 import br.com.githubrepos.R;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.longClick;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
-import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
-import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.google.common.base.Preconditions.checkArgument;
-import static org.hamcrest.Matchers.allOf;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.longClick;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
+import static androidx.test.espresso.intent.Checks.checkArgument;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -99,7 +100,7 @@ public class RepositoriesScreenTest {
     @Before
     public void registerIdlingResource() {
         //https://medium.com/azimolabs/wait-for-it-idlingresource-and-conditionwatcher-602055f32356#.vsyeol9wp
-        Espresso.registerIdlingResources(repositoriesActivityTestRule.getActivity().getCountingIdlingResource());
+        IdlingRegistry.getInstance().register(repositoriesActivityTestRule.getActivity().getCountingIdlingResource());
 
         //Prepare your test fixture for this test. In this case we register an IdlingResources with
         //Espresso. IdlingResource resource is a great way to tell Espresso when your app is in an
@@ -110,7 +111,7 @@ public class RepositoriesScreenTest {
     @After
     public void unregisterIdlingResource() {
         //Unregister your Idling Resource so it can be garbage collected and does not leak any memory.
-        Espresso.unregisterIdlingResources(repositoriesActivityTestRule.getActivity().getCountingIdlingResource());
+        IdlingRegistry.getInstance().unregister(repositoriesActivityTestRule.getActivity().getCountingIdlingResource());
     }
 
 
@@ -166,7 +167,7 @@ public class RepositoriesScreenTest {
         //        .perform(scrollTo(hasDescendant(withText("repositoryName5"))), longClick());
 
         String actionBarUpDescription = repositoriesActivityTestRule.getActivity()
-                .getString(android.support.v7.appcompat.R.string.abc_action_bar_up_description);
+                .getString(androidx.appcompat.R.string.abc_action_bar_up_description);
         onView(withContentDescription(actionBarUpDescription)).perform(click());
 
         onView(withText("Repositories")).check(matches(isDisplayed()));
@@ -188,5 +189,4 @@ public class RepositoriesScreenTest {
         onView(withText("Repositories")).check(matches(isDisplayed()));
         onView(withId(R.id.delete_repository)).check(doesNotExist());
     }
-
 }

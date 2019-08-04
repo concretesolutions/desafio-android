@@ -1,8 +1,7 @@
 package br.com.githubrepos.pullrequests;
 
-import android.support.annotation.NonNull;
 
-import com.google.common.base.Preconditions;
+import androidx.annotation.NonNull;
 
 import br.com.githubrepos.data.entity.PullRequest;
 import br.com.githubrepos.data.service.PullRequestServiceApi;
@@ -14,10 +13,8 @@ public class PullRequestsPresenter implements PullRequestsContract.UserActionsLi
 
     public PullRequestsPresenter(@NonNull PullRequestServiceApi pullRequestServiceApi,
                                  @NonNull PullRequestsContract.View pullRequestsView) {
-        this.mServiceApi = Preconditions.checkNotNull(pullRequestServiceApi,
-                "mServiceApi cannot be null!");
-        this.mView = Preconditions.checkNotNull(pullRequestsView,
-                "mView cannot be null!");
+        this.mServiceApi = pullRequestServiceApi;
+        this.mView = pullRequestsView;
     }
 
     @Override

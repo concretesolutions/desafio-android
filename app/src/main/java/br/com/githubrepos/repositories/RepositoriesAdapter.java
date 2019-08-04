@@ -1,7 +1,6 @@
 package br.com.githubrepos.repositories;
 
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,8 +22,6 @@ import br.com.githubrepos.commons.EndlessScrolling;
 import br.com.githubrepos.commons.ItemListListener;
 import br.com.githubrepos.data.entity.Repository;
 import br.com.githubrepos.util.CircleTransform;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 //Visible only in this package
 class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

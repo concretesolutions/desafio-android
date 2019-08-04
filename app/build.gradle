@@ -3,14 +3,13 @@ apply plugin: 'com.android.application'
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
-    //buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "br.com.githubrepos"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         //Enabling Java 8 features caused deadly slow build: http://stackoverflow.com/a/42291280
         //Jack is required to support java 8 language features
@@ -32,7 +31,7 @@ android {
             // AndroidStudio Debugger unable to find the local variable defined in method definition
             // "Cannot find local variable 'variable'"
             // Set testCoverageEnabled = false to fix this issue.
-            testCoverageEnabled = false
+            testCoverageEnabled = true
         }
         release {
             minifyEnabled false
@@ -79,11 +78,15 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // APP'S DEPENDENCIES
-    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "com.google.android.material:material:1.0.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+
+    //Idling Resources
+    implementation "androidx.test.espresso:espresso-idling-resource:3.2.0"
 
     // RETROFIT
     implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
@@ -97,31 +100,27 @@ dependencies {
     // PICASSO
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 
-    // GUAVA
-    implementation "com.google.guava:guava:$rootProject.guavaVersion"
-
-    // BUTTERKNIFE
-    implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
-
-    // ESPRESSO IDLING RESOURCES
-    implementation "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espressoVersion"
-
     // LOCAL UNIT TESTS
-    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "androidx.test.ext:junit:1.1.1"
     testImplementation "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
     testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockVersion"
     testImplementation "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockVersion"
     testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
 
     // ANDROID TESTING SUPPORT LIBRARY'S RUNNER AND RULES
-    androidTestImplementation "com.android.support.test:runner:$rootProject.ext.runnerVersion"
-    androidTestImplementation "com.android.support.test:rules:$rootProject.ext.rulesVersion"
+    androidTestImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation "androidx.test:runner:1.2.0"
+    androidTestImplementation "androidx.test:rules:1.2.0"
+
+    androidTestImplementation "androidx.test.ext:junit:1.1.1"
+    androidTestImplementation 'androidx.test.ext:truth:1.2.0'
+    androidTestImplementation 'com.google.truth:truth:0.42'
 
     // ESPRESSO UI TESTING DEPENDENCIES
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:3.2.0"
 }
 
 /*
@@ -129,7 +128,7 @@ Resolves dependency versions across test and production APKs, specifically, tran
 dependencies. This is required since Espresso internally has a dependency on support-annotations.
 */
 configurations.all {
-    resolutionStrategy.force "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    resolutionStrategy.force "androidx.annotation:annotation:1.0.0"
 }
 
 /*
@@ -138,9 +137,16 @@ excluded from the test APK! This is necessary because both APKs will contain the
 excluding these dependencies from your test configuration will result in an dex pre-verifier error
 at runtime. More info in this tools bug: (https://code.google.com/p/android/issues/detail?id=192497)
 */
-configurations.implementation.dependencies.each { implementationDependency ->
+configurations.compile.dependencies.each { compileDependency ->
+    println "Excluding compile dependency: ${compileDependency.getName()}"
+    configurations.androidTestCompile.dependencies.each { androidTestCompileDependency ->
+        configurations.androidTestCompile.exclude module: "${compileDependency.getName()}"
+    }
+}
+
+/*configurations.implementation.dependencies.each { implementationDependency ->
     println "Excluding implementation dependency: ${implementationDependency.getName()}"
     configurations.androidTestImplementation.dependencies.each { androidTestImplementationDependency ->
         configurations.androidTestImplementation.exclude module: "${implementationDependency.getName()}"
     }
-}
+}*/

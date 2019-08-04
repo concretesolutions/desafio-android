@@ -2,18 +2,19 @@ package br.com.githubrepos.repositories;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
-import android.support.test.espresso.IdlingResource;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.test.espresso.IdlingResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +27,11 @@ import br.com.githubrepos.commons.ItemListListener;
 import br.com.githubrepos.data.entity.Repository;
 import br.com.githubrepos.pullrequests.PullRequestsActivity;
 import br.com.githubrepos.util.IdleResourceHandler;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class RepositoriesActivity extends AppCompatActivity implements RepositoriesContract.View {
 
     private RepositoriesContract.UserActionsListener mActionsListener;
 
-    //TODO butterknife aparentemente gerou queda de performance
-    //@BindView(R.id.refresh_layout)
     private SwipeRefreshLayout mSwipeRefresh;
 
     private Menu mMenu;
@@ -42,8 +39,6 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
 
     private boolean isAnyRepositorySelected;
 
-    //TODO butterknife aparentemente gerou queda de performance
-    //@BindView(R.id.repositories_list)
     private RecyclerView mRecyclerView;
 
     private ItemListListener<Repository> mRepositoryItemListener = new ItemListListener<Repository>() {
@@ -84,9 +79,6 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repositories);
 
-        //TODO butterknife aparentemente gerou queda de performance
-        //ButterKnife.bind(this);
-
         mActionsListener = new RepositoriesPresenter(Injection.provideRepositoryServiceApi(), this);
         isAnyRepositorySelected = false;
 
@@ -97,7 +89,7 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     }
 
     private void setupActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         final ActionBar actionBar = getSupportActionBar();

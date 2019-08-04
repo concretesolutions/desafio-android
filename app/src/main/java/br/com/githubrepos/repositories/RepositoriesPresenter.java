@@ -1,8 +1,7 @@
 package br.com.githubrepos.repositories;
 
-import android.support.annotation.NonNull;
 
-import com.google.common.base.Preconditions;
+import androidx.annotation.NonNull;
 
 import br.com.githubrepos.data.entity.Repository;
 import br.com.githubrepos.data.entity.RepositoryStatus;
@@ -18,10 +17,8 @@ public class RepositoriesPresenter implements RepositoriesContract.UserActionsLi
     public RepositoriesPresenter(@NonNull RepositoryServiceApi repositoryServiceApi,
                                  @NonNull RepositoriesContract.View repositoriesView) {
 
-        this.mServiceApi = Preconditions.checkNotNull(repositoryServiceApi,
-                "mServiceApi cannot be null!");
-        this.mView = Preconditions.checkNotNull(repositoriesView,
-                "mView cannot be null!");
+        this.mServiceApi = repositoryServiceApi;
+        this.mView = repositoriesView;
 
         this.selectedRepositoryPosition = -1;
     }
