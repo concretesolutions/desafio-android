@@ -45,6 +45,56 @@
             app:layout_constraintVertical_bias="0.0"
             tools:text="Repo Description"/>
 
+        <ImageView
+            android:id="@+id/ic_git_branch"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_git_branch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            android:contentDescription="forks"/>
+
+        <TextView
+            android:id="@+id/textViewForkCount"
+            android:layout_width="50dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/metalicGold"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ic_git_branch"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="500"/>
+
+        <ImageView
+            android:id="@+id/ic_star"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_star"
+            app:layout_constraintStart_toEndOf="@+id/textViewForkCount"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            android:contentDescription="forks"/>
+
+        <TextView
+            android:id="@+id/textViewStartCount"
+            android:layout_width="50dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/metalicGold"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ic_star"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="500"/>
+
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/imageUser"

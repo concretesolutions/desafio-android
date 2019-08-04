@@ -1,4 +1,4 @@
-package com.paulobsa.desafioandroid;
+package com.paulobsa.desafioandroid.view;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

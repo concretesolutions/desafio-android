@@ -19,8 +19,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.paulobsa.desafioandroid.adapter.RepoListAdapter;
 import com.paulobsa.desafioandroid.model.SearchResult;
 import com.paulobsa.desafioandroid.util.Util;
+import com.paulobsa.desafioandroid.view.PaginationScrollListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

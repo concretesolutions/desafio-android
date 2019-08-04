@@ -1,4 +1,4 @@
-package com.paulobsa.desafioandroid;
+package com.paulobsa.desafioandroid.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -11,6 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.paulobsa.desafioandroid.view.BaseViewHolder;
+import com.paulobsa.desafioandroid.R;
 import com.paulobsa.desafioandroid.model.Item;
 import com.paulobsa.desafioandroid.model.SearchResult;
 
@@ -118,6 +120,8 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView textViewDescription;
         TextView textViewUserName;
         TextView textViewFullName;
+        TextView textViewForkCount;
+        TextView textViewStarCount;
         ImageView imgUser;
 
         public ViewHolder(View itemView) {
@@ -129,6 +133,8 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             this.textViewUserName = itemView.findViewById(R.id.textViewUsername);
             this.textViewFullName = itemView.findViewById(R.id.textViewFullname);
             this.imgUser = itemView.findViewById(R.id.imageUser);
+            this.textViewForkCount = itemView.findViewById(R.id.textViewForkCount);
+            this.textViewStarCount = itemView.findViewById(R.id.textViewStartCount);
         }
 
         @Override
@@ -150,6 +156,8 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             textViewDescription.setText(description);
             textViewUserName.setText(item.getOwner().getUserName());
             textViewFullName.setText(item.getOwner().getUserName());
+            textViewForkCount.setText(item.getForkCount().toString());
+            textViewStarCount.setText(item.getFavCount().toString());
             mCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
