@@ -58,7 +58,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 || searchResult.getItems() == null ? 0 : searchResult.getItems().size();
     }
 
-    public void add(SearchResult searchResult) {
+    public void addSearchResult(SearchResult searchResult) {
         if (this.searchResult == null) {
             this.searchResult = searchResult;
         } else {
@@ -68,7 +68,12 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         notifyDataSetChanged();
     }
 
-    private void remove(Item item) {
+    public void addItem(Item item) {
+        searchResult.getItems().add(item);
+        notifyItemInserted(searchResult.getItems().size() - 1);
+    }
+
+    private void removeItem(Item item) {
         int position = searchResult.getItems().indexOf(item);
         if (position > -1) {
             searchResult.getItems().remove(position);
@@ -78,6 +83,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public void addLoading() {
         isLoaderVisible = true;
+        addItem(new Item());
     }
 
     public void removeLoading() {
@@ -93,9 +99,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public void clear() {
-        while (getItemCount() > 0) {
-            remove(getItem(0));
-        }
+        searchResult = null;
     }
 
     Item getItem(int position) {

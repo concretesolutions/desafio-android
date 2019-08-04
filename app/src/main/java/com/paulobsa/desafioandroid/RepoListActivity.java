@@ -35,8 +35,8 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     private int currentPage = PAGE_START;
     private boolean isLastPage = false;
     private boolean isLoading = false;
-    private int totalPage = 30;
     int itemCount = 0;
+    private boolean firstAttempt = true;
 
     private static final String LOG_TAG = "DESAFIO";
     private static final String url = "https://api.github.com/search/repositories?q=language:Java&sort=stars&page=";
@@ -66,7 +66,6 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         // Instantiate the RequestQueue
         queue = Volley.newRequestQueue(this);
 
-        mRepoListAdapter.addLoading();
         fetchRepoInfo(PAGE_START);
 
         mRecyclerView.addOnScrollListener(new PaginationScrollListener(mLayoutManager) {
@@ -74,6 +73,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
             protected void loadMoreItems() {
                 isLoading = true;
                 currentPage++;
+                mRepoListAdapter.addLoading();
                 fetchRepoInfo(currentPage);
             }
 
@@ -96,7 +96,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     }
 
     private void setRepoList(SearchResult searchResult) {
-        mRepoListAdapter.add(searchResult);
+        mRepoListAdapter.addSearchResult(searchResult);
     }
 
     @Override
@@ -111,11 +111,11 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     @Override
     public void onRefresh() {
         itemCount = 0;
-        currentPage = PAGE_START;
         isLastPage = false;
-        isLoading = false;
+        isLoading = true;
         swipeRefresh.setRefreshing(false);
-//        mRepoListAdapter.clear();
+        mRepoListAdapter.clear();
+        fetchRepoInfo(PAGE_START);
 //        fetchData();
     }
 
@@ -142,6 +142,11 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         }
     }
 
+    private void removeLoading() {
+        if (!firstAttempt) mRepoListAdapter.removeLoading();
+        firstAttempt = false;
+    }
+
 
     //#####################
     //------NETWORK-------
@@ -159,6 +164,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         public void onResponse(String response) {
             Log.v(LOG_TAG, response);
 
+            removeLoading();
             SearchResult searchResult = mGson.fromJson(response, SearchResult.class);
             setRepoList(searchResult);
             isLoading = false;
@@ -169,10 +175,10 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     private final Response.ErrorListener onResponseError = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            // textView.setText("That didn't work!");
             showErrorMessage();
             Log.v(LOG_TAG, error.toString());
             mRepoListAdapter.removeLoading();
+            isLoading = false;
         }
     };
 }
