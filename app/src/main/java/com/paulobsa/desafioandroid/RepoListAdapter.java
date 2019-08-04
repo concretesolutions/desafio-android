@@ -109,12 +109,19 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public class ViewHolder extends BaseViewHolder {
         CardView mCard;
-        TextView textView;
+        TextView textViewRepoName;
+        TextView textViewDescription;
+        TextView textViewUserName;
+        TextView textViewFullName;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
             this.mCard = itemView.findViewById(R.id.repo_info_card);
-            this.textView = itemView.findViewById(R.id.textViewTitle);
+            this.textViewRepoName = itemView.findViewById(R.id.textViewRepoName);
+            this.textViewDescription = itemView.findViewById(R.id.textViewDescription);
+            this.textViewUserName = itemView.findViewById(R.id.textViewUsername);
+            this.textViewFullName = itemView.findViewById(R.id.textViewFullname);
         }
 
         @Override
@@ -125,8 +132,17 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         public void onBind(final int position) {
             super.onBind(position);
             Item item = searchResult.getItems().get(position);
+            String description = item.getDescription();
+            int descriptionLenght = (description.length() >= 68) ? 68 :  item.getDescription().length();
 
-            textView.setText(item.getName());
+            if (descriptionLenght == 68) {
+                description = description.concat("...");
+            }
+
+            textViewRepoName.setText(item.getName());
+            textViewDescription.setText(item.getDescription().substring(0, descriptionLenght));
+            textViewUserName.setText(item.getOwner().getUserName());
+            textViewFullName.setText(item.getOwner().getUserFullName());
             mCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

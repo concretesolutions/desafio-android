@@ -2,62 +2,109 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/repo_info_card">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:id="@+id/textViewRepoName"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:text="2 min Ago "
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="15dp"
 
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:letterSpacing="-0.02"
-
             android:lineSpacingExtra="5sp"
-            tools:text="Titulo "
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textColorLink="@android:color/holo_blue_dark"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Nome do Repositório"/>
 
         <TextView
             android:id="@+id/textViewDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="240dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:textSize="15sp"
-            android:text="Lorem Ipsum description"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-            tools:text="Zero movie review: Shah Rukh Khan, Katrina Kaif and Anushka Sharma make the first part of Zero flat-out fantastic, an unabashed charm-offensive. It is as the film continues, and gets more fanciful, that the seams start to show."/>
+            app:layout_constraintTop_toBottomOf="@+id/textViewRepoName"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Teste Teste Teste Teste Teste Teste Teste AAAA AAA BBB C CC DDD WWW WWW"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/imgCardView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="30dp"
+            android:elevation="12dp"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:cardCornerRadius="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_launcher_foreground">
+            </ImageView>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/textViewUsername"
+            android:layout_width="61dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="28dp"
+            android:text="Username"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgCardView"/>
+
+        <TextView
+            android:id="@+id/textViewFullname"
+            android:layout_width="74dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="20dp"
+            android:text="Full Name Bla Bla"
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="11sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewUsername"/>
 
     </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:background="@android:color/darker_gray"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"/>
 
 
 </android.support.v7.widget.CardView>
