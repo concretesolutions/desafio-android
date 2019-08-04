@@ -1,73 +1,152 @@
 package com.paulobsa.desafioandroid;
 
 import android.content.Context;
-
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.paulobsa.desafioandroid.model.Item;
 import com.paulobsa.desafioandroid.model.SearchResult;
 
-import java.util.ArrayList;
-
-public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.RepoListAdapterHolder> {
+public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private RepoListAdapterOnclickHandler mHandler;
     private Context mContext;
     private SearchResult searchResult;
+    private static final int LOADING = 0;
+    private static final int ITEM = 1;
+    private boolean isLoaderVisible = false;
 
     public RepoListAdapter(RepoListAdapterOnclickHandler handler, Context context) {
         this.mHandler = handler;
         this.mContext = context;
-        this.searchResult = new SearchResult();
-        this.searchResult.setItems(new ArrayList<Item>());
     }
 
     @Override
-    public RepoListAdapter.RepoListAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.repo_item, parent, false);
-
-        return new RepoListAdapter.RepoListAdapterHolder(view);
-
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case ITEM:
+                return new ViewHolder(
+                        LayoutInflater.from(parent.getContext()).inflate(R.layout.repo_item, parent, false));
+            case LOADING:
+                return new FooterHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false));
+            default:
+                return null;
+        }
     }
 
     @Override
-    public void onBindViewHolder(RepoListAdapter.RepoListAdapterHolder repoListAdapterHolder, final int position) {
-        repoListAdapterHolder.mCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mHandler.onCardClick(searchResult.getItems().get(position).getName());
-            }
-        });
+    public void onBindViewHolder(BaseViewHolder baseViewHolder, final int position) {
+        baseViewHolder.onBind(position);
+    }
 
-        repoListAdapterHolder.textView.setText(searchResult.getItems().get(position).getName());
+    @Override
+    public int getItemViewType(int position) {
+        if (isLoaderVisible) {
+            return position == searchResult.getItems().size() - 1 ? LOADING : ITEM;
+        } else {
+            return ITEM;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return searchResult.getItems().size();
+        return searchResult == null
+                || searchResult.getItems() == null ? 0 : searchResult.getItems().size();
     }
 
-    public class RepoListAdapterHolder extends RecyclerView.ViewHolder {
+    public void add(SearchResult searchResult) {
+        if (this.searchResult == null) {
+            this.searchResult = searchResult;
+        } else {
+            this.searchResult.getItems().addAll(searchResult.getItems());
+        }
+        isLoaderVisible = false;
+        notifyDataSetChanged();
+    }
+
+    private void remove(Item item) {
+        int position = searchResult.getItems().indexOf(item);
+        if (position > -1) {
+            searchResult.getItems().remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void addLoading() {
+        isLoaderVisible = true;
+    }
+
+    public void removeLoading() {
+        isLoaderVisible = false;
+        if (searchResult != null && searchResult.getItems() != null) {
+            int position = searchResult.getItems().size() - 1;
+            Item item = getItem(position);
+            if (item != null) {
+                searchResult.getItems().remove(position);
+                notifyItemRemoved(position);
+            }
+        }
+    }
+
+    public void clear() {
+        while (getItemCount() > 0) {
+            remove(getItem(0));
+        }
+    }
+
+    Item getItem(int position) {
+        return searchResult.getItems().get(position);
+    }
+
+    public class ViewHolder extends BaseViewHolder {
         CardView mCard;
         TextView textView;
-        public RepoListAdapterHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
 
             this.mCard = itemView.findViewById(R.id.repo_info_card);
             this.textView = itemView.findViewById(R.id.textViewTitle);
         }
+
+        @Override
+        protected void clear() {
+
+        }
+
+        public void onBind(final int position) {
+            super.onBind(position);
+            Item item = searchResult.getItems().get(position);
+
+            textView.setText(item.getName());
+            mCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mHandler.onCardClick(searchResult.getItems().get(position).getName());
+                }
+            });
+        }
+    }
+
+    public class FooterHolder extends BaseViewHolder {
+        ProgressBar mProgressBar;
+
+        FooterHolder(View itemView) {
+            super(itemView);
+            mProgressBar = itemView.findViewById(R.id.progressBar);
+        }
+
+        @Override
+        protected void clear() {
+        }
+
     }
 
     public interface RepoListAdapterOnclickHandler {
         void onCardClick(String repoJson);
     }
 
-    public void setSearchResult(SearchResult searchResult) {
-        this.searchResult = searchResult;
-    }
 }

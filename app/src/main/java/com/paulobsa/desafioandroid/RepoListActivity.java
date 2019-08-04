@@ -1,10 +1,14 @@
 package com.paulobsa.desafioandroid;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -16,17 +20,26 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.paulobsa.desafioandroid.model.SearchResult;
-import com.paulobsa.desafioandroid.model.Item;
 
-public class RepoListActivity extends AppCompatActivity implements RepoListAdapter.RepoListAdapterOnclickHandler {
+public class RepoListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RepoListAdapter.RepoListAdapterOnclickHandler {
 
     private RequestQueue queue;
+    private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout swipeRefresh;
+    private RepoListAdapter mRepoListAdapter;
+    private LinearLayoutManager mLayoutManager;
+    private ProgressBar progressBar;
+    private Gson mGson;
+
+    public static final int PAGE_START = 1;
+    private int currentPage = PAGE_START;
+    private boolean isLastPage = false;
+    private boolean isLoading = false;
+    private int totalPage = 30;
+    int itemCount = 0;
+
     private static final String LOG_TAG = "DESAFIO";
     private static final String url = "https://api.github.com/search/repositories?q=language:Java&sort=stars&page=";
-    private RecyclerView mRecyclerView;
-    private RepoListAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private Gson mGson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +50,101 @@ public class RepoListActivity extends AppCompatActivity implements RepoListAdapt
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new RepoListAdapter(this, this);
-        mRecyclerView.setAdapter(mAdapter);
+        mRepoListAdapter = new RepoListAdapter(this, this);
+        mRecyclerView.setAdapter(mRepoListAdapter);
 
-        mGson = gson_builder();
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        swipeRefresh.setOnRefreshListener(this);
+
+        progressBar = findViewById(R.id.progressBarRepoList);
+        showProgressBar(true);
+
+        mGson = gsonBuilder();
 
         // Instantiate the RequestQueue
         queue = Volley.newRequestQueue(this);
 
-        fetchRepoInfo(1);
+        mRepoListAdapter.addLoading();
+        fetchRepoInfo(PAGE_START);
+
+        mRecyclerView.addOnScrollListener(new PaginationScrollListener(mLayoutManager) {
+            @Override
+            protected void loadMoreItems() {
+                isLoading = true;
+                currentPage++;
+                fetchRepoInfo(currentPage);
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
     }
 
-    private Gson gson_builder() {
+    private Gson gsonBuilder() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
         return gsonBuilder.create();
     }
 
+    private void setRepoList(SearchResult searchResult) {
+        mRepoListAdapter.add(searchResult);
+    }
+
+    @Override
+    public void onCardClick(String repoJson) {
+        Toast.makeText(this, "Clicou!", Toast.LENGTH_LONG).show();
+    }
+
+    private void showErrorMessage() {
+        Toast.makeText(this, "Problema de conexão!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onRefresh() {
+        itemCount = 0;
+        currentPage = PAGE_START;
+        isLastPage = false;
+        isLoading = false;
+        swipeRefresh.setRefreshing(false);
+//        mRepoListAdapter.clear();
+//        fetchData();
+    }
+
+//    private void fetchData() {
+//        if (currentPage != PAGE_START) {
+//            mRepoListAdapter.removeLoading();
+//            fetchRepoInfo(currentPage);
+//            swipeRefresh.setRefreshing(false);
+//        }
+//
+//        if (currentPage < totalPage) {
+//            mRepoListAdapter.addLoading();
+//        } else {
+//            isLastPage = true;
+//        }
+//        isLoading = false;
+
+
+    private void showProgressBar(boolean show) {
+        if (show == true) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+
+    //#####################
+    //------NETWORK-------
     private void fetchRepoInfo(Integer page) {
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url + page,
@@ -67,16 +157,12 @@ public class RepoListActivity extends AppCompatActivity implements RepoListAdapt
     private final Response.Listener<String> onResponse = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            // Display the first 500 characters of the response string.
-            // textView.setText("Response is: "+ response.substring(0,500));
             Log.v(LOG_TAG, response);
 
             SearchResult searchResult = mGson.fromJson(response, SearchResult.class);
             setRepoList(searchResult);
-
-            for (Item item : searchResult.getItems()) {
-                Log.i(LOG_TAG, item.getName() + " " + item.getOwner().getUserName());
-            }
+            isLoading = false;
+            showProgressBar(false);
         }
     };
 
@@ -84,17 +170,9 @@ public class RepoListActivity extends AppCompatActivity implements RepoListAdapt
         @Override
         public void onErrorResponse(VolleyError error) {
             // textView.setText("That didn't work!");
+            showErrorMessage();
             Log.v(LOG_TAG, error.toString());
+            mRepoListAdapter.removeLoading();
         }
     };
-
-    private void setRepoList(SearchResult searchResult) {
-        mAdapter.setSearchResult(searchResult);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onCardClick(String repoJson) {
-        Toast.makeText(this, "Clicou!", Toast.LENGTH_LONG).show();
-    }
 }
