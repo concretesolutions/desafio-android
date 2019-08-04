@@ -2,7 +2,9 @@ package com.paulobsa.desafioandroid.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
 
     private Long id;
     private String name;

@@ -23,14 +23,14 @@ import com.paulobsa.desafioandroid.model.SearchResult;
 import com.paulobsa.desafioandroid.util.Util;
 
 public class RepoListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RepoListAdapter.RepoListAdapterOnclickHandler {
-    
+
     public static final int PAGE_START = 1;
     private static final int TOTAL_PAGES = 34;
 
     private int currentPage = PAGE_START;
     private boolean isLastPage = false;
     private boolean isLoading = false;
-    private boolean firstAttempt = true;
+    private boolean isFirstAttempt = true;
 
     private RequestQueue queue;
     private RecyclerView mRecyclerView;
@@ -93,7 +93,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         setRepoList((SearchResult) savedInstanceState.getSerializable(Util.SEARCH_RESULT));
         isLastPage = savedInstanceState.getBoolean(Util.LAST_PAGE, isLastPage);
         isLoading = savedInstanceState.getBoolean(Util.LOADING, isLoading);
-        firstAttempt = savedInstanceState.getBoolean(Util.FIRST_ATTEMPT, firstAttempt);
+        isFirstAttempt = savedInstanceState.getBoolean(Util.FIRST_ATTEMPT, isFirstAttempt);
         currentPage = savedInstanceState.getInt(Util.CURRENT_PAGE, currentPage);
     }
 
@@ -104,7 +104,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         outState.putSerializable(Util.SEARCH_RESULT, searchResult);
         outState.putBoolean(Util.LAST_PAGE, isLastPage);
         outState.putBoolean(Util.LOADING, isLoading);
-        outState.putBoolean(Util.FIRST_ATTEMPT, firstAttempt);
+        outState.putBoolean(Util.FIRST_ATTEMPT, isFirstAttempt);
         outState.putInt(Util.CURRENT_PAGE, currentPage);
     }
 
@@ -159,8 +159,8 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     }
 
     private void removeLoading() {
-        if (!firstAttempt) mRepoListAdapter.removeLoading();
-        firstAttempt = false;
+        if (!isFirstAttempt) mRepoListAdapter.removeLoading();
+        isFirstAttempt = false;
     }
 
     //#####################
