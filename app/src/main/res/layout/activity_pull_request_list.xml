@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             tools:context=".RepoListActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#DDDDDD"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">>
+        <!--<View android:id="@+id/rectangle_at_the_top"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_alignParentTop="true">-->
+
+        <TextView
+            android:id="@+id/textViewOpenPRCount"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/metalicGold"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="16"/>
+
+        <TextView
+            android:id="@+id/textViewOpenPR"
+            android:layout_width="45dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="5dp"
+            android:text="opened"
+            android:textAlignment="textStart"
+            android:textColor="@color/metalicGold"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageUser"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"/>
+
+        <TextView
+            android:id="@+id/textViewSpace"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageUser"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            tools:text="/"/>
+
+        <TextView
+            android:id="@+id/textViewClosedPRCount"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="5dp"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageUser"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            tools:text="800"/>
+
+        <TextView
+            android:id="@+id/textViewClosedPR"
+            android:layout_width="61dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="5dp"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageUser"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            android:text="opened"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/repo_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
+
+
+    <ProgressBar
+        android:id="@+id/progressBarRepoList"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+</android.support.constraint.ConstraintLayout>
