@@ -22,11 +22,21 @@ import com.google.gson.GsonBuilder;
 import com.paulobsa.desafioandroid.model.SearchResult;
 import com.paulobsa.desafioandroid.util.Util;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class RepoListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RepoListAdapter.RepoListAdapterOnclickHandler {
 
     public static final int PAGE_START = 1;
     private static final int TOTAL_PAGES = 34;
+
+    @BindView(R.id.repo_recycler_view)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefresh;
+    @BindView(R.id.progressBarRepoList)
+    ProgressBar progressBar;
 
     private int currentPage = PAGE_START;
     private boolean isLastPage = false;
@@ -34,11 +44,10 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     private boolean isFirstAttempt = true;
 
     private RequestQueue queue;
-    private RecyclerView mRecyclerView;
-    private SwipeRefreshLayout swipeRefresh;
+
     private RepoListAdapter mRepoListAdapter;
     private LinearLayoutManager mLayoutManager;
-    private ProgressBar progressBar;
+
     private Gson mGson;
     private SearchResult searchResult;
 
@@ -46,21 +55,17 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repo_list);
+        ButterKnife.bind(this);
 
-        mRecyclerView = findViewById(R.id.repo_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mRepoListAdapter = new RepoListAdapter(this, this);
+        mRepoListAdapter = new RepoListAdapter(this);
         mRecyclerView.setAdapter(mRepoListAdapter);
 
-        swipeRefresh = findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(this);
-
-        progressBar = findViewById(R.id.progressBarRepoList);
-
         mGson = gsonBuilder();
 
         // Instantiate the RequestQueue

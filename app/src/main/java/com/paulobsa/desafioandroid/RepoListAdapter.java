@@ -1,6 +1,5 @@
 package com.paulobsa.desafioandroid;
 
-import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,15 +13,13 @@ import com.paulobsa.desafioandroid.model.SearchResult;
 
 public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private RepoListAdapterOnclickHandler mHandler;
-    private Context mContext;
     private SearchResult searchResult;
     private static final int LOADING = 0;
     private static final int ITEM = 1;
     private boolean isLoaderVisible = false;
 
-    public RepoListAdapter(RepoListAdapterOnclickHandler handler, Context context) {
+    public RepoListAdapter(RepoListAdapterOnclickHandler handler) {
         this.mHandler = handler;
-        this.mContext = context;
     }
 
     @Override
