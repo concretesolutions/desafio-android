@@ -2,9 +2,10 @@ package com.paulobsa.desafioandroid.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class SearchResult {
+public class SearchResult implements Serializable {
     @SerializedName("total_count")
     private long totalCout;
 

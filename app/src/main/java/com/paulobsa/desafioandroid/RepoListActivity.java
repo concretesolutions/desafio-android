@@ -20,8 +20,17 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.paulobsa.desafioandroid.model.SearchResult;
+import com.paulobsa.desafioandroid.util.Util;
 
 public class RepoListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RepoListAdapter.RepoListAdapterOnclickHandler {
+    
+    public static final int PAGE_START = 1;
+    private static final int TOTAL_PAGES = 34;
+
+    private int currentPage = PAGE_START;
+    private boolean isLastPage = false;
+    private boolean isLoading = false;
+    private boolean firstAttempt = true;
 
     private RequestQueue queue;
     private RecyclerView mRecyclerView;
@@ -30,16 +39,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     private LinearLayoutManager mLayoutManager;
     private ProgressBar progressBar;
     private Gson mGson;
-
-    public static final int PAGE_START = 1;
-    private int currentPage = PAGE_START;
-    private boolean isLastPage = false;
-    private boolean isLoading = false;
-    int itemCount = 0;
-    private boolean firstAttempt = true;
-
-    private static final String LOG_TAG = "DESAFIO";
-    private static final String url = "https://api.github.com/search/repositories?q=language:Java&sort=stars&page=";
+    private SearchResult searchResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +59,22 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         swipeRefresh.setOnRefreshListener(this);
 
         progressBar = findViewById(R.id.progressBarRepoList);
-        showProgressBar(true);
 
         mGson = gsonBuilder();
 
         // Instantiate the RequestQueue
         queue = Volley.newRequestQueue(this);
 
-        fetchRepoInfo(PAGE_START);
+        if (savedInstanceState == null) {
+            fetchData();
+        } else {
+            loadState(savedInstanceState);
+        }
 
         mRecyclerView.addOnScrollListener(new PaginationScrollListener(mLayoutManager) {
             @Override
             protected void loadMoreItems() {
-                isLoading = true;
-                currentPage++;
-                mRepoListAdapter.addLoading();
-                fetchRepoInfo(currentPage);
+                fetchData();
             }
 
             @Override
@@ -87,6 +87,25 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
                 return isLoading;
             }
         });
+    }
+
+    private void loadState(Bundle savedInstanceState) {
+        setRepoList((SearchResult) savedInstanceState.getSerializable(Util.SEARCH_RESULT));
+        isLastPage = savedInstanceState.getBoolean(Util.LAST_PAGE, isLastPage);
+        isLoading = savedInstanceState.getBoolean(Util.LOADING, isLoading);
+        firstAttempt = savedInstanceState.getBoolean(Util.FIRST_ATTEMPT, firstAttempt);
+        currentPage = savedInstanceState.getInt(Util.CURRENT_PAGE, currentPage);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putSerializable(Util.SEARCH_RESULT, searchResult);
+        outState.putBoolean(Util.LAST_PAGE, isLastPage);
+        outState.putBoolean(Util.LOADING, isLoading);
+        outState.putBoolean(Util.FIRST_ATTEMPT, firstAttempt);
+        outState.putInt(Util.CURRENT_PAGE, currentPage);
     }
 
     private Gson gsonBuilder() {
@@ -110,36 +129,33 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
 
     @Override
     public void onRefresh() {
-        itemCount = 0;
         isLastPage = false;
         isLoading = true;
         swipeRefresh.setRefreshing(false);
         mRepoListAdapter.clear();
-        fetchRepoInfo(PAGE_START);
-//        fetchData();
+        currentPage = PAGE_START;
+        fetchData();
     }
 
-//    private void fetchData() {
-//        if (currentPage != PAGE_START) {
-//            mRepoListAdapter.removeLoading();
-//            fetchRepoInfo(currentPage);
-//            swipeRefresh.setRefreshing(false);
-//        }
-//
-//        if (currentPage < totalPage) {
-//            mRepoListAdapter.addLoading();
-//        } else {
-//            isLastPage = true;
-//        }
-//        isLoading = false;
-
-
-    private void showProgressBar(boolean show) {
-        if (show == true) {
-            progressBar.setVisibility(View.VISIBLE);
+    private void fetchData() {
+        if (currentPage == PAGE_START) {
+            enableProgressBar();
+            fetchRepoInfo(PAGE_START);
         } else {
-            progressBar.setVisibility(View.GONE);
+            isLoading = true;
+            mRepoListAdapter.addLoading();
+            fetchRepoInfo(currentPage);
         }
+
+        if (currentPage >= TOTAL_PAGES) isLastPage = true;
+    }
+
+    private void disableProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    private void enableProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     private void removeLoading() {
@@ -147,12 +163,11 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         firstAttempt = false;
     }
 
-
     //#####################
     //------NETWORK-------
     private void fetchRepoInfo(Integer page) {
         // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url + page,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.buildJavaSearch(page).toString(),
                 onResponse, onResponseError);
 
         // Add the request to the RequestQueue.
@@ -162,22 +177,22 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     private final Response.Listener<String> onResponse = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            Log.v(LOG_TAG, response);
-
             removeLoading();
-            SearchResult searchResult = mGson.fromJson(response, SearchResult.class);
+            searchResult = mGson.fromJson(response, SearchResult.class);
             setRepoList(searchResult);
             isLoading = false;
-            showProgressBar(false);
+            currentPage++;
+            disableProgressBar();
         }
     };
 
     private final Response.ErrorListener onResponseError = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
+            Log.v(Util.LOG_TAG, error.toString());
+
+            removeLoading();
             showErrorMessage();
-            Log.v(LOG_TAG, error.toString());
-            mRepoListAdapter.removeLoading();
             isLoading = false;
         }
     };
