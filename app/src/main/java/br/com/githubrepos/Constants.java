@@ -1,6 +1,6 @@
 package br.com.githubrepos;
 
-public class Constants {
+public interface Constants {
 
-    private static final String EXAMPLE = "";
+    String EXAMPLE = "";
 }

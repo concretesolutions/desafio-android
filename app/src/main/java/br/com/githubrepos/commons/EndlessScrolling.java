@@ -1,5 +1,6 @@
 package br.com.githubrepos.commons;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -7,9 +8,6 @@ public class EndlessScrolling extends RecyclerView.OnScrollListener {
 
     private int currentPage = 1;
     private boolean loading = false;
-
-    private int visibleThreshold = 3;
-    private int lastVisibleItem, totalItemCount;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private OnLoadMoreListener mOnLoadMoreListener;
@@ -20,14 +18,15 @@ public class EndlessScrolling extends RecyclerView.OnScrollListener {
     }
 
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
         if (mLayoutManager instanceof GridLayoutManager) {
             GridLayoutManager gridLayoutManager = (GridLayoutManager) mLayoutManager;
 
-            totalItemCount = gridLayoutManager.getItemCount();
-            lastVisibleItem = gridLayoutManager.findLastVisibleItemPosition();
+            int totalItemCount = gridLayoutManager.getItemCount();
+            int lastVisibleItem = gridLayoutManager.findLastVisibleItemPosition();
+            int visibleThreshold = 3;
             if (!loading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
                 //end has been reached, do something
                 loading = true;
