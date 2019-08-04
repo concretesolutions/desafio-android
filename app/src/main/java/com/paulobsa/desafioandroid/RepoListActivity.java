@@ -1,5 +1,6 @@
 package com.paulobsa.desafioandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.paulobsa.desafioandroid.adapter.RepoListAdapter;
 import com.paulobsa.desafioandroid.model.SearchResult;
 import com.paulobsa.desafioandroid.util.Util;
@@ -68,7 +68,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         mRecyclerView.setAdapter(mRepoListAdapter);
 
         swipeRefresh.setOnRefreshListener(this);
-        mGson = gsonBuilder();
+        mGson = Util.gsonBuilder();
 
         // Instantiate the RequestQueue
         queue = Volley.newRequestQueue(this);
@@ -116,19 +116,19 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         outState.putInt(Util.CURRENT_PAGE, currentPage);
     }
 
-    private Gson gsonBuilder() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-        return gsonBuilder.create();
-    }
+
 
     private void setRepoList(SearchResult searchResult) {
         mRepoListAdapter.addSearchResult(searchResult);
     }
 
     @Override
-    public void onCardClick(String repoJson) {
-        Toast.makeText(this, "Clicou!", Toast.LENGTH_LONG).show();
+    public void onCardClick(String userName, String repoName) {
+        Toast.makeText(this, userName + "-" + repoName, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, PullRequestActivity.class);
+        intent.putExtra(Util.USER_NAME, userName);
+        intent.putExtra(Util.REPO_NAME, repoName);
+        startActivity(intent);
     }
 
     private void showErrorMessage() {

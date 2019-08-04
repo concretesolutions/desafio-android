@@ -129,7 +129,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             this.mCard = itemView.findViewById(R.id.repo_info_card);
             this.textViewRepoName = itemView.findViewById(R.id.textViewRepoName);
-            this.textViewDescription = itemView.findViewById(R.id.textViewDescription);
+            this.textViewDescription = itemView.findViewById(R.id.textViewPRDescription);
             this.textViewUserName = itemView.findViewById(R.id.textViewUsername);
             this.textViewFullName = itemView.findViewById(R.id.textViewFullname);
             this.imgUser = itemView.findViewById(R.id.imageUser);
@@ -161,7 +161,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             mCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mHandler.onCardClick(searchResult.getItems().get(position).getName());
+                    mHandler.onCardClick(searchResult.getItems().get(position).getOwner().getUserName(), searchResult.getItems().get(position).getName());
                 }
             });
             Glide.with(context).load(item.getOwner().getAvatarUrl()).into(imgUser);
@@ -183,7 +183,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public interface RepoListAdapterOnclickHandler {
-        void onCardClick(String repoJson);
+        void onCardClick(String userName, String repoName);
     }
 
 }

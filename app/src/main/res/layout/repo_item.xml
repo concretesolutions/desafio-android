@@ -31,7 +31,7 @@
             tools:text="Nome do Repositorio"/>
 
         <TextView
-            android:id="@+id/textViewDescription"
+            android:id="@+id/textViewPRDescription"
             android:layout_width="240dp"
             android:layout_height="35dp"
             android:layout_marginStart="15dp"
@@ -53,7 +53,7 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_git_branch"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPRDescription"
             android:contentDescription="forks"/>
 
         <TextView
@@ -66,7 +66,7 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ic_git_branch"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPRDescription"
             app:layout_constraintVertical_bias="0.0"
             tools:text="500"/>
 
@@ -78,7 +78,7 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_star"
             app:layout_constraintStart_toEndOf="@+id/textViewForkCount"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPRDescription"
             android:contentDescription="forks"/>
 
         <TextView
@@ -91,7 +91,7 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ic_star"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPRDescription"
             app:layout_constraintVertical_bias="0.0"
             tools:text="500"/>
 
