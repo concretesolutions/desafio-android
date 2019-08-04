@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 import com.paulobsa.desafioandroid.model.SearchResult;
 import com.paulobsa.desafioandroid.util.Util;
 
+
 public class RepoListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RepoListAdapter.RepoListAdapterOnclickHandler {
 
     public static final int PAGE_START = 1;
@@ -101,7 +102,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putSerializable(Util.SEARCH_RESULT, searchResult);
+        outState.putSerializable(Util.SEARCH_RESULT, mRepoListAdapter.getSearchResult());
         outState.putBoolean(Util.LAST_PAGE, isLastPage);
         outState.putBoolean(Util.LOADING, isLoading);
         outState.putBoolean(Util.FIRST_ATTEMPT, isFirstAttempt);

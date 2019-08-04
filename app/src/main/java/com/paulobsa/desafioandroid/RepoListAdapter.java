@@ -68,6 +68,10 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         notifyDataSetChanged();
     }
 
+    public SearchResult getSearchResult() {
+        return searchResult;
+    }
+
     public void addItem(Item item) {
         searchResult.getItems().add(item);
         notifyItemInserted(searchResult.getItems().size() - 1);
