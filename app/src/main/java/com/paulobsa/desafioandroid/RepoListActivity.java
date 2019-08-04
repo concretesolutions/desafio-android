@@ -123,11 +123,10 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
     }
 
     @Override
-    public void onCardClick(String userName, String repoName) {
-        Toast.makeText(this, userName + "-" + repoName, Toast.LENGTH_LONG).show();
+    public void onCardClick(int position) {
         Intent intent = new Intent(this, PullRequestActivity.class);
-        intent.putExtra(Util.USER_NAME, userName);
-        intent.putExtra(Util.REPO_NAME, repoName);
+        intent.putExtra(Util.USER_NAME, mRepoListAdapter.getSearchResult().getItems().get(position).getOwner().getUserName());
+        intent.putExtra(Util.REPO_NAME, mRepoListAdapter.getSearchResult().getItems().get(position).getName());
         startActivity(intent);
     }
 
