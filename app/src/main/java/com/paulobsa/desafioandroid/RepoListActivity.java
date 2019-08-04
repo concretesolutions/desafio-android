@@ -62,7 +62,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mRepoListAdapter = new RepoListAdapter(this);
+        mRepoListAdapter = new RepoListAdapter(this, this);
         mRecyclerView.setAdapter(mRepoListAdapter);
 
         swipeRefresh.setOnRefreshListener(this);

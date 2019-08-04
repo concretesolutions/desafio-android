@@ -1,13 +1,16 @@
 package com.paulobsa.desafioandroid;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.paulobsa.desafioandroid.model.Item;
 import com.paulobsa.desafioandroid.model.SearchResult;
 
@@ -17,9 +20,11 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int LOADING = 0;
     private static final int ITEM = 1;
     private boolean isLoaderVisible = false;
+    private Context context;
 
-    public RepoListAdapter(RepoListAdapterOnclickHandler handler) {
+    public RepoListAdapter(RepoListAdapterOnclickHandler handler, Context context) {
         this.mHandler = handler;
+        this.context = context;
     }
 
     @Override
@@ -113,6 +118,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView textViewDescription;
         TextView textViewUserName;
         TextView textViewFullName;
+        ImageView imgUser;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -122,6 +128,7 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             this.textViewDescription = itemView.findViewById(R.id.textViewDescription);
             this.textViewUserName = itemView.findViewById(R.id.textViewUsername);
             this.textViewFullName = itemView.findViewById(R.id.textViewFullname);
+            this.imgUser = itemView.findViewById(R.id.imageUser);
         }
 
         @Override
@@ -140,15 +147,16 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             }
 
             textViewRepoName.setText(item.getName());
-            textViewDescription.setText(item.getDescription().substring(0, descriptionLenght));
+            textViewDescription.setText(description);
             textViewUserName.setText(item.getOwner().getUserName());
-            textViewFullName.setText(item.getOwner().getUserFullName());
+            textViewFullName.setText(item.getOwner().getUserName());
             mCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mHandler.onCardClick(searchResult.getItems().get(position).getName());
                 }
             });
+            Glide.with(context).load(item.getOwner().getAvatarUrl()).into(imgUser);
         }
     }
 
