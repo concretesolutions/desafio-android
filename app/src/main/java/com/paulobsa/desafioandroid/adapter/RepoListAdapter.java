@@ -179,7 +179,6 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         protected void clear() {
         }
-
     }
 
     public interface RepoListAdapterOnclickHandler {

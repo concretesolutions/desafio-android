@@ -83,6 +83,8 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
                 return isLoading;
             }
         });
+
+        getSupportActionBar().setTitle(getString(R.string.repo_list_title_str));
     }
 
     private void init() {

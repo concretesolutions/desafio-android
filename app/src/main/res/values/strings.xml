@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Desafio Android</string>
+    <string name="pull_requests_title_str">Pull Requests</string>
+    <string name="repo_list_title_str">GitHub Java Repos</string>
 </resources>

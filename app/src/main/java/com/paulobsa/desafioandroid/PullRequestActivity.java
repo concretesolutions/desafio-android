@@ -8,7 +8,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -47,17 +49,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
         setContentView(R.layout.activity_pull_request_list);
         ButterKnife.bind(this);
 
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        mPullRequestListAdapter = new PullRequestListAdapter(this, this);
-        mRecyclerView.setAdapter(mPullRequestListAdapter);
-        mGson = Util.gsonBuilder();
-
-        // Instantiate the RequestQueue
-        queue = Volley.newRequestQueue(this);
+        init();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -70,6 +62,19 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
         } else {
             loadState(savedInstanceState);
         }
+
+        getSupportActionBar().setTitle(getString(R.string.pull_requests_title_str));
+    }
+
+    private void init() {
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        mPullRequestListAdapter = new PullRequestListAdapter(this, this);
+        mRecyclerView.setAdapter(mPullRequestListAdapter);
+        mGson = Util.gsonBuilder();
     }
 
     @Override
@@ -89,7 +94,13 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
         outState.putSerializable(Util.PULL_REQUESTS, mPullRequestListAdapter.getSearchResult());
     }
 
+    private void showErrorMessage() {
+        Toast.makeText(this, "Problema de conexão!", Toast.LENGTH_LONG).show();
+    }
+
     private void fetchPullRequests() {
+        queue = Volley.newRequestQueue(this);
+        enableProgressBar();
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.buildPullRequestSearch(userName, repoName).toString(),
                 onResponse, onResponseError);
@@ -101,20 +112,31 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
     private final Response.Listener<String> onResponse = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-        pullRequestSearchResult = new PullRequestSearchResult();
-        pullRequestSearchResult.setPullRequests(mGson.fromJson(response, PullRequest[].class));
-        setPullRequestList(pullRequestSearchResult);
+            pullRequestSearchResult = new PullRequestSearchResult();
+            pullRequestSearchResult.setPullRequests(mGson.fromJson(response, PullRequest[].class));
+            setPullRequestList(pullRequestSearchResult);
+            disableProgressBar();
         }
     };
 
     private final Response.ErrorListener onResponseError = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-        Log.v(Util.LOG_TAG, error.toString());
+            Log.v(Util.LOG_TAG, error.toString());
+            showErrorMessage();
+            disableProgressBar();
         }
     };
 
     private void setPullRequestList(PullRequestSearchResult pullRequestSearchResult) {
         mPullRequestListAdapter.addResult(pullRequestSearchResult);
+    }
+
+    private void disableProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    private void enableProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 }
