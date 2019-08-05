@@ -1,5 +1,7 @@
 package com.paulobsa.desafioandroid;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -23,7 +25,7 @@ import com.paulobsa.desafioandroid.util.Util;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PullRequestActivity extends AppCompatActivity {
+public class PullRequestActivity extends AppCompatActivity implements PullRequestListAdapter.PullRequestListAdapterOnclickHandler{
     @BindView(R.id.pull_request_recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R.id.progressBarPRList)
@@ -50,7 +52,7 @@ public class PullRequestActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mPullRequestListAdapter = new PullRequestListAdapter(this);
+        mPullRequestListAdapter = new PullRequestListAdapter(this, this);
         mRecyclerView.setAdapter(mPullRequestListAdapter);
         mGson = Util.gsonBuilder();
 
@@ -68,6 +70,13 @@ public class PullRequestActivity extends AppCompatActivity {
         } else {
             loadState(savedInstanceState);
         }
+    }
+
+    @Override
+    public void onCardClick(String url) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
     private void loadState(Bundle savedInstanceState) {

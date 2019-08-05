@@ -1,12 +1,25 @@
 package com.paulobsa.desafioandroid.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class PullRequest implements Serializable {
     private String title;
     private String body;
     private String state;
+    private String url;
     private User user;
+    @SerializedName("html_url")
+    private String htmlUrl;
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 
     public String getTitle() {
         return title;

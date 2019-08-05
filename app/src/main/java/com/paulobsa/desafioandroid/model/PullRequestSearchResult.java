@@ -10,12 +10,22 @@ public class PullRequestSearchResult implements Serializable {
 
     public List<PullRequest> getPullRequests() {
         if (pullRequests == null) {
-            return null;
+            return new ArrayList<>();
         }
         return new ArrayList<>(Arrays.asList(pullRequests));
     }
 
     public void setPullRequests(PullRequest[] pullRequests) {
         this.pullRequests = pullRequests;
+    }
+
+    public int getClosedPRCount() {
+        if (getPullRequests() == null) return 0;
+
+        String url = getPullRequests().get(0).getUrl();
+        String[] strList = url.split("/");
+        String totalPRs = strList[strList.length-1];
+
+        return Integer.valueOf(totalPRs) - getPullRequests().size();
     }
 }
