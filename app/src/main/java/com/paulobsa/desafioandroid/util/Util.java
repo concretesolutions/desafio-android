@@ -18,6 +18,8 @@ public class Util {
     public static final String USER_NAME = "USER_NAME";
     public static final String REPO_NAME = "REPO_NAME";
     public static final String PULL_REQUESTS = "PULL_REQUESTS";
+    public static final int PAGE_START = 1;
+    public static final int TOTAL_PAGES = 34;
 
     private static String GITHUB_API_BASE_URL = "https://api.github.com";
     private static String SEARCH_REPOS = "search/repositories";

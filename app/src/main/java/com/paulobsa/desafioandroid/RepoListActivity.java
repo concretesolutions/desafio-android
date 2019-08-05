@@ -27,11 +27,11 @@ import com.paulobsa.desafioandroid.view.PaginationScrollListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.paulobsa.desafioandroid.util.Util.PAGE_START;
+import static com.paulobsa.desafioandroid.util.Util.TOTAL_PAGES;
+
 
 public class RepoListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RepoListAdapter.RepoListAdapterOnclickHandler {
-
-    public static final int PAGE_START = 1;
-    private static final int TOTAL_PAGES = 34;
 
     @BindView(R.id.repo_recycler_view)
     RecyclerView mRecyclerView;
@@ -59,19 +59,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         setContentView(R.layout.activity_repo_list);
         ButterKnife.bind(this);
 
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        mRepoListAdapter = new RepoListAdapter(this, this);
-        mRecyclerView.setAdapter(mRepoListAdapter);
-
-        swipeRefresh.setOnRefreshListener(this);
-        mGson = Util.gsonBuilder();
-
-        // Instantiate the RequestQueue
-        queue = Volley.newRequestQueue(this);
+        init();
 
         if (savedInstanceState == null) {
             fetchData();
@@ -97,6 +85,19 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         });
     }
 
+    private void init() {
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        mRepoListAdapter = new RepoListAdapter(this, this);
+        mRecyclerView.setAdapter(mRepoListAdapter);
+
+        swipeRefresh.setOnRefreshListener(this);
+        mGson = Util.gsonBuilder();
+    }
+
     private void loadState(Bundle savedInstanceState) {
         setRepoList((SearchResult) savedInstanceState.getSerializable(Util.SEARCH_RESULT));
         isLastPage = savedInstanceState.getBoolean(Util.LAST_PAGE, isLastPage);
@@ -116,22 +117,12 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         outState.putInt(Util.CURRENT_PAGE, currentPage);
     }
 
-
-
-    private void setRepoList(SearchResult searchResult) {
-        mRepoListAdapter.addSearchResult(searchResult);
-    }
-
     @Override
     public void onCardClick(int position) {
         Intent intent = new Intent(this, PullRequestActivity.class);
         intent.putExtra(Util.USER_NAME, mRepoListAdapter.getSearchResult().getItems().get(position).getOwner().getUserName());
         intent.putExtra(Util.REPO_NAME, mRepoListAdapter.getSearchResult().getItems().get(position).getName());
         startActivity(intent);
-    }
-
-    private void showErrorMessage() {
-        Toast.makeText(this, "Problema de conexão!", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -150,7 +141,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
             fetchRepoInfo(PAGE_START);
         } else {
             isLoading = true;
-            mRepoListAdapter.addLoading();
+            mRepoListAdapter.addLoadingFooter();
             fetchRepoInfo(currentPage);
         }
 
@@ -165,26 +156,30 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    private void removeLoading() {
-        if (!isFirstAttempt) mRepoListAdapter.removeLoading();
+    private void removeLoadingFooter() {
+        if (!isFirstAttempt) mRepoListAdapter.removeLoadingFooter();
         isFirstAttempt = false;
     }
 
-    //#####################
-    //------NETWORK-------
+    private void setRepoList(SearchResult searchResult) {
+        mRepoListAdapter.addSearchResult(searchResult);
+    }
+
+    private void showErrorMessage() {
+        Toast.makeText(this, "Problema de conexão!", Toast.LENGTH_LONG).show();
+    }
+
     private void fetchRepoInfo(Integer page) {
-        // Request a string response from the provided URL.
+        queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.buildJavaSearch(page).toString(),
                 onResponse, onResponseError);
-
-        // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
 
     private final Response.Listener<String> onResponse = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            removeLoading();
+            removeLoadingFooter();
             searchResult = mGson.fromJson(response, SearchResult.class);
             setRepoList(searchResult);
             isLoading = false;
@@ -198,7 +193,7 @@ public class RepoListActivity extends AppCompatActivity implements SwipeRefreshL
         public void onErrorResponse(VolleyError error) {
             Log.v(Util.LOG_TAG, error.toString());
 
-            removeLoading();
+            removeLoadingFooter();
             showErrorMessage();
             isLoading = false;
         }

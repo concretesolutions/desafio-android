@@ -89,12 +89,12 @@ public class RepoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public void addLoading() {
+    public void addLoadingFooter() {
         isLoaderVisible = true;
         addItem(new Item());
     }
 
-    public void removeLoading() {
+    public void removeLoadingFooter() {
         isLoaderVisible = false;
         if (searchResult != null && searchResult.getItems() != null) {
             int position = searchResult.getItems().size() - 1;
