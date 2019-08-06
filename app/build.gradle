@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
 
@@ -43,12 +44,12 @@ android {
     productFlavors {
         mock {
             dimension "version"
-            applicationIdSuffix = ".mock"
+            //applicationIdSuffix = ".mock"
             versionNameSuffix "-mock"
         }
         prod {
             dimension "version"
-            applicationIdSuffix = ".prod"
+            //applicationIdSuffix = ".prod"
             versionNameSuffix "-prod"
         }
     }
@@ -121,6 +122,17 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-contrib:3.2.0"
     androidTestImplementation "androidx.test.espresso:espresso-intents:3.2.0"
     androidTestImplementation "androidx.test.espresso:espresso-idling-resource:3.2.0"
+
+
+    // Check for v11.4.2 or higher
+    implementation 'com.google.firebase:firebase-core:17.0.1'
+
+    // (Recommended) Add Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.0.1'
+
+    // Add dependency
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
 }
 
 /*
@@ -150,3 +162,6 @@ configurations.compile.dependencies.each { compileDependency ->
         configurations.androidTestImplementation.exclude module: "${implementationDependency.getName()}"
     }
 }*/
+
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,5 +1,8 @@
 package br.com.githubrepos.data.service.impl;
 
+import com.crashlytics.android.Crashlytics;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +42,15 @@ public class RepositoryServiceApiImpl implements RepositoryServiceApi {
 
             @Override
             public void onFailure(Call<RepositoryStatus> call, Throwable t) {
+                Crashlytics.logException(t);
+
+                try {
+                    Response<RepositoryStatus> execute = call.execute();
+                    String errorMessage = execute.message();
+                    callback.onError(errorMessage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

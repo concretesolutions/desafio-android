@@ -45,6 +45,11 @@ public class RepositoriesPresenter implements RepositoriesContract.UserActionsLi
 
                 mView.showRepositoryList(data.getRepositoryList(), doRefresh);
             }
+
+            @Override
+            public void onError(String errorMsg) {
+                //TODO tratamento de erro
+            }
         });
 
     }

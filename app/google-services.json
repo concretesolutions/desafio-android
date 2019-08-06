@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "936328486583",
+    "firebase_url": "https://githubrepos-9ac8b.firebaseio.com",
+    "project_id": "githubrepos-9ac8b",
+    "storage_bucket": "githubrepos-9ac8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936328486583:android:427618a8397c5eba",
+        "android_client_info": {
+          "package_name": "br.com.githubrepos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936328486583-sn6lt17e0faq6mrlmds1gs6v0sto5180.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwM5SQnTGuJT6SJ_Pjw6PpPyxUeal1QXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936328486583-sn6lt17e0faq6mrlmds1gs6v0sto5180.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

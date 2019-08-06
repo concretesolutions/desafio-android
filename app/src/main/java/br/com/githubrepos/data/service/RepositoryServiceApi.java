@@ -6,6 +6,8 @@ public interface RepositoryServiceApi {
 
     interface RepositoryServiceCallback<T> {
         void onLoaded(T data);
+
+        void onError(String errorMsg);
     }
 
     void search(int page, String language, String sort, RepositoryServiceCallback<RepositoryStatus> callback);

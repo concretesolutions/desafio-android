@@ -18,7 +18,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.google.common.net.HttpHeaders.CACHE_CONTROL;
 import static okhttp3.logging.HttpLoggingInterceptor.Level.HEADERS;
 import static okhttp3.logging.HttpLoggingInterceptor.Level.NONE;
 
@@ -110,7 +109,7 @@ public class HttpEndpointGenerator<T> {
                         .maxAge(2, TimeUnit.MINUTES)
                         .build();
 
-                return response.newBuilder().header(CACHE_CONTROL, cacheControl.toString())
+                return response.newBuilder().header("CACHE_CONTROL", cacheControl.toString())
                         .build();
             }
         };

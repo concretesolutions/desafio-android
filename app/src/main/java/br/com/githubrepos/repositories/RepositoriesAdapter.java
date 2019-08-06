@@ -1,14 +1,13 @@
 package br.com.githubrepos.repositories;
 
 import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -186,12 +185,12 @@ class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     class ProgressViewHolder extends RecyclerView.ViewHolder {
-        public ProgressBar progressBar;
+        ProgressBar progressBar;
 
-        public ProgressViewHolder(View itemView) {
+        ProgressViewHolder(View itemView) {
             super(itemView);
 
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 
@@ -201,51 +200,28 @@ class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         private ItemListListener<Repository> mItemListener;
 
-        //TODO butterknife aparentemente gerou queda de performance
-        //@BindView(R.id.ll_item_repository)
-        public LinearLayout mLayout;
+        ConstraintLayout mLayout;
+        TextView tvRepositoryName;
+        TextView tvRepositoryDescription;
+        TextView tvRepositoryForksCount;
+        TextView tvRepositoryStargazersCount;
+        ImageView ivOwnerPicture;
+        TextView tvOwnerLogin;
+        TextView tvOwnerFullname;
 
-        //TODO butterknife aparentemente gerou queda de performance
-        //@BindView(R.id.tv_repository_name)
-        public TextView tvRepositoryName;
-
-        //TODO butterknife aparentemente gerou queda de performance
-        //@BindView(R.id.tv_repository_description)
-        public TextView tvRepositoryDescription;
-
-        //TODO butterknife aparentemente gerou queda de performance
-        //@BindView(R.id.tv_repository_forks_count)
-        public TextView tvRepositoryForksCount;
-
-        //TODO butterknife aparentemente gerou queda de performance
-        //@BindView(R.id.tv_repository_stargazers_count)
-        public TextView tvRepositoryStargazersCount;
-
-        //TODO butterknife aparentemente gerou queda de performance
-        //@BindView(R.id.iv_owner_picture)
-        public ImageView ivOwnerPicture;
-
-        //TODO butterknife aparentemente gerou queda de performance
-        //@BindView(R.id.tv_owner_login)
-        public TextView tvOwnerLogin;
-
-        //TODO butterknife aparentemente gerou queda de performance
-        //@BindView(R.id.tv_owner_fullname)
-        public TextView tvOwnerFullname;
-
-        public ItemViewHolder(View itemView, final ItemListListener<Repository> itemListener) {
+        ItemViewHolder(View itemView, final ItemListListener<Repository> itemListener) {
             super(itemView);
             this.mItemListener = itemListener;
 
-            mLayout = (LinearLayout) itemView.findViewById(R.id.ll_item_repository);
-            tvRepositoryName = (TextView) itemView.findViewById(R.id.tv_repository_name);
-            tvRepositoryDescription = (TextView) itemView.findViewById(R.id.tv_repository_description);
-            tvRepositoryForksCount = (TextView) itemView.findViewById(R.id.tv_repository_forks_count);
-            tvRepositoryStargazersCount = (TextView) itemView.findViewById(R.id.tv_repository_stargazers_count);
+            mLayout = itemView.findViewById(R.id.cl_item_repository);
+            tvRepositoryName = itemView.findViewById(R.id.tv_repository_name);
+            tvRepositoryDescription = itemView.findViewById(R.id.tv_repository_description);
+            tvRepositoryForksCount = itemView.findViewById(R.id.tv_repository_forks_count);
+            tvRepositoryStargazersCount = itemView.findViewById(R.id.tv_repository_stargazers_count);
 
-            ivOwnerPicture = (ImageView) itemView.findViewById(R.id.iv_owner_picture);
-            tvOwnerLogin = (TextView) itemView.findViewById(R.id.tv_owner_login);
-            tvOwnerFullname = (TextView) itemView.findViewById(R.id.tv_owner_fullname);
+            ivOwnerPicture = itemView.findViewById(R.id.iv_owner_picture);
+            tvOwnerLogin = itemView.findViewById(R.id.tv_owner_login);
+            tvOwnerFullname = itemView.findViewById(R.id.tv_owner_fullname);
 
             //TODO butterknife aparentemente gerou queda de performance
             //ButterKnife.bind(this, itemView);
