@@ -25,8 +25,8 @@ import br.com.githubrepos.util.CircleTransform;
 //Visible only in this package
 class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int TYPE_ITEM = 1;
     private static final int TYPE_LOADING = 0;
+    private static final int TYPE_ITEM = 1;
 
     private LayoutInflater mInflater;
     //CopyOnWriteArrayList - http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/CopyOnWriteArrayList.html
@@ -222,9 +222,6 @@ class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ivOwnerPicture = itemView.findViewById(R.id.iv_owner_picture);
             tvOwnerLogin = itemView.findViewById(R.id.tv_owner_login);
             tvOwnerFullname = itemView.findViewById(R.id.tv_owner_fullname);
-
-            //TODO butterknife aparentemente gerou queda de performance
-            //ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

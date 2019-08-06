@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="num_movies_columns">1</integer>
+    <integer name="num_repositories_columns">1</integer>
+    <integer name="num_pullrequests_columns">1</integer>
 </resources>

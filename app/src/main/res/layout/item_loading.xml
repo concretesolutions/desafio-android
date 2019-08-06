@@ -5,7 +5,7 @@
     android:background="@android:color/white"
     android:gravity="center"
     android:orientation="horizontal"
-    android:padding="15dp">
+    android:padding="16dp">
 
     <ProgressBar
         android:id="@+id/progress_bar"

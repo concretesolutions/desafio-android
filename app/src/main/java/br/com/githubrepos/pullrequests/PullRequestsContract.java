@@ -11,12 +11,6 @@ public interface PullRequestsContract {
 
         void showPullRequestList(List<PullRequest> pullRequestList);
 
-        void changeActionBarWhenPullRequestSelected();
-
-        void changeActionBarWhenPullRequestUnselected();
-
-        void removePullRequest(PullRequest pullRequest);
-
         void showPullRequestInBrowser();
     }
 

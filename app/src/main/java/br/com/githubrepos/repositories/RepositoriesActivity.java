@@ -31,14 +31,10 @@ import br.com.githubrepos.util.IdleResourceHandler;
 public class RepositoriesActivity extends AppCompatActivity implements RepositoriesContract.View {
 
     private RepositoriesContract.UserActionsListener mActionsListener;
-
     private SwipeRefreshLayout mSwipeRefresh;
-
     private Menu mMenu;
     private RepositoriesAdapter mAdapter;
-
     private boolean isAnyRepositorySelected;
-
     private RecyclerView mRecyclerView;
 
     private ItemListListener<Repository> mRepositoryItemListener = new ItemListListener<Repository>() {
@@ -104,7 +100,7 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         mRecyclerView = (RecyclerView) findViewById(R.id.repositories_list);
         mRecyclerView.setHasFixedSize(true);
 
-        int numColuns = getResources().getInteger(R.integer.num_movies_columns);
+        int numColuns = getResources().getInteger(R.integer.num_repositories_columns);
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numColuns);
         mRecyclerView.setLayoutManager(gridLayoutManager);
 
@@ -113,7 +109,7 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
 
         mRecyclerView.setAdapter(mAdapter);
 
-        mSwipeRefresh = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
+        mSwipeRefresh = findViewById(R.id.refresh_layout);
         mSwipeRefresh.setColorSchemeColors(
                 ContextCompat.getColor(this, R.color.colorPrimary),
                 ContextCompat.getColor(this, R.color.colorAccent),
