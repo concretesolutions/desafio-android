@@ -46,7 +46,7 @@ public class PullRequestsPresenter implements PullRequestsContract.UserActionsLi
 
     @Override
     public void openPullRequestDetails(PullRequest pullRequest) {
-        String url = pullRequest.getUrl();
+        String url = pullRequest.getHtmlUrl();
         if (null != url) {
             if (URLUtil.isValidUrl(url)) {
                 mView.showPullRequestInBrowser(url);
