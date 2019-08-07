@@ -28,7 +28,7 @@ public class RepositoryServiceApiImpl implements RepositoryServiceApi {
         options.put("sort", sort);
 
         Call<RepositoryStatus> call = new HttpEndpointGenerator<RepositoryEndpoint>()
-                .gen(RepositoryEndpoint.class).list(options);
+                .gen(RepositoryEndpoint.class).search(options);
 
         call.enqueue(new Callback<RepositoryStatus>() {
             @Override

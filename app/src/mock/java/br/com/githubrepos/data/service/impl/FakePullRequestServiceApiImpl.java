@@ -22,6 +22,7 @@ public class FakePullRequestServiceApiImpl implements PullRequestServiceApi {
                     "This moves updateReplicaRequest to createPrimaryResponse",
                     "https://github.com/elastic/elasticsearch/pull/23665",
                     "open", user);
+            pullRequest.setUrl("https://duckduckgo.com/");
 
             PULL_REQUEST_LIST.add(pullRequest);
         }

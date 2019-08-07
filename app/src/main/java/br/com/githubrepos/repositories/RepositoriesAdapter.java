@@ -81,8 +81,7 @@ class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 itemViewHolder.mLayout.setBackgroundColor(Color.parseColor("#ffffff"));
             }
 
-            if (null != repository.getOwner().getAvatarUrl() &&
-                    !"".equals(repository.getOwner().getAvatarUrl())) {
+            if (null != repository.getOwner().getAvatarUrl() && !repository.getOwner().getAvatarUrl().isEmpty()) {
 
                 Picasso.with(itemViewHolder.ivOwnerPicture.getContext())
                         .load(repository.getOwner().getAvatarUrl())

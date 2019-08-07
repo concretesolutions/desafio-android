@@ -20,6 +20,8 @@ public interface RepositoriesContract {
         void changeActionBarWhenRepositoryUnselected(int repositoryPosition);
 
         void removeRepository(int position);
+
+        void showErrorMessage(String message);
     }
 
     interface UserActionsListener {

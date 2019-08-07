@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_item_pullrequest_header"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@android:color/white">
+    android:background="@color/graye"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_total_pull_requests_opened"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16 opened"
+        android:textColor="@color/darkOrange"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_total_pull_requests_closed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" / 800 closed"
+        android:textColor="@color/gray7"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_pull_requests_opened"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

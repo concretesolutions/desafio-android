@@ -3,15 +3,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="150dp"
     android:layout_marginBottom="5dp"
     app:cardUseCompatPadding="true">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/cl_item_repository"
+        android:id="@+id/cl_item_pullrequest"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_pull_request_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loren_ipsum_title"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_pull_request_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loren_ipsum_description"
+            android:textColor="@color/gray7"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pull_request_title" />
+
+        <ImageView
+            android:id="@+id/iv_owner_picture"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/loren_ipsum_image_description"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pull_request_body" />
+
+        <TextView
+            android:id="@+id/tv_owner_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/loren_ipsum_name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/iv_owner_picture"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pull_request_body" />
+
+        <TextView
+            android:id="@+id/tv_owner_fullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/loren_ipsum_name"
+            android:textColor="@color/graya"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_owner_picture"
+            app:layout_constraintTop_toBottomOf="@+id/tv_owner_login" />
+
 
     </android.support.constraint.ConstraintLayout>
 

@@ -4,9 +4,13 @@ import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -14,6 +18,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import br.com.githubrepos.R;
 import br.com.githubrepos.commons.ItemListListener;
 import br.com.githubrepos.data.entity.PullRequest;
+import br.com.githubrepos.util.CircleTransform;
 
 public class PullRequestsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -21,11 +26,8 @@ public class PullRequestsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static final int TYPE_ITEM = 1;
 
     private LayoutInflater mInflater;
-    //CopyOnWriteArrayList - http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/CopyOnWriteArrayList.html
-    //CopyOnWriteArrayList - http://stackoverflow.com/a/26281967
     private CopyOnWriteArrayList<PullRequest> mDataList;
     private ItemListListener<PullRequest> mItemListener;
-    private RecyclerView mRecyclerView;
 
     public PullRequestsAdapter(List<PullRequest> pullRequestList, RecyclerView recyclerView,
                                ItemListListener<PullRequest> pullRequestItemListListener) {
@@ -33,8 +35,6 @@ public class PullRequestsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.mDataList = new CopyOnWriteArrayList<>();
         this.mDataList.addAll(0, pullRequestList);
         this.mItemListener = pullRequestItemListListener;
-
-        this.mRecyclerView = recyclerView;
     }
 
     @NonNull
@@ -60,11 +60,10 @@ public class PullRequestsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             PullRequestsAdapter.ItemViewHolder itemViewHolder = (PullRequestsAdapter.ItemViewHolder) holder;
             final PullRequest pullRequest = mDataList.get(position);
 
-            /*if (null != pullRequest.getOwner().getAvatarUrl() &&
-                    !"".equals(pullRequest.getOwner().getAvatarUrl())) {
+            if (null != pullRequest.getUser().getAvatarUrl() && !pullRequest.getUser().getAvatarUrl().isEmpty()) {
 
                 Picasso.with(itemViewHolder.ivOwnerPicture.getContext())
-                        .load(pullRequest.getOwner().getAvatarUrl())
+                        .load(pullRequest.getUser().getAvatarUrl())
                         .transform(new CircleTransform())
                         .fit().centerCrop()
                         .placeholder(R.drawable.ic_avatar)
@@ -73,16 +72,15 @@ public class PullRequestsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 itemViewHolder.ivOwnerPicture.setImageResource(R.drawable.ic_avatar);
             }
 
-            itemViewHolder.tvRepositoryName.setText(pullRequest.getName());
-            itemViewHolder.tvRepositoryDescription.setText(pullRequest.getDescription());
-            itemViewHolder.tvRepositoryForksCount.setText(String.format("%d", pullRequest.getForksCount()));
-            itemViewHolder.tvRepositoryStargazersCount.setText(String.format("%d", pullRequest.getStargazersCount()));
-            itemViewHolder.tvOwnerLogin.setText(pullRequest.getOwner().getLogin());
-            itemViewHolder.tvOwnerFullname.setText(pullRequest.getOwner().getLogin());*/
-            //itemViewHolder.tvOwnerFullname.setText(repository.getOwner().getName());
+            itemViewHolder.tvPullRequestTitle.setText(pullRequest.getTitle());
+            itemViewHolder.tvPullRequestBody.setText(pullRequest.getBody());
+            itemViewHolder.tvOwnerLogin.setText(pullRequest.getUser().getLogin());
+            itemViewHolder.tvOwnerFullname.setText(pullRequest.getUser().getLogin());
         } else {
-            //TODO fazer o header
-            //((PullRequestsAdapter.HeaderViewHolder) holder).progressBar.setIndeterminate(true);
+
+            PullRequestsAdapter.HeaderViewHolder headerViewHolder = ((PullRequestsAdapter.HeaderViewHolder) holder);
+            //headerViewHolder.tvTotalPullRequestsOpened.setText();
+            //headerViewHolder.tvTotalPullRequestsClosed.setText();
         }
     }
 
@@ -123,12 +121,17 @@ public class PullRequestsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     class HeaderViewHolder extends RecyclerView.ViewHolder {
-        //ProgressBar progressBar;
+
+        ConstraintLayout mLayout;
+
+        TextView tvTotalPullRequestsOpened;
+        TextView tvTotalPullRequestsClosed;
 
         HeaderViewHolder(View itemView) {
             super(itemView);
-
-            //progressBar = itemView.findViewById(R.id.progress_bar);
+            mLayout = itemView.findViewById(R.id.cl_item_pullrequest_header);
+            tvTotalPullRequestsOpened = itemView.findViewById(R.id.tv_total_pull_requests_opened);
+            tvTotalPullRequestsClosed = itemView.findViewById(R.id.tv_total_pull_requests_closed);
         }
     }
 
@@ -137,27 +140,22 @@ public class PullRequestsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private ItemListListener<PullRequest> mItemListener;
 
         ConstraintLayout mLayout;
-        /*TextView tvRepositoryName;
-        TextView tvRepositoryDescription;
-        TextView tvRepositoryForksCount;
-        TextView tvRepositoryStargazersCount;
+        TextView tvPullRequestTitle;
+        TextView tvPullRequestBody;
         ImageView ivOwnerPicture;
         TextView tvOwnerLogin;
-        TextView tvOwnerFullname;*/
+        TextView tvOwnerFullname;
 
         ItemViewHolder(View itemView, final ItemListListener<PullRequest> itemListener) {
             super(itemView);
             this.mItemListener = itemListener;
 
-            mLayout = itemView.findViewById(R.id.cl_item_repository);
-            /*tvRepositoryName = itemView.findViewById(R.id.tv_repository_name);
-            tvRepositoryDescription = itemView.findViewById(R.id.tv_repository_description);
-            tvRepositoryForksCount = itemView.findViewById(R.id.tv_repository_forks_count);
-            tvRepositoryStargazersCount = itemView.findViewById(R.id.tv_repository_stargazers_count);
-
+            mLayout = itemView.findViewById(R.id.cl_item_pullrequest);
+            tvPullRequestTitle = itemView.findViewById(R.id.tv_pull_request_title);
+            tvPullRequestBody = itemView.findViewById(R.id.tv_pull_request_body);
             ivOwnerPicture = itemView.findViewById(R.id.iv_owner_picture);
             tvOwnerLogin = itemView.findViewById(R.id.tv_owner_login);
-            tvOwnerFullname = itemView.findViewById(R.id.tv_owner_fullname);*/
+            tvOwnerFullname = itemView.findViewById(R.id.tv_owner_fullname);
 
             itemView.setOnClickListener(this);
         }

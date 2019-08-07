@@ -12,8 +12,8 @@ public interface RepositoryEndpoint {
     //Example: https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1
 
     //@GET("search/repositories")
-    //Observable<RepositoryStatus> list(@QueryMap Map<String, String> options);
+    //Observable<RepositoryStatus> search(@QueryMap Map<String, String> options);
 
     @GET("search/repositories")
-    Call<RepositoryStatus> list(@QueryMap Map<String, String> options);
+    Call<RepositoryStatus> search(@QueryMap Map<String, String> options);
 }

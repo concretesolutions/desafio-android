@@ -11,18 +11,14 @@ public interface PullRequestsContract {
 
         void showPullRequestList(List<PullRequest> pullRequestList);
 
-        void showPullRequestInBrowser();
+        void showPullRequestInBrowser(String url);
+
+        void showErrorMessage(String errorMessage);
     }
 
     interface UserActionsListener {
 
-        void loadPullRequestList(boolean forceUpdate);
-
-        void selectPullRequest();
-
-        void unselectPullRequest();
-
-        void deleteSelectedPullRequest();
+        void loadPullRequestList(boolean forceUpdate, String ownerLogin, String repositoryName);
 
         void openPullRequestDetails(PullRequest pullRequest);
     }

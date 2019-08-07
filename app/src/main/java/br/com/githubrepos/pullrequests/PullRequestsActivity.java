@@ -1,7 +1,10 @@
 package br.com.githubrepos.pullrequests;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -28,11 +31,13 @@ public class PullRequestsActivity extends AppCompatActivity implements PullReque
     private PullRequestsAdapter mAdapter;
     private RecyclerView mRecyclerView;
 
+    private String ownerLogin;
+    private String repositoryName;
+
     private ItemListListener<PullRequest> mPullRequestItemListener = new ItemListListener<PullRequest>() {
         @Override
         public void onClickedItem(PullRequest item) {
-            //TODO open browser
-            //mActionsListener.openPullRequestDetails();
+            mActionsListener.openPullRequestDetails(item);
         }
 
         @Override
@@ -69,6 +74,12 @@ public class PullRequestsActivity extends AppCompatActivity implements PullReque
         actionBar.setTitle("PullRequests");
 
         mActionsListener = new PullRequestsPresenter(Injection.providePullRequestServiceApi(), this);
+
+        Intent intent = getIntent();
+        if (intent.getExtras() != null) {
+            ownerLogin = intent.getExtras().getString("ownerLogin");
+            repositoryName = intent.getExtras().getString("repositoryName");
+        }
 
         setupActionBar();
         setupContentView();
@@ -109,7 +120,7 @@ public class PullRequestsActivity extends AppCompatActivity implements PullReque
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mActionsListener.loadPullRequestList(true);
+                mActionsListener.loadPullRequestList(true, ownerLogin, repositoryName);
             }
         });
     }
@@ -118,13 +129,12 @@ public class PullRequestsActivity extends AppCompatActivity implements PullReque
         if (null != savedInstanceState) {
             mAdapter.addData((CopyOnWriteArrayList<PullRequest>) savedInstanceState.get("pullRequestList"));
         } else {
-            mActionsListener.loadPullRequestList(true);
+            mActionsListener.loadPullRequestList(true, ownerLogin, repositoryName);
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //TODO testar
         int itemId = item.getItemId();
         switch (itemId) {
             case android.R.id.home:
@@ -150,7 +160,13 @@ public class PullRequestsActivity extends AppCompatActivity implements PullReque
     }
 
     @Override
-    public void showPullRequestInBrowser() {
-        //TODO
+    public void showPullRequestInBrowser(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

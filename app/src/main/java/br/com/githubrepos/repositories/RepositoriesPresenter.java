@@ -48,7 +48,7 @@ public class RepositoriesPresenter implements RepositoriesContract.UserActionsLi
 
             @Override
             public void onError(String errorMsg) {
-                //TODO tratamento de erro
+                mView.showErrorMessage(errorMsg);
             }
         });
 

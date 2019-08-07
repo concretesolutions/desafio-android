@@ -8,6 +8,8 @@ public interface PullRequestServiceApi {
 
     interface PullRequestCallback<T> {
         void onLoaded(T data);
+
+        void onError(String errorMsg);
     }
 
     void list(String ownerLogin, String repoName, PullRequestCallback<List<PullRequest>> callback);
