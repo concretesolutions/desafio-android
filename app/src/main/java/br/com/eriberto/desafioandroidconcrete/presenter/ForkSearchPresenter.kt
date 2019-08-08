@@ -2,7 +2,6 @@ package br.com.eriberto.desafioandroidconcrete.presenter
 
 import br.com.eriberto.desafioandroidconcrete.model.interfaces.*
 import br.com.eriberto.desafioandroidconcrete.model.pojo.ForkRepositorio
-import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDAO
 
 class ForkSearchPresenter(
     val view: ForkSearchView,

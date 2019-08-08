@@ -1,6 +1,6 @@
 package br.com.eriberto.desafioandroidconcrete.model.retrofit.webClient
 
-import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDAO
+import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDTO
 import br.com.eriberto.desafioandroidconcrete.model.retrofit.RetrofitConfig
 import br.com.eriberto.desafioandroidconcrete.model.retrofit.response.CallbackResponse
 import org.json.JSONArray
@@ -10,12 +10,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RepositorioWebClient {
-    fun getRepositorios(page:Int, callbackResponse: CallbackResponse<RepositorioDAO>) {
+    fun getRepositorios(page:Int, callbackResponse: CallbackResponse<RepositorioDTO>) {
 
         val call = RetrofitConfig().repositoriosService().getRepositorios(page = page)
 
-        call.enqueue(object : Callback<RepositorioDAO> {
-            override fun onResponse(call: Call<RepositorioDAO>, response: Response<RepositorioDAO>) {
+        call.enqueue(object : Callback<RepositorioDTO> {
+            override fun onResponse(call: Call<RepositorioDTO>, response: Response<RepositorioDTO>) {
 
                 response.body()?.let {
                     callbackResponse.success(it)
@@ -31,7 +31,7 @@ class RepositorioWebClient {
                 }
             }
 
-            override fun onFailure(call: Call<RepositorioDAO>, t: Throwable) {
+            override fun onFailure(call: Call<RepositorioDTO>, t: Throwable) {
 
                 callbackResponse.failure(t.message.toString())
             }

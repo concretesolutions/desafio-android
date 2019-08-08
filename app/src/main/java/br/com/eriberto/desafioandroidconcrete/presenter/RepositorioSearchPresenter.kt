@@ -3,7 +3,7 @@ package br.com.eriberto.desafioandroidconcrete.presenter
 import br.com.eriberto.desafioandroidconcrete.model.interfaces.RepositorioSearchModel
 import br.com.eriberto.desafioandroidconcrete.model.interfaces.RepositorioSearchView
 import br.com.eriberto.desafioandroidconcrete.model.interfaces.SearchResultListener
-import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDAO
+import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDTO
 
 class RepositorioSearchPresenter(
     val view: RepositorioSearchView,
@@ -18,7 +18,7 @@ class RepositorioSearchPresenter(
                     view.hideProgress()
                 }
 
-                override fun onSearchResult(result: RepositorioDAO) {
+                override fun onSearchResult(result: RepositorioDTO) {
                     view.showResult(result)
                     view.hideProgress()
                 }

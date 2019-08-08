@@ -18,7 +18,7 @@ import br.com.eriberto.desafioandroidconcrete.model.RepositorioModel
 import br.com.eriberto.desafioandroidconcrete.model.interfaces.InteracaoComLista
 import br.com.eriberto.desafioandroidconcrete.model.interfaces.RepositorioSearchView
 import br.com.eriberto.desafioandroidconcrete.model.pojo.Repositorio
-import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDAO
+import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDTO
 import br.com.eriberto.desafioandroidconcrete.presenter.RepositorioSearchPresenter
 import br.com.eriberto.desafioandroidconcrete.view.recyclerViewAdapter.AdapterListaRepository
 import kotlinx.android.synthetic.main.content_main.*
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-    override fun showResult(result: RepositorioDAO) {
+    override fun showResult(result: RepositorioDTO) {
         Toast.makeText(this, result.items.size.toString(), Toast.LENGTH_LONG).show()
 
         if (novaLista) {

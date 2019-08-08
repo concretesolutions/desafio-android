@@ -1,7 +1,6 @@
 package br.com.eriberto.desafioandroidconcrete.model.retrofit.webClient
 
 import br.com.eriberto.desafioandroidconcrete.model.pojo.ForkRepositorio
-import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDAO
 import br.com.eriberto.desafioandroidconcrete.model.retrofit.RetrofitConfig
 import br.com.eriberto.desafioandroidconcrete.model.retrofit.response.CallbackResponse
 import org.json.JSONArray

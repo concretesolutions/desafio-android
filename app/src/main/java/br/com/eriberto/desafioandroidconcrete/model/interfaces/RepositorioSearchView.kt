@@ -1,11 +1,10 @@
 package br.com.eriberto.desafioandroidconcrete.model.interfaces
 
-import br.com.eriberto.desafioandroidconcrete.model.pojo.Repositorio
-import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDAO
+import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDTO
 
 interface RepositorioSearchView {
     fun showProgress()
     fun hideProgress()
-    fun showResult(result: RepositorioDAO)
+    fun showResult(result: RepositorioDTO)
     fun showErroResult(mensagem: String?)
 }
