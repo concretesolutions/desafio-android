@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:padding="16dp">
+
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/tvTituloFork" android:textColor="@color/azul"
+            android:textStyle="bold" android:textSize="18sp" android:layout_marginBottom="2dp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/tvDescricaoFork" android:layout_marginBottom="4dp"/>
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:shrinkColumns="0,1" android:stretchColumns="1">
+
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" tools:srcCompat="@tools:sample/avatars"
+                    android:id="@+id/ivAvatarUser"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:gravity="center_vertical">
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/tvNomeUser"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/tvNomeSobrenomeUser"/>
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

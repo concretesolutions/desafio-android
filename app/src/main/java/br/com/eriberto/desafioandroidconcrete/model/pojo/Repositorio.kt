@@ -13,5 +13,7 @@ class Repositorio(
     @SerializedName("forks_count")
     var quantidadeDeEstrelas: Long,
     @SerializedName("forks")
-    var quantidadeDeForks: Long
-):Serializable
+    var quantidadeDeForks: Long,
+    @SerializedName("html_url")
+    var htmlSite: String
+) : Serializable

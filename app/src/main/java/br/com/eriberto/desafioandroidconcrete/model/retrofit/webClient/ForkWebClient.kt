@@ -1,5 +1,6 @@
 package br.com.eriberto.desafioandroidconcrete.model.retrofit.webClient
 
+import br.com.eriberto.desafioandroidconcrete.model.pojo.ForkRepositorio
 import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDAO
 import br.com.eriberto.desafioandroidconcrete.model.retrofit.RetrofitConfig
 import br.com.eriberto.desafioandroidconcrete.model.retrofit.response.CallbackResponse
@@ -10,12 +11,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ForkWebClient {
-    fun getRepositorios(page:Int, callbackResponse: CallbackResponse<RepositorioDAO>) {
+    fun getForks(nomeProprietario:String, nomeRepositorio:String, callbackResponse: CallbackResponse<ArrayList<ForkRepositorio>>) {
 
-        val call = RetrofitConfig().repositoriosService().getRepositorios(page = page)
+        val call = RetrofitConfig().forksService().getForks(nomeProprietario = nomeProprietario, nomeRepositorio = nomeRepositorio)
 
-        call.enqueue(object : Callback<RepositorioDAO> {
-            override fun onResponse(call: Call<RepositorioDAO>, response: Response<RepositorioDAO>) {
+        call.enqueue(object : Callback<ArrayList<ForkRepositorio>> {
+            override fun onResponse(call: Call<ArrayList<ForkRepositorio>>, response: Response<ArrayList<ForkRepositorio>>) {
 
                 response.body()?.let {
                     callbackResponse.success(it)
@@ -31,7 +32,7 @@ class ForkWebClient {
                 }
             }
 
-            override fun onFailure(call: Call<RepositorioDAO>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<ForkRepositorio>>, t: Throwable) {
 
                 callbackResponse.failure(t.message.toString())
             }
