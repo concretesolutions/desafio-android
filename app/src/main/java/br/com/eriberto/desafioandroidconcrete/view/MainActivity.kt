@@ -1,8 +1,6 @@
-package br.com.eriberto.desafioandroidconcrete
+package br.com.eriberto.desafioandroidconcrete.view
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -11,9 +9,18 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.widget.Toast
+import br.com.eriberto.desafioandroidconcrete.R
+import br.com.eriberto.desafioandroidconcrete.model.RepositorioModel
+import br.com.eriberto.desafioandroidconcrete.model.interfaces.RepositorioSearchModel
+import br.com.eriberto.desafioandroidconcrete.model.interfaces.RepositorioSearchView
+import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDAO
+import br.com.eriberto.desafioandroidconcrete.presenter.RepositorioSearchPresenter
+import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, RepositorioSearchView {
 
+    private val presenter = RepositorioSearchPresenter(view = this, model = RepositorioModel)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,15 +28,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        /*val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawerLayout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.setNavigationItemSelectedListener(this)
+        navView.setNavigationItemSelectedListener(this)*/
+
+        recyclerViewRepositorios
+        swipeRefresh_repositorios.setOnRefreshListener {
+            presenter.search(page = 1)
+        }
+        presenter.search(page = 1)
+
+    }
+
+    override fun showProgress() {
+        swipeRefresh_repositorios.isRefreshing = true
+    }
+
+    override fun hideProgress() {
+        swipeRefresh_repositorios.isRefreshing = false
+    }
+
+    override fun showResult(result: RepositorioDAO) {
+        Toast.makeText(this, result.items.size.toString(), Toast.LENGTH_LONG).show()
+    }
+
+
+    override fun showErroResult(mensagem: String?) {
+        Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show()
     }
 
     override fun onBackPressed() {

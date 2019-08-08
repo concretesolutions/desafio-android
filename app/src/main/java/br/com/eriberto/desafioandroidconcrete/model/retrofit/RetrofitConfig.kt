@@ -12,7 +12,7 @@ class RetrofitConfig {
     var client = OkHttpClient.Builder().addInterceptor(interceptor).build()!!
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.github.com/search/")
+        .baseUrl("https://api.github.com/")
         .client(client)
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())

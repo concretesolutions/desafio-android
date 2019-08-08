@@ -12,7 +12,7 @@ import retrofit2.Response
 class RepositorioWebClient {
     fun getRepositorios(page:Int, callbackResponse: CallbackResponse<RepositorioDAO>) {
 
-        val call = RetrofitConfig().repositoriosService().getRepositorios(page = page, q = "language:Java", sort = "stars")
+        val call = RetrofitConfig().repositoriosService().getRepositorios(page = page)
 
         call.enqueue(object : Callback<RepositorioDAO> {
             override fun onResponse(call: Call<RepositorioDAO>, response: Response<RepositorioDAO>) {
