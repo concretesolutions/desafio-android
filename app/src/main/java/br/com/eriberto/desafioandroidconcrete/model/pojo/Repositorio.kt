@@ -1,6 +1,7 @@
 package br.com.eriberto.desafioandroidconcrete.model.pojo
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 class Repositorio(
     @SerializedName("name")
@@ -9,8 +10,8 @@ class Repositorio(
     var descricaoRepositorio: String,
     @SerializedName("owner")
     var proprietario: Proprietario,
-    @SerializedName("score")
+    @SerializedName("forks_count")
     var quantidadeDeEstrelas: Long,
     @SerializedName("forks")
     var quantidadeDeForks: Long
-)
+):Serializable

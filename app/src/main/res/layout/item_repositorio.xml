@@ -20,12 +20,15 @@
                 <TextView
                         tools:text="Nome Repositorio"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/textView2"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvNomeRepositorio"
                         android:textSize="18sp" android:textColor="@color/azul" android:textStyle="bold"/>
                 <TextView
                         tools:text="Descrição Repositorio"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/textView3"/>
+                        android:layout_height="wrap_content"
+                        android:maxLength="25"
+                        android:id="@+id/tvDescricaoRepositorio"/>
                 <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:gravity="bottom"
@@ -35,7 +38,7 @@
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_menu_gallery"
+                                app:srcCompat="@mipmap/ic_star_black_24dp"
                                 android:tint="@color/amarelo"
                                 android:id="@+id/imageView3"/>
                         <TextView
@@ -49,7 +52,7 @@
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_menu_send"
+                                app:srcCompat="@mipmap/ic_source_fork_black_24dp"
                                 android:tint="@color/amarelo"
                                 android:id="@+id/imageView4"
                                 android:layout_marginStart="15dp"/>
@@ -72,13 +75,14 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:id="@+id/imageAvatar"
-                        android:background="@drawable/ic_menu_send"/>
+                        tools:background="@drawable/ic_menu_send"/>
                 <TextView
                         tools:text="Username"
                         android:textColor="@color/azul"
                         android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/textView4" android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvNomeUsuario" android:textStyle="bold"
                         android:textSize="14sp"/>
                 <TextView
                         android:text="TextView"

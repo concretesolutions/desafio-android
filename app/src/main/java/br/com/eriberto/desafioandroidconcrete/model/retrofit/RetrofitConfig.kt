@@ -1,5 +1,6 @@
 package br.com.eriberto.desafioandroidconcrete.model.retrofit
 
+import br.com.eriberto.desafioandroidconcrete.model.retrofit.services.ForksService
 import br.com.eriberto.desafioandroidconcrete.model.retrofit.services.RepositoriosService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,4 +20,5 @@ class RetrofitConfig {
         .build()
 
     fun repositoriosService() = retrofit.create(RepositoriosService::class.java)
+    fun forksService() = retrofit.create(ForksService::class.java)
 }

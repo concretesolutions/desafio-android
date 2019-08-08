@@ -1,6 +1,8 @@
 package br.com.eriberto.desafioandroidconcrete.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -10,17 +12,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import br.com.eriberto.desafioandroidconcrete.R
 import br.com.eriberto.desafioandroidconcrete.model.RepositorioModel
+import br.com.eriberto.desafioandroidconcrete.model.interfaces.InteracaoComLista
 import br.com.eriberto.desafioandroidconcrete.model.interfaces.RepositorioSearchModel
 import br.com.eriberto.desafioandroidconcrete.model.interfaces.RepositorioSearchView
+import br.com.eriberto.desafioandroidconcrete.model.pojo.Repositorio
 import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDAO
 import br.com.eriberto.desafioandroidconcrete.presenter.RepositorioSearchPresenter
+import br.com.eriberto.desafioandroidconcrete.view.recyclerViewAdapter.AdapterListaRepository
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, RepositorioSearchView {
 
     private val presenter = RepositorioSearchPresenter(view = this, model = RepositorioModel)
+    private var novaLista: Boolean = true
+    private lateinit var listaAtual: ArrayList<Repositorio>
+    private var numPage: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        /*val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar,
@@ -38,15 +48,42 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.setNavigationItemSelectedListener(this)*/
+        navView.setNavigationItemSelectedListener(this)
 
-        recyclerViewRepositorios
+
+        if (recyclerViewRepositorios is RecyclerView)
+            with(recyclerViewRepositorios) {
+                layoutManager = LinearLayoutManager(this@MainActivity)
+            }
+
         swipeRefresh_repositorios.setOnRefreshListener {
             presenter.search(page = 1)
         }
-        presenter.search(page = 1)
+
+
+        presenter.search(page = 0)
 
     }
+
+    /*override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+
+        outState?.putSerializable("listaAtual", listaAtual)
+        outState?.putSerializable("numPage", numPage)
+
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        if (savedInstanceState != null) {
+            mostarLista(savedInstanceState.getSerializable("listaAtual") as ArrayList<Repositorio>)
+            val adapter = recyclerViewRepositorios.adapter as AdapterListaRepository
+
+            adapter.setNumeroDaPaginaAtual(savedInstanceState.getInt("numPage"))
+        }
+
+    }*/
 
     override fun showProgress() {
         swipeRefresh_repositorios.isRefreshing = true
@@ -56,8 +93,44 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         swipeRefresh_repositorios.isRefreshing = false
     }
 
+
     override fun showResult(result: RepositorioDAO) {
         Toast.makeText(this, result.items.size.toString(), Toast.LENGTH_LONG).show()
+
+        if (novaLista) {
+            listaAtual = result.items
+
+            mostarLista(result.items)
+
+        } else {
+            val adapter = recyclerViewRepositorios.adapter as AdapterListaRepository
+            adapter.setLista(result.items)
+            adapter.setNumeroDaPaginaAtual(numPage)
+            listaAtual = adapter.getList()
+        }
+
+    }
+
+    private fun mostarLista(items: ArrayList<Repositorio>) {
+        recyclerViewRepositorios.adapter = AdapterListaRepository(
+            context = this,
+            mValues = items,
+            interacaoComLista = object : InteracaoComLista {
+                override fun selecionou(repositorio: Repositorio) {
+                    startActivity(
+                        Intent(this@MainActivity, ForkActivity::class.java)
+                            .putExtra("repositorio", repositorio)
+                    )
+                }
+
+                override fun buscarMais(numeroDaPagina: Int) {
+                    novaLista = false
+                    numPage = numeroDaPagina
+                    presenter.search(numeroDaPagina)
+                }
+            })
+        val adapter = recyclerViewRepositorios.adapter as AdapterListaRepository
+        adapter.setNumeroDaPaginaAtual(numPage)
     }
 
 

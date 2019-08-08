@@ -8,9 +8,9 @@ import retrofit2.http.Query
 
 interface ForksService {
 
-    @GET("repos/<criador>/<repositório>/pulls")
+    @GET("repos/{criador}/{repositorio}/pulls")
     fun getRepositorios(
-        @Path("criador") criador: Int,
-        @Path("repositorio") repositorio: Int
+        @Path("criador") nomeProprietario: String,
+        @Path("repositorio") nomeRepositorio: String
     ): Call<RepositorioDAO>
 }
