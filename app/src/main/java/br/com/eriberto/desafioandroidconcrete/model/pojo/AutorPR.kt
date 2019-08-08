@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 class AutorPR(
-    @SerializedName("BrkingYan")
+    @SerializedName("login")
     var nome: String,
     @SerializedName("avatar_url")
     var urlFoto: String,
-    @SerializedName("")
+    @SerializedName("html_url")
     var urlSite: String
 ) : Serializable

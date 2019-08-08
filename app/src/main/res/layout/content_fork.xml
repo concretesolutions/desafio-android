@@ -7,13 +7,14 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_fork"
+        android:id="@+id/swipeRefresh_fork"
         tools:context=".view.ForkActivity">
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_fork"
-            android:id="@+id/recyclerViewRepositorios"
+            android:id="@+id/recyclerViewForks"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 

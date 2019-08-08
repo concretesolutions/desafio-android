@@ -98,7 +98,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (novaLista) {
             listaAtual = result.items
 
-            mostarLista(result.items)
+            recyclerViewRepositorios.adapter = AdapterListaRepository(
+                context = this,
+                mValues = result.items,
+                interacaoComLista = object : InteracaoComLista {
+                    override fun selecionou(repositorio: Repositorio) {
+                        startActivity(
+                            Intent(this@MainActivity, ForkActivity::class.java)
+                                .putExtra("repositorio", repositorio)
+                        )
+                    }
+
+                    override fun buscarMais(numeroDaPagina: Int) {
+                        novaLista = false
+                        numPage = numeroDaPagina
+                        presenter.search(numeroDaPagina)
+                    }
+                })
 
         } else {
             val adapter = recyclerViewRepositorios.adapter as AdapterListaRepository

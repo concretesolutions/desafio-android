@@ -13,12 +13,15 @@
     <TextView
             android:text="TextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/tvDescricaoFork" android:layout_marginBottom="4dp"/>
+            android:layout_height="wrap_content"
+            android:maxLength="50"
+            android:id="@+id/tvDescricaoFork" android:layout_marginBottom="4dp"/>
     <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:shrinkColumns="0,1" android:stretchColumns="1">
 
         <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+
             <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp" tools:srcCompat="@tools:sample/avatars"
@@ -30,7 +33,8 @@
                 <TextView
                         android:text="TextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/tvNomeUser"/>
+                        android:layout_height="wrap_content" android:id="@+id/tvNomeUser"
+                        android:textColor="@color/azul" android:textStyle="bold"/>
                 <TextView
                         android:text="TextView"
                         android:layout_width="match_parent"
@@ -38,4 +42,10 @@
             </LinearLayout>
         </TableRow>
     </TableLayout>
+    <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="16dp"/>
 </LinearLayout>

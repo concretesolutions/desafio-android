@@ -6,5 +6,5 @@ import br.com.eriberto.desafioandroidconcrete.model.pojo.Repositorio
 interface InteracaoComListaFork {
 
     fun buscarMais(numeroDaPagina: Int)
-    fun selecionou(repositorio: ForkRepositorio)
+    fun selecionou(fork: ForkRepositorio)
 }
