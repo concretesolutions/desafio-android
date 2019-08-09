@@ -1,0 +1,27 @@
+<resources>
+    <!--API-->
+    <string name="loading_text">Loading…</string>
+    <string name="api_error_text">Ops…</string>
+    <string name="unexpected_api_error_text">ocorreu um erro inesperado.</string>
+
+    <!--Splash Activity-->
+    <string name="android_challenge_text">Desafio Android</string>
+    <string name="lets_go_text">Vamos começar!</string>
+
+    <!--Activities Title Text-->
+    <string name="home_activity_title_text">Home</string>
+
+    <!--Search item-->
+    <string name="user_name_Text">Username Text</string>
+    <string name="git_repository_name_placeholder_text">Git Repository Name</string>
+    <string name="description_placeholder_text">Description Text</string>
+    <string name="user_name_placeholder_text">Username Text</string>
+
+
+    <!--Pull request item-->
+    <string name="pull_request_placeholder_text">Pull Request Name</string>
+    <string name="created_at_text">Created at:</string>
+    <string name="updated_at_text">Updated at:</string>
+    <string name="no_description_text">Sem descrição</string>
+
+</resources>

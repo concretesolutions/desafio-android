@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="main_textview_color">#21397c</color>
+    <color name="progress_color">#4a90e2</color>
+    <color name="dark_color">#273d52</color>
+
+    <!--Toolbar-->
+    <color name="custom_toolbar_title_text_color">#273d52</color>
+    <color name="separator_view_color">#dee0f1</color>
+
+</resources>
