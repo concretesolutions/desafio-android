@@ -22,7 +22,7 @@
 
         <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp" tools:srcCompat="@tools:sample/avatars"
                     android:id="@+id/ivAvatarUser"/>
@@ -36,7 +36,7 @@
                         android:layout_height="wrap_content" android:id="@+id/tvNomeUser"
                         android:textColor="@color/azul" android:textStyle="bold"/>
                 <TextView
-                        android:text="TextView"
+                        tools:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/tvNomeSobrenomeUser"/>
             </LinearLayout>

@@ -80,7 +80,6 @@ class ForkActivity : AppCompatActivity(), ForkSearchView {
                 }
             })
 
-
     }
 
     override fun showErroResult(mensagem: String?) {

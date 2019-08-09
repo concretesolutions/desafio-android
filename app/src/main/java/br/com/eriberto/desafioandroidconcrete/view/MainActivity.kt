@@ -2,6 +2,8 @@ package br.com.eriberto.desafioandroidconcrete.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -21,6 +23,7 @@ import br.com.eriberto.desafioandroidconcrete.model.pojo.Repositorio
 import br.com.eriberto.desafioandroidconcrete.model.pojo.RepositorioDTO
 import br.com.eriberto.desafioandroidconcrete.presenter.RepositorioSearchPresenter
 import br.com.eriberto.desafioandroidconcrete.view.recyclerViewAdapter.AdapterListaRepository
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, RepositorioSearchView {
@@ -63,26 +66,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    /*override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState)
-
-        outState?.putSerializable("listaAtual", listaAtual)
-        outState?.putSerializable("numPage", numPage)
-
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        if (savedInstanceState != null) {
-            mostarLista(savedInstanceState.getSerializable("listaAtual") as ArrayList<Repositorio>)
-            val adapter = recyclerViewRepositorios.adapter as AdapterListaRepository
-
-            adapter.setNumeroDaPaginaAtual(savedInstanceState.getInt("numPage"))
-        }
-
-    }*/
-
     override fun showProgress() {
         swipeRefresh_repositorios.isRefreshing = true
     }
@@ -93,7 +76,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun showResult(result: RepositorioDTO) {
-        Toast.makeText(this, result.items.size.toString(), Toast.LENGTH_LONG).show()
 
         if (novaLista) {
             listaAtual = result.items
@@ -124,29 +106,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
     }
-
-    private fun mostarLista(items: ArrayList<Repositorio>) {
-        recyclerViewRepositorios.adapter = AdapterListaRepository(
-            context = this,
-            mValues = items,
-            interacaoComLista = object : InteracaoComLista {
-                override fun selecionou(repositorio: Repositorio) {
-                    startActivity(
-                        Intent(this@MainActivity, ForkActivity::class.java)
-                            .putExtra("repositorio", repositorio)
-                    )
-                }
-
-                override fun buscarMais(numeroDaPagina: Int) {
-                    novaLista = false
-                    numPage = numeroDaPagina
-                    presenter.search(numeroDaPagina)
-                }
-            })
-        val adapter = recyclerViewRepositorios.adapter as AdapterListaRepository
-        adapter.setNumeroDaPaginaAtual(numPage)
-    }
-
 
     override fun showErroResult(mensagem: String?) {
         Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show()
