@@ -1,0 +1,26 @@
+package com.example.desafioconcentresolutions
+
+import com.example.desafioconcentresolutions.service.GitHubService
+import com.example.desafioconcentresolutions.service.IGitHubService
+import com.example.desafioconcentresolutions.viewmodels.MainViewModel
+import org.koin.android.ext.koin.androidApplication
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.Module
+import org.koin.dsl.module
+
+val viewModelModule: Module = module {
+    viewModel { MainViewModel(androidApplication(),get()) }
+}
+
+val repositoriesModule: Module = module{
+    single {  }
+}
+
+val services:Module = module {
+    single { GitHubService() as IGitHubService }
+
+}
+
+val dataSourcesModule:Module = module {
+
+}

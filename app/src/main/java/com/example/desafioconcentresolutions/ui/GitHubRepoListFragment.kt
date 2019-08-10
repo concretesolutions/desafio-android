@@ -14,11 +14,13 @@ import com.example.desafioconcentresolutions.adapters.GitHubRepoAdapter
 import com.example.desafioconcentresolutions.models.Resource
 import com.example.desafioconcentresolutions.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_git_hub_repo_list.*
+import kotlinx.android.synthetic.main.gitrepo_item_card.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class GitHubRepoListFragment : Fragment() {
 
-    private lateinit var mMainViewModel:MainViewModel
+    private val mMainViewModel by sharedViewModel<MainViewModel>()
 
     private lateinit var mGitRepoAdapter : GitHubRepoAdapter
 
@@ -32,12 +34,10 @@ class GitHubRepoListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.let{
-            mMainViewModel = MainViewModel(it.application)
-        }
         mMainViewModel.loadFirstPage()
         setupObservable()
         setupRecyclerView()
+        setupListener()
     }
 
     private fun setupRecyclerView() {
@@ -62,5 +62,8 @@ class GitHubRepoListFragment : Fragment() {
                 Resource.Status.LOADING -> mGitRepoAdapter.setStatus(GitHubRepoAdapter.GitHubRepoStatus.LOADING_GITHUB_REPO)
             }
         })
+    }
+
+    private fun setupListener(){
     }
 }

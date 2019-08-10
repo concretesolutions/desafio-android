@@ -57,6 +57,7 @@ class GitHubRepoAdapter(private val context: Context) : RecyclerView.Adapter<Rec
                 forks.text = gitRepo.forks.toString()
 
                 loadImage(context, gitRepo.owner.avatar_url, avatar)
+
             }
         }
     }
@@ -92,6 +93,7 @@ class GitHubRepoAdapter(private val context: Context) : RecyclerView.Adapter<Rec
         var repoDescription = itemView.textView_gitrepoItemCard_repoDescription
         var repoName = itemView.textView_gitrepoItemCard_repoName
         var avatar = itemView.imageView_gitrepoItemCard_photo
+        var card = itemView.constraintLayout_gitRepoItemCard_card
     }
 
     enum class GitHubRepoStatus {
@@ -109,5 +111,9 @@ class GitHubRepoAdapter(private val context: Context) : RecyclerView.Adapter<Rec
         };
 
         abstract fun layout(): Int
+    }
+
+    interface GitHubRepoListener{
+        fun onRepoClicked()
     }
 }

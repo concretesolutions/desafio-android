@@ -2,9 +2,18 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_navigation"
-            app:startDestination="@id/gitHubRepoListFragment">
+            app:startDestination="@id/homePageFragment">
 
     <fragment android:id="@+id/gitHubRepoListFragment"
               android:name="com.example.desafioconcentresolutions.ui.GitHubRepoListFragment"
               android:label="fragment_git_hub_repo_list" tools:layout="@layout/fragment_git_hub_repo_list"/>
+    <fragment android:id="@+id/homePageFragment"
+              android:name="com.example.desafioconcentresolutions.ui.HomePageFragment"
+              android:label="fragment_home_page" tools:layout="@layout/fragment_home_page">
+        <action android:id="@+id/action_homePageFragment_to_gitHubRepoListFragment"
+                app:destination="@id/gitHubRepoListFragment"
+                app:popUpTo="@id/homePageFragment"
+                app:popUpToInclusive="true"
+        />
+    </fragment>
 </navigation>
