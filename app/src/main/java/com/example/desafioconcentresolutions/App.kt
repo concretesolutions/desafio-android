@@ -21,7 +21,7 @@ class App : Application(){
             androidFileProperties()
 
             // module list
-            modules(listOf(viewModelModule, repositoriesModule, dataSourcesModule, services))
+            modules(listOf(viewModelModule, repositoriesModule, dataSourcesModule))
         }
     }
 

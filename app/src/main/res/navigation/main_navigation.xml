@@ -6,7 +6,10 @@
 
     <fragment android:id="@+id/gitHubRepoListFragment"
               android:name="com.example.desafioconcentresolutions.ui.GitHubRepoListFragment"
-              android:label="fragment_git_hub_repo_list" tools:layout="@layout/fragment_git_hub_repo_list"/>
+              android:label="fragment_git_hub_repo_list" tools:layout="@layout/fragment_git_hub_repo_list">
+        <action android:id="@+id/action_gitHubRepoListFragment_to_gitHubPullListFragment"
+                app:destination="@id/gitHubPullListFragment"/>
+    </fragment>
     <fragment android:id="@+id/homePageFragment"
               android:name="com.example.desafioconcentresolutions.ui.HomePageFragment"
               android:label="fragment_home_page" tools:layout="@layout/fragment_home_page">
@@ -16,4 +19,7 @@
                 app:popUpToInclusive="true"
         />
     </fragment>
+    <fragment android:id="@+id/gitHubPullListFragment"
+              android:name="com.example.desafioconcentresolutions.ui.GitHubPullListFragment"
+              android:label="fragment_git_hub_pull_list" tools:layout="@layout/fragment_git_hub_pull_list"/>
 </navigation>
