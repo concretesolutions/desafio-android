@@ -2,8 +2,12 @@ package com.example.desafioconcentresolutions.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.example.desafioconcentresolutions.datasource.GitHubrepoDataSourceFactory
 import com.example.desafioconcentresolutions.models.GitHubRepo
 import com.example.desafioconcentresolutions.models.Resource
 import com.example.desafioconcentresolutions.service.GitHubService
@@ -21,9 +25,22 @@ class MainViewModel(application: Application, private val gitHubService: IGitHub
 
     private var mCurrentPageNumber = 1
 
+    private lateinit var pagedList: LiveData<PagedList<GitHubRepo>>
+
     private val mGithubRepoList = MutableLiveData<Resource<List<GitHubRepo>>>()
 
-    fun getGitHubRepoList() = mGithubRepoList
+    private var gitHubrepoDataSourceFactory: GitHubrepoDataSourceFactory = GitHubrepoDataSourceFactory()
+
+    init {
+        val config = PagedList.Config.Builder()
+            .setPageSize(10)
+            .setInitialLoadSizeHint(20)
+            .setEnablePlaceholders(false)
+            .build()
+
+        pagedList = LivePagedListBuilder<Int,GitHubRepo>(gitHubrepoDataSourceFactory, config).build()
+    }
+    fun getGitHubRepoList() = pagedList
 
     fun loadFirstPage() {
         if (mCurrentPageNumber == 1) {

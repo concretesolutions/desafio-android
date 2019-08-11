@@ -52,15 +52,7 @@ class GitHubRepoListFragment : Fragment() {
 
     private fun setupObservable() {
         mMainViewModel.getGitHubRepoList().observe(viewLifecycleOwner, Observer {resource->
-            when(resource.status){
-                Resource.Status.SUCCESS -> {
-                    resource.data?.let{
-                        mGitRepoAdapter.updateGitHubList(it)
-                    }
-                }
-                Resource.Status.ERROR -> mGitRepoAdapter.setStatus(GitHubRepoAdapter.GitHubRepoStatus.ERROR_GITHUB_REPO)
-                Resource.Status.LOADING -> mGitRepoAdapter.setStatus(GitHubRepoAdapter.GitHubRepoStatus.LOADING_GITHUB_REPO)
-            }
+            mGitRepoAdapter.submitList(resource)
         })
     }
 
