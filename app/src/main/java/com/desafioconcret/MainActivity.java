@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         repositorios.addAll(response.body().getRepositories());
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
+
                     }
                 });
             }
