@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+                name="repository"
+                type="com.rafael.fernandes.domain.model.Item"/>
+
+        <variable
+                name="view"
+                type="android.view.View"/>
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:orientation="vertical"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="16dp">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingLeft="16dp">
+
+                            <TextView
+                                    android:id="@+id/text_view_repository_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@{repository.name}"
+                                    android:textAllCaps="true"
+                                    android:textColor="#000"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"/>
+
+                            <TextView
+                                    android:id="@+id/text_view_repository_description"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:maxLines="2"
+                                    android:text="@{repository.description}"
+                                    android:textAllCaps="true"
+                                    android:textSize="12sp"/>
+
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal"
+                                    android:paddingTop="5dp">
+
+                                <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                    <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/ic_action_git_branch"/>
+
+                                    <TextView
+                                            android:id="@+id/text_view_number_of_forks"
+                                            android:layout_width="match_parent"
+                                            android:text="@{String.valueOf(repository.forksCount)}"
+                                            android:layout_height="wrap_content"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                    <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/ic_star_orange_36dp"/>
+
+                                    <TextView
+                                            android:id="@+id/text_view_number_of_stars"
+                                            android:layout_width="match_parent"
+                                            android:text="@{String.valueOf(repository.stargazersCount)}"
+                                            android:layout_height="wrap_content"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:paddingLeft="16dp"
+                                android:paddingRight="16dp">
+
+
+                            <com.rafael.fernandes.desafioconcrete.ui.custom.compoments.ImageViewUrl
+                                    android:id="@+id/profile_image"
+                                    android:layout_width="50dp"
+                                    app:imageUrl="@{repository.owner.avatarUrl}"
+                                    android:layout_height="50dp"/>
+
+                            <TextView
+                                    android:id="@+id/text_view_user_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="11sp"/>
+
+                            <ImageView
+                                    android:id="@+id/image_view_not_favorite"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:visibility="@{repository.favorite ? view.VISIBLE : view.GONE}"
+                                    android:src="@drawable/ic_favorite"
+                                    android:textSize="11sp"/>
+
+                            <ImageView
+                                    android:id="@+id/image_view_favorite"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:visibility="@{!repository.favorite ? view.VISIBLE : view.GONE}"
+                                    android:src="@drawable/ic_favorite_border"
+                                    android:textSize="11sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                    android:id="@+id/view_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="#868686"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

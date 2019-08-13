@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DesafioConcrete</string>
+    <string name="repository_label">Repositórios</string>
+    <string name="_favorite_repository_label">Repositórios Favoritos</string>
+    <string name="favorite_label">Favoritos</string>
+    <string name="logo_empresa_concrete">Logo empresa concrete</string>
+    <string name="imagem_github">Imagem github</string>
+    <string name="desafio_concrete">Desafio Concrete</string>
+    <string name="lista_de_repositorios">Lista de repositórios GitHub</string>
+    <string name="desenvolvido_por">Desenvolvido por:</string>
+    <string name="rafael_henrique_fernandes">Rafael Henrique Fernandes</string>
+    <string name="rafael_henrique_fernandes_com_email">Rafael Henrique Fernandes: faelmg18@gmaill.com</string>
+</resources>

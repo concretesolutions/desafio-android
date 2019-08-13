@@ -1,0 +1,94 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion Versions.compileSdk
+    defaultConfig {
+        applicationId ApplicationId.id
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Releases.versionCode
+        versionName Releases.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //presentation
+    implementation SupportLibraries.appcompatx
+    implementation SupportLibraries.design
+    implementation Libraries.constraintlayout
+    api Libraries.glide
+    kapt Libraries.glideCompiler
+
+    //injection
+    implementation Libraries.javaxInject
+    api Libraries.javaxAnnotation
+
+    //retrofit
+    implementation Libraries.retrofitConverter
+    implementation Libraries.rxandroid
+    implementation Libraries.rxjavaAdapter
+
+    //dagger
+    api Libraries.dagger
+    api Libraries.daggerAndroid
+    api Libraries.daggerAndroidSupport
+    annotationProcessor Libraries.daggerAndroidProcessor
+    annotationProcessor Libraries.daggerAndroidCompiler
+    kapt Libraries.daggerAndroidProcessor
+    kapt Libraries.daggerAndroidCompiler
+
+    // persistence
+    implementation Libraries.roomLifecycle
+    implementation Libraries.roomRX
+    kapt Libraries.roomCompiler
+
+    //arch
+    implementation Libraries.lifecycleCompiler
+    implementation Libraries.lifecycleExtensions
+    implementation Libraries.coroutines
+
+    // test
+    androidTestImplementation TestLibraries.junit
+    androidTestImplementation TestLibraries.runner
+    androidTestImplementation TestLibraries.testRules
+    androidTestImplementation TestLibraries.roomTesting
+    androidTestImplementation TestLibraries.androidCoreTesting
+    testImplementation TestLibraries.mockwebserver
+    testImplementation TestLibraries.mockito
+    testImplementation TestLibraries.assertjCore
+    testImplementation TestLibraries.monitor
+
+    //projects
+    implementation project(Modules.data)
+    implementation project(Modules.domain)
+}
+
+repositories {
+    google()
+}

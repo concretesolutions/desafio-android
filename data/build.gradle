@@ -1,0 +1,48 @@
+apply from: "$rootDir/common-android-library.gradle"
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation SupportLibraries.appcompatx
+
+    api Libraries.retrofit
+    implementation Libraries.okHttp
+    api Libraries.loggingInterceptor
+
+    implementation Libraries.gson
+    api Libraries.retrofitConverter
+
+    implementation Libraries.rxandroid
+    implementation Libraries.rxjavaAdapter
+
+    //dagger
+    api Libraries.dagger
+    api Libraries.daggerAndroid
+    api Libraries.daggerAndroidSupport
+    annotationProcessor Libraries.daggerAndroidProcessor
+    annotationProcessor Libraries.daggerAndroidCompiler
+
+    kapt Libraries.daggerAndroidProcessor
+    kapt Libraries.daggerAndroidCompiler
+
+    // persistence
+    implementation Libraries.roomLifecycle
+    implementation Libraries.roomRX
+    kapt Libraries.roomCompiler
+
+    // testes
+    testImplementation TestLibraries.junit
+    androidTestImplementation TestLibraries.runner
+    androidTestImplementation TestLibraries.espresso
+
+    //projects
+    implementation project(Modules.domain)
+
+}
+repositories {
+    mavenCentral()
+}

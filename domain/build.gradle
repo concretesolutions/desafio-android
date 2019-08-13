@@ -1,0 +1,15 @@
+apply from: "$rootDir/common-android-library.gradle"
+
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation Libraries.javaxInject
+    implementation Libraries.gson
+    // persistence
+    implementation Libraries.roomLifecycle
+    implementation Libraries.roomRX
+    kapt Libraries.roomCompiler
+    api Libraries.glide
+    kapt Libraries.glideCompiler
+
+}
