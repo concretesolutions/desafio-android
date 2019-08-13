@@ -7,8 +7,39 @@
         android:layout_height="match_parent"
         tools:context=".ui.GitHubRepoListFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/appBarLayout_gitHubRepoListFragment"
+            app:layout_constraintTop_toTopOf="parent"
+    >
+        <androidx.appcompat.widget.Toolbar
+                android:title="title"
+                android:layout_width="match_parent"
+                android:id="@+id/toolBar_gitHubPullListFragment"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="GitHub Java Most Stars Repo"
+                app:titleTextColor="@color/cardview_light_background"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:itemCount="2"
+            tools:listitem="@layout/gitrepo_item_card"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/recyclerView_githubRepoListFragment"
+            tools:layout_editor_absoluteY="144dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            tools:visibility="gone"
             android:layout_height="match_parent"
             android:id="@+id/container_gitHubRepoListFragment_loading"
     >
@@ -16,39 +47,9 @@
                      app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                      app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                      android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+                     tools:visibility="gone"
                      android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/container_gitHubRepoListFragment_default" tools:visibility="gone">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:listitem="@layout/gitrepo_item_card"
-                android:paddingTop="?attr/actionBarSize"
-                app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/recyclerView">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-        >
-            <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
-                    app:title="GitHub Java Most Stars Repo"
-                    app:titleTextColor="@color/cardview_light_background"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_scrollFlags="scroll|enterAlways"/>
-        </com.google.android.material.appbar.AppBarLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

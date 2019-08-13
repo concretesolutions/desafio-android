@@ -73,7 +73,7 @@ class GitHubPullAdapter(private val context: Context) : PagedListAdapter<GitHubP
     }
 
     interface GitHubPullListener{
-        fun onGitPullClicked(html_url:String)
+        fun onGitPullClicked(htmlUrl:String)
     }
 
     companion object {

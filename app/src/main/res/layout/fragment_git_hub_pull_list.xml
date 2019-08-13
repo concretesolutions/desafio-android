@@ -7,11 +7,41 @@
         android:layout_height="match_parent"
         tools:context=".ui.GitHubPullListFragment">
 
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/appBarLayout_gitHubRepoListFragment"
+            app:layout_constraintTop_toTopOf="parent"
+    >
+        <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="Pull Requests"
+                android:id="@+id/toolBar_gitHubPullListFragment"
+                app:titleTextColor="@color/cardview_light_background"
+                app:navigationIcon="@drawable/ic_arrow_back_white"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+        >
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_gitHubPullFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/gitpull_item_card">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/container_gitHubPullListFragment_loading"
-    >
+            tools:visibility="gone">
         <ProgressBar android:layout_width="100dp" android:layout_height="100dp"
                      app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                      app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
@@ -21,39 +51,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/container_gitHubPullListFragment_default"
-    >
-        <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-        >
-            <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:title="Pull Requests"
-                    android:id="@+id/toolBar_gitHubPullListFragment"
-                    app:titleTextColor="@color/cardview_light_background"
-                    app:navigationIcon="@drawable/ic_arrow_back_white"
-                    app:layout_scrollFlags="scroll|enterAlways"
-            >
-
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_gitHubPullFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="?attr/actionBarSize"
-                tools:listitem="@layout/gitpull_item_card"
-                android:layout_marginTop="4dp"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

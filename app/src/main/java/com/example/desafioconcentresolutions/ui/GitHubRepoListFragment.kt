@@ -42,9 +42,9 @@ class GitHubRepoListFragment : Fragment(), GitHubRepoAdapter.GitHubRepoListener 
     private fun setupRecyclerView() {
         context?.let {
             mGitRepoAdapter = GitHubRepoAdapter(it)
-            recyclerView.adapter = mGitRepoAdapter
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.setHasFixedSize(true)
+            recyclerView_githubRepoListFragment.adapter = mGitRepoAdapter
+            recyclerView_githubRepoListFragment.layoutManager = LinearLayoutManager(context)
+            recyclerView_githubRepoListFragment.setHasFixedSize(true)
 
             mGitRepoAdapter.setGitHubRepoListener(this)
         }
@@ -74,11 +74,13 @@ class GitHubRepoListFragment : Fragment(), GitHubRepoAdapter.GitHubRepoListener 
 
     private fun setLoadingState(){
         container_gitHubRepoListFragment_loading.visibility = View.VISIBLE
-        container_gitHubRepoListFragment_default.visibility = View.GONE
+        appBarLayout_gitHubRepoListFragment.visibility = View.GONE
+        recyclerView_githubRepoListFragment.visibility = View.GONE
     }
 
     private fun setDefaultState(){
         container_gitHubRepoListFragment_loading.visibility = View.GONE
-        container_gitHubRepoListFragment_default.visibility = View.VISIBLE
+        appBarLayout_gitHubRepoListFragment.visibility = View.VISIBLE
+        recyclerView_githubRepoListFragment.visibility = View.VISIBLE
     }
 }
