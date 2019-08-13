@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.androidnetworking.AndroidNetworking;
 import com.example.brunovsiq.concreteapp.R;
 import com.example.brunovsiq.concreteapp.models.Repository;
-import com.example.brunovsiq.concreteapp.models.RepositoryDataSourceFactory;
+import com.example.brunovsiq.concreteapp.screens.adapters.RepositoryAdapter;
 import com.jacksonandroidnetworking.JacksonParserFactory;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,39 +41,6 @@ public class MainActivity extends AppCompatActivity {
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         getRepos();
-
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                getRepos();
-//            }
-//        });
-
-
-//        repositoryAdapter = new RepositoryAdapter(this);
-//        // Setup rest of TweetAdapter here (i.e. LayoutManager)
-//
-//        // Initial page size to fetch can also be configured here too
-//        PagedList.Config config = new PagedList.Config.Builder().build();
-//
-//        // Pass in dependency
-//        RepositoryDataSourceFactory factory = new RepositoryDataSourceFactory();
-//
-//        repoList = new LivePagedListBuilder(factory, config).build();
-//
-//        recyclerView.setAdapter(repositoryAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        repoList.observe(this, new Observer<PagedList<Repository>>() {
-//            @Override
-//            public void onChanged(@Nullable PagedList<Repository> repos) {
-//                repositoryAdapter.submitList(repos);
-//
-//                recyclerView.setAdapter(repositoryAdapter);
-//                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-//                repositoryAdapter.notifyDataSetChanged();
-//            }
-//        });
 
 
     }

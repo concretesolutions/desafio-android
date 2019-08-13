@@ -17,21 +17,6 @@ public class RepositoryDataSource extends PageKeyedDataSource<Integer, Repositor
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, Repository> callback) {
-
-//        appController.getRestApi().listRepos(1)
-//                .enqueue(new Callback<JSONObject>() {
-//                    @Override
-//                    public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-//                        if (response.isSuccessful()) {
-//                            createRepoList(response.body());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<JSONObject> call, Throwable t) {
-//
-//                    }
-//                });
         //show progress bar
         AndroidNetworking.get("https://api.github.com/search/repositories?q=language:Java&sort=stars&page={pageNumber}")
                 .addPathParameter("pageNumber", "0")
@@ -65,20 +50,6 @@ public class RepositoryDataSource extends PageKeyedDataSource<Integer, Repositor
 
     @Override
     public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Repository> callback) {
-//        appController.getRestApi().listRepos(params.key)
-//                .enqueue(new Callback<JSONObject>() {
-//                    @Override
-//                    public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-//                        if (response.isSuccessful()) {
-//                            createRepoList(response.body());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<JSONObject> call, Throwable t) {
-//
-//                    }
-//                });
         AndroidNetworking.get("https://api.github.com/search/repositories?q=language:Java&sort=stars&page={pageNumber}")
                 .addPathParameter("pageNumber", String.valueOf(params.key))
                 //.addQueryParameter("limit", "3")

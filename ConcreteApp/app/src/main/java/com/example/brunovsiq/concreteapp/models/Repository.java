@@ -4,13 +4,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.databinding.BaseObservable;
 import androidx.recyclerview.widget.DiffUtil;
 
-public class Repository extends BaseObservable {
+public class Repository extends BaseObservable implements Serializable {
 
     //private String
     private int id;

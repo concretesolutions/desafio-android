@@ -1,6 +1,5 @@
-package com.example.brunovsiq.concreteapp.screens;
+package com.example.brunovsiq.concreteapp.screens.adapters;
 
-import androidx.annotation.Nullable;
 import androidx.paging.PagedList;
 import androidx.paging.PagedListAdapter;
 import android.content.Context;
@@ -64,6 +63,7 @@ public class RepositoryAdapter extends PagedListAdapter<Repository, RepositoryVi
     public void onBindViewHolder(@NonNull RepositoryViewHolder repositoryViewHolder, int i) {
 
         Repository repository = getItem(i);
+        repositoryViewHolder.setRepository(repository);
 
         if (repository != null) {
             repositoryViewHolder.repoName.setText(repository.getRepoName());
