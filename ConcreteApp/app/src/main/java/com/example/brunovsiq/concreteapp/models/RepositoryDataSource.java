@@ -2,33 +2,18 @@ package com.example.brunovsiq.concreteapp.models;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.brunovsiq.concreteapp.AppController;
-import com.example.brunovsiq.concreteapp.networking.GithubService;
-import com.example.brunovsiq.concreteapp.screens.MainActivityViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import androidx.paging.ItemKeyedDataSource;
 import androidx.paging.PageKeyedDataSource;
-import androidx.paging.PositionalDataSource;
 import androidx.annotation.NonNull;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class RepositoryDataSource extends PageKeyedDataSource<Integer, Repository> {
-
-    GithubService service;
-    AppController appController;
-
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, Repository> callback) {
