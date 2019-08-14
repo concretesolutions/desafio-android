@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_toLeftOf="@id/user"
+        android:padding="10dp"
+        android:gravity="center"
+        android:foregroundGravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/repositoryName"
+            android:text="Nome Repositório"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:textSize="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/repositoryDescription"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/repositoryName"
+            android:textSize="15dp"
+            android:minLines="2"
+            android:maxLines="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_below="@id/repositoryDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgFork"
+                    android:src="@drawable/forks"
+                    android:layout_centerVertical="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <RelativeLayout
+                    android:layout_toRightOf="@id/imgFork"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:id="@+id/countForks"
+                        android:text="123123"
+                        android:textColor="@color/colorStarAndForks"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgStar"
+                    android:src="@drawable/star"
+                    android:layout_centerVertical="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <RelativeLayout
+                    android:layout_toRightOf="@id/imgStar"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:id="@+id/countStars"
+                        android:text="2123123"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/colorStarAndForks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/user"
+        android:layout_width="120dp"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgUser"
+            android:src="@drawable/default_user"
+            android:layout_centerHorizontal="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:id="@+id/username"
+            android:text="username"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:layout_below="@id/imgUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/fullName"
+            android:text="Nome Sobrenome"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:layout_below="@id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

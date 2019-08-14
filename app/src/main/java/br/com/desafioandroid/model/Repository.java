@@ -1,6 +1,6 @@
 package br.com.desafioandroid.model;
 
-public class Repositorio {
+public class Repository {
     //@SerializedName("id")
     int id;
 
@@ -9,6 +9,10 @@ public class Repositorio {
     String name;
 
     String full_name;
+
+    int forks;
+
+    int stargazers_count;
 
     boolean priv;
 

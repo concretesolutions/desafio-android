@@ -8,7 +8,7 @@ import br.com.desafioandroid.R;
 
 public class HomeActivity extends AppCompatActivity {
 
-    ListView listRepositorios;
+    ListView listRepositories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         setTitle("Github JavaPop");
 
-        listRepositorios = (ListView) findViewById(R.id.listRepositorios);
+        listRepositories = (ListView) findViewById(R.id.listRepositories);
 
 
 

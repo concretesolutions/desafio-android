@@ -1,12 +1,12 @@
 # Crear una app de consulta a la API del [GitHub](https://github.com/)
 
-Desarrollar una app para consultar la [API do GitHub](https://developer.github.com/v3/) y cargar los repositorios más populares del Java. Básese en el mockup fornecido: 
+Desarrollar una app para consultar la [API do GitHub](https://developer.github.com/v3/) y cargar los repositories más populares del Java. Básese en el mockup fornecido:
 
 ![Captura de tela de 2015-10-22 11-28-03.png](https://bitbucket.org/repo/7ndaaA/images/3102804929-Captura%20de%20tela%20de%202015-10-22%2011-28-03.png)
 
 ### **Debe contener**
 
-- **Lista de repositorios**. Ejemplo de llamada en la API: `https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1` 
+- **Lista de repositories**. Ejemplo de llamada en la API: `https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1`
   * Paginación en la pantalla de lista, con endless scroll / scroll infinito (incrementando el parámetro `page`).
   * Cada repositorio debe presentar Nombre del repositorio, Descripción del Repositorio, Nombre / Foto del autor, Cantidad de Stars, Cantidad de Forks
   * Al tocar em um articulo, debe llevar a la lista de Pull Requests del repositorio

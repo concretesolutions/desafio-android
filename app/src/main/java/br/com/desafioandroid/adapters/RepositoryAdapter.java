@@ -7,24 +7,24 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.desafioandroid.model.Repositorio;
+import br.com.desafioandroid.model.Repository;
 
-public class RepositoriosAdapter extends BaseAdapter {
-    List<Repositorio> repositorioList = new ArrayList<>();
+public class RepositoryAdapter extends BaseAdapter {
+    List<Repository> repositoryList = new ArrayList<>();
 
-    public RepositoriosAdapter(List<Repositorio> repositorios) {
-        this.repositorioList = repositorios;
+    public RepositoryAdapter(List<Repository> repositories) {
+        this.repositoryList = repositories;
     }
 
 
     @Override
     public int getCount() {
-        return repositorioList.size();
+        return repositoryList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return repositorioList.get(i);
+        return repositoryList.get(i);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class RepositoriosAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        
+
 
 
         return view;
