@@ -41,11 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Integer page = 1;
     private EndlessScroll endlessScroll;
-    private RecyclerView.Adapter adapter;
+    private GitAdapter adapter;
     GitHubApiService gitHubApiService = new GitHubApiService();
 
 
-    private List<Repositories> repositorios = new ArrayList<>();
     private Toolbar toolbar;
 
     private EndlessScroll scrollListener;
@@ -56,15 +55,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.adapter = new GitAdapter(this.repositorios);
         this.layoutManager = new LinearLayoutManager(this);
-
 
         this.recyclerView = findViewById(R.id.repos_recicle_view);
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(layoutManager);
         this.recyclerView.setAdapter(adapter);
         this.recyclerView.addItemDecoration(new SimpleDivider(this));
+
+        adapter = new GitAdapter();
+        recyclerView.setAdapter(adapter);
 
         toolbar = findViewById(R.id.toolbar_pullrequest);
         setSupportActionBar(toolbar);
@@ -102,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        repositorios.addAll(response.body().getRepositories());
-                        recyclerView.setAdapter(adapter);
+                        List<Repositories> repositorios = response.body().getRepositories();
+                        adapter.addRepositories(repositorios);
                         adapter.notifyDataSetChanged();
 
                     }
