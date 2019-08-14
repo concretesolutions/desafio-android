@@ -2,6 +2,7 @@ package com.desafioconcret.adapters;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import com.desafioconcret.R;
 import com.desafioconcret.pojo.json.PullRequests;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -22,29 +22,6 @@ public class PullAdapter extends RecyclerView.Adapter<PullAdapter.ViewHolder>{
 
     private List<PullRequests> pullRequestses;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView pullTitle;
-        public TextView pullDescription;
-        public CircleImageView pullUserAvatar;
-        public TextView pullUser;
-        public TextView pullDate;
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String formatedDate = dateFormat.format(dateFormat);
-
-
-        public ViewHolder(final View view) {
-            super(view);
-            this.pullTitle = (TextView) view.findViewById(R.id.pull_title);
-            this.pullDescription = (TextView) view.findViewById(R.id.pull_description);
-            this.pullUserAvatar = (CircleImageView) view.findViewById(R.id.circle_image);
-            this.pullUser = (TextView) view.findViewById(R.id.pull_user);
-            this.pullDate = (TextView) view.findViewById(R.id.pull_date);
-
-
-        }
-    }
 
     public PullAdapter (List<PullRequests> pullRequestses) {
         this.pullRequestses = pullRequestses;
@@ -55,11 +32,11 @@ public class PullAdapter extends RecyclerView.Adapter<PullAdapter.ViewHolder>{
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pull_view_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.pullTitle = (TextView) view.findViewById(R.id.pull_title);
-        viewHolder.pullDescription = (TextView) view.findViewById(R.id.pull_description);
-        viewHolder.pullUserAvatar = (CircleImageView) view.findViewById(R.id.circle_image);
-        viewHolder.pullUser = (TextView) view.findViewById(R.id.pull_user);
-        viewHolder.pullDate = (TextView) view.findViewById(R.id.pull_date);
+        viewHolder.pullTitle =  view.findViewById(R.id.pull_title);
+        viewHolder.pullDescription = view.findViewById(R.id.pull_description);
+        viewHolder.pullUserAvatar = view.findViewById(R.id.circle_image);
+        viewHolder.pullUser = view.findViewById(R.id.pull_user);
+        viewHolder.pullDate = view.findViewById(R.id.pull_date);
 
         return viewHolder;
     }
@@ -72,7 +49,8 @@ public class PullAdapter extends RecyclerView.Adapter<PullAdapter.ViewHolder>{
         Picasso.with(viewHolder.pullUserAvatar.getContext()).load(this.pullRequestses.get(position)
                 .getUser().getAvatarUrl()).fit().centerCrop().into(viewHolder.pullUserAvatar);
         viewHolder.pullUser.setText(this.pullRequestses.get(position).getUser().getLogin());
-        viewHolder.pullDate.setText((CharSequence) this.pullRequestses.get(position).getCreated_at());
+        CharSequence pullDate = DateFormat.format("dd-MM-yyyy kk:mm:ss", pullRequestses.get(position).getCreated_at());
+        viewHolder.pullDate.setText(pullDate);
 
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,11 +68,33 @@ public class PullAdapter extends RecyclerView.Adapter<PullAdapter.ViewHolder>{
     }
     @Override
     public int getItemCount() {
-        return pullRequestses != null ? pullRequestses.size() : 0;
+        return this.pullRequestses.size();
     }
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+    }
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView pullTitle;
+        public TextView pullDescription;
+        public CircleImageView pullUserAvatar;
+        public TextView pullUser;
+        public TextView pullDate;
+
+
+        public ViewHolder(final View view) {
+            super(view);
+            this.pullTitle = view.findViewById(R.id.pull_title);
+            this.pullDescription = view.findViewById(R.id.pull_description);
+            this.pullUserAvatar = view.findViewById(R.id.circle_image);
+            this.pullUser = view.findViewById(R.id.pull_user);
+            this.pullDate = view.findViewById(R.id.pull_date);
+
+
+        }
     }
 }

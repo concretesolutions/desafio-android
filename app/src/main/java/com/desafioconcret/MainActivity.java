@@ -44,10 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private GitAdapter adapter;
     GitHubApiService gitHubApiService = new GitHubApiService();
 
-
     private Toolbar toolbar;
 
-    private EndlessScroll scrollListener;
 
 
     @Override
@@ -60,11 +58,7 @@ public class MainActivity extends AppCompatActivity {
         this.recyclerView = findViewById(R.id.repos_recicle_view);
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(layoutManager);
-        this.recyclerView.setAdapter(adapter);
         this.recyclerView.addItemDecoration(new SimpleDivider(this));
-
-        adapter = new GitAdapter();
-        recyclerView.setAdapter(adapter);
 
         toolbar = findViewById(R.id.toolbar_pullrequest);
         setSupportActionBar(toolbar);
@@ -72,99 +66,57 @@ public class MainActivity extends AppCompatActivity {
 
         mostraListaRepos();
 
-        scrollListener = new EndlessScroll((LinearLayoutManager) layoutManager) {
+        endlessScroll = new EndlessScroll((LinearLayoutManager) layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
 
                 carregaNovaPaginaApi(page);
             }
         };
-        recyclerView.addOnScrollListener(scrollListener);
+        recyclerView.addOnScrollListener(endlessScroll);
     }
 
-    public void carregaNovaPaginaApi (int offset){
+    public void carregaNovaPaginaApi(int offset) {
 
-        if (page>=1){
+        if (page >= 1) {
             page = page + 1;
             mostraListaRepos();
-        }else { }
+        } else {
+        }
     }
 
     private void mostraListaRepos() {
 
-        Call<TopRepositorios> topRepositoriesCall = gitHubApiService
+        Observable<TopRepositorios> repositoriosObservable = gitHubApiService
                 .topRepositorios().getTopRepositorios("language:Java", "stars", page);
 
-        topRepositoriesCall.enqueue(new Callback<TopRepositorios>() {
-            @Override
-            public void onResponse(Call<TopRepositorios> call, final Response<TopRepositorios> response) {
-                runOnUiThread(new Runnable() {
+        repositoriosObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<TopRepositorios>() {
                     @Override
-                    public void run() {
+                    public void onSubscribe(Disposable d) {
+                    }
 
-                        List<Repositories> repositorios = response.body().getRepositories();
-                        adapter.addRepositories(repositorios);
+                    @Override
+                    public void onNext(TopRepositorios topRepositorios) {
+
+                        List<Repositories> repositorios = topRepositorios.getRepositories();
+                        adapter = new GitAdapter(repositorios);
                         adapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(adapter);
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("conexção", "Concexão erro" + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
                     }
                 });
-            }
-
-            @Override
-            public void onFailure(Call<TopRepositorios> call, Throwable t) {
-                Log.i("Erro Repos", "Erro: " + t.getMessage());
-                Toast.makeText(getApplicationContext(), "Falha na Chamada dos repositórios: "
-                                + t.getMessage(),
-                        Toast.LENGTH_LONG).show();
-            }
-        });
 
 
-
-//        Observable <TopRepositorios> repositoriosObservable = gitHubApiService
-//                .topRepositorios().getTopRepositorios("language:Java", "stars", page);
-//
-//        repositoriosObservable.subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<TopRepositorios>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//                    }
-//                    @Override
-//                    public void onNext(TopRepositorios topRepositorios) {
-//
-//                        repositorios.addAll(topRepositorios.getRepositories());
-//                        adapter.notifyDataSetChanged();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.e("conexção", "Concexão erro" + e.toString());
-//                    }
-//                    @Override
-//                    public void onComplete() {
-//
-//
-//                    }
-//                });
-
-//        @Override
-//        public boolean onCreateOptionsMenu(Menu menu) {
-//            MenuInflater inflater = getMenuInflater();
-//            inflater.inflate(R.menu.main_menu, menu);
-//            return true;
-//        }
-//
-//        @Override
-//        public boolean onOptionsItemSelected(MenuItem item) {
-//            switch (item.getItemId()) {
-//                case R.id.repo_exit:
-//                    finish();
-//                    return true;
-//                default:
-//                    return super.onOptionsItemSelected(item);
-//            }
-//        }
     }
 
 

@@ -15,10 +15,12 @@ import retrofit2.http.Query;
 public interface GitHubApi {
 
     @GET("search/repositories?")
-    Call<TopRepositorios> getTopRepositorios (@Query("q") String q, @Query("sort") String sort, @Query("page") Integer page);
+    Observable<TopRepositorios> getTopRepositorios (@Query("q") String q, @Query("sort") String sort, @Query("page") Integer page);
+//    Call<TopRepositorios> getTopRepositorios (@Query("q") String q, @Query("sort") String sort, @Query("page") Integer page);
+
 
     @GET("repos/{criador}/{repositorio}/pulls")
-    Call<List<PullRequests>> getPulls(@Path("criador") String creator, @Path("repositorio") String repositorie);
+    Observable<List<PullRequests>> getPulls(@Path("criador") String creator, @Path("repositorio") String repositorie);
 
 
 }

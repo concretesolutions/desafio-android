@@ -19,37 +19,18 @@ import java.util.List;
 
 public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolderRepo> {
 
-    private List<Repositories> repositories = new ArrayList<>();
-
-    public static class ViewHolderRepo extends RecyclerView.ViewHolder {
-        public TextView repositoryName;
-        public TextView descriptionText;
-        public TextView forksNumber;
-        public TextView starsNumber;
-        public ImageView ownerPhoto;
-        public TextView ownerName;
+    private List<Repositories> repositories;
 
 
-        public ViewHolderRepo(View view) {
-            super(view);
-            this.repositoryName = view.findViewById(R.id.repo_name);
-            this.descriptionText = view.findViewById(R.id.repo_description);
-            this.forksNumber = view.findViewById(R.id.repo_forks);
-            this.starsNumber = view.findViewById(R.id.repo_stars);
-            this.ownerPhoto = view.findViewById(R.id.owner_photo);
-            this.ownerName = view.findViewById(R.id.owner_name);
-
-        }
-    }
-
-    public void addRepositories(List<Repositories> repositories) {
-        this.repositories.addAll(repositories);
+    public GitAdapter(List<Repositories> repositories) {
+        this.repositories = repositories;
     }
 
     @Override
     public ViewHolderRepo onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repo_view_item, parent, false);
+
         return new ViewHolderRepo(view);
     }
 
@@ -74,7 +55,6 @@ public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolderRepo> 
                 intent.putExtra("REPO", repo_name);
                 intent.putExtra("OWNER", owner_name);
                 v.getContext().startActivity(intent);
-
             }
 
         });
@@ -85,10 +65,30 @@ public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolderRepo> 
     public int getItemCount() {
         return this.repositories.size();
     }
-
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    public static class ViewHolderRepo extends RecyclerView.ViewHolder {
+        public TextView repositoryName;
+        public TextView descriptionText;
+        public TextView forksNumber;
+        public TextView starsNumber;
+        public ImageView ownerPhoto;
+        public TextView ownerName;
+
+
+        public ViewHolderRepo(View view) {
+            super(view);
+            this.repositoryName = view.findViewById(R.id.repo_name);
+            this.descriptionText = view.findViewById(R.id.repo_description);
+            this.forksNumber = view.findViewById(R.id.repo_forks);
+            this.starsNumber = view.findViewById(R.id.repo_stars);
+            this.ownerPhoto = view.findViewById(R.id.owner_photo);
+            this.ownerName = view.findViewById(R.id.owner_name);
+
+        }
     }
 
 }
