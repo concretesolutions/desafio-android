@@ -11,15 +11,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.desafioconcret.adapters.GitAdapter;
 import com.desafioconcret.net.GitHubApiService;
-import com.desafioconcret.pojo.json.Repo;
 import com.desafioconcret.pojo.json.Repositories;
 import com.desafioconcret.pojo.json.TopRepositorios;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -27,9 +24,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -109,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("conexção", "Concexão erro" + e.toString());
+
                     }
 
                     @Override
@@ -118,6 +114,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+            @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.main_menu, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.repo_exit:
+                    finish();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }
 
 
 }

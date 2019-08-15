@@ -14,13 +14,11 @@ import com.desafioconcret.R;
 import com.desafioconcret.pojo.json.Repositories;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolderRepo> {
 
     private List<Repositories> repositories;
-
 
     public GitAdapter(List<Repositories> repositories) {
         this.repositories = repositories;
@@ -29,8 +27,8 @@ public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolderRepo> 
     @Override
     public ViewHolderRepo onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repo_view_item, parent, false);
-
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.repo_view_item, parent, false);
         return new ViewHolderRepo(view);
     }
 
@@ -65,6 +63,7 @@ public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolderRepo> 
     public int getItemCount() {
         return this.repositories.size();
     }
+
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
@@ -90,7 +89,6 @@ public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolderRepo> 
 
         }
     }
-
 }
 
 
