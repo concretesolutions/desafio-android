@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.desafioconcret.adapters.GitAdapter;
+import com.desafioconcret.models.EndlessScroll;
 import com.desafioconcret.net.GitHubApiService;
 import com.desafioconcret.pojo.json.Repositories;
 import com.desafioconcret.pojo.json.TopRepositorios;
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     GitHubApiService gitHubApiService = new GitHubApiService();
 
     private Toolbar toolbar;
-
 
 
     @Override
@@ -114,23 +114,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-            @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.main_menu, menu);
-            return true;
-        }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.repo_exit:
-                    finish();
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.repo_exit:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
 
 }

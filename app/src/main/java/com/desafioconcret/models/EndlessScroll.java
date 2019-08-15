@@ -1,4 +1,4 @@
-package com.desafioconcret;
+package com.desafioconcret.models;
 
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
 
 public abstract class EndlessScroll extends RecyclerView.OnScrollListener {
 

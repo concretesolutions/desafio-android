@@ -7,7 +7,5 @@
     <color name="forks">#FF6F00</color>
     <color name="stars">#FF6F00</color>
     <color name="description">#212121</color>
-    <color name="borderCircle">#0D47A1</color>
     <color name="toolbar">#3F51B5</color>
-    <color name="titleToolBar">#FFFFFF</color>
 </resources>

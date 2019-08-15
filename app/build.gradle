@@ -46,8 +46,9 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp3Version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3Version"
     implementation "com.android.support:recyclerview-v$recyclerviewVersion"
-    implementation "de.hdodenhof:circleimageview:$circleimageviewVersion"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation "de.hdodenhof:circleimageview:$circleimageviewVersion"
+
 
 
 }

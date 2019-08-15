@@ -18,12 +18,12 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PullAdapter extends RecyclerView.Adapter<PullAdapter.ViewHolder>{
+public class PullAdapter extends RecyclerView.Adapter<PullAdapter.ViewHolder> {
 
     private List<PullRequests> pullRequestses;
 
 
-    public PullAdapter (List<PullRequests> pullRequestses) {
+    public PullAdapter(List<PullRequests> pullRequestses) {
         this.pullRequestses = pullRequestses;
     }
 
@@ -32,7 +32,7 @@ public class PullAdapter extends RecyclerView.Adapter<PullAdapter.ViewHolder>{
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pull_view_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.pullTitle =  view.findViewById(R.id.pull_title);
+        viewHolder.pullTitle = view.findViewById(R.id.pull_title);
         viewHolder.pullDescription = view.findViewById(R.id.pull_description);
         viewHolder.pullUserAvatar = view.findViewById(R.id.circle_image);
         viewHolder.pullUser = view.findViewById(R.id.pull_user);
@@ -66,6 +66,7 @@ public class PullAdapter extends RecyclerView.Adapter<PullAdapter.ViewHolder>{
         });
 
     }
+
     @Override
     public int getItemCount() {
         return this.pullRequestses.size();
