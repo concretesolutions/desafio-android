@@ -1,0 +1,10 @@
+target 'ConcreteTeste' do
+    use_frameworks!
+	pod 'Toast', '~> 4.0.0'
+	pod 'Firebase/Auth'
+	pod 'Firebase/Database'
+    pod 'Alamofire', '~> 4.7'
+    pod 'SwiftyJSON', '~> 4.0'
+    pod 'ObjectMapper', '~> 3.4'
+  end
+
