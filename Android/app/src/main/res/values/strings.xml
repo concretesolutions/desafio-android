@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Desafio Android</string>
+    <string name="homeActivity">Github JavaPop</string>
+    
+    <string name="buscandoRepos">Aguarde enquanto coletamos os dados do repositório...</string>
+    
+    <string name="buscandoPulls">Buscando Pulls..</string>
 </resources>

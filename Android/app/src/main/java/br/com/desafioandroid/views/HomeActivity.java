@@ -1,9 +1,12 @@
 package br.com.desafioandroid.views;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ import java.util.List;
 import br.com.desafioandroid.R;
 import br.com.desafioandroid.adapters.RepositoryAdapter;
 import br.com.desafioandroid.model.Repository;
+import br.com.desafioandroid.utils.DialogHoldon;
 import br.com.desafioandroid.wsconsumer.RetrofitConfig;
 import br.com.desafioandroid.wsconsumer.responses.ResponseRepositories;
 import retrofit2.Call;
@@ -29,16 +33,31 @@ public class HomeActivity extends AppCompatActivity {
     List<Repository> repositories = new ArrayList<>();
     RepositoryAdapter adapter;
     ImageLoader imageLoader = ImageLoader.getInstance();
+    DialogHoldon dialogHoldon;
     int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setTitle("Github JavaPop");
+        setTitle(getString(R.string.homeActivity));
+        dialogHoldon = new DialogHoldon(this);
+        dialogHoldon.setMessage(getString(R.string.buscandoRepos));
 
         listRepositories = (ListView) findViewById(R.id.listRepositories);
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
+
+        listRepositories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(HomeActivity.this, PullsActivity.class);
+                intent.putExtra("name", repositories.get(i).getOwner().getLogin());
+                intent.putExtra("repo", repositories.get(i).getName());
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         getRepo();
 
@@ -62,7 +81,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     void getRepo() {
-        Call<ResponseRepositories> call = new RetrofitConfig().getService().getAllRepositories("language","stars", page);
+        dialogHoldon.showDialog();
+        Call<ResponseRepositories> call = new RetrofitConfig().getService().getAllRepositories("language:Java","stars", page);
         call.enqueue(new Callback<ResponseRepositories>() {
             @Override
             public void onResponse(Call<ResponseRepositories> call, Response<ResponseRepositories> response) {
@@ -76,11 +96,25 @@ public class HomeActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     }
                 }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialogHoldon.hideDialog();
+                    }
+                });
+
             }
 
             @Override
-            public void onFailure(Call<ResponseRepositories> call, Throwable t) {
-                Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(Call<ResponseRepositories> call, final Throwable t) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialogHoldon.hideDialog();
+                        Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
             }
         });
     }

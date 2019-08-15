@@ -12,36 +12,34 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.desafioandroid.R;
-import br.com.desafioandroid.holder.RepositoryHolder;
-import br.com.desafioandroid.model.Repository;
+import br.com.desafioandroid.holder.PullsHolder;
+import br.com.desafioandroid.model.PullsRequests;
 
-public class RepositoryAdapter extends BaseAdapter {
-    List<Repository> repositoryList = new ArrayList<>();
+public class PullsAdapter extends BaseAdapter {
+    List<PullsRequests> pullsRequests = new ArrayList<PullsRequests>();
     Context context;
     ImageLoader imgLoader;
 
-    public RepositoryAdapter(List<Repository> repositories, Context context, ImageLoader imageLoader) {
-        this.repositoryList = repositories;
+    public PullsAdapter(List<PullsRequests> requests, Context context, ImageLoader imgLoader) {
+        this.pullsRequests = requests;
         this.context = context;
-        this.imgLoader = imageLoader;
+        this.imgLoader = imgLoader;
     }
-
 
     @Override
     public int getCount() {
-        return repositoryList.size();
+        return pullsRequests.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return repositoryList.get(i);
+        return pullsRequests.get(i);
     }
 
     @Override
@@ -51,39 +49,38 @@ public class RepositoryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        final RepositoryHolder holder;
+        final PullsHolder holder;
 
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.list_repositories, viewGroup, false);
-            holder = new RepositoryHolder();
+            view = LayoutInflater.from(context).inflate(R.layout.list_pulls, viewGroup, false);
+            holder = new PullsHolder();
 
             holder.setRepositoryName((TextView) view.findViewById(R.id.repositoryName));
+            holder.setData((TextView) view.findViewById(R.id.data));
             holder.setRepositoryDescription((TextView) view.findViewById(R.id.repositoryDescription));
-            holder.setCountForks((TextView) view.findViewById(R.id.countForks));
-            holder.setCountStars((TextView) view.findViewById(R.id.countStars));
-            holder.setImgUser((ImageView) view.findViewById(R.id.imgUser));
             holder.setUsername((TextView) view.findViewById(R.id.username));
             holder.setFullName((TextView) view.findViewById(R.id.fullName));
+            holder.setImgUser((ImageView) view.findViewById(R.id.imgUser));
             holder.setProgressBar((ProgressBar) view.findViewById(R.id.progressBar));
 
             view.setTag(holder);
         } else {
-            holder = (RepositoryHolder) view.getTag();
+            holder = (PullsHolder) view.getTag();
         }
 
-        Repository repo = repositoryList.get(i);
+        PullsRequests pulls = pullsRequests.get(i);
 
-        holder.getRepositoryName().setText(repo.getName());
-        holder.getRepositoryDescription().setText(repo.getDescription());
-        holder.getCountForks().setText(String.valueOf(repo.getForks()));
-        holder.getCountStars().setText(String.valueOf(repo.getStargazers_count()));
-        holder.getUsername().setText(repo.getOwner().getLogin());
-        holder.getFullName().setText(repo.getFull_name());
+        holder.getRepositoryName().setText(pulls.getTitle());
+
+        String[] dataSplit = pulls.getCreated_at().split("T");
+        String data = formatDate(dataSplit[0]);
+        holder.getData().setText(data);
+        holder.getRepositoryDescription().setText(pulls.getBody());
+        holder.getUsername().setText(pulls.getUser().getLogin());
 
 
-        //set img from url
-
-        imgLoader.displayImage(repo.getOwner().getAvatar_url(), holder.getImgUser(), null, new SimpleImageLoadingListener() {
+        //setando a imagem:
+        imgLoader.displayImage(pulls.getUser().getAvatar_url(), holder.getImgUser(), null, new SimpleImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
                 holder.getImgUser().setImageDrawable(context.getResources().getDrawable(R.drawable.default_user));
@@ -103,7 +100,11 @@ public class RepositoryAdapter extends BaseAdapter {
             }
         });
 
-
         return view;
+    }
+
+    String formatDate(String data) {
+        String[] dataSeparada = data.split("-");
+        return dataSeparada[2] + "/" + dataSeparada[1] + "/" + dataSeparada[0];
     }
 }

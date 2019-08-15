@@ -20,6 +20,8 @@ public class Repository {
 
     String description;
 
+    String pulls_url; //29
+
     public int getId() {
         return id;
     }
@@ -90,5 +92,25 @@ public class Repository {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setForks(Integer forks) {
+        this.forks = forks;
+    }
+
+    public void setStargazers_count(Integer stargazers_count) {
+        this.stargazers_count = stargazers_count;
+    }
+
+    public String getPulls_url() {
+        return pulls_url;
+    }
+
+    public void setPulls_url(String pulls_url) {
+        this.pulls_url = pulls_url;
     }
 }
