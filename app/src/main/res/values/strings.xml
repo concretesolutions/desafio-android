@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GitPop</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="tituloAct1">Top GitHub Java</string>
+    <string name="conteudo">Erico Gomes</string>
+</resources>
