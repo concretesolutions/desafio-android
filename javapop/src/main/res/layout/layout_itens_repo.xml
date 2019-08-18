@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:cdView="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/ltPrincipal">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cdView"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        cdView:cardCornerRadius="10dp"
+        cdView:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/txtNomeRepo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtDescRepo"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtNomeRepo"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="30dp"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:id="@+id/imgFork"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/txtDescRepo"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="39dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fork" />
+
+            <TextView
+                android:id="@+id/txtQtdFork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDescRepo"
+                android:layout_alignStart="@id/imgFork"
+                android:layout_alignRight="@id/imgFork"
+                android:layout_marginStart="43dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="46dp"
+                android:layout_marginRight="-35dp"
+                android:hint="123"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgStart"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/txtDescRepo"
+                android:layout_alignStart="@id/txtQtdFork"
+                android:layout_alignRight="@id/txtQtdFork"
+                android:layout_marginStart="61dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="41dp"
+                android:layout_marginRight="-69dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/estrela" />
+
+            <TextView
+                android:id="@+id/txtQtdStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDescRepo"
+                android:layout_alignStart="@id/imgStart"
+                android:layout_alignRight="@id/imgStart"
+                android:layout_marginStart="39dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="49dp"
+                android:layout_marginRight="-43dp"
+                android:hint="34234"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgUsuario"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="250dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginRight="48dp"
+                android:layout_marginBottom="23dp"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/txtUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtQtdStart"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="-16dp"
+                android:layout_marginEnd="33dp"
+                android:layout_marginRight="33dp"
+                android:hint="JOyce Souza"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
