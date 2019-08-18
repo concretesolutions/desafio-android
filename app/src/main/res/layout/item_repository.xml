@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewRepositoryLogo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:importantForAccessibility="no"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/textViewRepositoryUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewRepositoryLogo"
+        app:layout_constraintStart_toStartOf="@+id/imageViewRepositoryLogo"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewRepositoryLogo"
+        tools:text="@tools:sample/first_names" />
+
+    <TextView
+        android:id="@+id/textViewRepositoryName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewRepositoryLogo"
+        app:layout_constraintTop_toTopOf="@+id/imageViewRepositoryLogo"
+        tools:text="@tools:sample/lorem[5]" />
+
+    <TextView
+        android:id="@+id/textViewRepositoryDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewRepositoryName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRepositoryName"
+        tools:text="@tools:sample/lorem[10]" />
+
+    <ImageView
+        android:id="@+id/imageViewForkCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_star_count"
+        app:layout_constraintStart_toStartOf="@id/textViewRepositoryDescription"
+        app:layout_constraintTop_toBottomOf="@id/textViewRepositoryDescription" />
+
+    <TextView
+        android:id="@+id/textViewForkCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewForkCount"
+        app:layout_constraintStart_toEndOf="@id/imageViewForkCount"
+        app:layout_constraintTop_toTopOf="@+id/imageViewForkCount"
+        tools:text="@tools:sample/us_zipcodes" />
+
+    <ImageView
+        android:id="@+id/imageViewStarCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_star_count"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewForkCount"
+        app:layout_constraintStart_toEndOf="@id/textViewForkCount"
+        app:layout_constraintTop_toTopOf="@+id/imageViewForkCount" />
+
+    <TextView
+        android:id="@+id/textViewStarCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewStarCount"
+        app:layout_constraintStart_toEndOf="@id/imageViewStarCount"
+        app:layout_constraintTop_toTopOf="@+id/imageViewStarCount"
+        tools:text="@tools:sample/us_zipcodes" />
+</androidx.constraintlayout.widget.ConstraintLayout>
