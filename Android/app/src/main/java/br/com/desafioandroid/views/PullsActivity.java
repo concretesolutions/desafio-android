@@ -9,11 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +31,8 @@ import retrofit2.Response;
 public class PullsActivity extends AppCompatActivity {
 
     String repo, name;
+    RelativeLayout emptyPulls;
     DialogHoldon dialogHoldon;
-    ImageLoader imageLoader = ImageLoader.getInstance();
     ListView listPulls;
     List<PullsRequests> pulls = new ArrayList<PullsRequests>();
     PullsAdapter adapter;
@@ -46,9 +45,11 @@ public class PullsActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        imageLoader.init(ImageLoaderConfiguration.createDefault(this));
         dialogHoldon = new DialogHoldon(this);
         dialogHoldon.setMessage(getString(R.string.buscandoPulls));
+
+        emptyPulls = (RelativeLayout) findViewById(R.id.emptyPulls);
+        emptyPulls.setVisibility(View.GONE);
         listPulls = (ListView) findViewById(R.id.listPulls);
 
         Bundle extras = getIntent().getExtras();
@@ -81,8 +82,18 @@ public class PullsActivity extends AppCompatActivity {
              public void onResponse(Call<List<PullsRequests>> call, Response<List<PullsRequests>> response) {
 
                  pulls = response.body();
-                 adapter = new PullsAdapter(pulls, PullsActivity.this, imageLoader);
-                 listPulls.setAdapter(adapter);
+                 Gson gson = new Gson();
+
+
+                 Log.e("TESTE > ", gson.toJson(pulls));
+                 if (pulls.size()>0) {
+                     emptyPulls.setVisibility(View.GONE);
+                     adapter = new PullsAdapter(pulls, PullsActivity.this, name + "/" + repo);
+                     listPulls.setAdapter(adapter);
+                 } else {
+                     emptyPulls.setVisibility(View.VISIBLE);
+
+                 }
                  runOnUiThread(new Runnable() {
                      @Override
                      public void run() {

@@ -1,18 +1,20 @@
 package br.com.desafioandroid.views;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import br.com.desafioandroid.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     ListView listRepositories;
     List<Repository> repositories = new ArrayList<>();
     RepositoryAdapter adapter;
-    ImageLoader imageLoader = ImageLoader.getInstance();
+    ImageLoader imageLoader;//ImageLoader.getInstance();
     DialogHoldon dialogHoldon;
     int page = 1;
 
@@ -45,7 +47,16 @@ public class HomeActivity extends AppCompatActivity {
         dialogHoldon.setMessage(getString(R.string.buscandoRepos));
 
         listRepositories = (ListView) findViewById(R.id.listRepositories);
-        imageLoader.init(ImageLoaderConfiguration.createDefault(this));
+
+        int MyVersion = Build.VERSION.SDK_INT;
+        if (MyVersion > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            if (!checkIfAlreadyhavePermission()) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE}, 101);
+
+            }
+        }
 
         listRepositories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (resp.getItems()!= null && resp.getItems().size()>0) {
                     repositories.addAll(resp.getItems());
                     if (page == 1) {
-                        adapter = new RepositoryAdapter(repositories, HomeActivity.this, imageLoader);
+                        adapter = new RepositoryAdapter(repositories, HomeActivity.this);
                         listRepositories.setAdapter(adapter);
                     } else {
                         adapter.notifyDataSetChanged();
@@ -117,6 +128,15 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private boolean checkIfAlreadyhavePermission() {
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

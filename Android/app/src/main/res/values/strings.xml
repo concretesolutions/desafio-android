@@ -5,4 +5,6 @@
     <string name="buscandoRepos">Aguarde enquanto coletamos os dados do repositório...</string>
     
     <string name="buscandoPulls">Buscando Pulls..</string>
+
+    <string name="noPulls">Não existem pulls para este repositório...</string>
 </resources>

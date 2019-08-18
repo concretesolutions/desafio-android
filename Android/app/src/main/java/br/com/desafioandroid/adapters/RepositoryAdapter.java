@@ -10,10 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import br.com.desafioandroid.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +24,11 @@ public class RepositoryAdapter extends BaseAdapter {
     Context context;
     ImageLoader imgLoader;
 
-    public RepositoryAdapter(List<Repository> repositories, Context context, ImageLoader imageLoader) {
+    public RepositoryAdapter(List<Repository> repositories, Context context) {
         this.repositoryList = repositories;
         this.context = context;
-        this.imgLoader = imageLoader;
+        this.imgLoader = new ImageLoader(context);
+
     }
 
 
@@ -64,7 +62,6 @@ public class RepositoryAdapter extends BaseAdapter {
             holder.setImgUser((ImageView) view.findViewById(R.id.imgUser));
             holder.setUsername((TextView) view.findViewById(R.id.username));
             holder.setFullName((TextView) view.findViewById(R.id.fullName));
-            holder.setProgressBar((ProgressBar) view.findViewById(R.id.progressBar));
 
             view.setTag(holder);
         } else {
@@ -83,25 +80,7 @@ public class RepositoryAdapter extends BaseAdapter {
 
         //set img from url
 
-        imgLoader.displayImage(repo.getOwner().getAvatar_url(), holder.getImgUser(), null, new SimpleImageLoadingListener() {
-            @Override
-            public void onLoadingStarted(String imageUri, View view) {
-                holder.getImgUser().setImageDrawable(context.getResources().getDrawable(R.drawable.default_user));
-                holder.getProgressBar().setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                holder.getProgressBar().setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                holder.getProgressBar().setVisibility(View.GONE);
-                holder.getImgUser().setImageBitmap(loadedImage);
-
-            }
-        });
+        imgLoader.displayImage(repo.getOwner().getAvatar_url(), holder.getImgUser());
 
 
         return view;

@@ -7,7 +7,6 @@ import android.widget.TextView;
 public class PullsHolder {
     TextView repositoryName, data, repositoryDescription, username, fullName;
     ImageView imgUser;
-    ProgressBar progressBar;
 
     public TextView getRepositoryName() {
         return repositoryName;
@@ -57,11 +56,4 @@ public class PullsHolder {
         this.imgUser = imgUser;
     }
 
-    public ProgressBar getProgressBar() {
-        return progressBar;
-    }
-
-    public void setProgressBar(ProgressBar progressBar) {
-        this.progressBar = progressBar;
-    }
 }

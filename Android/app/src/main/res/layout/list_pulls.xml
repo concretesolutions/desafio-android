@@ -62,12 +62,6 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_width="25dp"
-                android:layout_height="25dp" />
         </RelativeLayout>
 
         <RelativeLayout

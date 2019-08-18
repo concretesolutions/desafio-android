@@ -16,7 +16,7 @@ public class RetrofitConfig {
     }
 
     public ApiService getService() {
-        return this.retrofit.create(ApiService.class);
+        return RetrofitConfig.this.retrofit.create(ApiService.class);
     }
 
 }

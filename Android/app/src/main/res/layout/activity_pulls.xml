@@ -6,6 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".views.PullsActivity">
 
+    <RelativeLayout
+        android:id="@+id/emptyPulls"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgFail"
+            android:src="@drawable/box"
+            android:layout_centerHorizontal="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:layout_below="@id/imgFail"
+            android:text="@string/noPulls"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:textSize="30dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
     <ListView
         android:id="@+id/listPulls"
         android:layout_width="match_parent"
