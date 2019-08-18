@@ -1,6 +1,5 @@
 package dev.theuzfaleiro.trendingongithub.ui.feature.home.model.data
 
-import dev.theuzfaleiro.trendingongithub.ui.feature.home.model.response.Owner
 import dev.theuzfaleiro.trendingongithub.ui.feature.home.model.response.Repository
 
 data class Repository(

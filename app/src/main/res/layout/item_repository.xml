@@ -14,7 +14,7 @@
         android:importantForAccessibility="no"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textViewRepositoryUserName"

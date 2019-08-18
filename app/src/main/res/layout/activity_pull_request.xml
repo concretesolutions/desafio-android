@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.home.HomeActivity">
+    tools:context=".ui.feature.pullrequest.PullRequestActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewRepository"
+        android:id="@+id/recyclerViewPullRequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="11"
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_repository"
+        tools:listitem="@layout/item_pull_request"
         tools:orientation="vertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
