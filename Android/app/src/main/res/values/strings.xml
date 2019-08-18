@@ -7,4 +7,7 @@
     <string name="buscandoPulls">Buscando Pulls..</string>
 
     <string name="noPulls">Não existem pulls para este repositório...</string>
+
+    <string name="offlineWithData">Verifique sua conexão com a Interent! Carregado dados salvos em memória...</string>
+    <string name="offline">Verifique a sua conexão com a Internet!</string>
 </resources>

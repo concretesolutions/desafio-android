@@ -7,6 +7,9 @@ public class RetrofitConfig {
 
     private final Retrofit retrofit;
 
+    public static final String preferencias = "preferencias";
+    public static final String objOffline = "objOffline";
+
     public RetrofitConfig() {
 
         retrofit = new Retrofit.Builder()
