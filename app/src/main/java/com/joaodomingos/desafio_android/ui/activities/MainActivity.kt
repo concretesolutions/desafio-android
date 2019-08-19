@@ -1,7 +1,8 @@
-package com.joaodomingos.desafio_android
+package com.joaodomingos.desafio_android.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.joaodomingos.desafio_android.R
 
 class MainActivity : AppCompatActivity() {
 
