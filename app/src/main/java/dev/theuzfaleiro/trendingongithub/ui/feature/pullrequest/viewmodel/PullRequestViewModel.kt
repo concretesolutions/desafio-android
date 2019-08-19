@@ -11,18 +11,29 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
+private const val INFORMATION = 0
+private const val LOADING = 1
+private const val ERROR = 2
+
 class PullRequestViewModel(private val pullRequestRepository: PullRequestRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
     private val pullRequests = MutableLiveData<List<PullRequest>>()
 
+    private val loadingProgressBar = MutableLiveData<Int>()
+
     fun getRepositories(): LiveData<List<PullRequest>> = pullRequests
+
+    fun getLoading(): LiveData<Int> = loadingProgressBar
 
     fun fetchPullRequests(username: String, repositoryName: String) {
         pullRequestRepository.fetchPullRequests(username, repositoryName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { loadingProgressBar.postValue(LOADING) }
+            .doOnSuccess { loadingProgressBar.postValue(INFORMATION) }
+            .doOnError { loadingProgressBar.postValue(ERROR) }
             .subscribeBy(
                 onSuccess = {
                     pullRequests.postValue(it)
@@ -32,7 +43,6 @@ class PullRequestViewModel(private val pullRequestRepository: PullRequestReposit
                 }
             ).addTo(compositeDisposable)
     }
-
 
     override fun onCleared() {
         super.onCleared()

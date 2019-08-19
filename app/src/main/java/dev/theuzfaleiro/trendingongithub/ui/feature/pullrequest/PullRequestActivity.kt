@@ -32,13 +32,12 @@ class PullRequestActivity : DaggerAppCompatActivity() {
     private val pullRequestAdapter: PullRequestAdapter by lazy {
         PullRequestAdapter {
             startActivity(
-                Intent(this, PullRequestDetailActivity::class.java).apply {
-                    putExtras(
-                        bundleOf(
-                            PULL_REQUEST_URL to it.url
-                        )
+                Intent(this, PullRequestDetailActivity::class.java).putExtras(
+                    bundleOf(
+                        PULL_REQUEST_URL to it.url
                     )
-                })
+                )
+            )
         }
     }
 
@@ -51,11 +50,18 @@ class PullRequestActivity : DaggerAppCompatActivity() {
 
         setUpRecyclerView()
 
-        pullRequestViewModel.getRepositories().observe(this, Observer {
-            pullRequestAdapter.submitList(it)
-        })
+        with(pullRequestViewModel) {
 
-        pullRequestViewModel.fetchPullRequests(username, repositoryName)
+            getRepositories().observe(this@PullRequestActivity, Observer {
+                pullRequestAdapter.submitList(it)
+            })
+
+            getLoading().observe(this@PullRequestActivity, Observer {
+                viewFlipperPullRequest.displayedChild = it
+            })
+
+            fetchPullRequests(username, repositoryName)
+        }
     }
 
     private fun setUpRecyclerView() {

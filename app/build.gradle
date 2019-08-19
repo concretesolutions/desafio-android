@@ -19,7 +19,8 @@ android {
 
         versionCode 1
         versionName '1.0'
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner 'dev.theuzfaleiro.trendingongithub.runner.TrendingOnGitHubRunner'
     }
 
     buildTypes {
@@ -114,7 +115,22 @@ dependencies {
     //Rx Unit Testing
     testImplementation 'com.github.Plastix.RxSchedulerRule:rx2:1.0.2'
 
+    //Dagger2
+    androidTestImplementation "com.google.dagger:dagger:${versions.daggerVersion}"
+    androidTestImplementation "com.google.dagger:dagger-android-support:${versions.daggerVersion}"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:${versions.daggerVersion}"
+    kaptAndroidTest "com.google.dagger:dagger-android-processor:${versions.daggerVersion}"
+
+    //RESTMock
+    androidTestImplementation "com.github.andrzejchm.RESTMock:android:${versions.restMockVersion}"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espressoVersion}"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:${versions.espressoVersion}"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:${versions.espressoVersion}"
+
+    androidTestImplementation "androidx.test:runner:${versions.androidTestVersion}"
+    androidTestImplementation "androidx.test:rules:${versions.androidTestVersion}"
 }

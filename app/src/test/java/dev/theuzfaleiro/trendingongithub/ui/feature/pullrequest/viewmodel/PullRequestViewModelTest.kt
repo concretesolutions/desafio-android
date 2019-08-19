@@ -15,6 +15,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
+private const val ERROR = 3
+
 class PullRequestViewModelTest {
 
     @get:Rule
@@ -33,8 +35,7 @@ class PullRequestViewModelTest {
     }
 
     @Test
-    fun shouldDisplayAvailablePullRequestsWereFetched() {
-        //arrange
+    fun shouldDisplayOpenPullRequests_WhenFetchOpenPullRequests() {
         every {
             pullRequestRepository.fetchPullRequests("theuzfaleiro", "minimal-weather")
         } returns Single.just(
@@ -49,10 +50,8 @@ class PullRequestViewModelTest {
             )
         )
 
-        //act
         pullRequestViewModel.fetchPullRequests("theuzfaleiro", "minimal-weather")
 
-        //assert
         assertEquals(
             "First Pull Request Title",
             pullRequestViewModel.getRepositories().value!!.first().title
@@ -60,16 +59,14 @@ class PullRequestViewModelTest {
     }
 
     @Test
-    fun shouldDisplayAnErrorWhenNoRepositoriesWereFetched() {
-        //arrange
+    fun shouldDisplayAnError_WhenNoRepositoriesWereFetched() {
         every {
             pullRequestRepository.fetchPullRequests("theuzfaleiro", "minimal-weather")
         } returns Single.error(Throwable())
 
-        //act
         pullRequestViewModel.fetchPullRequests("theuzfaleiro", "minimal-weather")
 
-        //assert
         assertNull(pullRequestViewModel.getRepositories().value)
+        assertEquals(pullRequestViewModel.getLoading().value, ERROR)
     }
 }

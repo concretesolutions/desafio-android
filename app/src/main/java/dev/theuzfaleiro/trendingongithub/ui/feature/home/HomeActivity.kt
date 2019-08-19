@@ -29,14 +29,12 @@ class HomeActivity : DaggerAppCompatActivity() {
     private val repositoryAdapter: RepositoryAdapter by lazy {
         RepositoryAdapter {
             startActivity(
-                Intent(this, PullRequestActivity::class.java).apply {
-                    putExtras(
-                        bundleOf(
-                            PULL_REQUEST_REPOSITORY_NAME to it.name,
-                            PULL_REQUEST_OWNER_NAME to it.owner.userName
-                        )
+                Intent(this, PullRequestActivity::class.java).putExtras(
+                    bundleOf(
+                        PULL_REQUEST_REPOSITORY_NAME to it.name,
+                        PULL_REQUEST_OWNER_NAME to it.owner.userName
                     )
-                }
+                )
             )
         }
     }
@@ -47,9 +45,18 @@ class HomeActivity : DaggerAppCompatActivity() {
 
         setUpRecyclerView()
 
-        homeViewModel.getRepositories().observe(this, Observer {
-            repositoryAdapter.submitList(it)
-        })
+        with(homeViewModel) {
+
+            getRepositories().observe(this@HomeActivity, Observer {
+                repositoryAdapter.submitList(it)
+            })
+
+            getLoading().observe(this@HomeActivity, Observer {
+                viewFlipperRepository.displayedChild = it
+            })
+
+            fetchRepositories()
+        }
     }
 
     private fun setUpRecyclerView() {

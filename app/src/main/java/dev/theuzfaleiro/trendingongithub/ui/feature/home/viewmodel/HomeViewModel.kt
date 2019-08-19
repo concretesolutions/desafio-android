@@ -12,20 +12,29 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
+private const val INFORMATION = 0
+private const val LOADING = 1
+private const val ERROR = 2
+
 class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
-    private val repositories: MutableLiveData<PagedList<Repository>> by lazy {
-        MutableLiveData<PagedList<Repository>>().also {
-            fetchRepositories()
-        }
-    }
+    private val repositories = MutableLiveData<PagedList<Repository>>()
 
-    private fun fetchRepositories() {
+    private val loadingProgressBar = MutableLiveData<Int>()
+
+    fun getRepositories(): LiveData<PagedList<Repository>> = repositories
+
+    fun getLoading(): LiveData<Int> = loadingProgressBar
+
+    fun fetchRepositories() {
         homeRepository.fetchTrendingRepositories()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { loadingProgressBar.postValue(LOADING) }
+            .doOnNext { loadingProgressBar.postValue(INFORMATION) }
+            .doOnError { loadingProgressBar.postValue(ERROR) }
             .subscribeBy(
                 onNext = {
                     repositories.postValue(it)
@@ -35,8 +44,6 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
                 }
             ).addTo(compositeDisposable)
     }
-
-    fun getRepositories(): LiveData<PagedList<Repository>> = repositories
 
     override fun onCleared() {
         super.onCleared()
