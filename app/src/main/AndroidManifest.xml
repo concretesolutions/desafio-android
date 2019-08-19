@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="br.com.erico.desafio_android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -8,10 +13,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppThemeDark"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".activities.SplashScreen"
+            android:name=".views.SplashScreen"
             android:label="@string/app_name"
             android:theme="@style/AppCompat.TelaCheia">
             <intent-filter>
@@ -22,14 +28,12 @@
         </activity>
 
         <activity
-            android:name=".activities.RepositoryList"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".views.Repositories"
+            android:label="@string/app_name">
+        </activity>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+        <activity
+            android:name=".views.DescriptionRequest">
         </activity>
     </application>
 

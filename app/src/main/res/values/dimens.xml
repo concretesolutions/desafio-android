@@ -1,3 +1,15 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fork_size">15dp</dimen>
+    <dimen name="star_size">20dp</dimen>
+
+    <!-- Screen Margins Repositories -->
+    <dimen name="activity_margin_horizontal">15dp</dimen>
+    <dimen name="activity_margin_vertical">15dp</dimen>
+
+    <!-- Screen Margins Repository List -->
+    <dimen name="tp_activity_horizontal_margin">10dp</dimen>
+    <dimen name="tp_activity_vertical_margin">10dp</dimen>
+    <dimen name="tp_layout_horizontal_margin">5dp</dimen>
+    <dimen name="tp_layout_vertical_margin">5dp</dimen>
+    <dimen name="tp_margem_botoes">10dp</dimen>
 </resources>

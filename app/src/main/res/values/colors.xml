@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#8C9EFF</color>
+    <color name="titulo">#1A237E</color>
+    <color name="fork_star">#FF8C00</color>
+    <color name="body">#000000</color>
+    <color name="green">#338b18</color>
 </resources>

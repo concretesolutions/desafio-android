@@ -1,4 +1,4 @@
-package br.com.erico.desafio_android.activities;
+package br.com.erico.desafio_android.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,14 +16,15 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 repositoryList();
             }
         }, 2000);
     }
 
-    public void repositoryList(){
-        Intent intent = new Intent(SplashScreen.this, RepositoryList.class);
+    public void repositoryList() {
+        Intent intent = new Intent(SplashScreen.this, Repositories.class);
         startActivity(intent);
         finish();
     }
