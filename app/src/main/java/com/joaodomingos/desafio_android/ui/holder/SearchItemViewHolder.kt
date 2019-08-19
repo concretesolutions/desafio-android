@@ -18,6 +18,7 @@ class SearchItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             itemView.txt_forks .text = searchItem.forksCount.toString()
             itemView.txt_stars.text = searchItem.starsCount.toString()
             itemView.txt_username.text = searchItem.owner.userName
+            itemView.txt_description.text = searchItem.description
             Picasso.get().load(searchItem.owner.avatarUrl).into(itemView.img_avatar)
         }
     }
