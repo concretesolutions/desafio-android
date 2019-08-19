@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">desafio-android</string>
+    <string name="error_reload">Erro ao carregar a pagina, clique para recarregar</string>
+    <string name="img_repository">Imagem do repositório</string>
+    <string name="fork_imagem">Fork imagem</string>
+    <string name="star_image">estrelas imagem</string>
 </resources>
