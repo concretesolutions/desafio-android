@@ -9,16 +9,17 @@ import com.joaodomingos.desafio_android.models.SearchItensModel
 import com.joaodomingos.desafio_android.ui.holder.ListFooterViewHolder
 import com.joaodomingos.desafio_android.ui.holder.SearchItemViewHolder
 
-class SearchListItemAdapter(private val retry: () -> Unit)
-    : PagedListAdapter<SearchItensModel, RecyclerView.ViewHolder>(NewsDiffCallback) {
+class SearchListItemAdapter(private  val retry: () -> Unit)
+    : PagedListAdapter<SearchItensModel, RecyclerView.ViewHolder>(ItemDiffCallback) {
 
     private val DATA_VIEW_TYPE = 1
     private val FOOTER_VIEW_TYPE = 2
 
+
     private var state = State.LOADING
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == DATA_VIEW_TYPE) SearchItemViewHolder.create(parent) else ListFooterViewHolder.create(retry, parent)
+        return if (viewType == DATA_VIEW_TYPE) SearchItemViewHolder.create(parent, parent.context) else ListFooterViewHolder.create(retry, parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -32,7 +33,7 @@ class SearchListItemAdapter(private val retry: () -> Unit)
     }
 
     companion object {
-        val NewsDiffCallback = object : DiffUtil.ItemCallback<SearchItensModel>() {
+        val ItemDiffCallback = object : DiffUtil.ItemCallback<SearchItensModel>() {
             override fun areItemsTheSame(oldItem: SearchItensModel, newItem: SearchItensModel): Boolean {
                 return oldItem.name == newItem.name
             }

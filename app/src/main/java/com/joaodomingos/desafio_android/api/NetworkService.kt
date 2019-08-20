@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface NetworkService {
     @GET("search/repositories?q=language:Java&sort=stars")
-    fun getNews(@Query("page") page: Int): Single<SearchListItensModel>
+    fun getSearchListItens(@Query("page") page: Int): Single<SearchListItensModel>
 
     companion object {
         fun getService(): NetworkService {

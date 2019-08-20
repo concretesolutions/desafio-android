@@ -22,7 +22,7 @@ class ItemDataSource (
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, SearchItensModel>) {
         updateState(State.LOADING)
         compositeDisposable.add(
-            networkService.getNews(1)
+            networkService.getSearchListItens(1)
                 .subscribe(
                     { response ->
                         updateState(State.DONE)
@@ -42,7 +42,7 @@ class ItemDataSource (
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, SearchItensModel>) {
         updateState(State.LOADING)
         compositeDisposable.add(
-            networkService.getNews(params.key)
+            networkService.getSearchListItens(params.key)
                 .subscribe(
                     { response ->
                         updateState(State.DONE)

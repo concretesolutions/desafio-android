@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: SearchListItensViewModel
-    private lateinit var newsListAdapter: SearchListItemAdapter
+    private lateinit var adapter: SearchListItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        newsListAdapter = SearchListItemAdapter { viewModel.retry() }
+        adapter = SearchListItemAdapter { viewModel.retry() }
         recycler_view.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recycler_view.adapter = newsListAdapter
-        viewModel.newsList.observe(this, Observer {
-            newsListAdapter.submitList(it)
+        recycler_view.adapter = adapter
+        viewModel.itemList.observe(this, Observer {
+            adapter.submitList(it)
         })
     }
 
@@ -43,9 +43,8 @@ class MainActivity : AppCompatActivity() {
             progress_bar.visibility = if (viewModel.listIsEmpty() && state == State.LOADING) View.VISIBLE else View.GONE
             txt_error.visibility = if (viewModel.listIsEmpty() && state == State.ERROR) View.VISIBLE else View.GONE
             if (!viewModel.listIsEmpty()) {
-                newsListAdapter.setState(state ?: State.DONE)
+                adapter.setState(state ?: State.DONE)
             }
         })
     }
-
 }

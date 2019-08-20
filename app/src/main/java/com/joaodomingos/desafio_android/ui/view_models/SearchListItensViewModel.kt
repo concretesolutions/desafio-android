@@ -1,5 +1,6 @@
 package com.joaodomingos.desafio_android.ui.view_models
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -15,31 +16,31 @@ import io.reactivex.disposables.CompositeDisposable
 class SearchListItensViewModel: ViewModel() {
 
     private val networkService = NetworkService.getService()
-    var newsList: LiveData<PagedList<SearchItensModel>>
+    var itemList: LiveData<PagedList<SearchItensModel>>
     private val compositeDisposable = CompositeDisposable()
     private val pageSize = 5
-    private val newsDataSourceFactory: SearchItensDataSourceFactory
+    private val itemDataSourceFactory: SearchItensDataSourceFactory
 
     init {
-        newsDataSourceFactory = SearchItensDataSourceFactory(compositeDisposable, networkService)
+        itemDataSourceFactory = SearchItensDataSourceFactory(compositeDisposable, networkService)
         val config = PagedList.Config.Builder()
             .setPageSize(pageSize)
             .setInitialLoadSizeHint(pageSize * 2)
             .setEnablePlaceholders(false)
             .build()
-        newsList = LivePagedListBuilder<Int, SearchItensModel>(newsDataSourceFactory, config).build()
+        itemList = LivePagedListBuilder<Int, SearchItensModel>(itemDataSourceFactory, config).build()
     }
 
 
     fun getState(): LiveData<State> = Transformations.switchMap<ItemDataSource,
-            State>(newsDataSourceFactory.newsDataSourceLiveData, ItemDataSource::state)
+            State>(itemDataSourceFactory.itemDataSourceLiveData, ItemDataSource::state)
 
     fun retry() {
-        newsDataSourceFactory.newsDataSourceLiveData.value?.retry()
+        itemDataSourceFactory.itemDataSourceLiveData.value?.retry()
     }
 
     fun listIsEmpty(): Boolean {
-        return newsList.value?.isEmpty() ?: true
+        return itemList.value?.isEmpty() ?: true
     }
 
     override fun onCleared() {

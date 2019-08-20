@@ -13,11 +13,11 @@ class SearchItensDataSourceFactory (
 )
     : DataSource.Factory<Int, SearchItensModel>() {
 
-    val newsDataSourceLiveData = MutableLiveData<ItemDataSource>()
+    val itemDataSourceLiveData = MutableLiveData<ItemDataSource>()
 
     override fun create(): DataSource<Int, SearchItensModel> {
         val itemDataSource = ItemDataSource(networkService, compositeDisposable)
-        newsDataSourceLiveData.postValue(itemDataSource)
+        itemDataSourceLiveData.postValue(itemDataSource)
         return itemDataSource
     }
 }
