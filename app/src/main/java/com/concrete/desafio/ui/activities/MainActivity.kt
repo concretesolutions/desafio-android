@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
-
+        toolbar.setTitle("Github Repositórios")
         recycler_view.adapter = repositoriosAdapter
         recycler_view.layoutManager = LinearLayoutManager(this)
 
