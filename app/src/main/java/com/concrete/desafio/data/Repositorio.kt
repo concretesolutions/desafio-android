@@ -27,7 +27,12 @@ data class Repositorio(
 
     @Expose
     @SerializedName("owner")
-    val autor: Autor
+    val autor: Autor,
+
+    @Expose
+    @SerializedName("full_name")
+    val nomeCompleto: String
+
 )
 
 data class Repositorios(

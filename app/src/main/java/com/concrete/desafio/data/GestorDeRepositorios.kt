@@ -19,11 +19,11 @@ class GestorDeRepositorios(val gitHubServiceAPI: GitHubServiceAPI) {
 
     fun getRepositorios() = mRepositorios
 
-    fun buscarRepositorios() {
+    fun buscarRepositorios(pagina: Int) {
 
         val gitHubServiceRepositorios: GitHubService = gitHubServiceAPI.getGitHubService()
 
-        val call = gitHubServiceRepositorios.listarRepositorios()
+        val call = gitHubServiceRepositorios.listarRepositorios(pagina.toString())
 
         CoroutineScope(Dispatchers.IO).launch {
 

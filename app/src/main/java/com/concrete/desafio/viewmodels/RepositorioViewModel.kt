@@ -12,11 +12,15 @@ class RepositorioViewModel(val gestorRepositorios: GestorDeRepositorios): ViewMo
 
     fun getRepositorios(): LiveData<MutableList<Repositorio>>? {
         if(mRepositorios == null){
-            gestorRepositorios.buscarRepositorios()
+            buscarRepositorios(1)
             mRepositorios = gestorRepositorios.getRepositorios()
         }
 
         return mRepositorios
+    }
+
+    fun buscarRepositorios(pagina: Int){
+        gestorRepositorios.buscarRepositorios(pagina)
     }
 
 }

@@ -11,7 +11,10 @@ class MyApplication : Application() {
 
         startKoin(
             this,
-            listOf(ModulosDeDependencias.moduloDaApp)
+            listOf(
+                ModulosDeDependencias.moduloDeRepositorios,
+                ModulosDeDependencias.moduloDePullRequest
+                )
             )
     }
 }

@@ -87,7 +87,7 @@
             android:layout_height="50dp"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/avatar"
-            app:civ_border_color="#5c0000"
+            app:civ_border_color="#4a77aa"
             app:civ_border_width="1dp"
             app:layout_constraintEnd_toEndOf="@id/autor"
             app:layout_constraintStart_toStartOf="@id/autor"
