@@ -61,4 +61,29 @@
             android:layout_marginStart="5dp"
     />
 
+    <ImageView
+            android:id="@+id/date_icon"
+            app:layout_constraintTop_toTopOf="@id/data"
+            app:layout_constraintBottom_toBottomOf="@id/data"
+            app:layout_constraintEnd_toStartOf="@id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_date"
+    />
+
+    <TextView
+            app:layout_constraintTop_toTopOf="@id/autor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/autor"
+            android:id="@+id/data"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:width="70dp"
+            android:maxLines="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+    />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

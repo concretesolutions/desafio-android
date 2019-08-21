@@ -27,7 +27,11 @@ data class PullRequest(
 
     @Expose
     @SerializedName("created_at")
-    val data: String
+    val data: String,
+
+    @Expose
+    @SerializedName("html_url")
+    val url: String
 
 )
 
