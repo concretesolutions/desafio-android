@@ -7,13 +7,13 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.intent.rule.IntentsTestRule
-import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import dev.theuzfaleiro.trendingongithub.R
 import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequestdetail.PULL_REQUEST_URL
 import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequestdetail.PullRequestDetailActivity
@@ -42,18 +42,57 @@ class PullRequestActivityTest {
         pullRequestActivity.launchActivity(Intent())
 
         onView(withText("Mention the `master` branch as the target of pull requests in contrib…"))
-            .check(matches(ViewMatchers.isDisplayed()))
+            .check(matches(isDisplayed()))
     }
 
     @Test
-    fun shouldDisplayRetryMessage_WhenFetchRepositoriesFromAPI() {
+    fun shouldDisplayGoBackButton_WhenFetchNoOpenPullRequestsFromAPI() {
+        RESTMockServer.whenGET(pathContains("repos"))
+            .thenReturnString(200, "[]")
+
+        pullRequestActivity.launchActivity(Intent())
+
+        onView(withText(R.string.pull_request_title_any_open_pull_requests))
+            .check(matches(isDisplayed()))
+
+        onView(withText(R.string.pull_request_message_any_open_pull_requests))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.buttonPullRequestGoBack))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldDisplayRetryMessage_WhenFetchOpenPullRequestsFromAPI() {
         RESTMockServer.whenGET(pathContains("repos"))
             .thenReturnEmpty(404)
 
         pullRequestActivity.launchActivity(Intent())
 
+        onView(withText(R.string.pull_request_title_error_no_internet_connection))
+            .check(matches(isDisplayed()))
+
+        onView(withText(R.string.pull_request_message_check_your_mobile_data_or_wi_fi))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.buttonPullRequestRetry))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldDisplayPullRequests_WhenRetryButtonWasClicked() {
+        RESTMockServer.whenGET(pathContains("repos"))
+            .thenReturnEmpty(404)
+            .thenReturnFile(200, "pullrequest/pull-requests.json")
+
+        pullRequestActivity.launchActivity(Intent())
+
+        onView(withId(R.id.buttonPullRequestRetry))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
         onView(withText("Mention the `master` branch as the target of pull requests in contrib…"))
-            .check(matches(ViewMatchers.isDisplayed()))
+            .check(matches(isDisplayed()))
     }
 
     @Test
@@ -63,7 +102,7 @@ class PullRequestActivityTest {
 
         pullRequestActivity.launchActivity(Intent())
 
-        onView(ViewMatchers.withId(R.id.recyclerViewPullRequest)).perform(
+        onView(withId(R.id.recyclerViewPullRequest)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
                 15
             )
@@ -88,10 +127,10 @@ class PullRequestActivityTest {
         Intents.intending(IntentMatchers.hasComponent(PullRequestDetailActivity::class.java.name))
             .respondWith(activityResult)
 
-        onView(ViewMatchers.withId(R.id.recyclerViewPullRequest)).perform(
+        onView(withId(R.id.recyclerViewPullRequest)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
-                ViewActions.click()
+                click()
             )
         )
 

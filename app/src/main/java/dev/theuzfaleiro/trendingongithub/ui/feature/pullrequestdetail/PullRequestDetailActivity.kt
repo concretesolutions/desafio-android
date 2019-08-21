@@ -15,6 +15,6 @@ class PullRequestDetailActivity : AppCompatActivity() {
 
         val pullRequestUrl = intent.getStringExtra(PULL_REQUEST_URL).orEmpty()
 
-        pullRequestDetailWebView.loadUrl(pullRequestUrl)
+        webViewPullRequestDetail.loadUrl(pullRequestUrl)
     }
 }

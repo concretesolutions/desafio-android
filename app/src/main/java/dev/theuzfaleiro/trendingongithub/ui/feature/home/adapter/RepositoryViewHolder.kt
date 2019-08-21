@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.transform.CircleCropTransformation
+import dev.theuzfaleiro.trendingongithub.R
 import dev.theuzfaleiro.trendingongithub.ui.feature.home.model.data.Repository
 import kotlinx.android.synthetic.main.item_repository.view.*
 
@@ -22,7 +23,8 @@ class RepositoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     ) {
         repositoryLogo.load(repository.owner.avatarUrl) {
             crossfade(true)
-            placeholder(android.R.drawable.alert_dark_frame)
+            placeholder(R.drawable.ic_image_placeholder)
+            error(R.drawable.ic_image_placeholder)
             transformations(CircleCropTransformation())
         }
 

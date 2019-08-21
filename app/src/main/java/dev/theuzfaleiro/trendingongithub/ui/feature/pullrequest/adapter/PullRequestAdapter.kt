@@ -22,7 +22,7 @@ class PullRequestAdapter(private val pullRequestSelected: (pullRequests: PullReq
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         with(holder as PullRequestViewHolder) {
-            bindItemsToView(getItem(position)!!, pullRequestSelected)
+            bindItemsToView(requireNotNull(getItem(position)), pullRequestSelected)
         }
     }
 }

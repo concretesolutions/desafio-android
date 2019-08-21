@@ -125,6 +125,7 @@ dependencies {
     androidTestImplementation "com.github.andrzejchm.RESTMock:android:${versions.restMockVersion}"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation 'io.kotlintest:kotlintest-runner-junit5:3.3.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espressoVersion}"
@@ -133,4 +134,5 @@ dependencies {
 
     androidTestImplementation "androidx.test:runner:${versions.androidTestVersion}"
     androidTestImplementation "androidx.test:rules:${versions.androidTestVersion}"
+
 }

@@ -24,7 +24,6 @@ class RepositoryDataSource(private val gitHubEndpoint: GitHubEndpoint) :
                     loadInitialCallback.onResult(it, 1, 2)
                 },
                 onError = {
-                    TODO("Handle Error For Loading Repositories")
                 }).addTo(CompositeDisposable())
     }
 

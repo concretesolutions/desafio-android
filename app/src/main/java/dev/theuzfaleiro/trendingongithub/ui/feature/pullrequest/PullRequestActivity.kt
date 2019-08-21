@@ -2,6 +2,7 @@ package dev.theuzfaleiro.trendingongithub.ui.feature.pullrequest
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,6 +15,8 @@ import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequest.viewmodel.PullRe
 import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequestdetail.PULL_REQUEST_URL
 import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequestdetail.PullRequestDetailActivity
 import kotlinx.android.synthetic.main.activity_pull_request.*
+import kotlinx.android.synthetic.main.layout_connection_error.*
+import kotlinx.android.synthetic.main.layout_no_pull_requests.*
 import javax.inject.Inject
 
 const val PULL_REQUEST_REPOSITORY_NAME = "PULL_REQUEST_REPOSITORY_NAME"
@@ -44,14 +47,17 @@ class PullRequestActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_request)
+        setSupportActionBar(findViewById(R.id.toolbarRepository))
+        requireNotNull(supportActionBar).setDisplayHomeAsUpEnabled(true)
 
-        val username = intent.getStringExtra(PULL_REQUEST_OWNER_NAME).orEmpty()
-        val repositoryName = intent.getStringExtra(PULL_REQUEST_REPOSITORY_NAME).orEmpty()
+        val username = getRepositoryOwnerUsername()
+        val repositoryName = getRepositoryName()
+
+        toolbarRepository.title = getRepositoryName().capitalize()
 
         setUpRecyclerView()
 
         with(pullRequestViewModel) {
-
             getRepositories().observe(this@PullRequestActivity, Observer {
                 pullRequestAdapter.submitList(it)
             })
@@ -62,12 +68,41 @@ class PullRequestActivity : DaggerAppCompatActivity() {
 
             fetchPullRequests(username, repositoryName)
         }
+
+        retryLoadSelectedRepository()
+        goBackToRepositories()
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+
+        return super.onContextItemSelected(item)
+    }
+
+    private fun getRepositoryName() = intent.getStringExtra(PULL_REQUEST_REPOSITORY_NAME).orEmpty()
+
+    private fun getRepositoryOwnerUsername() =
+        intent.getStringExtra(PULL_REQUEST_OWNER_NAME).orEmpty()
 
     private fun setUpRecyclerView() {
         with(recyclerViewPullRequest) {
             adapter = pullRequestAdapter
             layoutManager = LinearLayoutManager(context)
         }
+    }
+
+    private fun retryLoadSelectedRepository() {
+        buttonPullRequestRetry.setOnClickListener {
+            pullRequestViewModel.fetchPullRequests(
+                getRepositoryOwnerUsername(),
+                getRepositoryName()
+            )
+        }
+    }
+
+    private fun goBackToRepositories() {
+        buttonPullRequestGoBack.setOnClickListener { finish() }
     }
 }

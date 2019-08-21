@@ -10,7 +10,9 @@ data class PullRequest(
     @SerializedName(value = "title")
     val title: String,
     @SerializedName(value = "body")
-    val description: String,
+    val description: String?,
+    @SerializedName(value = "created_at")
+    val createdAt: String,
     @SerializedName(value = "user")
     val user: User
 )

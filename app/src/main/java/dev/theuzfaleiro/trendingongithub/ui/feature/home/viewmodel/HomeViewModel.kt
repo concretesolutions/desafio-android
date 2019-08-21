@@ -40,7 +40,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
                     repositories.postValue(it)
                 },
                 onError = {
-                    TODO("Handle Error For Loading Repositories")
+                    loadingProgressBar.postValue(ERROR)
                 }
             ).addTo(compositeDisposable)
     }

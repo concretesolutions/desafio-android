@@ -7,7 +7,7 @@
     tools:context=".ui.feature.pullrequestdetail.PullRequestDetailActivity">
 
     <WebView
-        android:id="@+id/pullRequestDetailWebView"
+        android:id="@+id/webViewPullRequestDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

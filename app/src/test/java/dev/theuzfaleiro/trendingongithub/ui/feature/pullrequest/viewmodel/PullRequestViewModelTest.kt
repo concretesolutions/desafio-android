@@ -5,17 +5,17 @@ import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequest.model.data.PullR
 import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequest.model.data.User
 import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequest.repository.PullRequestRepository
 import io.github.plastix.rxschedulerrule.RxSchedulerRule
+import io.kotlintest.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-private const val ERROR = 3
+private const val INFORMATION = 0
+private const val ERROR = 2
 
 class PullRequestViewModelTest {
 
@@ -27,7 +27,7 @@ class PullRequestViewModelTest {
 
     private val pullRequestRepository = mockk<PullRequestRepository>()
 
-    lateinit var pullRequestViewModel: PullRequestViewModel
+    private lateinit var pullRequestViewModel: PullRequestViewModel
 
     @Before
     fun setUp() {
@@ -45,6 +45,7 @@ class PullRequestViewModelTest {
                     42,
                     "First Pull Request Title",
                     "First Pull Request Description",
+                    "28/01/2020",
                     User("theuzfaleiro", "https://bit.ly")
                 )
             )
@@ -52,10 +53,11 @@ class PullRequestViewModelTest {
 
         pullRequestViewModel.fetchPullRequests("theuzfaleiro", "minimal-weather")
 
-        assertEquals(
-            "First Pull Request Title",
-            pullRequestViewModel.getRepositories().value!!.first().title
-        )
+        pullRequestViewModel.getLoading().value shouldBe INFORMATION
+
+        requireNotNull(pullRequestViewModel.getRepositories().value).first().title shouldBe
+                "First Pull Request Title"
+
     }
 
     @Test
@@ -66,7 +68,7 @@ class PullRequestViewModelTest {
 
         pullRequestViewModel.fetchPullRequests("theuzfaleiro", "minimal-weather")
 
-        assertNull(pullRequestViewModel.getRepositories().value)
-        assertEquals(pullRequestViewModel.getLoading().value, ERROR)
+        pullRequestViewModel.getRepositories().value shouldBe null
+        pullRequestViewModel.getLoading().value shouldBe ERROR
     }
 }

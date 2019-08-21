@@ -46,7 +46,6 @@ class HomeActivity : DaggerAppCompatActivity() {
         setUpRecyclerView()
 
         with(homeViewModel) {
-
             getRepositories().observe(this@HomeActivity, Observer {
                 repositoryAdapter.submitList(it)
             })

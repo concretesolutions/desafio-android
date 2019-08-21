@@ -1,15 +1,11 @@
 package dev.theuzfaleiro.trendingongithub.ui.feature.home.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
-import coil.transform.CircleCropTransformation
 import dev.theuzfaleiro.trendingongithub.R
 import dev.theuzfaleiro.trendingongithub.ui.feature.home.model.data.Repository
-import kotlinx.android.synthetic.main.item_repository.view.*
 
 class RepositoryAdapter(private val repositorySelected: (repository: Repository) -> Unit) :
     PagedListAdapter<Repository,
@@ -25,7 +21,7 @@ class RepositoryAdapter(private val repositorySelected: (repository: Repository)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         with(holder as RepositoryViewHolder) {
-            bindItemsToView(getItem(position)!!, repositorySelected)
+            bindItemsToView(requireNotNull(getItem(position)), repositorySelected)
         }
     }
 }

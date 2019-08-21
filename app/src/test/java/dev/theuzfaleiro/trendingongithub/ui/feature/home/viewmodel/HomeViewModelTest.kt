@@ -1,13 +1,16 @@
 package dev.theuzfaleiro.trendingongithub.ui.feature.home.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.paging.DataSource
 import androidx.paging.PagedList
+import dev.theuzfaleiro.trendingongithub.ui.feature.home.datasource.RepositoryDataSourceFactory
 import dev.theuzfaleiro.trendingongithub.ui.feature.home.model.data.Owner
 import dev.theuzfaleiro.trendingongithub.ui.feature.home.model.data.Repository
 import dev.theuzfaleiro.trendingongithub.ui.feature.home.repository.HomeRepository
 import io.github.plastix.rxschedulerrule.RxSchedulerRule
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkConstructor
 import io.reactivex.Observable
 import junit.framework.Assert.assertEquals
 import org.junit.Before
@@ -25,19 +28,19 @@ class HomeViewModelTest {
 
     private val homeRepository = mockk<HomeRepository>()
 
+    private val repositoryDataSource = mockk<RepositoryDataSourceFactory>()
+
     private val repositoryPagedList = mockk<PagedList<Repository>>()
 
     lateinit var homeViewModel: HomeViewModel
 
     @Before
     fun setUp() {
-        homeViewModel = HomeViewModel(homeRepository)
-    }
 
-    @Test
-    fun shouldDisplayAvailableRepositories_WhenFetchRepositories() {
+        mockkConstructor(PagedList::class)
+
         every {
-            repositoryPagedList.first()
+            anyConstructed<PagedList<Repository>>().first()
         } returns Repository(
             0,
             "Repository Name",
@@ -47,17 +50,24 @@ class HomeViewModelTest {
             42
         )
 
+        homeViewModel = HomeViewModel(homeRepository)
+    }
+
+    @Test
+    fun shouldDisplayAvailableRepositories_WhenFetchRepositories() {
+        //arrange
         every {
             homeRepository.fetchTrendingRepositories()
         } returns Observable.just(repositoryPagedList)
 
+
         //act
-        homeViewModel.getRepositories()
+        homeViewModel.fetchRepositories()
 
         //assert
         assertEquals(
             "Repository Name",
-            homeViewModel.getRepositories().value!!.first().name
+            homeViewModel.getRepositories().value!![0]!!.name
         )
     }
 }

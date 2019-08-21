@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">trending-on-github</string>
+    <string name="app_name">Trending on GitHub</string>
+
+    <!--Pull Request-->
+    <string name="pull_request_title_error_no_internet_connection">No Internet Connection</string>
+    <string name="pull_request_title_any_open_pull_requests">There aren’t any open pull requests</string>
+    <string name="pull_request_message_any_open_pull_requests">You could search all of GitHub or try an advanced search</string>
+    <string name="pull_request_message_check_your_mobile_data_or_wi_fi">Check your mobile data or Wi-Fi</string>
+    <string name="pull_request_button_retry">RETRY</string>
+    <string name="pull_request_button_go_back">GO BACK</string>
+    <string name="repository_message_at_sign">"@"</string>
+    <string name="pull_request_message_created_at">Created at</string>
+    <string name="pull_request_content_description_user_avatar">User Avatar</string>
+    <string name="pull_request_content_description_fork_count">Fork Count</string>
+    <string name="pull_request_content_description_star_count">Star Count</string>
 </resources>

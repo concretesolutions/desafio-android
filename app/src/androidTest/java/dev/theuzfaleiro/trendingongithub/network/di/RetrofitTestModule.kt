@@ -39,15 +39,12 @@ object RetrofitTestModule {
     @JvmStatic
     @Provides
     @Singleton
-    fun providesOkHttpClient(
-        httpLoggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient =
+    fun providesOkHttpClient(): OkHttpClient =
         OkHttpClient.Builder()
             .sslSocketFactory(
                 RESTMockServer.getSSLSocketFactory(),
                 RESTMockServer.getTrustManager()
             )
-            .addInterceptor(httpLoggingInterceptor)
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .build()
@@ -61,20 +58,6 @@ object RetrofitTestModule {
     @Provides
     fun providesRxCallAdapterFactory(): RxJava2CallAdapterFactory =
         RxJava2CallAdapterFactory.create()
-
-    @JvmStatic
-    @Provides
-    fun providesHttpLoggingInterceptor(buildType: String): HttpLoggingInterceptor {
-        return if (buildType.contentEquals("debug")) {
-            HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
-        } else {
-            HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.NONE
-            }
-        }
-    }
 
     @JvmStatic
     @Provides
