@@ -35,9 +35,7 @@ class PullRequestViewModel(private val pullRequestRepository: PullRequestReposit
             .filter { it.isNotEmpty() }
             .doOnSubscribe { loadingProgressBar.postValue(LOADING) }
             .doOnSuccess { loadingProgressBar.postValue(INFORMATION) }
-            .doOnComplete {
-                loadingProgressBar.postValue(EMPTY)
-            }
+            .doOnComplete { loadingProgressBar.postValue(EMPTY) }
             .doOnError { loadingProgressBar.postValue(ERROR) }
             .subscribeBy(
                 onSuccess = {
