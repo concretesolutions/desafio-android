@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="#FFF"
+    card_view:cardCornerRadius="7dp"
+    card_view:cardElevation="7dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="7dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="195dp">
+
+        <ImageView
+            android:id="@+id/pull_request_img_avatar"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/img_repository"
+            android:scaleType="fitXY"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/pull_request_txt_title"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/pull_request_txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:textColor="@color/title"
+            android:textSize="18sp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="Pull Request Title" />
+
+        <TextView
+            android:id="@+id/pull_request_txt_description"
+            android:layout_width="260dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="4dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.305"
+            card_view:layout_constraintStart_toEndOf="@+id/pull_request_img_avatar"
+            card_view:layout_constraintTop_toBottomOf="@+id/pull_request_txt_title"
+            tools:text="Description" />
+
+        <TextView
+            android:id="@+id/pull_request_txt_username"
+            android:layout_width="77dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/title"
+            android:textSize="12sp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.057"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/pull_request_img_avatar"
+            tools:text="Username" />
+
+        <TextView
+            android:id="@+id/pull_request_created"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@android:color/black"
+            card_view:layout_constraintStart_toEndOf="@+id/pull_request_img_avatar"
+            card_view:layout_constraintTop_toBottomOf="@+id/pull_request_txt_description"
+            tools:text="Created at:" />
+
+        <TextView
+            android:id="@+id/pull_request_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            card_view:layout_constraintStart_toEndOf="@+id/pull_request_img_avatar"
+            card_view:layout_constraintTop_toBottomOf="@+id/pull_request_created"
+            tools:text="Updated at:" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

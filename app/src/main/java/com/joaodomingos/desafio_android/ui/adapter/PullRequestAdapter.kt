@@ -5,12 +5,12 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.joaodomingos.desafio_android.api.State
-import com.joaodomingos.desafio_android.models.SearchItensModel
-import com.joaodomingos.desafio_android.ui.holder.ListFooterViewHolder
-import com.joaodomingos.desafio_android.ui.holder.SearchItemViewHolder
+import com.joaodomingos.desafio_android.models.PullRequestModel
+import com.joaodomingos.desafio_android.ui.holder.ListFooterPullRequestViewHolder
+import com.joaodomingos.desafio_android.ui.holder.PullRequestViewHolder
 
-class SearchListItemAdapter(private val retry: () -> Unit)
-    : PagedListAdapter<SearchItensModel, RecyclerView.ViewHolder>(ItemDiffCallback) {
+class PullRequestAdapter (private val retry: () -> Unit)
+    : PagedListAdapter<PullRequestModel, RecyclerView.ViewHolder>(PullRequestAdapter.ItemDiffCallback) {
 
     private val DATA_VIEW_TYPE = 1
     private val FOOTER_VIEW_TYPE = 2
@@ -18,13 +18,13 @@ class SearchListItemAdapter(private val retry: () -> Unit)
     private var state = State.LOADING
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == DATA_VIEW_TYPE) SearchItemViewHolder.create(parent, parent.context) else ListFooterViewHolder.create(retry, parent)
+        return if (viewType == DATA_VIEW_TYPE) PullRequestViewHolder.create(parent) else ListFooterPullRequestViewHolder.create(retry, parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == DATA_VIEW_TYPE)
-            (holder as SearchItemViewHolder).bind(getItem(position))
-        else (holder as ListFooterViewHolder).bind(state)
+            (holder as PullRequestViewHolder).bind(getItem(position))
+        else (holder as ListFooterPullRequestViewHolder).bind(state)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -32,12 +32,12 @@ class SearchListItemAdapter(private val retry: () -> Unit)
     }
 
     companion object {
-        val ItemDiffCallback = object : DiffUtil.ItemCallback<SearchItensModel>() {
-            override fun areItemsTheSame(oldItem: SearchItensModel, newItem: SearchItensModel): Boolean {
-                return oldItem.name == newItem.name
+        val ItemDiffCallback = object : DiffUtil.ItemCallback<PullRequestModel>() {
+            override fun areItemsTheSame(oldItem: PullRequestModel, newItem: PullRequestModel): Boolean {
+                return oldItem.title == newItem.title
             }
 
-            override fun areContentsTheSame(oldItem: SearchItensModel, newItem: SearchItensModel): Boolean {
+            override fun areContentsTheSame(oldItem: PullRequestModel, newItem: PullRequestModel): Boolean {
                 return oldItem == newItem
             }
         }

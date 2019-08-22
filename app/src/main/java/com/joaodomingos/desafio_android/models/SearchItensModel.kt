@@ -1,7 +1,6 @@
 package com.joaodomingos.desafio_android.models
 
 import com.google.gson.annotations.SerializedName
-import com.joaodomingos.desafio_android.models.OwnerModel
 
 data class SearchItensModel (
     @SerializedName("name") val name: String,
