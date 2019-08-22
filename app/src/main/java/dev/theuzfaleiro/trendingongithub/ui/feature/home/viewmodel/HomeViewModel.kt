@@ -32,6 +32,10 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         homeRepository.fetchTrendingRepositories()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .filter {
+                loadingProgressBar.postValue(ERROR)
+                it.isNotEmpty()
+            }
             .doOnSubscribe { loadingProgressBar.postValue(LOADING) }
             .doOnNext { loadingProgressBar.postValue(INFORMATION) }
             .doOnError { loadingProgressBar.postValue(ERROR) }
@@ -41,8 +45,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
                 },
                 onError = {
                     loadingProgressBar.postValue(ERROR)
-                }
-            ).addTo(compositeDisposable)
+                }).addTo(compositeDisposable)
     }
 
     override fun onCleared() {

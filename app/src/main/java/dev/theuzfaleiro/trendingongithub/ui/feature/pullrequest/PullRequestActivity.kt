@@ -58,7 +58,7 @@ class PullRequestActivity : DaggerAppCompatActivity() {
         setUpRecyclerView()
 
         with(pullRequestViewModel) {
-            getRepositories().observe(this@PullRequestActivity, Observer {
+            getPullRequests().observe(this@PullRequestActivity, Observer {
                 pullRequestAdapter.submitList(it)
             })
 

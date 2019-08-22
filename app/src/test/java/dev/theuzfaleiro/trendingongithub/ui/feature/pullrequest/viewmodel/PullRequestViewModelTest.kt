@@ -36,6 +36,7 @@ class PullRequestViewModelTest {
 
     @Test
     fun shouldDisplayOpenPullRequests_WhenFetchOpenPullRequests() {
+        //arrange
         every {
             pullRequestRepository.fetchPullRequests("theuzfaleiro", "minimal-weather")
         } returns Single.just(
@@ -51,24 +52,29 @@ class PullRequestViewModelTest {
             )
         )
 
+        //act
         pullRequestViewModel.fetchPullRequests("theuzfaleiro", "minimal-weather")
 
+        //assert
         pullRequestViewModel.getLoading().value shouldBe INFORMATION
 
-        requireNotNull(pullRequestViewModel.getRepositories().value).first().title shouldBe
+        requireNotNull(pullRequestViewModel.getPullRequests().value).first().title shouldBe
                 "First Pull Request Title"
 
     }
 
     @Test
-    fun shouldDisplayAnError_WhenNoRepositoriesWereFetched() {
+    fun shouldDisplayAnError_WhenNoPullRequestsWereFetched() {
+        //arrange
         every {
             pullRequestRepository.fetchPullRequests("theuzfaleiro", "minimal-weather")
         } returns Single.error(Throwable())
 
+        //act
         pullRequestViewModel.fetchPullRequests("theuzfaleiro", "minimal-weather")
 
-        pullRequestViewModel.getRepositories().value shouldBe null
+        //assert
+        pullRequestViewModel.getPullRequests().value shouldBe null
         pullRequestViewModel.getLoading().value shouldBe ERROR
     }
 }

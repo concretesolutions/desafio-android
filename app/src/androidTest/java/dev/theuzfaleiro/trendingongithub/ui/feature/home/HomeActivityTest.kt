@@ -47,23 +47,54 @@ class HomeActivityTest {
     }
 
     @Test
-    @Ignore
     fun shouldDisplayRetryMessage_WhenFetchRepositoriesFromAPI() {
-        RESTMockServer.whenGET(pathContains("repositories"))
+        //arrange
+        RESTMockServer.whenGET(pathContains("repos"))
             .thenReturnEmpty(404)
 
+        //act
         homeActivity.launchActivity(Intent())
 
-        onView(withId(R.string.app_name)).check(matches(isDisplayed()))
+        //assert
+        onView(withText(R.string.pull_request_title_error_no_internet_connection))
+            .check(matches(isDisplayed()))
+
+        onView(withText(R.string.pull_request_message_check_your_mobile_data_or_wi_fi))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.buttonPullRequestRetry))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun shouldDisplayRepositories_WhenRetryButtonWasClicked() {
+        //arrange
+        RESTMockServer.whenGET(pathContains("repos"))
+            .thenReturnEmpty(404)
+            .thenReturnFile(200, "repository/repositories-list.json")
+
+        //act
+        homeActivity.launchActivity(Intent())
+
+        //assert
+        onView(withId(R.id.buttonPullRequestRetry))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        onView(withText("android-architecture")).check(matches(isDisplayed()))
+            .check(matches(isDisplayed()))
     }
 
     @Test
     fun shouldScrollToAPosition_WhenFetchRepositoriesFromAPI() {
+        //arrange
         RESTMockServer.whenGET(pathContains("repositories"))
             .thenReturnFile(200, "repository/repositories-list.json")
 
+        //act
         homeActivity.launchActivity(Intent())
 
+        //assert
         onView(withId(R.id.recyclerViewRepository)).perform(
             scrollToPosition<RecyclerView.ViewHolder>(
                 15
@@ -73,9 +104,11 @@ class HomeActivityTest {
 
     @Test
     fun shouldOpenPullRequestList_WhenARepositoryWasSelected() {
+        //arrange
         RESTMockServer.whenGET(pathContains("repositories"))
             .thenReturnFile(200, "repository/repositories-list.json")
 
+        //act
         homeActivity.launchActivity(
             Intent().putExtras(
                 bundleOf(
@@ -87,6 +120,7 @@ class HomeActivityTest {
 
         val activityResult = Instrumentation.ActivityResult(Activity.RESULT_OK, Intent())
 
+        //assert
         Intents.intending(IntentMatchers.hasComponent(PullRequestActivity::class.java.name))
             .respondWith(activityResult)
 

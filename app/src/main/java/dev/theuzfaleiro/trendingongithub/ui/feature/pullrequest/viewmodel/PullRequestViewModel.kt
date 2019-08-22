@@ -24,7 +24,7 @@ class PullRequestViewModel(private val pullRequestRepository: PullRequestReposit
 
     private val loadingProgressBar = MutableLiveData<Int>()
 
-    fun getRepositories(): LiveData<List<PullRequest>> = pullRequests
+    fun getPullRequests(): LiveData<List<PullRequest>> = pullRequests
 
     fun getLoading(): LiveData<Int> = loadingProgressBar
 

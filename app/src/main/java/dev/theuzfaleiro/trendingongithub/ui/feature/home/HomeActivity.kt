@@ -15,6 +15,7 @@ import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequest.PULL_REQUEST_OWN
 import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequest.PULL_REQUEST_REPOSITORY_NAME
 import dev.theuzfaleiro.trendingongithub.ui.feature.pullrequest.PullRequestActivity
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.layout_connection_error.*
 import javax.inject.Inject
 
 class HomeActivity : DaggerAppCompatActivity() {
@@ -45,6 +46,8 @@ class HomeActivity : DaggerAppCompatActivity() {
 
         setUpRecyclerView()
 
+        retryLoadTrendingRepositories()
+
         with(homeViewModel) {
             getRepositories().observe(this@HomeActivity, Observer {
                 repositoryAdapter.submitList(it)
@@ -62,6 +65,12 @@ class HomeActivity : DaggerAppCompatActivity() {
         with(recyclerViewRepository) {
             adapter = repositoryAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun retryLoadTrendingRepositories() {
+        buttonPullRequestRetry.setOnClickListener {
+            homeViewModel.fetchRepositories()
         }
     }
 }

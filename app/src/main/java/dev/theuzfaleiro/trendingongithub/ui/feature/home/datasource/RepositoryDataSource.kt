@@ -3,12 +3,15 @@ package dev.theuzfaleiro.trendingongithub.ui.feature.home.datasource
 import androidx.paging.PageKeyedDataSource
 import dev.theuzfaleiro.trendingongithub.network.GitHubEndpoint
 import dev.theuzfaleiro.trendingongithub.ui.feature.home.model.data.Repository
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 
 class RepositoryDataSource(private val gitHubEndpoint: GitHubEndpoint) :
     PageKeyedDataSource<Int, Repository>() {
+
+    private val compositeDisposable = CompositeDisposable()
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
@@ -19,12 +22,11 @@ class RepositoryDataSource(private val gitHubEndpoint: GitHubEndpoint) :
                 it.repositories.map { repository ->
                     Repository(repository)
                 }.toList()
-            }.subscribeBy(
+            }.onErrorResumeNext { Single.just(listOf()) }
+            .subscribeBy(
                 onSuccess = {
                     loadInitialCallback.onResult(it, 1, 2)
-                },
-                onError = {
-                }).addTo(CompositeDisposable())
+                }).addTo(compositeDisposable)
     }
 
     override fun loadAfter(params: LoadParams<Int>, loadCallback: LoadCallback<Int, Repository>) {
@@ -33,11 +35,10 @@ class RepositoryDataSource(private val gitHubEndpoint: GitHubEndpoint) :
                 it.repositories.map { repository ->
                     Repository(repository)
                 }.toList()
-            }.subscribeBy(onSuccess = {
+            }.onErrorResumeNext { Single.just(listOf()) }
+            .subscribeBy(onSuccess = {
                 loadCallback.onResult(it, params.key + 1)
-            }, onError = {
-                TODO("Handle Error For Loading Repositories")
-            }).addTo(CompositeDisposable())
+            }).addTo(compositeDisposable)
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Repository>) {}
