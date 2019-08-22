@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp"
+        android:elevation="@dimen/dp_4"
         android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:id="@+id/viewFlipperPullRequest"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/dp_16"
         app:layout_constraintEnd_toEndOf="@id/toolbarRepository"
         app:layout_constraintStart_toStartOf="@id/toolbarRepository"
         app:layout_constraintTop_toBottomOf="@id/toolbarRepository">

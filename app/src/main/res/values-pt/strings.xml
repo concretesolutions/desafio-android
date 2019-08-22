@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trending on GitHub</string>
+
+    <!--Pull Requests-->
+    <string name="pull_request_button_go_back">VOLTAR</string>
+    <string name="pull_request_button_retry">TENTAR NOVAMENTE</string>
+    <string name="pull_request_content_description_fork_count">Número de Forks</string>
+    <string name="pull_request_content_description_star_count">Número de Estrelas</string>
+    <string name="pull_request_content_description_user_avatar">Avatar do Usuário</string>
+    <string name="pull_request_message_any_open_pull_requests">Você pode selecionar outro repositório e tentar novamente</string>
+    <string name="pull_request_message_check_your_mobile_data_or_wi_fi">Verifique seus dados móveis ou Wi-Fi</string>
+    <string name="pull_request_message_created_at">Criado em</string>
+    <string name="pull_request_title_any_open_pull_requests">Não existem Pull Requests</string>
+    <string name="pull_request_title_error_no_internet_connection">Sem conexão com a internet</string>
+</resources>

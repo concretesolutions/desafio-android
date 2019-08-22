@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp">
+    android:paddingBottom="@dimen/dp_16">
 
     <ImageView
         android:id="@+id/imageViewRepositoryLogo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
         android:layout_marginStart="1dp"
         android:contentDescription="@string/pull_request_content_description_user_avatar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,32 +19,29 @@
 
     <TextView
         android:id="@+id/textViewRepositoryName"
+        style="@style/TextViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
+        android:layout_marginStart="@dimen/dp_16"
         app:layout_constraintStart_toEndOf="@+id/imageViewRepositoryLogo"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/textViewRepositoryAtSign"
+        style="@style/TextViewUserHandle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/dp_8"
         android:text="@string/repository_message_at_sign"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textViewRepositoryName"
         app:layout_constraintTop_toTopOf="@id/textViewRepositoryName" />
 
     <TextView
         android:id="@+id/textViewRepositoryUserName"
+        style="@style/TextViewUserHandle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textViewRepositoryAtSign"
         app:layout_constraintTop_toTopOf="@id/textViewRepositoryName"
         tools:text="@tools:sample/first_names" />
@@ -53,21 +50,19 @@
         android:id="@+id/textViewRepositoryDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textSize="14sp"
+        android:layout_marginTop="@dimen/dp_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textViewRepositoryName"
         app:layout_constraintTop_toBottomOf="@+id/textViewRepositoryUserName"
-        tools:text="@tools:sample/lorem[10]" />
+        tools:text="@tools:sample/lorem[25]"
+        style="@style/TextViewDescription" />
 
     <ImageView
         android:id="@+id/imageViewForkCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
         android:contentDescription="@string/pull_request_content_description_fork_count"
-        android:layout_marginTop="16dp"
         android:src="@drawable/ic_fork_count"
         app:layout_constraintStart_toStartOf="@id/textViewRepositoryDescription"
         app:layout_constraintTop_toBottomOf="@id/textViewRepositoryDescription" />
@@ -76,7 +71,7 @@
         android:id="@+id/textViewForkCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="@dimen/dp_4"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewForkCount"
         app:layout_constraintStart_toEndOf="@id/imageViewForkCount"
         app:layout_constraintTop_toTopOf="@+id/imageViewForkCount"
@@ -86,7 +81,7 @@
         android:id="@+id/imageViewStarCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/dp_16"
         android:contentDescription="@string/pull_request_content_description_star_count"
         android:src="@drawable/ic_star_count"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewForkCount"
@@ -97,7 +92,7 @@
         android:id="@+id/textViewStarCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="@dimen/dp_4"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewStarCount"
         app:layout_constraintStart_toEndOf="@id/imageViewStarCount"
         app:layout_constraintTop_toTopOf="@+id/imageViewStarCount"

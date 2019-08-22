@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewNoInternetConnection"
+        android:id="@+id/textViewNoPullRequest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -18,26 +18,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewErrorDescription"
+        android:id="@+id/textViewEmptyListErrorDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/dp_8"
         android:gravity="center"
         android:text="@string/pull_request_message_any_open_pull_requests"
-        app:layout_constraintEnd_toEndOf="@id/textViewNoInternetConnection"
-        app:layout_constraintStart_toStartOf="@id/textViewNoInternetConnection"
-        app:layout_constraintTop_toBottomOf="@id/textViewNoInternetConnection" />
+        app:layout_constraintEnd_toEndOf="@id/textViewNoPullRequest"
+        app:layout_constraintStart_toStartOf="@id/textViewNoPullRequest"
+        app:layout_constraintTop_toBottomOf="@id/textViewNoPullRequest" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonPullRequestGoBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/dp_32"
         android:background="@color/colorPrimary"
         android:text="@string/pull_request_button_go_back"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/textViewErrorDescription"
-        app:layout_constraintStart_toStartOf="@+id/textViewErrorDescription"
-        app:layout_constraintTop_toBottomOf="@+id/textViewErrorDescription" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewEmptyListErrorDescription"
+        app:layout_constraintStart_toStartOf="@+id/textViewEmptyListErrorDescription"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmptyListErrorDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
