@@ -15,7 +15,6 @@ class SearchListItemAdapter(private  val retry: () -> Unit)
     private val DATA_VIEW_TYPE = 1
     private val FOOTER_VIEW_TYPE = 2
 
-
     private var state = State.LOADING
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
