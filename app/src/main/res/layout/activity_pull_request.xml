@@ -28,6 +28,12 @@
         app:layout_constraintStart_toStartOf="@id/toolbarRepository"
         app:layout_constraintTop_toBottomOf="@id/toolbarRepository">
 
+        <ProgressBar
+            android:id="@+id/progressBarRepository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewPullRequest"
             android:layout_width="match_parent"
@@ -39,12 +45,6 @@
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_pull_request"
             tools:orientation="vertical" />
-
-        <ProgressBar
-            android:id="@+id/progressBarRepository"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
 
         <include layout="@layout/layout_connection_error" />
 

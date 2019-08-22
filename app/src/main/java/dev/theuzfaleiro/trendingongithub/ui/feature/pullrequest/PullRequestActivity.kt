@@ -57,6 +57,10 @@ class PullRequestActivity : DaggerAppCompatActivity() {
 
         setUpRecyclerView()
 
+        retryLoadSelectedRepository()
+
+        goBackToRepositories()
+
         with(pullRequestViewModel) {
             getPullRequests().observe(this@PullRequestActivity, Observer {
                 pullRequestAdapter.submitList(it)
@@ -68,9 +72,6 @@ class PullRequestActivity : DaggerAppCompatActivity() {
 
             fetchPullRequests(username, repositoryName)
         }
-
-        retryLoadSelectedRepository()
-        goBackToRepositories()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

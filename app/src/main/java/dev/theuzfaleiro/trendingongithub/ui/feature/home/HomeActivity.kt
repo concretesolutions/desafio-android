@@ -24,7 +24,8 @@ class HomeActivity : DaggerAppCompatActivity() {
     lateinit var homeViewModelFactory: HomeViewModelFactory
 
     private val homeViewModel: HomeViewModel by lazy {
-        ViewModelProviders.of(this, homeViewModelFactory).get(HomeViewModel::class.java)
+        ViewModelProviders.of(this, homeViewModelFactory)
+            .get(HomeViewModel::class.java)
     }
 
     private val repositoryAdapter: RepositoryAdapter by lazy {
@@ -46,8 +47,6 @@ class HomeActivity : DaggerAppCompatActivity() {
 
         setUpRecyclerView()
 
-        retryLoadTrendingRepositories()
-
         with(homeViewModel) {
             getRepositories().observe(this@HomeActivity, Observer {
                 repositoryAdapter.submitList(it)
@@ -59,6 +58,8 @@ class HomeActivity : DaggerAppCompatActivity() {
 
             fetchRepositories()
         }
+
+        retryLoadTrendingRepositories()
     }
 
     private fun setUpRecyclerView() {

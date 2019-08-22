@@ -3,7 +3,6 @@ package dev.theuzfaleiro.trendingongithub.ui.feature.home.datasource
 import androidx.paging.PageKeyedDataSource
 import dev.theuzfaleiro.trendingongithub.network.GitHubEndpoint
 import dev.theuzfaleiro.trendingongithub.ui.feature.home.model.data.Repository
-import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -22,7 +21,7 @@ class RepositoryDataSource(private val gitHubEndpoint: GitHubEndpoint) :
                 it.repositories.map { repository ->
                     Repository(repository)
                 }.toList()
-            }.onErrorResumeNext { Single.just(listOf()) }
+            }.onErrorReturnItem(listOf())
             .subscribeBy(
                 onSuccess = {
                     loadInitialCallback.onResult(it, 1, 2)
@@ -35,7 +34,7 @@ class RepositoryDataSource(private val gitHubEndpoint: GitHubEndpoint) :
                 it.repositories.map { repository ->
                     Repository(repository)
                 }.toList()
-            }.onErrorResumeNext { Single.just(listOf()) }
+            }.onErrorReturnItem(listOf())
             .subscribeBy(onSuccess = {
                 loadCallback.onResult(it, params.key + 1)
             }).addTo(compositeDisposable)

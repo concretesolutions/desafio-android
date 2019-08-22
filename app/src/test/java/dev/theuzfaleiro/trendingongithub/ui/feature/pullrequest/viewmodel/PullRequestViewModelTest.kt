@@ -14,7 +14,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-private const val INFORMATION = 0
+private const val INFORMATION = 1
 private const val ERROR = 2
 
 class PullRequestViewModelTest {

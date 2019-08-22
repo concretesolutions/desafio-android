@@ -12,8 +12,7 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-private const val INFORMATION = 0
-private const val LOADING = 1
+private const val INFORMATION = 1
 private const val ERROR = 2
 
 class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
@@ -36,7 +35,6 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
                 loadingProgressBar.postValue(ERROR)
                 it.isNotEmpty()
             }
-            .doOnSubscribe { loadingProgressBar.postValue(LOADING) }
             .doOnNext { loadingProgressBar.postValue(INFORMATION) }
             .doOnError { loadingProgressBar.postValue(ERROR) }
             .subscribeBy(

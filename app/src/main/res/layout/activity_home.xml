@@ -7,6 +7,12 @@
     android:layout_margin="@dimen/dp_16"
     tools:context=".ui.feature.home.HomeActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBarRepository"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRepository"
         android:layout_width="match_parent"
@@ -15,12 +21,6 @@
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_repository"
         tools:orientation="vertical" />
-
-    <ProgressBar
-        android:id="@+id/progressBarRepository"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
 
     <include layout="@layout/layout_connection_error" />
 

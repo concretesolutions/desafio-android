@@ -11,8 +11,7 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-private const val INFORMATION = 0
-private const val LOADING = 1
+private const val INFORMATION = 1
 private const val ERROR = 2
 private const val EMPTY = 3
 
@@ -33,16 +32,14 @@ class PullRequestViewModel(private val pullRequestRepository: PullRequestReposit
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .filter { it.isNotEmpty() }
-            .doOnSubscribe { loadingProgressBar.postValue(LOADING) }
             .doOnSuccess { loadingProgressBar.postValue(INFORMATION) }
             .doOnComplete { loadingProgressBar.postValue(EMPTY) }
-            .doOnError { loadingProgressBar.postValue(ERROR) }
             .subscribeBy(
                 onSuccess = {
                     pullRequests.postValue(it)
                 },
                 onError = {
-                    print(it)
+                    loadingProgressBar.postValue(ERROR)
                 }
             ).addTo(compositeDisposable)
     }

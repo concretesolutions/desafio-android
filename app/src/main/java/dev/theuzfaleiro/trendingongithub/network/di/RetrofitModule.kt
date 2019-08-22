@@ -20,7 +20,7 @@ object RetrofitModule {
     @JvmStatic
     @Provides
     @Singleton
-    fun providesOpenWeatherEndPoint(retrofit: Retrofit): GitHubEndpoint =
+    fun providesGitHubEndpoint(retrofit: Retrofit): GitHubEndpoint =
         retrofit.create(GitHubEndpoint::class.java)
 
     @JvmStatic
