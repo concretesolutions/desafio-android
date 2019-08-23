@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.desafioconcrete.Objects.DetailsPull;
 import com.example.desafioconcrete.R;
 
@@ -79,7 +80,7 @@ public class AdapterPullList extends BaseAdapter {
             txtPullDate.setText(detailsPullList.get(i).getCreated_at());
         }
 
-        Glide.with(context).load(detailsPullList.get(i).getUser().getAvatar_url()).into(imgPullAvatar);
+        Glide.with(context).load(detailsPullList.get(i).getUser().getAvatar_url()).apply(RequestOptions.circleCropTransform()).into(imgPullAvatar);
 
         return rowView;
     }

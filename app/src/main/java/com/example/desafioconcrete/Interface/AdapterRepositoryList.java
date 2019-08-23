@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.desafioconcrete.Objects.GithubApiResponse;
 import com.example.desafioconcrete.R;
 
@@ -64,7 +65,7 @@ public class AdapterRepositoryList extends BaseAdapter {
         txtRepositoryUsername.setText(githubApiResponse.getDetailsRepositoryList().get(i).getOwner().getLogin());
         txtRepositoryFullName.setText(githubApiResponse.getDetailsRepositoryList().get(i).getFull_name());
 
-        Glide.with(context).load(githubApiResponse.getDetailsRepositoryList().get(i).getOwner().getAvatar_url()).into(imgRepositoryAvatar);
+        Glide.with(context).load(githubApiResponse.getDetailsRepositoryList().get(i).getOwner().getAvatar_url()).apply(RequestOptions.circleCropTransform()).into(imgRepositoryAvatar);
 
 
         return rowView;
