@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.finish();
             System.exit(0);
         } else {
-            Toast.makeText(this, "Pressione novamente para sair.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.pressToExit), Toast.LENGTH_LONG).show();
             backCount++;
         }
     }

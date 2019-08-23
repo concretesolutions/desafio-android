@@ -11,6 +11,7 @@
     <string name="fork_description">Ícone fork</string>
     <string name="stars_description">Ícone estrelas</string>
     <string name="built_in">Criado em:</string>
+    <string name="pressToExit">Pressione novamente para sair.</string>
 
 
 </resources>
