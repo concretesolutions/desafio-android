@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean flagLoading;
     private int page;
     private AdapterRepositoryList adapterRepositoryList;
-    private ImageView toolBarBack;
+    private int backCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         baseURL = "https://api.github.com/search/";
         flagLoading = false;
         page = 1;
+        backCount = 0;
 
         layoutReference();
         configRetrofitClient();
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void layoutReference(){
         repositoryList = findViewById(R.id.repositoryList);
-        toolBarBack = findViewById(R.id.toolBarBack);
+        ImageView toolBarBack = findViewById(R.id.toolBarBack);
         toolBarBack.setVisibility(View.GONE);
     }
 
@@ -176,5 +177,16 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         unregisterReceiver(networkChangeReceiver);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backCount == 1){
+            MainActivity.this.finish();
+            System.exit(0);
+        } else {
+            Toast.makeText(this, "Pressione novamente para sair.", Toast.LENGTH_LONG).show();
+            backCount++;
+        }
     }
 }

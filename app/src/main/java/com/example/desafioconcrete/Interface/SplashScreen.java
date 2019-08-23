@@ -75,6 +75,7 @@ public class SplashScreen extends AppCompatActivity {
                     Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                     intent.putExtra("repositoryData", json);
                     startActivity(intent);
+                    SplashScreen.this.finish();
                 }
             }
 
@@ -106,6 +107,7 @@ public class SplashScreen extends AppCompatActivity {
                     Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                     intent.putExtra("repositoryData", json);
                     startActivity(intent);
+                    SplashScreen.this.finish();
                 }
             }
         });
