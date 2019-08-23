@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">DesafioConcrete</string>
+    <string name="version">Versão 1.0.0</string>
+
+    <string name="connection_failed">Falha de conexão</string>
+    <string name="internet_needed">Ops... Para buscar mais conteúdo você precisa estar conectado à internet.</string>
+    <string name="empty_body">Body vazio.</string>
+    <string name="repository_title_text">Confira abaixo os repositórios Java do GitHub:</string>
+    <string name="pull_title_text">Confira abaixo os pulls do repositório em questão:</string>
+    <string name="avatar_description">Imagem referente ao usuário em questão.</string>
+    <string name="fork_description">Ícone fork</string>
+    <string name="stars_description">Ícone estrelas</string>
+    <string name="built_in">Criado em:</string>
+
+
+</resources>

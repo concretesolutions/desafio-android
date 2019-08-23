@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/telas_fundo">
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="120dp"
+        android:src="@drawable/giticon"
+        android:layout_centerInParent="true"
+        android:tint="@android:color/white"
+        android:id="@+id/ivSplashScreen"/>
+
+    <ProgressBar
+        android:layout_width="@dimen/dp32Margin"
+        android:padding="@dimen/dp2Margin"
+        android:layout_height="@dimen/dp32Margin"
+        android:visibility="visible"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ivSplashScreen" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNomeVersao"
+        android:layout_margin="@dimen/dp8Margin"
+        android:layout_alignParentBottom="true"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:text="@string/version"/>
+
+</RelativeLayout>

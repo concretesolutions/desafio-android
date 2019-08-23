@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dp2Margin">2dp</dimen>
+    <dimen name="sp16size">18sp</dimen>
+    <dimen name="sp18size">18sp</dimen>
+    <dimen name="sp20size">20sp</dimen>
+    <dimen name="sp24size">24sp</dimen>
+
+    <dimen name="dp4Margin">4dp</dimen>
+    <dimen name="dp8Margin">8dp</dimen>
+    <dimen name="dp16Margin">16dp</dimen>
+    <dimen name="dp32Margin">32dp</dimen>
+</resources>
