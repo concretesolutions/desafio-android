@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Desafio Concrete</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_java">Java</string>
+    <string name="menu_kotlin">Kotlin</string>
+    <string name="menu_c_sharp">C#</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <!--ToolBar-->
+    <string name="toolbar_title">Github Api</string>
+    <string name="toolbar_sub_title">Repositórios populares&#160;%1$s</string>
+    <string name="toolbar_repo_pulls_title">Repositório</string>
+
+    <!-- String Mockup -->
+    <string name="repo_pulls_empty">Este repositório não contem pull requests</string>
+    <string name="repo_name">Nome Repositório</string>
+    <string name="repo_desc">Descrição do repositório lorem ipsum dolor sit amet lorem ipsum dolor lorem ipsum dolor sit amet lorem ipsum dolor</string>
+    <string name="repo_user_name">Username</string>
+    <string name="repo_user_name_last">Nome Sobrenome</string>
+    <string name="repo_fork_number_a">640</string>
+    <string name="repo_fork_number_b">330</string>
+    <string name="repo_fork_number_c">260</string>
+    <string name="repo_fork_number_d">670</string>
+    <string name="repo_fork_number_e">644</string>
+    <string name="repo_star_number_a">58</string>
+    <string name="repo_star_number_b">28</string>
+    <string name="repo_star_number_c">38</string>
+    <string name="repo_star_number_d">48</string>
+    <string name="repo_star_number_e">79</string>
+    <string name="pull_name">Título do pull request</string>
+    <string name="pull_body">Body do pull request lorem ipsum dolor sit amet lorem ipsum dolor</string>
+    <string name="pull_user_name">Username</string>
+    <string name="pull_user_name_last">Nome Sobrenome</string>
+    <string name="pull_date">Criado em&#160;%1$s</string>
+    <string name="title_activity_repo_pulls">RepoPullsActivity</string>
+</resources>

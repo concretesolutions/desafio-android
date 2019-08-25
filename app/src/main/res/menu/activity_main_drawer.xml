@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/java"
+            android:icon="@drawable/java_icon"
+            android:title="@string/menu_java" />
+        <item
+            android:id="@+id/kotlin"
+            android:icon="@drawable/kotlin_icon"
+            android:title="@string/menu_kotlin" />
+        <item
+            android:id="@+id/c_sharp"
+            android:icon="@drawable/c_sharp_icon"
+            android:title="@string/menu_c_sharp" />
+        <!--<item
+            android:id="@+id/nav_tools"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_tools" />-->
+    </group>
+
+    <!--<item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/menu_send" />
+        </menu>
+    </item>-->
+
+</menu>

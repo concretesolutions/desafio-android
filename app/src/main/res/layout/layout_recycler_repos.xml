@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cLRepositorie"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/bkg_click_ripple">
+
+    <TextView
+        android:id="@+id/tVRepoName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/repo_name"
+        android:textColor="@color/repo_name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tVRepoDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/repo_desc"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/tVRepoName"
+        app:layout_constraintTop_toBottomOf="@+id/tVRepoName" />
+
+    <ImageView
+        android:id="@+id/iVFork"
+        android:layout_width="20dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tVForkCount"
+        app:layout_constraintStart_toStartOf="@+id/tVRepoDescription"
+        app:layout_constraintTop_toTopOf="@+id/tVForkCount"
+        app:srcCompat="@drawable/icon_fork" />
+
+    <TextView
+        android:id="@+id/tVForkCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/repo_fork_number_b"
+        android:textColor="@color/repo_fork_star"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iVFork"
+        app:layout_constraintTop_toTopOf="@+id/tVStarCount" />
+
+    <ImageView
+        android:id="@+id/iVStars"
+        android:layout_width="20dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tVForkCount"
+        app:layout_constraintStart_toEndOf="@+id/tVForkCount"
+        app:layout_constraintTop_toTopOf="@+id/tVForkCount"
+        app:srcCompat="@drawable/icon_star" />
+
+    <TextView
+        android:id="@+id/tVStarCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/repo_star_number_a"
+        android:textColor="@color/repo_fork_star"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iVStars"
+        app:layout_constraintTop_toBottomOf="@+id/tVRepoDescription" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+
+    <ImageView
+        android:id="@+id/iVUser"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tVRepoDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/tVRepoName"
+        app:srcCompat="@drawable/user" />
+
+    <TextView
+        android:id="@+id/tVUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/repo_user_name"
+        android:textAlignment="center"
+        android:textColor="@color/repo_user_name"
+        app:layout_constraintEnd_toEndOf="@+id/iVUser"
+        app:layout_constraintStart_toStartOf="@+id/iVUser"
+        app:layout_constraintTop_toBottomOf="@+id/iVUser" />
+
+    <TextView
+        android:id="@+id/tVUserSurName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/repo_user_name_last"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tVUserName" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/divider_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iVFork"
+        app:layout_constraintTop_toBottomOf="@+id/tVUserSurName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
