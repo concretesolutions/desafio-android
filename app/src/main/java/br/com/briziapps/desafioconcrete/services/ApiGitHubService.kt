@@ -12,10 +12,10 @@ interface ApiGitHubService {
 
 
     @GET("search/repositories")
-    fun getReposOnApi(@Header("Authorization") token : String, @Query("q")  q:String, @Query("sort") sort:String, @Query("page") page:String ) : Call<GitHubRepo>
+    fun getReposOnApi( @Query("q")  q:String, @Query("sort") sort:String, @Query("page") page:String ) : Call<GitHubRepo>
 
     @GET("repos/{repo_name}/pulls")
-    fun getRepoPullsOnApi(@Header("Authorization") token : String, @Path("repo_name", encoded = true) repoName: String, @Query("page") page:String, @Query("state")  state:String ) : Call<List<GitHubRepoPullObjects>>
+    fun getRepoPullsOnApi( @Path("repo_name", encoded = true) repoName: String, @Query("page") page:String, @Query("state")  state:String ) : Call<List<GitHubRepoPullObjects>>
 
 
 }

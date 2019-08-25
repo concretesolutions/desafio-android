@@ -12,51 +12,6 @@ import java.util.concurrent.TimeUnit
 
 class Client {
 
-    /*companion object{
-
-        //private const val tag: String = "ServiceGenerator"
-        private const val gitHubApiBaseUrl = "https://api.github.com/"
-
-
-        private const val cacheSize : Long = 10 * 1024 * 1024 // 10 MB
-
-        private fun retrofit() : Retrofit {
-
-            return Retrofit.Builder()
-                .baseUrl(gitHubApiBaseUrl)
-                .client(okHTTPClient())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        }
-
-        private fun okHTTPClient() : OkHttpClient {
-
-            return  OkHttpClient.Builder()
-                .cache(cache())
-                .addInterceptor { chain ->
-
-                    var request = chain.request()
-                    request = if (MyApplication.hasNetwork())
-                        request.newBuilder().header("Cache-Control","public, max-age=" + 5).build()
-                    else
-                        request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
-                    chain.proceed(request)
-
-                }
-                .build()
-
-        }
-
-
-        private fun cache() : Cache {
-            return Cache(File(MyApplication.getInstance()?.cacheDir, "identifier"), cacheSize)
-        }
-
-        fun getApi() : ApiGitHubService {
-            return retrofit().create(ApiGitHubService::class.java)
-        }
-    }*/
-
     companion object{
 
 
@@ -65,7 +20,6 @@ class Client {
         private const val HEADER_CACHE_CONTROL = "Cache-Control"
         private const val HEADER_PRAGMA = "pragma"
 
-        const val GITHUBAPI_TOKEN = "token fe1e658547fd554b6ae889919fcc1c4a8693f2e8"
 
 
         private const val cacheSize : Long = 10 * 1024 * 1024 // 10 MB

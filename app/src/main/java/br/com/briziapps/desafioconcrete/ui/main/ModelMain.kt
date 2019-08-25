@@ -15,7 +15,7 @@ class ModelMain (private val presenterMain: PresenterMain): Mvp.ModelMain{
 
     override fun getReposOnApi(search: String, page: String) {
 
-        Client.getApi().getReposOnApi(  Client.GITHUBAPI_TOKEN,"language:$search", "stars", page ).enqueue( object : Callback<GitHubRepo>{
+        Client.getApi().getReposOnApi( "language:$search", "stars", page ).enqueue( object : Callback<GitHubRepo>{
 
          override fun onResponse( call: Call<GitHubRepo>, response: Response<GitHubRepo>) {
 

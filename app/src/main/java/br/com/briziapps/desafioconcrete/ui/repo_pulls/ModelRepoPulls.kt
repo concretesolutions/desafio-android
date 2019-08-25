@@ -14,7 +14,7 @@ class ModelRepoPulls (private val presenterRepoPulls: PresenterRepoPulls): Mvp.M
 
     override fun getRepoPullsOnApi(repoName: String, page: String) {
 
-        Client.getApi().getRepoPullsOnApi( Client.GITHUBAPI_TOKEN, repoName, page, "open").enqueue( object : Callback<List<GitHubRepoPullObjects>>{
+        Client.getApi().getRepoPullsOnApi( repoName, page, "open").enqueue( object : Callback<List<GitHubRepoPullObjects>>{
 
             override fun onResponse( call: Call<List<GitHubRepoPullObjects>>, response: Response<List<GitHubRepoPullObjects>> ) {
 
