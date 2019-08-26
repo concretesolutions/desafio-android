@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#151515</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="corRepositorio">#5882FA</color>
+    <color name="corEstrela">#DBA901</color>
+    <color name="viewLinha">#6E6E6E</color>
+</resources>

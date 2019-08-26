@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="180dp">
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/viewLinha"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/title_pull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:text="Titulo"
+        android:textColor="@color/corRepositorio"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/body_pull"
+        android:layout_width="239dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:text="descrição do pull"
+        app:layout_constraintStart_toStartOf="@+id/title_pull"
+        app:layout_constraintTop_toBottomOf="@+id/title_pull" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewPull"
+        android:layout_width="63dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/body_pull"
+        app:layout_constraintTop_toBottomOf="@+id/body_pull"
+        tools:srcCompat="@tools:sample/avatars[1]" />
+
+    <TextView
+        android:id="@+id/userPull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Username"
+        android:textColor="@color/corRepositorio"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPull"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPull" />
+
+    <TextView
+        android:id="@+id/complete_name_pull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="nome Sopbrenome"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPull"
+        app:layout_constraintTop_toBottomOf="@+id/userPull" />
+</androidx.constraintlayout.widget.ConstraintLayout>
