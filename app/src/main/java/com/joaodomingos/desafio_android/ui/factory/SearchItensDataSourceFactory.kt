@@ -10,8 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 class SearchItensDataSourceFactory (
     private val compositeDisposable: CompositeDisposable,
     private val networkService: NetworkService
-)
-    : DataSource.Factory<Int, SearchItensModel>() {
+): DataSource.Factory<Int, SearchItensModel>() {
 
     val itemDataSourceLiveData = MutableLiveData<ItemDataSource>()
 
