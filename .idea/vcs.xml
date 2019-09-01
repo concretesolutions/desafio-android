@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/Contazul/Mobile/appcontazul" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Contazul/Mobile/backup/appcontazul" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Contazul/WebService/backup/02/wscontazul" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Contazul/WebService/backup/wscontazul" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Contazul/WebService/wscontazul" vcs="Git" />
+  </component>
+</project>

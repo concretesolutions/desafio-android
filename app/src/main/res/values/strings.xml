@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Concretizando</string>
+
+    <string name="str01">Repository: {param1}</string>
+    <string name="str02">Description: {param1}</string>
+    <string name="str03">Stars: {param1}</string>
+    <string name="str04">Forks: {param1}</string>
+    <string name="str05">Created by: {param1}</string>
+    <string name="str06">Loading</string>
+    <string name="str07">Repository:</string>
+    <string name="str08">Pull requests:</string>
+    <string name="str09">Title:</string>
+    <string name="str10">Body:</string>
+    <string name="str11">Created in:</string>
+    <string name="str12">Back</string>
+</resources>
