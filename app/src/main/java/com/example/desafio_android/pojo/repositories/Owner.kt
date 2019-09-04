@@ -1,4 +1,4 @@
-package com.example.desafio_android.pojo
+package com.example.desafio_android.pojo.repositories
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

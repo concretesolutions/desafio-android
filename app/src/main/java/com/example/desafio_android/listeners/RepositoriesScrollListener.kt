@@ -1,35 +1,42 @@
 package com.example.desafio_android.listeners
 
-import android.widget.AbsListView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-abstract class RepositoriesScrollListener: AbsListView.OnScrollListener {
+abstract class RepositoriesScrollListener(private val mLinearLayoutManager: LinearLayoutManager): RecyclerView.OnScrollListener() {
     private var visibleThreshold = 5
     private var currentPage = 1
     private var previousTotalItemCount = 0
     private var loading = true
-    private var startingPageIndex = 1
+    var firstVisibleItem: Int = 0
+    var visibleItemCount:Int = 0
+    var totalItemCount:Int = 0
 
-    override fun onScroll(view: AbsListView?, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
-        if (totalItemCount < previousTotalItemCount) {
-            this.currentPage = this.startingPageIndex;
-            this.previousTotalItemCount = totalItemCount
-            if (totalItemCount == 0) { this.loading = true }
+
+    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        super.onScrolled(recyclerView, dx, dy)
+
+        visibleItemCount = recyclerView.childCount
+        totalItemCount = mLinearLayoutManager!!.itemCount
+        firstVisibleItem = mLinearLayoutManager!!.findFirstVisibleItemPosition()
+
+        if (loading) {
+            if (totalItemCount > previousTotalItemCount) {
+                loading = false
+                previousTotalItemCount = totalItemCount
+            }
         }
+        if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
+            // End has been reached
 
-        if (loading && (totalItemCount > previousTotalItemCount)) {
-            loading = false
-            previousTotalItemCount = totalItemCount
+            // Do something
             currentPage++
-        }
 
-        if (!loading && (firstVisibleItem + visibleItemCount + visibleThreshold) >= totalItemCount ) {
-            loading = onLoadMore(currentPage + 1, totalItemCount);
+            onLoadMore(currentPage)
+
+            loading = true
         }
     }
 
-    abstract fun onLoadMore(page: Int, totalItemsCount: Int): Boolean
-
-    override fun onScrollStateChanged(p0: AbsListView?, p1: Int) {
-        //
-    }
+    abstract fun onLoadMore(page: Int)
 }
