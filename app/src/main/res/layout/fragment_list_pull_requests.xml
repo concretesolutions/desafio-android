@@ -3,10 +3,30 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_margin="16dp">
+        <TextView
+            android:id="@+id/txtOpened"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="16 opened"
+            android:textColor="@color/orange"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtClosed"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="/800 closed"
+            android:textStyle="bold"/>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listPullRequests"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp">
     </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

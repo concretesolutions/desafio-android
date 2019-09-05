@@ -16,7 +16,7 @@ class ListPullRequestsViewHolder (inflater: LayoutInflater, parent: ViewGroup) :
 
     private var mTxtTituloPullRequest: TextView? = null
     private var mTxtDescPullRequest: TextView? = null
-    private var mTxtNomeSobrenome: TextView? = null
+    private var mTxtcreatedAt: TextView? = null
     private var mTxtUsername: TextView? = null
     private var mImageAvatar: ImageView? = null
 
@@ -24,7 +24,7 @@ class ListPullRequestsViewHolder (inflater: LayoutInflater, parent: ViewGroup) :
     init {
         mTxtTituloPullRequest = itemView.findViewById(R.id.txtTituloPullRequest)
         mTxtDescPullRequest = itemView.findViewById(R.id.txtDescPullRequest)
-        mTxtNomeSobrenome = itemView.findViewById(R.id.txtNomeSobrenome)
+        mTxtcreatedAt = itemView.findViewById(R.id.txtCreatedAt)
         mTxtUsername = itemView.findViewById(R.id.txtUsername)
         mImageAvatar = itemView.findViewById(R.id.imageAvatar)
     }
@@ -32,7 +32,7 @@ class ListPullRequestsViewHolder (inflater: LayoutInflater, parent: ViewGroup) :
     fun bind(pullRequestModel: PullRequestModel) {
         mTxtTituloPullRequest!!.text = pullRequestModel.name
         mTxtDescPullRequest!!.text = pullRequestModel.description
-        mTxtNomeSobrenome!!.text = pullRequestModel.name_autor
+        mTxtcreatedAt!!.text = pullRequestModel.createdAt
         mTxtUsername!!.text = pullRequestModel.login ?: ""
         Picasso.
             get()

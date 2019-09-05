@@ -7,17 +7,19 @@ import com.example.desafio_android.R
 import com.example.desafio_android.model.RepositorieModel
 
 
-class RepositoriesGitHubActivity: AppCompatActivity(), RepositoriesListFragment.OnRepositorieSelected, RepositoriePullRequestFragment.OnBackClickListener{
+class RepositoriesGitHubActivity: AppCompatActivity(), RepositoriesListFragment.OnRepositorieSelected{
+    var mCurrentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_fragment)
+        mCurrentFragment = RepositoriesListFragment.newInstance()
 
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.fragment_container, RepositoriesListFragment.newInstance(), "repositoriesList")
+                .add(R.id.fragment_container, mCurrentFragment as RepositoriesListFragment)
                 .commit()
         }
     }
@@ -28,21 +30,22 @@ class RepositoriesGitHubActivity: AppCompatActivity(), RepositoriesListFragment.
         ChangeFragment(detailsFragment)
     }
 
-    private fun ChangeFragment(detailsFragment: Fragment) {
+    private fun ChangeFragment(fragment: Fragment) {
+        mCurrentFragment = fragment
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container, detailsFragment, "repositoriePullRequest")
+            .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
     }
 
-    override fun OnBackClicked() {
-        val listFragment =
-            RepositoriesListFragment.newInstance()
-        ChangeFragment(listFragment)
-    }
-
     override fun onBackPressed() {
-        OnBackClicked()
+        if (mCurrentFragment is RepositoriePullRequestFragment) {
+            val listFragment =
+                RepositoriesListFragment.newInstance()
+            ChangeFragment(listFragment)
+        } else{
+            finish()
+        }
     }
 }

@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:layout_margin="8dp"
     android:orientation="horizontal">
 
 
@@ -27,42 +26,53 @@
             android:layout_height="wrap_content"
             android:text="Nome Repositório"
             android:textColor="#2196F3"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/txtDescRepositorio"
             android:layout_width="match_parent"
             android:layout_height="67dp"
-            android:text="descrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositório" />
+            android:maxLength="100"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="descriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa dodescriçãoaaa do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositóriodescrição do repositórioaaaaaaaaaaaaaaaaaa" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
             android:gravity="end"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="center">
 
 
             <TextView
                 android:id="@+id/txtNumerFork"
                 android:layout_width="wrap_content"
-                android:layout_height="23dp"
+                android:layout_height="match_parent"
                 android:drawableLeft="@drawable/ic_repo_forked"
                 android:text="640"
-                android:textColor="#FF9800"
+                android:textColor="@color/orange"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/txtStars"
                 android:layout_width="wrap_content"
-                android:layout_height="23dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
                 android:drawableLeft="@drawable/ic_star"
                 android:text="98"
-                android:textColor="#FF9800"
+                android:textColor="@color/orange"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txtNumerFork" />
+                app:layout_constraintStart_toEndOf="@+id/txtNumerFork"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
@@ -91,7 +101,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Username"
-            android:textColor="#2196F3" />
+            android:textColor="@color/blue" />
 
         <TextView
             android:id="@+id/txtNomeSobrenome"
@@ -101,6 +111,5 @@
             android:gravity="center"
             android:text="Nome Sobrenome" />
     </LinearLayout>
-
 
 </LinearLayout>

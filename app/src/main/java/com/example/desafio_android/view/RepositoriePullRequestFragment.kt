@@ -1,10 +1,12 @@
 package com.example.desafio_android.view
 
+import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafio_android.R
 import com.example.desafio_android.adapter.AdapterListPullRequests
@@ -22,11 +24,6 @@ class RepositoriePullRequestFragment: Fragment(){
     lateinit var mRepositorie: RepositorieModel
     var itensPullRequests = ArrayList<PullRequestModel>()
     lateinit var mAdapter: AdapterListPullRequests
-    private lateinit var listener: OnBackClickListener
-
-    interface OnBackClickListener {
-        fun OnBackClicked()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +39,14 @@ class RepositoriePullRequestFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         activity!!.title = mRepositorie.name
+        txtOpened.text = "0 opened"
+        txtClosed.text = "/${mRepositorie.forksCount} closed"
 
         listPullRequests.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = mAdapter
         }
+        listPullRequests.addItemDecoration(DividerItemDecoration(context, HORIZONTAL))
 
         getPullRequests()
     }
@@ -60,9 +60,11 @@ class RepositoriePullRequestFragment: Fragment(){
             override fun onResponse(call: Call<List<PullRequest>>?, response: Response<List<PullRequest>>?) {
                 val resource = response?.body()
                 if (resource != null) {
-                    val itens = resource!!.flatMap { listOf(PullRequestModel(it.title, it.body, it.user!!.login, it.user!!.login, it.user!!.avatarUrl))}
+                    val itens = resource!!.flatMap { listOf(PullRequestModel(it.title, it.body, it.createdAt, it.user!!.login, it.user!!.avatarUrl))}
                     mAdapter.setItens(itens)
                     mAdapter.notifyDataSetChanged()
+                    txtOpened.text = "${itens.size} opened"
+                    txtClosed.text = "/${mRepositorie.forksCount!! - itens.size} closed"
                 }
             }
 

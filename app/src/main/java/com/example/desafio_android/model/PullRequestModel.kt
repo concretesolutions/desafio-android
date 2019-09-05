@@ -5,6 +5,6 @@ import java.io.Serializable
 class PullRequestModel (
     var name: String? = "",
     var description: String? = "",
-    var name_autor: String? = "",
+    var createdAt: String? = "",
     var login: String? = "",
     var avatarUrl: String? = "") : Serializable

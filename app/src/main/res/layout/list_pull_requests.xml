@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_margin="8dp"
+    android:layout_height="175dp"
     android:orientation="horizontal">
 
 
@@ -26,14 +24,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="txtTituloPullRequest"
-            android:textColor="#2196F3"
-            android:textStyle="bold" />
+            android:textColor="@color/blue"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/txtDescPullRequest"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:text="txtDescPullRequest" />
+            android:text="txtDescPullRequest"
+            android:ellipsize="end"
+            android:maxLines="2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,10 +71,10 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="Username"
-                    android:textColor="#2196F3" />
+                    android:textColor="@color/blue" />
 
                 <TextView
-                    android:id="@+id/txtNomeSobrenome"
+                    android:id="@+id/txtCreatedAt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

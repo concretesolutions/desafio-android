@@ -19,6 +19,8 @@ import kotlinx.android.synthetic.main.fragment_list_repositories.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.recyclerview.widget.DividerItemDecoration
+import android.graphics.drawable.ClipDrawable.HORIZONTAL
 
 
 class RepositoriesListFragment: Fragment(){
@@ -79,6 +81,7 @@ class RepositoriesListFragment: Fragment(){
             }
         })
 
+        listRepositories.addItemDecoration(DividerItemDecoration(context, HORIZONTAL))
         getRepositories(1)
     }
 
