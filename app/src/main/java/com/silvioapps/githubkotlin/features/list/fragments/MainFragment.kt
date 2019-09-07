@@ -20,6 +20,7 @@ import com.silvioapps.githubkotlin.databinding.FragmentMainBinding
 import com.silvioapps.githubkotlin.features.list.adapters.ListAdapter
 import com.silvioapps.githubkotlin.features.list.models.ListModel
 import com.silvioapps.githubkotlin.features.details.activities.DetailsActivity
+import com.silvioapps.githubkotlin.features.list.models.ResponseModel
 import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
 import com.silvioapps.githubkotlin.features.shared.services.ServiceGenerator
 import com.silvioapps.githubkotlin.features.list.services.ListService
@@ -93,14 +94,14 @@ class MainFragment : CustomFragment(), ViewClickListener {
 
     protected fun loadMore(){
         val service : ListService = ServiceGenerator.createService(Constants.API_BASE_URL, Constants.TIMEOUT, ListService::class.java)
-        val call : Call<MutableList<ListModel>> = service.getList("", page)
-        call.enqueue(object : Callback<MutableList<ListModel>> {
-            override fun onResponse(call : Call<MutableList<ListModel>>, response : Response<MutableList<ListModel>>) {
-                setList(response.body()!!)
+        val call : Call<ResponseModel> = service.getList("language:Java", "stars", page)
+        call.enqueue(object : Callback<ResponseModel> {
+            override fun onResponse(call : Call<ResponseModel>, response : Response<ResponseModel>) {
+                setList(response.body()?.items!!)
                 page++
             }
 
-            override fun onFailure(call : Call<MutableList<ListModel>>, t : Throwable) {
+            override fun onFailure(call : Call<ResponseModel>, t : Throwable) {
                 Toast.makeText(activity, getString(R.string.list_error), Toast.LENGTH_LONG).show()
             }
         })

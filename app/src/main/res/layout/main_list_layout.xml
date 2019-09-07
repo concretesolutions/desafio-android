@@ -25,6 +25,7 @@
                 android:adjustViewBounds="true"
                 android:layout_margin="@dimen/image_margin"
                 android:foreground="?attr/selectableItemBackground"
+                android:url="@{listModel.owner.avatarUrl}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/textView"
                 app:layout_constraintTop_toTopOf="parent"
