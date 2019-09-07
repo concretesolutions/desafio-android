@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GithubKotlin</string>
+    <string name="list_error">Falha ao obter dados do servidor. Tente novamente mais tarde</string>
+</resources>
