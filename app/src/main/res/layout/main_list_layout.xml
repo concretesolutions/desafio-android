@@ -14,35 +14,110 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:visibility="@{listModel.showLoading ? View.GONE : View.VISIBLE}"
+            android:layout_margin="@dimen/layout_margin"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="@dimen/list_size"
-                android:layout_height="0dp"
-                android:scaleType="fitXY"
-                android:adjustViewBounds="true"
-                android:layout_margin="@dimen/image_margin"
-                android:foreground="?attr/selectableItemBackground"
-                android:url="@{listModel.owner.avatar_url}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/textView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <TextView
-                android:id="@+id/textView"
+            <LinearLayout
+                android:id="@+id/leftLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="@dimen/title_text_size"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@{listModel.name}"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textSize="@dimen/description_text_size"
+                    android:textColor="@android:color/black"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@{listModel.description}"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="@dimen/title_text_size"
+                        android:textColor="@android:color/holo_orange_light"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="@{Integer.toString(listModel.stargazers_count)}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="@dimen/title_text_size"
+                        android:layout_marginLeft="@dimen/views_margin"
+                        android:textColor="@android:color/holo_orange_light"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="@{Integer.toString(listModel.forks_count)}"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.66"/>
+
+            <LinearLayout
+                android:id="@+id/rightLayout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:textColor="@android:color/white"
-                android:foreground="?attr/selectableItemBackground"
-                android:text="@{listModel.owner.login}"
-                app:layout_constraintLeft_toRightOf="@id/imageView"
+                app:layout_constraintLeft_toRightOf="@id/guideline"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:url="@{listModel.owner.avatar_url}"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/description_text_size"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@{listModel.owner.login}"/>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
