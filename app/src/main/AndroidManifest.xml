@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.silvioapps.githubkotlin.features.list.activities.MainActivity"/>
-        <activity android:name="com.silvioapps.githubkotlin.features.details.activities.DetailsActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name="com.silvioapps.githubkotlin.features.details.activities.DetailsActivity"/>
     </application>
 
 </manifest>

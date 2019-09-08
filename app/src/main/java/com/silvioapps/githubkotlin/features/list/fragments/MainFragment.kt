@@ -66,8 +66,7 @@ class MainFragment : CustomFragment(), ViewClickListener {
 
         if(bundle != null){
             @Suppress("UNCHECKED_CAST")
-            val list : MutableList<ListModel> = bundle.getSerializable("list") as MutableList<ListModel>
-            setList(list)
+            setList(bundle.getSerializable("list") as MutableList<ListModel>)
             page = bundle.getInt("page")
         }
         else{

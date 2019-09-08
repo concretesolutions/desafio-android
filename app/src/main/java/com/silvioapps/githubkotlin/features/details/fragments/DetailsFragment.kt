@@ -29,7 +29,6 @@ class DetailsFragment : CustomFragment(), ViewClickListener {
     private var list = mutableListOf<DetailsModel>()
     private var listAdapter : DetailsListAdapter? = null
 
-    @Suppress("UNCHECKED_CAST")
     override fun onCreateView(layoutInflater : LayoutInflater, viewGroup : ViewGroup?, bundle : Bundle?) : View? {
         fragmentDetailsBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_details, viewGroup, false)
         fragmentDetailsBinding?.progressBar?.setVisibility(View.VISIBLE)
@@ -42,13 +41,17 @@ class DetailsFragment : CustomFragment(), ViewClickListener {
         fragmentDetailsBinding?.recyclerView?.setHasFixedSize(true)
         fragmentDetailsBinding?.recyclerView?.adapter = listAdapter
 
+        var listModel : ListModel? = null
         if(bundle != null){
             @Suppress("UNCHECKED_CAST")
             setList(bundle.getSerializable("list") as MutableList<DetailsModel>)
         }
         else{
-            loadList(arguments?.getSerializable("details")  as ListModel)
+            listModel = arguments?.getSerializable("details") as ListModel
+            loadList(listModel)
         }
+
+        showBackButton(null, listModel?.name!!)
 
         return fragmentDetailsBinding?.root
     }
