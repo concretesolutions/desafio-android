@@ -38,6 +38,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/white"
                 android:foreground="?attr/selectableItemBackground"
+                android:text="@{listModel.owner.login}"
                 app:layout_constraintLeft_toRightOf="@id/imageView"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
