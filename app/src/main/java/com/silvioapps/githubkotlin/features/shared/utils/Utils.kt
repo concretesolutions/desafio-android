@@ -1,8 +1,11 @@
 package com.silvioapps.githubkotlin.features.shared.utils
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.security.ProviderInstaller
 import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
+import javax.net.ssl.SSLContext
 
 class Utils {
     companion object{
@@ -35,6 +38,18 @@ class Utils {
                         setClickListeners(nextChild, viewClickListener)
                     }
                 }
+            }
+        }
+
+        fun fixSSLError(context : Context){
+            try {
+                ProviderInstaller.installIfNeeded(context)
+                val sslContext = SSLContext.getInstance("TLSv1.2")
+                sslContext.init(null, null, null)
+                sslContext.createSSLEngine()
+            }
+            catch(e : Exception){
+                e.printStackTrace()
             }
         }
     }
