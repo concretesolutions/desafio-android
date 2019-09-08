@@ -94,7 +94,7 @@ class MainFragment : CustomFragment(), ViewClickListener {
 
     protected fun loadMore(){
         val service : ListService = ServiceGenerator.createService(Constants.API_BASE_URL, Constants.TIMEOUT, ListService::class.java)
-        val call : Call<ResponseModel> = service.getList("language:Java", "stars", page)
+        val call : Call<ResponseModel> = service.getList(Constants.QUERY, Constants.SORT, page)
         call.enqueue(object : Callback<ResponseModel> {
             override fun onResponse(call : Call<ResponseModel>, response : Response<ResponseModel>) {
                 setList(response.body()?.items!!)

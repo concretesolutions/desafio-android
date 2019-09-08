@@ -9,12 +9,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:padding="@dimen/layout_margin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_size">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="@{listModel.showLoading ? View.GONE : View.VISIBLE}"
+            android:layout_margin="@dimen/layout_margin"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -131,19 +130,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:visibility="@{listModel.showLoading ? View.VISIBLE : View.GONE}"
-            style="?android:attr/progressBarStyleInverse"
-            android:background="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/list_size"
-            android:indeterminate="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
