@@ -9,14 +9,21 @@ import android.view.ViewGroup
 
 import com.silvioapps.githubkotlin.BR
 import com.silvioapps.githubkotlin.R
-import com.silvioapps.githubkotlin.features.list.models.ListModel
+import com.silvioapps.githubkotlin.features.details.models.DetailsModel
+import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
+import com.silvioapps.githubkotlin.features.shared.utils.Utils
 import kotlin.collections.List
 
-class DetailsListAdapter(list_ : List<ListModel>) : RecyclerView.Adapter<DetailsListAdapter.BindingViewHolder>() {
-    private var list = listOf<ListModel>()
+class DetailsListAdapter(list_ : List<DetailsModel>, viewClickListener_ : ViewClickListener) : RecyclerView.Adapter<DetailsListAdapter.BindingViewHolder>() {
+    private var list = listOf<DetailsModel>()
+
+    companion object{
+        private var viewClickListener : ViewClickListener? = null
+    }
 
     init{
         this.list = list_
+        viewClickListener = viewClickListener_
     }
 
     class BindingViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -24,6 +31,7 @@ class DetailsListAdapter(list_ : List<ListModel>) : RecyclerView.Adapter<Details
 
         init{
             viewDataBinding = DataBindingUtil.bind<ViewDataBinding>(view)
+            Utils.setClickListeners(view, DetailsListAdapter.viewClickListener)
         }
     }
 
@@ -33,9 +41,11 @@ class DetailsListAdapter(list_ : List<ListModel>) : RecyclerView.Adapter<Details
     }
 
     override fun onBindViewHolder(holder : BindingViewHolder, position : Int) {
+        Utils.setTags(position, holder.itemView)
+
         if(list.size > position) {
-            val listModel : ListModel = list.get(position)
-            holder.viewDataBinding?.setVariable(BR.listModel, listModel)
+            val detailsModel : DetailsModel = list.get(position)
+            holder.viewDataBinding?.setVariable(BR.detailsModel, detailsModel)
             holder.viewDataBinding?.executePendingBindings()
         }
     }

@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<data>
+        <variable
+            name="detailsModel"
+            type="com.silvioapps.githubkotlin.features.details.models.DetailsModel" />
+        <import type="android.view.View"/>
+    </data>-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/topLayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_details_height"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/recyclerView">
+
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginLeft="@dimen/layout_margin"
+                android:textSize="@dimen/description_text_size"
+                android:textColor="@android:color/holo_orange_light"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@{detailsModel.title}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginLeft="@dimen/layout_margin"
+                android:textSize="@dimen/description_text_size"
+                android:textColor="@android:color/holo_orange_light"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@{detailsModel.body}"/>-->
+
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/topLayout"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <ProgressBar
             android:id="@+id/progressBar"

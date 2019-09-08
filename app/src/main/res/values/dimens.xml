@@ -8,5 +8,6 @@
     <dimen name="description_text_size">16sp</dimen>
     <dimen name="line_height">1dp</dimen>
     <item name="guideline_value" type="dimen" format="float">0.66</item>
+    <dimen name="top_details_height">100dp</dimen>
 </resources>
 

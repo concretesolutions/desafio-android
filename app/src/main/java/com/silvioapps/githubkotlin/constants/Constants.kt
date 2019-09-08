@@ -7,5 +7,8 @@ class Constants {
         const val TIMEOUT : Long = 15
         const val QUERY = "language:Java"
         const val SORT = "stars"
+        const val DETAILS = "repos/{author}/{repo}/pulls"
+        const val AUTHOR = "author"
+        const val REPO = "repo"
     }
 }

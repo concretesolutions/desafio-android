@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="listModel"
-            type="com.silvioapps.githubkotlin.features.list.models.ListModel" />
+            name="detailsModel"
+            type="com.silvioapps.githubkotlin.features.details.models.DetailsModel" />
         <import type="android.view.View"/>
     </data>
 
@@ -36,7 +36,7 @@
                     android:textSize="@dimen/title_text_size"
                     android:textColor="@android:color/holo_blue_dark"
                     android:foreground="?attr/selectableItemBackground"
-                    android:text="@{listModel.name}"/>
+                    android:text="@{detailsModel.title}"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -47,43 +47,7 @@
                     android:textSize="@dimen/description_text_size"
                     android:textColor="@android:color/black"
                     android:foreground="?attr/selectableItemBackground"
-                    android:text="@{listModel.description}"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/layout_margin"
-                    android:layout_marginBottom="@dimen/layout_margin"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:drawableStart="@android:drawable/ic_menu_share"
-                        android:drawableLeft="@android:drawable/ic_menu_share"
-                        android:textSize="@dimen/title_text_size"
-                        android:textColor="@android:color/holo_orange_light"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:text="@{Integer.toString(listModel.stargazers_count)}"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:drawableStart="@android:drawable/btn_star"
-                        android:drawableLeft="@android:drawable/btn_star"
-                        android:textSize="@dimen/title_text_size"
-                        android:layout_marginLeft="@dimen/layout_margin"
-                        android:textColor="@android:color/holo_orange_light"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:text="@{Integer.toString(listModel.forks_count)}"/>
-
-                </LinearLayout>
+                    android:text="@{detailsModel.body}"/>
 
             </LinearLayout>
 
@@ -111,7 +75,7 @@
                     android:scaleType="fitXY"
                     android:adjustViewBounds="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:url="@{listModel.owner.avatar_url}"/>
+                    android:url="@{detailsModel.user.avatar_url}"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,7 +83,7 @@
                     android:textSize="@dimen/description_text_size"
                     android:textColor="@android:color/holo_blue_dark"
                     android:foreground="?attr/selectableItemBackground"
-                    android:text="@{listModel.owner.login}"/>
+                    android:text="@{detailsModel.user.login}"/>
 
             </LinearLayout>
 
