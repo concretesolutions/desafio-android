@@ -4,8 +4,8 @@ import java.io.Serializable
 
 class License : Serializable{
 	val name: String? = null
-	val spdxId: String? = null
+	val spdx_id: String? = null
 	val key: String? = null
 	val url: String? = null
-	val nodeId: String? = null
+	val node_id: String? = null
 }
