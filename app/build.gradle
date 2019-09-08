@@ -37,6 +37,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //para teste
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
     //para consumo de API
@@ -57,4 +59,7 @@ dependencies {
 
     //para views de Material Design
     //implementation 'com.google.android.material:material:1.0.0'
+
+    //para erro de SSL
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
 }
