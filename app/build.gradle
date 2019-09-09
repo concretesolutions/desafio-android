@@ -57,9 +57,6 @@ dependencies {
     implementation 'androidx.fragment:fragment:1.2.0-alpha02'
     implementation 'androidx.fragment:fragment-ktx:1.2.0-alpha02'
 
-    //para views de Material Design
-    //implementation 'com.google.android.material:material:1.0.0'
-
     //para erro de SSL
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
 }

@@ -5,12 +5,11 @@
         <variable
             name="detailsModel"
             type="com.silvioapps.githubkotlin.features.details.models.DetailsModel" />
-        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_size">
+        android:layout_height="@dimen/details_size">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_margin="@dimen/layout_margin"
@@ -18,14 +17,12 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/leftLayout"
-                android:layout_width="0dp"
+                android:id="@+id/topLayout"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="vertical"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/guideline"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintBottom_toTopOf="@id/bottomLayout">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -51,22 +48,14 @@
 
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="@dimen/guideline_value"/>
-
             <LinearLayout
-                android:id="@+id/rightLayout"
-                android:layout_width="0dp"
+                android:id="@+id/bottomLayout"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
-                app:layout_constraintLeft_toRightOf="@id/guideline"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal"
+                android:gravity="start|center_vertical"
+                android:layout_marginBottom="@dimen/layout_margin"
+                app:layout_constraintTop_toBottomOf="@id/topLayout"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
@@ -80,6 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/details_margin"
                     android:textSize="@dimen/description_text_size"
                     android:textColor="@android:color/holo_blue_dark"
                     android:foreground="?attr/selectableItemBackground"
