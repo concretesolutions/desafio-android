@@ -19,6 +19,7 @@ import com.silvioapps.githubkotlin.features.list.models.ListModel
 import com.silvioapps.githubkotlin.features.shared.fragments.CustomFragment
 import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
 import com.silvioapps.githubkotlin.features.shared.services.ServiceGenerator
+import com.silvioapps.githubkotlin.features.shared.utils.Utils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,7 +62,7 @@ class DetailsFragment : CustomFragment(), ViewClickListener {
     }
 
     override fun onClick(context : Context, view : View, position : Int) {
-       //todo
+        Utils.openUrl(context, list[position].html_url!!)
     }
 
     protected fun loadList(listModel : ListModel){

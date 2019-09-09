@@ -1,6 +1,8 @@
 package com.silvioapps.githubkotlin.features.shared.utils
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.security.ProviderInstaller
@@ -50,6 +52,13 @@ class Utils {
             }
             catch(e : Exception){
                 e.printStackTrace()
+            }
+        }
+
+        fun openUrl(context : Context, url : String){
+            if(url.startsWith("http://") || url.startsWith("https://")) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                context.startActivity(intent)
             }
         }
     }

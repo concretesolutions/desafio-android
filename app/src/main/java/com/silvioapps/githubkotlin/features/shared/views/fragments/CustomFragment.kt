@@ -6,12 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 
 open class CustomFragment : Fragment(){
     fun showBackButton(toolbar : Toolbar?, title : String) {
-        val currentActivity: AppCompatActivity = activity as AppCompatActivity
+        val currentActivity: AppCompatActivity? = activity as AppCompatActivity
         if(toolbar != null) {
-            currentActivity.setSupportActionBar(toolbar)
+            currentActivity?.setSupportActionBar(toolbar)
         }
-        currentActivity.getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        currentActivity.getSupportActionBar()?.setDisplayShowHomeEnabled(true)
-        currentActivity.setTitle(title)
+        currentActivity?.getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        currentActivity?.getSupportActionBar()?.setDisplayShowHomeEnabled(true)
+        currentActivity?.setTitle(title)
     }
 }
