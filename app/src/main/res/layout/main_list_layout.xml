@@ -106,7 +106,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <ImageView
+                <com.github.abdularis.civ.CircleImageView
                     android:layout_width="@dimen/image_size"
                     android:layout_height="@dimen/image_size"
                     android:scaleType="fitXY"

@@ -59,4 +59,7 @@ dependencies {
 
     //para erro de SSL
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    //para imagens redondas
+    implementation 'com.github.abdularis:circularimageview:1.4'
 }

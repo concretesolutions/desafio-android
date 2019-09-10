@@ -15,7 +15,7 @@ class DetailsActivity : CustomActivity() {
             val detailsFragment = DetailsFragment()
             detailsFragment.setArguments(intent.getBundleExtra("data"))
 
-            attachFragment(R.id.frameLayout, detailsFragment)
+            attachFragment(R.id.fragmentContainerView, detailsFragment)
         }
     }
 

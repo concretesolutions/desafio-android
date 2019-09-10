@@ -12,7 +12,7 @@ class MainActivity : CustomActivity() {
         setContentView(R.layout.activity_main)
 
         if(savedInstanceState == null) {
-            attachFragment(R.id.frameLayout, MainFragment())
+            attachFragment(R.id.fragmentContainerView, MainFragment())
         }
     }
 }
