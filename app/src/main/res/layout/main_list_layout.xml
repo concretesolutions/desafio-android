@@ -35,7 +35,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textSize="@dimen/title_text_size"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/colorTitle"
                     android:foreground="?attr/selectableItemBackground"
                     android:text="@{listModel.name}"/>
 
@@ -63,10 +63,10 @@
                         android:gravity="start"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:drawableStart="@android:drawable/ic_menu_share"
-                        android:drawableLeft="@android:drawable/ic_menu_share"
+                        android:drawableStart="@drawable/fork"
+                        android:drawableLeft="@drawable/fork"
                         android:textSize="@dimen/title_text_size"
-                        android:textColor="@android:color/holo_orange_light"
+                        android:textColor="@color/colorNumbers"
                         android:foreground="?attr/selectableItemBackground"
                         android:text="@{Integer.toString(listModel.stargazers_count)}"/>
 
@@ -76,11 +76,11 @@
                         android:gravity="start"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:drawableStart="@android:drawable/btn_star"
-                        android:drawableLeft="@android:drawable/btn_star"
+                        android:drawableStart="@drawable/star"
+                        android:drawableLeft="@drawable/star"
                         android:textSize="@dimen/title_text_size"
                         android:layout_marginLeft="@dimen/layout_margin"
-                        android:textColor="@android:color/holo_orange_light"
+                        android:textColor="@color/colorNumbers"
                         android:foreground="?attr/selectableItemBackground"
                         android:text="@{Integer.toString(listModel.forks_count)}"/>
 
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/description_text_size"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/colorName"
                     android:foreground="?attr/selectableItemBackground"
                     android:text="@{listModel.owner.login}"/>
 

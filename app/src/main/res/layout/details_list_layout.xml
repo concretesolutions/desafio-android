@@ -31,7 +31,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textSize="@dimen/title_text_size"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/colorTitle"
                     android:foreground="?attr/selectableItemBackground"
                     android:text="@{detailsModel.title}"/>
 
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/details_margin"
                     android:textSize="@dimen/description_text_size"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/colorName"
                     android:foreground="?attr/selectableItemBackground"
                     android:text="@{detailsModel.user.login}"/>
 
