@@ -44,25 +44,23 @@ class MainFragment : CustomFragment(), ViewClickListener {
 
         listAdapter = ListAdapter(list, this)
 
-        if (activity != null) {
-            val linearLayoutManager = LinearLayoutManager(activity)
-            fragmentMainBinding?.recyclerView?.layoutManager = linearLayoutManager
-            fragmentMainBinding?.recyclerView?.itemAnimator = DefaultItemAnimator()
-            fragmentMainBinding?.recyclerView?.setHasFixedSize(true)
-            fragmentMainBinding?.recyclerView?.adapter = listAdapter
-            fragmentMainBinding?.recyclerView?.setOnTouchListener(object: View.OnTouchListener {
-                override fun onTouch(v : View , event : MotionEvent) : Boolean{
-                    if (!Statics.loadMore && !fragmentMainBinding?.recyclerView?.canScrollVertically(1)!! && event.getAction() == MotionEvent.ACTION_UP) {
-                        Statics.loadMore = true
+        val linearLayoutManager = LinearLayoutManager(activity)
+        fragmentMainBinding?.recyclerView?.layoutManager = linearLayoutManager
+        fragmentMainBinding?.recyclerView?.itemAnimator = DefaultItemAnimator()
+        fragmentMainBinding?.recyclerView?.setHasFixedSize(true)
+        fragmentMainBinding?.recyclerView?.adapter = listAdapter
+        fragmentMainBinding?.recyclerView?.setOnTouchListener(object: View.OnTouchListener {
+            override fun onTouch(v : View , event : MotionEvent) : Boolean{
+                if (!Statics.loadMore && !fragmentMainBinding?.recyclerView?.canScrollVertically(1)!! && event.getAction() == MotionEvent.ACTION_UP) {
+                    Statics.loadMore = true
 
-                        showLoading()
+                    showLoading()
 
-                        loadMore()
-                    }
-                    return false
+                    loadMore()
                 }
-            })
-        }
+                return false
+            }
+        })
 
         if(bundle != null){
             @Suppress("UNCHECKED_CAST")
@@ -82,7 +80,7 @@ class MainFragment : CustomFragment(), ViewClickListener {
     }
 
     override fun onClick(context : Context, view : View, position : Int) {
-        val intent = Intent(activity, DetailsActivity::class.java)
+        val intent = Intent(context, DetailsActivity::class.java)
 
         val bundle = Bundle()
         bundle.putSerializable("details", list[position] as Serializable)
