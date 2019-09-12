@@ -1,3 +1,17 @@
+# Aplicativo de consulta a API do [GitHub](https://github.com)#
+
+### **A solução foi implementada utilizando os seguintes recursos** ##
+* Linguagem Java
+* Arquitetura MVP (Model View Presenter)
+* Biblioteca Retrofit para comunicação com os endpoints
+* Biblioteca Picasso para exibição de imagens
+* Mapeamento JSON -> Objeto usando GSON
+* ConstraintLayout na criação das interfaces
+* Testes unitários com Junit
+
+-------------------------------------------------------------------------
+# Descrição do desafio: #
+
 # Criar um aplicativo de consulta a API do [GitHub](https://github.com)#
 
 Criar um aplicativo para consultar a [API do GitHub](https://developer.github.com/v3/) e trazer os repositórios mais populares de Java. Basear-se no mockup fornecido:

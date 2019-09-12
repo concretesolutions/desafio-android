@@ -1,0 +1,11 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="item_recyclerView_height">110dp</dimen>
+    <dimen name="item_icon_size">20dp</dimen>
+
+    <dimen name="image_icon_size">50dp</dimen>
+
+</resources>
