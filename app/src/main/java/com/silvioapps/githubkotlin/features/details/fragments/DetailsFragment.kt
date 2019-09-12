@@ -20,28 +20,30 @@ import com.silvioapps.githubkotlin.features.shared.fragments.CustomFragment
 import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
 import com.silvioapps.githubkotlin.features.shared.services.ServiceGenerator
 import com.silvioapps.githubkotlin.features.shared.utils.Utils
+import dagger.android.support.AndroidSupportInjection
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.Serializable
+import javax.inject.Inject
 
-class DetailsFragment : CustomFragment(), ViewClickListener {
-    private var fragmentDetailsBinding : FragmentDetailsBinding? = null
+class DetailsFragment @Inject constructor(): CustomFragment(), ViewClickListener {
+    private lateinit var fragmentDetailsBinding : FragmentDetailsBinding
     private var list = mutableListOf<DetailsModel>()
-    private var listAdapter : DetailsListAdapter? = null
-    private var listModel : ListModel? = null
+    private lateinit var listAdapter : DetailsListAdapter
+    private lateinit var listModel : ListModel
 
     override fun onCreateView(layoutInflater : LayoutInflater, viewGroup : ViewGroup?, bundle : Bundle?) : View? {
         fragmentDetailsBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_details, viewGroup, false)
-        fragmentDetailsBinding?.progressBar?.setVisibility(View.VISIBLE)
+        fragmentDetailsBinding.progressBar.setVisibility(View.VISIBLE)
 
         listAdapter = DetailsListAdapter(list, this)
 
         val linearLayoutManager = LinearLayoutManager(activity)
-        fragmentDetailsBinding?.recyclerView?.layoutManager = linearLayoutManager
-        fragmentDetailsBinding?.recyclerView?.itemAnimator = DefaultItemAnimator()
-        fragmentDetailsBinding?.recyclerView?.setHasFixedSize(true)
-        fragmentDetailsBinding?.recyclerView?.adapter = listAdapter
+        fragmentDetailsBinding.recyclerView.layoutManager = linearLayoutManager
+        fragmentDetailsBinding.recyclerView.itemAnimator = DefaultItemAnimator()
+        fragmentDetailsBinding.recyclerView.setHasFixedSize(true)
+        fragmentDetailsBinding.recyclerView.adapter = listAdapter
 
         if(bundle != null){
             listModel = bundle.getSerializable("listModel") as ListModel
@@ -50,12 +52,17 @@ class DetailsFragment : CustomFragment(), ViewClickListener {
         }
         else{
             listModel = arguments?.getSerializable("details") as ListModel
-            loadList(listModel!!)
+            loadList(listModel)
         }
 
-        showBackButton(null, listModel?.name!!)
+        showBackButton(null, listModel.name!!)
 
-        return fragmentDetailsBinding?.root
+        return fragmentDetailsBinding.root
+    }
+
+    override fun onAttach(context: Context){
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
     }
 
     override fun onSaveInstanceState(outState : Bundle) {
@@ -84,8 +91,8 @@ class DetailsFragment : CustomFragment(), ViewClickListener {
     protected fun setList(values : List<DetailsModel>){
         val startRange = list.size
         list.addAll(values)
-        listAdapter?.notifyItemRangeInserted(startRange, values.size)
+        listAdapter.notifyItemRangeInserted(startRange, values.size)
 
-        fragmentDetailsBinding?.progressBar?.setVisibility(View.GONE)
+        fragmentDetailsBinding.progressBar.setVisibility(View.GONE)
     }
 }

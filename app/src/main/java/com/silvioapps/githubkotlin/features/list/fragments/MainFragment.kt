@@ -25,33 +25,35 @@ import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
 import com.silvioapps.githubkotlin.features.shared.services.ServiceGenerator
 import com.silvioapps.githubkotlin.features.list.services.ListService
 import com.silvioapps.githubkotlin.features.shared.fragments.CustomFragment
+import dagger.android.support.AndroidSupportInjection
 
 import java.io.Serializable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class MainFragment : CustomFragment(), ViewClickListener {
+class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
     private var list = mutableListOf<ListModel>()
-    private var listAdapter : ListAdapter? = null
-    private var fragmentMainBinding : FragmentMainBinding? = null
+    /*@Inject*/ lateinit var listAdapter : ListAdapter
+    private lateinit var fragmentMainBinding : FragmentMainBinding
     private var page : Int = 1
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(layoutInflater : LayoutInflater, viewGroup : ViewGroup?, bundle : Bundle?) : View?{
         fragmentMainBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_main, viewGroup, false)
-        fragmentMainBinding?.progressBar?.setVisibility(View.VISIBLE)
+        fragmentMainBinding.progressBar.setVisibility(View.VISIBLE)
 
         listAdapter = ListAdapter(list, this)
 
         val linearLayoutManager = LinearLayoutManager(activity)
-        fragmentMainBinding?.recyclerView?.layoutManager = linearLayoutManager
-        fragmentMainBinding?.recyclerView?.itemAnimator = DefaultItemAnimator()
-        fragmentMainBinding?.recyclerView?.setHasFixedSize(true)
-        fragmentMainBinding?.recyclerView?.adapter = listAdapter
-        fragmentMainBinding?.recyclerView?.setOnTouchListener(object: View.OnTouchListener {
+        fragmentMainBinding.recyclerView.layoutManager = linearLayoutManager
+        fragmentMainBinding.recyclerView.itemAnimator = DefaultItemAnimator()
+        fragmentMainBinding.recyclerView.setHasFixedSize(true)
+        fragmentMainBinding.recyclerView.adapter = listAdapter
+        fragmentMainBinding.recyclerView.setOnTouchListener(object: View.OnTouchListener {
             override fun onTouch(v : View , event : MotionEvent) : Boolean{
-                if (!Statics.loadMore && !fragmentMainBinding?.recyclerView?.canScrollVertically(1)!! && event.getAction() == MotionEvent.ACTION_UP) {
+                if (!Statics.loadMore && !fragmentMainBinding.recyclerView.canScrollVertically(1) && event.getAction() == MotionEvent.ACTION_UP) {
                     Statics.loadMore = true
 
                     showLoading()
@@ -71,7 +73,12 @@ class MainFragment : CustomFragment(), ViewClickListener {
             loadMore()
         }
 
-        return fragmentMainBinding?.root
+        return fragmentMainBinding.root
+    }
+
+    override fun onAttach(context: Context){
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
     }
 
     override fun onSaveInstanceState(outState : Bundle) {
@@ -109,9 +116,9 @@ class MainFragment : CustomFragment(), ViewClickListener {
 
         val startRange = list.size
         list.addAll(values)
-        listAdapter?.notifyItemRangeInserted(startRange, values.size)
+        listAdapter.notifyItemRangeInserted(startRange, values.size)
 
-        fragmentMainBinding?.progressBar?.setVisibility(View.GONE)
+        fragmentMainBinding.progressBar.setVisibility(View.GONE)
 
         Statics.loadMore = false
     }
@@ -120,14 +127,14 @@ class MainFragment : CustomFragment(), ViewClickListener {
         val listModel = ListModel()
         listModel.showLoading = true
         list.add(listModel)
-        listAdapter?.notifyItemInserted(list.size - 1)
+        listAdapter.notifyItemInserted(list.size - 1)
     }
 
     protected fun hideLoading(){
         if(Statics.loadMore && list.size >= 1) {
             val index = list.size - 1
             list.removeAt(index)
-            listAdapter?.notifyItemRemoved(index)
+            listAdapter.notifyItemRemoved(index)
         }
     }
 }
