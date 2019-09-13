@@ -2,7 +2,7 @@ package com.desafioandroid.core.service
 
 import com.desafioandroid.BuildConfig
 import com.desafioandroid.MyApplication.Companion.applicationContext
-import com.example.recruiting.core.api.ApiService
+import com.desafioandroid.data.source.remote.ApiService
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.Interceptor

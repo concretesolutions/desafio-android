@@ -1,6 +1,6 @@
-package com.example.recruiting.core.api
+package com.desafioandroid.data.source.remote
 
-import com.example.recruiting.homelist.model.domain.entity.HomeResponse
+import com.desafioandroid.data.model.home.entity.HomeResponse
 
 import retrofit2.http.GET
 import retrofit2.http.Query
