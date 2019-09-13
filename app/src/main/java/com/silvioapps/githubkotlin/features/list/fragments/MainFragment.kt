@@ -35,9 +35,10 @@ import javax.inject.Inject
 
 class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
     private var list = mutableListOf<ListModel>()
-    /*@Inject*/ lateinit var listAdapter : ListAdapter
-    private lateinit var fragmentMainBinding : FragmentMainBinding
-    private var page : Int = 1
+    private lateinit var listAdapter: ListAdapter
+    private lateinit var fragmentMainBinding: FragmentMainBinding
+    private var page: Int = 1
+    @Inject lateinit var context_: Context
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(layoutInflater : LayoutInflater, viewGroup : ViewGroup?, bundle : Bundle?) : View?{
@@ -46,7 +47,7 @@ class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
 
         listAdapter = ListAdapter(list, this)
 
-        val linearLayoutManager = LinearLayoutManager(activity)
+        val linearLayoutManager = LinearLayoutManager(context_)
         fragmentMainBinding.recyclerView.layoutManager = linearLayoutManager
         fragmentMainBinding.recyclerView.itemAnimator = DefaultItemAnimator()
         fragmentMainBinding.recyclerView.setHasFixedSize(true)
@@ -106,7 +107,7 @@ class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
             }
 
             override fun onFailure(call : Call<ResponseModel>, t : Throwable) {
-                Toast.makeText(activity, getString(R.string.list_error), Toast.LENGTH_LONG).show()
+                Toast.makeText(context_, getString(R.string.list_error), Toast.LENGTH_LONG).show()
             }
         })
     }

@@ -27,11 +27,12 @@ import retrofit2.Response
 import java.io.Serializable
 import javax.inject.Inject
 
-class DetailsFragment @Inject constructor(): CustomFragment(), ViewClickListener {
+class DetailsFragment: CustomFragment(), ViewClickListener {
     private lateinit var fragmentDetailsBinding : FragmentDetailsBinding
     private var list = mutableListOf<DetailsModel>()
     private lateinit var listAdapter : DetailsListAdapter
     private lateinit var listModel : ListModel
+    @Inject lateinit var context_: Context
 
     override fun onCreateView(layoutInflater : LayoutInflater, viewGroup : ViewGroup?, bundle : Bundle?) : View? {
         fragmentDetailsBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_details, viewGroup, false)
@@ -39,7 +40,7 @@ class DetailsFragment @Inject constructor(): CustomFragment(), ViewClickListener
 
         listAdapter = DetailsListAdapter(list, this)
 
-        val linearLayoutManager = LinearLayoutManager(activity)
+        val linearLayoutManager = LinearLayoutManager(context_)
         fragmentDetailsBinding.recyclerView.layoutManager = linearLayoutManager
         fragmentDetailsBinding.recyclerView.itemAnimator = DefaultItemAnimator()
         fragmentDetailsBinding.recyclerView.setHasFixedSize(true)
@@ -83,7 +84,7 @@ class DetailsFragment @Inject constructor(): CustomFragment(), ViewClickListener
             }
 
             override fun onFailure(call : Call<List<DetailsModel>>, t : Throwable) {
-                Toast.makeText(activity, getString(R.string.list_error), Toast.LENGTH_LONG).show()
+                Toast.makeText(context_, getString(R.string.list_error), Toast.LENGTH_LONG).show()
             }
         })
     }

@@ -12,14 +12,12 @@ import com.silvioapps.githubkotlin.R
 import com.silvioapps.githubkotlin.features.list.models.ListModel
 import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
 import com.silvioapps.githubkotlin.features.shared.utils.Utils
-import javax.inject.Inject
-import kotlin.collections.List
 
-class ListAdapter constructor(list_ : List<ListModel>, viewClickListener_ : ViewClickListener) : RecyclerView.Adapter<ListAdapter.BindingViewHolder>() {
-    private var list = listOf<ListModel>()
+class ListAdapter (list_ : MutableList<ListModel>, viewClickListener_ : ViewClickListener) : RecyclerView.Adapter<ListAdapter.BindingViewHolder>() {
+    private var list: MutableList<ListModel>
 
     companion object{
-        private var viewClickListener : ViewClickListener? = null
+        private lateinit var viewClickListener: ViewClickListener
     }
 
     init{
