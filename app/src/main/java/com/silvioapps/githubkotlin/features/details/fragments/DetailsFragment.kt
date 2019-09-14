@@ -3,7 +3,6 @@ package com.silvioapps.githubkotlin.features.details.fragments
 import android.content.Context
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,11 +27,9 @@ import retrofit2.Response
 import java.io.Serializable
 import javax.inject.Inject
 
-class DetailsFragment @Inject constructor(): CustomFragment()/*, ViewClickListener*/ {
+class DetailsFragment @Inject constructor(): CustomFragment() {
     private lateinit var fragmentDetailsBinding : FragmentDetailsBinding
-    private var list_ = mutableListOf<DetailsModel>()
-    //@Inject lateinit var list_: MutableList<DetailsModel>
-    /*@Inject*/ lateinit var listAdapter : DetailsListAdapter
+    @Inject lateinit var listAdapter : DetailsListAdapter
     private lateinit var listModel : ListModel
     @Inject lateinit var context_: Context
     @Inject lateinit var linearLayoutManager: LinearLayoutManager
@@ -41,8 +38,6 @@ class DetailsFragment @Inject constructor(): CustomFragment()/*, ViewClickListen
     override fun onCreateView(layoutInflater : LayoutInflater, viewGroup : ViewGroup?, bundle : Bundle?) : View? {
         fragmentDetailsBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_details, viewGroup, false)
         fragmentDetailsBinding.progressBar.setVisibility(View.VISIBLE)
-
-        listAdapter = DetailsListAdapter(list_, DetailsViewClickListener.DetailsViewClickListenerImpl())
 
         fragmentDetailsBinding.recyclerView.layoutManager = linearLayoutManager
         fragmentDetailsBinding.recyclerView.itemAnimator = defaultItemAnimator
@@ -70,13 +65,9 @@ class DetailsFragment @Inject constructor(): CustomFragment()/*, ViewClickListen
     }
 
     override fun onSaveInstanceState(outState : Bundle) {
-        outState.putSerializable("list", list_ as Serializable)
+        outState.putSerializable("list", listAdapter.getList() as Serializable)
         outState.putSerializable("listModel", listModel as Serializable)
     }
-
-    /*override fun onClick(context : Context, view : View, position : Int, list: List<Any>) {
-        Utils.openUrl(context, list_[position].html_url!!)
-    }*/
 
     interface DetailsViewClickListener : ViewClickListener{
         override fun onClick(context : Context, view : View, position : Int, list: List<Any>)
@@ -103,8 +94,8 @@ class DetailsFragment @Inject constructor(): CustomFragment()/*, ViewClickListen
     }
 
     protected fun setList(values : List<DetailsModel>){
-        val startRange = list_.size
-        list_.addAll(values)
+        val startRange = listAdapter.getList().size
+        listAdapter.getList().addAll(values)
         listAdapter.notifyItemRangeInserted(startRange, values.size)
 
         fragmentDetailsBinding.progressBar.setVisibility(View.GONE)

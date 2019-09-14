@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.silvioapps.githubkotlin.features.details.adapters.DetailsListAdapter
 import com.silvioapps.githubkotlin.features.details.fragments.DetailsFragment
 import com.silvioapps.githubkotlin.features.details.models.DetailsModel
+import com.silvioapps.githubkotlin.features.list.adapters.ListAdapter
+import com.silvioapps.githubkotlin.features.list.fragments.MainFragment
 import com.silvioapps.githubkotlin.features.list.models.ListModel
 import javax.inject.Singleton
 import dagger.Module
@@ -22,11 +24,6 @@ class AppModule{
     }
 
     @Provides
-    fun providesMutableListOfDetailsModel(): MutableList<DetailsModel>{
-        return mutableListOf<DetailsModel>()
-    }
-
-    @Provides
     fun providesLinearLayoutManager(context: Context): LinearLayoutManager{
         return LinearLayoutManager(context)
     }
@@ -37,8 +34,8 @@ class AppModule{
     }
 
     @Provides
-    fun providesMutableListOfListModel(): MutableList<ListModel>{
-        return mutableListOf<ListModel>()
+    fun providesMutableListOfDetailsModel(): MutableList<DetailsModel>{
+        return mutableListOf<DetailsModel>()
     }
 
     @Provides
@@ -47,8 +44,23 @@ class AppModule{
     }
 
     @Provides
-    fun providesViewClickListener(): DetailsFragment.DetailsViewClickListener {
+    fun providesDetailsViewClickListener(): DetailsFragment.DetailsViewClickListener {
         return DetailsFragment.DetailsViewClickListener.DetailsViewClickListenerImpl()
+    }
+
+    @Provides
+    fun providesMutableListOfListModel(): MutableList<ListModel>{
+        return mutableListOf<ListModel>()
+    }
+
+    @Provides
+    fun providesListAdapter(list: MutableList<ListModel>, viewClickListener: MainFragment.ListViewClickListener): ListAdapter {
+        return ListAdapter(list, viewClickListener)
+    }
+
+    @Provides
+    fun providesListViewClickListener(): MainFragment.ListViewClickListener {
+        return MainFragment.ListViewClickListener.ListViewClickListenerImpl()
     }
 }
 

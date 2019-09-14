@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.silvioapps.githubkotlin.BR
 import com.silvioapps.githubkotlin.R
 import com.silvioapps.githubkotlin.features.details.fragments.DetailsFragment
@@ -15,8 +14,9 @@ import com.silvioapps.githubkotlin.features.shared.utils.Utils
 import javax.inject.Inject
 
 class DetailsListAdapter @Inject constructor(list_ : MutableList<DetailsModel>, viewClickListener_ : DetailsFragment.DetailsViewClickListener) : RecyclerView.Adapter<DetailsListAdapter.BindingViewHolder>() {
+    private var list: MutableList<DetailsModel>
+
     companion object{
-        private lateinit var list: MutableList<DetailsModel>
         private lateinit var viewClickListener : DetailsFragment.DetailsViewClickListener
     }
 
@@ -25,18 +25,18 @@ class DetailsListAdapter @Inject constructor(list_ : MutableList<DetailsModel>, 
         viewClickListener = viewClickListener_
     }
 
-    class BindingViewHolder(view : View) : RecyclerView.ViewHolder(view){
+    class BindingViewHolder(view : View, list: MutableList<DetailsModel>) : RecyclerView.ViewHolder(view){
         var viewDataBinding : ViewDataBinding? = null
 
         init{
             viewDataBinding = DataBindingUtil.bind<ViewDataBinding>(view)
-            Utils.setClickListeners(view, DetailsListAdapter.viewClickListener, DetailsListAdapter.list)
+            Utils.setClickListeners(view, viewClickListener, list)
         }
     }
 
     override fun onCreateViewHolder(parent : ViewGroup, viewType: Int) : BindingViewHolder{
         val view = LayoutInflater.from(parent.context).inflate(R.layout.details_list_layout, parent, false)
-        return BindingViewHolder(view)
+        return BindingViewHolder(view, list)
     }
 
     override fun onBindViewHolder(holder : BindingViewHolder, position : Int) {
@@ -51,5 +51,9 @@ class DetailsListAdapter @Inject constructor(list_ : MutableList<DetailsModel>, 
 
     override fun getItemCount() : Int{
         return list.size
+    }
+
+    fun getList(): MutableList<DetailsModel>{
+        return list
     }
 }

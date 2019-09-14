@@ -33,9 +33,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
-    @Inject lateinit var list_: MutableList<ListModel>
-    private lateinit var listAdapter: ListAdapter
+class MainFragment @Inject constructor(): CustomFragment() {
+    @Inject lateinit var listAdapter: ListAdapter
     private lateinit var fragmentMainBinding: FragmentMainBinding
     private var page: Int = 1
     @Inject lateinit var context_: Context
@@ -46,8 +45,6 @@ class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
     override fun onCreateView(layoutInflater : LayoutInflater, viewGroup : ViewGroup?, bundle : Bundle?) : View?{
         fragmentMainBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_main, viewGroup, false)
         fragmentMainBinding.progressBar.setVisibility(View.VISIBLE)
-
-        listAdapter = ListAdapter(list_, this)
 
         fragmentMainBinding.recyclerView.layoutManager = linearLayoutManager
         fragmentMainBinding.recyclerView.itemAnimator = defaultItemAnimator
@@ -84,18 +81,24 @@ class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
     }
 
     override fun onSaveInstanceState(outState : Bundle) {
-        outState.putSerializable("list", list_ as Serializable)
+        outState.putSerializable("list", listAdapter.getList() as Serializable)
         outState.putInt("page", page)
     }
 
-    override fun onClick(context : Context, view : View, position : Int, list: List<Any>) {
-        val intent = Intent(context, DetailsActivity::class.java)
+    interface ListViewClickListener : ViewClickListener{
+        override fun onClick(context : Context, view : View, position : Int, list: List<Any>)
 
-        val bundle = Bundle()
-        bundle.putSerializable("details", list[position] as Serializable)
+        class ListViewClickListenerImpl @Inject constructor(): ListViewClickListener{
+            override fun onClick(context: Context, view: View, position: Int, list: List<Any>) {
+                val intent = Intent(context, DetailsActivity::class.java)
 
-        intent.putExtra("data", bundle)
-        startActivity(intent)
+                val bundle = Bundle()
+                bundle.putSerializable("details", list[position] as Serializable)
+
+                intent.putExtra("data", bundle)
+                context.startActivity(intent)
+            }
+        }
     }
 
     protected fun loadMore(){
@@ -116,8 +119,8 @@ class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
     protected fun setList(values : MutableList<ListModel>){
         hideLoading()
 
-        val startRange = list_.size
-        list_.addAll(values)
+        val startRange = listAdapter.getList().size
+        listAdapter.getList().addAll(values)
         listAdapter.notifyItemRangeInserted(startRange, values.size)
 
         fragmentMainBinding.progressBar.setVisibility(View.GONE)
@@ -128,14 +131,14 @@ class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
     protected fun showLoading(){
         val listModel = ListModel()
         listModel.showLoading = true
-        list_.add(listModel)
-        listAdapter.notifyItemInserted(list_.size - 1)
+        listAdapter.getList().add(listModel)
+        listAdapter.notifyItemInserted(listAdapter.getList().size - 1)
     }
 
     protected fun hideLoading(){
-        if(Statics.loadMore && list_.size >= 1) {
-            val index = list_.size - 1
-            list_.removeAt(index)
+        if(Statics.loadMore && listAdapter.getList().size >= 1) {
+            val index = listAdapter.getList().size - 1
+            listAdapter.getList().removeAt(index)
             listAdapter.notifyItemRemoved(index)
         }
     }
