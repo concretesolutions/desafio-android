@@ -20,28 +20,29 @@ import com.silvioapps.githubkotlin.features.shared.fragments.CustomFragment
 import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
 import com.silvioapps.githubkotlin.features.shared.services.ServiceGenerator
 import com.silvioapps.githubkotlin.features.shared.utils.Utils
+import dagger.android.support.AndroidSupportInjection
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.Serializable
+import javax.inject.Inject
 
-class DetailsFragment : CustomFragment(), ViewClickListener {
-    private var fragmentDetailsBinding : FragmentDetailsBinding? = null
-    private var list = mutableListOf<DetailsModel>()
-    private var listAdapter : DetailsListAdapter? = null
-    private var listModel : ListModel? = null
+class DetailsFragment @Inject constructor(): CustomFragment() {
+    private lateinit var fragmentDetailsBinding : FragmentDetailsBinding
+    @Inject lateinit var listAdapter : DetailsListAdapter
+    private lateinit var listModel : ListModel
+    @Inject lateinit var context_: Context
+    @Inject lateinit var linearLayoutManager: LinearLayoutManager
+    @Inject lateinit var defaultItemAnimator: DefaultItemAnimator
 
     override fun onCreateView(layoutInflater : LayoutInflater, viewGroup : ViewGroup?, bundle : Bundle?) : View? {
         fragmentDetailsBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_details, viewGroup, false)
-        fragmentDetailsBinding?.progressBar?.setVisibility(View.VISIBLE)
+        fragmentDetailsBinding.progressBar.setVisibility(View.VISIBLE)
 
-        listAdapter = DetailsListAdapter(list, this)
-
-        val linearLayoutManager = LinearLayoutManager(activity)
-        fragmentDetailsBinding?.recyclerView?.layoutManager = linearLayoutManager
-        fragmentDetailsBinding?.recyclerView?.itemAnimator = DefaultItemAnimator()
-        fragmentDetailsBinding?.recyclerView?.setHasFixedSize(true)
-        fragmentDetailsBinding?.recyclerView?.adapter = listAdapter
+        fragmentDetailsBinding.recyclerView.layoutManager = linearLayoutManager
+        fragmentDetailsBinding.recyclerView.itemAnimator = defaultItemAnimator
+        fragmentDetailsBinding.recyclerView.setHasFixedSize(true)
+        fragmentDetailsBinding.recyclerView.adapter = listAdapter
 
         if(bundle != null){
             listModel = bundle.getSerializable("listModel") as ListModel
@@ -50,21 +51,32 @@ class DetailsFragment : CustomFragment(), ViewClickListener {
         }
         else{
             listModel = arguments?.getSerializable("details") as ListModel
-            loadList(listModel!!)
+            loadList(listModel)
         }
 
-        showBackButton(null, listModel?.name!!)
+        showBackButton(null, listModel.name!!)
 
-        return fragmentDetailsBinding?.root
+        return fragmentDetailsBinding.root
+    }
+
+    override fun onAttach(context: Context){
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
     }
 
     override fun onSaveInstanceState(outState : Bundle) {
-        outState.putSerializable("list", list as Serializable)
+        outState.putSerializable("list", listAdapter.getList() as Serializable)
         outState.putSerializable("listModel", listModel as Serializable)
     }
 
-    override fun onClick(context : Context, view : View, position : Int) {
-        Utils.openUrl(context, list[position].html_url!!)
+    interface DetailsViewClickListener : ViewClickListener{
+        override fun onClick(context : Context, view : View, position : Int, list: List<Any>)
+
+        class DetailsViewClickListenerImpl @Inject constructor(): DetailsViewClickListener{
+            override fun onClick(context: Context, view: View, position: Int, list: List<Any>) {
+                Utils.openUrl(context, (list[position] as DetailsModel).html_url!!)
+            }
+        }
     }
 
     protected fun loadList(listModel : ListModel){
@@ -76,16 +88,16 @@ class DetailsFragment : CustomFragment(), ViewClickListener {
             }
 
             override fun onFailure(call : Call<List<DetailsModel>>, t : Throwable) {
-                Toast.makeText(activity, getString(R.string.list_error), Toast.LENGTH_LONG).show()
+                Toast.makeText(context_, getString(R.string.list_error), Toast.LENGTH_LONG).show()
             }
         })
     }
 
     protected fun setList(values : List<DetailsModel>){
-        val startRange = list.size
-        list.addAll(values)
-        listAdapter?.notifyItemRangeInserted(startRange, values.size)
+        val startRange = listAdapter.getList().size
+        listAdapter.getList().addAll(values)
+        listAdapter.notifyItemRangeInserted(startRange, values.size)
 
-        fragmentDetailsBinding?.progressBar?.setVisibility(View.GONE)
+        fragmentDetailsBinding.progressBar.setVisibility(View.GONE)
     }
 }

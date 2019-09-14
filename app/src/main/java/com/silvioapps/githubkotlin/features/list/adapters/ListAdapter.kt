@@ -12,13 +12,12 @@ import com.silvioapps.githubkotlin.R
 import com.silvioapps.githubkotlin.features.list.models.ListModel
 import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
 import com.silvioapps.githubkotlin.features.shared.utils.Utils
-import kotlin.collections.List
 
-class ListAdapter(list_ : List<ListModel>, viewClickListener_ : ViewClickListener) : RecyclerView.Adapter<ListAdapter.BindingViewHolder>() {
-    private var list = listOf<ListModel>()
+class ListAdapter (list_ : MutableList<ListModel>, viewClickListener_ : ViewClickListener) : RecyclerView.Adapter<ListAdapter.BindingViewHolder>() {
+    private var list: MutableList<ListModel>
 
     companion object{
-        private var viewClickListener : ViewClickListener? = null
+        private lateinit var viewClickListener: ViewClickListener
     }
 
     init{
@@ -26,18 +25,18 @@ class ListAdapter(list_ : List<ListModel>, viewClickListener_ : ViewClickListene
         viewClickListener = viewClickListener_
     }
 
-    class BindingViewHolder(view : View) : RecyclerView.ViewHolder(view){
+    class BindingViewHolder(view : View, list: MutableList<ListModel>) : RecyclerView.ViewHolder(view){
         var viewDataBinding : ViewDataBinding? = null
 
         init{
             viewDataBinding = DataBindingUtil.bind<ViewDataBinding>(view)
-            Utils.setClickListeners(view, viewClickListener)
+            Utils.setClickListeners(view, viewClickListener, list)
         }
     }
 
     override fun onCreateViewHolder(parent : ViewGroup, viewType: Int) : BindingViewHolder{
         val view = LayoutInflater.from(parent.context).inflate(R.layout.main_list_layout, parent, false)
-        return BindingViewHolder(view)
+        return BindingViewHolder(view, list)
     }
 
     override fun onBindViewHolder(holder : BindingViewHolder, position : Int) {
@@ -52,5 +51,9 @@ class ListAdapter(list_ : List<ListModel>, viewClickListener_ : ViewClickListene
 
     override fun getItemCount() : Int{
         return list.size
+    }
+
+    fun getList(): MutableList<ListModel>{
+        return list
     }
 }

@@ -1,9 +1,9 @@
 package com.silvioapps.githubkotlin.features.list.models
 
 import java.io.Serializable
+import javax.inject.Singleton
 
-class ResponseModel : Serializable{
-	val total_count: Int? = null
-	val incomplete_results: Boolean? = null
+@Singleton
+data class ResponseModel(
 	val items: MutableList<ListModel>? = null
-}
+): Serializable

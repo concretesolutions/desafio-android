@@ -1,8 +1,10 @@
 package com.silvioapps.githubkotlin.features.details.models
 
 import java.io.Serializable
+import javax.inject.Singleton
 
-class User : Serializable{
-	val login: String? = null
+@Singleton
+data class User(
+	val login: String? = null,
 	val avatar_url: String? = null
-}
+): Serializable
