@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.row_data.view.*
 import java.util.*
 
 class HomeAdapter(private var listItem: ArrayList<Item>,
-                  private val onItemClickListener: ((dataItem: Item) -> Unit)) :
+                  private val onItemClickListener: ((Item) -> Unit)) :
     RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ItemViewHolder {
@@ -29,6 +29,12 @@ class HomeAdapter(private var listItem: ArrayList<Item>,
 
         val dataItem = listItem[p1]
         holder.bindView(dataItem)
+    }
+
+    fun clear(dataItem: ArrayList<Item>) {
+        listItem.clear()
+        listItem.addAll(dataItem)
+        notifyDataSetChanged()
     }
 
     class ItemViewHolder(private val view: View, private val onItemClickListener: ((dataItem: Item) -> Unit)):
@@ -52,7 +58,7 @@ class HomeAdapter(private var listItem: ArrayList<Item>,
 
             imageAvatar.fadeAnimation()
 
-            val drawableImageDefault = R.drawable.icon_github_logo_preview
+            val drawableImageDefault = R.drawable.icon_github_avatar_preview
 
             Glide.with(context)
                 .load(dataItem.owner.avatarUrl)

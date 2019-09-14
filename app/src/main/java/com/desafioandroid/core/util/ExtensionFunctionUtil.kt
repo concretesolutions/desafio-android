@@ -1,5 +1,6 @@
 package com.desafioandroid.core.util
 
+import android.animation.ObjectAnimator
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import java.text.DecimalFormat
@@ -22,4 +23,11 @@ fun View.fadeAnimation(){
     this.animate().setDuration(400)
         .setInterpolator(AccelerateDecelerateInterpolator())
         .alpha(1f)
+}
+
+fun View.rotationAnimation(): View{
+    ObjectAnimator
+        .ofFloat(this, View.ROTATION, 0f, 360f)
+        .setDuration(300).start()
+    return this
 }
