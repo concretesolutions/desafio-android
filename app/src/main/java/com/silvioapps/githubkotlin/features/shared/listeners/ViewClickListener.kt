@@ -4,5 +4,5 @@ import android.content.Context
 import android.view.View
 
 interface ViewClickListener {
-    fun onClick(context : Context, view : View, position : Int)
+    fun onClick(context : Context, view : View, position : Int, list: List<Any>)
 }

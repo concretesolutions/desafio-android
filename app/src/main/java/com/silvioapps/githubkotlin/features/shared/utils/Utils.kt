@@ -24,20 +24,20 @@ class Utils {
             }
         }
 
-        fun setClickListeners(view : View, viewClickListener : ViewClickListener?) {
+        fun setClickListeners(view : View, viewClickListener : ViewClickListener?, list: List<Any>) {
             if (view is ViewGroup) {
                 for (index in 0..view.getChildCount()) {
                     val nextChild : View? = view.getChildAt(index)
                     nextChild?.setOnClickListener(object : View.OnClickListener {
                         override fun onClick(v : View) {
                             if (nextChild.getTag() != null) {
-                                viewClickListener?.onClick(nextChild.context, nextChild, nextChild.getTag() as Int)
+                                viewClickListener?.onClick(nextChild.context, nextChild, nextChild.getTag() as Int, list)
                             }
                         }
                     });
 
                     if (nextChild is ViewGroup) {
-                        setClickListeners(nextChild, viewClickListener)
+                        setClickListeners(nextChild, viewClickListener, list)
                     }
                 }
             }

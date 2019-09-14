@@ -30,7 +30,7 @@ class ListAdapter (list_ : MutableList<ListModel>, viewClickListener_ : ViewClic
 
         init{
             viewDataBinding = DataBindingUtil.bind<ViewDataBinding>(view)
-            Utils.setClickListeners(view, viewClickListener)
+            Utils.setClickListeners(view, viewClickListener, listOf<ListModel>())
         }
     }
 

@@ -1,9 +1,8 @@
 package com.silvioapps.githubkotlin.di.components
 
 import android.app.Application
+import com.silvioapps.githubkotlin.di.applications.App
 import com.silvioapps.githubkotlin.di.modules.AppModule
-import com.silvioapps.githubkotlin.features.shared.views.applications.CustomApplication
-
 import javax.inject.Singleton
 import dagger.BindsInstance
 import dagger.Component
@@ -22,5 +21,5 @@ interface AppComponent: AndroidInjector<Any>{
         fun build(): AppComponent
     }
 
-    fun inject(application: CustomApplication)
+    fun inject(application: App)
 }

@@ -34,22 +34,23 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
-    private var list = mutableListOf<ListModel>()
+    @Inject lateinit var list_: MutableList<ListModel>
     private lateinit var listAdapter: ListAdapter
     private lateinit var fragmentMainBinding: FragmentMainBinding
     private var page: Int = 1
     @Inject lateinit var context_: Context
+    @Inject lateinit var linearLayoutManager: LinearLayoutManager
+    @Inject lateinit var defaultItemAnimator: DefaultItemAnimator
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(layoutInflater : LayoutInflater, viewGroup : ViewGroup?, bundle : Bundle?) : View?{
         fragmentMainBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_main, viewGroup, false)
         fragmentMainBinding.progressBar.setVisibility(View.VISIBLE)
 
-        listAdapter = ListAdapter(list, this)
+        listAdapter = ListAdapter(list_, this)
 
-        val linearLayoutManager = LinearLayoutManager(context_)
         fragmentMainBinding.recyclerView.layoutManager = linearLayoutManager
-        fragmentMainBinding.recyclerView.itemAnimator = DefaultItemAnimator()
+        fragmentMainBinding.recyclerView.itemAnimator = defaultItemAnimator
         fragmentMainBinding.recyclerView.setHasFixedSize(true)
         fragmentMainBinding.recyclerView.adapter = listAdapter
         fragmentMainBinding.recyclerView.setOnTouchListener(object: View.OnTouchListener {
@@ -83,11 +84,11 @@ class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
     }
 
     override fun onSaveInstanceState(outState : Bundle) {
-        outState.putSerializable("list", list as Serializable)
+        outState.putSerializable("list", list_ as Serializable)
         outState.putInt("page", page)
     }
 
-    override fun onClick(context : Context, view : View, position : Int) {
+    override fun onClick(context : Context, view : View, position : Int, list: List<Any>) {
         val intent = Intent(context, DetailsActivity::class.java)
 
         val bundle = Bundle()
@@ -115,8 +116,8 @@ class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
     protected fun setList(values : MutableList<ListModel>){
         hideLoading()
 
-        val startRange = list.size
-        list.addAll(values)
+        val startRange = list_.size
+        list_.addAll(values)
         listAdapter.notifyItemRangeInserted(startRange, values.size)
 
         fragmentMainBinding.progressBar.setVisibility(View.GONE)
@@ -127,14 +128,14 @@ class MainFragment @Inject constructor(): CustomFragment(), ViewClickListener {
     protected fun showLoading(){
         val listModel = ListModel()
         listModel.showLoading = true
-        list.add(listModel)
-        listAdapter.notifyItemInserted(list.size - 1)
+        list_.add(listModel)
+        listAdapter.notifyItemInserted(list_.size - 1)
     }
 
     protected fun hideLoading(){
-        if(Statics.loadMore && list.size >= 1) {
-            val index = list.size - 1
-            list.removeAt(index)
+        if(Statics.loadMore && list_.size >= 1) {
+            val index = list_.size - 1
+            list_.removeAt(index)
             listAdapter.notifyItemRemoved(index)
         }
     }

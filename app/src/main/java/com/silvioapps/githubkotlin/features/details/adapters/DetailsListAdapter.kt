@@ -9,20 +9,19 @@ import android.view.ViewGroup
 
 import com.silvioapps.githubkotlin.BR
 import com.silvioapps.githubkotlin.R
+import com.silvioapps.githubkotlin.features.details.fragments.DetailsFragment
 import com.silvioapps.githubkotlin.features.details.models.DetailsModel
-import com.silvioapps.githubkotlin.features.shared.listeners.ViewClickListener
 import com.silvioapps.githubkotlin.features.shared.utils.Utils
-import kotlin.collections.List
+import javax.inject.Inject
 
-class DetailsListAdapter(list_ : List<DetailsModel>, viewClickListener_ : ViewClickListener) : RecyclerView.Adapter<DetailsListAdapter.BindingViewHolder>() {
-    private var list = listOf<DetailsModel>()
-
+class DetailsListAdapter @Inject constructor(list_ : MutableList<DetailsModel>, viewClickListener_ : DetailsFragment.DetailsViewClickListener) : RecyclerView.Adapter<DetailsListAdapter.BindingViewHolder>() {
     companion object{
-        private var viewClickListener : ViewClickListener? = null
+        private lateinit var list: MutableList<DetailsModel>
+        private lateinit var viewClickListener : DetailsFragment.DetailsViewClickListener
     }
 
     init{
-        this.list = list_
+        list = list_
         viewClickListener = viewClickListener_
     }
 
@@ -31,7 +30,7 @@ class DetailsListAdapter(list_ : List<DetailsModel>, viewClickListener_ : ViewCl
 
         init{
             viewDataBinding = DataBindingUtil.bind<ViewDataBinding>(view)
-            Utils.setClickListeners(view, DetailsListAdapter.viewClickListener)
+            Utils.setClickListeners(view, DetailsListAdapter.viewClickListener, DetailsListAdapter.list)
         }
     }
 
