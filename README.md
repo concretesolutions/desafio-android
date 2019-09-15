@@ -1,6 +1,6 @@
-# Desáfio Concrete
+# Desafio Concrete
 
-Desáfio usando a api do próprio Github.
+Criar um aplicativo usando a api do próprio Github.
 
 # Tecnologias utilizadas
 
