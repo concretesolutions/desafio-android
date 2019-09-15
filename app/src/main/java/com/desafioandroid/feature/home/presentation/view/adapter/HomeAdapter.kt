@@ -37,7 +37,7 @@ class HomeAdapter(private var listItem: ArrayList<Item>,
         notifyDataSetChanged()
     }
 
-    class ItemViewHolder(private val view: View, private val onItemClickListener: ((dataItem: Item) -> Unit)):
+    class ItemViewHolder(private val view: View, private val onItemClickListener: ((Item) -> Unit)):
         RecyclerView.ViewHolder(view) {
 
         private val nameRepository: TextView = view.text_name_repository

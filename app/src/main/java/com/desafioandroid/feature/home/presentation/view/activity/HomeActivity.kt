@@ -43,7 +43,7 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        setToolbar(title = R.string.title_toolbar_home)
+        setToolbar(title = R.string.title_toolbar_home, showHomeAsUp = false)
 
         initViewModel()
         iniUi()

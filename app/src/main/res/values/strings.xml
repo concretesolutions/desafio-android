@@ -11,4 +11,9 @@
 
     <!-- Screen empty -->
     <string name="message_screen_empty">Lista vázia.</string>
+
+    <!-- PullRequestActivity -->
+    <string name="message_state_open_pull_request">%d aberto</string>
+    <string name="message_state_closed_pull_request">%d fechado</string>
+    <string name="division_concat">%s / %s</string>
 </resources>

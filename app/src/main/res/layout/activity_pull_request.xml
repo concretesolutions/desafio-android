@@ -11,9 +11,9 @@
         layout="@layout/layout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
     </include>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -25,45 +25,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include_toolbar_pull_request">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_pull_request"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.recyclerview.widget.RecyclerView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_total_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/text_total_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/background_light"
+                    android:padding="12dp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_pull_request"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <include
         android:id="@+id/include_layout_loading"
         layout="@layout/layout_loading"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include_toolbar_pull_request"
-        android:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/include_toolbar_pull_request" />
 
     <include
         android:id="@+id/include_layout_reload"
         layout="@layout/layout_reload"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include_toolbar_pull_request"
-        android:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/include_toolbar_pull_request" />
 
     <include
         android:id="@+id/include_layout_empty"
         layout="@layout/layout_empty"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include_toolbar_pull_request"
-        android:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/include_toolbar_pull_request" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

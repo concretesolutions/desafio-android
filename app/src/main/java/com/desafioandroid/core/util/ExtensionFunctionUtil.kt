@@ -1,9 +1,15 @@
 package com.desafioandroid.core.util
 
 import android.animation.ObjectAnimator
+import android.content.Context
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,4 +42,11 @@ fun View.rotationAnimation(): View{
 fun TextView.textEmptyGone(text: String){
     this.text = text
     this.visibility = if (this.text.toString().isEmpty()) View.GONE else View.VISIBLE
+}
+
+fun String.addColorSpecificText(context: Context, @ColorRes colorValue: Int, textSpecific: String): SpannableString {
+    val color = ContextCompat.getColor(context, colorValue)
+    val spannableString = SpannableString(this)
+    spannableString.setSpan(ForegroundColorSpan(color), 0, textSpecific.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    return spannableString
 }

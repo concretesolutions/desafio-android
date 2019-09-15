@@ -14,12 +14,12 @@ import com.desafioandroid.data.model.pullrequest.entity.PullRequestResponse
 import kotlinx.android.synthetic.main.row_data_pull_request.view.*
 import java.util.*
 
-class PullRequestAdapter(private var listPullRequestResponse: ArrayList<PullRequestResponse>) :
+class PullRequestAdapter(private var listPullRequestResponse: ArrayList<PullRequestResponse>, private val onItemClickListener: ((PullRequestResponse) -> Unit)) :
     RecyclerView.Adapter<PullRequestAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ItemViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.row_data_pull_request, p0, false)
-        return ItemViewHolder(view)
+        return ItemViewHolder(view, onItemClickListener)
     }
 
     override fun getItemCount(): Int = listPullRequestResponse.size
@@ -36,7 +36,7 @@ class PullRequestAdapter(private var listPullRequestResponse: ArrayList<PullRequ
         notifyDataSetChanged()
     }
 
-    class ItemViewHolder(private val view: View):
+    class ItemViewHolder(private val view: View, private val onItemClickListener: ((PullRequestResponse) -> Unit)):
         RecyclerView.ViewHolder(view) {
 
         private val titlePullRequest: TextView = view.text_title
@@ -63,6 +63,10 @@ class PullRequestAdapter(private var listPullRequestResponse: ArrayList<PullRequ
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageAvatar)
+
+            this.setOnClickListener {
+                onItemClickListener.invoke(pullRequestResponse)
+            }
         }
     }
 }
