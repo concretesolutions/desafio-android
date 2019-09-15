@@ -126,11 +126,7 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun showError() {
-        if (page > 2) {
-            errorBottomScroll()
-        } else {
-            errorFullScreen()
-        }
+        if (page > 2) { errorBottomScroll() } else { errorFullScreen() }
     }
 
     private fun errorFullScreen() {
