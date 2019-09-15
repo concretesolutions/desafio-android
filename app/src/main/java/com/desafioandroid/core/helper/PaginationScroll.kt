@@ -15,9 +15,9 @@ abstract class PaginationScroll(private val layoutManager: LinearLayoutManager) 
                 if (visibleItemCount + firstVisibleItemPosition >= totalItemCount) {
                     loadMoreItems()
                 }
+                hideMoreItems()
             }
         }
-        hideMoreItems()
     }
 
     abstract fun loadMoreItems()

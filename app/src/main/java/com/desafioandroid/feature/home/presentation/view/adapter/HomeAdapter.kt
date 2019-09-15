@@ -11,7 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.desafioandroid.R
 import com.desafioandroid.core.util.*
 import com.desafioandroid.data.model.home.entity.Item
-import kotlinx.android.synthetic.main.row_data.view.*
+import kotlinx.android.synthetic.main.row_data_home.view.*
 import java.util.*
 
 class HomeAdapter(private var listItem: ArrayList<Item>,
@@ -19,7 +19,7 @@ class HomeAdapter(private var listItem: ArrayList<Item>,
     RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ItemViewHolder {
-        val view = LayoutInflater.from(p0.context).inflate(R.layout.row_data, p0, false)
+        val view = LayoutInflater.from(p0.context).inflate(R.layout.row_data_home, p0, false)
         return ItemViewHolder(view, onItemClickListener)
     }
 

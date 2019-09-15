@@ -20,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".feature.pullrequest.presentation.view.activity.PullRequestActivity"
+            android:configChanges="screenSize|orientation"/>
     </application>
 
 </manifest>

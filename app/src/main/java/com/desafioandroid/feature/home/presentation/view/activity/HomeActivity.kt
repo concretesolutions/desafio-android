@@ -1,5 +1,6 @@
 package com.desafioandroid.feature.home.presentation.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -12,20 +13,23 @@ import com.desafioandroid.core.util.rotationAnimation
 import com.desafioandroid.data.model.home.entity.Item
 import com.desafioandroid.feature.home.presentation.view.adapter.HomeAdapter
 import com.desafioandroid.feature.home.presentation.viewmodel.HomeViewModel
+import com.desafioandroid.feature.pullrequest.presentation.view.activity.PullRequestActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_reload.*
 import kotlinx.android.synthetic.main.layout_reload_bottom.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class HomeActivity : BaseActivity() {
 
     private val viewModel by viewModel<HomeViewModel>()
 
     private val homeAdapter by lazy {
-        HomeAdapter(itemList) {
+        HomeAdapter(itemList) { item ->
             if (releasedLoad) {
-                Timber.i(it.name)
+                val intent = Intent(this@HomeActivity, PullRequestActivity::class.java)
+                intent.putExtra("name_user", item.owner.login)
+                intent.putExtra("name_repository", item.name)
+                startActivity(intent)
             }
         }
     }
@@ -43,11 +47,6 @@ class HomeActivity : BaseActivity() {
 
         initViewModel()
         iniUi()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        swipeRefresh()
     }
 
     private fun initViewModel() {
@@ -88,6 +87,8 @@ class HomeActivity : BaseActivity() {
 
             this.layoutManager = linearLayoutManager
         }
+
+        swipeRefresh()
     }
 
     private fun populateList(itemList: List<Item>) {

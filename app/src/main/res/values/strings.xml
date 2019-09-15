@@ -3,8 +3,12 @@
 
     <!-- Title toolbar -->
     <string name="title_toolbar_home">Repositório</string>
+    <string name="title_toolbar_pull_request">Pull Request</string>
 
     <!-- Screen error -->
     <string name="message_status_erro_title">Desculpe, algum erro aconteceu.</string>
     <string name="message_status_erro_subtitle">Pressione o botão abaixo para\ntentar novamente.</string>
+
+    <!-- Screen empty -->
+    <string name="message_screen_empty">Lista vázia.</string>
 </resources>
