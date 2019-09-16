@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">RepoList</string>
+    <string name="waiting">Aguarde…</string>
+    <string name="list_txt_empty">Não há dados para serem exibidos.</string>
+    <string name="main_title">Github JavaPop</string>
+    <string name="main_err_owner_null">Falha ao buscar o autor, tente novamente!</string>
+    <string name="pull_txt_opened">%o opened /</string>
+    <string name="pull_txt_closed">%o closed</string>
+    <string name="error_service">Ocorreu um erro ao realizar a requisição. Tente novamente!</string>
+</resources>

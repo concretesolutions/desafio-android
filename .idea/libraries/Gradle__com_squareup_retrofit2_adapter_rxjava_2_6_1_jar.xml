@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup.retrofit2:adapter-rxjava:2.6.1@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava/2.6.1/352057979ddbf23d42691ad64943ffe6ca7afff1/adapter-rxjava-2.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava/2.6.1/412f4ff8715669ae59c66df1db7ce5c01329a3d5/adapter-rxjava-2.6.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

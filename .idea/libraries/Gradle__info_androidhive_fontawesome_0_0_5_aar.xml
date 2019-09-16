@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: info.androidhive:fontawesome:0.0.5@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f159c63fbdbc11dfbd5312ef11a4d29a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f159c63fbdbc11dfbd5312ef11a4d29a/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/info.androidhive/fontawesome/0.0.5/b94fd0e88f374ca43a132af166da78ce7798e38a/fontawesome-0.0.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
