@@ -39,8 +39,8 @@ fun View.rotationAnimation(): View{
     return this
 }
 
-fun TextView.textEmptyGone(text: String){
-    this.text = text
+fun TextView.textEmptyGone(text: String? = null){
+    this.text = text ?: ""
     this.visibility = if (this.text.toString().isEmpty()) View.GONE else View.VISIBLE
 }
 
