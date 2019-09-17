@@ -3,19 +3,19 @@ package com.example.desafioconcentresolutions.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.desafioconcentresolutions.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafioconcentresolutions.adapters.GitHubPullAdapter
 import com.example.desafioconcentresolutions.models.Operation
 import com.example.desafioconcentresolutions.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_git_hub_pull_list.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
 
 class GitHubPullListFragment : Fragment(), GitHubPullAdapter.GitHubPullListener {
 
@@ -80,7 +80,7 @@ class GitHubPullListFragment : Fragment(), GitHubPullAdapter.GitHubPullListener 
 
     private fun setupListener() {
         toolBar_gitHubPullListFragment.setNavigationOnClickListener {
-           activity?.onBackPressed()
+            activity?.onBackPressed()
         }
     }
 

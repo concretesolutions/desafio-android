@@ -15,7 +15,7 @@ import com.example.desafioconcentresolutions.R
 import com.example.desafioconcentresolutions.models.GitHubPull
 import kotlinx.android.synthetic.main.gitpull_item_card.view.*
 import java.text.SimpleDateFormat
-import java.util.*
+
 
 class GitHubPullAdapter(private val context: Context) : PagedListAdapter<GitHubPull, RecyclerView.ViewHolder>(GitHubPullDiff) {
 

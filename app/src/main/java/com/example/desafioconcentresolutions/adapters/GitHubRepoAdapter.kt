@@ -9,11 +9,12 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.desafioconcentresolutions.R
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.desafioconcentresolutions.R
 import com.example.desafioconcentresolutions.models.GitHubRepo
 import kotlinx.android.synthetic.main.gitrepo_item_card.view.*
+
 
 class GitHubRepoAdapter(private val context: Context) :
     PagedListAdapter<GitHubRepo, RecyclerView.ViewHolder>(GitHubDiffCall) {

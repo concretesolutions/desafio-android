@@ -17,7 +17,8 @@ class GitHubPullDataSource(private val ownerName:String, private val login:Strin
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, GitHubPull>) {
         operation.postValue(Operation.LOADING)
-        GitHubApi.getGitHubApi().listAllPRByPage( ownerName, login, 1, params.requestedLoadSize).enqueue(object: Callback<List<GitHubPull>> {
+        GitHubApi.getGitHubApi().listAllPRByPage( ownerName, login, 1, params.requestedLoadSize).enqueue(object:
+            Callback<List<GitHubPull>> {
             override fun onResponse(call: Call<List<GitHubPull>>, response: Response<List<GitHubPull>>) {
                 if(response.isSuccessful){
                     val gitRepo = response.body()?.toMutableList() ?: mutableListOf()
@@ -33,7 +34,8 @@ class GitHubPullDataSource(private val ownerName:String, private val login:Strin
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, GitHubPull>) {
-        GitHubApi.getGitHubApi().listAllPRByPage( ownerName, login, params.key, params.requestedLoadSize).enqueue(object: Callback<List<GitHubPull>> {
+        GitHubApi.getGitHubApi().listAllPRByPage( ownerName, login, params.key, params.requestedLoadSize).enqueue(object:
+            Callback<List<GitHubPull>> {
             override fun onResponse(call: Call<List<GitHubPull>>, response: Response<List<GitHubPull>>) {
                 if(response.isSuccessful){
                     val gitRepo = response.body()?.toMutableList() ?: mutableListOf()

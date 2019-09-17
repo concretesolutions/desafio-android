@@ -1,8 +1,6 @@
 package com.example.desafioconcentresolutions.models
 
 import com.squareup.moshi.Json
-import java.net.URI
-
 
 data class GitHubRepo(
     val name:String,

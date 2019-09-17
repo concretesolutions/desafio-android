@@ -1,20 +1,18 @@
 package com.example.desafioconcentresolutions.ui
 
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-
-import com.example.desafioconcentresolutions.R
 import com.example.desafioconcentresolutions.adapters.GitHubRepoAdapter
 import com.example.desafioconcentresolutions.models.Operation
 import com.example.desafioconcentresolutions.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_git_hub_repo_list.*
+import com.example.desafioconcentresolutions.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
