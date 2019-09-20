@@ -1,0 +1,66 @@
+ext {
+    configuration = [
+            app_name         : "desafio-android",
+            packageName      : "br.com.concrete",
+            compileVersion   : 28,
+            buildToolsVersion: "28.0.8",
+            minSdk           : 16,
+            targetSdk        : 28
+    ]
+
+    libraries = [
+            supportVersion: "27.0.2"
+    ]
+}
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://maven.fabric.io/public'}
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.google.gms:google-services:3.2.1'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        jcenter{ url "http://jcenter.bintray.com/" }
+        google()
+        jcenter()
+        flatDir {
+            dirs 'libs'
+        }
+        maven { url "https://plugins.gradle.org/m2/"}
+        maven { url "https://jitpack.io" }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+    task checkstyle(type: Checkstyle) {
+        showViolations = true
+        configFile file("../config/checkstyle/checkstyle.xml")
+
+        source 'src/main/java'
+        include '**/*.java'
+        exclude '**/gen/**'
+        exclude '**/R.java'
+        exclude '**/BuildConfig.java'
+        // empty classpath
+        classpath = files()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
