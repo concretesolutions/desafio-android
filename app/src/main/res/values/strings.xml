@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Git Searcher</string>
+    <string name="default_dialog_button">OK</string>
+    <string name="default_rest_error_message">Parece que a sua requisição falhou, verifique sua conexão e tente novamente!</string>
+    <string name="webpage_intent_error_message">Não foi possível abrir o endereço solicitado, verifique se possui um navegador web instalado.</string>
+    <string name="try_again_layout_title">Parece que algo deu errado</string>
+    <string name="try_again_layout_text">Tentar novamente</string>
+
+</resources>
