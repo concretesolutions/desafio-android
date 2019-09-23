@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GitHub Repositórios</string>
+    <string name="pull_requests">Pull Requests</string>
+
+    //url
+    <string name="base_url">https://api.github.com/</string>
+    <string name="title_activity_pull_request">PullRequestActivity</string>
+</resources>

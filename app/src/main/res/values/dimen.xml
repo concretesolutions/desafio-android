@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="big_padding">30dp</dimen>
+    <dimen name="medium_padding">20dp</dimen>
+    <dimen name="small_padding">10dp</dimen>
+
+    <dimen name="big_text">32dp</dimen>
+    <dimen name="medium_text">24dp</dimen>
+    <dimen name="small_text">12dp</dimen>
+
+    <dimen name="very_big_margin">60dp</dimen>
+    <dimen name="big_margin">45dp</dimen>
+    <dimen name="medium_margin">30dp</dimen>
+    <dimen name="small_margin">15dp</dimen>
+    <dimen name="mini_margin">3dp</dimen>
+</resources>
