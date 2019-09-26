@@ -63,7 +63,7 @@ class PullVH(inflater: LayoutInflater, parent: ViewGroup) :
             })
             .into(ivAvatar!!)
 
-        var data = ""
+        var data: String
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var ldt: LocalDateTime = LocalDateTime.parse(pull.created_at.replace("Z", ""))
             var dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")

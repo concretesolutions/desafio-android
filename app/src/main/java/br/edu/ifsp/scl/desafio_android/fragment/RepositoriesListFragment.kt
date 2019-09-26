@@ -39,7 +39,7 @@ class RepositoriesListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
-        rService = RetrofitClient().getClient().create(RepositoriesService::class.java)
+        rService = RetrofitClient().getClient(context!!).create(RepositoriesService::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =

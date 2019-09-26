@@ -35,7 +35,7 @@ class PullListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pService = RetrofitClient().getClient().create(PullService::class.java)
+        pService = RetrofitClient().getClient(context!!).create(PullService::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
