@@ -1,7 +1,8 @@
-package br.com.guilherme.solution
+package br.com.guilherme.solution.ui.repositoryList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.com.guilherme.solution.R
 
 class MainActivity : AppCompatActivity() {
 
