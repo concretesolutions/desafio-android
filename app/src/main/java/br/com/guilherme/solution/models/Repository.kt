@@ -7,7 +7,8 @@ import kotlinx.android.parcel.Parcelize
 data class Repository(
     val id: Long,
     val name: String,
-    val owner: Owner,
+    val owner: User,
     val description: String,
-    val stargazers_count: String
+    val stargazers_count: String,
+    val forks: String
 ) : Parcelable
