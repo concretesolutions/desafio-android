@@ -11,7 +11,7 @@ import br.com.guilherme.solution.models.Repository
 
 class RepositoryAdapter(
     val context: Context,
-    val issues: MutableList<Repository>,
+    val repositories: MutableList<Repository>,
     activity: Activity
 ) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
 
@@ -27,11 +27,11 @@ class RepositoryAdapter(
     }
 
     override fun getItemCount(): Int {
-        return issues.size
+        return repositories.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val issue = issues.get(position)
+        val repo = repositories.get(position)
 
         /*holder.textViewTitle.setText(issue.title)
         holder.textViewEstado.setText(issue.state)

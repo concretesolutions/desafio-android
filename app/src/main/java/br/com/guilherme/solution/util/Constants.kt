@@ -1,5 +1,7 @@
 package br.com.guilherme.solution.util
 
+const val EXTRA_REPO = "repo"
+
 class Constants {
 
     companion object {
