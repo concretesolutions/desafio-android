@@ -2,6 +2,5 @@
     <string name="app_name">Solution</string>
     <string name="atention">Atenção</string>
     <string name="ok">OK</string>
-    <string name="title_activity_pull_requests">PullRequestsActivity</string>
     <string name="imagem">imagem</string>
 </resources>
