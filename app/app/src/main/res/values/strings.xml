@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">desafio_tembici</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Rodrigo Contarini</string>
+    <string name="nav_header_subtitle">contbeiro@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="fragment_home">Github JavaPop</string>
+    <string name="menu_home">Home</string>
+
+
+    <string name="error">Tente novamente</string>
+    <string name="title_activity_pull_request">PullRequestActivity</string>
+    <string name="pull_request_error">Nenhum pull request encontrado!</string>
+
+    <string name="opened">opened</string>
+    <string name="space">/</string>
+    <string name="closed">closed</string>
+</resources>
