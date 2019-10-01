@@ -8,4 +8,11 @@
     tools:context=".ui.pullRequests.PullRequestsActivity"
     tools:showIn="@layout/activity_pull_requests">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_pull_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
