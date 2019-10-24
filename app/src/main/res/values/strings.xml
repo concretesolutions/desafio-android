@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Concrete Test</string>
+    <string name="title_activity_repos_list">ReposListActivity</string>
+    <string name="title_repos">Java Repositories</string>
+    <string name="title_pulls">Pull Requests</string>
+    <string name="error_net">Network Error</string>
+    <string name="empty_list">Empty List</string>
+    <string name="item_element_text">tv</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_pull_request">PullRequestActivity</string>
+    <string name="str_stars">Sort by Stars</string>
+    <string name="str_forks">Sort by Forks</string>
+    <string name="str_updated">Sort by Updated</string>
+</resources>
