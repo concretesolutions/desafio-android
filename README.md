@@ -1,5 +1,3 @@
-[![Build Status](https://app.bitrise.io/app/68ed8d5381bbcdfd/status.svg?token=HhAzwt7XdEYjw1-SX9zQVQ&branch=development)](https://app.bitrise.io/app/68ed8d5381bbcdfd)
-
 # Criar um aplicativo de consulta a API do [GitHub](https://github.com)#
 
 Criar um aplicativo para consultar a [API do GitHub](https://developer.github.com/v3/) e trazer os repositórios mais populares de Java. Basear-se no mockup fornecido:
