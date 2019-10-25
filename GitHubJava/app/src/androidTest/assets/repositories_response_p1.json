@@ -1,0 +1,100 @@
+{
+  "items": [
+    {
+      "id": 121395510,
+      "name": "CS-Notes",
+      "full_name": "CyC2018/CS-Notes",
+      "owner": {
+        "login": "CyC2018",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/36260787?v=4"
+      },
+      "description": ":books: Tech Interview Guide 技术面试必备基础知识、Leetcode 题解、Java、C++、Python、后端面试、操作系统、计算机网络、系统设计",
+      "stargazers_count": 81110,
+      "forks": 25920
+    },
+    {
+      "id": 132464395,
+      "name": "JavaGuide",
+      "full_name": "Snailclimb/JavaGuide",
+      "owner": {
+        "login": "Snailclimb",
+        "avatar_url": "https://avatars0.githubusercontent.com/u/29880145?v=4"
+      },
+      "description": "【Java学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。",
+      "stargazers_count": 58802,
+      "forks": 19758
+    },
+    {
+      "id": 22790488,
+      "name": "java-design-patterns",
+      "full_name": "iluwatar/java-design-patterns",
+      "owner": {
+        "login": "iluwatar",
+        "avatar_url": "https://avatars1.githubusercontent.com/u/582346?v=4"
+      },
+      "description": "Design patterns implemented in Java",
+      "stargazers_count": 52123,
+      "forks": 16925
+    },
+    {
+      "id": 507775,
+      "name": "elasticsearch",
+      "full_name": "elastic/elasticsearch",
+      "owner": {
+        "login": "elastic",
+        "avatar_url": "https://avatars0.githubusercontent.com/u/6764390?v=4"
+      },
+      "description": "Open Source, Distributed, RESTful Search Engine",
+      "stargazers_count": 44948,
+      "forks": 15140
+    },
+    {
+      "id": 160640094,
+      "name": "LeetCodeAnimation",
+      "full_name": "MisterBooo/LeetCodeAnimation",
+      "owner": {
+        "login": "MisterBooo",
+        "avatar_url": "https://avatars1.githubusercontent.com/u/15308811?v=4"
+      },
+      "description": "Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解LeetCode题目的思路）",
+      "stargazers_count": 42997,
+      "forks": 7446
+    },
+    {
+      "id": 6296790,
+      "name": "spring-boot",
+      "full_name": "spring-projects/spring-boot",
+      "owner": {
+        "login": "spring-projects",
+        "avatar_url": "https://avatars0.githubusercontent.com/u/317776?v=4"
+      },
+      "description": "Spring Boot",
+      "stargazers_count": 42723,
+      "forks": 27334
+    },
+    {
+      "id": 81975372,
+      "name": "interviews",
+      "full_name": "kdn251/interviews",
+      "owner": {
+        "login": "kdn251",
+        "avatar_url": "https://avatars1.githubusercontent.com/u/16903644?v=4"
+      },
+      "description": "Everything you need to know to get the job.",
+      "stargazers_count": 39753,
+      "forks": 8286
+    },
+    {
+      "id": 67481986,
+      "name": "tinker",
+      "full_name": "Tencent/tinker",
+      "owner": {
+        "login": "Tencent",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/18461506?v=4"
+      },
+      "description": "Tinker is a hot-fix solution library for Android, it supports dex, library and resources update without reinstall apk.",
+      "stargazers_count": 14335,
+      "forks": 2899
+    }
+  ]
+}

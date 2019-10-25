@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3466BE</color>
+    <color name="colorPrimaryDark">#191B72</color>
+    <color name="colorAccent">#1E3B7A</color>
+    <color name="ic_launcher_donuts_background">#2C4E85</color>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.eloyvitorio.githubjavapop">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="com.example.eloyvitorio.githubjavapop.application.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_donuts"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_donuts_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
+        tools:targetApi="m">
+        <activity android:name=".ui.repositories.MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.pullrequest.PullRequestsListActivity"
+            android:parentActivityName=".ui.repositories.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.repositories.MainActivity" />
+        </activity>
+    </application>
+
+</manifest>

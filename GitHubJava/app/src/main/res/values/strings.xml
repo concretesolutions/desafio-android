@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">GitHub Java</string>
+    <string name="pullrequestslist_message_for_choose_browser">Escolha o navegador para abrir este endereço:</string>
+    <string name="button_reload_text">Recarregar</string>
+    <string name="tools_text_error_example">Um erro ocorreu. Tente carregar novamente.</string>
+    <string name="pullrequestslist_empty_message">Não há Pull Requests para este repositório.</string>
+    <string name="content_description_imageview_error_load">Um erro ocorreu. Tente carregar a lista de repositórios novamente.</string>
+    <string name="content_description_fork_icon">Ícone de fork</string>
+    <string name="content_description_start_icon">Ícone de estrela</string>
+    <string name="menu_settings">Settings</string>
+</resources>
