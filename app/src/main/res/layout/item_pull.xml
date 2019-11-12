@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp">
+
+
+    <LinearLayout
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:text="Título do pull request"
+            style="@style/Text.Title"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/txtBody"
+            android:text="Body do pull request"
+            style="@style/Text.Description"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/imgUser"
+                    android:src="@drawable/ic_profile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_marginStart="15dp"
+                android:gravity="start|center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/txtUsername"
+                    android:text="username"
+                    style="@style/Text.Username"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/txtFullname"
+                    android:text="Nome Sobrenome"
+                    style="@style/Text.Name"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

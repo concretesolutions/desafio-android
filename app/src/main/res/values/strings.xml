@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">desafio-android</string>
+    <string name="action_settings">Settings</string>
+    <string name="maint_title">Github JavaPop</string>
+    <string name="title_activity_pull">PullActivity</string>
+    <string name="title_activity_pull_view">PullViewActivity</string>
+</resources>

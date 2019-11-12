@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#343438</color>
+    <color name="colorPrimaryDark">#343438</color>
+    <color name="colorAccent">#343438</color>
+
+    <color name="titleText">#4c76a9</color>
+    <color name="descriptionText">#242424</color>
+    <color name="usernameText">#5789d4</color>
+    <color name="nameText">#646464</color>
+    <color name="forkColor">#d19622</color>
+    <color name="openedBackColor">#f0f0f1</color>
+</resources>

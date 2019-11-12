@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+
+    <dimen name="title_font_size">20dp</dimen>
+    <dimen name="description_font_size">16dp</dimen>
+    <dimen name="fork_font_size">20dp</dimen>
+    <dimen name="username_font_size">13dp</dimen>
+    <dimen name="name_font_size">13dp</dimen>
+    <dimen name="opened_font_size">16dp</dimen>
+
+</resources>

@@ -1,0 +1,63 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="Text.Title" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/title_font_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/titleText</item>
+    </style>
+
+    <style name="Text.Description" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/description_font_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/descriptionText</item>
+    </style>
+
+    <style name="Text.Fork" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/fork_font_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/forkColor</item>
+    </style>
+
+    <style name="Text.Username" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/username_font_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/usernameText</item>
+    </style>
+
+    <style name="Text.Name" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/name_font_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/nameText</item>
+    </style>
+
+    <style name="Text.Opened" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/opened_font_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/forkColor</item>
+    </style>
+
+    <style name="Text.Closed" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/opened_font_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/descriptionText</item>
+    </style>
+
+</resources>
