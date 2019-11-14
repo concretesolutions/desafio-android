@@ -7,7 +7,7 @@ abstract class EndlessScroll : RecyclerView.OnScrollListener {
 
     private var recyclerView: RecyclerView
     private var layoutManager: LinearLayoutManager
-    private var percentage = 0
+    private val percentage = 80
     private var currentPosition: Position = Position.START
 
     abstract fun onFirstItem()
@@ -16,8 +16,7 @@ abstract class EndlessScroll : RecyclerView.OnScrollListener {
 
 
 
-    constructor(recyclerView: RecyclerView, loadPercentage: Int){
-        this.percentage = loadPercentage
+    constructor(recyclerView: RecyclerView){
         this.recyclerView = recyclerView
         this.layoutManager = (recyclerView.layoutManager as LinearLayoutManager)
 
@@ -60,6 +59,11 @@ abstract class EndlessScroll : RecyclerView.OnScrollListener {
 
             }
         })
+    }
+
+
+    fun reset(){
+        currentPosition = Position.SCROLLING
     }
 
 

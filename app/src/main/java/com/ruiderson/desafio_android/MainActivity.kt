@@ -1,5 +1,6 @@
 package com.ruiderson.desafio_android
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -68,10 +69,8 @@ class MainActivity : AppCompatActivity() {
 
         swipeRefresh = findViewById(R.id.swipeRefresh)
         swipeRefresh.setOnRefreshListener {
-
             page = 1
             loadRepository()
-
         }
 
 
@@ -90,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        endlessScroll = object : EndlessScroll(recyclerView, 60){
+        endlessScroll = object : EndlessScroll(recyclerView){
             override fun onFirstItem() {
                 fab.hide()
             }
@@ -98,15 +97,12 @@ class MainActivity : AppCompatActivity() {
                 fab.show()
             }
             override fun onLoadMore() {
-
                 page++
                 loadRepository()
-
             }
         }
 
 
-        //Loads the database
         val database = Room.databaseBuilder(
             this,
             RepositoryDatabase::class.java,
@@ -114,146 +110,153 @@ class MainActivity : AppCompatActivity() {
             .build()
         tbRepository = database.repositoryDao()
 
+        apiService = RetrofitInitializer().githubService()
+
 
     }
+
 
     override fun onResume() {
         super.onResume()
 
-
         if(!pageLoaded){
 
 
-            //Restore the RecyclerView states
+            //Restore the RecyclerView state after rotation
             var stateRestored = false
-            recyclerViewState?.let {
-                recyclerViewItemsState?.let {
+            if(recyclerViewState != null){
+                recyclerViewState?.let {
+                    recyclerViewItemsState?.let {
+                        displayItems((recyclerViewItemsState as ArrayList<Repository>))
+                        recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)
+                        stateRestored = true
 
-                    adapter.loadItems((recyclerViewItemsState as ArrayList<Repository>))
-                    recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)
-                    stateRestored = true
-
-                    val progressBar: ProgressBar = findViewById(R.id.progressBar)
-                    if(progressBar.visibility == View.VISIBLE){
-                        progressBar.visibility = View.INVISIBLE
-                    }
-
-                    if(fabState.value){
-                        fab.show()
-                    }
-
-
-                }
-            }
-
-
-            //Loads page 1
-            if(!stateRestored){
-                loadCache()
-            }
-
-
-            pageLoaded = true
-        }
-    }
-
-
-    private fun loadCache() = CoroutineScope(Dispatchers.Default + SupervisorJob()).launch {
-        async {
-
-
-            val listCache = tbRepository.getAll()
-            if(listCache.isNotEmpty()){
-
-
-                val repositories = ArrayList<Repository>()
-                for(cache in listCache){
-                    repositories.add(Repository(cache))
-                }
-                adapter.loadItems(repositories)
-
-
-                val progressBar: ProgressBar = findViewById(R.id.progressBar)
-                if(progressBar.visibility == View.VISIBLE){
-                    progressBar.visibility = View.INVISIBLE
-                }
-
-
-                //Wait a few miliseconds, and loads the repository from Github
-                GlobalScope.launch{
-                    delay(500)
-                    loadRepository()
-                }
-
-
-            }else{
-                loadRepository()
-            }
-
-
-        }.await()
-    }
-
-
-    private fun loadRepository() {
-
-        if(apiService == null) {
-            apiService = RetrofitInitializer().githubService()
-        }
-
-
-        //Load the current page
-        val call = apiService?.getRepos("language:Java","stars", page)
-        call?.enqueue(object: Callback<RepositoryBody?> {
-            override fun onResponse(call: Call<RepositoryBody?>?,
-                                    response: Response<RepositoryBody?>?) {
-                if(response?.code() == 200) {
-                    response.body()?.let {
-
-                        val repositories: ArrayList<Repository> = it.items
-
-
-                        //Check if current page is the number 1
-                        if(page == 1) {
-
-                            if(swipeRefresh.isRefreshing){
-                                swipeRefresh.isRefreshing = false
-                            }
-
-                            val progressBar: ProgressBar = findViewById(R.id.progressBar)
-                            if(progressBar.visibility == View.VISIBLE){
-                                progressBar.visibility = View.INVISIBLE
-                            }
-
-                            adapter.loadItems(repositories)
-                            saveCache(repositories)
-
-
-                        } else {
-
-                            adapter.addItems(repositories)
-
+                        if(fabState.value){
+                            fab.show()
                         }
                     }
                 }
             }
 
-            override fun onFailure(call: Call<RepositoryBody?>?,
-                                   t: Throwable?) {
+            if(!stateRestored){
+                page = 1
+                loadRepository()
             }
-        })
+
+            pageLoaded= true
+        }
     }
 
 
-    private fun saveCache(repositories: ArrayList<Repository>) = CoroutineScope(Dispatchers.Default).launch {
+    private fun loadRepository() = CoroutineScope(Dispatchers.Default).launch {
+        async {
 
+            var repositories: ArrayList<Repository>
+            if(page == 1){
+                repositories = getRepositoryOnCache()
+
+                //If empty list, load online
+                if(repositories.isEmpty()){
+                    repositories = getRepositoryOnline()
+                }else{
+
+                    //Wait a few miliseconds, and loads the repository online
+                    GlobalScope.launch{
+                        delay(1500)
+                        repositories = getRepositoryOnline()
+                        withContext(Dispatchers.Main) {
+                            displayItems(repositories)
+                        }
+                    }
+
+                }
+            } else {
+
+                //Load page
+                repositories = getRepositoryOnline()
+
+            }
+            withContext(Dispatchers.Main) {
+                displayItems(repositories)
+            }
+
+        }.await()
+    }
+
+
+    private suspend fun getRepositoryOnCache(): ArrayList<Repository> = coroutineScope {
+        val job = async{
+
+            val repositories = ArrayList<Repository>()
+            val listCache = tbRepository.getAll()
+            if(listCache.isNotEmpty()){
+                for(cache in listCache){
+                    repositories.add(cache.getRepository())
+                }
+            }
+            repositories
+
+        }
+        job.await()
+    }
+
+
+    private suspend fun getRepositoryOnline(): ArrayList<Repository> = coroutineScope {
+        val job = async{
+
+            var repositories = ArrayList<Repository>()
+
+            val call = apiService?.getRepository("language:Java","stars", page)
+            val response = call?.execute()
+            if(response?.code() == 200) {
+                response.body()?.let {
+                    repositories = it.items
+
+                    //Saves the cache
+                    if(page == 1) {
+                        if(repositories.isNotEmpty()){
+                            saveCache(repositories)
+                        }
+                    }
+
+                }
+            }
+
+            repositories
+
+        }
+        job.await()
+    }
+
+
+    private fun displayItems(repositories: ArrayList<Repository>){
+
+        if(page == 1) {
+            adapter.loadItems(repositories)
+        } else {
+            adapter.addItems(repositories)
+        }
+
+        val progressBar: ProgressBar = findViewById(R.id.progressBar)
+        if(progressBar.visibility == View.VISIBLE){
+            progressBar.visibility = View.INVISIBLE
+        }
+
+        if(swipeRefresh.isRefreshing){
+            swipeRefresh.isRefreshing = false
+        }
+        endlessScroll.reset()
+
+    }
+
+
+    private fun saveCache(repositories: ArrayList<Repository>) = CoroutineScope(Dispatchers.IO).async {
         tbRepository.deleteAll()
         var order: Long = 0
         for(repository in repositories){
             order++
             tbRepository.insert(RepositoryCache(repository, order))
         }
-
     }
 
 

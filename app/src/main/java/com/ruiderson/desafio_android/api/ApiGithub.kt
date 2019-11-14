@@ -11,7 +11,7 @@ interface ApiGithub {
 
 
     @GET("search/repositories")
-    fun getRepos(@Query("q") language: String, @Query("sort") sort: String, @Query("page") page: Int) : Call<RepositoryBody>
+    fun getRepository(@Query("q") language: String, @Query("sort") sort: String, @Query("page") page: Int) : Call<RepositoryBody>
 
 
     @GET("repos/{username}/{repository}/pulls")

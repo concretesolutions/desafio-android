@@ -26,4 +26,16 @@ data class RepositoryCache(
         repository.stargazers_count,
         repository.owner.avatar_url,
         repository.owner.login)
+
+
+    fun getRepository(): Repository{
+        return Repository(
+            id,
+            name,
+            description,
+            forks,
+            stargazers_count,
+            RepositoryOwner(owner_avatar_url, owner_login))
+    }
+
 }

@@ -22,8 +22,7 @@ import com.ruiderson.desafio_android.ui.EndlessScroll
 import com.ruiderson.desafio_android.ui.PullAdapter
 
 import kotlinx.android.synthetic.main.activity_pull.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 import retrofit2.Call
 import retrofit2.Response
@@ -40,8 +39,6 @@ class PullActivity : AppCompatActivity() {
     private var repository: Repository? = null
     private var apiService: ApiGithub? = null
     private var page: Int = 1
-    private var openedCount = 0
-    private var closedCount = 0
 
     private var recyclerViewState: Parcelable? = null
     private var recyclerViewItemsState: ArrayList<PullRequest>? = null
@@ -62,7 +59,6 @@ class PullActivity : AppCompatActivity() {
         }
 
         repository = (intent.getParcelableExtra(IntentCode.REPOSITORY_EXTRA.value) as Repository)
-
         repository?.let {
             supportActionBar?.title = repository?.name
         }
@@ -72,7 +68,7 @@ class PullActivity : AppCompatActivity() {
         swipeRefresh.setOnRefreshListener {
 
             page = 1
-            loadRepository()
+            loadPulls()
 
         }
 
@@ -92,7 +88,7 @@ class PullActivity : AppCompatActivity() {
         }
 
 
-        endlessScroll = object : EndlessScroll(recyclerView, 60){
+        endlessScroll = object : EndlessScroll(recyclerView){
             override fun onFirstItem() {
                 fab.hide()
             }
@@ -102,10 +98,12 @@ class PullActivity : AppCompatActivity() {
             override fun onLoadMore() {
 
                 page++
-                loadRepository()
+                loadPulls()
 
             }
         }
+
+        apiService = RetrofitInitializer().githubService()
 
 
     }
@@ -113,106 +111,95 @@ class PullActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-
         if(!pageLoaded){
 
 
-            //Restore the RecyclerView states
+            //Restore the RecyclerView state after rotation
             var stateRestored = false
-            recyclerViewState?.let {
-                recyclerViewItemsState?.let {
+            if(recyclerViewState != null){
+                recyclerViewState?.let {
+                    recyclerViewItemsState?.let {
+                        displayItems((recyclerViewItemsState as ArrayList<PullRequest>))
+                        recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)
+                        stateRestored = true
 
-                    adapter.loadItems((recyclerViewItemsState as ArrayList<PullRequest>))
-                    recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)
-                    stateRestored = true
-
-                    val progressBar: ProgressBar = findViewById(R.id.progressBar)
-                    if(progressBar.visibility == View.VISIBLE){
-                        progressBar.visibility = View.INVISIBLE
+                        if(fabState.value){
+                            fab.show()
+                        }
                     }
-
-                    if(fabState.value){
-                        fab.show()
-                    }
-
-
                 }
             }
 
-
-            //Loads page 1
             if(!stateRestored){
-                loadRepository()
+                page = 1
+                loadPulls()
             }
 
-
-            pageLoaded = true
+            pageLoaded= true
         }
     }
 
 
+    private fun loadPulls() = CoroutineScope(Dispatchers.Default).launch {
+        async {
 
-    private fun loadRepository() {
+            val pulls = getPullOnline()
+            withContext(Dispatchers.Main) {
+                displayItems(pulls)
+            }
 
-        if(apiService == null) {
-            apiService = RetrofitInitializer().githubService()
-        }
-
-
-        //API data
-        var pullUser = ""
-        repository?.owner?.let {
-            pullUser = repository?.owner?.login.toString()
-        }
-        var repositoryName = ""
-        repository?.let {
-            repositoryName = repository?.name.toString()
-        }
+        }.await()
+    }
 
 
-        //Load the current page
-        val call = apiService?.getPulls(pullUser,repositoryName)
-        call?.enqueue(object: Callback<ArrayList<PullRequest>?> {
-            override fun onResponse(call: Call<ArrayList<PullRequest>?>?,
-                                    response: Response<ArrayList<PullRequest>?>?) {
-                if(response?.code() == 200) {
-                    response.body()?.let {
+    private suspend fun getPullOnline(): ArrayList<PullRequest> = coroutineScope {
+        val job = async{
 
-                        val pulls: ArrayList<PullRequest> = it
+            var pulls = ArrayList<PullRequest>()
 
 
-                        //Check if current page is the number 1
-                        if(page == 1) {
+            //API data
+            var pullUser = ""
+            repository?.owner?.let {
+                pullUser = repository?.owner?.login.toString()
+            }
+            var repositoryName = ""
+            repository?.let {
+                repositoryName = repository?.name.toString()
+            }
 
-                            if(swipeRefresh.isRefreshing){
-                                swipeRefresh.isRefreshing = false
-                            }
-
-                            val progressBar: ProgressBar = findViewById(R.id.progressBar)
-                            if(progressBar.visibility == View.VISIBLE){
-                                progressBar.visibility = View.INVISIBLE
-                            }
-
-                            adapter.loadItems(pulls)
-                            openedCount = 0
-                            closedCount = 0
-
-
-                        } else {
-
-                            adapter.addItems(pulls)
-
-                        }
-
-
-                    }
+            val call = apiService?.getPulls(pullUser,repositoryName)
+            val response = call?.execute()
+            if(response?.code() == 200) {
+                response.body()?.let {
+                    pulls = it
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<PullRequest>?>?,
-                                   t: Throwable?) {
-            }
-        })
+            pulls
+        }
+        job.await()
+    }
+
+
+    private fun displayItems(pulls: ArrayList<PullRequest>){
+
+        if(page == 1) {
+            adapter.loadItems(pulls)
+        } else {
+            adapter.addItems(pulls)
+        }
+
+        val progressBar: ProgressBar = findViewById(R.id.progressBar)
+        if(progressBar.visibility == View.VISIBLE){
+            progressBar.visibility = View.INVISIBLE
+        }
+
+        if(swipeRefresh.isRefreshing){
+            swipeRefresh.isRefreshing = false
+        }
+        endlessScroll.reset()
+
     }
 
 
@@ -239,4 +226,5 @@ class PullActivity : AppCompatActivity() {
         }
 
     }
+
 }

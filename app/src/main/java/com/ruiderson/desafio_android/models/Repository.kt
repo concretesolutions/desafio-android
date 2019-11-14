@@ -17,16 +17,6 @@ data class Repository (
     val stargazers_count: Int,
     val owner: RepositoryOwner
 ) : Parcelable
-{
-    constructor(cache: RepositoryCache) : this(
-        cache.id,
-        cache.name,
-        cache.description,
-        cache.forks,
-        cache.stargazers_count,
-        RepositoryOwner(cache.owner_avatar_url, cache.owner_login))
-}
-
 
 @Parcelize
 data class RepositoryOwner (
