@@ -1,6 +1,5 @@
 package com.ruiderson.desafio_android
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -22,16 +21,11 @@ import com.ruiderson.desafio_android.database.RepositoryDao
 import com.ruiderson.desafio_android.database.RepositoryDatabase
 import com.ruiderson.desafio_android.models.ParcelableBoolean
 import com.ruiderson.desafio_android.models.Repository
-import com.ruiderson.desafio_android.models.RepositoryBody
 import com.ruiderson.desafio_android.models.RepositoryCache
 import com.ruiderson.desafio_android.ui.EndlessScroll
 import com.ruiderson.desafio_android.ui.RepositoryAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
-
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Callback
 
 
 class MainActivity : AppCompatActivity() {

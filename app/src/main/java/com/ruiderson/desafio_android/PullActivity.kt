@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -23,10 +22,6 @@ import com.ruiderson.desafio_android.ui.PullAdapter
 
 import kotlinx.android.synthetic.main.activity_pull.*
 import kotlinx.coroutines.*
-
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Callback
 
 class PullActivity : AppCompatActivity() {
 
