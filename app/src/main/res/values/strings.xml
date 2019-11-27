@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GithubApp</string>
+
+    <string name="title_toolbar_main">Repositories</string>
+    <string name="title_toolbar_pull_requests">Pull Requests</string>
+
+    <string name="open_pull_requests">%d open</string>
+    <string name="closed_pull_requests">%d closed</string>
+    <string name="open_and_closed_pull_requests">%s / %s</string>
+</resources>
