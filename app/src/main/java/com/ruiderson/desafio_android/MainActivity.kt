@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RepositoryAdapter
     private lateinit var fab: FloatingActionButton
-    private var apiService: ApiGithub? = null
-    private lateinit var tbRepository: RepositoryDao
+    private lateinit var apiService: ApiGithub
+    private lateinit var repositoryDao: RepositoryDao
     private var page: Int = 1
 
     private var recyclerViewState: Parcelable? = null
@@ -100,9 +100,9 @@ class MainActivity : AppCompatActivity() {
         val database = Room.databaseBuilder(
             this,
             RepositoryDatabase::class.java,
-            "Repository")
+            RepositoryDatabase.DATABASE_NAME)
             .build()
-        tbRepository = database.repositoryDao()
+        repositoryDao = database.repositoryDao()
 
         apiService = RetrofitInitializer().githubService()
 
@@ -182,7 +182,7 @@ class MainActivity : AppCompatActivity() {
         val job = async{
 
             val repositories = ArrayList<Repository>()
-            val listCache = tbRepository.getAll()
+            val listCache = repositoryDao.getAll()
             if(listCache.isNotEmpty()){
                 for(cache in listCache){
                     repositories.add(cache.getRepository())
@@ -200,8 +200,8 @@ class MainActivity : AppCompatActivity() {
 
             var repositories = ArrayList<Repository>()
 
-            val call = apiService?.getRepository("language:Java","stars", page)
-            val response = call?.execute()
+            val call = apiService.getRepository("language:Java","stars", page)
+            val response = call.execute()
             if(response?.code() == 200) {
                 response.body()?.let {
                     repositories = it.items
@@ -245,11 +245,11 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun saveCache(repositories: ArrayList<Repository>) = CoroutineScope(Dispatchers.IO).async {
-        tbRepository.deleteAll()
+        repositoryDao.deleteAll()
         var order: Long = 0
         for(repository in repositories){
             order++
-            tbRepository.insert(RepositoryCache(repository, order))
+            repositoryDao.insert(RepositoryCache(repository, order))
         }
     }
 

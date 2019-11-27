@@ -31,8 +31,8 @@ class PullActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PullAdapter
     private lateinit var fab: FloatingActionButton
-    private var repository: Repository? = null
-    private var apiService: ApiGithub? = null
+    private lateinit var repository: Repository
+    private lateinit var apiService: ApiGithub
     private var page: Int = 1
 
     private var recyclerViewState: Parcelable? = null
@@ -54,9 +54,7 @@ class PullActivity : AppCompatActivity() {
         }
 
         repository = (intent.getParcelableExtra(IntentCode.REPOSITORY_EXTRA.value) as Repository)
-        repository?.let {
-            supportActionBar?.title = repository?.name
-        }
+        supportActionBar?.title = repository.name
 
 
         swipeRefresh = findViewById(R.id.swipeRefresh)
@@ -154,17 +152,11 @@ class PullActivity : AppCompatActivity() {
 
 
             //API data
-            var pullUser = ""
-            repository?.owner?.let {
-                pullUser = repository?.owner?.login.toString()
-            }
-            var repositoryName = ""
-            repository?.let {
-                repositoryName = repository?.name.toString()
-            }
+            val pullUser = repository.owner.login
+            val repositoryName = repository.name
 
-            val call = apiService?.getPulls(pullUser,repositoryName)
-            val response = call?.execute()
+            val call = apiService.getPulls(pullUser,repositoryName)
+            val response = call.execute()
             if(response?.code() == 200) {
                 response.body()?.let {
                     pulls = it
