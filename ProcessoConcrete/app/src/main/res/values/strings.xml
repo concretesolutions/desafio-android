@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Processo Concrete</string>
+    <string name="foto_do_usuario">Foto do usuário</string>
+    <string name="username">Username</string>
+    <string name="nome_sobrenome">Nome Sobrenome</string>
+    <string name="meu_repositorio">Meu Repositório</string>
+    <string name="descricao_de_um_repositorio">Descrição de um repositório</string>
+    <string name="icone_de_branches">Icone de Ramificações</string>
+    <string name="icone_de_favoritos">Icone de Favoritos</string>
+    <string name="quantidade_xml">500</string>
+    <string name="title_main_activity">GitHub JavaPop</string>
+    <string name="repositorio_selecionado">Meu Repositorio</string>
+</resources>
