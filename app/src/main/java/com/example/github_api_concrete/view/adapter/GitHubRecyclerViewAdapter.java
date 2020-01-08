@@ -46,8 +46,11 @@ public class GitHubRecyclerViewAdapter extends RecyclerView.Adapter<GitHubRecycl
     }
 
     public void updateList(List<Item> newList){
-        this.itemList.clear();
-        this.itemList = newList;
+        if (this.itemList.isEmpty()) {
+            this.itemList = newList;
+        } else {
+            this.itemList.addAll(newList);
+        }
         notifyDataSetChanged();
     }
 

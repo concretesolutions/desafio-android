@@ -18,12 +18,17 @@ import com.example.github_api_concrete.viewmodel.GitHubViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.annotations.NonNull;
+
 public class MainActivity extends AppCompatActivity implements OnClick {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private GitHubViewModel viewModel;
     private List<Item> itemList = new ArrayList<>();
     private GitHubRecyclerViewAdapter adapter;
+    private String language = "language:Java";
+    private String sort = "stars";
+    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +39,9 @@ public class MainActivity extends AppCompatActivity implements OnClick {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        setScrollView();
 
-        viewModel.getAllItems();
+        viewModel.getAllItems(language, sort, page);
         viewModel.getListItem().observe(this, items -> {
             adapter.updateList(items);
         });
@@ -44,6 +50,31 @@ public class MainActivity extends AppCompatActivity implements OnClick {
                 progressBar.setVisibility(View.VISIBLE);
             } else {
                 progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void setScrollView() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+                int totalItemCount = layoutManager.getItemCount();
+                int lastVisible = layoutManager.findLastVisibleItemPosition();
+                boolean lastItem = lastVisible + 5 >= totalItemCount;
+
+                if (totalItemCount > 0 && lastItem) {
+                    page++;
+                    viewModel.getAllItems(language, sort, page);
+                }
             }
         });
     }

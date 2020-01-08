@@ -36,9 +36,9 @@ public class GitHubViewModel extends AndroidViewModel {
         return this.loading;
     }
 
-    public void getAllItems(){
+    public void getAllItems(String language, String sort, int page){
         disposable.add(
-                repository.getRepositories("language:Java", "stars", 1)
+                repository.getRepositories(language, sort, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable1 -> loading.setValue(true))
