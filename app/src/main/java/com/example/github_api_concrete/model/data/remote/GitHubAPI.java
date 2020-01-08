@@ -8,8 +8,8 @@ import retrofit2.http.Query;
 
 public interface GitHubAPI {
 
-    @GET("repositories?")
-    Observable<RepositoriesResult> getAllRepositories(@Query("language") String language,
+    @GET("repositories")
+    Observable<RepositoriesResult> getAllRepositories(@Query("q") String language,
                                                       @Query("sort") String sort,
                                                       @Query("page") int page);
 }
