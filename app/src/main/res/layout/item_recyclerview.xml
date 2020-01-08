@@ -46,13 +46,13 @@
 
                 <ImageView
                     android:id="@+id/fork"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="12dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/description"
-                    app:srcCompat="@drawable/ic_fork" />
+                    app:srcCompat="@drawable/forkimage" />
 
                 <TextView
                     android:id="@+id/number_of_forks"
