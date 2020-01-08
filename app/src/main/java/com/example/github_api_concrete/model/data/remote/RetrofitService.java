@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
 
-    private static final String BASE_URL = "https://api.github.com/search/";
+    private static final String BASE_URL = "https://api.github.com/";
     private static Retrofit retrofit;
 
     private static Retrofit getRetrofit() {

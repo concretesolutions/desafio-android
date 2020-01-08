@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -88,6 +89,10 @@ public class ReposActivity extends AppCompatActivity implements OnClick {
 
     @Override
     public void click(Item item) {
-
+        Intent intent = new Intent(ReposActivity.this, PullRequestsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("Item", item);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }
