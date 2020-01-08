@@ -50,7 +50,7 @@ public class Item {
     @Expose
     private Long forks;
     @SerializedName("forks_count")
-    private Long forksCount;
+    private int forksCount;
     @SerializedName("forks_url")
     private String forksUrl;
     @SerializedName("full_name")
@@ -130,7 +130,7 @@ public class Item {
     @SerializedName("ssh_url")
     private String sshUrl;
     @SerializedName("stargazers_count")
-    private Long stargazersCount;
+    private int stargazersCount;
     @SerializedName("stargazers_url")
     private String stargazersUrl;
     @SerializedName("statuses_url")
@@ -324,11 +324,11 @@ public class Item {
         this.forks = forks;
     }
 
-    public Long getForksCount() {
+    public int getForksCount() {
         return forksCount;
     }
 
-    public void setForksCount(Long forksCount) {
+    public void setForksCount(int forksCount) {
         this.forksCount = forksCount;
     }
 
@@ -644,11 +644,11 @@ public class Item {
         this.sshUrl = sshUrl;
     }
 
-    public Long getStargazersCount() {
+    public int getStargazersCount() {
         return stargazersCount;
     }
 
-    public void setStargazersCount(Long stargazersCount) {
+    public void setStargazersCount(int stargazersCount) {
         this.stargazersCount = stargazersCount;
     }
 
