@@ -73,8 +73,8 @@ public class GitHubRecyclerViewAdapter extends RecyclerView.Adapter<GitHubRecycl
             Picasso.get().load(item.getOwner().getAvatarUrl()).into(userIcon);
             nameRepo.setText(item.getName());
             descriptionRepo.setText(item.getDescription());
-//            totalForks.setText(item.getForksCount());
-//            totalStars.setText(item.getStargazersCount());
+            totalForks.setText(String.valueOf(item.getForksCount()));
+            totalStars.setText(String.valueOf(item.getStargazersCount()));
             username.setText(item.getOwner().getLogin());
         }
     }
