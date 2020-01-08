@@ -1,5 +1,7 @@
 package br.com.guilherme.concrete.model;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -22,5 +24,9 @@ public class RepositorioService {
 
     public Call<Repositorio> getAllRepositorios(String pagLoad){
         return api.getAllRepositorios("Java", "stars", pagLoad);
+    }
+
+    public Call<List<PullRequest>>getAllPulls(){
+        return null;
     }
 }

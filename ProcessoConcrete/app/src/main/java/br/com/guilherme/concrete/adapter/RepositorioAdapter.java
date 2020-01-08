@@ -19,7 +19,7 @@ import java.util.List;
 import br.com.guilherme.concrete.R;
 import br.com.guilherme.concrete.model.Repositorio;
 import br.com.guilherme.concrete.presenter.RepositorioPresenter;
-import br.com.guilherme.concrete.view.RepositorioActivity;
+import br.com.guilherme.concrete.view.PullRequestActivity;
 
 public class RepositorioAdapter extends RecyclerView.Adapter<RepositorioAdapter.ViewHolder> {
     private List<Repositorio> listRepositorios;
@@ -43,7 +43,7 @@ public class RepositorioAdapter extends RecyclerView.Adapter<RepositorioAdapter.
         holder.containerInfos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = RepositorioActivity.getIntent(context);
+                Intent intent = PullRequestActivity.getIntent(context);
                 intent.putExtra("nomeUsuario", listRepositorios.get(position).getUser().getNomeUsuario());
                 intent.putExtra("nomeRepositorio", listRepositorios.get(position).getNomeRepositorio());
                 context.startActivity(intent);

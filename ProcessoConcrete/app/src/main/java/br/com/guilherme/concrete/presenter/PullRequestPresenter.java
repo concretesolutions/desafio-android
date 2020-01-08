@@ -5,43 +5,42 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.guilherme.concrete.model.Repositorio;
+import br.com.guilherme.concrete.model.PullRequest;
 import br.com.guilherme.concrete.model.RepositorioService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RepositorioPresenter {
+public class PullRequestPresenter {
     private View view;
     private RepositorioService service;
 
-    public RepositorioPresenter (View view){
+    public PullRequestPresenter(View view) {
         this.view = view;
         service = new RepositorioService();
     }
 
-    public void getAllRepositorios(int pagLoad){
-        service.getAllRepositorios(String.valueOf(pagLoad))
-                .enqueue(new Callback<Repositorio>() {
+    public void getAllPulls() {
+        service.getAllPulls()
+                .enqueue(new Callback<List<PullRequest>>() {
                     @Override
-                    public void onResponse(Call<Repositorio> call, Response<Repositorio> response) {
-                        List<Repositorio> repositorios = new ArrayList<>();
+                    public void onResponse(Call<List<PullRequest>> call, Response<List<PullRequest>> response) {
+                        List<PullRequest> pullRequests = new ArrayList<>();
                         if (response.body() != null)
-                            repositorios.addAll(response.body().getRepositorios());
-                        view.setRecyclerView(repositorios);
+                            pullRequests.addAll(response.body());
+                        view.setRecyclerView(pullRequests);
                     }
 
                     @Override
-                    public void onFailure(Call<Repositorio> call, Throwable t) {
+                    public void onFailure(Call<List<PullRequest>> call, Throwable t) {
                         view.onError(t.getMessage());
                         Log.e("api_erro", t.getMessage());
                     }
                 });
     }
 
-
     public interface View{
-        void setRecyclerView(List<Repositorio> repositorios);
+        void setRecyclerView(List<PullRequest> repositorios);
         void onError(String errorException);
     }
 }

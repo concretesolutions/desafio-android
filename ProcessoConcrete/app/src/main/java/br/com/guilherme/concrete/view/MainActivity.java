@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements RepositorioPresen
 
     @Override
     public void onError(String errorException) {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(getApplicationContext(), errorException, Toast.LENGTH_LONG).show();
     }
 }
