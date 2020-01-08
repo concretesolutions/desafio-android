@@ -1,19 +1,17 @@
 package br.com.guilherme.concrete.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.List;
 
 import br.com.guilherme.concrete.R;
@@ -22,6 +20,7 @@ import br.com.guilherme.concrete.model.Repositorio;
 import br.com.guilherme.concrete.presenter.RepositorioPresenter;
 
 public class MainActivity extends AppCompatActivity implements RepositorioPresenter.View{
+    private CoordinatorLayout coordinatorLayout;
     private RecyclerView listRepo;
     private RepositorioPresenter presenter;
     private ProgressBar progressBar;
@@ -30,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements RepositorioPresen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        coordinatorLayout = findViewById(R.id.coordinator);
         progressBar = findViewById(R.id.loading_content);
         listRepo = findViewById(R.id.list_rpositorios);
 
@@ -53,6 +54,6 @@ public class MainActivity extends AppCompatActivity implements RepositorioPresen
     @Override
     public void onError(String errorException) {
         progressBar.setVisibility(View.GONE);
-        Toast.makeText(getApplicationContext(), errorException, Toast.LENGTH_LONG).show();
+        Snackbar.make(coordinatorLayout, errorException, Snackbar.LENGTH_LONG).show();
     }
 }

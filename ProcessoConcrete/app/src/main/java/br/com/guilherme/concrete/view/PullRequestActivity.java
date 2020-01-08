@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -22,6 +26,8 @@ import br.com.guilherme.concrete.model.PullRequest;
 import br.com.guilherme.concrete.presenter.PullRequestPresenter;
 
 public class PullRequestActivity extends AppCompatActivity implements PullRequestPresenter.View {
+    private CoordinatorLayout coordinatorLayout;
+    private ConstraintLayout infoPROpen;
     private RecyclerView listPulls;
     private ProgressBar progressBar;
 
@@ -31,6 +37,8 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
         setContentView(R.layout.activity_pull_request);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        coordinatorLayout = findViewById(R.id.coordinator);
+        infoPROpen = findViewById(R.id.info_pull);
         listPulls = findViewById(R.id.list);
         progressBar = findViewById(R.id.loading_content);
 
@@ -47,7 +55,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
         });
 
         PullRequestPresenter presenter = new PullRequestPresenter(this);
-        presenter.getAllPulls();
+        presenter.getAllPulls(getIntent().getStringExtra("nomeUsuario"), getIntent().getStringExtra("nomeRepositorio"));
     }
 
     public static Intent getIntent(Context context) {
@@ -57,7 +65,11 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
     @Override
     public void setRecyclerView(List<PullRequest> pullRequests) {
         progressBar.setVisibility(View.GONE);
+        infoPROpen.setVisibility(View.VISIBLE);
         listPulls.setVisibility(View.VISIBLE);
+
+        TextView totalOpenPR = findViewById(R.id.abertos);
+        totalOpenPR.setText(String.valueOf(pullRequests.size()).concat(" " + getResources().getString(R.string.dev_abertos)));
 
         PullRequestAdapter adapter = new PullRequestAdapter(pullRequests, PullRequestActivity.this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -70,6 +82,6 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
     @Override
     public void onError(String errorException) {
         progressBar.setVisibility(View.GONE);
-        Toast.makeText(getApplicationContext(), errorException, Toast.LENGTH_LONG).show();
+        Snackbar.make(coordinatorLayout, errorException, Snackbar.LENGTH_LONG).show();
     }
 }

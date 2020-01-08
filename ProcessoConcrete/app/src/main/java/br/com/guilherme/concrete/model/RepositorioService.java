@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RepositorioService {
 
-    public static final String URL_REQUEST = "https://api.github.com/";
+    private static final String URL_REQUEST = "https://api.github.com/";
     private RepositoriosAPI api;
 
     public RepositorioService(){
@@ -26,7 +26,7 @@ public class RepositorioService {
         return api.getAllRepositorios("Java", "stars", pagLoad);
     }
 
-    public Call<List<PullRequest>>getAllPulls(){
-        return null;
+    public Call<List<PullRequest>>getAllPulls(String nomeUser, String nomeRepo){
+        return api.getAllPulls(nomeUser, nomeRepo);
     }
 }

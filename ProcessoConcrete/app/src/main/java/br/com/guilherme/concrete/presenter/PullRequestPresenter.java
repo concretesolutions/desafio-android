@@ -20,8 +20,8 @@ public class PullRequestPresenter {
         service = new RepositorioService();
     }
 
-    public void getAllPulls() {
-        service.getAllPulls()
+    public void getAllPulls(String nomeUser, String nomeRepositorio) {
+        service.getAllPulls(nomeUser, nomeRepositorio)
                 .enqueue(new Callback<List<PullRequest>>() {
                     @Override
                     public void onResponse(Call<List<PullRequest>> call, Response<List<PullRequest>> response) {
