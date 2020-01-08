@@ -1,5 +1,9 @@
 package br.com.guilherme.concrete.presenter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.Browser;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -37,6 +41,12 @@ public class PullRequestPresenter {
                         Log.e("api_erro", t.getMessage());
                     }
                 });
+    }
+
+    public void setCallWeb(String urlRepPr, Context context){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(urlRepPr));
+        context.startActivity(intent);
     }
 
     public interface View{

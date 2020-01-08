@@ -30,6 +30,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
     private ConstraintLayout infoPROpen;
     private RecyclerView listPulls;
     private ProgressBar progressBar;
+    private PullRequestPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
             }
         });
 
-        PullRequestPresenter presenter = new PullRequestPresenter(this);
+        presenter = new PullRequestPresenter(this);
         presenter.getAllPulls(getIntent().getStringExtra("nomeUsuario"), getIntent().getStringExtra("nomeRepositorio"));
     }
 
@@ -71,7 +72,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
         TextView totalOpenPR = findViewById(R.id.abertos);
         totalOpenPR.setText(String.valueOf(pullRequests.size()).concat(" " + getResources().getString(R.string.dev_abertos)));
 
-        PullRequestAdapter adapter = new PullRequestAdapter(pullRequests, PullRequestActivity.this);
+        PullRequestAdapter adapter = new PullRequestAdapter(pullRequests, PullRequestActivity.this, presenter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         listPulls.setLayoutManager(linearLayoutManager);

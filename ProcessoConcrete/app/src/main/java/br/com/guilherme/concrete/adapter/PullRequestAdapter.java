@@ -22,14 +22,17 @@ import java.util.Locale;
 
 import br.com.guilherme.concrete.R;
 import br.com.guilherme.concrete.model.PullRequest;
+import br.com.guilherme.concrete.presenter.PullRequestPresenter;
 
 public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.ViewHolder>{
     private List<PullRequest> pullRequests;
     private Context context;
+    private PullRequestPresenter presenter;
 
-    public PullRequestAdapter(List<PullRequest> pullRequests, Context context){
+    public PullRequestAdapter(List<PullRequest> pullRequests, Context context, PullRequestPresenter presenter){
         this.pullRequests = pullRequests;
         this.context = context;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -39,7 +42,14 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PullRequestAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PullRequestAdapter.ViewHolder holder, final int position) {
+        holder.row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.setCallWeb(pullRequests.get(position).getPathPR(), context);
+            }
+        });
+
         holder.nomePullRequest.setText(pullRequests.get(position).getTituloPR());
         holder.descricaoPullRequest.setText(pullRequests.get(position).getBodyPR());
         holder.dataPullRequest.setText(formatarData(pullRequests.get(position).getDataPR()));
@@ -55,6 +65,7 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout containerInfos;
+        ConstraintLayout row;
         TextView nomePullRequest;
         TextView descricaoPullRequest;
         TextView dataPullRequest;
@@ -64,6 +75,7 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestAdapter.
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            row = itemView.findViewById(R.id.row);
             containerInfos = itemView.findViewById(R.id.row);
             nomePullRequest = itemView.findViewById(R.id.nome_pull_request);
             descricaoPullRequest = itemView.findViewById(R.id.descricao_pull_request);

@@ -7,6 +7,9 @@ public class PullRequest {
     @SerializedName("user")
     private Usuario user;
 
+    @SerializedName("html_url")
+    private String pathPR;
+
     @SerializedName("title")
     private String tituloPR;
 
@@ -18,6 +21,10 @@ public class PullRequest {
 
     public Usuario getUser() {
         return user;
+    }
+
+    public String getPathPR() {
+        return pathPR;
     }
 
     public String getTituloPR() {
