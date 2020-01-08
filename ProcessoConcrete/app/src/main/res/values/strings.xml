@@ -10,4 +10,5 @@
     <string name="quantidade_xml">500</string>
     <string name="title_main_activity">GitHub JavaPop</string>
     <string name="repositorio_selecionado">Meu Repositorio</string>
+    <string name="title_padrao_reqeuests">Pull Requests</string>
 </resources>

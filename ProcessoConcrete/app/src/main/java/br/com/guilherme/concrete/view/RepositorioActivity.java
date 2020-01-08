@@ -12,11 +12,19 @@ import androidx.appcompat.widget.Toolbar;
 import br.com.guilherme.concrete.R;
 
 public class RepositorioActivity extends AppCompatActivity {
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repositorio);
+
+        toolbar = findViewById(R.id.toolbar);
+
+        String nomeRepositorio = getIntent().getStringExtra("nomeRepositorio") != null
+                ? getIntent().getStringExtra("nomeRepositorio")
+                : getResources().getString(R.string.title_padrao_reqeuests);
+        toolbar.setTitle(nomeRepositorio);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -27,7 +35,7 @@ public class RepositorioActivity extends AppCompatActivity {
         });
     }
 
-    public static Intent getIntent(Context context){
+    public static Intent getIntent(Context context) {
         return new Intent(context, RepositorioActivity.class);
     }
 }
