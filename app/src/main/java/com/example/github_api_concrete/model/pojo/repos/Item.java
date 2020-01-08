@@ -1,5 +1,5 @@
 
-package com.example.github_api_concrete.model.pojo;
+package com.example.github_api_concrete.model.pojo.repos;
 
 import android.os.Parcel;
 import android.os.Parcelable;

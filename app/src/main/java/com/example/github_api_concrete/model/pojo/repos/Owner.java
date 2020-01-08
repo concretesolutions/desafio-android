@@ -1,11 +1,14 @@
 
-package com.example.github_api_concrete.model.pojo;
+package com.example.github_api_concrete.model.pojo.repos;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class Owner {
+public class Owner implements Parcelable {
 
     @SerializedName("avatar_url")
     private String avatarUrl;
@@ -43,6 +46,44 @@ public class Owner {
     private String type;
     @Expose
     private String url;
+
+    protected Owner(Parcel in) {
+        avatarUrl = in.readString();
+        eventsUrl = in.readString();
+        followersUrl = in.readString();
+        followingUrl = in.readString();
+        gistsUrl = in.readString();
+        gravatarId = in.readString();
+        htmlUrl = in.readString();
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        login = in.readString();
+        nodeId = in.readString();
+        organizationsUrl = in.readString();
+        receivedEventsUrl = in.readString();
+        reposUrl = in.readString();
+        byte tmpSiteAdmin = in.readByte();
+        siteAdmin = tmpSiteAdmin == 0 ? null : tmpSiteAdmin == 1;
+        starredUrl = in.readString();
+        subscriptionsUrl = in.readString();
+        type = in.readString();
+        url = in.readString();
+    }
+
+    public static final Creator<Owner> CREATOR = new Creator<Owner>() {
+        @Override
+        public Owner createFromParcel(Parcel in) {
+            return new Owner(in);
+        }
+
+        @Override
+        public Owner[] newArray(int size) {
+            return new Owner[size];
+        }
+    };
 
     public String getAvatarUrl() {
         return avatarUrl;
@@ -188,4 +229,35 @@ public class Owner {
         this.url = url;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(avatarUrl);
+        dest.writeString(eventsUrl);
+        dest.writeString(followersUrl);
+        dest.writeString(followingUrl);
+        dest.writeString(gistsUrl);
+        dest.writeString(gravatarId);
+        dest.writeString(htmlUrl);
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(login);
+        dest.writeString(nodeId);
+        dest.writeString(organizationsUrl);
+        dest.writeString(receivedEventsUrl);
+        dest.writeString(reposUrl);
+        dest.writeByte((byte) (siteAdmin == null ? 0 : siteAdmin ? 1 : 2));
+        dest.writeString(starredUrl);
+        dest.writeString(subscriptionsUrl);
+        dest.writeString(type);
+        dest.writeString(url);
+    }
 }

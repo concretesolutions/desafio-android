@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.github_api_concrete.R;
-import com.example.github_api_concrete.model.pojo.Item;
+import com.example.github_api_concrete.model.pojo.repos.Item;
 import com.example.github_api_concrete.view.interfaces.OnClick;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class GitHubRecyclerViewAdapter extends RecyclerView.Adapter<GitHubRecyclerViewAdapter.ViewHolder> {
+public class ReposRecyclerViewAdapter extends RecyclerView.Adapter<ReposRecyclerViewAdapter.ViewHolder> {
 
     private List<Item> itemList;
     private OnClick listener;
 
-    public GitHubRecyclerViewAdapter (List<Item> itemList, OnClick listener){
+    public ReposRecyclerViewAdapter(List<Item> itemList, OnClick listener){
         this.itemList = itemList;
         this.listener = listener;
     }

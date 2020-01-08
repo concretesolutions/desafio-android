@@ -3,4 +3,5 @@
     <string name="name">Nome do repositório</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consect adipiscing elit. Nam sit amet arcu venatis....</string>
     <string name="username">username</string>
+    <string name="date">00/00/0000</string>
 </resources>

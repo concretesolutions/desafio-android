@@ -1,5 +1,5 @@
 
-package com.example.github_api_concrete.model.pojo;
+package com.example.github_api_concrete.model.pojo.repos;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

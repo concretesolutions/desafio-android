@@ -1,6 +1,6 @@
 package com.example.github_api_concrete.model.repository;
 
-import com.example.github_api_concrete.model.pojo.RepositoriesResult;
+import com.example.github_api_concrete.model.pojo.repos.RepositoriesResult;
 
 import io.reactivex.Observable;
 
@@ -10,5 +10,9 @@ public class GitHubRepository {
 
     public Observable<RepositoriesResult> getRepositories(String language, String sort, int page) {
         return getApiService().getAllRepositories(language, sort, page);
+    }
+
+    public Observable<RepositoriesResult> getPRs(String login, String name) {
+        return getApiService().getAllPRs(login, name);
     }
 }

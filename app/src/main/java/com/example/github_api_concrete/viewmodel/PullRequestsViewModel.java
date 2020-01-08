@@ -8,7 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.github_api_concrete.model.pojo.Item;
+import com.example.github_api_concrete.model.pojo.repos.Item;
 import com.example.github_api_concrete.model.repository.GitHubRepository;
 
 import java.util.List;
@@ -17,34 +17,34 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class GitHubViewModel extends AndroidViewModel {
+public class PullRequestsViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<Item>> listItem = new MutableLiveData<>();
+    private MutableLiveData<List<Item>> listPR = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
     private GitHubRepository repository = new GitHubRepository();
 
-    public GitHubViewModel(@NonNull Application application) {
+    public PullRequestsViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public LiveData<List<Item>> getListItem(){
-        return this.listItem;
+    public LiveData<List<Item>> getListPR() {
+        return this.listPR;
     }
 
     public LiveData<Boolean> getLoading() {
         return this.loading;
     }
 
-    public void getAllItems(String language, String sort, int page){
+    public void getAllPR(String login, String name){
         disposable.add(
-                repository.getRepositories(language, sort, page)
+                repository.getPRs(login, name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable1 -> loading.setValue(true))
                 .doOnTerminate(() -> loading.setValue(false))
-                .subscribe(repositoriesResult -> {
-                    listItem.setValue(repositoriesResult.getItems());
+                .subscribe(pullRequestResults -> {
+                    listPR.setValue(pullRequestResults.getItems());
                 }, throwable -> {
                     Log.i("Log", "Error" + throwable.getMessage());
                 })

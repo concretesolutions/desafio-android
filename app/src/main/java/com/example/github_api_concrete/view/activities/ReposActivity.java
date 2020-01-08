@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.github_api_concrete.R;
-import com.example.github_api_concrete.model.pojo.Item;
-import com.example.github_api_concrete.view.adapter.GitHubRecyclerViewAdapter;
+import com.example.github_api_concrete.model.pojo.repos.Item;
+import com.example.github_api_concrete.view.adapter.ReposRecyclerViewAdapter;
 import com.example.github_api_concrete.view.interfaces.OnClick;
-import com.example.github_api_concrete.viewmodel.GitHubViewModel;
+import com.example.github_api_concrete.viewmodel.ReposViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +24,9 @@ import io.reactivex.annotations.NonNull;
 public class ReposActivity extends AppCompatActivity implements OnClick {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private GitHubViewModel viewModel;
+    private ReposViewModel viewModel;
     private List<Item> itemList = new ArrayList<>();
-    private GitHubRecyclerViewAdapter adapter;
+    private ReposRecyclerViewAdapter adapter;
     private String language = "language:Java";
     private String sort = "stars";
     private int page = 1;
@@ -83,8 +83,8 @@ public class ReposActivity extends AppCompatActivity implements OnClick {
     private void initViews() {
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progressBar);
-        viewModel = ViewModelProviders.of(this).get(GitHubViewModel.class);
-        adapter = new GitHubRecyclerViewAdapter(itemList, this);
+        viewModel = ViewModelProviders.of(this).get(ReposViewModel.class);
+        adapter = new ReposRecyclerViewAdapter(itemList, this);
     }
 
     @Override
