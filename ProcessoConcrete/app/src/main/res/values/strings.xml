@@ -11,4 +11,7 @@
     <string name="title_main_activity">GitHub JavaPop</string>
     <string name="repositorio_selecionado">Meu Repositorio</string>
     <string name="title_padrao_reqeuests">Pull Requests</string>
+    <string name="dev_fechados">000 Fechados</string>
+    <string name="dev_abertos">000 Abertos</string>
+    <string name="divisor_string">/</string>
 </resources>

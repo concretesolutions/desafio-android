@@ -28,7 +28,7 @@ public class PullRequestActivity extends AppCompatActivity implements PullReques
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repositorio);
+        setContentView(R.layout.activity_pull_request);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         listPulls = findViewById(R.id.list);
