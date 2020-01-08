@@ -20,7 +20,7 @@ import java.util.List;
 
 import io.reactivex.annotations.NonNull;
 
-public class MainActivity extends AppCompatActivity implements OnClick {
+public class ReposActivity extends AppCompatActivity implements OnClick {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private GitHubViewModel viewModel;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements OnClick {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_repos);
 
         initViews();
 
