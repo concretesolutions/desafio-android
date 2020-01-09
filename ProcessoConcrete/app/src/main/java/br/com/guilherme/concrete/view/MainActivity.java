@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements RepositorioPresen
     private CoordinatorLayout coordinatorLayout;
     private RecyclerView listRepo;
     private RepositorioPresenter presenter;
-    private ProgressBar progressBar;
+    private ProgressBar progressBar, progressBarRecycler;
     private int pageToLoad = 1;
     private boolean isLoading = false;
     private List<Repositorio> repositorios;
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements RepositorioPresen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        progressBarRecycler= findViewById(R.id.progress_recycler);
         coordinatorLayout = findViewById(R.id.coordinator);
         progressBar = findViewById(R.id.loading_content);
         listRepo = findViewById(R.id.list_rpositorios);
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements RepositorioPresen
             repositorios.addAll(repositoriosFromApi);
             isFirstPage = false;
         }
+        progressBarRecycler.setVisibility(View.GONE);
         adapter.notifyDataSetChanged();
         listRepo.scrollToPosition(lastPosition);
 
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements RepositorioPresen
                 if (!isLoading && linearLayoutManager.findLastVisibleItemPosition() == repositorios.size() -1){
                     isLoading = true;
                     presenter.getAllRepositorios(++pageToLoad);
+                    progressBarRecycler.setVisibility(View.VISIBLE);
                 }
             }
         });
