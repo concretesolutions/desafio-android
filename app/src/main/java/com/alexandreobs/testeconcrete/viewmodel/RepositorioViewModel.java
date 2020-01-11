@@ -9,8 +9,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.alexandreobs.testeconcrete.model.data.repository.GitRepository;
-import com.alexandreobs.testeconcrete.model.pojo.GitResult;
-import com.alexandreobs.testeconcrete.model.pojo.Item;
+import com.alexandreobs.testeconcrete.model.pojo.repositories.GitResult;
+import com.alexandreobs.testeconcrete.model.pojo.repositories.Item;
 
 import java.util.List;
 
@@ -24,6 +24,8 @@ public class RepositorioViewModel extends AndroidViewModel {
     private MutableLiveData<List<Item>> listaDeRepositorios = new MutableLiveData<>();
     private GitRepository gitRepository = new GitRepository();
     private CompositeDisposable disposable = new CompositeDisposable();
+    private MutableLiveData<Boolean> loading = new MutableLiveData<>();
+
 
     public RepositorioViewModel(@NonNull Application application) {
         super(application);
@@ -33,29 +35,30 @@ public class RepositorioViewModel extends AndroidViewModel {
         return this.listaDeRepositorios;
     }
 
-    public void getRepositorios() {
+    public LiveData<Boolean> getLoading(){
+        return this.loading;
+    }
+
+    public void getRepositorios(int pagina) {
 
         disposable.add(
-                gitRepository.getRepo(/*"name", "login", "full_name", "escription",
-                        "forks_count", "stargazers_count"*/)
+                gitRepository.getRepo(pagina)
 
-                        .subscribeOn(Schedulers.newThread())
-
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSubscribe(disposable -> loading.setValue(true))
+                        .doAfterTerminate(()-> {
+                            loading.setValue(false);
+                        })
+                        .subscribe(gitResult -> {
+                                    listaDeRepositorios.setValue(gitResult.getItems());
+                                },
+                                throwable -> {
+                                    Log.i("LOG", "Erro" + throwable.getMessage());
+                                }
+                        )
+        );
 
-                        .subscribe(new Consumer<GitResult>() {
-                            @Override
-                            public void accept(GitResult gitResult) throws Exception {
-
-                                listaDeRepositorios.setValue(gitResult.getItems());
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-
-                                Log.i("LOG", "Error: " + throwable.getMessage());
-                            }
-                        }));
     }
 }
 

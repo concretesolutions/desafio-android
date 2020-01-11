@@ -1,5 +1,5 @@
 
-package com.alexandreobs.testeconcrete.model.pojo;
+package com.alexandreobs.testeconcrete.model.pojo.repositories;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 
-@SuppressWarnings("unused")
+
 public class GitResult {
 
     @SerializedName("incomplete_results")

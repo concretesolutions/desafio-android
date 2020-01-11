@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexandreobs.testeconcrete.R;
-import com.alexandreobs.testeconcrete.model.pojo.Item;
-import com.alexandreobs.testeconcrete.view.interfaces.RepositorioOnClick;
+import com.alexandreobs.testeconcrete.model.pojo.repositories.Item;
+import com.alexandreobs.testeconcrete.view.interfaces.OnClickRepository;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,17 +20,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolder> {
 
     private List<Item> resultList;
-    private RepositorioOnClick repositorioOnClick;
+    private OnClickRepository listener;
 
-    public GitAdapter(List<Item> resultList, RepositorioOnClick repositorioOnClick) {
+    public GitAdapter(List<Item> resultList, OnClickRepository listener) {
         this.resultList = resultList;
-        this.repositorioOnClick = repositorioOnClick;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item_projects, parent, false);
         return new ViewHolder(view);
     }
 
@@ -38,9 +38,12 @@ public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item result = this.resultList.get(position);
         holder.onBind(result);
-        
+
+        holder.itemView.setOnClickListener(v ->{
+            listener.OnClick(result);
+        });
+
     }
-    
 
     @Override
     public int getItemCount() {
@@ -48,8 +51,11 @@ public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolder> {
     }
 
     public void update(List<Item> results) {
-        this.resultList.clear();
-        this.resultList= results;
+        if (this.resultList.isEmpty()){
+            this.resultList = results;
+        } else {
+            this.resultList.addAll(results);
+        }
         notifyDataSetChanged();
     }
 
@@ -80,7 +86,7 @@ public class GitAdapter extends RecyclerView.Adapter<GitAdapter.ViewHolder> {
 
         }
 
-        void onBind (Item result){
+        void onBind(Item result) {
             nomeRep.setText(result.getName());
             nomeLogin.setText(result.getOwner().getLogin());
             nomeFull.setText(result.getFullName());

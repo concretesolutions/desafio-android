@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitService {
+public class RequestsRetrofit {
 
     private static final String BASE_URL = "https://api.github.com";
 
@@ -49,8 +49,8 @@ public class RetrofitService {
     }
 
 
-    public static GitAPI getApiService() {
-        return getRetrofit().create(GitAPI.class);
+    public static GitRequestsAPI getApiService() {
+        return getRetrofit().create(GitRequestsAPI.class);
     }
 }
 

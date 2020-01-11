@@ -1,9 +1,11 @@
 package com.alexandreobs.testeconcrete.view.activitys;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,46 +16,51 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexandreobs.testeconcrete.R;
-import com.alexandreobs.testeconcrete.model.pojo.repositories.Item;
-import com.alexandreobs.testeconcrete.view.adapter.GitAdapter;
-import com.alexandreobs.testeconcrete.view.interfaces.OnClickRepository;
-import com.alexandreobs.testeconcrete.viewmodel.RepositorioViewModel;
+import com.alexandreobs.testeconcrete.model.pojo.pull.Request;
+import com.alexandreobs.testeconcrete.view.adapter.RequestAdapter;
+import com.alexandreobs.testeconcrete.view.interfaces.OnClickRequest;
+import com.alexandreobs.testeconcrete.viewmodel.RequestViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnClickRepository {
+import static com.alexandreobs.testeconcrete.view.activitys.MainActivity.CREATOR_ID;
+import static com.alexandreobs.testeconcrete.view.activitys.MainActivity.REPO_ID;
 
+public class PullRequest extends AppCompatActivity implements OnClickRequest {
+
+    private Request request;
+    private List<Request> requestList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private RepositorioViewModel viewModel;
-    private GitAdapter adapter;
-    private List<Item> itemList = new ArrayList<>();
-    public static final String CREATOR_ID = "creator_id";
-    public static final String REPO_ID = "repo_id";
+    private RequestAdapter adapter;
+    private RequestViewModel viewModel;
     private ProgressBar progressBar;
     private  int pagina = 1;
+    private  String creator;
+    private  String repo;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pull_request);
 
-        recyclerView = findViewById(R.id.recyclerRepos);
-        viewModel = ViewModelProviders.of(this).get(RepositorioViewModel.class);
-        adapter = new GitAdapter(itemList, this);
+        initViews();
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        String creator = bundle.getString(CREATOR_ID);
+        String repo = bundle.getString(REPO_ID);
 
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         setScrollView();
 
-        viewModel.getRepositorios(pagina);
-        viewModel.getListaRespositorios().observe(this, new Observer<List<Item>>() {
-            @Override
-            public void onChanged(List<Item> results1) {
-                adapter.update(results1);
-            }
+        viewModel.getPullRequest(creator, repo, pagina);
+        viewModel.getRequest().observe(this, requestList -> {
+            adapter.atualizaLista(requestList);
         });
 
         progressBar = findViewById(R.id.progress_bar);
@@ -67,18 +74,27 @@ public class MainActivity extends AppCompatActivity implements OnClickRepository
                 }
             }
         });
+
+
     }
 
+
+    public void initViews() {
+
+        viewModel = ViewModelProviders.of(this).get(RequestViewModel.class);
+        adapter = new RequestAdapter(requestList, this);
+        recyclerView = findViewById(R.id.recyclerPullRequest);
+
+
+    }
+
+
     @Override
-    public void OnClick(Item result) {
-
-        Intent intent = new Intent(MainActivity.this, PullRequest.class);
-        Bundle bundle = new Bundle();
-        bundle.putString(REPO_ID, result.getName());
-        bundle.putString(CREATOR_ID, result.getOwner().getLogin());
-        intent.putExtras(bundle);
-        startActivity(intent);
-
+    public void OnClick(Request request) {
+        String url = request.getHtmlUrl();
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
     private void setScrollView(){
@@ -100,13 +116,10 @@ public class MainActivity extends AppCompatActivity implements OnClickRepository
 
                 if (totalItemCount > 0 && ultimoItem){
                     pagina++;
-                    viewModel.getRepositorios(pagina);
+                    viewModel.getPullRequest(creator, repo, pagina);
                 }
 
             }
         });
     }
 }
-
-
-

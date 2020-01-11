@@ -1,94 +1,11 @@
 
-package com.alexandreobs.testeconcrete.model.pojo;
-
-import android.os.Parcel;
-import android.os.Parcelable;
+package com.alexandreobs.testeconcrete.model.pojo.pull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-@SuppressWarnings("unused")
-public class Item implements Parcelable {
-    @Override
-    public String toString() {
-        return "Item{" +
-                "archiveUrl='" + archiveUrl + '\'' +
-                ", archived=" + archived +
-                ", assigneesUrl='" + assigneesUrl + '\'' +
-                ", blobsUrl='" + blobsUrl + '\'' +
-                ", branchesUrl='" + branchesUrl + '\'' +
-                ", cloneUrl='" + cloneUrl + '\'' +
-                ", collaboratorsUrl='" + collaboratorsUrl + '\'' +
-                ", commentsUrl='" + commentsUrl + '\'' +
-                ", commitsUrl='" + commitsUrl + '\'' +
-                ", compareUrl='" + compareUrl + '\'' +
-                ", contentsUrl='" + contentsUrl + '\'' +
-                ", contributorsUrl='" + contributorsUrl + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", defaultBranch='" + defaultBranch + '\'' +
-                ", deploymentsUrl='" + deploymentsUrl + '\'' +
-                ", description='" + description + '\'' +
-                ", disabled=" + disabled +
-                ", downloadsUrl='" + downloadsUrl + '\'' +
-                ", eventsUrl='" + eventsUrl + '\'' +
-                ", fork=" + fork +
-                ", forks=" + forks +
-                ", forksCount=" + forksCount +
-                ", forksUrl='" + forksUrl + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", gitCommitsUrl='" + gitCommitsUrl + '\'' +
-                ", gitRefsUrl='" + gitRefsUrl + '\'' +
-                ", gitTagsUrl='" + gitTagsUrl + '\'' +
-                ", gitUrl='" + gitUrl + '\'' +
-                ", hasDownloads=" + hasDownloads +
-                ", hasIssues=" + hasIssues +
-                ", hasPages=" + hasPages +
-                ", hasProjects=" + hasProjects +
-                ", hasWiki=" + hasWiki +
-                ", homepage='" + homepage + '\'' +
-                ", hooksUrl='" + hooksUrl + '\'' +
-                ", htmlUrl='" + htmlUrl + '\'' +
-                ", id=" + id +
-                ", issueCommentUrl='" + issueCommentUrl + '\'' +
-                ", issueEventsUrl='" + issueEventsUrl + '\'' +
-                ", issuesUrl='" + issuesUrl + '\'' +
-                ", keysUrl='" + keysUrl + '\'' +
-                ", labelsUrl='" + labelsUrl + '\'' +
-                ", language='" + language + '\'' +
-                ", languagesUrl='" + languagesUrl + '\'' +
-                ", license=" + license +
-                ", mergesUrl='" + mergesUrl + '\'' +
-                ", milestonesUrl='" + milestonesUrl + '\'' +
-                ", mirrorUrl=" + mirrorUrl +
-                ", name='" + name + '\'' +
-                ", nodeId='" + nodeId + '\'' +
-                ", notificationsUrl='" + notificationsUrl + '\'' +
-                ", openIssues=" + openIssues +
-                ", openIssuesCount=" + openIssuesCount +
-                ", owner=" + owner +
-                ", privates=" + privates +
-                ", pullsUrl='" + pullsUrl + '\'' +
-                ", pushedAt='" + pushedAt + '\'' +
-                ", releasesUrl='" + releasesUrl + '\'' +
-                ", score=" + score +
-                ", size=" + size +
-                ", sshUrl='" + sshUrl + '\'' +
-                ", stargazersCount=" + stargazersCount +
-                ", stargazersUrl='" + stargazersUrl + '\'' +
-                ", statusesUrl='" + statusesUrl + '\'' +
-                ", subscribersUrl='" + subscribersUrl + '\'' +
-                ", subscriptionUrl='" + subscriptionUrl + '\'' +
-                ", svnUrl='" + svnUrl + '\'' +
-                ", tagsUrl='" + tagsUrl + '\'' +
-                ", teamsUrl='" + teamsUrl + '\'' +
-                ", treesUrl='" + treesUrl + '\'' +
-                ", updatedAt='" + updatedAt + '\'' +
-                ", url='" + url + '\'' +
-                ", watchers=" + watchers +
-                ", watchersCount=" + watchersCount +
-                '}';
-    }
+public class Repo {
 
     @SerializedName("archive_url")
     private String archiveUrl;
@@ -175,11 +92,11 @@ public class Item implements Parcelable {
     @SerializedName("labels_url")
     private String labelsUrl;
     @Expose
-    private String language;
+    private Object language;
     @SerializedName("languages_url")
     private String languagesUrl;
     @Expose
-    private Object license;
+    private License license;
     @SerializedName("merges_url")
     private String mergesUrl;
     @SerializedName("milestones_url")
@@ -199,15 +116,13 @@ public class Item implements Parcelable {
     @Expose
     private Owner owner;
     @Expose
-    private Boolean privates;
+    private Boolean privateBool;
     @SerializedName("pulls_url")
     private String pullsUrl;
     @SerializedName("pushed_at")
     private String pushedAt;
     @SerializedName("releases_url")
     private String releasesUrl;
-    @Expose
-    private Double score;
     @Expose
     private Long size;
     @SerializedName("ssh_url")
@@ -238,141 +153,6 @@ public class Item implements Parcelable {
     private Long watchers;
     @SerializedName("watchers_count")
     private Long watchersCount;
-
-    protected Item(Parcel in) {
-        archiveUrl = in.readString();
-        byte tmpArchived = in.readByte();
-        archived = tmpArchived == 0 ? null : tmpArchived == 1;
-        assigneesUrl = in.readString();
-        blobsUrl = in.readString();
-        branchesUrl = in.readString();
-        cloneUrl = in.readString();
-        collaboratorsUrl = in.readString();
-        commentsUrl = in.readString();
-        commitsUrl = in.readString();
-        compareUrl = in.readString();
-        contentsUrl = in.readString();
-        contributorsUrl = in.readString();
-        createdAt = in.readString();
-        defaultBranch = in.readString();
-        deploymentsUrl = in.readString();
-        description = in.readString();
-        byte tmpDisabled = in.readByte();
-        disabled = tmpDisabled == 0 ? null : tmpDisabled == 1;
-        downloadsUrl = in.readString();
-        eventsUrl = in.readString();
-        byte tmpFork = in.readByte();
-        fork = tmpFork == 0 ? null : tmpFork == 1;
-        if (in.readByte() == 0) {
-            forks = null;
-        } else {
-            forks = in.readLong();
-        }
-        if (in.readByte() == 0) {
-            forksCount = null;
-        } else {
-            forksCount = in.readLong();
-        }
-        forksUrl = in.readString();
-        fullName = in.readString();
-        gitCommitsUrl = in.readString();
-        gitRefsUrl = in.readString();
-        gitTagsUrl = in.readString();
-        gitUrl = in.readString();
-        byte tmpHasDownloads = in.readByte();
-        hasDownloads = tmpHasDownloads == 0 ? null : tmpHasDownloads == 1;
-        byte tmpHasIssues = in.readByte();
-        hasIssues = tmpHasIssues == 0 ? null : tmpHasIssues == 1;
-        byte tmpHasPages = in.readByte();
-        hasPages = tmpHasPages == 0 ? null : tmpHasPages == 1;
-        byte tmpHasProjects = in.readByte();
-        hasProjects = tmpHasProjects == 0 ? null : tmpHasProjects == 1;
-        byte tmpHasWiki = in.readByte();
-        hasWiki = tmpHasWiki == 0 ? null : tmpHasWiki == 1;
-        homepage = in.readString();
-        hooksUrl = in.readString();
-        htmlUrl = in.readString();
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readLong();
-        }
-        issueCommentUrl = in.readString();
-        issueEventsUrl = in.readString();
-        issuesUrl = in.readString();
-        keysUrl = in.readString();
-        labelsUrl = in.readString();
-        language = in.readString();
-        languagesUrl = in.readString();
-        mergesUrl = in.readString();
-        milestonesUrl = in.readString();
-        name = in.readString();
-        nodeId = in.readString();
-        notificationsUrl = in.readString();
-        if (in.readByte() == 0) {
-            openIssues = null;
-        } else {
-            openIssues = in.readLong();
-        }
-        if (in.readByte() == 0) {
-            openIssuesCount = null;
-        } else {
-            openIssuesCount = in.readLong();
-        }
-        byte tmpPrivates = in.readByte();
-        privates = tmpPrivates == 0 ? null : tmpPrivates == 1;
-        pullsUrl = in.readString();
-        pushedAt = in.readString();
-        releasesUrl = in.readString();
-        if (in.readByte() == 0) {
-            score = null;
-        } else {
-            score = in.readDouble();
-        }
-        if (in.readByte() == 0) {
-            size = null;
-        } else {
-            size = in.readLong();
-        }
-        sshUrl = in.readString();
-        if (in.readByte() == 0) {
-            stargazersCount = null;
-        } else {
-            stargazersCount = in.readLong();
-        }
-        stargazersUrl = in.readString();
-        statusesUrl = in.readString();
-        subscribersUrl = in.readString();
-        subscriptionUrl = in.readString();
-        svnUrl = in.readString();
-        tagsUrl = in.readString();
-        teamsUrl = in.readString();
-        treesUrl = in.readString();
-        updatedAt = in.readString();
-        url = in.readString();
-        if (in.readByte() == 0) {
-            watchers = null;
-        } else {
-            watchers = in.readLong();
-        }
-        if (in.readByte() == 0) {
-            watchersCount = null;
-        } else {
-            watchersCount = in.readLong();
-        }
-    }
-
-    public static final Creator<Item> CREATOR = new Creator<Item>() {
-        @Override
-        public Item createFromParcel(Parcel in) {
-            return new Item(in);
-        }
-
-        @Override
-        public Item[] newArray(int size) {
-            return new Item[size];
-        }
-    };
 
     public String getArchiveUrl() {
         return archiveUrl;
@@ -710,11 +490,11 @@ public class Item implements Parcelable {
         this.labelsUrl = labelsUrl;
     }
 
-    public String getLanguage() {
+    public Object getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(Object language) {
         this.language = language;
     }
 
@@ -726,11 +506,11 @@ public class Item implements Parcelable {
         this.languagesUrl = languagesUrl;
     }
 
-    public Object getLicense() {
+    public License getLicense() {
         return license;
     }
 
-    public void setLicense(Object license) {
+    public void setLicense(License license) {
         this.license = license;
     }
 
@@ -807,11 +587,11 @@ public class Item implements Parcelable {
     }
 
     public Boolean getPrivate() {
-        return privates;
+        return privateBool;
     }
 
-    public void setPrivate(Boolean privates) {
-        this.privates = privates;
+    public void setPrivate(Boolean privateBool) {
+        this.privateBool = privateBool;
     }
 
     public String getPullsUrl() {
@@ -836,14 +616,6 @@ public class Item implements Parcelable {
 
     public void setReleasesUrl(String releasesUrl) {
         this.releasesUrl = releasesUrl;
-    }
-
-    public Double getScore() {
-        return score;
-    }
-
-    public void setScore(Double score) {
-        this.score = score;
     }
 
     public Long getSize() {
@@ -966,133 +738,4 @@ public class Item implements Parcelable {
         this.watchersCount = watchersCount;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(archiveUrl);
-        parcel.writeByte((byte) (archived == null ? 0 : archived ? 1 : 2));
-        parcel.writeString(assigneesUrl);
-        parcel.writeString(blobsUrl);
-        parcel.writeString(branchesUrl);
-        parcel.writeString(cloneUrl);
-        parcel.writeString(collaboratorsUrl);
-        parcel.writeString(commentsUrl);
-        parcel.writeString(commitsUrl);
-        parcel.writeString(compareUrl);
-        parcel.writeString(contentsUrl);
-        parcel.writeString(contributorsUrl);
-        parcel.writeString(createdAt);
-        parcel.writeString(defaultBranch);
-        parcel.writeString(deploymentsUrl);
-        parcel.writeString(description);
-        parcel.writeByte((byte) (disabled == null ? 0 : disabled ? 1 : 2));
-        parcel.writeString(downloadsUrl);
-        parcel.writeString(eventsUrl);
-        parcel.writeByte((byte) (fork == null ? 0 : fork ? 1 : 2));
-        if (forks == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(forks);
-        }
-        if (forksCount == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(forksCount);
-        }
-        parcel.writeString(forksUrl);
-        parcel.writeString(fullName);
-        parcel.writeString(gitCommitsUrl);
-        parcel.writeString(gitRefsUrl);
-        parcel.writeString(gitTagsUrl);
-        parcel.writeString(gitUrl);
-        parcel.writeByte((byte) (hasDownloads == null ? 0 : hasDownloads ? 1 : 2));
-        parcel.writeByte((byte) (hasIssues == null ? 0 : hasIssues ? 1 : 2));
-        parcel.writeByte((byte) (hasPages == null ? 0 : hasPages ? 1 : 2));
-        parcel.writeByte((byte) (hasProjects == null ? 0 : hasProjects ? 1 : 2));
-        parcel.writeByte((byte) (hasWiki == null ? 0 : hasWiki ? 1 : 2));
-        parcel.writeString(homepage);
-        parcel.writeString(hooksUrl);
-        parcel.writeString(htmlUrl);
-        if (id == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(id);
-        }
-        parcel.writeString(issueCommentUrl);
-        parcel.writeString(issueEventsUrl);
-        parcel.writeString(issuesUrl);
-        parcel.writeString(keysUrl);
-        parcel.writeString(labelsUrl);
-        parcel.writeString(language);
-        parcel.writeString(languagesUrl);
-        parcel.writeString(mergesUrl);
-        parcel.writeString(milestonesUrl);
-        parcel.writeString(name);
-        parcel.writeString(nodeId);
-        parcel.writeString(notificationsUrl);
-        if (openIssues == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(openIssues);
-        }
-        if (openIssuesCount == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(openIssuesCount);
-        }
-        parcel.writeByte((byte) (privates == null ? 0 : privates ? 1 : 2));
-        parcel.writeString(pullsUrl);
-        parcel.writeString(pushedAt);
-        parcel.writeString(releasesUrl);
-        if (score == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeDouble(score);
-        }
-        if (size == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(size);
-        }
-        parcel.writeString(sshUrl);
-        if (stargazersCount == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(stargazersCount);
-        }
-        parcel.writeString(stargazersUrl);
-        parcel.writeString(statusesUrl);
-        parcel.writeString(subscribersUrl);
-        parcel.writeString(subscriptionUrl);
-        parcel.writeString(svnUrl);
-        parcel.writeString(tagsUrl);
-        parcel.writeString(teamsUrl);
-        parcel.writeString(treesUrl);
-        parcel.writeString(updatedAt);
-        parcel.writeString(url);
-        if (watchers == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(watchers);
-        }
-        if (watchersCount == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(watchersCount);
-        }
-    }
 }

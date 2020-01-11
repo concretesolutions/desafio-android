@@ -1,9 +1,10 @@
 package com.alexandreobs.testeconcrete.model.data.remote;
 
-import com.alexandreobs.testeconcrete.model.pojo.GitResult;
+import com.alexandreobs.testeconcrete.model.pojo.repositories.GitResult;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface GitAPI {
 
@@ -11,5 +12,6 @@ public interface GitAPI {
 
     Observable<GitResult> getALLRepo(
 
+            @Query("page") int pagina
     );
 }

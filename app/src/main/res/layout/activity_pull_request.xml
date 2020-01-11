@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activitys.MainActivity">
+    tools:context=".view.activitys.PullRequest">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerRepos"
+        android:id="@+id/recyclerPullRequest"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

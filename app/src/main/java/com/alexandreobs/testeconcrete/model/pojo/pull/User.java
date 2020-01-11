@@ -1,12 +1,11 @@
 
-package com.alexandreobs.testeconcrete.model.pojo;
+package com.alexandreobs.testeconcrete.model.pojo.pull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-@SuppressWarnings("unused")
-public class Owner {
+public class User {
 
     @SerializedName("avatar_url")
     private String avatarUrl;
