@@ -8,7 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.github_api_concrete.model.pojo.repos.Item;
+import com.example.github_api_concrete.model.pojo.pullrequests.Response;
 import com.example.github_api_concrete.model.repository.GitHubRepository;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PullRequestsViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<Item>> listPR = new MutableLiveData<>();
+    private MutableLiveData<List<Response>> listPR = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
     private GitHubRepository repository = new GitHubRepository();
@@ -28,7 +28,7 @@ public class PullRequestsViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public LiveData<List<Item>> getListPR() {
+    public LiveData<List<Response>> getListPR() {
         return this.listPR;
     }
 
@@ -36,15 +36,15 @@ public class PullRequestsViewModel extends AndroidViewModel {
         return this.loading;
     }
 
-    public void getAllPR(String login, String name){
+    public void getAllPR(String owner, String repo){
         disposable.add(
-                repository.getPRs(login, name)
+                repository.getPRs(owner, repo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable1 -> loading.setValue(true))
                 .doOnTerminate(() -> loading.setValue(false))
                 .subscribe(pullRequestResults -> {
-                    listPR.setValue(pullRequestResults.getItems());
+                    listPR.setValue(pullRequestResults);
                 }, throwable -> {
                     Log.i("Log", "Error" + throwable.getMessage());
                 })

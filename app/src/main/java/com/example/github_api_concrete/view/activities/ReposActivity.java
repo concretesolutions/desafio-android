@@ -30,6 +30,8 @@ public class ReposActivity extends AppCompatActivity implements OnClick {
     private String language = "language:Java";
     private String sort = "stars";
     private int page = 1;
+    public static final String OWNER = "owner";
+    public static final String REPO = "repo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +93,8 @@ public class ReposActivity extends AppCompatActivity implements OnClick {
     public void click(Item item) {
         Intent intent = new Intent(ReposActivity.this, PullRequestsActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable("Item", item);
+        bundle.putString(OWNER, item.getOwner().getLogin());
+        bundle.putString(REPO, item.getName());
         intent.putExtras(bundle);
         startActivity(intent);
     }

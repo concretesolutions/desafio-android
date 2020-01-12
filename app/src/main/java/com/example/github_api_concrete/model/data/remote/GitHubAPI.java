@@ -1,6 +1,9 @@
 package com.example.github_api_concrete.model.data.remote;
 
+import com.example.github_api_concrete.model.pojo.pullrequests.Response;
 import com.example.github_api_concrete.model.pojo.repos.RepositoriesResult;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -14,7 +17,7 @@ public interface GitHubAPI {
                                                       @Query("sort") String sort,
                                                       @Query("page") int page);
 
-    @GET("repos/{login}/{name}/pulls")
-    Observable<RepositoriesResult> getAllPRs(@Path("login") String login,
-                                             @Path("name") String name);
+    @GET("repos/{owner}/{repo}/pulls")
+    Observable<List<Response>> getAllPRs(@Path("owner") String owner,
+                                         @Path("repo") String repo);
 }

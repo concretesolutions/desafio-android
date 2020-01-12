@@ -73,7 +73,11 @@ public class ReposRecyclerViewAdapter extends RecyclerView.Adapter<ReposRecycler
         }
 
         public void onBind(Item item){
-            Picasso.get().load(item.getOwner().getAvatarUrl()).into(userIcon);
+            Picasso.get()
+                    .load(item.getOwner().getAvatarUrl())
+                    .placeholder(R.drawable.usericon)
+                    .into(userIcon);
+
             nameRepo.setText(item.getName());
             descriptionRepo.setText(item.getDescription());
             totalForks.setText(String.valueOf(item.getForksCount()));

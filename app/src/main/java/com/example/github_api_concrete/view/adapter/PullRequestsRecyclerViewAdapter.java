@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.github_api_concrete.R;
-import com.example.github_api_concrete.model.pojo.repos.Item;
-import com.example.github_api_concrete.view.interfaces.OnClick;
+import com.example.github_api_concrete.model.pojo.pullrequests.Response;
+import com.example.github_api_concrete.view.interfaces.OnClickPR;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class PullRequestsRecyclerViewAdapter extends RecyclerView.Adapter<PullRequestsRecyclerViewAdapter.ViewHolder> {
 
-    private List<Item> pullRequestList;
-    private OnClick listener;
+    private List<Response> pullRequestList;
+    private OnClickPR listener;
 
-    public PullRequestsRecyclerViewAdapter(List<Item> pullRequestList, OnClick listener){
+    public PullRequestsRecyclerViewAdapter(List<Response> pullRequestList, OnClickPR listener){
         this.pullRequestList = pullRequestList;
         this.listener = listener;
     }
@@ -35,9 +35,9 @@ public class PullRequestsRecyclerViewAdapter extends RecyclerView.Adapter<PullRe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Item item = pullRequestList.get(position);
-        holder.onBind(item);
-        holder.itemView.setOnClickListener(v -> listener.click(item));
+        final Response response = pullRequestList.get(position);
+        holder.onBind(response);
+        holder.itemView.setOnClickListener(v -> listener.click(response));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class PullRequestsRecyclerViewAdapter extends RecyclerView.Adapter<PullRe
         return pullRequestList.size();
     }
 
-    public void updateList(List<Item> newPRList) {
+    public void updateList(List<Response> newPRList) {
         this.pullRequestList.clear();
         this.pullRequestList = newPRList;
         notifyDataSetChanged();
@@ -67,12 +67,32 @@ public class PullRequestsRecyclerViewAdapter extends RecyclerView.Adapter<PullRe
             username = itemView.findViewById(R.id.username2);
         }
 
-        public void onBind(Item item) {
-            Picasso.get().load(item.getOwner().getAvatarUrl()).into(userIcon);
-            namePR.setText(item.getFullName());
-            descriptionPR.setText(item.getFullName());
-            datePR.setText(item.getFullName());
-            username.setText(item.getOwner().getLogin());
+        public void onBind(Response response) {
+            Picasso.get()
+                    .load(response.getUser().getAvatarUrl())
+                    .placeholder(R.drawable.usericon)
+                    .into(userIcon);
+
+            namePR.setText(response.getTitle());
+
+            if (response.getBody().isEmpty()) {
+                descriptionPR.setText("No description provided.");
+            } else {
+                descriptionPR.setText(response.getBody());
+            }
+
+            if (response.getCreatedAt() == null || response.getCreatedAt().isEmpty()){
+                datePR.setText("No creation date provided.");
+            } else {
+                String dateISO = response.getCreatedAt().split("T")[0];
+                String[] dates = dateISO.split("-");
+                String creationDate = dates[2] + "/" + dates[1] + "/" + dates[0];
+                datePR.setText(creationDate);
+            }
+
+            username.setText(response.getUser().getLogin());
         }
     }
 }
+
+
