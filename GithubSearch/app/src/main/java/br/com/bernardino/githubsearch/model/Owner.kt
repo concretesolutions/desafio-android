@@ -3,60 +3,60 @@ package br.com.bernardino.githubsearch.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Owner {
+data class Owner (
     @SerializedName("login")
     @Expose
-    var login: String? = null
+    val login: String,
     @SerializedName("id")
     @Expose
-    var id: Int? = null
+    val id: Int,
     @SerializedName("node_id")
     @Expose
-    var nodeId: String? = null
+    val nodeId: String,
     @SerializedName("avatar_url")
     @Expose
-    var avatarUrl: String? = null
+    val avatarUrl: String,
     @SerializedName("gravatar_id")
     @Expose
-    var gravatarId: String? = null
+    val gravatarId: String,
     @SerializedName("url")
     @Expose
-    var url: String? = null
+    val url: String,
     @SerializedName("html_url")
     @Expose
-    var htmlUrl: String? = null
+    val htmlUrl: String,
     @SerializedName("followers_url")
     @Expose
-    var followersUrl: String? = null
+    val followersUrl: String,
     @SerializedName("following_url")
     @Expose
-    var followingUrl: String? = null
+    val followingUrl: String,
     @SerializedName("gists_url")
     @Expose
-    var gistsUrl: String? = null
+    val gistsUrl: String,
     @SerializedName("starred_url")
     @Expose
-    var starredUrl: String? = null
+    val starredUrl: String,
     @SerializedName("subscriptions_url")
     @Expose
-    var subscriptionsUrl: String? = null
+    val subscriptionsUrl: String,
     @SerializedName("organizations_url")
     @Expose
-    var organizationsUrl: String? = null
+    val organizationsUrl: String,
     @SerializedName("repos_url")
     @Expose
-    var reposUrl: String? = null
+    val reposUrl: String,
     @SerializedName("events_url")
     @Expose
-    var eventsUrl: String? = null
+    val eventsUrl: String,
     @SerializedName("received_events_url")
     @Expose
-    var receivedEventsUrl: String? = null
+    val receivedEventsUrl: String,
     @SerializedName("type")
     @Expose
-    var type: String? = null
+    val type: String,
     @SerializedName("site_admin")
     @Expose
-    var siteAdmin: Boolean? = null
+    val siteAdmin: Boolean
 
-}
+)
