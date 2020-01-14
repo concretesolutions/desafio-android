@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Github Search</string>
+    <string name="fork_image">Fork icon</string>
+    <string name="star_image">Star icon</string>
 </resources>
