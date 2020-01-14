@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#181717"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <ImageView
+        android:id="@+id/image"
+        android:src="@drawable/ic_githubicon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/app_name" />
+    <TextView
+        android:id="@+id/text"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:text="@string/app_name"
+        android:layout_below="@id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
