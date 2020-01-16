@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -19,6 +21,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -44,7 +49,9 @@ dependencies {
     implementation "com.android.support:support-v4:$appcompat_version"
     implementation "com.android.support:recyclerview-v7:$appcompat_version"
     implementation "android.arch.lifecycle:extensions:$lifecycle_ext_version"
+
     testImplementation "junit:junit:$junit_version"
+
     androidTestImplementation "com.android.support.test:runner:$runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
 
