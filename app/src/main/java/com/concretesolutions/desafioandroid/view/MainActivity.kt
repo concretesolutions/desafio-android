@@ -9,6 +9,7 @@ import com.concretesolutions.desafioandroid.R
 import com.concretesolutions.desafioandroid.adapters.RepositoryAdapter
 import com.concretesolutions.desafioandroid.helpers.NetworkHelper
 import com.concretesolutions.desafioandroid.model.Repositories
+import com.concretesolutions.desafioandroid.model.Repository
 import com.concretesolutions.desafioandroid.service.RepositoryService
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -37,7 +38,12 @@ class MainActivity : AppCompatActivity() {
                 Log.i("Repos", "Aí porra!")
 
                 response.body()?.let {
-                    rvRepositories.adapter = RepositoryAdapter(it.repositories)
+                    rvRepositories.adapter = RepositoryAdapter(it.repositories, object : RepositoryAdapter.OnItemClickListener{
+                        override fun onItemClick(repository: Repository) {
+                            Log.i("Teste", repository.name)
+                        }
+
+                    })
                 }
 
             }

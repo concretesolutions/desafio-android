@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import com.concretesolutions.desafioandroid.R
 import com.concretesolutions.desafioandroid.model.Repository
 import kotlinx.android.synthetic.main.repository_counts.view.*
@@ -13,7 +14,7 @@ import com.squareup.picasso.Picasso
 
 
 
-class RepositoryAdapter(var repositories: List<Repository>)
+class RepositoryAdapter(private val repositories: List<Repository>, private val listener: OnItemClickListener)
             : RecyclerView.Adapter<RepositoryAdapter.RepositoryAdapterViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int)
@@ -29,11 +30,11 @@ class RepositoryAdapter(var repositories: List<Repository>)
     override fun getItemCount() = repositories.count()
 
     override fun onBindViewHolder(holder: RepositoryAdapterViewHolder, position: Int) {
-        holder.bind(repositories[position])
+        holder.bind(repositories[position], listener)
     }
 
     class RepositoryAdapterViewHolder(private val view : View): RecyclerView.ViewHolder(view) {
-        fun bind(repository: Repository) {
+        fun bind(repository: Repository, listener: OnItemClickListener) {
             with(view) {
                 ctForks.text = repository.forksCount.toString()
                 ctStars.text = repository.starsCount.toString()
@@ -41,9 +42,15 @@ class RepositoryAdapter(var repositories: List<Repository>)
                 description.text = repository.description
                 fullName.text = repository.owner.login
                 firstName.text = repository.owner.login
+
+                setOnClickListener(View.OnClickListener { listener.onItemClick(repository)  })
             }
             Picasso.with(view.context).load(repository.owner.avatarUrl)
                 .into(view.fotoUser)
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(repository: Repository)
     }
 }
