@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.widget.LinearLayout
 import com.concretesolutions.desafioandroid.R
 import com.concretesolutions.desafioandroid.adapters.RepositoryAdapter
 import com.concretesolutions.desafioandroid.helpers.NetworkHelper
