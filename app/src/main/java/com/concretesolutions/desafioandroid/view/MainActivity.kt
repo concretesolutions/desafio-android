@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.concretesolutions.desafioandroid.R
 import com.concretesolutions.desafioandroid.adapters.RepositoryAdapter
 import com.concretesolutions.desafioandroid.model.Repository
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val sortType: String = "stars"
     private val searchTerm: String = "language:Java"
     private lateinit var repositoryAdapter: RepositoryAdapter
-    private val repositoriesViewModel: RepositoriesViewModel = RepositoriesViewModel()
+    private lateinit var repositoriesViewModel: RepositoriesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +35,13 @@ class MainActivity : AppCompatActivity() {
         initAdapters()
         initView()
 
+
     }
 
     private fun initAdapters() {
+
+        repositoriesViewModel = RepositoriesViewModel(applicationContext)
+
         repositoryAdapter = RepositoryAdapter(object : RepositoryAdapter.OnItemClickListener {
             override fun onItemClick(repositoryViewModel: RepositoryViewModel) {
                 repoClicked(repositoryViewModel)
@@ -47,10 +52,14 @@ class MainActivity : AppCompatActivity() {
             progressBar.visibility = View.GONE
             repositoryAdapter.updateRepositories(it!!.repositories)
         })
-        repositoriesViewModel.isFinished().observe(this, Observer {
-            if (it!!) {
+        repositoriesViewModel.getStatus().observe(this, Observer {
+            it?.let {
                 progressBar.visibility = View.GONE
-                hasMore = false
+                hasMore = !it.finished
+                if(!it.message.isNullOrEmpty()) {
+                    Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         })
         loadPageRepos()
@@ -116,7 +125,8 @@ class MainActivity : AppCompatActivity() {
     private fun repoClicked(repositoryViewModel: RepositoryViewModel) {
 
         val intent = Intent(applicationContext, PullRequestViewActivity::class.java)
-        intent.putExtra("repository", repositoryViewModel.repositoryData.name)
+        intent.putExtra("repositoryName", repositoryViewModel.repositoryData.name)
+        intent.putExtra("repositoryFullName", repositoryViewModel.repositoryData.fullName)
         intent.putExtra("owner", repositoryViewModel.repositoryData.owner.login)
         startActivity(intent)
 

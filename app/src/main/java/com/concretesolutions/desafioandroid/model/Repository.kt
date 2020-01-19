@@ -13,6 +13,8 @@ data class Repository(
     var starsCount: Int,
     @SerializedName("name")
     var name: String,
+    @SerializedName("full_name")
+    var fullName: String,
     @SerializedName("description")
     var description: String? = "",
     @SerializedName("owner")
@@ -25,6 +27,7 @@ data class Repository(
                 parcel.readInt(),
                 parcel.readInt(),
                 parcel.readInt(),
+                parcel.readString(),
                 parcel.readString(),
                 parcel.readString(),
                 parcel.readParcelable(Owner.javaClass.classLoader)
@@ -42,6 +45,7 @@ data class Repository(
             it.writeInt(forksCount)
             it.writeInt(starsCount)
             it.writeString(name)
+            it.writeString(fullName)
             it.writeString(description)
             it.writeParcelable(owner, flags)
         }

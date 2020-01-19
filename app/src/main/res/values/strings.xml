@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Github JavaPop</string>
+    <string name="error_load_repos">Erro ao carregar dados</string>
 </resources>
