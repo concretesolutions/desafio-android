@@ -2,6 +2,7 @@ package com.concretesolutions.desafioandroid.view
 
 import android.arch.lifecycle.Observer
 import android.content.Intent
+import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -10,12 +11,16 @@ import android.util.Log
 import android.view.View
 import com.concretesolutions.desafioandroid.R
 import com.concretesolutions.desafioandroid.adapters.RepositoryAdapter
+import com.concretesolutions.desafioandroid.model.Repository
 import com.concretesolutions.desafioandroid.viewmodel.RepositoriesViewModel
 import com.concretesolutions.desafioandroid.viewmodel.RepositoryViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var hasMore: Boolean = true
+    private val RVPOSITION: String = "rvposition"
+    private val REPOSITORIESPARCEL: String = "repositoriesparcel"
     private var page: Int = 1
     private val sortType: String = "stars"
     private val searchTerm: String = "language:Java"
@@ -32,20 +37,51 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapters() {
-        repositoryAdapter = RepositoryAdapter( object: RepositoryAdapter.OnItemClickListener{
-            override fun onItemClick(repositoryViewModel: RepositoryViewModel) { repoClicked(repositoryViewModel) }
+        repositoryAdapter = RepositoryAdapter(object : RepositoryAdapter.OnItemClickListener {
+            override fun onItemClick(repositoryViewModel: RepositoryViewModel) {
+                repoClicked(repositoryViewModel)
+            }
         })
-        loadPageRepos()
+
         repositoriesViewModel.getRepos().observe(this, Observer {
             progressBar.visibility = View.GONE
             repositoryAdapter.updateRepositories(it!!.repositories)
         })
+        repositoriesViewModel.isFinished().observe(this, Observer {
+            if (it!!) {
+                progressBar.visibility = View.GONE
+                hasMore = false
+            }
+        })
+        loadPageRepos()
 
     }
 
     private fun loadPageRepos() {
         progressBar.visibility = View.VISIBLE
         repositoriesViewModel.loadRepos(searchTerm, sortType, page)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.let {
+            it.putParcelableArrayList(
+                REPOSITORIESPARCEL,
+                ArrayList(repositoryAdapter.getRepositories())
+            )
+            it.putParcelable(RVPOSITION, rvRepositories.layoutManager!!.onSaveInstanceState())
+        }
+
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        savedInstanceState?.let {
+            val list = it.getParcelableArrayList<Repository>(REPOSITORIESPARCEL)
+            repositoryAdapter.updateRepositories(list)
+            rvRepositories.layoutManager!!.onRestoreInstanceState(it.getParcelable(RVPOSITION))
+        }
+        progressBar.visibility = View.GONE
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     private fun initView() {
@@ -55,22 +91,22 @@ class MainActivity : AppCompatActivity() {
         rvRepositories.layoutManager = linearVertical
         rvRepositories.adapter = repositoryAdapter
 
-        rvRepositories.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+        rvRepositories.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                if (hasMore) {
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
 
-                layoutManager.let {
+                    layoutManager.let {
 
-                    if( it.findLastVisibleItemPosition() + 6 > it.itemCount) {
-                        page++
-                        loadPageRepos()
+                        if (it.findLastVisibleItemPosition() + 6 > it.itemCount) {
+                            page++
+                            loadPageRepos()
+                        }
                     }
                 }
-
-
 
             }
 

@@ -1,5 +1,6 @@
 package com.concretesolutions.desafioandroid.adapters
 
+import android.os.Parcelable
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,6 +36,11 @@ class RepositoryAdapter(private val listener: OnItemClickListener) :
         holder.bind(repositories[position])
     }
 
+    fun getRepositories(): MutableList<Repository> {
+        return repositories
+    }
+
+
     class RepositoryAdapterViewHolder(
         private val binding: RepositoryItemBinding,
         private val listener: OnItemClickListener
@@ -49,7 +55,6 @@ class RepositoryAdapter(private val listener: OnItemClickListener) :
         }
 
         fun bind(repository: Repository) {
-            Log.i("teste", repository.toString())
             binding.repository = RepositoryViewModel(repository)
             binding.executePendingBindings()
         }

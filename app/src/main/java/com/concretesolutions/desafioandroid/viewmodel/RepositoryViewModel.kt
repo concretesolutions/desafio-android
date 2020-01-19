@@ -1,5 +1,6 @@
 package com.concretesolutions.desafioandroid.viewmodel
 
+import com.concretesolutions.desafioandroid.helpers.StringHelper
 import com.concretesolutions.desafioandroid.model.Repository
 
 class RepositoryViewModel {
@@ -11,8 +12,7 @@ class RepositoryViewModel {
     constructor(repository: Repository) {
         repositoryData = repository
         avatarViewModel = AvatarViewModel(repository.owner)
-        val description = if( repository.description.isNullOrEmpty() ) "--" else repository.description!!
-        headerViewModel = HeaderViewModel(repository.name, description)
+        headerViewModel = HeaderViewModel(repository.name, StringHelper.makeShortDescription(repository.description))
         countInfoViewModel = CountInfoViewModel(repository.forksCount.toString(), repository.starsCount.toString())
     }
 }
