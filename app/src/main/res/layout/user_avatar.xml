@@ -6,18 +6,20 @@
                   type="com.concretesolutions.desafioandroid.viewmodel.AvatarViewModel" />
     </data>
     <LinearLayout android:layout_width="wrap_content"
+                  android:padding="8sp"
                   android:orientation="vertical"
-                  android:gravity="center_horizontal"
                   android:layout_height="wrap_content">
 
-        <ImageView android:layout_width="wrap_content"
+        <ImageView android:layout_width="60dp"
                    app:imageUrl="@{avatar.photoUrl}"
-                   android:layout_height="wrap_content"/>
-        <TextView android:layout_width="wrap_content"
+                   android:layout_height="60dp"/>
+        <TextView android:layout_width="match_parent"
                   android:text="@{avatar.name}"
+                  android:textAlignment="center"
                   android:layout_height="wrap_content"/>
-        <TextView android:layout_width="wrap_content"
+        <TextView android:layout_width="match_parent"
                   android:text="@{avatar.fullName}"
+                  android:textAlignment="center"
                   android:layout_height="wrap_content"/>
     </LinearLayout>
 </layout>

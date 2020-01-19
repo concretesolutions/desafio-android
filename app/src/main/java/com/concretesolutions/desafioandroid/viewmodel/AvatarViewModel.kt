@@ -7,11 +7,12 @@ import android.databinding.BindingAdapter
 import android.widget.ImageView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
-@BindingAdapter("bind:imageUrl")
+
+@BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, imageUrl: String) {
     Picasso.with(view.context)
         .load(imageUrl)
-        .resize(90, 90)
+        .resize(view.layoutParams.width, view.layoutParams.height)
         .transform(CropCircleTransformation())
         .placeholder(R.drawable.star_big_off)
         .into(view)

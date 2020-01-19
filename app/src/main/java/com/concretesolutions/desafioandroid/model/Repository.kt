@@ -12,7 +12,7 @@ data class Repository (
     @SerializedName("name")
     var name: String,
     @SerializedName("description")
-    var description: String,
+    var description: String? = "",
     @SerializedName("owner")
     var owner: Owner
 )
