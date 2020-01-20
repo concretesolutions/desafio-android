@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:paddingLeft="12dp"
+    android:paddingTop="4dp"
+    android:paddingRight="4dp"
+    android:paddingBottom="4dp">
+
+
+    <TextView
+        android:id="@+id/repository_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="#4682B4"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="My repository name" />
+
+    <TextView
+        android:id="@+id/repository_description"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:maxLines="5"
+        app:layout_constraintRight_toLeftOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/repository_name"
+        app:layout_constraintLeft_toLeftOf="@id/repository_name"
+        app:layout_constraintStart_toStartOf="@id/repository_name"
+        tools:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+
+    <ImageView
+        android:id="@+id/fork"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:gravity="end"
+        android:tint="#FFD700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/repository_name"
+        app:layout_constraintTop_toBottomOf="@+id/repository_description"
+        tools:src="@drawable/branch" />
+
+    <TextView
+        android:id="@+id/fork_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:maxEms="180"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/fork"
+        app:layout_constraintTop_toBottomOf="@+id/repository_description"
+        tools:text="489" />
+
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:gravity="end"
+        android:tint="#FFD700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/fork_count"
+        app:layout_constraintTop_toBottomOf="@+id/repository_description"
+        tools:src="@drawable/star" />
+
+    <TextView
+        android:id="@+id/star_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/star"
+        app:layout_constraintTop_toBottomOf="@+id/repository_description"
+        tools:text="489" />
+
+
+    <ImageView
+        android:id="@+id/avatar_user"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="150dp"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#4682B4"
+        app:layout_constraintLeft_toLeftOf="@+id/avatar_user"
+        app:layout_constraintTop_toBottomOf="@+id/avatar_user"
+        tools:text="Name" />
+
+    <TextView
+        android:id="@+id/full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxWidth="100dp"
+        android:maxLines="2"
+        app:layout_constraintLeft_toLeftOf="@+id/user_name"
+        app:layout_constraintTop_toBottomOf="@+id/user_name"
+        tools:text="Full name" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="full_name,avatar_user,user_name"
+        tools:layout_editor_absoluteX="407dp"
+        tools:layout_editor_absoluteY="4dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

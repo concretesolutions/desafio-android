@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="12dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="12dp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_pull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <TextView
+        android:id="@+id/pull_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="My repository name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif"
+        android:textColor="#4682B4"/>
+
+    <TextView
+        android:id="@+id/pull_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="5"
+        app:layout_constraintLeft_toLeftOf="@id/pull_title"
+        app:layout_constraintTop_toBottomOf="@id/pull_title"
+        android:text="is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the
+         industry's standard dummy text ever since the 1500s"
+        android:textSize="15sp"/>
+
+    <ImageView
+        android:id="@+id/avatar_user_pull"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@id/pull_body"
+        app:layout_constraintTop_toBottomOf="@id/pull_body"
+        android:src="@drawable/ic_launcher_background"/>
+
+    <TextView
+        android:id="@+id/user_name_pull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/avatar_user_pull"
+        app:layout_constraintTop_toBottomOf="@id/pull_body"
+        app:layout_constraintTop_toTopOf="@id/avatar_user_pull"
+        android:text="USERNAME"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="#4682B4"
+        android:textSize="15sp"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
