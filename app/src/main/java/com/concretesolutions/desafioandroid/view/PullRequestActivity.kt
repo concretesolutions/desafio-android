@@ -1,7 +1,9 @@
 package com.concretesolutions.desafioandroid.view
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -47,8 +49,8 @@ class PullRequestActivity : AppCompatActivity() {
     private fun initExtras() {
         val bundle = intent.extras
         if (bundle != null) {
-            reposName = bundle.getString("repositoryName")
-            ownerName = bundle.getString("owner")
+            reposName = bundle.getString("repositoryName")!!
+            ownerName = bundle.getString("owner")!!
         }
 
     }
@@ -94,7 +96,7 @@ class PullRequestActivity : AppCompatActivity() {
 
     private fun showData(pulls: MutableList<PullRequest>) {
         bindig.opened = "${pulls.count()} pulls"
-        pullRequestAdapter.updateRepositories(pulls)
+        pullRequestAdapter.setPullRequests(pulls)
         rvPullRequest.visibility = View.VISIBLE
         feedError.visibility = View.GONE
     }
@@ -135,7 +137,8 @@ class PullRequestActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
             val list = it.getParcelableArrayList<PullRequest>(PULLSPARCEL)
-            showData(list)
+            if(list != null)
+                showData(list)
             rvPullRequest.layoutManager!!.onRestoreInstanceState(it.getParcelable(RVPOSITION))
         }
         super.onRestoreInstanceState(savedInstanceState)
@@ -147,6 +150,9 @@ class PullRequestActivity : AppCompatActivity() {
     }
 
     private fun itemClick(pullRequest: PullRequest) {
+        val openUrl = Intent(android.content.Intent.ACTION_VIEW)
+        openUrl.data = Uri.parse(pullRequest.url)
+        startActivity(openUrl)
 
     }
 }

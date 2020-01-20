@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Github JavaPop</string>
     <string name="error_load_repos">Erro ao carregar dados</string>
+    <string name="criado_em">Criado em:</string>
+    <string name="voltar">voltar</string>
+    <string name="resultados_n_encontrados">Não foram encontrados resultados</string>
 </resources>

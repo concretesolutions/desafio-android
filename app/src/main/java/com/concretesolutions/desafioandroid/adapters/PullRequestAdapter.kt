@@ -4,7 +4,6 @@ package com.concretesolutions.desafioandroid.adapters
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.concretesolutions.desafioandroid.databinding.ActivityPullRequestViewBinding
 import com.concretesolutions.desafioandroid.databinding.PullrequestItemBinding
 import com.concretesolutions.desafioandroid.model.PullRequest
 import com.concretesolutions.desafioandroid.viewmodel.PullsViewModel
@@ -15,8 +14,13 @@ class PullRequestAdapter(private val listener: OnItemClickListener) :
 
     private var pullRequests: MutableList<PullRequest> = arrayListOf()
 
-    fun updateRepositories(repos: List<PullRequest>) {
+    fun updatePullRequests(repos: List<PullRequest>) {
         pullRequests.addAll(repos)
+        notifyDataSetChanged()
+    }
+
+    fun setPullRequests(repos: List<PullRequest>) {
+        pullRequests = repos.toMutableList()
         notifyDataSetChanged()
     }
 

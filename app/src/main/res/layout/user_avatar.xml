@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable name="avatar"
-                  type="com.concretesolutions.desafioandroid.viewmodel.AvatarViewModel" />
-    </data>
-    <LinearLayout android:layout_width="wrap_content"
-                  android:padding="8sp"
-                  android:orientation="vertical"
-                  android:layout_height="wrap_content">
 
-        <ImageView android:layout_width="60dp"
-                   app:imageUrl="@{avatar.photoUrl}"
-                   android:layout_height="60dp"/>
-        <TextView android:layout_width="match_parent"
-                  android:text="@{avatar.name}"
-                  android:textAlignment="center"
-                  android:layout_height="wrap_content"/>
-        <TextView android:layout_width="match_parent"
-                  android:text="@{avatar.fullName}"
-                  android:textAlignment="center"
-                  android:layout_height="wrap_content"/>
+    <data>
+
+        <variable
+                name="avatar"
+                type="com.concretesolutions.desafioandroid.viewmodel.AvatarViewModel" />
+    </data>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacer">
+
+        <ImageView
+                android:layout_width="@dimen/avatarSize"
+                android:layout_height="@dimen/avatarSize"
+                app:imageUrl="@{avatar.photoUrl}" />
+
+        <TextView
+                style="@style/Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{avatar.name}"
+                android:textAlignment="center" />
     </LinearLayout>
 </layout>

@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Title" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+    <style name="SubTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+    </style>
+    <style name="textOver" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
 </resources>

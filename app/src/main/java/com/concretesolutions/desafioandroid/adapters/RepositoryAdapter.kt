@@ -20,6 +20,11 @@ class RepositoryAdapter(private val listener: OnItemClickListener) :
         notifyDataSetChanged()
     }
 
+    fun setRepositories(repos: List<Repository>) {
+        repositories = repos.toMutableList()
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int)
             : RepositoryAdapterViewHolder {
 

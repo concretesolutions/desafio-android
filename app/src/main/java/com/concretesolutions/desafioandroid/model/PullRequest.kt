@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class PullRequest(@SerializedName("title") val title: String,
-                       @SerializedName("url") val url: String,
+                       @SerializedName("html_url") val url: String,
                        @SerializedName("body") val body: String,
                        @SerializedName("created_at") val createdData: String,
                        @SerializedName("user") val user: Owner) : Parcelable{
@@ -13,11 +13,11 @@ data class PullRequest(@SerializedName("title") val title: String,
     companion object CREATOR : Parcelable.Creator<PullRequest> {
         override fun createFromParcel(parcel: Parcel): PullRequest {
             return PullRequest(
-                parcel.readString(),
-                parcel.readString(),
-                parcel.readString(),
-                parcel.readString(),
-                parcel.readParcelable(Owner.javaClass.classLoader)
+                parcel.readString()!!,
+                parcel.readString()!!,
+                parcel.readString()!!,
+                parcel.readString()!!,
+                parcel.readParcelable(Owner.javaClass.classLoader)!!
             )
         }
 

@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             it?.let {
                 progressBar.visibility = View.GONE
                 hasMore = !it.finished
-                if(!it.message.isNullOrEmpty()) {
+                if (!it.message.isNullOrEmpty()) {
                     Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT)
                         .show()
                 }
@@ -87,7 +87,8 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
             val list = it.getParcelableArrayList<Repository>(REPOSITORIESPARCEL)
-            repositoryAdapter.updateRepositories(list)
+            if (list != null)
+                repositoryAdapter.setRepositories(list.toList())
             rvRepositories.layoutManager!!.onRestoreInstanceState(it.getParcelable(RVPOSITION))
         }
         progressBar.visibility = View.GONE

@@ -1,39 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
                 name="repository"
-                type="com.concretesolutions.desafioandroid.viewmodel.RepositoryViewModel"/>
+                type="com.concretesolutions.desafioandroid.viewmodel.RepositoryViewModel" />
     </data>
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:padding="8sp"
-                  android:orientation="horizontal"
-                  android:layout_height="wrap_content"
-                  android:baselineAligned="false">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
 
-        <LinearLayout android:layout_width="0dp"
-                      android:layout_weight="1"
-                      android:orientation="vertical"
-                      android:layout_height="wrap_content">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacer">
 
-            <include layout="@layout/title_description"
-                     android:layout_width="match_parent"
-                     app:header="@{repository.headerViewModel}"
-                     android:layout_height="wrap_content"/>
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <include layout="@layout/repository_counts"
-                     app:info="@{repository.countInfoViewModel}"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"/>
+                <include
+                        layout="@layout/title_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:header="@{repository.headerViewModel}" />
+
+                <include
+                        layout="@layout/repository_counts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:info="@{repository.countInfoViewModel}" />
+            </LinearLayout>
+
+            <include
+                    layout="@layout/user_avatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:avatar="@{repository.avatarViewModel}" />
+
         </LinearLayout>
 
-        <include layout="@layout/user_avatar"
-                 app:avatar="@{repository.avatarViewModel}"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"/>
-
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGray" />
     </LinearLayout>
 
 </layout>

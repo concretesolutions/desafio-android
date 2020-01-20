@@ -27,10 +27,10 @@ data class Repository(
                 parcel.readInt(),
                 parcel.readInt(),
                 parcel.readInt(),
-                parcel.readString(),
-                parcel.readString(),
-                parcel.readString(),
-                parcel.readParcelable(Owner.javaClass.classLoader)
+                parcel.readString()!!,
+                parcel.readString()!!,
+                parcel.readString()!!,
+                parcel.readParcelable(Owner.javaClass.classLoader)!!
             )
         }
 

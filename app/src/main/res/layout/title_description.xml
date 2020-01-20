@@ -8,10 +8,12 @@
                   android:orientation="vertical">
         <TextView
                 android:text="@{header.title}"
+                style="@style/Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         <TextView
+                style="@style/SubTitle"
                 android:text="@{header.description}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

@@ -12,24 +12,21 @@
             android:layout_width="wrap_content">
 
         <ImageView
-                android:layout_width="40dp"
+                android:layout_width="@dimen/smallAvatarSize"
                 app:imageUrl="@{avatar.photoUrl}"
-                android:layout_height="40dp"/>
+                android:layout_height="@dimen/smallAvatarSize"/>
 
         <LinearLayout
+                android:layout_marginLeft="@dimen/spacer"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:orientation="vertical">
 
             <TextView
+                    style="@style/Title"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="@{avatar.name}"/>
-
-            <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@{avatar.fullName}" />
         </LinearLayout>
 
     </LinearLayout>

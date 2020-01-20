@@ -15,7 +15,7 @@ data class Owner (
 
     companion object CREATOR : Parcelable.Creator<Owner> {
         override fun createFromParcel(parcel: Parcel): Owner {
-            return Owner(parcel.readInt(), parcel.readString(), parcel.readString())
+            return Owner(parcel.readInt(), parcel.readString()!!, parcel.readString()!!)
         }
 
         override fun newArray(size: Int): Array<Owner?> {

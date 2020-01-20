@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacer">8dp</dimen>
+    <dimen name="smallAvatarSize">40dp</dimen>
+    <dimen name="avatarSize">60dp</dimen>
+    <dimen name="loaderSize">90dp</dimen>
+    <dimen name="smallProgressSize">30dp</dimen>
+</resources>
