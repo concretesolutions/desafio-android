@@ -10,25 +10,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RepositoriesViewModel {
+class RepositoriesViewModel(ctx: Context) : BaseViewModel(ctx) {
 
-    private val context: Context
     private var repositories: MutableLiveData<Repositories> = MutableLiveData()
-    private var status: MutableLiveData<RepositorieStatus> = MutableLiveData()
     private val repositoriesService = NetworkHelper.getRetrofitInstanceGitHub()
         .create(RepositoryService::class.java)
 
-    constructor(ctx: Context) {
-        context = ctx
-        status.value = RepositorieStatus(false, "")
-    }
-
     fun getRepos(): MutableLiveData<Repositories> {
         return repositories
-    }
-
-    fun getStatus(): MutableLiveData<RepositorieStatus> {
-        return status
     }
 
     fun loadRepos(searchTerm: String, sortType: String, page: Number) {
@@ -36,7 +25,7 @@ class RepositoriesViewModel {
         repositoriesService.getRepositories(searchTerm, sortType, page)
             .enqueue(object : Callback<Repositories> {
                 override fun onFailure(call: Call<Repositories>, t: Throwable) {
-                    status.value = RepositorieStatus(status.value!!.finished, context.getString(R.string.error_load_repos))
+                    status.value = LoadStatus(status.value!!.finished, context.getString(R.string.error_load_repos))
                 }
                 override fun onResponse(
                     call: Call<Repositories>,
@@ -46,12 +35,10 @@ class RepositoriesViewModel {
                     if (result != null && result.repositories.count() > 0) {
                         repositories.value = result
                     } else {
-                        status.value = RepositorieStatus(true, "")
+                        status.value = LoadStatus(true, "")
                     }
                 }
             })
     }
-
-    class RepositorieStatus(val finished: Boolean, val message: String)
 
 }

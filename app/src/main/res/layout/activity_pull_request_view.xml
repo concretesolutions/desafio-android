@@ -11,7 +11,7 @@
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.PullRequestViewActivity">
+            tools:context=".view.PullRequestActivity">
 
         <TextView android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -23,16 +23,53 @@
                 android:background="@color/colorPrimary"
                 android:text="@{ opened }"
                 android:id="@+id/textView"/>
-
-        <android.support.v7.widget.RecyclerView
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:padding="8dp"
                 android:layout_height="0dp"
-                android:id="@+id/rvPullRequest"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"/>
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvPullRequest"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/progressPullBar"
+                    android:visibility="gone"
+                    />
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:visibility="gone"
+                    android:id="@+id/feedError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_marginBottom="8dp"
+                        android:textAlignment="center"
+                        android:text="Não foram encontrados resultados"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                <Button
+                        android:id="@+id/btnBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="voltar"
+                    />
+            </LinearLayout>
+            <ProgressBar
+                    android:id="@+id/progressPullBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+
 
     </android.support.constraint.ConstraintLayout>
 

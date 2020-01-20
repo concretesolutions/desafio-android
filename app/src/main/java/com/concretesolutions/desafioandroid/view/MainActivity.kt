@@ -2,12 +2,10 @@ package com.concretesolutions.desafioandroid.view
 
 import android.arch.lifecycle.Observer
 import android.content.Intent
-import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.concretesolutions.desafioandroid.R
@@ -34,8 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         initAdapters()
         initView()
+        loadData()
 
+    }
 
+    private fun loadData() {
+        loadPageRepos()
     }
 
     private fun initAdapters() {
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             progressBar.visibility = View.GONE
             repositoryAdapter.updateRepositories(it!!.repositories)
         })
-        repositoriesViewModel.getStatus().observe(this, Observer {
+        repositoriesViewModel.getLoadStatus().observe(this, Observer {
             it?.let {
                 progressBar.visibility = View.GONE
                 hasMore = !it.finished
@@ -62,7 +64,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        loadPageRepos()
 
     }
 
@@ -124,7 +125,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun repoClicked(repositoryViewModel: RepositoryViewModel) {
 
-        val intent = Intent(applicationContext, PullRequestViewActivity::class.java)
+        val intent = Intent(applicationContext, PullRequestActivity::class.java)
         intent.putExtra("repositoryName", repositoryViewModel.repositoryData.name)
         intent.putExtra("repositoryFullName", repositoryViewModel.repositoryData.fullName)
         intent.putExtra("owner", repositoryViewModel.repositoryData.owner.login)
