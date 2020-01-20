@@ -5,4 +5,5 @@
     <dimen name="avatarSize">60dp</dimen>
     <dimen name="loaderSize">90dp</dimen>
     <dimen name="smallProgressSize">30dp</dimen>
+    <dimen name="iconSize">20dp</dimen>
 </resources>

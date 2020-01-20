@@ -1,9 +1,9 @@
 package com.concretesolutions.desafioandroid.helpers
 
-import android.R
 import android.databinding.BindingAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.concretesolutions.desafioandroid.R
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
@@ -13,7 +13,7 @@ fun loadImage(view: ImageView, imageUrl: String) {
         .load(imageUrl)
         .resize(view.layoutParams.width, view.layoutParams.height)
         .transform(CropCircleTransformation())
-        .placeholder(R.drawable.star_big_off)
+        .placeholder(R.drawable.foto)
         .into(view)
 }
 
