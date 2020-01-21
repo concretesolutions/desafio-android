@@ -2,6 +2,7 @@ package com.concretesolutions.desafioandroid.view
 
 import android.arch.lifecycle.Observer
 import android.content.Intent
+import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private var hasMore: Boolean = true
+    private val DATACONTENTVISIBILITY: String = "DATACONTENTVISIBILITY"
     private val RVPOSITION: String = "rvposition"
     private val REPOSITORIESPARCEL: String = "repositoriesparcel"
     private var page: Int = 1
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val searchTerm: String = "language:Java"
     private lateinit var repositoryAdapter: RepositoryAdapter
     private lateinit var repositoriesViewModel: RepositoriesViewModel
+    private var firstLoad: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +35,18 @@ class MainActivity : AppCompatActivity() {
 
         initAdapters()
         initView()
-        loadData()
+        checkScreenRotation(savedInstanceState)
 
+    }
+
+    private fun checkScreenRotation(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            loadData()
+        } else {
+            firstLoad = false
+            mainProgressBar.visibility = View.GONE
+            rvRepositories.visibility = View.VISIBLE
+        }
     }
 
     private fun loadData() {
@@ -52,23 +65,51 @@ class MainActivity : AppCompatActivity() {
 
         repositoriesViewModel.getRepos().observe(this, Observer {
             progressBar.visibility = View.GONE
-            repositoryAdapter.updateRepositories(it!!.repositories)
+            mainProgressBar.visibility = View.GONE
+            rvRepositories.visibility = View.VISIBLE
+            if( (it == null || it.repositories.count() == 0 ) && firstLoad) {
+                showFeedbackError(true)
+            } else {
+                firstLoad = false
+                repositoryAdapter.updateRepositories(it!!.repositories)
+            }
+
         })
         repositoriesViewModel.getLoadStatus().observe(this, Observer {
             it?.let {
-                progressBar.visibility = View.GONE
                 hasMore = !it.finished
                 if (!it.message.isNullOrEmpty()) {
-                    Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT)
-                        .show()
+                    if(firstLoad) {
+                        showFeedbackError(true)
+                    } else {
+                        Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
         })
 
     }
 
+    private fun showFeedbackError(isToShow: Boolean) {
+        if (isToShow) {
+            dataContent.visibility = View.GONE
+            feedTryAgain.visibility = View.VISIBLE
+        } else {
+            dataContent.visibility = View.VISIBLE
+            feedTryAgain.visibility = View.GONE
+        }
+    }
+
     private fun loadPageRepos() {
-        progressBar.visibility = View.VISIBLE
+        showFeedbackError(false)
+        if(!firstLoad)
+            progressBar.visibility = View.VISIBLE
+        else
+            mainProgressBar.visibility = View.VISIBLE
+
+
+
         repositoriesViewModel.loadRepos(searchTerm, sortType, page)
     }
 
@@ -79,6 +120,7 @@ class MainActivity : AppCompatActivity() {
                 ArrayList(repositoryAdapter.getRepositories())
             )
             it.putParcelable(RVPOSITION, rvRepositories.layoutManager!!.onSaveInstanceState())
+            it.putInt(DATACONTENTVISIBILITY, dataContent.visibility)
         }
 
         super.onSaveInstanceState(outState)
@@ -90,8 +132,13 @@ class MainActivity : AppCompatActivity() {
             if (list != null)
                 repositoryAdapter.setRepositories(list.toList())
             rvRepositories.layoutManager!!.onRestoreInstanceState(it.getParcelable(RVPOSITION))
+
+            if( it.getInt(DATACONTENTVISIBILITY) == View.VISIBLE ) {
+                showFeedbackError(false)
+            } else {
+                showFeedbackError(true)
+            }
         }
-        progressBar.visibility = View.GONE
         super.onRestoreInstanceState(savedInstanceState)
     }
 
@@ -122,6 +169,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+        btnReload.setOnClickListener { loadData() }
     }
 
     private fun repoClicked(repositoryViewModel: RepositoryViewModel) {
