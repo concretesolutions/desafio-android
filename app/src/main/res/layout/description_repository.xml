@@ -22,12 +22,12 @@
 
     <ImageView
         android:id="@+id/img_fork"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
         android:layout_below="@id/tv_description"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:background="@android:drawable/ic_menu_share"/>
+        android:background="@drawable/fork"/>
 
     <TextView
         android:id="@+id/tv_qtd_fork"
@@ -41,13 +41,13 @@
 
     <ImageView
         android:id="@+id/img_star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_below="@id/tv_description"
         android:layout_toRightOf="@id/tv_qtd_fork"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
-        android:background="@android:drawable/star_off"/>
+        android:background="@drawable/star"/>
 
     <TextView
         android:id="@+id/tv_qtd_star"

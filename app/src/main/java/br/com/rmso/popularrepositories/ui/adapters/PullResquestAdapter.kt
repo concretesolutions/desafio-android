@@ -3,12 +3,14 @@ package br.com.rmso.popularrepositories.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.com.rmso.popularrepositories.ListOnClickListener
 import br.com.rmso.popularrepositories.R
 import br.com.rmso.popularrepositories.model.PullRequest
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_pull_request.view.*
 
-class PullResquestAdapter (private val listPullRequests: List<PullRequest>): RecyclerView.Adapter<PullResquestAdapter.ViewHolder>(){
+class PullResquestAdapter (private val listPullRequests: List<PullRequest>, private val listOnClick: ListOnClickListener)
+    : RecyclerView.Adapter<PullResquestAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -20,6 +22,10 @@ class PullResquestAdapter (private val listPullRequests: List<PullRequest>): Rec
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pullRequest = listPullRequests[position]
         holder.bind(pullRequest)
+
+        holder.itemView.setOnClickListener {
+            listOnClick.onClick(position)
+        }
     }
 
     class ViewHolder(inflater: LayoutInflater, parent: ViewGroup):
