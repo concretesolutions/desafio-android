@@ -1,7 +1,8 @@
-package br.com.rmso.popularrepositories
+package br.com.rmso.popularrepositories.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.com.rmso.popularrepositories.R
 
 class PullRequestActivity : AppCompatActivity() {
 

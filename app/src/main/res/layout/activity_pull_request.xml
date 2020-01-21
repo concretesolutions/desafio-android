@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="PullRequestActivity">
+    tools:context=".ui.activities.PullRequestActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_pull_request"
