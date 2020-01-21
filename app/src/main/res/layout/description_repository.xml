@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_name_repository"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome do Repositório"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="5dp"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name_repository"
+        android:layout_marginLeft="5dp"
+        android:text="Descrição do repositório Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."/>
+
+    <ImageView
+        android:id="@+id/img_fork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_description"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:drawable/ic_menu_share"/>
+
+    <TextView
+        android:id="@+id/tv_qtd_fork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_description"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_toRightOf="@id/img_fork"
+        android:text="580" />
+
+    <ImageView
+        android:id="@+id/img_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_description"
+        android:layout_toRightOf="@id/tv_qtd_fork"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:background="@android:drawable/star_off"/>
+
+    <TextView
+        android:id="@+id/tv_qtd_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img_star"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tv_description"
+        android:text="48"/>
+
+</RelativeLayout>
