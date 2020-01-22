@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.rmso.popularrepositories.ListOnClickListener
@@ -67,17 +68,21 @@ class RepositoryActivity : AppCompatActivity(), ListOnClickListener {
     }
 
     fun requestList() {
+        setProgressBar(true)
         val callRespository = retrofit.repositoryService.listRepositories(page)
         callRespository.enqueue(object : Callback<RepositoryListCallback> {
             override fun onResponse(call: Call<RepositoryListCallback>, response: Response<RepositoryListCallback>) {
                 val listRepositories = response.body()!!
+                setProgressBar(false)
                 lastPosition = repositoriesArrayList.size + 1
                 repositoriesArrayList.addAll(listRepositories.items)
                 updateList(repositoriesArrayList,lastPosition)
+
             }
 
             override fun onFailure(call: Call<RepositoryListCallback>, t: Throwable) {
                 Log.e("onFailure error", t.message)
+                setProgressBar(false)
             }
         })
     }
@@ -88,5 +93,13 @@ class RepositoryActivity : AppCompatActivity(), ListOnClickListener {
         intent.putExtra("owner", repository.owner.login)
         intent.putExtra("repository", repository.name)
         startActivity(intent)
+    }
+
+    fun setProgressBar(status: Boolean){
+        if(status) {
+            pb_loading.visibility = View.VISIBLE
+        }else {
+            pb_loading.visibility = View.GONE
+        }
     }
 }
