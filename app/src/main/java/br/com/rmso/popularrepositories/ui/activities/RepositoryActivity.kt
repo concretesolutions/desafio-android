@@ -19,66 +19,74 @@ import retrofit2.Response
 
 class RepositoryActivity : AppCompatActivity(), ListOnClickListener {
     var retrofit = RetrofitAPI()
-    var count = 1
+    var page = 1
     var repositoriesArrayList = ArrayList<Repository>()
     var isLoading = false
+    var lastPosition = 0
 
+    var linearLayoutManager = LinearLayoutManager(this@RepositoryActivity)
+    var adapterRepository = RepositoryAdapter(repositoriesArrayList, this@RepositoryActivity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
 
         requestList()
-    }
 
-    fun configureListRepository (list: ArrayList<Repository>) {
         rv_repository.apply {
-            layoutManager = LinearLayoutManager(this@RepositoryActivity)
-            adapter = RepositoryAdapter(list, this@RepositoryActivity)
+            setHasFixedSize(true)
+            layoutManager = linearLayoutManager
+            adapter = adapterRepository
+
+            updateList(repositoriesArrayList,lastPosition)
 
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
                     val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
                     val lastCompleteItem = linearLayoutManager.findLastCompletelyVisibleItemPosition()
-
                     if (!isLoading) {
                         if (lastCompleteItem == repositoriesArrayList.size - 1){
-                            requestList()
+                            page += 1
                             isLoading = true
+                            requestList()
                         }
                     }
-
                 }
             })
+        }
     }
-}
+
+    private fun updateList(list: ArrayList<Repository>, lastPosition: Int){
+        if (page > 1) {
+            rv_repository.adapter?.notifyItemRangeInserted(lastPosition, list.size)
+        }else {
+            rv_repository.adapter?.notifyDataSetChanged()
+        }
+        isLoading = false
+    }
 
     fun requestList() {
-        val callRespository = retrofit.repositoryService.listRepositories(count)
-
+        val callRespository = retrofit.repositoryService.listRepositories(page)
         callRespository.enqueue(object : Callback<RepositoryListCallback> {
             override fun onResponse(call: Call<RepositoryListCallback>, response: Response<RepositoryListCallback>) {
                 val listRepositories = response.body()!!
+                lastPosition = repositoriesArrayList.size + 1
                 repositoriesArrayList.addAll(listRepositories.items)
-                configureListRepository(repositoriesArrayList)
+                updateList(repositoriesArrayList,lastPosition)
             }
 
             override fun onFailure(call: Call<RepositoryListCallback>, t: Throwable) {
                 Log.e("onFailure error", t.message)
             }
         })
-
-        isLoading = false
     }
 
     override fun onClick(position: Int) {
         val intent = Intent(this@RepositoryActivity, PullRequestActivity::class.java)
-        var repository = repositoriesArrayList[position]
+        val repository = repositoriesArrayList[position]
         intent.putExtra("owner", repository.owner.login)
         intent.putExtra("repository", repository.name)
         startActivity(intent)
     }
-
 }
