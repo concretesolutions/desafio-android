@@ -46,4 +46,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.2'
     //CardView
     implementation 'androidx.cardview:cardview:1.0.0'
+    //ViewModel
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0-alpha01'
 }

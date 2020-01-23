@@ -27,6 +27,8 @@ class PullRequestActivity : AppCompatActivity(), ListOnClickListener {
     private var repositoryName = ""
     private var pullRequestArrayList = ArrayList<PullRequest>()
     private val constans = Constants()
+    var linearLayoutManager = LinearLayoutManager(this@PullRequestActivity)
+    var adapterRepository = PullResquestAdapter(pullRequestArrayList, this@PullRequestActivity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,23 @@ class PullRequestActivity : AppCompatActivity(), ListOnClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        requestPull()
+        if (savedInstanceState != null) {
+            pullRequestArrayList.addAll(savedInstanceState.getParcelableArrayList(constans.listPullRequestInstance))
+            owner = savedInstanceState.getString(constans.owner)
+            repositoryName = savedInstanceState.getString(constans.repository)
+        }else {
+            requestPull()
+        }
+
+        rv_pull_request.apply {
+            layoutManager = linearLayoutManager
+            adapter = adapterRepository
+            updateList()
+        }
+    }
+
+    private fun updateList() {
+        rv_pull_request.adapter?.notifyDataSetChanged()
     }
 
     private fun requestPull (){
@@ -51,7 +69,7 @@ class PullRequestActivity : AppCompatActivity(), ListOnClickListener {
                 val listPullRequest = response.body()!!
                 setProgressBar(false)
                 pullRequestArrayList.addAll(listPullRequest)
-                configureListRepository(pullRequestArrayList)
+                updateList()
             }
 
             override fun onFailure(call: Call<List<PullRequest>>, t: Throwable) {
@@ -61,16 +79,16 @@ class PullRequestActivity : AppCompatActivity(), ListOnClickListener {
         })
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList(constans.listPullRequestInstance, pullRequestArrayList)
+        outState.putString(constans.owner, owner)
+        outState.putString(constans.repository, repositoryName)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
-    }
-
-    fun configureListRepository (list: ArrayList<PullRequest>){
-        rv_pull_request.apply {
-            layoutManager = LinearLayoutManager(this@PullRequestActivity)
-            adapter = PullResquestAdapter(list, this@PullRequestActivity)
-        }
     }
 
     override fun onClick(position: Int) {

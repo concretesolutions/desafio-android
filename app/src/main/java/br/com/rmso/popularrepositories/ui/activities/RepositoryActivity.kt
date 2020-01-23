@@ -36,7 +36,12 @@ class RepositoryActivity : AppCompatActivity(), ListOnClickListener {
 
         toolbar_main.title = constants.repositories
 
-        requestList()
+        if (savedInstanceState != null) {
+            repositoriesArrayList.addAll(savedInstanceState.getParcelableArrayList(constants.listRepositoryInstance))
+            page = savedInstanceState.getInt(constants.countInstance)
+        }else {
+            requestList()
+        }
 
         rv_repository.apply {
             setHasFixedSize(true)
@@ -60,6 +65,12 @@ class RepositoryActivity : AppCompatActivity(), ListOnClickListener {
                 }
             })
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList(constants.listRepositoryInstance, repositoriesArrayList)
+        outState.putInt(constants.countInstance, page)
     }
 
     private fun updateList(list: ArrayList<Repository>, lastPosition: Int){
