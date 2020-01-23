@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GitBusca</string>
+    <string name="image_owner">Imagem do dono do respositório</string>
+</resources>
