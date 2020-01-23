@@ -1,72 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="5dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_title_pull_request"
-        android:layout_width="wrap_content"
+    <RelativeLayout
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_margin="5dp"
-        android:textColor="@color/colorPrimary"
-        tools:text="@string/title_pull_request"/>
+        android:layout_width="match_parent">
 
-    <TextView
-        android:id="@+id/tv_body_pull_request"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:textSize="15sp"
-        android:maxLines="4"
-        android:layout_below="@id/tv_title_pull_request"
-        tools:text="@string/body_text"/>
+        <TextView
+            android:id="@+id/tv_title_pull_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:textColor="@color/colorTitle"
+            tools:text="@string/title_pull_request"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_profile_pull_request"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_below="@id/tv_body_pull_request"
-        android:layout_margin="5dp"
-        android:src="@drawable/ic_launcher_background"/>
+        <TextView
+            android:id="@+id/tv_body_pull_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:maxLines="3"
+            android:layout_below="@id/tv_title_pull_request"
+            tools:text="@string/body_text"/>
 
-    <TextView
-        android:id="@+id/tv_username_pull_request"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/img_profile_pull_request"
-        android:layout_below="@id/tv_body_pull_request"
-        tools:text="@string/name_owner"
-        android:textSize="15sp"
-        android:layout_marginLeft="5dp"
-        android:textColor="@color/colorAccent"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profile_pull_request"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/tv_body_pull_request"
+            android:layout_margin="5dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_launcher_background"/>
 
-    <TextView
-        android:id="@+id/tv_title_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@id/tv_username_pull_request"
-        android:layout_toRightOf="@id/img_profile_pull_request"
-        android:text="@string/title_date"/>
+        <TextView
+            android:id="@+id/tv_username_pull_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_body_pull_request"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="21dp"
+            android:layout_toRightOf="@id/img_profile_pull_request"
+            android:textColor="@color/colorTitle"
+            android:textSize="18sp"
+            tools:text="@string/name_owner" />
 
-    <TextView
-        android:id="@+id/tv_date_pull_request"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@id/tv_username_pull_request"
-        android:layout_toRightOf="@id/tv_title_date"
-        tools:text="@string/date"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_below="@id/img_profile_pull_request"/>
-
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_date_pull_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/img_profile_pull_request"
+            tools:text="@string/date"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

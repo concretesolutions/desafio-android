@@ -34,6 +34,8 @@ class RepositoryActivity : AppCompatActivity(), ListOnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
 
+        toolbar_main.title = constants.repositories
+
         requestList()
 
         rv_repository.apply {

@@ -5,5 +5,6 @@ class Constants {
     val repository = "repository"
     val baseUrl = "https://api.github.com"
     val msgError = "onFailure error"
+    val repositories = "Repositorios"
 
 }

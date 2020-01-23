@@ -1,11 +1,13 @@
 package br.com.rmso.popularrepositories.ui.activities
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.rmso.popularrepositories.ListOnClickListener
 import br.com.rmso.popularrepositories.R
@@ -33,6 +35,11 @@ class PullRequestActivity : AppCompatActivity(), ListOnClickListener {
         owner = intent.getStringExtra(constans.owner)
         repositoryName = intent.getStringExtra(constans.repository)
 
+        toolbar.title = repositoryName
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         requestPull()
     }
 
@@ -52,6 +59,11 @@ class PullRequestActivity : AppCompatActivity(), ListOnClickListener {
                 setProgressBar(false)
             }
         })
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     fun configureListRepository (list: ArrayList<PullRequest>){

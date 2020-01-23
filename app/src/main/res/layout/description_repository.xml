@@ -10,14 +10,16 @@
         android:layout_height="wrap_content"
         tools:text="@string/name_repository"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorTitle"
         android:layout_margin="5dp"
-        android:textSize="18sp"/>
+        android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:textSize="18sp"
         android:layout_below="@id/tv_name_repository"
         android:layout_marginLeft="5dp"
         tools:text="@string/body_text"/>
@@ -28,7 +30,7 @@
         android:layout_height="30dp"
         android:layout_below="@id/tv_description"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/fork"/>
 
     <TextView
@@ -38,6 +40,9 @@
         android:layout_below="@id/tv_description"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="12dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/colorAccent"
         android:layout_toRightOf="@id/img_fork"
         tools:text="@string/number_forks"/>
 
@@ -47,8 +52,8 @@
         android:layout_height="30dp"
         android:layout_below="@id/tv_description"
         android:layout_toRightOf="@id/tv_qtd_fork"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
         android:background="@drawable/star"/>
 
     <TextView
@@ -58,6 +63,9 @@
         android:layout_toRightOf="@id/img_star"
         android:layout_marginTop="12dp"
         android:layout_marginLeft="5dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
         android:layout_below="@id/tv_description"
         tools:text="@string/number_stars"/>
 
