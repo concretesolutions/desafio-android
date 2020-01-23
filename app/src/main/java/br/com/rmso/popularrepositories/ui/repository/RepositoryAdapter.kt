@@ -1,9 +1,9 @@
-package br.com.rmso.popularrepositories.ui.adapters
+package br.com.rmso.popularrepositories.ui.repository
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.rmso.popularrepositories.ListOnClickListener
+import br.com.rmso.popularrepositories.utils.ListOnClickListener
 import br.com.rmso.popularrepositories.R
 import br.com.rmso.popularrepositories.model.Repository
 import com.squareup.picasso.Picasso
@@ -15,7 +15,10 @@ class RepositoryAdapter (private val listRepositories: List<Repository>, private
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-        return ViewHolder(view, parent)
+        return ViewHolder(
+            view,
+            parent
+        )
     }
 
     override fun getItemCount(): Int = listRepositories.size
@@ -32,7 +35,7 @@ class RepositoryAdapter (private val listRepositories: List<Repository>, private
     class ViewHolder(inflater: LayoutInflater, parent: ViewGroup):
         RecyclerView.ViewHolder(inflater.inflate(R.layout.item_repository, parent, false)) {
 
-        //Repository
+        //IRepository
         private var mNameRepositoryTextView = itemView.tv_name_repository
         private var mDescriptionTextView = itemView.tv_description
         private var mNumberForksTextView = itemView.tv_qtd_fork

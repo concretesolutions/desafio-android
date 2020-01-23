@@ -1,34 +1,31 @@
-package br.com.rmso.popularrepositories.ui.activities
+package br.com.rmso.popularrepositories.ui.pullrequest
 
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.rmso.popularrepositories.ListOnClickListener
+import br.com.rmso.popularrepositories.utils.ListOnClickListener
 import br.com.rmso.popularrepositories.R
 import br.com.rmso.popularrepositories.model.PullRequest
-import br.com.rmso.popularrepositories.retrofit.RetrofitAPI
-import br.com.rmso.popularrepositories.ui.adapters.PullResquestAdapter
 import br.com.rmso.popularrepositories.utils.Constants
 import kotlinx.android.synthetic.main.activity_pull_request.*
-import kotlinx.android.synthetic.main.activity_repository.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class PullRequestActivity : AppCompatActivity(), ListOnClickListener {
-    private var retrofit = RetrofitAPI()
+class PullRequestActivity : AppCompatActivity(),
+    ListOnClickListener, IPullRequest.View{
+
     private var owner = ""
     private var repositoryName = ""
     private var pullRequestArrayList = ArrayList<PullRequest>()
     private val constans = Constants()
     var linearLayoutManager = LinearLayoutManager(this@PullRequestActivity)
-    var adapterRepository = PullResquestAdapter(pullRequestArrayList, this@PullRequestActivity)
+    var adapterRepository = PullResquestAdapter(
+        pullRequestArrayList,
+        this@PullRequestActivity
+    )
+    private var pullRequestPresenter: IPullRequest.Presenter = PullRequestPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,36 +44,18 @@ class PullRequestActivity : AppCompatActivity(), ListOnClickListener {
             owner = savedInstanceState.getString(constans.owner)
             repositoryName = savedInstanceState.getString(constans.repository)
         }else {
-            requestPull()
+            (pullRequestPresenter as PullRequestPresenter).requestList(pullRequestArrayList, owner, repositoryName)
         }
 
         rv_pull_request.apply {
             layoutManager = linearLayoutManager
             adapter = adapterRepository
-            updateList()
         }
     }
 
-    private fun updateList() {
+    override fun updateList(list: List<PullRequest>?, owner: String, repositoryName: String) {
+        pullRequestArrayList.addAll(list!!)
         rv_pull_request.adapter?.notifyDataSetChanged()
-    }
-
-    private fun requestPull (){
-        setProgressBar(true)
-        val callRespository = retrofit.pullRequestService.listPullRequests(owner, repositoryName)
-        callRespository.enqueue(object : Callback<List<PullRequest>> {
-            override fun onResponse(call: Call<List<PullRequest>>, response: Response<List<PullRequest>>) {
-                val listPullRequest = response.body()!!
-                setProgressBar(false)
-                pullRequestArrayList.addAll(listPullRequest)
-                updateList()
-            }
-
-            override fun onFailure(call: Call<List<PullRequest>>, t: Throwable) {
-                Log.e(constans.msgError, t.message)
-                setProgressBar(false)
-            }
-        })
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -99,12 +78,16 @@ class PullRequestActivity : AppCompatActivity(), ListOnClickListener {
 
     }
 
-    fun setProgressBar(status: Boolean){
+    override fun progressBar(status: Boolean) {
         if(status) {
             pb_loading_pull.visibility = View.VISIBLE
         }else {
             pb_loading_pull.visibility = View.GONE
         }
+    }
+
+    override fun errorRequest(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
 }

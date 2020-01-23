@@ -11,8 +11,8 @@
         android:roundIcon="@drawable/github"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.PullRequestActivity"></activity>
-        <activity android:name=".ui.activities.RepositoryActivity">
+        <activity android:name=".ui.pullrequest.PullRequestActivity"></activity>
+        <activity android:name=".ui.repository.RepositoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

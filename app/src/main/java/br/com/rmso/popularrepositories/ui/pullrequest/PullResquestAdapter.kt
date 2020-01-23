@@ -1,9 +1,9 @@
-package br.com.rmso.popularrepositories.ui.adapters
+package br.com.rmso.popularrepositories.ui.pullrequest
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.rmso.popularrepositories.ListOnClickListener
+import br.com.rmso.popularrepositories.utils.ListOnClickListener
 import br.com.rmso.popularrepositories.R
 import br.com.rmso.popularrepositories.model.PullRequest
 import com.squareup.picasso.Picasso
@@ -14,7 +14,10 @@ class PullResquestAdapter (private val listPullRequests: List<PullRequest>, priv
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-        return ViewHolder(view, parent)
+        return ViewHolder(
+            view,
+            parent
+        )
     }
 
     override fun getItemCount(): Int = listPullRequests.size
