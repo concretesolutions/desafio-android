@@ -13,17 +13,19 @@ import br.com.rmso.popularrepositories.model.Repository
 import br.com.rmso.popularrepositories.model.RepositoryListCallback
 import br.com.rmso.popularrepositories.retrofit.RetrofitAPI
 import br.com.rmso.popularrepositories.ui.adapters.RepositoryAdapter
+import br.com.rmso.popularrepositories.utils.Constants
 import kotlinx.android.synthetic.main.activity_repository.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class RepositoryActivity : AppCompatActivity(), ListOnClickListener {
-    var retrofit = RetrofitAPI()
-    var page = 1
-    var repositoriesArrayList = ArrayList<Repository>()
-    var isLoading = false
-    var lastPosition = 0
+    private var retrofit = RetrofitAPI()
+    private var page = 1
+    private var repositoriesArrayList = ArrayList<Repository>()
+    private var isLoading = false
+    private var lastPosition = 0
+    private val constants = Constants()
 
     var linearLayoutManager = LinearLayoutManager(this@RepositoryActivity)
     var adapterRepository = RepositoryAdapter(repositoriesArrayList, this@RepositoryActivity)
@@ -81,7 +83,7 @@ class RepositoryActivity : AppCompatActivity(), ListOnClickListener {
             }
 
             override fun onFailure(call: Call<RepositoryListCallback>, t: Throwable) {
-                Log.e("onFailure error", t.message)
+                Log.e(constants.msgError, t.message)
                 setProgressBar(false)
             }
         })
@@ -90,8 +92,8 @@ class RepositoryActivity : AppCompatActivity(), ListOnClickListener {
     override fun onClick(position: Int) {
         val intent = Intent(this@RepositoryActivity, PullRequestActivity::class.java)
         val repository = repositoriesArrayList[position]
-        intent.putExtra("owner", repository.owner.login)
-        intent.putExtra("repository", repository.name)
+        intent.putExtra(constants.owner, repository.owner.login)
+        intent.putExtra(constants.repository, repository.name)
         startActivity(intent)
     }
 

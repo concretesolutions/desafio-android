@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Popular Repositories</string>
+    <string name="name_owner">Username</string>
+    <string name="name_repository">Nome do Repositório</string>
+    <string name="title_pull_request">Título do Pull Request</string>
+    <string name="title_date">Date: </string>
+    <string name="date">20/02/2015</string>
+    <string name="body_text">Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</string>
+    <string name="number_forks">580</string>
+    <string name="number_stars">48</string>
+
 </resources>

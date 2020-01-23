@@ -9,7 +9,6 @@ import br.com.rmso.popularrepositories.model.Repository
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.description_repository.view.*
 import kotlinx.android.synthetic.main.description_user.view.*
-import kotlinx.android.synthetic.main.item_repository.view.*
 
 class RepositoryAdapter (private val listRepositories: List<Repository>, private val listOnClick: ListOnClickListener)
     : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>(){
@@ -33,8 +32,6 @@ class RepositoryAdapter (private val listRepositories: List<Repository>, private
     class ViewHolder(inflater: LayoutInflater, parent: ViewGroup):
         RecyclerView.ViewHolder(inflater.inflate(R.layout.item_repository, parent, false)) {
 
-        private var mLinearLayout = itemView.ll_repository
-
         //Repository
         private var mNameRepositoryTextView = itemView.tv_name_repository
         private var mDescriptionTextView = itemView.tv_description
@@ -44,7 +41,6 @@ class RepositoryAdapter (private val listRepositories: List<Repository>, private
         //owner
         private var mProfileImageView = itemView.img_profile
         private var mUsernameTextView = itemView.tv_username
-        private var mNameCompleteTextView = itemView.tv_name_complete
 
         fun bind(repository: Repository) {
             mNameRepositoryTextView?.text = repository.name
@@ -54,6 +50,8 @@ class RepositoryAdapter (private val listRepositories: List<Repository>, private
             mUsernameTextView?.text = repository.owner.login
             Picasso.get()
                 .load(repository.owner.avatar_url)
+                .placeholder(R.drawable.loader)
+                .error(R.drawable.problem)
                 .into(mProfileImageView)
         }
     }

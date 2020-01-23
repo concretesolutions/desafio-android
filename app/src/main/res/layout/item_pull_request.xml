@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/tv_title_pull_request"
@@ -12,7 +12,7 @@
         android:textSize="18sp"
         android:layout_margin="5dp"
         android:textColor="@color/colorPrimary"
-        android:text="Titulo do pull request"/>
+        tools:text="@string/title_pull_request"/>
 
     <TextView
         android:id="@+id/tv_body_pull_request"
@@ -22,7 +22,7 @@
         android:textSize="15sp"
         android:maxLines="4"
         android:layout_below="@id/tv_title_pull_request"
-        android:text="Body do pull request Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+        tools:text="@string/body_text"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_profile_pull_request"
@@ -38,20 +38,30 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/img_profile_pull_request"
         android:layout_below="@id/tv_body_pull_request"
-        android:text="username"
+        tools:text="@string/name_owner"
         android:textSize="15sp"
         android:layout_marginLeft="5dp"
         android:textColor="@color/colorAccent"/>
 
     <TextView
-        android:id="@+id/tv_nome_complete_pull_request"
+        android:id="@+id/tv_title_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:layout_marginLeft="5dp"
         android:layout_below="@id/tv_username_pull_request"
         android:layout_toRightOf="@id/img_profile_pull_request"
-        android:text="Nome Sobrenome"/>
+        android:text="@string/title_date"/>
+
+    <TextView
+        android:id="@+id/tv_date_pull_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tv_username_pull_request"
+        android:layout_toRightOf="@id/tv_title_date"
+        tools:text="@string/date"/>
 
     <View
         android:layout_width="match_parent"

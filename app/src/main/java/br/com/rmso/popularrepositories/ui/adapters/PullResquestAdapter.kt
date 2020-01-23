@@ -35,16 +35,18 @@ class PullResquestAdapter (private val listPullRequests: List<PullRequest>, priv
         private var mBodyPRTextView = itemView.tv_body_pull_request
         private var mProfilePRImageView = itemView.img_profile_pull_request
         private var mUsernamePRTextView = itemView.tv_username_pull_request
-        private var mNameCompletePRTextView = itemView.tv_nome_complete_pull_request
+        private var mDatePRTextView = itemView.tv_date_pull_request
 
         fun bind(pullRequest: PullRequest) {
             mTitlePRTextView?.text = pullRequest.title
             mBodyPRTextView?.text = pullRequest.body
             mUsernamePRTextView?.text = pullRequest.owner.login
+            mDatePRTextView?.text = pullRequest.created_at
             Picasso.get()
                 .load(pullRequest.owner.avatar_url)
+                .placeholder(R.drawable.loader)
+                .error(R.drawable.problem)
                 .into(mProfilePRImageView)
-
         }
     }
 }

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/tv_name_repository"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome do Repositório"
+        tools:text="@string/name_repository"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
         android:layout_margin="5dp"
@@ -18,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_name_repository"
         android:layout_marginLeft="5dp"
-        android:text="Descrição do repositório Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."/>
+        tools:text="@string/body_text"/>
 
     <ImageView
         android:id="@+id/img_fork"
@@ -37,7 +39,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="12dp"
         android:layout_toRightOf="@id/img_fork"
-        android:text="580" />
+        tools:text="@string/number_forks"/>
 
     <ImageView
         android:id="@+id/img_star"
@@ -57,6 +59,6 @@
         android:layout_marginTop="12dp"
         android:layout_marginLeft="5dp"
         android:layout_below="@id/tv_description"
-        android:text="48"/>
+        tools:text="@string/number_stars"/>
 
 </RelativeLayout>
