@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Desafio Concrete</string>
+
+    <string name="sorry_unable_to_process">Desculpe-nos, não foi possível processar a sua solicitação no momento.</string>
+    <string name="you_are_not_connected">Você não está conectado, por favor tente novamente mais tarde.</string>
+    <string name="not_pull">Esse repositório não possui Pull request no momento.</string>
+    <string name="github_java">Github Java</string>
+    <string name="felipe_miranda">Felipe Miranda</string>
+    <string name="github_profile" formatted="false">\@felipemirandareis</string>
+</resources>
