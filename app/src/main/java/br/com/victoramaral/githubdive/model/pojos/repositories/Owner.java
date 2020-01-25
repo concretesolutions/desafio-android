@@ -1,5 +1,5 @@
 
-package br.com.victoramaral.githubdive.model.pojos;
+package br.com.victoramaral.githubdive.model.pojos.repositories;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

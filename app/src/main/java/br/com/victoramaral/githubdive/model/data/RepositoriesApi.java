@@ -1,6 +1,6 @@
 package br.com.victoramaral.githubdive.model.data;
 
-import br.com.victoramaral.githubdive.model.pojos.Repositories;
+import br.com.victoramaral.githubdive.model.pojos.repositories.Repositories;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
