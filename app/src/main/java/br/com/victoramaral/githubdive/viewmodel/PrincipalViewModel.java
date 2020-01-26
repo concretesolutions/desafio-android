@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import br.com.victoramaral.githubdive.model.data.apiReturn.RepositoryReturn;
+import br.com.victoramaral.githubdive.model.data.repository.RepositoryReturn;
 import br.com.victoramaral.githubdive.model.pojos.repositories.Item;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -30,9 +30,9 @@ public class PrincipalViewModel extends AndroidViewModel {
         return this.listaRepositories;
     }
 
-    public void getAllRepositories(int page) {
+    public void getAllRepositories(int page, int perPage) {
         disposable.add(
-                repository.getRepositories(page)
+                repository.getRepositories(page, perPage)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(repositories ->

@@ -15,13 +15,16 @@ import java.util.List;
 
 import br.com.victoramaral.githubdive.R;
 import br.com.victoramaral.githubdive.model.pojos.repositories.Item;
+import br.com.victoramaral.githubdive.view.interfaces.RepositoryOnClick;
 
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> {
 
     private List<Item> itens;
+    private RepositoryOnClick onClickListener;
 
-    public RepositoryAdapter(List<Item> itens) {
+    public RepositoryAdapter(List<Item> itens, RepositoryOnClick onClickListener) {
         this.itens = itens;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -36,6 +39,13 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = itens.get(position);
         holder.bind(item);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.repositoryOnClick(item);
+            }
+        });
     }
     public void setUpdate(List<Item> itens) {
         if (this.itens.isEmpty()) {
