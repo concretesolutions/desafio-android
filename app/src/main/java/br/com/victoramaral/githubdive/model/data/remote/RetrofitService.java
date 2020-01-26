@@ -1,4 +1,4 @@
-package br.com.victoramaral.githubdive.model.data;
+package br.com.victoramaral.githubdive.model.data.remote;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 

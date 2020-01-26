@@ -1,4 +1,4 @@
-package br.com.victoramaral.githubdive.model.data;
+package br.com.victoramaral.githubdive.model.data.remote;
 
 import br.com.victoramaral.githubdive.model.pojos.repositories.Repositories;
 import io.reactivex.Observable;

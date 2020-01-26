@@ -1,4 +1,4 @@
-package br.com.victoramaral.githubdive.view;
+package br.com.victoramaral.githubdive.view.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +16,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import br.com.victoramaral.githubdive.R;
 
-import static br.com.victoramaral.githubdive.view.LoginActivity.EMAIL_KEY;
-import static br.com.victoramaral.githubdive.view.LoginActivity.NOME_KEY;
+import static br.com.victoramaral.githubdive.view.activities.LoginActivity.EMAIL_KEY;
+import static br.com.victoramaral.githubdive.view.activities.LoginActivity.NOME_KEY;
 
 public class MainActivity extends AppCompatActivity {
 

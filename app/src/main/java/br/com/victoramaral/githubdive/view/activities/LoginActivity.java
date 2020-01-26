@@ -1,4 +1,4 @@
-package br.com.victoramaral.githubdive.view;
+package br.com.victoramaral.githubdive.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
