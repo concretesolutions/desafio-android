@@ -1,5 +1,7 @@
 package br.com.victoramaral.githubdive.view.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -14,12 +16,13 @@ import java.util.List;
 import br.com.victoramaral.githubdive.R;
 import br.com.victoramaral.githubdive.model.pojos.requests.Request;
 import br.com.victoramaral.githubdive.view.adapter.RequestAdapter;
+import br.com.victoramaral.githubdive.view.interfaces.RequestOnClick;
 import br.com.victoramaral.githubdive.viewmodel.RequestViewModel;
 
 import static br.com.victoramaral.githubdive.view.activities.RepositoriesActivity.CREATOR_KEY;
 import static br.com.victoramaral.githubdive.view.activities.RepositoriesActivity.REPOSITORY_KEY;
 
-public class PullRequestActivity extends AppCompatActivity {
+public class PullRequestActivity extends AppCompatActivity implements RequestOnClick {
 
     private RecyclerView recyclerView;
     private RequestViewModel viewModel;
@@ -56,6 +59,16 @@ public class PullRequestActivity extends AppCompatActivity {
     public void initView() {
         recyclerView = findViewById(R.id.recyclerViewPull);
         viewModel = ViewModelProviders.of(this).get(RequestViewModel.class);
-        adapter = new RequestAdapter(requestsList);
+        adapter = new RequestAdapter(requestsList, this);
+    }
+
+    @Override
+    public void onClick(Request request) {
+        Toast.makeText(this, "Você foi direcionado ao Pull Request "
+                        + request.getTitle(),
+                Toast.LENGTH_LONG).show();
+        Uri uri = Uri.parse(request.getHtmlUrl());
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(browserIntent);
     }
 }

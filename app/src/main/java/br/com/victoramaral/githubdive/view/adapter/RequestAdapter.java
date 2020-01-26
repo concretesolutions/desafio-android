@@ -21,9 +21,11 @@ import br.com.victoramaral.githubdive.view.interfaces.RequestOnClick;
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHolder> {
 
     private List<Request> requests;
+    private RequestOnClick listener;
 
-    public RequestAdapter(List<Request> requests) {
+    public RequestAdapter(List<Request> requests, RequestOnClick listener) {
         this.requests = requests;
+        this.listener = listener;
     }
 
     @NonNull
@@ -39,6 +41,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Request request = requests.get(position);
         holder.bind(request);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(request);
+            }
+        });
     }
     public void setUpdate(List<Request> requests) {
         if (this.requests.isEmpty()) {
