@@ -16,13 +16,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class PrincipalViewModel extends AndroidViewModel {
+public class RepositoriesViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Item>> listaRepositories = new MutableLiveData<>();
     private RepositoryReturn repository = new RepositoryReturn();
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public PrincipalViewModel(@NonNull Application application) {
+    public RepositoriesViewModel(@NonNull Application application) {
         super(application);
     }
 

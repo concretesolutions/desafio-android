@@ -95,7 +95,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageViewProfile"
             android:layout_width="90dp"
-            android:layout_height="80dp"
+            android:layout_height="90dp"
             android:layout_marginTop="22dp"
             android:src="@drawable/githublogobranco"
             app:layout_constraintEnd_toEndOf="parent"

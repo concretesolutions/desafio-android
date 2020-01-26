@@ -73,7 +73,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         }
 
         public void bind(Request request) {
-            nome.setText(request.getUser().getAvatarUrl());
+            nome.setText(request.getTitle());
             descricao.setText(request.getBody());
             usuario.setText(request.getUser().getLogin());
             nomeSobrenome.setText(request.getHead().getRepo().getOwner().getLogin());
