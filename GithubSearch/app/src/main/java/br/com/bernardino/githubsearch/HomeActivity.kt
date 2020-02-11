@@ -50,28 +50,6 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    private fun apiQueryRepos() {
-        val call = RetrofitInitializer().reposService()
-            .getRepositories("language:Java", "stars", 1)
-
-        call.enqueue(object : Callback<RepositoryBody?> {
-            override fun onResponse(call: Call<RepositoryBody?>, response: Response<RepositoryBody?>) {
-                if(response?.code() == 200) {
-                    response.body()?.let {
-                        val repositories: ArrayList<Repository> = it.items
-                        mAdapter.setReposListItems(repositories)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<RepositoryBody?>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        }
-
-        )
-    }
-
     private fun configureList() {
         var recyclerView = rv_repos
         mAdapter = ReposListAdapter(this)
