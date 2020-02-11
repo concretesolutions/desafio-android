@@ -3,6 +3,10 @@ package br.com.bernardino.githubsearch.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+data class RepositoryBody(
+    val items: ArrayList<Repository>
+)
+
 data class Repository (
     @SerializedName("id")
     @Expose

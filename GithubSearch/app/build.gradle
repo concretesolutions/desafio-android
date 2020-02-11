@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -19,7 +21,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", "\"https://api.github.com\""
         }
+        debug {
+            buildConfigField "String", "API_URL", "\"https://api.github.com/\""
+        }
+    }
+    compileOptions {
+        targetCompatibility = "8"
+        sourceCompatibility = "8"
     }
 }
 
@@ -30,6 +40,7 @@ dependencies {
     def glide_version = "4.11.0"
     def circleimage_version = "3.0.1"
     def recyclerview_version = "1.1.0"
+    def material_version = "1.1.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -49,6 +60,9 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    implementation "com.google.android.material:material:$material_version"
 }
