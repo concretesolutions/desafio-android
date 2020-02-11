@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.bernardino.githubsearch.adapter.ReposListAdapter
 import br.com.bernardino.githubsearch.api.RetrofitInitializer
@@ -52,6 +53,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun configureList() {
         var recyclerView = rv_repos
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
         mAdapter = ReposListAdapter(this)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
