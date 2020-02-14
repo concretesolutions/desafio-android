@@ -24,11 +24,17 @@ android {
 }
 
 dependencies {
+
+    // Default
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "androidx.core:core-ktx:$android_ktx"
+    implementation "androidx.recyclerview:recyclerview:$reclycerview"
+
+    // Test
+    testImplementation "junit:junit:$jnuit_jnuit"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_jnuit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
 }
