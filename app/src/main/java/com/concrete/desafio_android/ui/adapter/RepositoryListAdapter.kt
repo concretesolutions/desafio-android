@@ -4,12 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.concrete.desafio_android.R
 import com.concrete.desafio_android.domain.Repository
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.list_item_repository.view.*
+import kotlinx.android.synthetic.main.list_item_repository.view.textview_repository_description
+import kotlinx.android.synthetic.main.list_item_repository.view.textview_repository_name
+import kotlinx.android.synthetic.main.list_item_repository.view.textview_repository_owner_username
+import kotlinx.android.synthetic.main.list_item_repository.view.textview_repository_star_counter
+import kotlinx.android.synthetic.main.list_item_repository.view.textview_repository_fork_counter
+import kotlinx.android.synthetic.main.list_item_repository.view.repository_owner_avatar
+
 
 class RepositoryListAdapter (
     private val repositories: ArrayList<Repository>,

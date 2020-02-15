@@ -1,5 +1,6 @@
 package com.concrete.desafio_android.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +24,9 @@ class HomeActivity: AppCompatActivity(), RepositoriesContract.View{
         setContentView(R.layout.activity_home)
         presenter.getRepositories(pageCount)
         list_java_repositories.adapter = RepositoryListAdapter(repositoryList, this){
-
+            val intent = Intent(this, PullRequestListActivity::class.java)
+            intent.putExtra("repository", it)
+            startActivity(intent)
         }
     }
 
