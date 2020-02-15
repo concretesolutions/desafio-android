@@ -17,7 +17,8 @@ buildscript {
         jnuit_jnuit = '4.12'
         androidx_jnuit = '1.1.0'
         espresso_core = '3.1.1'
-
+        retrofit_version = '2.6.0'
+        github_url = '"https://api.github.com"'
     }
 
     dependencies {
