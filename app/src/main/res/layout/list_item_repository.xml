@@ -89,7 +89,7 @@
         app:layout_constraintStart_toEndOf="@id/textview_repository_name"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_launcher_background"/>
+        tools:src="@drawable/ic_launcher_background"/>
 
     <TextView
         android:id="@+id/textview_repository_owner_username"
@@ -99,7 +99,6 @@
         app:layout_constraintStart_toEndOf="@id/textview_repository_name"
         app:layout_constraintEnd_toEndOf="parent"
         android:maxLines="1"
-        android:ellipsize="end"
         tools:text="username"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="14sp"/>

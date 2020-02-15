@@ -22,7 +22,9 @@ class HomeActivity: AppCompatActivity(), RepositoriesContract.View{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         presenter.getRepositories(pageCount)
-        list_java_repositories.adapter = RepositoryListAdapter(repositoryList, this)
+        list_java_repositories.adapter = RepositoryListAdapter(repositoryList, this){
+
+        }
     }
 
     override fun showList(repositories: ArrayList<Repository>) {
