@@ -9,7 +9,7 @@ class PullRequestsPresenter(
 ) : PullRequestsContract.Presenter,
     PullRequestsContract.Callback {
 
-    private val repository =
+    private val repository: PullRequestsContract.Api =
         GithubRepository(
             pullRequestsCallback = this
         )

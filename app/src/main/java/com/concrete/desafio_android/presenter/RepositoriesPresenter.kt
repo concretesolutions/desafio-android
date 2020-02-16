@@ -13,7 +13,7 @@ class RepositoriesPresenter(
         private var pageNumber = 1
     }
 
-    private val repository =
+    private val repository: RepositoriesContract.Api =
         GithubRepository(
             repositoriesCallback = this
         )
