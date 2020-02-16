@@ -2,7 +2,6 @@
 <resources>
     <color name="colorPrimary">#24292E</color>
     <color name="colorPrimaryDark">#24292E</color>
-<!--    <color name="colorPrimaryDark">#161a1d</color>-->
     <color name="colorAccent">#E19635</color>
 
     <color name="lightGray">#F0F0F0</color>

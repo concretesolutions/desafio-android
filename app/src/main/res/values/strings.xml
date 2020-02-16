@@ -1,7 +1,20 @@
 <resources>
     <string name="app_name">Desafio Android</string>
 
-    <!--  begin region home  -->
-    <!--  end region home  -->
-    
+    <!--  begin region repositories  -->
+    <string name="home_activity_label">Github Java Top Repositories</string>
+    <string name="repository_avatar_content_description">Repository owner avatar image.</string>
+    <string name="star_icon_content_description">Repository star count icon.</string>
+    <string name="fork_icon_content_description">Repository fork count icon.</string>
+    <!--  end region repositories  -->
+
+    <!--  begin region pullRequest  -->
+    <string name="repository_not_loaded_error">Github Java Top Repositories</string>
+    <string name="pull_request_avatar_content_description">Pull request creator avatar image.</string>
+    <!--  end region pullRequest  -->
+
+    <!--  begin region error  -->
+    <string name="connection_problem">Could not connect with github.</string>
+    <string name="unknown_error">An unexpected error occurred.</string>
+    <!--  end region error  -->
 </resources>
