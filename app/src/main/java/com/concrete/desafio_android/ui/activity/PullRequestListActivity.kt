@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.concrete.desafio_android.contract.PullRequestsContract
 import com.concrete.desafio_android.presenter.PullRequestsPresenter
 import com.concrete.desafio_android.R
@@ -29,7 +30,17 @@ class PullRequestListActivity : AppCompatActivity(), PullRequestsContract.View {
             presenter.getPullRequests(repository.owner.login, repository.name)
             setTitle()
             setRequestsList()
+            addListDivider()
         } ?: noRepositoryError()
+    }
+
+    private fun addListDivider() {
+        val dividerItemDecoration = DividerItemDecoration(
+            pull_request_list.context,
+            DividerItemDecoration.VERTICAL
+        )
+        dividerItemDecoration.setDrawable(getDrawable(R.drawable.list_item_divider)!!)
+        pull_request_list.addItemDecoration(dividerItemDecoration)
     }
 
     private fun setRequestsList() {

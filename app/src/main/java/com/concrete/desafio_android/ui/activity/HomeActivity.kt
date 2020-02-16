@@ -19,6 +19,8 @@ import com.concrete.desafio_android.util.REPOSITORY_TAG
 
 class HomeActivity : AppCompatActivity(), RepositoriesContract.View {
 
+    val REPOSITORY_LIST = "repositoryList"
+
     private val repositoryList = ArrayList<Repository>()
 
     private val presenter: RepositoriesContract.Presenter =
@@ -29,6 +31,7 @@ class HomeActivity : AppCompatActivity(), RepositoriesContract.View {
         setContentView(R.layout.activity_home)
         presenter.getRepositories()
         setListAdapter()
+        addListDivider()
     }
 
     private fun setListAdapter() {
@@ -40,9 +43,12 @@ class HomeActivity : AppCompatActivity(), RepositoriesContract.View {
                 presenter.getRepositories()
             }
         })
+    }
+
+    private fun addListDivider() {
         val dividerItemDecoration = DividerItemDecoration(
             list_java_repositories.context,
-            list_java_repositories.layoutManager!!.layoutDirection
+            DividerItemDecoration.VERTICAL
         )
         dividerItemDecoration.setDrawable(getDrawable(R.drawable.list_item_divider)!!)
         list_java_repositories.addItemDecoration(dividerItemDecoration)
@@ -67,12 +73,12 @@ class HomeActivity : AppCompatActivity(), RepositoriesContract.View {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList("repositoryList", repositoryList)
+        outState.putParcelableArrayList(REPOSITORY_LIST, repositoryList)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        savedInstanceState.getParcelableArrayList<Repository>("repositoryList")?.let {
+        savedInstanceState.getParcelableArrayList<Repository>(REPOSITORY_LIST)?.let {
             repositoryList.clear()
             repositoryList.addAll(it)
         }
