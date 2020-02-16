@@ -7,5 +7,5 @@ class PullRequest(
     val title: String,
     val body: String,
     val html_url: String,
-    val updated_at: Date
+    val created_at: Date
 )

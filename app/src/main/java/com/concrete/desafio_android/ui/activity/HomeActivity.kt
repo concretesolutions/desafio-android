@@ -6,18 +6,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.concrete.desafio_android.R
-import com.concrete.desafio_android.RepositoriesContract
-import com.concrete.desafio_android.RepositoriesPresenter
+import com.concrete.desafio_android.contract.RepositoriesContract
+import com.concrete.desafio_android.presenter.RepositoriesPresenter
 import com.concrete.desafio_android.domain.Repository
 import com.concrete.desafio_android.ui.adapter.RepositoryListAdapter
 import kotlinx.android.synthetic.main.activity_home.list_java_repositories
+import com.concrete.desafio_android.util.REPOSITORY_TAG
 
 
-class HomeActivity: AppCompatActivity(), RepositoriesContract.View{
+class HomeActivity : AppCompatActivity(), RepositoriesContract.View {
 
-    private val presenter: RepositoriesContract.Presenter = RepositoriesPresenter(this)
+    private val presenter: RepositoriesContract.Presenter =
+        RepositoriesPresenter(this)
     private val repositoryList = ArrayList<Repository>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,7 @@ class HomeActivity: AppCompatActivity(), RepositoriesContract.View{
 
     private fun startPullRequestListActivity(repository: Repository) {
         val intent = Intent(this, PullRequestListActivity::class.java)
-        intent.putExtra("repository", repository)
+        intent.putExtra(REPOSITORY_TAG, repository)
         startActivity(intent)
     }
 
@@ -49,11 +50,8 @@ class HomeActivity: AppCompatActivity(), RepositoriesContract.View{
         list_java_repositories.adapter?.notifyDataSetChanged()
     }
 
-    override fun showFailureMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showErrorMessage(message: String) {
+    override fun showErrorMessage(messageId: Int) {
+        val message = resources.getString(messageId)
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

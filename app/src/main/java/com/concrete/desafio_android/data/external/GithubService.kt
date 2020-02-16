@@ -1,4 +1,4 @@
-package com.concrete.desafio_android
+package com.concrete.desafio_android.data.external
 
 import com.concrete.desafio_android.domain.PullRequest
 import com.concrete.desafio_android.domain.RepositoryResponse
@@ -14,12 +14,12 @@ interface GithubService {
         @Query("q") language: String,
         @Query("sort") sort: String,
         @Query("page") pageNumber: Int
-    ): Call<RepositoryResponse?>?
+    ): Call<RepositoryResponse>
 
     @GET("repos/{creator}/{repository}/pulls")
     fun listPullRequests(
         @Path("creator") creator: String,
         @Path("repository") repository: String
-    ): Call<List<PullRequest?>?>?
+    ): Call<List<PullRequest>>
 
 }

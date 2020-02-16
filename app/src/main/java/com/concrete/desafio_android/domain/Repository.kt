@@ -10,4 +10,4 @@ class Repository(
     val stargazers_count: Int,
     val forks_count: Int,
     val owner: User
-):Parcelable
+) : Parcelable

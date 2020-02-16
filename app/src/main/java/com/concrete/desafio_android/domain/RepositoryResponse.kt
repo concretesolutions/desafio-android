@@ -1,5 +1,5 @@
 package com.concrete.desafio_android.domain
 
-class RepositoryResponse (
+class RepositoryResponse(
     val items: List<Repository>
 )
