@@ -6,10 +6,15 @@ class RepositoriesPresenter(
     private val view: RepositoriesContract.View
 ): RepositoriesContract.Presenter, RepositoriesContract.Callback{
 
-    private val repository = GithubRepository(this)
+    companion object {
+        private var pageNumber = 1
+    }
 
-    override fun getRepositories(pageNumber: Int) {
+    private val repository = GithubRepository(repositoriesCallback = this)
+
+    override fun getRepositories() {
         repository.listJavaRepositories(pageNumber)
+        pageNumber += 1
     }
 
     override fun onSucces(repositories: ArrayList<Repository>) {

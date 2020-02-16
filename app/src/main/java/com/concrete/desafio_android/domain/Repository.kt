@@ -9,5 +9,5 @@ class Repository(
     val description: String,
     val stargazers_count: Int,
     val forks_count: Int,
-    val owner: RepositoryOwner
+    val owner: User
 ):Parcelable

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.concrete.desafio_android.R
 import com.concrete.desafio_android.RepositoriesContract
 import com.concrete.desafio_android.RepositoriesPresenter
@@ -14,20 +15,33 @@ import kotlinx.android.synthetic.main.activity_home.list_java_repositories
 
 class HomeActivity: AppCompatActivity(), RepositoriesContract.View{
 
-    private val presenter = RepositoriesPresenter(this)
-    private val pageCount = 1
+    private val presenter: RepositoriesContract.Presenter = RepositoriesPresenter(this)
     private val repositoryList = ArrayList<Repository>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        presenter.getRepositories(pageCount)
-        list_java_repositories.adapter = RepositoryListAdapter(repositoryList, this){
-            val intent = Intent(this, PullRequestListActivity::class.java)
-            intent.putExtra("repository", it)
-            startActivity(intent)
+        presenter.getRepositories()
+        setListAdapter()
+    }
+
+    private fun setListAdapter() {
+        list_java_repositories.adapter = RepositoryListAdapter(repositoryList, this) {
+            startPullRequestListActivity(it)
         }
+        val dividerItemDecoration = DividerItemDecoration(
+            list_java_repositories.context,
+            list_java_repositories.layoutManager!!.layoutDirection
+        )
+        dividerItemDecoration.setDrawable(getDrawable(R.drawable.list_item_divider)!!)
+        list_java_repositories.addItemDecoration(dividerItemDecoration)
+    }
+
+    private fun startPullRequestListActivity(repository: Repository) {
+        val intent = Intent(this, PullRequestListActivity::class.java)
+        intent.putExtra("repository", repository)
+        startActivity(intent)
     }
 
     override fun showList(repositories: ArrayList<Repository>) {
