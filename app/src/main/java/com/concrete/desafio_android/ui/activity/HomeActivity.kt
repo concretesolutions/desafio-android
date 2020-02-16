@@ -19,9 +19,7 @@ import com.concrete.desafio_android.util.REPOSITORY_TAG
 
 class HomeActivity : AppCompatActivity(), RepositoriesContract.View {
 
-    companion object{
-        private val repositoryList = ArrayList<Repository>()
-    }
+    private val repositoryList = ArrayList<Repository>()
 
     private val presenter: RepositoriesContract.Presenter =
         RepositoriesPresenter(this)
@@ -65,5 +63,18 @@ class HomeActivity : AppCompatActivity(), RepositoriesContract.View {
     override fun showErrorMessage(messageId: Int) {
         val message = resources.getString(messageId)
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList("repositoryList", repositoryList)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState.getParcelableArrayList<Repository>("repositoryList")?.let {
+            repositoryList.clear()
+            repositoryList.addAll(it)
+        }
     }
 }
