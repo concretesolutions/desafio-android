@@ -2,7 +2,7 @@ package com.concrete.desafio_android.presenter
 
 import com.concrete.desafio_android.contract.PullRequestsContract
 import com.concrete.desafio_android.data.external.GithubRepository
-import com.concrete.desafio_android.domain.PullRequest
+import com.concrete.desafio_android.data.domain.PullRequest
 
 class PullRequestsPresenter(
     private val view: PullRequestsContract.View

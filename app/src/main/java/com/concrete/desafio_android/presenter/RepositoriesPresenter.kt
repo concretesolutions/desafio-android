@@ -2,7 +2,7 @@ package com.concrete.desafio_android.presenter
 
 import com.concrete.desafio_android.contract.RepositoriesContract
 import com.concrete.desafio_android.data.external.GithubRepository
-import com.concrete.desafio_android.domain.Repository
+import com.concrete.desafio_android.data.domain.Repository
 
 class RepositoriesPresenter(
     private val view: RepositoriesContract.View

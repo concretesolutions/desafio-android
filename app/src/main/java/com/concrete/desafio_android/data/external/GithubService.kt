@@ -1,7 +1,7 @@
 package com.concrete.desafio_android.data.external
 
-import com.concrete.desafio_android.domain.PullRequest
-import com.concrete.desafio_android.domain.RepositoryResponse
+import com.concrete.desafio_android.data.domain.PullRequest
+import com.concrete.desafio_android.data.domain.RepositoryResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

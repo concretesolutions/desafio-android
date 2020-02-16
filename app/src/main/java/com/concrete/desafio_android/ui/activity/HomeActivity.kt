@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.concrete.desafio_android.R
 import com.concrete.desafio_android.contract.RepositoriesContract
 import com.concrete.desafio_android.presenter.RepositoriesPresenter
-import com.concrete.desafio_android.domain.Repository
+import com.concrete.desafio_android.data.domain.Repository
 import com.concrete.desafio_android.ui.adapter.RepositoryListAdapter
 import com.concrete.desafio_android.ui.listener.EndlessRecyclerViewScrollListener
 import kotlinx.android.synthetic.main.activity_home.list_java_repositories

@@ -1,6 +1,6 @@
 package com.concrete.desafio_android.contract
 
-import com.concrete.desafio_android.domain.Repository
+import com.concrete.desafio_android.data.domain.Repository
 
 interface RepositoriesContract {
 

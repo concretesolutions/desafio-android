@@ -4,9 +4,9 @@ import com.concrete.desafio_android.BuildConfig.BASE_URL
 import com.concrete.desafio_android.R
 import com.concrete.desafio_android.contract.PullRequestsContract
 import com.concrete.desafio_android.contract.RepositoriesContract
-import com.concrete.desafio_android.domain.PullRequest
-import com.concrete.desafio_android.domain.Repository
-import com.concrete.desafio_android.domain.RepositoryResponse
+import com.concrete.desafio_android.data.domain.PullRequest
+import com.concrete.desafio_android.data.domain.Repository
+import com.concrete.desafio_android.data.domain.RepositoryResponse
 import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback

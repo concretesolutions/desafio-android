@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.concrete.desafio_android.R
-import com.concrete.desafio_android.domain.Repository
+import com.concrete.desafio_android.data.domain.Repository
 import com.concrete.desafio_android.util.AVATAR_ICON_SIZE
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_repository.view.textview_repository_description

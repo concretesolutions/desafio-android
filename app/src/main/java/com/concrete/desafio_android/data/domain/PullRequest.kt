@@ -1,4 +1,4 @@
-package com.concrete.desafio_android.domain
+package com.concrete.desafio_android.data.domain
 
 import java.util.Date
 
