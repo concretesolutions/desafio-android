@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.concrete.desafio_android.R
 import com.concrete.desafio_android.data.domain.Repository
-import com.concrete.desafio_android.util.AVATAR_ICON_SIZE
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_repository.view.textview_repository_description
 import kotlinx.android.synthetic.main.list_item_repository.view.textview_repository_fork_counter
@@ -30,9 +29,10 @@ class RepositoryListAdapter(
             itemView.textview_repository_fork_counter.text = repository.forks_count.toString()
             itemView.textview_repository_star_counter.text = repository.stargazers_count.toString()
             itemView.textview_repository_owner_username.text = repository.owner.login
+            val avatarSize = context.resources.getInteger(R.integer.avatar_icon_size)
             Picasso.get()
                 .load(repository.owner.avatar_url)
-                .resize(AVATAR_ICON_SIZE, AVATAR_ICON_SIZE)
+                .resize(avatarSize, avatarSize)
                 .centerCrop()
                 .error(R.drawable.ic_launcher_foreground)
                 .into(itemView.repository_owner_avatar)

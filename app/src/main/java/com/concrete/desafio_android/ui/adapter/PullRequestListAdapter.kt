@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.concrete.desafio_android.R
 import com.concrete.desafio_android.data.domain.PullRequest
 import com.concrete.desafio_android.extension.formatString
-import com.concrete.desafio_android.util.AVATAR_ICON_SIZE
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_pull_request.view.textview_pull_request_date
 import kotlinx.android.synthetic.main.list_item_pull_request.view.textview_pull_request_title
@@ -28,9 +27,10 @@ class PullRequestListAdapter(
             textview_pull_request_title.text = pullRequest.title
             textview_pull_request_author_username.text = pullRequest.user.login
             textview_pull_request_date.text = pullRequest.created_at.formatString()
+            val avatarSize = context.resources.getInteger(R.integer.avatar_icon_size)
             Picasso.get()
                 .load(pullRequest.user.avatar_url)
-                .resize(AVATAR_ICON_SIZE, AVATAR_ICON_SIZE)
+                .resize(avatarSize, avatarSize)
                 .centerCrop()
                 .error(R.drawable.ic_launcher_foreground)
                 .into(itemView.pull_request_author_avatar)

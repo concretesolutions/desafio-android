@@ -6,13 +6,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.concrete.desafio_android.BuildConfig.REPOSITORY_TAG
 import com.concrete.desafio_android.contract.PullRequestsContract
 import com.concrete.desafio_android.presenter.PullRequestsPresenter
 import com.concrete.desafio_android.R
 import com.concrete.desafio_android.data.domain.PullRequest
 import com.concrete.desafio_android.data.domain.Repository
 import com.concrete.desafio_android.ui.adapter.PullRequestListAdapter
-import com.concrete.desafio_android.util.REPOSITORY_TAG
 import kotlinx.android.synthetic.main.activity_pull_request_list.pull_request_list
 
 class PullRequestListActivity : AppCompatActivity(), PullRequestsContract.View {
