@@ -28,15 +28,13 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "BASE_URL", "$github_url"
-            buildConfigField "String", "REPOSITORY_TAG", "$repository_tag"
+            buildConfigField "String", "BASE_URL", '"https://api.github.com"'
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", "$github_url"
-            buildConfigField "String", "REPOSITORY_TAG", "$repository_tag"
+            buildConfigField "String", "BASE_URL", '"https://api.github.com"'
         }
     }
 }
@@ -63,7 +61,6 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$picasso_version"
 
     // Test
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$jnuit_jnuit"
     androidTestImplementation "androidx.test.ext:junit:$androidx_jnuit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"

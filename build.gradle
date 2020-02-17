@@ -20,8 +20,6 @@ buildscript {
         retrofit_version = '2.6.0'
         picasso_version = '2.71828'
         nav_version = '2.2.1'
-        github_url = '"https://api.github.com"'
-        repository_tag = '"repository"'
     }
 
     dependencies {

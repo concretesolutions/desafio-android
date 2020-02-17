@@ -19,7 +19,8 @@
     <fragment
         android:id="@+id/pullRequestFragment"
         android:name="com.concrete.desafio_android.ui.fragment.PullRequestFragment"
-        android:label="fragment_pull_request" >
+        android:label="fragment_pull_request"
+        tools:layout="@layout/fragment_pull_request">
         <argument
             android:name="repository"
             app:argType="com.concrete.desafio_android.data.domain.Repository" />
