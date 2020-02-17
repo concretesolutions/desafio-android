@@ -11,15 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".ui.activity.HomeActivity"
-            android:label="@string/home_activity_label">
+        <activity android:name=".ui.activity.HostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.PullRequestListActivity" />
 
     </application>
 </manifest>

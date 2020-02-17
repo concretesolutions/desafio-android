@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/repositoriesFragment">
+
+
+    <fragment
+        android:id="@+id/repositoriesFragment"
+        android:name="com.concrete.desafio_android.ui.fragment.RepositoriesFragment"
+        android:label="fragment_repositories"
+        tools:layout="@layout/fragment_repositories" >
+        <action
+            android:id="@+id/action_repositoriesFragment_to_pullRequestFragment"
+            app:destination="@id/pullRequestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pullRequestFragment"
+        android:name="com.concrete.desafio_android.ui.fragment.PullRequestFragment"
+        android:label="fragment_pull_request" >
+        <argument
+            android:name="repository"
+            app:argType="com.concrete.desafio_android.data.domain.Repository" />
+    </fragment>
+</navigation>
