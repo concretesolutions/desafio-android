@@ -37,7 +37,9 @@ class RepositoriesFragment : Fragment(), RepositoriesContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.setTitle(R.string.repositories_fragment_label)
-        presenter.getRepositories()
+        if (savedInstanceState == null){
+            presenter.getRepositories()
+        }
         setListAdapter()
         addListDivider()
         setTitle()
@@ -48,11 +50,12 @@ class RepositoriesFragment : Fragment(), RepositoriesContract.View {
     }
 
     private fun setListAdapter() {
-        list_java_repositories.adapter = RepositoryListAdapter(repositoryList, context!!) {
+        context?.let {context ->
+            list_java_repositories.adapter = RepositoryListAdapter(repositoryList, context) {
             val action =
                 RepositoriesFragmentDirections.actionRepositoriesFragmentToPullRequestFragment(it)
             findNavController().navigate(action)
-        }
+        } }
         list_java_repositories.addOnScrollListener(object :
             EndlessRecyclerViewScrollListener(list_java_repositories.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
@@ -66,7 +69,7 @@ class RepositoriesFragment : Fragment(), RepositoriesContract.View {
             list_java_repositories.context,
             DividerItemDecoration.VERTICAL
         )
-        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.list_item_divider)!!)
+        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.list_item_divider, resources.newTheme()))
         list_java_repositories.addItemDecoration(dividerItemDecoration)
     }
 

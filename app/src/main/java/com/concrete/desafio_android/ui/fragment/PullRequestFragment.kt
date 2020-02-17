@@ -39,7 +39,9 @@ class PullRequestFragment : Fragment(), PullRequestsContract.View {
         super.onViewCreated(view, savedInstanceState)
         val args: PullRequestFragmentArgs by navArgs()
         repository = args.repository
-        presenter.getPullRequests(repository.owner.login, repository.name)
+        if (savedInstanceState == null){
+            presenter.getPullRequests(repository.owner.login, repository.name)
+        }
         setTitle()
         setRequestsList()
         addListDivider()
@@ -50,14 +52,14 @@ class PullRequestFragment : Fragment(), PullRequestsContract.View {
             pull_request_list.context,
             DividerItemDecoration.VERTICAL
         )
-        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.list_item_divider)!!)
+        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.list_item_divider, resources.newTheme()))
         pull_request_list.addItemDecoration(dividerItemDecoration)
     }
 
     private fun setRequestsList() {
-        pull_request_list.adapter = PullRequestListAdapter(pullRequests, context!!) {
+        context?.let {context -> pull_request_list.adapter = PullRequestListAdapter(pullRequests, context) {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.html_url)))
-        }
+        } }
     }
 
     private fun setTitle() {
