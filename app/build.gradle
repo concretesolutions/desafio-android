@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: "androidx.navigation.safeargs"
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -66,5 +68,3 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
 
 }
-
-apply plugin: "androidx.navigation.safeargs"
