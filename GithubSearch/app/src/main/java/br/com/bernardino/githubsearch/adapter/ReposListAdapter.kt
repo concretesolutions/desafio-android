@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.bernardino.githubsearch.R
+import br.com.bernardino.githubsearch.database.RepositoryDatabase
 import br.com.bernardino.githubsearch.model.Repository
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.list_item_repos.view.*
@@ -14,11 +15,11 @@ import kotlinx.android.synthetic.main.list_item_repos.view.*
 class ReposListAdapter(private val mContext: Context)
     : RecyclerView.Adapter<ReposListAdapter.ViewHolder>() {
 
-    var repos : List<Repository> = listOf()
+    var repos : List<RepositoryDatabase> = listOf()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val repo = repos[position]
-        holder?.let {
+        holder.let {
             it.bindView(repo, mContext)
         }
     }
@@ -32,14 +33,14 @@ class ReposListAdapter(private val mContext: Context)
         return repos.size
     }
 
-    fun setReposListItems(movieList: List<Repository>){
+    fun setReposListItems(movieList: List<RepositoryDatabase>){
         this.repos = movieList
         notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(repo: Repository, context: Context) {
+        fun bindView(repo: RepositoryDatabase, context: Context) {
 
             val repoName = itemView.tv_repos_name
             val repoDesc = itemView.tv_repos_desc
@@ -53,9 +54,9 @@ class ReposListAdapter(private val mContext: Context)
             repoDesc.text = repo.description
             forkNumber.text = repo.forksCount.toString()
             starNumber.text = repo.stargazersCount.toString()
-            Glide.with(context).load(repo.owner.avatarUrl).into(userAvatar)
-            userName.text = repo.owner.login
-            userFullName.text = repo.owner.login
+            Glide.with(context).load(repo.ownerAvatar).into(userAvatar)
+            userName.text = repo.ownerUserFirstName
+            userFullName.text = repo.ownerUserLastName
         }
     }
 

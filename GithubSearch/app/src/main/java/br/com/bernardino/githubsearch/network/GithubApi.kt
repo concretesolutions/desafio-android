@@ -1,7 +1,6 @@
-package br.com.bernardino.githubsearch.api
+package br.com.bernardino.githubsearch.network
 
 import br.com.bernardino.githubsearch.model.PullRequest
-import br.com.bernardino.githubsearch.model.Repository
 import br.com.bernardino.githubsearch.model.RepositoryBody
 import retrofit2.Call
 import retrofit2.http.GET

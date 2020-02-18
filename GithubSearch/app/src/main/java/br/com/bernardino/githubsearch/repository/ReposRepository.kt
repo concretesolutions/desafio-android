@@ -1,41 +1,24 @@
 package br.com.bernardino.githubsearch.repository
 
-import androidx.lifecycle.MutableLiveData
-import br.com.bernardino.githubsearch.api.RetrofitInitializer
-import br.com.bernardino.githubsearch.model.Repository
-import br.com.bernardino.githubsearch.model.RepositoryBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.lifecycle.LiveData
+import br.com.bernardino.githubsearch.database.RepositoriesDatabase
+import br.com.bernardino.githubsearch.database.RepositoryDatabase
+import br.com.bernardino.githubsearch.database.asDomainModel
+import br.com.bernardino.githubsearch.network.RetrofitInitializer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import retrofit2.await
 
 
-object ReposRepository {
+class ReposRepository(private val database: RepositoriesDatabase) {
 
-    fun getRepositories(
-        successHandler: (List<Repository>?) -> Unit,
-        failureHandler: (Throwable?) -> Unit
-    ) {
-        val call = RetrofitInitializer().reposService()
-            .getRepositories("language:Java", "stars", 1)
+    val repos: LiveData<List<RepositoryDatabase>> = database.reposDao.getRepositories()
 
-        call.enqueue(object : Callback<RepositoryBody?> {
-            override fun onResponse(
-                call: Call<RepositoryBody?>,
-                response: Response<RepositoryBody?>
-            ) {
-                if (response?.code() == 200) {
-                    response.body()?.let {
-                        successHandler(it.items)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<RepositoryBody?>, t: Throwable) {
-                failureHandler(t)
-            }
+    suspend fun refreshRepositories() {
+        withContext(Dispatchers.IO) {
+            val reposlist = RetrofitInitializer().reposService().getRepositories("language:Java", "stars", 1)
+                    .await()
+            database.reposDao.insertAll(reposlist.items.asDomainModel())
         }
-
-        )
     }
-
 }
