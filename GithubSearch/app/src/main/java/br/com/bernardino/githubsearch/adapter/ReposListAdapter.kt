@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.bernardino.githubsearch.R
 import br.com.bernardino.githubsearch.database.RepositoryDatabase
-import br.com.bernardino.githubsearch.model.Repository
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.list_item_repos.view.*
 
 
-class ReposListAdapter(private val mContext: Context)
+class ReposListAdapter(private val mContext: Context, val mClickListener: (RepositoryDatabase) -> Unit)
     : RecyclerView.Adapter<ReposListAdapter.ViewHolder>() {
 
     var repos : List<RepositoryDatabase> = listOf()
@@ -20,7 +19,7 @@ class ReposListAdapter(private val mContext: Context)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val repo = repos[position]
         holder.let {
-            it.bindView(repo, mContext)
+            it.bindView(repo, mContext, mClickListener)
         }
     }
 
@@ -40,7 +39,11 @@ class ReposListAdapter(private val mContext: Context)
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(repo: RepositoryDatabase, context: Context) {
+        fun bindView(
+            repo: RepositoryDatabase,
+            context: Context,
+            clickListener: (RepositoryDatabase) -> Unit
+        ) {
 
             val repoName = itemView.tv_repos_name
             val repoDesc = itemView.tv_repos_desc
@@ -57,6 +60,10 @@ class ReposListAdapter(private val mContext: Context)
             Glide.with(context).load(repo.ownerAvatar).into(userAvatar)
             userName.text = repo.ownerUserFirstName
             userFullName.text = repo.ownerUserLastName
+
+            itemView.setOnClickListener{
+                clickListener(repo)
+            }
         }
     }
 

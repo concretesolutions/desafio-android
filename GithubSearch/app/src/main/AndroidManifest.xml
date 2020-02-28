@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeActivity" />
+        <activity android:name=".PullRequestActivity" />
     </application>
 
 </manifest>

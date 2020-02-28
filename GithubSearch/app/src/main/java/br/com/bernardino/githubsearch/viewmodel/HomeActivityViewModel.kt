@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import br.com.bernardino.githubsearch.ClickReposListener
 import br.com.bernardino.githubsearch.database.getDatabase
 import br.com.bernardino.githubsearch.repository.ReposRepository
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +21,8 @@ class HomeActivityViewModel(application: Application) : AndroidViewModel(applica
     private val viewModelJob = SupervisorJob()
 
     val repolist = reposRepository.repos
+
+    var clickReposListener : ClickReposListener? = null
 
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 

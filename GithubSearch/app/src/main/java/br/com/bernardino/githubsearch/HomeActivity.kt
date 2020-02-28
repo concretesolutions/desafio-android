@@ -1,5 +1,6 @@
 package br.com.bernardino.githubsearch
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,7 +12,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.bernardino.githubsearch.adapter.ReposListAdapter
+import br.com.bernardino.githubsearch.database.RepositoryDatabase
 import br.com.bernardino.githubsearch.databinding.ActivityHomeBinding
+import br.com.bernardino.githubsearch.model.EXTRA_REPOSITORY
+import br.com.bernardino.githubsearch.model.Repository
 import br.com.bernardino.githubsearch.viewmodel.HomeActivityViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_home.*
@@ -50,7 +54,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun configureList() {
         mBinding.rvRepos.addItemDecoration(DividerItemDecoration(mBinding.rvRepos.context, DividerItemDecoration.VERTICAL))
-        mAdapter = ReposListAdapter(this)
+        mAdapter = ReposListAdapter(this) { repositoryDatabase : RepositoryDatabase -> clickListener(repositoryDatabase)  }
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding.rvRepos.layoutManager = layoutManager
         mBinding.rvRepos.adapter = mAdapter
@@ -69,6 +73,14 @@ class HomeActivity : AppCompatActivity() {
             ).show()
             mBinding.viewmodel?.onNetworkErrorShown()
         }
+    }
+
+    private fun clickListener(repository: RepositoryDatabase) {
+        val intent = Intent (this, PullRequestActivity::class.java).apply {
+            putExtra(EXTRA_REPOSITORY, repository)
+        }
+        startActivity(intent)
+
     }
 
 }
