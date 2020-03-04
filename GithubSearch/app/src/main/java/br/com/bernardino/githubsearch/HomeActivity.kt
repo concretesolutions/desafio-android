@@ -4,8 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,7 +13,6 @@ import br.com.bernardino.githubsearch.adapter.ReposListAdapter
 import br.com.bernardino.githubsearch.database.RepositoryDatabase
 import br.com.bernardino.githubsearch.databinding.ActivityHomeBinding
 import br.com.bernardino.githubsearch.model.EXTRA_REPOSITORY
-import br.com.bernardino.githubsearch.model.Repository
 import br.com.bernardino.githubsearch.viewmodel.HomeActivityViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_home.*

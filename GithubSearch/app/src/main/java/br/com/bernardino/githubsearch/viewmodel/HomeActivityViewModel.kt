@@ -22,8 +22,6 @@ class HomeActivityViewModel(application: Application) : AndroidViewModel(applica
 
     val repolist = reposRepository.repos
 
-    var clickReposListener : ClickReposListener? = null
-
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     var isLoading = MutableLiveData<Boolean>()
