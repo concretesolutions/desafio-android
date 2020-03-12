@@ -1,0 +1,2 @@
+rootProject.name='ConsultingGitHub'
+include ':app'
