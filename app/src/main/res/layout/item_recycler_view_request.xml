@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:backgroundTint="@color/colorAccent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="1dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/textViewRepository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Título pull request"
+            android:textColor="@color/textTitulo"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.085"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="body do pull request chamada api githubrepositório chamada api githubbody do pull request chamada api githubrepositório chamada api githubbody do pull request chamada api githubrepositório chamada api github"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.151"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRepository" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/githublogobranco"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewDescricao"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescricao" />
+
+        <TextView
+            android:id="@+id/textViewUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42dp"
+            android:text="Username"
+            android:textColor="@color/textUserName"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewProfile"
+            app:layout_constraintStart_toEndOf="@+id/imageViewProfile"
+            app:layout_constraintTop_toTopOf="@+id/imageViewProfile"
+            app:layout_constraintVertical_bias="0.17000002" />
+
+        <TextView
+            android:id="@+id/textViewNomeSobrenome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome e sobrenome"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewUsername"
+            app:layout_constraintStart_toStartOf="@+id/textViewUsername"
+            app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
