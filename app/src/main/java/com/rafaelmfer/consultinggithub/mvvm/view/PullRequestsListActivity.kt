@@ -13,7 +13,6 @@ import com.rafaelmfer.consultinggithub.R
 import com.rafaelmfer.consultinggithub.mvvm.ViewModelFactory
 import com.rafaelmfer.consultinggithub.mvvm.viewmodel.GitHubRepositoriesViewModel
 import kotlinx.android.synthetic.main.activity_pull_requests_list.*
-import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.content_pull_requests_list.*
 
 class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
@@ -27,6 +26,7 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_requests_list)
         setSupportActionBar(toolbarPullRequests)
+        toolbarPullRequests.setNavigationOnClickListener { onBackPressed() }
 
         val creator = intent.extras?.getString("creator")
         val repositoryId = intent.extras?.getString("repoId")
@@ -38,7 +38,6 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
         }
     }
 
-
     override fun onClickOpenWeb(htmlUrl: String) {
         startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(htmlUrl)))
     }
@@ -49,7 +48,6 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
             adapter = PullRequestsListAdapter(emptyList(), this@PullRequestsListActivity)
         }
     }
-
 
     private fun setObservers() {
         gitHubRepositoriesViewModel.command.observe(this, Observer {
@@ -72,9 +70,9 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
 
     private fun showLoading(visible: Boolean) {
         if (visible) {
-            rvRepositoriesList.visibility = View.GONE
+            rvPullRequestsList.visibility = View.GONE
         } else {
-            rvRepositoriesList.visibility = View.VISIBLE
+            rvPullRequestsList.visibility = View.VISIBLE
         }
     }
 }

@@ -6,7 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import com.rafaelmfer.consultinggithub.R
 import com.rafaelmfer.consultinggithub.mvvm.ViewModelFactory
@@ -14,11 +15,13 @@ import com.rafaelmfer.consultinggithub.mvvm.viewmodel.GitHubRepositoriesViewMode
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
-class HomeActivity : AppCompatActivity(), OnClickListenerGitHub {
+class HomeActivity : AppCompatActivity() {
 
-    private val gitHubRepositoriesViewModel by lazy { ViewModelProviders.of(this,
-        ViewModelFactory()
-    ).get(GitHubRepositoriesViewModel::class.java) }
+    private val gitHubRepositoriesViewModel by lazy {
+        ViewModelProviders
+            .of(this, ViewModelFactory())
+            .get(GitHubRepositoriesViewModel::class.java)
+    }
     private val page = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,17 +35,19 @@ class HomeActivity : AppCompatActivity(), OnClickListenerGitHub {
         gitHubRepositoriesViewModel.getRepositoriesList(page)
     }
 
-    override fun onClickOpenPullRequestsList(creator: String, repositoryId: String) {
-            startActivity(Intent(this, PullRequestsListActivity::class.java).apply {
-                putExtra("repoID", repositoryId)
+    private val listener = object : OnClickListenerGitHub {
+        override fun onClickOpenPullRequestsList(creator: String, repositoryId: String) {
+            startActivity(Intent(this@HomeActivity, PullRequestsListActivity::class.java).apply {
+                putExtra("repoId", repositoryId)
                 putExtra("creator", creator)
             })
+        }
     }
 
     private fun setList() {
         rvRepositoriesList.apply {
             layoutManager = LinearLayoutManager(this@HomeActivity)
-            adapter = GitHubRepositoriesListAdapter(emptyList(), this@HomeActivity)
+            adapter = GitHubRepositoriesListAdapter(emptyList(), listener)
         }
     }
 
@@ -56,7 +61,7 @@ class HomeActivity : AppCompatActivity(), OnClickListenerGitHub {
 
         gitHubRepositoriesViewModel.gitHubRepositories.observe(this, Observer { repositoriesList ->
             if (repositoriesList != null) {
-                rvRepositoriesList.adapter = GitHubRepositoriesListAdapter(repositoriesList.items,this)
+                rvRepositoriesList.adapter = GitHubRepositoriesListAdapter(repositoriesList.items, listener)
             }
         })
 
@@ -66,12 +71,6 @@ class HomeActivity : AppCompatActivity(), OnClickListenerGitHub {
     }
 
     private fun showLoading(visible: Boolean) {
-        if (visible) {
-            rvRepositoriesList.visibility = View.GONE
-//            progressBar.visibility = View.VISIBLE
-        } else {
-            rvRepositoriesList.visibility = View.VISIBLE
-//            progressBar.visibility = View.GONE
-        }
+        rvRepositoriesList.visibility = if (visible) GONE else VISIBLE
     }
 }

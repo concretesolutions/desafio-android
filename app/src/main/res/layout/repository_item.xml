@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.alexzh.circleimageview.CircleImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civUser"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="@+id/tvFullName"
         app:layout_constraintStart_toStartOf="@+id/tvFullName"
-        app:layout_constraintTop_toTopOf="@+id/tvNameRep"
-        android:src="@drawable/ic_launcher_background"/>
+        app:layout_constraintTop_toTopOf="@+id/tvNameRep" />
 
     <TextView
         android:id="@+id/tvNameRep"
@@ -83,10 +83,11 @@
         android:layout_marginEnd="@dimen/margin_16"
         android:layout_marginBottom="@dimen/margin_8"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/viewDivider"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tvUserNameLogin"
+        app:layout_constraintVertical_bias="0"
         tools:text="Nome Sobrenome" />
 
     <ImageView
@@ -94,7 +95,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginBottom="@dimen/margin_16"
         android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="@id/viewDivider"
         app:layout_constraintEnd_toStartOf="@+id/tvNumberForksRep"
@@ -123,11 +124,11 @@
         android:layout_marginTop="@dimen/margin_8"
         android:background="#3c3c3c"
         android:orientation="horizontal"
-        app:layout_constraintVertical_bias="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvFullName" />
+        app:layout_constraintTop_toBottomOf="@id/tvFullName"
+        app:layout_constraintVertical_bias="1" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

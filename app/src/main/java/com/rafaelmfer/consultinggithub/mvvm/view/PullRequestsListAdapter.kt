@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.alexzh.circleimageview.CircleImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.rafaelmfer.consultinggithub.R
 import com.rafaelmfer.consultinggithub.mvvm.model.pullrequests.GitPullRequestResponse
+import de.hdodenhof.circleimageview.CircleImageView
 
 class PullRequestsListAdapter(var pullRequestList: List<GitPullRequestResponse>, private val listener: OnClickListenerGitHub) :
     RecyclerView.Adapter<PullRequestsListAdapter.ViewHolder>() {
@@ -30,7 +30,7 @@ class PullRequestsListAdapter(var pullRequestList: List<GitPullRequestResponse>,
             tvNamePullRequest.text = pullRequest.title
             tvDescriptionPullRequest.text = pullRequest.body
             tvUserNameLoginPull.text = pullRequest.user.login
-            tvFullNamePull.text = pullRequest.head.repo.fullName
+//            tvFullNamePull.text = "teste"
 
             Glide.with(itemView)
                 .load(pullRequest.user.avatarUrl)

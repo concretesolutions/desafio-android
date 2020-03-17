@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.alexzh.circleimageview.CircleImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civUserPullRequest"
         android:layout_width="@dimen/width_40"
         android:layout_height="@dimen/height_50"
