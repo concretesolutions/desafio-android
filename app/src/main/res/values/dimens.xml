@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--MARGIN-->
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+
+    <!--PADDING-->
+    <dimen name="padding_4">4dp</dimen>
+
+    <!--TEXT SIZE-->
+    <dimen name="font_18">18sp</dimen>
+    <dimen name="margin_52">52dp</dimen>
+    <dimen name="width_48">48dp</dimen>
+    <dimen name="height_48">48dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
