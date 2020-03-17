@@ -1,4 +1,4 @@
-package com.marraps.mvvmshow.retrofit
+package com.rafaelmfer.consultinggithub
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

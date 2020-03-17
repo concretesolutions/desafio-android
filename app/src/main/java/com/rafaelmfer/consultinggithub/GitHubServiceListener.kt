@@ -1,4 +1,4 @@
-package com.marraps.mvvmshow.numberlist.model
+package com.rafaelmfer.consultinggithub
 
 import com.rafaelmfer.consultinggithub.model.pullrequests.GitPullRequestResponse
 import com.rafaelmfer.consultinggithub.model.repositories.GitRepositoriesResponse
@@ -6,6 +6,6 @@ import com.rafaelmfer.consultinggithub.model.repositories.GitRepositoriesRespons
 interface GitHubServiceListener {
 
     fun onSuccess(response: GitRepositoriesResponse) {}
-    fun onSuccess(response: GitPullRequestResponse) {}
+    fun onSuccess(response: List<GitPullRequestResponse>) {}
     fun onError(error: Throwable)
 }

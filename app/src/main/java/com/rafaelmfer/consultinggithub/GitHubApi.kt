@@ -1,5 +1,4 @@
-package com.marraps.mvvmshow.retrofit
-
+package com.rafaelmfer.consultinggithub
 
 import com.rafaelmfer.consultinggithub.model.pullrequests.GitPullRequestResponse
 import com.rafaelmfer.consultinggithub.model.repositories.GitRepositoriesResponse
@@ -20,5 +19,5 @@ interface GitHubApi {
         @Path("creator") creatorString: String,
         @Path("repository") repoString: String,
         @Query("page") page: Int
-    ): Call<GitPullRequestResponse>
+    ): Call<List<GitPullRequestResponse>>
 }
