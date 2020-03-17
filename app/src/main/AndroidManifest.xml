@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".view.HomeActivity"
+            android:name="com.rafaelmfer.consultinggithub.mvvm.view.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".view.PullRequestsListActivity"
+            android:name="com.rafaelmfer.consultinggithub.mvvm.view.PullRequestsListActivity"
             android:label="@string/title_activity_pull_requests_list"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
