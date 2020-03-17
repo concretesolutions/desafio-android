@@ -32,8 +32,8 @@
     <TextView
         android:id="@+id/tvDescriptionRep"
         android:layout_width="0dp"
-        android:padding="@dimen/padding_4"
         android:layout_height="wrap_content"
+        android:padding="@dimen/padding_4"
         app:layout_constraintEnd_toEndOf="@+id/tvNameRep"
         app:layout_constraintStart_toStartOf="@+id/tvNameRep"
         app:layout_constraintTop_toBottomOf="@+id/tvNameRep"
@@ -41,7 +41,7 @@
 
     <TextView
 
-        android:id="@+id/UserNameLogin"
+        android:id="@+id/tvUserNameLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8"
@@ -55,21 +55,21 @@
         tools:text="Username" />
 
     <TextView
-        android:id="@+id/fullName"
+        android:id="@+id/tvFullName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="start|center"
         android:padding="@dimen/padding_2"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/civUser"
-        app:layout_constraintEnd_toEndOf="@+id/UserNameLogin"
-        app:layout_constraintStart_toStartOf="@+id/UserNameLogin"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameLogin"
+        app:layout_constraintEnd_toEndOf="@+id/tvUserNameLogin"
+        app:layout_constraintStart_toStartOf="@+id/tvUserNameLogin"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserNameLogin"
         tools:text="Nome Sobrenome" />
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/viewDivider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_2"
         android:layout_marginTop="@dimen/margin_8"

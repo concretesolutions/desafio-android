@@ -9,8 +9,8 @@
         android:id="@+id/civUser"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        app:layout_constraintEnd_toEndOf="@+id/fullName"
-        app:layout_constraintStart_toStartOf="@+id/fullName"
+        app:layout_constraintEnd_toEndOf="@+id/tvFullName"
+        app:layout_constraintStart_toStartOf="@+id/tvFullName"
         app:layout_constraintTop_toTopOf="@+id/tvNameRep" />
 
     <TextView
@@ -37,81 +37,80 @@
         tools:text="Descrição" />
 
     <TextView
-        android:id="@+id/ForksRepo"
+        android:id="@+id/tvNumberForksRep"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginStart="@dimen/margin_4"
         android:textColor="@color/gold"
-        app:layout_constraintStart_toEndOf="@+id/forkImage"
-        app:layout_constraintTop_toTopOf="@+id/forkImage"
+        app:layout_constraintStart_toEndOf="@+id/ivForkImage"
+        app:layout_constraintTop_toTopOf="@+id/ivForkImage"
         tools:text="Forks" />
 
     <TextView
-        android:id="@+id/numbersStars"
+        android:id="@+id/tvNumbersStars"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginStart="@dimen/margin_4"
         android:textColor="@color/gold"
         app:layout_constraintEnd_toEndOf="@+id/tvDescriptionRep"
-        app:layout_constraintStart_toEndOf="@+id/starImage"
-        app:layout_constraintTop_toTopOf="@+id/starImage"
+        app:layout_constraintStart_toEndOf="@+id/ivStarImage"
+        app:layout_constraintTop_toTopOf="@+id/ivStarImage"
         tools:text="Stars" />
 
     <TextView
-
-        android:id="@+id/UserNameLogin"
+        android:id="@+id/tvUserNameLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:textColor="@color/blue"
         android:padding="@dimen/padding_4"
-        app:layout_constraintEnd_toEndOf="@id/fullName"
-        app:layout_constraintStart_toStartOf="@id/fullName"
+        android:textColor="@color/blue"
+        app:layout_constraintEnd_toEndOf="@id/tvFullName"
+        app:layout_constraintStart_toStartOf="@id/tvFullName"
         app:layout_constraintTop_toBottomOf="@+id/civUser"
         tools:text="Username" />
 
     <TextView
-        android:id="@+id/fullName"
+        android:id="@+id/tvFullName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_16"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameLogin"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserNameLogin"
         tools:text="Nome Sobrenome" />
 
     <ImageView
-        android:id="@+id/forkImage"
+        android:id="@+id/ivForkImage"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="@dimen/margin_8"
         android:importantForAccessibility="no"
-        app:layout_constraintEnd_toStartOf="@+id/ForksRepo"
+        app:layout_constraintEnd_toStartOf="@+id/tvNumberForksRep"
         app:layout_constraintStart_toStartOf="@+id/tvDescriptionRep"
         app:layout_constraintTop_toBottomOf="@+id/tvDescriptionRep"
         app:srcCompat="@drawable/fork" />
 
 
     <ImageView
-        android:id="@+id/starImage"
+        android:id="@+id/ivStarImage"
         android:layout_width="24dp"
-        android:importantForAccessibility="no"
         android:layout_height="24dp"
         android:layout_marginStart="@dimen/margin_8"
-        app:layout_constraintEnd_toStartOf="@+id/numbersStars"
-        app:layout_constraintStart_toEndOf="@+id/ForksRepo"
-        app:layout_constraintTop_toTopOf="@+id/ForksRepo"
+        android:importantForAccessibility="no"
+        app:layout_constraintEnd_toStartOf="@+id/tvNumbersStars"
+        app:layout_constraintStart_toEndOf="@+id/tvNumberForksRep"
+        app:layout_constraintTop_toTopOf="@+id/tvNumberForksRep"
         app:srcCompat="@drawable/estreladourada" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/viewDivider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#3c3c3c"
         android:layout_marginTop="@dimen/margin_8"
-        app:layout_constraintTop_toBottomOf="@id/fullName"
+        android:background="#3c3c3c"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="horizontal" />
+        app:layout_constraintTop_toBottomOf="@id/tvFullName" />
 </android.support.constraint.ConstraintLayout>

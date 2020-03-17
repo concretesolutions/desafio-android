@@ -7,4 +7,6 @@
     <string name="close">fechar</string>
     <string name="title_activity_pull_requests_list">PullRequestsListActivity</string>
     <string name="title_activity_home">GitHub KotlinPop</string>
+
+    <string name="error_message">Não foi possível carregar as informações. Por favor, tente novamente mais tarde.</string>
 </resources>
