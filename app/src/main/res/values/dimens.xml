@@ -6,13 +6,19 @@
     <dimen name="margin_16">16dp</dimen>
 
     <!--PADDING-->
+    <dimen name="padding_2">2dp</dimen>
     <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
 
     <!--TEXT SIZE-->
     <dimen name="font_18">18sp</dimen>
-    <dimen name="margin_52">52dp</dimen>
-    <dimen name="width_48">48dp</dimen>
-    <dimen name="height_48">48dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+
+    <!--WIDTH-->
+    <dimen name="width_40">40dp</dimen>
+    <dimen name="width_50">50dp</dimen>
+
+    <!--HEIGHT-->
+    <dimen name="height_2">2dp</dimen>
+    <dimen name="height_40">40dp</dimen>
+    <dimen name="height_50">50dp</dimen>
 </resources>
