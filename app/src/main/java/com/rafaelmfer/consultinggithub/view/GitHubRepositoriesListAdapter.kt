@@ -11,7 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.rafaelmfer.consultinggithub.R
 import com.rafaelmfer.consultinggithub.model.repositories.Item
 
-class GitHubRepositoriesListAdapter(var repositoriesList: List<Item>) :
+class GitHubRepositoriesListAdapter(var repositoriesList: List<Item>, private val listener: OnClickListenerGitHub) :
     RecyclerView.Adapter<GitHubRepositoriesListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,6 +39,10 @@ class GitHubRepositoriesListAdapter(var repositoriesList: List<Item>) :
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .dontAnimate()
                 .into(civUser)
+
+            itemView.setOnClickListener {
+                listener.onClickOpenPullRequestsList(item.name, item.owner.login)
+            }
         }
     }
 

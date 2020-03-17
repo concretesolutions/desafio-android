@@ -2,6 +2,7 @@ package com.rafaelmfer.consultinggithub.view
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -13,7 +14,7 @@ import com.rafaelmfer.consultinggithub.viewmodel.GitHubRepositoriesViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), OnClickListenerGitHub {
 
     private val gitHubRepositoriesViewModel by lazy { ViewModelProviders.of(this, ViewModelFactory()).get(GitHubRepositoriesViewModel::class.java) }
     private val page = 1
@@ -27,13 +28,19 @@ class HomeActivity : AppCompatActivity() {
         setObservers()
 
         gitHubRepositoriesViewModel.getRepositoriesList(page)
+    }
 
+    override fun onClickOpenPullRequestsList(creator: String, repositoryId: String) {
+            startActivity(Intent(this, PullRequestsListActivity::class.java).apply {
+                putExtra("repoID", repositoryId)
+                putExtra("creator", creator)
+            })
     }
 
     private fun setList() {
         rvRepositoriesList.apply {
             layoutManager = LinearLayoutManager(this@HomeActivity)
-            adapter = GitHubRepositoriesListAdapter(emptyList())
+            adapter = GitHubRepositoriesListAdapter(emptyList(), this@HomeActivity)
         }
     }
 
@@ -47,7 +54,7 @@ class HomeActivity : AppCompatActivity() {
 
         gitHubRepositoriesViewModel.gitHubRepositories.observe(this, Observer { repositoriesList ->
             if (repositoriesList != null) {
-                rvRepositoriesList.adapter = GitHubRepositoriesListAdapter(repositoriesList.items)
+                rvRepositoriesList.adapter = GitHubRepositoriesListAdapter(repositoriesList.items,this)
             }
         })
 
