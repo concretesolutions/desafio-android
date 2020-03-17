@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.alexzh.circleimageview.CircleImageView
+        android:id="@+id/civUser"
+        android:layout_width="@dimen/width_40"
+        android:layout_height="@dimen/height_50"
+        android:layout_marginTop="@dimen/margin_8"
+        android:importantForAccessibility="no"
+        app:layout_constraintStart_toStartOf="@id/tvDescriptionRep"
+        app:layout_constraintTop_toBottomOf="@id/tvDescriptionRep" />
+
+    <TextView
+        android:id="@+id/tvNameRep"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:padding="@dimen/padding_4"
+        android:textColor="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nome do Repositorio" />
+
+    <TextView
+        android:id="@+id/tvDescriptionRep"
+        android:layout_width="0dp"
+        android:padding="@dimen/padding_4"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvNameRep"
+        app:layout_constraintStart_toStartOf="@+id/tvNameRep"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameRep"
+        tools:text="Descrição" />
+
+    <TextView
+
+        android:id="@+id/UserNameLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_8"
+        android:gravity="start|center"
+        android:padding="@dimen/padding_2"
+        android:textColor="@color/blue"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvDescriptionRep"
+        app:layout_constraintStart_toEndOf="@+id/civUser"
+        app:layout_constraintTop_toTopOf="@+id/civUser"
+        tools:text="Username" />
+
+    <TextView
+        android:id="@+id/fullName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start|center"
+        android:padding="@dimen/padding_2"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/civUser"
+        app:layout_constraintEnd_toEndOf="@+id/UserNameLogin"
+        app:layout_constraintStart_toStartOf="@+id/UserNameLogin"
+        app:layout_constraintTop_toBottomOf="@+id/UserNameLogin"
+        tools:text="Nome Sobrenome" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_2"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="#3c3c3c"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/civUser" />
+</android.support.constraint.ConstraintLayout>
