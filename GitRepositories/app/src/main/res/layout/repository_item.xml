@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:elevation="4dp">
+    android:elevation="4dp"
+    android:layout_marginBottom="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,18 +17,19 @@
             android:layout_height="120dp"
             android:padding="5dp">
 
-            <TextView android:id="@+id/repository_title"
+            <TextView android:id="@+id/title"
                 style="@style/repositoryItemText"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView android:id="@+id/repository_description"
+            <TextView android:id="@+id/description"
                 style="@style/repositoryItemText"
+                android:textStyle="normal"
                 android:layout_marginTop="5dp"
                 android:maxLines="4"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/repository_title" />
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -37,7 +39,7 @@
             android:background="@color/lightGrey"
             app:layout_constraintTop_toBottomOf="@+id/upper_layout">
 
-            <ImageView android:id="@+id/repository_picture"
+            <ImageView android:id="@+id/picture"
                 android:src="@drawable/ic_user"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -51,8 +53,8 @@
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:layout_marginStart="10dp"
-                app:layout_constraintLeft_toRightOf="@id/repository_picture"
-                app:layout_constraintTop_toTopOf="@id/repository_picture" />
+                app:layout_constraintLeft_toRightOf="@id/picture"
+                app:layout_constraintTop_toTopOf="@id/picture" />
 
             <TextView android:id="@+id/complete_name"
                 android:layout_width="wrap_content"
@@ -61,7 +63,7 @@
                 android:textSize="14sp"
                 android:maxLines="1"
                 android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintLeft_toRightOf="@id/repository_picture"
+                app:layout_constraintLeft_toRightOf="@id/picture"
                 app:layout_constraintTop_toBottomOf="@id/username" />
 
             <TextView android:id="@+id/star_count"

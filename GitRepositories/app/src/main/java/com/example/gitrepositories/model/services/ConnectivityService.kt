@@ -1,4 +1,4 @@
-package com.example.gitrepositories.services
+package com.example.gitrepositories.model.services
 
 import android.content.Context
 import android.net.ConnectivityManager

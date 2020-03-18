@@ -1,7 +1,12 @@
 package com.example.gitrepositories.model.dto
 
 import android.graphics.Bitmap
+import com.google.gson.annotations.SerializedName
 import java.util.*
+
+data class PullRequestResponse(
+    @SerializedName("pull_requests") val pullRequests: List<PullRequest>
+)
 
 data class PullRequest(
     val title: String,

@@ -19,8 +19,8 @@ class PullRequestViewHolder(view: View, private val context: Context, private va
     fun bind(pullRequest: PullRequest?) {
         if (pullRequest == null) return
 
-        itemView.repository_title.text = pullRequest.title
-        itemView.repository_description.text = pullRequest.description
+        itemView.title.text = pullRequest.title
+        itemView.description.text = pullRequest.description
         itemView.username.text = pullRequest.username
         itemView.complete_name.text = pullRequest.completeName
         itemView.date.text = getDateString(pullRequest.date)
@@ -29,7 +29,7 @@ class PullRequestViewHolder(view: View, private val context: Context, private va
             .load(pullRequest.image)
             .placeholder(R.drawable.ic_user)
             .apply(RequestOptions.circleCropTransform())
-            .into(itemView.repository_picture)
+            .into(itemView.picture)
 
         itemView.setOnClickListener { clickListener.invoke(pullRequest) }
     }

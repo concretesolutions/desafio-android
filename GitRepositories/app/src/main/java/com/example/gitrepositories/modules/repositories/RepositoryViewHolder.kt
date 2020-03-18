@@ -16,8 +16,8 @@ class RepositoryViewHolder(view: View, private val context: Context, private val
     fun bind(repository: Repository?) {
         if (repository == null) return
 
-        itemView.repository_title.text = repository.title
-        itemView.repository_description.text = repository.description
+        itemView.title.text = repository.title
+        itemView.description.text = repository.description
         itemView.username.text = repository.username
         itemView.complete_name.text = repository.completeName
         itemView.star_count.text = repository.starCount.toString()
@@ -27,7 +27,7 @@ class RepositoryViewHolder(view: View, private val context: Context, private val
             .load(repository.image)
             .placeholder(R.drawable.ic_user)
             .apply(RequestOptions.circleCropTransform())
-            .into(itemView.repository_picture)
+            .into(itemView.picture)
 
         itemView.setOnClickListener { clickListener.invoke(repository) }
     }

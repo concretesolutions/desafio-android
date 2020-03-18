@@ -7,15 +7,16 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.gitrepositories.R
+import com.example.gitrepositories.model.data_sources.PullRequestsDataSourceFactory
 import com.example.gitrepositories.model.dto.PullRequest
-import com.example.gitrepositories.services.ConnectivityService
-import com.example.gitrepositories.services.GitHubService
-import kotlinx.android.synthetic.main.repository_item.view.*
+import com.example.gitrepositories.model.services.ConnectivityService
+import com.example.gitrepositories.model.services.GitHubService
+import io.reactivex.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-
 
 class PullRequestsViewModel(application: Application, private val repoName: String, private val repoCreator: String)
     : AndroidViewModel(application), KoinComponent {
@@ -24,6 +25,7 @@ class PullRequestsViewModel(application: Application, private val repoName: Stri
     private val gitHubService: GitHubService by inject()
 
     private val context = application.applicationContext
+    private val compositeDisposable = CompositeDisposable()
 
     lateinit var list: LiveData<PagedList<PullRequest>>
     var intent = MutableLiveData<Intent>()
@@ -33,19 +35,16 @@ class PullRequestsViewModel(application: Application, private val repoName: Stri
 
     init {
         loadPullRequests()
+        if (!connectivityService.isNetworkAvailable(context)) {
+            displayConnectivityMessage.postValue(context.getString(R.string.no_network_error))
+        }
     }
 
     private fun loadPullRequests() {
-        if (connectivityService.isNetworkAvailable(context)) {
-            gitHubService
-           // newsDataSourceFactory = NewsDataSourceFactory(compositeDisposable, networkService)
-            val config = PagedList.Config.Builder().setPageSize(10).setInitialLoadSizeHint(20)
-                .setEnablePlaceholders(false).build()
-          //  list = LivePagedListBuilder<Int, PullRequest>(newsDataSourceFactory, config).build()
-            displayEmptyMessage.postValue(list.value!!.isEmpty())
-        } else {
-            displayConnectivityMessage.postValue(context.getString(R.string.no_network_error))
-        }
+        val dataSourceFactory = PullRequestsDataSourceFactory(compositeDisposable, gitHubService.baseService)
+        val config = PagedList.Config.Builder().setPageSize(10).setInitialLoadSizeHint(20).setEnablePlaceholders(false).build()
+        list = LivePagedListBuilder<Int, PullRequest>(dataSourceFactory, config).build()
+        displayEmptyMessage.postValue(list.value == null || list.value!!.isEmpty())
     }
 
     fun onPullRequestClick(pullRequest: PullRequest) {
@@ -62,5 +61,10 @@ class PullRequestsViewModel(application: Application, private val repoName: Stri
         } else {
             Uri.parse(url)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
     }
 }
