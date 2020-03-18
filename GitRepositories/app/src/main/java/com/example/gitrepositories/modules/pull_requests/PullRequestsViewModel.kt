@@ -41,10 +41,13 @@ class PullRequestsViewModel(application: Application, private val repoName: Stri
     }
 
     private fun loadPullRequests() {
-        val dataSourceFactory = PullRequestsDataSourceFactory(compositeDisposable, gitHubService.baseService)
+        val dataSourceFactory = PullRequestsDataSourceFactory(compositeDisposable, gitHubService, ::onInitialFetchCompleted)
         val config = PagedList.Config.Builder().setPageSize(10).setInitialLoadSizeHint(20).setEnablePlaceholders(false).build()
         list = LivePagedListBuilder<Int, PullRequest>(dataSourceFactory, config).build()
-        displayEmptyMessage.postValue(list.value == null || list.value!!.isEmpty())
+    }
+
+    private fun onInitialFetchCompleted(isEmpty: Boolean) {
+        displayEmptyMessage.postValue(isEmpty)
     }
 
     fun onPullRequestClick(pullRequest: PullRequest) {

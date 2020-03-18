@@ -5,17 +5,20 @@ import com.example.gitrepositories.model.dto.Repository
 import com.example.gitrepositories.model.services.GitHubService
 import io.reactivex.disposables.CompositeDisposable
 
-class RepositoriesDataSource(private val gitHubService: GitHubService, private val compositeDisposable: CompositeDisposable)
+class RepositoriesDataSource(private val gitHubService: GitHubService, private val compositeDisposable: CompositeDisposable, private val initialFetchCompletedListener: (Boolean) -> Unit)
     : PageKeyedDataSource<Int, Repository>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Repository>) {
 //        compositeDisposable.add(
 //            gitHubService.getRepositories(1, params.requestedLoadSize)
 //                .subscribe { response ->
-//                    callback.onResult(response.repositories, null, 2)
+//                    val list = response.repositories
+//                    callback.onResult(list, null, 2)
+//                    initialFetchCompletedListener.invoke(list.isEmpty())
 //                }
 //        )
         callback.onResult(listOf(Repository("Rounded Image", "This is a project to make the ImageView rounded, wether setting it on xml or programatically", "markMc", "Mark McFetter", 30, 3, null)), null, 2)
+        initialFetchCompletedListener.invoke(false)
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Repository>) {

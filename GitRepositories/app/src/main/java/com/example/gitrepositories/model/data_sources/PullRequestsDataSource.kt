@@ -6,14 +6,16 @@ import com.example.gitrepositories.model.services.GitHubService
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
 
-class PullRequestsDataSource(private val gitHubService: GitHubService, private val compositeDisposable: CompositeDisposable)
+class PullRequestsDataSource(private val gitHubService: GitHubService, private val compositeDisposable: CompositeDisposable, private val initialFetchCompletedListener: (Boolean) -> Unit)
     : PageKeyedDataSource<Int, PullRequest>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, PullRequest>) {
 //        compositeDisposable.add(
 //            gitHubService.getPullRequests(1, params.requestedLoadSize)
 //                .subscribe { response ->
-//                    callback.onResult(response.pullRequests, null, 2)
+//                    val list = response.pullRequests
+//                    callback.onResult(list, null, 2)
+//                    initialFetchCompletedListener.invoke(list.isEmpty())
 //                }
 //        )
         callback.onResult(listOf(), null, 2)

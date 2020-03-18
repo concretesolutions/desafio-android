@@ -39,10 +39,13 @@ class RepositoriesViewModel(application: Application) : AndroidViewModel(applica
     }
 
     private fun loadRepositories() {
-        val dataSourceFactory = RepositoriesDataSourceFactory(compositeDisposable, gitHubService.baseService)
+        val dataSourceFactory = RepositoriesDataSourceFactory(compositeDisposable, gitHubService, ::onInitialFetchCompleted)
         val config = PagedList.Config.Builder().setPageSize(10).setInitialLoadSizeHint(20).setEnablePlaceholders(false).build()
         list = LivePagedListBuilder<Int, Repository>(dataSourceFactory, config).build()
-        displayEmptyMessage.postValue(list.value == null || list.value!!.isEmpty())
+    }
+
+    private fun onInitialFetchCompleted(isEmpty: Boolean) {
+        displayEmptyMessage.postValue(isEmpty)
     }
 
     fun onRepositoryClick(repository: Repository) {

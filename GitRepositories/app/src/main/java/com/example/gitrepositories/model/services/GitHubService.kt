@@ -9,23 +9,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-class GitHubService {
+interface GitHubService {
 
-    private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://newsapi.org/v2/")
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    @GET("/everything?q=sports&apiKey=aa67d8d98c8e4ad1b4f16dbd5f3be348")
+    fun getRepositories(@Query("page") page: Int, @Query("pageSize") pageSize: Int): Single<RepositoryResponse>
 
-    val baseService = retrofit.create(GitHubService::class.java)
+    @GET("/everything?q=sports&apiKey=aa67d8d98c8e4ad1b4f16dbd5f3be348")
+    fun getPullRequests(@Query("page") page: Int, @Query("pageSize") pageSize: Int): Single<PullRequestResponse>
 
-//    @GET("/everything?q=sports&apiKey=aa67d8d98c8e4ad1b4f16dbd5f3be348")
-//    fun getRepositories(@Query("page") page: Int, @Query("pageSize") pageSize: Int): Single<RepositoryResponse> {
-//        return
-//    }
-//
-//    @GET("/everything?q=sports&apiKey=aa67d8d98c8e4ad1b4f16dbd5f3be348")
-//    fun getPullRequests(@Query("page") page: Int, @Query("pageSize") pageSize: Int): Single<PullRequestResponse> {
-//        return
-//    }
+    companion object {
+        fun getBaseService(): GitHubService {
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("https://api.github.com/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            return retrofit.create(GitHubService::class.java)
+        }
+    }
 }

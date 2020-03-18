@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val appModule = module {
     single { ConnectivityService() }
-    single { GitHubService() }
+    single { GitHubService.getBaseService() }
 }
 
 class MainApplication : Application() {
