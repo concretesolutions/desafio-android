@@ -69,7 +69,7 @@ class HomeActivity : AppCompatActivity(), SwipyRefreshLayout.OnRefreshListener {
             if (repositoriesList != null) {
                 gitHubRepositoriesListAdapter.run {
                     addPage(repositoriesList.items)
-//                    notifyDataSetChanged()
+                    notifyDataSetChanged()
                 }
                 swipyrefreshlayout.isRefreshing = false
             }

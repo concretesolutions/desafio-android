@@ -22,7 +22,9 @@ class GitHubRepositoriesViewModel(
     val errorLiveData = MutableLiveData<Throwable>()
 
     fun getRepositoriesList(page: Int) {
-        command.value = Command.ShowLoading
+        if (page == 1) {
+            command.value = Command.ShowLoading
+        }
         repository.getRepositoriesList(this, page)
     }
 
