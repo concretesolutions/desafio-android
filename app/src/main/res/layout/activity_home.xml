@@ -18,6 +18,7 @@
             android:background="@color/gray"
             app:navigationContentDescription="@string/menu"
             app:navigationIcon="@drawable/ic_menu"
+            app:title="@string/title_activity_home"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>

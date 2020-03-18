@@ -25,11 +25,11 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pull_requests_list)
-        setSupportActionBar(toolbarPullRequests)
-        toolbarPullRequests.setNavigationOnClickListener { onBackPressed() }
-
         val creator = intent.extras?.getString("creator")
         val repositoryId = intent.extras?.getString("repoId")
+        toolbarPullRequests.title = repositoryId
+        setSupportActionBar(toolbarPullRequests)
+        toolbarPullRequests.setNavigationOnClickListener { onBackPressed() }
 
         setList()
         setObservers()
@@ -45,7 +45,7 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
     private fun setList() {
         rvPullRequestsList.apply {
             layoutManager = LinearLayoutManager(this@PullRequestsListActivity)
-            adapter = PullRequestsListAdapter(emptyList(), this@PullRequestsListActivity)
+            adapter = PullRequestsListAdapter(this@PullRequestsListActivity, emptyList(), this@PullRequestsListActivity)
         }
     }
 
@@ -59,7 +59,7 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
 
         gitHubRepositoriesViewModel.gitHubPullRequestsList.observe(this, Observer { pullRequestsList ->
             if (pullRequestsList != null) {
-                rvPullRequestsList.adapter = PullRequestsListAdapter(pullRequestsList, this)
+                rvPullRequestsList.adapter = PullRequestsListAdapter(this@PullRequestsListActivity, pullRequestsList, this)
             }
         })
 

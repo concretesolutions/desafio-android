@@ -1,5 +1,7 @@
 package com.rafaelmfer.consultinggithub.mvvm.view
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +12,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.rafaelmfer.consultinggithub.R
 import com.rafaelmfer.consultinggithub.mvvm.model.pullrequests.GitPullRequestResponse
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
 
-class PullRequestsListAdapter(var pullRequestList: List<GitPullRequestResponse>, private val listener: OnClickListenerGitHub) :
+const val DATE_FROM_SERVER_PATTERN = "yyyy-MM-dd'T'HH:mm:ss"
+const val TIME_PATTERN_HHh_MM = "HH'h'mm"
+const val DATE_PATTERN_DD_MM_YY = "dd/MM/yy"
+
+class PullRequestsListAdapter(var context: Context, var pullRequestList: List<GitPullRequestResponse>, private val listener: OnClickListenerGitHub) :
     RecyclerView.Adapter<PullRequestsListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,22 +31,28 @@ class PullRequestsListAdapter(var pullRequestList: List<GitPullRequestResponse>,
     override fun getItemCount(): Int = pullRequestList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val pullRequest = pullRequestList[position]
+        pullRequestList[position].run {
 
-        holder.apply {
-            tvNamePullRequest.text = pullRequest.title
-            tvDescriptionPullRequest.text = pullRequest.body
-            tvUserNameLoginPull.text = pullRequest.user.login
-//            tvFullNamePull.text = "teste"
+            holder.apply {
+                tvNamePullRequest.text = title
+                tvDescriptionPullRequest.text = body
+                tvUserNameLoginPull.text = user.login
 
-            Glide.with(itemView)
-                .load(pullRequest.user.avatarUrl)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .dontAnimate()
-                .into(civUserPullRequest)
+                tvFullNamePull.text = context.getString(
+                    R.string.time_and_date,
+                    createdAt.formatFromServer(DATE_FROM_SERVER_PATTERN, TIME_PATTERN_HHh_MM),
+                    createdAt.formatFromServer(DATE_FROM_SERVER_PATTERN, DATE_PATTERN_DD_MM_YY)
+                )
 
-            itemView.setOnClickListener {
-                listener.onClickOpenWeb(pullRequest.htmlUrl)
+                Glide.with(itemView)
+                    .load(user.avatarUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .dontAnimate()
+                    .into(civUserPullRequest)
+
+                itemView.setOnClickListener {
+                    listener.onClickOpenWeb(htmlUrl)
+                }
             }
         }
     }
@@ -51,4 +64,12 @@ class PullRequestsListAdapter(var pullRequestList: List<GitPullRequestResponse>,
         val tvFullNamePull: TextView = itemView.findViewById(R.id.tvFullNamePull)
         val civUserPullRequest: CircleImageView = itemView.findViewById(R.id.civUserPullRequest)
     }
+}
+
+@SuppressLint("SimpleDateFormat")
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+fun String.formatFromServer(serverPattern: String, pattern: String): String {
+    val parse = SimpleDateFormat(serverPattern)
+    val formatterDate = SimpleDateFormat(pattern)
+    return formatterDate.format(parse.parse(this))
 }

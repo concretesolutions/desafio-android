@@ -31,6 +31,8 @@
         android:id="@+id/tvDescriptionRep"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="3"
         android:padding="@dimen/padding_4"
         app:layout_constraintEnd_toEndOf="@+id/tvNameRep"
         app:layout_constraintStart_toStartOf="@+id/tvNameRep"
