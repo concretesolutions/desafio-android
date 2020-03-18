@@ -13,25 +13,21 @@ import com.example.gitrepositories.R
 import com.example.gitrepositories.model.data_sources.PullRequestsDataSourceFactory
 import com.example.gitrepositories.model.dto.PullRequest
 import com.example.gitrepositories.model.services.ConnectivityService
-import com.example.gitrepositories.model.services.GitHubService
-import io.reactivex.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class PullRequestsViewModel(application: Application, private val repoName: String, private val repoCreator: String)
-    : AndroidViewModel(application), KoinComponent {
+class PullRequestsViewModel(application: Application, private val repoName: String, private val repoCreator: String) : AndroidViewModel(application), KoinComponent {
 
     private val connectivityService: ConnectivityService by inject()
-    private val gitHubService: GitHubService by inject()
 
     private val context = application.applicationContext
-    private val compositeDisposable = CompositeDisposable()
 
     lateinit var list: LiveData<PagedList<PullRequest>>
     var intent = MutableLiveData<Intent>()
     var displayEmptyMessage = MutableLiveData<Boolean>()
     var displayNoBrowserMessage = MutableLiveData<String>()
     var displayConnectivityMessage = MutableLiveData<String>()
+    var displayLoadPullRequestsError = MutableLiveData<String>()
 
     init {
         loadPullRequests()
@@ -41,13 +37,17 @@ class PullRequestsViewModel(application: Application, private val repoName: Stri
     }
 
     private fun loadPullRequests() {
-        val dataSourceFactory = PullRequestsDataSourceFactory(compositeDisposable, gitHubService, ::onInitialFetchCompleted)
-        val config = PagedList.Config.Builder().setPageSize(10).setInitialLoadSizeHint(20).setEnablePlaceholders(false).build()
+        val dataSourceFactory = PullRequestsDataSourceFactory(::onInitialFetchCompleted, ::onLoadPullRequestsError, repoCreator, repoName)
+        val config = PagedList.Config.Builder().setPageSize(30).setInitialLoadSizeHint(30).setEnablePlaceholders(false).build()
         list = LivePagedListBuilder<Int, PullRequest>(dataSourceFactory, config).build()
     }
 
     private fun onInitialFetchCompleted(isEmpty: Boolean) {
         displayEmptyMessage.postValue(isEmpty)
+    }
+
+    private fun onLoadPullRequestsError() {
+        displayLoadPullRequestsError.postValue(context.getString(R.string.load_pr_error))
     }
 
     fun onPullRequestClick(pullRequest: PullRequest) {
@@ -64,10 +64,5 @@ class PullRequestsViewModel(application: Application, private val repoName: Stri
         } else {
             Uri.parse(url)
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
     }
 }

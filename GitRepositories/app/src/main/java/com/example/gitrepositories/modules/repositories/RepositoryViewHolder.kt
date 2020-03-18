@@ -18,13 +18,12 @@ class RepositoryViewHolder(view: View, private val context: Context, private val
 
         itemView.title.text = repository.title
         itemView.description.text = repository.description
-        itemView.username.text = repository.username
-        itemView.complete_name.text = repository.completeName
+        itemView.username.text = repository.user.username
         itemView.star_count.text = repository.starCount.toString()
         itemView.fork_count.text = repository.forkCount.toString()
 
         Glide.with(context)
-            .load(repository.image)
+            .load(repository.user.image)
             .placeholder(R.drawable.ic_user)
             .apply(RequestOptions.circleCropTransform())
             .into(itemView.picture)

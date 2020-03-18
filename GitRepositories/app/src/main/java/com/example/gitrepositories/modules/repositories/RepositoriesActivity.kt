@@ -47,5 +47,9 @@ class RepositoriesActivity : AppCompatActivity() {
         viewModel.displayConnectivityMessage.observe(this, Observer {
             Snackbar.make(repositories_layout, it, Snackbar.LENGTH_LONG).show()
         })
+
+        viewModel.displayLoadRepositoryError.observe(this, Observer {
+            Snackbar.make(repositories_layout, it, Snackbar.LENGTH_LONG).show()
+        })
     }
 }

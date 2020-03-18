@@ -3,32 +3,41 @@ package com.example.gitrepositories.model.data_sources
 import androidx.paging.PageKeyedDataSource
 import com.example.gitrepositories.model.dto.PullRequest
 import com.example.gitrepositories.model.services.GitHubService
-import io.reactivex.disposables.CompositeDisposable
-import java.util.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class PullRequestsDataSource(private val gitHubService: GitHubService, private val compositeDisposable: CompositeDisposable, private val initialFetchCompletedListener: (Boolean) -> Unit)
-    : PageKeyedDataSource<Int, PullRequest>() {
+class PullRequestsDataSource(private val initialFetchCompletedCallback: (Boolean) -> Unit, private val errorCallback: () -> Unit,
+                             private val repoCreator: String, private val repoName: String) : PageKeyedDataSource<Int, PullRequest>(), KoinComponent {
+
+    private val gitHubService: GitHubService by inject()
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, PullRequest>) {
-//        compositeDisposable.add(
-//            gitHubService.getPullRequests(1, params.requestedLoadSize)
-//                .subscribe { response ->
-//                    val list = response.pullRequests
-//                    callback.onResult(list, null, 2)
-//                    initialFetchCompletedListener.invoke(list.isEmpty())
-//                }
-//        )
-        callback.onResult(listOf(), null, 2)
+        gitHubService.getPullRequests(repoCreator, repoName).enqueue(object : Callback<List<PullRequest>> {
+            override fun onResponse(call: Call<List<PullRequest>>, response: Response<List<PullRequest>>) {
+                val list = response.body()!!
+                callback.onResult(list, null, 2)
+                initialFetchCompletedCallback.invoke(list.isEmpty())
+            }
+
+            override fun onFailure(call: Call<List<PullRequest>>, t: Throwable) {
+                errorCallback.invoke()
+            }
+        })
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, PullRequest>) {
-//        compositeDisposable.add(
-//            gitHubService.getPullRequests(params.key, params.requestedLoadSize)
-//                .subscribe { response ->
-//                    callback.onResult(response.pullRequests, params.key + 1)
-//                }
-//        )
-        callback.onResult(listOf(), params.key + 1)
+        gitHubService.getPullRequests(repoCreator, repoName).enqueue(object : Callback<List<PullRequest>> {
+            override fun onResponse(call: Call<List<PullRequest>>, response: Response<List<PullRequest>>) {
+                callback.onResult(response.body()!!, params.key + 1)
+            }
+
+            override fun onFailure(call: Call<List<PullRequest>>, t: Throwable) {
+                errorCallback.invoke()
+            }
+        })
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, PullRequest>) {}

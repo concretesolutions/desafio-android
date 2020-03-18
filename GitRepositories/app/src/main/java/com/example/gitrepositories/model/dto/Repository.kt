@@ -1,18 +1,20 @@
 package com.example.gitrepositories.model.dto
 
-import android.graphics.Bitmap
 import com.google.gson.annotations.SerializedName
 
-data class RepositoryResponse(
-    @SerializedName("pull_requests") val repositories: List<Repository>
-)
-
 data class Repository(
+    @SerializedName("name")
     val title: String,
+
+    @SerializedName("description")
     val description: String,
-    val username: String,
-    val completeName: String,
+
+    @SerializedName("stargazers_count")
     val starCount: Int,
+
+    @SerializedName("forks_count")
     val forkCount: Int,
-    val image: Bitmap?
+
+    @SerializedName("owner")
+    val user: User
 )

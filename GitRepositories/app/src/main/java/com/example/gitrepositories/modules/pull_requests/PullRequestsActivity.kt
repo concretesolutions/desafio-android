@@ -59,5 +59,9 @@ class PullRequestsActivity : AppCompatActivity() {
         viewModel.displayConnectivityMessage.observe(this, Observer {
             Snackbar.make(pull_requests_layout, it, Snackbar.LENGTH_LONG).show()
         })
+
+        viewModel.displayLoadPullRequestsError.observe(this, Observer {
+            Snackbar.make(pull_requests_layout, it, Snackbar.LENGTH_LONG).show()
+        })
     }
 }
