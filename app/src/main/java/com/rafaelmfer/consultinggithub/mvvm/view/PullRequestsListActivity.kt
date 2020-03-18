@@ -69,10 +69,6 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
     }
 
     private fun showLoading(visible: Boolean) {
-        if (visible) {
-            rvPullRequestsList.visibility = View.GONE
-        } else {
-            rvPullRequestsList.visibility = View.VISIBLE
-        }
+        rvPullRequestsList.visibility = if (visible) View.GONE else View.VISIBLE
     }
 }
