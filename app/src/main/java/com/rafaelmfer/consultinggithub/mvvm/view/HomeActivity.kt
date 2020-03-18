@@ -86,7 +86,6 @@ class HomeActivity : AppCompatActivity(), SwipyRefreshLayout.OnRefreshListener {
 
     override fun onRefresh(direction: SwipyRefreshLayoutDirection) {
         getRepositories()
-        Toast.makeText(this, "carregando sabosta", Toast.LENGTH_LONG).show()
     }
 
     private fun getRepositories() {
