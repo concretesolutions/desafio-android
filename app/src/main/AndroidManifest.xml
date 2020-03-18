@@ -14,21 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name="com.rafaelmfer.consultinggithub.mvvm.view.HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".mvvm.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
+            android:name="com.rafaelmfer.consultinggithub.mvvm.view.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity
             android:name="com.rafaelmfer.consultinggithub.mvvm.view.PullRequestsListActivity"
-            android:label="@string/title_activity_pull_requests_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ActBase" />
+
     </application>
 
 </manifest>

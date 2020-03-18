@@ -9,7 +9,7 @@
         android:id="@+id/civUser"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/ic_github"
         app:layout_constraintEnd_toEndOf="@+id/tvFullName"
         app:layout_constraintStart_toStartOf="@+id/tvFullName"
         app:layout_constraintTop_toTopOf="@+id/tvNameRep" />
