@@ -37,7 +37,6 @@ class HomeActivity : AppCompatActivity(), SwipyRefreshLayout.OnRefreshListener {
         setObservers()
 
         getRepositories()
-//        gitHubRepositoriesViewModel.getRepositoriesList(page)
     }
 
     private val listener = object : OnClickListenerGitHub {
