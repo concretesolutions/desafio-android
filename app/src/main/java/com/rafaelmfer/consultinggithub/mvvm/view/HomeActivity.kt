@@ -9,30 +9,35 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout
+import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection
 import com.rafaelmfer.consultinggithub.R
 import com.rafaelmfer.consultinggithub.mvvm.ViewModelFactory
 import com.rafaelmfer.consultinggithub.mvvm.viewmodel.GitHubRepositoriesViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), SwipyRefreshLayout.OnRefreshListener {
 
+    private lateinit var gitHubRepositoriesListAdapter: GitHubRepositoriesListAdapter
     private val gitHubRepositoriesViewModel by lazy {
         ViewModelProviders
             .of(this, ViewModelFactory())
             .get(GitHubRepositoriesViewModel::class.java)
     }
-    private val page = 1
+    private var page = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbarHome)
+        swipyrefreshlayout.setOnRefreshListener(this@HomeActivity)
 
         setList()
         setObservers()
 
-        gitHubRepositoriesViewModel.getRepositoriesList(page)
+        getRepositories()
+//        gitHubRepositoriesViewModel.getRepositoriesList(page)
     }
 
     private val listener = object : OnClickListenerGitHub {
@@ -47,7 +52,8 @@ class HomeActivity : AppCompatActivity() {
     private fun setList() {
         rvRepositoriesList.apply {
             layoutManager = LinearLayoutManager(this@HomeActivity)
-            adapter = GitHubRepositoriesListAdapter(emptyList(), listener)
+            gitHubRepositoriesListAdapter = GitHubRepositoriesListAdapter(listener)
+            adapter = gitHubRepositoriesListAdapter
         }
     }
 
@@ -61,7 +67,11 @@ class HomeActivity : AppCompatActivity() {
 
         gitHubRepositoriesViewModel.gitHubRepositories.observe(this, Observer { repositoriesList ->
             if (repositoriesList != null) {
-                rvRepositoriesList.adapter = GitHubRepositoriesListAdapter(repositoriesList.items, listener)
+                gitHubRepositoriesListAdapter.run {
+                    addPage(repositoriesList.items)
+//                    notifyDataSetChanged()
+                }
+                swipyrefreshlayout.isRefreshing = false
             }
         })
 
@@ -72,5 +82,15 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showLoading(visible: Boolean) {
         rvRepositoriesList.visibility = if (visible) GONE else VISIBLE
+    }
+
+    override fun onRefresh(direction: SwipyRefreshLayoutDirection) {
+        getRepositories()
+        Toast.makeText(this, "carregando sabosta", Toast.LENGTH_LONG).show()
+    }
+
+    private fun getRepositories() {
+        gitHubRepositoriesViewModel.getRepositoriesList(page)
+        page++
     }
 }

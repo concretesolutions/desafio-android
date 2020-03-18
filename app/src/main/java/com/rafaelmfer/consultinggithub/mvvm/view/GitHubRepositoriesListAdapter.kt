@@ -11,8 +11,14 @@ import com.rafaelmfer.consultinggithub.R
 import com.rafaelmfer.consultinggithub.mvvm.model.repositories.Item
 import de.hdodenhof.circleimageview.CircleImageView
 
-class GitHubRepositoriesListAdapter(var repositoriesList: List<Item>, private val listener: OnClickListenerGitHub) :
+class GitHubRepositoriesListAdapter(private val listener: OnClickListenerGitHub) :
     RecyclerView.Adapter<GitHubRepositoriesListAdapter.ViewHolder>() {
+
+    private var repositoriesList = mutableListOf<Item>()
+
+    fun addPage(page: List<Item>) {
+        repositoriesList.addAll(page)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater
