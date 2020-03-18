@@ -38,7 +38,7 @@ class PullRequestsListAdapter(var context: Context, var pullRequestList: List<Gi
                 tvDescriptionPullRequest.text = body
                 tvUserNameLoginPull.text = user.login
 
-                tvFullNamePull.text = context.getString(
+                tvDateOfPull.text = context.getString(
                     R.string.time_and_date,
                     createdAt.formatFromServer(DATE_FROM_SERVER_PATTERN, TIME_PATTERN_HHh_MM),
                     createdAt.formatFromServer(DATE_FROM_SERVER_PATTERN, DATE_PATTERN_DD_MM_YY)
@@ -61,7 +61,7 @@ class PullRequestsListAdapter(var context: Context, var pullRequestList: List<Gi
         val tvNamePullRequest: TextView = itemView.findViewById(R.id.tvNamePullRequest)
         val tvDescriptionPullRequest: TextView = itemView.findViewById(R.id.tvDescriptionPullRequest)
         val tvUserNameLoginPull: TextView = itemView.findViewById(R.id.tvUserNameLoginPull)
-        val tvFullNamePull: TextView = itemView.findViewById(R.id.tvFullNamePull)
+        val tvDateOfPull: TextView = itemView.findViewById(R.id.tvDateOfPull)
         val civUserPullRequest: CircleImageView = itemView.findViewById(R.id.civUserPullRequest)
     }
 }

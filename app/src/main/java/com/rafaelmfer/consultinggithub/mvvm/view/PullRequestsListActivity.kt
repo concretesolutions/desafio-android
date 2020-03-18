@@ -21,6 +21,7 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
         ViewModelFactory()
     ).get(GitHubRepositoriesViewModel::class.java) }
     private val page = 1
+    var gitHubPullRequestsOpened = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +32,15 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
         setSupportActionBar(toolbarPullRequests)
         toolbarPullRequests.setNavigationOnClickListener { onBackPressed() }
 
+
+
         setList()
         setObservers()
         if (creator != null && repositoryId != null) {
             gitHubRepositoriesViewModel.getPullRequestsList(creator, repositoryId, page)
         }
+
+
     }
 
     override fun onClickOpenWeb(htmlUrl: String) {
@@ -60,6 +65,12 @@ class PullRequestsListActivity : AppCompatActivity(), OnClickListenerGitHub {
         gitHubRepositoriesViewModel.gitHubPullRequestsList.observe(this, Observer { pullRequestsList ->
             if (pullRequestsList != null) {
                 rvPullRequestsList.adapter = PullRequestsListAdapter(this@PullRequestsListActivity, pullRequestsList, this)
+                for (item in pullRequestsList) {
+                    if (item.state == "open") {
+                        gitHubPullRequestsOpened++
+                    }
+                }
+                tvPullRequestsCountOpened.text = getString(R.string.pull_requests_opened, gitHubPullRequestsOpened)
             }
         })
 

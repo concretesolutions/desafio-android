@@ -38,9 +38,9 @@ class GitHubRepositoriesViewModel(
         errorLiveData.value = error
     }
 
-    fun getPullRequestsList(creator: String, repository: String, page: Int) {
+    fun getPullRequestsList(creator: String, repositoryId: String, page: Int) {
         command.value = Command.ShowLoading
-        this.repository.getPullRequestsList(this, creator, repository, page)
+        repository.getPullRequestsList(this, creator, repositoryId, page)
     }
 
     override fun onSuccess(response: List<GitPullRequestResponse>) {

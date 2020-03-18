@@ -50,14 +50,14 @@
         android:padding="@dimen/padding_2"
         android:textColor="@color/blue"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/tvFullNamePull"
+        app:layout_constraintBottom_toTopOf="@id/tvDateOfPull"
         app:layout_constraintEnd_toEndOf="@+id/tvDescriptionPullRequest"
         app:layout_constraintStart_toEndOf="@+id/civUserPullRequest"
         app:layout_constraintTop_toTopOf="@+id/civUserPullRequest"
         tools:text="Username" />
 
     <TextView
-        android:id="@+id/tvFullNamePull"
+        android:id="@+id/tvDateOfPull"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="start|center"

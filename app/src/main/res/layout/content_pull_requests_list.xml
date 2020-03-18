@@ -7,19 +7,19 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TextView
-        android:id="@+id/tvPullRequestsCount"
+        android:id="@+id/tvPullRequestsCountOpened"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_40"
         android:alpha="0.5"
         android:background="@color/gray"
-        android:gravity="start|center"
+        android:gravity="center_vertical"
         android:paddingStart="@dimen/padding_16"
-        android:paddingEnd="@dimen/padding_16"
+        android:paddingEnd="@dimen/padding_2"
         android:textColor="@color/gold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="423 opened / 545 closed" />
+        tools:text="423 opened " />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPullRequestsList"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPullRequestsCount"
+        app:layout_constraintTop_toBottomOf="@id/tvPullRequestsCountOpened"
         tools:itemCount="5"
         tools:listitem="@layout/pull_requests_item" />
 
