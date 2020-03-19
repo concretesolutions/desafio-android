@@ -38,7 +38,7 @@ class PullRequestsViewModel(application: Application, private val repoName: Stri
 
     private fun loadPullRequests() {
         val dataSourceFactory = PullRequestsDataSourceFactory(::onInitialFetchCompleted, ::onLoadPullRequestsError, repoCreator, repoName)
-        val config = PagedList.Config.Builder().setPageSize(30).setInitialLoadSizeHint(30).setEnablePlaceholders(false).build()
+        val config = PagedList.Config.Builder().setPageSize(10).setInitialLoadSizeHint(20).setEnablePlaceholders(false).build()
         list = LivePagedListBuilder<Int, PullRequest>(dataSourceFactory, config).build()
     }
 

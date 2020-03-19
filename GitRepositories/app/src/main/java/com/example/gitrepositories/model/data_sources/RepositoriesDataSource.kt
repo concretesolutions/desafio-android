@@ -31,7 +31,8 @@ class RepositoriesDataSource(private val initialFetchCompletedCallback: (Boolean
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Repository>) {
         gitHubService.getRepositories(params.key).enqueue(object : Callback<RepositoryResponse> {
             override fun onResponse(call: Call<RepositoryResponse>, response: Response<RepositoryResponse>) {
-                callback.onResult(response.body()!!.repositories, params.key + 1)
+                val list = response.body()?.repositories ?: listOf()
+                callback.onResult(list, params.key + 1)
             }
 
             override fun onFailure(call: Call<RepositoryResponse>, t: Throwable) {

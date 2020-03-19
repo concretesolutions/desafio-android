@@ -37,7 +37,7 @@ class RepositoriesViewModel(application: Application) : AndroidViewModel(applica
 
     private fun loadRepositories() {
         val dataSourceFactory = RepositoriesDataSourceFactory(::onInitialFetchCompleted, ::onLoadRepositoriesError)
-        val config = PagedList.Config.Builder().setPageSize(30).setInitialLoadSizeHint(30).setEnablePlaceholders(false).build()
+        val config = PagedList.Config.Builder().setPageSize(10).setInitialLoadSizeHint(20).setEnablePlaceholders(false).build()
         list = LivePagedListBuilder<Int, Repository>(dataSourceFactory, config).build()
     }
 

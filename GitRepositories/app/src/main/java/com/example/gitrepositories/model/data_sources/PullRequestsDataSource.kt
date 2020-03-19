@@ -31,7 +31,8 @@ class PullRequestsDataSource(private val initialFetchCompletedCallback: (Boolean
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, PullRequest>) {
         gitHubService.getPullRequests(repoCreator, repoName).enqueue(object : Callback<List<PullRequest>> {
             override fun onResponse(call: Call<List<PullRequest>>, response: Response<List<PullRequest>>) {
-                callback.onResult(response.body()!!, params.key + 1)
+                val list = response.body() ?: listOf()
+                callback.onResult(list, params.key + 1)
             }
 
             override fun onFailure(call: Call<List<PullRequest>>, t: Throwable) {
