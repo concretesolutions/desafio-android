@@ -21,7 +21,7 @@ class PullRequestViewHolder(view: View, private val context: Context, private va
         itemView.title.text = pullRequest.title
         itemView.description.text = pullRequest.description
         itemView.username.text = pullRequest.user.username
-        itemView.date.text = getDateString(pullRequest.date)
+        itemView.date.text = pullRequest.date.split("T")[0]
 
         Glide.with(context)
             .load(pullRequest.user.image)
@@ -30,11 +30,6 @@ class PullRequestViewHolder(view: View, private val context: Context, private va
             .into(itemView.picture)
 
         itemView.setOnClickListener { clickListener.invoke(pullRequest) }
-    }
-
-    private fun getDateString(date: String): String {
-        val pattern = context.getString(R.string.date_format)
-        return SimpleDateFormat(pattern, Locale.US).format(date)
     }
 
     companion object {

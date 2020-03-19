@@ -17,7 +17,7 @@ class PullRequestsDataSource(private val initialFetchCompletedCallback: (Boolean
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, PullRequest>) {
         gitHubService.getPullRequests(repoCreator, repoName).enqueue(object : Callback<List<PullRequest>> {
             override fun onResponse(call: Call<List<PullRequest>>, response: Response<List<PullRequest>>) {
-                val list = response.body()!!
+                val list = response.body() ?: listOf()
                 callback.onResult(list, null, 2)
                 initialFetchCompletedCallback.invoke(list.isEmpty())
             }

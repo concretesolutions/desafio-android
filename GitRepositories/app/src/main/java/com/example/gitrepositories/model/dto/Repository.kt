@@ -2,6 +2,10 @@ package com.example.gitrepositories.model.dto
 
 import com.google.gson.annotations.SerializedName
 
+data class RepositoryResponse(
+    @SerializedName("items") val repositories: List<Repository>
+)
+
 data class Repository(
     @SerializedName("name")
     val title: String,
