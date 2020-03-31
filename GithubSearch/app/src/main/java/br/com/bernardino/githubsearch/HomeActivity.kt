@@ -39,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
             it?.let { showLoadingDialog(it) }
         })
 
-        mBinding.viewmodel?.repolist?.observe(this, Observer {
+        mBinding.viewmodel?.repoList?.observe(this, Observer {
             mAdapter.setReposListItems(it)
             mAdapter.notifyDataSetChanged()
         })

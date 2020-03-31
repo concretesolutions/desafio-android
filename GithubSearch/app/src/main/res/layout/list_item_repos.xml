@@ -25,7 +25,7 @@
             <TextView
                 android:id="@+id/tv_repos_desc"
                 style="@style/descText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_repos_name"
                 tools:text="Descrição do repositório lorem ipsum dolor sit amet lorem ipsum dolor" />
@@ -75,6 +75,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -94,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ci_user_avatar"
-                android:padding="4dp"
+                android:layout_margin="4dp"
                 tools:text="@string/app_name" />
 
             <TextView
@@ -102,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_user_name"
-                android:padding="4dp"
+                android:layout_margin="4dp"
                 tools:text="@string/app_name" />
 
         </RelativeLayout>

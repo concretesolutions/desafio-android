@@ -32,8 +32,8 @@ class ReposListAdapter(private val mContext: Context, val mClickListener: (Repos
         return repos.size
     }
 
-    fun setReposListItems(movieList: List<RepositoryDatabase>){
-        this.repos = movieList
+    fun setReposListItems(repoList: List<RepositoryDatabase>){
+        this.repos = repoList
         notifyDataSetChanged()
     }
 

@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.bernardino.githubsearch.ClickReposListener
 import br.com.bernardino.githubsearch.database.getDatabase
 import br.com.bernardino.githubsearch.repository.ReposRepository
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +19,7 @@ class HomeActivityViewModel(application: Application) : AndroidViewModel(applica
 
     private val viewModelJob = SupervisorJob()
 
-    val repolist = reposRepository.repos
+    val repoList = reposRepository.repos
 
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -35,6 +34,11 @@ class HomeActivityViewModel(application: Application) : AndroidViewModel(applica
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
+
+    private val _reposDescription = MutableLiveData<String>()
+    val reposDescription: LiveData<String>
+        get() = _reposDescription
+
 
     init {
         refreshDataFromRepository()
@@ -52,7 +56,7 @@ class HomeActivityViewModel(application: Application) : AndroidViewModel(applica
             } catch (networkError: IOException) {
                 // Show a Toast error message and hide the progress bar.
                 isLoading.value = false
-                if(repolist.value.isNullOrEmpty())
+                if(repoList.value.isNullOrEmpty())
                     _eventNetworkError.value = true
             }
         }
