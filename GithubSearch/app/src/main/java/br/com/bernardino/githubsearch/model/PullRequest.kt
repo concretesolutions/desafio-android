@@ -1,7 +1,10 @@
 package br.com.bernardino.githubsearch.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class PullRequest (
     @SerializedName("url") val url : String,
     @SerializedName("id") val id : Int,
@@ -13,4 +16,4 @@ data class PullRequest (
     @SerializedName("updated_at") val updated_at : String,
     @SerializedName("closed_at") val closed_at : String,
     @SerializedName("merged_at") val merged_at : String
-)
+) : Parcelable

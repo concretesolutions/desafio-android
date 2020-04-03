@@ -15,7 +15,7 @@
             android:name=".PullRequestActivity"
             android:label="@string/title_activity_pull_request1"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.bernardino.githubsearch.HomeActivity" />
@@ -30,7 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".HomeActivity"
+            android:parentActivityName=".SplashActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

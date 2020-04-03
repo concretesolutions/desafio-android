@@ -1,5 +1,6 @@
 package br.com.bernardino.githubsearch.network
 
+import androidx.lifecycle.LiveData
 import br.com.bernardino.githubsearch.model.PullRequest
 import br.com.bernardino.githubsearch.model.RepositoryBody
 import retrofit2.Call

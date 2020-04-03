@@ -30,6 +30,10 @@ class HomeActivity : AppCompatActivity() {
         mBinding.viewmodel = mHomeActivityViewModel
         mBinding.lifecycleOwner = this
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setIcon(R.mipmap.ic_launcher)
+
         configureList()
         attachObserver()
     }

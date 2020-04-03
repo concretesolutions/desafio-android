@@ -1,7 +1,10 @@
 package br.com.bernardino.githubsearch.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User (
 
     @SerializedName("login") val login : String,
@@ -22,4 +25,4 @@ data class User (
     @SerializedName("received_events_url") val received_events_url : String,
     @SerializedName("type") val type : String,
     @SerializedName("site_admin") val site_admin : Boolean
-)
+) : Parcelable
