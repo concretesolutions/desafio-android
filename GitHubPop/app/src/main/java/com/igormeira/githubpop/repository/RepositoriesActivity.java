@@ -42,6 +42,12 @@ public class RepositoriesActivity extends AppCompatActivity {
         recyclerView.setAdapter(repositoriesRecyclerAdapter);
         getAllRepositories();
         repositoriesRecyclerAdapter.setContext(this);
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                repositoriesViewModel.addDataToList();
+            }
+        });
     }
 
     private void getAllRepositories() {

@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class RepositoriesRecyclerAdapter extends RecyclerView.Adapter<RepositoryViewHolder> {
-    private ArrayList<Repository> mRepositories;
+    private ArrayList<Repository> mRepositories = new ArrayList<>();
     private Context context;
 
     @NonNull @Override
@@ -46,7 +46,9 @@ public class RepositoriesRecyclerAdapter extends RecyclerView.Adapter<Repository
     }
 
     public void setRepositoryList(ArrayList<Repository> repositories) {
-        this.mRepositories = repositories;
-        notifyDataSetChanged();
+        if (repositories != null) {
+            this.mRepositories.addAll(repositories);
+            notifyDataSetChanged();
+        }
     }
 }

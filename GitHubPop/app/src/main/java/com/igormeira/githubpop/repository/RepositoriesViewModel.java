@@ -18,13 +18,20 @@ import java.util.List;
 public class RepositoriesViewModel extends AndroidViewModel {
 
     private RepositoryData repositoryData;
+    private long currentPage;
 
     public RepositoriesViewModel(@NonNull Application application) {
         super(application);
         repositoryData = new RepositoryData();
+        currentPage = 1;
     }
 
     public LiveData<List<Repository>> getAllRepositories() {
-        return repositoryData.getRepositoriesData();
+        return repositoryData.getRepositoriesData(currentPage);
+    }
+
+    public LiveData<List<Repository>> addDataToList() {
+        currentPage += 1;
+        return repositoryData.getRepositoriesData(currentPage);
     }
 }

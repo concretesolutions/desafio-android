@@ -14,11 +14,11 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".pullrequest.PullRequestsActivity"
-            android:alwaysRetainTaskState="true"/>
+            android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
             android:name=".repository.RepositoriesActivity"
-            android:alwaysRetainTaskState="true">
+            android:configChanges="orientation|keyboardHidden|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

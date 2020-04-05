@@ -18,11 +18,11 @@ public class RepositoryData {
     private ArrayList<Repository> repositories = new ArrayList<>();
     private MutableLiveData<List<Repository>> mutableLiveData = new MutableLiveData<>();
 
-    public MutableLiveData<List<Repository>> getRepositoriesData() {
+    public MutableLiveData<List<Repository>> getRepositoriesData(long page) {
 
         final GitHubService service = new GitHubClient().getGitHubService();
 
-        Call<Repositories> call = service.getRepositories(1);
+        Call<Repositories> call = service.getRepositories(page);
         call.enqueue(new Callback<Repositories>() {
             @Override
             public void onResponse(Call<Repositories> call, Response<Repositories> response) {
