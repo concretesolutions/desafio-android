@@ -1,11 +1,5 @@
 <resources>
     <string name="app_name">GitHub Pop</string>
-    <string name="empty_repositories_list">There is no Java repository to be displayed at the moment</string>
-    <string name="empty_pull_requests_list">There is no pull request to be displayed at the moment</string>
-    <string name="no_network_error">There is no network connection at the moment</string>
-    <string name="load_repo_error">Error trying to load Java repositories</string>
-    <string name="load_pr_error">Error trying to load pull requests</string>
-    <string name="browser_error">There is no application in the device that can open this link</string>
     <string name="date_format">dd MMM yyyy</string>
     <string name="repositories">Repositories</string>
     <string name="pull_requests">Pull Requests</string>

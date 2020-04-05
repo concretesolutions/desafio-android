@@ -2,6 +2,8 @@ package com.igormeira.githubpop.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import static com.igormeira.githubpop.util.StringUtil.formateDateFromstring;
+
 public class PullRequest {
 
     @SerializedName("title")
@@ -40,7 +42,8 @@ public class PullRequest {
     }
 
     public String getDate() {
-        return date;
+        String formattedDate = formateDateFromstring("yyyy-MM-dd", "dd-MMM-yyyy", date);
+        return formattedDate;
     }
 
     public void setDate(String date) {
