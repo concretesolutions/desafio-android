@@ -1,5 +1,6 @@
 package com.igormeira.githubpop.handler;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -23,5 +24,9 @@ public class EventHandler {
 
     public void onPullRequestClick(String url) {
         mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+    }
+
+    public void onBackClick() {
+        ((Activity) mContext).finish();
     }
 }

@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import com.igormeira.githubpop.R;
 import com.igormeira.githubpop.databinding.ActivityPullRequestsBinding;
+import com.igormeira.githubpop.handler.EventHandler;
 import com.igormeira.githubpop.model.PullRequest;
 
 import java.util.ArrayList;
@@ -21,12 +22,15 @@ public class PullRequestsActivity extends AppCompatActivity {
 
     private PullRequestViewModel pullRequestViewModel;
     private PullRequestRecyclerAdapter pullRequestRecyclerAdapter;
+    private String creator, name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityPullRequestsBinding activityPullRequestsBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_pull_requests);
+
+        setUpInformation(activityPullRequestsBinding);
 
         // Bind RecyclerView
         RecyclerView recyclerView = activityPullRequestsBinding.recyclerViewPullRequest;
@@ -40,9 +44,14 @@ public class PullRequestsActivity extends AppCompatActivity {
         pullRequestRecyclerAdapter.setContext(this);
     }
 
+    private void setUpInformation(ActivityPullRequestsBinding activityPullRequestsBinding){
+        creator = getIntent().getStringExtra("creator");
+        name = getIntent().getStringExtra("name");
+        activityPullRequestsBinding.setName(name);
+        activityPullRequestsBinding.setHandler(new EventHandler(this));
+    }
+
     private void getAllPullRequests() {
-        String creator = getIntent().getStringExtra("creator");
-        String name = getIntent().getStringExtra("name");
         ProgressDialog dialog = showLoadingDialog(this);
         dialog.show();
         pullRequestViewModel.getAllPullRequests(creator, name).observe(this, pullRequests -> {
