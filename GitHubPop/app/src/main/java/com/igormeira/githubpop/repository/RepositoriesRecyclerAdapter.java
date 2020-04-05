@@ -2,32 +2,30 @@ package com.igormeira.githubpop.repository;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.igormeira.githubpop.R;
 import com.igormeira.githubpop.databinding.ItemRepositoryBinding;
+import com.igormeira.githubpop.handler.EventHandler;
 import com.igormeira.githubpop.model.Repository;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RepositoriesRecyclerAdapter extends RecyclerView.Adapter<RepositoryViewHolder> {
     private ArrayList<Repository> mRepositories;
     private Context context;
 
     @NonNull @Override
-    public RepositoryViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public RepositoryViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         ItemRepositoryBinding itemRepositoryBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
-                        R.layout.item_repository, viewGroup, false);
+                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                        R.layout.item_repository, parent, false);
         return new RepositoryViewHolder(itemRepositoryBinding);
     }
 

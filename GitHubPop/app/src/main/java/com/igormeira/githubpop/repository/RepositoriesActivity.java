@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import com.igormeira.githubpop.R;
@@ -17,6 +18,8 @@ import com.igormeira.githubpop.model.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.igormeira.githubpop.handler.Dialog.showLoadingDialog;
 
 public class RepositoriesActivity extends AppCompatActivity {
 
@@ -42,7 +45,11 @@ public class RepositoriesActivity extends AppCompatActivity {
     }
 
     private void getAllRepositories() {
-        repositoriesViewModel.getAllRepositories().observe(this, repositories ->
-                repositoriesRecyclerAdapter.setRepositoryList((ArrayList<Repository>) repositories));
+        ProgressDialog dialog = showLoadingDialog(this);
+        dialog.show();
+        repositoriesViewModel.getAllRepositories().observe(this, repositories -> {
+            dialog.dismiss();
+            repositoriesRecyclerAdapter.setRepositoryList((ArrayList<Repository>) repositories);
+        });
     }
 }

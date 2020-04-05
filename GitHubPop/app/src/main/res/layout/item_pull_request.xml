@@ -7,8 +7,8 @@
 
     <data>
         <variable
-            name="repository"
-            type="com.igormeira.githubpop.model.Repository" />
+            name="pullrequest"
+            type="com.igormeira.githubpop.model.PullRequest" />
         <variable
             name="handler"
             type="com.igormeira.githubpop.handler.EventHandler" />
@@ -19,9 +19,9 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true">
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
-            android:onClick="@{() -> handler.onRepositoryClick(repository)}"
+            android:onClick="@{() -> handler.onPullRequestClick(pullrequest.link)}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
@@ -34,63 +34,47 @@
                 android:layout_height="match_parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/repositoryUser"
+                    android:id="@+id/upper_layout"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:background="@color/darkPurple_opacity1"
+                    bind:layout_constraintEnd_toEndOf="parent"
+                    bind:layout_constraintStart_toStartOf="parent"
                     bind:layout_constraintTop_toTopOf="parent">
 
                     <!--USER-->
-                    <ImageView android:id="@+id/avatar"
-                        bind:profileImage="@{repository.user.avatar}"
+                    <ImageView
+                        android:id="@+id/avatar"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="10dp"
+                        bind:profileImage="@{pullrequest.user.avatar}"
                         bind:layout_constraintBottom_toBottomOf="parent"
                         bind:layout_constraintLeft_toLeftOf="parent"
                         bind:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.textview.MaterialTextView
+                    <TextView
                         android:id="@+id/username"
                         style="@style/itemUserNameText"
-                        android:text="@{repository.user.username}"
-                        android:textSize="14sp"
+                        android:text="@{pullrequest.user.username}"
                         android:layout_marginStart="10dp"
+                        android:textSize="14sp"
+                        bind:layout_constraintBottom_toBottomOf="@id/avatar"
                         bind:layout_constraintLeft_toRightOf="@id/avatar"
-                        bind:layout_constraintTop_toTopOf="@id/avatar"
-                        bind:layout_constraintBottom_toBottomOf="@id/avatar"/>
+                        bind:layout_constraintTop_toTopOf="@id/avatar" />
 
-                    <!--FORKS-->
+                    <!--DATE-->
                     <ImageView
-                        android:id="@+id/fork_icon"
-                        style="@style/repositoryItemIcon"
-                        android:src="@drawable/ic_fork"
-                        bind:layout_constraintRight_toLeftOf="@+id/fork_count"
+                        style="@style/pullRequestItemIcon"
+                        android:src="@drawable/ic_calendar"
                         bind:layout_constraintBottom_toBottomOf="parent"
+                        bind:layout_constraintRight_toLeftOf="@+id/date"
                         bind:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/fork_count"
-                        style="@style/itemRepositoryText"
-                        android:text="@{repository.forks}"
-                        android:layout_marginEnd="30dp"
-                        bind:layout_constraintRight_toLeftOf="@+id/star_icon"
-                        bind:layout_constraintBottom_toBottomOf="parent"
-                        bind:layout_constraintTop_toTopOf="parent" />
-
-                    <!--STARS-->
-                    <ImageView
-                        android:id="@+id/star_icon"
-                        style="@style/repositoryItemIcon"
-                        android:src="@drawable/ic_star"
-                        bind:layout_constraintRight_toLeftOf="@+id/star_count"
-                        bind:layout_constraintBottom_toBottomOf="parent"
-                        bind:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/star_count"
-                        style="@style/itemRepositoryText"
-                        android:text="@{repository.stars}"
+                    <TextView
+                        android:id="@+id/date"
+                        style="@style/itemPRsText"
+                        android:text="@{pullrequest.date}"
                         android:layout_marginEnd="10dp"
                         bind:layout_constraintBottom_toBottomOf="parent"
                         bind:layout_constraintRight_toRightOf="parent"
@@ -99,25 +83,27 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    bind:layout_constraintTop_toBottomOf="@+id/repositoryUser"
-                    android:id="@+id/upper_layout"
+                    android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    bind:layout_constraintTop_toBottomOf="@+id/upper_layout">
 
-                    <com.google.android.material.textview.MaterialTextView
+                    <TextView
                         android:id="@+id/title"
                         style="@style/itemTitleText"
-                        android:text="@{repository.title}"
+                        android:text="@{pullrequest.title}"
                         bind:layout_constraintLeft_toLeftOf="parent"
                         bind:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.textview.MaterialTextView
+                    <TextView
                         android:id="@+id/description"
                         style="@style/itemDescriptionText"
-                        android:text="@{repository.description}"
-                        android:textStyle="normal"
+                        android:text="@{pullrequest.description}"
                         android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="3"
+                        android:textStyle="normal"
                         bind:layout_constraintLeft_toLeftOf="parent"
                         bind:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -125,7 +111,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
