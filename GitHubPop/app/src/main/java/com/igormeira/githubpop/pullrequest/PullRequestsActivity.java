@@ -11,12 +11,12 @@ import android.os.Bundle;
 
 import com.igormeira.githubpop.R;
 import com.igormeira.githubpop.databinding.ActivityPullRequestsBinding;
-import com.igormeira.githubpop.handler.EventHandler;
+import com.igormeira.githubpop.util.EventHandler;
 import com.igormeira.githubpop.model.PullRequest;
 
 import java.util.ArrayList;
 
-import static com.igormeira.githubpop.handler.Dialog.showLoadingDialog;
+import static com.igormeira.githubpop.util.Dialog.showLoadingDialog;
 
 public class PullRequestsActivity extends AppCompatActivity {
 

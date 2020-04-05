@@ -10,7 +10,7 @@
             type="String" />
         <variable
             name="handler"
-            type="com.igormeira.githubpop.handler.EventHandler" />
+            type="com.igormeira.githubpop.util.EventHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

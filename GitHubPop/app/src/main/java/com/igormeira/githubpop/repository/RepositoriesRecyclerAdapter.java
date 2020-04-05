@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.igormeira.githubpop.R;
 import com.igormeira.githubpop.databinding.ItemRepositoryBinding;
-import com.igormeira.githubpop.handler.EventHandler;
+import com.igormeira.githubpop.util.EventHandler;
 import com.igormeira.githubpop.model.Repository;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -22,7 +20,7 @@ public class RepositoriesRecyclerAdapter extends RecyclerView.Adapter<Repository
     private Context context;
 
     @NonNull @Override
-    public RepositoryViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+    public RepositoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemRepositoryBinding itemRepositoryBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                         R.layout.item_repository, parent, false);

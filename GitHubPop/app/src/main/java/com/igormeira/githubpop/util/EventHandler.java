@@ -1,4 +1,4 @@
-package com.igormeira.githubpop.handler;
+package com.igormeira.githubpop.util;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,10 +1,7 @@
 package com.igormeira.githubpop.repository;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +14,8 @@ import com.igormeira.githubpop.databinding.ActivityRepositoriesBinding;
 import com.igormeira.githubpop.model.Repository;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static com.igormeira.githubpop.handler.Dialog.showLoadingDialog;
+import static com.igormeira.githubpop.util.Dialog.showLoadingDialog;
 
 public class RepositoriesActivity extends AppCompatActivity {
 

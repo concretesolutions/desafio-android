@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.igormeira.githubpop.R;
 import com.igormeira.githubpop.databinding.ItemPullRequestBinding;
 import com.igormeira.githubpop.model.PullRequest;
-import com.igormeira.githubpop.handler.EventHandler;
+import com.igormeira.githubpop.util.EventHandler;
 
 import java.util.ArrayList;
 

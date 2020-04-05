@@ -11,7 +11,7 @@
             type="com.igormeira.githubpop.model.Repository" />
         <variable
             name="handler"
-            type="com.igormeira.githubpop.handler.EventHandler" />
+            type="com.igormeira.githubpop.util.EventHandler" />
     </data>
 
     <LinearLayout
