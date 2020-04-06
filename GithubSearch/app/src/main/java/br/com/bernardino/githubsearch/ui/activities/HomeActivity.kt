@@ -1,7 +1,6 @@
-package br.com.bernardino.githubsearch
+package br.com.bernardino.githubsearch.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -9,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.bernardino.githubsearch.R
 import br.com.bernardino.githubsearch.adapter.ReposListAdapter
 import br.com.bernardino.githubsearch.database.RepositoryDatabase
 import br.com.bernardino.githubsearch.databinding.ActivityHomeBinding
@@ -26,7 +26,9 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        mBinding = DataBindingUtil.setContentView(this,
+            R.layout.activity_home
+        )
         mBinding.viewmodel = mHomeActivityViewModel
         mBinding.lifecycleOwner = this
 

@@ -1,4 +1,4 @@
-package br.com.bernardino.githubsearch
+package br.com.bernardino.githubsearch.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel

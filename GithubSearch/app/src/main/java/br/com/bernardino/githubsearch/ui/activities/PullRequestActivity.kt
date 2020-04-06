@@ -1,27 +1,20 @@
-package br.com.bernardino.githubsearch
+package br.com.bernardino.githubsearch.ui.activities
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.bernardino.githubsearch.R
 import br.com.bernardino.githubsearch.adapter.PullRequestListAdapter
-import br.com.bernardino.githubsearch.adapter.ReposListAdapter
 import br.com.bernardino.githubsearch.database.RepositoryDatabase
-import br.com.bernardino.githubsearch.databinding.ActivityHomeBinding
 import br.com.bernardino.githubsearch.databinding.ActivityPullrequestBinding
 import br.com.bernardino.githubsearch.model.EXTRA_REPOSITORY
 import br.com.bernardino.githubsearch.viewmodel.PullRequestActivityViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_pullrequest.*
 
 class PullRequestActivity : BaseActivity() {
 
@@ -51,7 +44,9 @@ class PullRequestActivity : BaseActivity() {
             )
         }).get(PullRequestActivityViewModel::class.java)
 
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_pullrequest)
+        mBinding = DataBindingUtil.setContentView(this,
+            R.layout.activity_pullrequest
+        )
         mBinding.viewmodel = mPullRequestActivityViewModel
         mBinding.lifecycleOwner = this
 

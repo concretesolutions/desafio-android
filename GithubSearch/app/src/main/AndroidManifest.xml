@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PullRequestActivity"
+            android:name=".ui.activities.PullRequestActivity"
             android:label="@string/title_activity_pull_request1"
-            android:parentActivityName=".HomeActivity"
+            android:parentActivityName=".ui.activities.HomeActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.bernardino.githubsearch.HomeActivity" />
+                android:value="br.com.bernardino.githubsearch.ui.activities.HomeActivity" />
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
@@ -30,8 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"
-            android:parentActivityName=".SplashActivity"
+        <activity android:name=".ui.activities.HomeActivity"
+            android:parentActivityName=".ui.activities.SplashActivity"
             android:theme="@style/AppTheme"/>
     </application>
 
