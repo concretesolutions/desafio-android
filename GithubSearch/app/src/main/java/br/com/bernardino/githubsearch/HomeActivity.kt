@@ -17,7 +17,7 @@ import br.com.bernardino.githubsearch.viewmodel.HomeActivityViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     lateinit var mAdapter: ReposListAdapter
     lateinit var mBinding: ActivityHomeBinding

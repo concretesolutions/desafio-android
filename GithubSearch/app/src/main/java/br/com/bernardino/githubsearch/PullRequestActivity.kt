@@ -23,12 +23,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_pullrequest.*
 
-class PullRequestActivity : AppCompatActivity() {
-
-    protected inline fun <VM : ViewModel> viewModelFactory(crossinline f: () -> VM) =
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(aClass: Class<T>): T = f() as T
-        }
+class PullRequestActivity : BaseActivity() {
 
     lateinit var mBinding: ActivityPullrequestBinding
     lateinit var mAdapter: PullRequestListAdapter
