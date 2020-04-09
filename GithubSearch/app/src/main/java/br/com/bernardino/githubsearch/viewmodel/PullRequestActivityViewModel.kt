@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import br.com.bernardino.githubsearch.database.getDatabase
 import br.com.bernardino.githubsearch.model.PullRequest
 import br.com.bernardino.githubsearch.repository.ReposRepository
@@ -19,17 +20,17 @@ class PullRequestActivityViewModel(
     creator: String,
     repository: String
 ) : AndroidViewModel(application) {
-    private val viewModelJob = SupervisorJob()
+
 
     private val reposRepository = ReposRepository(getDatabase(application))
-
-    private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private var pullRequest : List<PullRequest> = listOf()
 
     var pullRequestLiveData = MutableLiveData<List<PullRequest>>()
 
-    var isLoading = MutableLiveData<Boolean>()
+    private var _isLoading = MutableLiveData<Boolean>()
+    val isLoading : LiveData<Boolean>
+        get() = _isLoading
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -48,26 +49,21 @@ class PullRequestActivityViewModel(
     fun readPullRequestAPI (creator: String, repository: String) {
         viewModelScope.launch {
             try {
-                isLoading.value = true
+                _isLoading.value = true
                 Log.i("Bernardino", "Entrou launch API REQUEST")
                 pullRequest = reposRepository.getPullRequest(creator, repository)
                 pullRequestLiveData.value = pullRequest
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
-                isLoading.value = false
+                _isLoading.value = false
 
             } catch (networkError: IOException) {
                 // Show a Toast error message and hide the progress bar.
-                isLoading.value = false
+                _isLoading.value = false
                 if(pullRequestLiveData.value.isNullOrEmpty())
                     _eventNetworkError.value = true
             }
         }
-    }
-
-    override fun onCleared() {
-        viewModelJob.cancel()
-        super.onCleared()
     }
 
     fun onNetworkErrorShown() {

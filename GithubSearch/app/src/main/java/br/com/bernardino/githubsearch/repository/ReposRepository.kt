@@ -20,7 +20,6 @@ class ReposRepository(private val database: RepositoriesDatabase) {
     suspend fun refreshRepositories() {
         withContext(Dispatchers.IO) {
             val reposlist = RetrofitInitializer().reposService().getRepositories("language:Java", "stars", 1)
-                    .await()
             database.reposDao.insertAll(reposlist.items.asDomainModel())
         }
     }
@@ -30,7 +29,6 @@ class ReposRepository(private val database: RepositoriesDatabase) {
         withContext(Dispatchers.Main) {
             pullRequestList =
                 RetrofitInitializer().reposService().getPullRequests(creator, repository)
-                    .await()
         }
 
         return pullRequestList

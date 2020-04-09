@@ -31,12 +31,6 @@ class PullRequestActivity : BaseActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = repository.name
 
-        Toast.makeText(
-            this,
-            "repository data: ${repository.name} e ${repository.ownerUserFirstName}",
-            Toast.LENGTH_LONG
-        ).show()
-
         val mPullRequestActivityViewModel = ViewModelProviders.of(this, viewModelFactory {
             PullRequestActivityViewModel(
                 application,
@@ -62,8 +56,6 @@ class PullRequestActivity : BaseActivity() {
             )
         )
         mAdapter = PullRequestListAdapter(this)
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding.rvPullrequest.layoutManager = layoutManager
         mBinding.rvPullrequest.adapter = mAdapter
     }
 
@@ -74,7 +66,6 @@ class PullRequestActivity : BaseActivity() {
 
         mBinding.viewmodel?.pullRequestLiveData?.observe(this, Observer {
             mAdapter.setPullRequestListItems(it)
-            mAdapter.notifyDataSetChanged()
         })
 
         mBinding.viewmodel?.eventNetworkError?.observe(this, Observer<Boolean> { isNetworkError ->

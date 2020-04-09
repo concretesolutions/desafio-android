@@ -11,9 +11,9 @@ import retrofit2.http.Query
 interface GithubApi {
 
     @GET("search/repositories")
-    fun getRepositories(@Query("q") language: String, @Query("sort") sort: String, @Query("page") page: Int) : Call<RepositoryBody>
-
+    suspend fun getRepositories(@Query("q") language: String, @Query("sort") sort: String, @Query("page") page: Int)
+            : RepositoryBody
     @GET ("repos/{creator}/{repository}/pulls")
-    fun getPullRequests (@Path("creator") creator: String?,
-                         @Path("repository") repository : String?) : Call<List<PullRequest>>
+    suspend fun getPullRequests (@Path("creator") creator: String?,
+                         @Path("repository") repository : String?) : List<PullRequest>
 }

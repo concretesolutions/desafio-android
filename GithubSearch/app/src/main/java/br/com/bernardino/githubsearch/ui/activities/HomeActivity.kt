@@ -21,12 +21,15 @@ class HomeActivity : BaseActivity() {
 
     lateinit var mAdapter: ReposListAdapter
     lateinit var mBinding: ActivityHomeBinding
-    private val mHomeActivityViewModel by lazy {  ViewModelProviders.of(this).get(HomeActivityViewModel::class.java) }
+    private val mHomeActivityViewModel by lazy {
+        ViewModelProviders.of(this).get(HomeActivityViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mBinding = DataBindingUtil.setContentView(this,
+        mBinding = DataBindingUtil.setContentView(
+            this,
             R.layout.activity_home
         )
         mBinding.viewmodel = mHomeActivityViewModel
@@ -41,34 +44,39 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun attachObserver() {
-        mBinding.viewmodel?.isLoading?.observe(this, Observer<Boolean> {
+        mHomeActivityViewModel.isLoading.observe(this, Observer<Boolean> {
             it?.let { showLoadingDialog(it) }
         })
 
-        mBinding.viewmodel?.repoList?.observe(this, Observer {
+        mHomeActivityViewModel.repoList.observe(this, Observer {
             mAdapter.setReposListItems(it)
-            mAdapter.notifyDataSetChanged()
         })
 
-        mBinding.viewmodel?.eventNetworkError?.observe(this, Observer<Boolean> { isNetworkError ->
+        mHomeActivityViewModel.eventNetworkError.observe(this, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
     }
 
     private fun configureList() {
-        mBinding.rvRepos.addItemDecoration(DividerItemDecoration(mBinding.rvRepos.context, DividerItemDecoration.VERTICAL))
-        mAdapter = ReposListAdapter(this) { repositoryDatabase : RepositoryDatabase -> clickListener(repositoryDatabase)  }
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding.rvRepos.layoutManager = layoutManager
+        mBinding.rvRepos.addItemDecoration(
+            DividerItemDecoration(
+                mBinding.rvRepos.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        mAdapter = ReposListAdapter(this) { repositoryDatabase: RepositoryDatabase ->
+            clickListener(repositoryDatabase)
+        }
         mBinding.rvRepos.adapter = mAdapter
     }
 
     private fun showLoadingDialog(show: Boolean) {
-        if (show) mBinding.pbHome.visibility = View.VISIBLE else mBinding.pbHome.visibility = View.GONE
+        if (show) mBinding.pbHome.visibility = View.VISIBLE else mBinding.pbHome.visibility =
+            View.GONE
     }
 
     private fun onNetworkError() {
-        if(!mBinding.viewmodel?.isNetworkErrorShown?.value!!) {
+        if (!mHomeActivityViewModel.isNetworkErrorShown.value!!) {
             Snackbar.make(
                 rv_repos,
                 getString(R.string.network_error_msg),
@@ -79,11 +87,9 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun clickListener(repository: RepositoryDatabase) {
-        val intent = Intent (this, PullRequestActivity::class.java).apply {
+        val intent = Intent(this, PullRequestActivity::class.java).apply {
             putExtra(EXTRA_REPOSITORY, repository)
         }
         startActivity(intent)
-
     }
-
 }

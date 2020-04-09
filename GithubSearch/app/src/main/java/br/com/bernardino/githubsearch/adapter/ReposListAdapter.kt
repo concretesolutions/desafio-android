@@ -34,7 +34,7 @@ class ReposListAdapter(private val mContext: Context, val mClickListener: (Repos
 
     fun setReposListItems(repoList: List<RepositoryDatabase>){
         this.repos = repoList
-        notifyDataSetChanged()
+        this.notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
