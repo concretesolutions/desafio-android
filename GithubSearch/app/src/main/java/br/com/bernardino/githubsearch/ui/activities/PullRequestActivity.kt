@@ -12,20 +12,30 @@ import br.com.bernardino.githubsearch.R
 import br.com.bernardino.githubsearch.adapter.PullRequestListAdapter
 import br.com.bernardino.githubsearch.database.RepositoryDatabase
 import br.com.bernardino.githubsearch.databinding.ActivityPullrequestBinding
+import br.com.bernardino.githubsearch.di.dataModule
 import br.com.bernardino.githubsearch.model.EXTRA_REPOSITORY
+import br.com.bernardino.githubsearch.repository.ReposRepositoryImpl
 import br.com.bernardino.githubsearch.viewmodel.PullRequestActivityViewModel
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
+import org.koin.core.context.loadKoinModules
 
 class PullRequestActivity : BaseActivity() {
 
     lateinit var mBinding: ActivityPullrequestBinding
     lateinit var mAdapter: PullRequestListAdapter
 
+    private val koinFeatures by lazy {
+        loadKoinModules(dataModule)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pullrequest)
+        injectFeatures()
 
         val repository = intent.getParcelableExtra<RepositoryDatabase>(EXTRA_REPOSITORY)
+        val reposImpl : ReposRepositoryImpl by inject()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -33,8 +43,9 @@ class PullRequestActivity : BaseActivity() {
 
         val mPullRequestActivityViewModel = ViewModelProviders.of(this, viewModelFactory {
             PullRequestActivityViewModel(
-                application,
-                creator = repository.ownerUserFirstName, repository = repository.name
+                reposImpl,
+                creator = repository.ownerUserFirstName,
+                repository = repository.name
             )
         }).get(PullRequestActivityViewModel::class.java)
 
@@ -89,4 +100,5 @@ class PullRequestActivity : BaseActivity() {
         }
     }
 
+    private fun injectFeatures() = koinFeatures
 }

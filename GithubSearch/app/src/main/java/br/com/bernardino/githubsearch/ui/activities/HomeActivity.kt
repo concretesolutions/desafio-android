@@ -12,21 +12,32 @@ import br.com.bernardino.githubsearch.R
 import br.com.bernardino.githubsearch.adapter.ReposListAdapter
 import br.com.bernardino.githubsearch.database.RepositoryDatabase
 import br.com.bernardino.githubsearch.databinding.ActivityHomeBinding
+import br.com.bernardino.githubsearch.di.dataModule
+import br.com.bernardino.githubsearch.di.databaseModule
+import br.com.bernardino.githubsearch.di.networkModule
 import br.com.bernardino.githubsearch.model.EXTRA_REPOSITORY
+import br.com.bernardino.githubsearch.repository.ReposRepositoryImpl
 import br.com.bernardino.githubsearch.viewmodel.HomeActivityViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_home.*
+import org.koin.android.ext.android.inject
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class HomeActivity : BaseActivity() {
 
     lateinit var mAdapter: ReposListAdapter
     lateinit var mBinding: ActivityHomeBinding
-    private val mHomeActivityViewModel by lazy {
-        ViewModelProviders.of(this).get(HomeActivityViewModel::class.java)
-    }
+    val reposImpl: ReposRepositoryImpl by inject()
+    lateinit var mHomeActivityViewModel: HomeActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mHomeActivityViewModel = ViewModelProviders.of(this, viewModelFactory {
+                HomeActivityViewModel(reposImpl)
+            }
+        ).get(HomeActivityViewModel::class.java)
 
         mBinding = DataBindingUtil.setContentView(
             this,
@@ -43,18 +54,25 @@ class HomeActivity : BaseActivity() {
         attachObserver()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unloadKoinModules(listOf(dataModule, networkModule, databaseModule))
+    }
+
     private fun attachObserver() {
         mHomeActivityViewModel.isLoading.observe(this, Observer<Boolean> {
             it?.let { showLoadingDialog(it) }
         })
 
-        mHomeActivityViewModel.repoList.observe(this, Observer {
+        mHomeActivityViewModel.repositories.observe(this, Observer {
             mAdapter.setReposListItems(it)
         })
 
-        mHomeActivityViewModel.eventNetworkError.observe(this, Observer<Boolean> { isNetworkError ->
-            if (isNetworkError) onNetworkError()
-        })
+        mHomeActivityViewModel.eventNetworkError.observe(
+            this,
+            Observer<Boolean> { isNetworkError ->
+                if (isNetworkError) onNetworkError()
+            })
     }
 
     private fun configureList() {
@@ -93,3 +111,4 @@ class HomeActivity : BaseActivity() {
         startActivity(intent)
     }
 }
+

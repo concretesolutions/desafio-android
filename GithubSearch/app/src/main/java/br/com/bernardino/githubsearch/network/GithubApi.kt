@@ -10,9 +10,8 @@ import retrofit2.http.Query
 
 interface GithubApi {
 
-    @GET("search/repositories")
-    suspend fun getRepositories(@Query("q") language: String, @Query("sort") sort: String, @Query("page") page: Int)
-            : RepositoryBody
+    @GET("search/repositories?q=language:Java&sort=stars&per_page=10")
+    suspend fun getRepositories(@Query("page") page: Int) : RepositoryBody
     @GET ("repos/{creator}/{repository}/pulls")
     suspend fun getPullRequests (@Path("creator") creator: String?,
                          @Path("repository") repository : String?) : List<PullRequest>
