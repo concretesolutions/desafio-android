@@ -10,11 +10,13 @@ import br.com.bernardino.githubsearch.model.PullRequest
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.list_item_pullrequest.view.*
 
-class PullRequestListAdapter (val mContext: Context): RecyclerView.Adapter<PullRequestListAdapter.ViewHolder>() {
+class PullRequestListAdapter (val mContext: Context, private val mClickListener: (String) -> Unit)
+    : RecyclerView.Adapter<PullRequestListAdapter.ViewHolder>() {
+
     var pullRequest : List<PullRequest> = listOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(pullRequest: PullRequest, context: Context){
+        fun bindView(pullRequest: PullRequest, context: Context, clickListener: (String) -> Unit) {
             val pullRequestTitle = itemView.tv_title_pr
             val pullRequestUser = itemView.tv_user_name_pr
             val pullRequestFullName = itemView.tv_fullname_pr
@@ -26,6 +28,9 @@ class PullRequestListAdapter (val mContext: Context): RecyclerView.Adapter<PullR
             pullRequestUser.text = pullRequest.user.login
             pullRequestFullName.text = pullRequest.user.login
             Glide.with(context).load(pullRequest.user.avatar_url).into(pullRequestAvatar)
+            itemView.setOnClickListener{
+                clickListener(pullRequest.html_url)
+            }
         }
     }
 
@@ -41,7 +46,7 @@ class PullRequestListAdapter (val mContext: Context): RecyclerView.Adapter<PullR
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pullRequestItem = pullRequest[position]
         holder.let {
-            it.bindView(pullRequestItem, mContext)
+            it.bindView(pullRequestItem, mContext, mClickListener)
         }
     }
 

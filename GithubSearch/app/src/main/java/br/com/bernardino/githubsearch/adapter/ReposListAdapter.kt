@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.list_item_repos.view.*
 
 
-class ReposListAdapter(private val mContext: Context, val mClickListener: (RepositoryDatabase) -> Unit)
+class ReposListAdapter(private val mContext: Context, private val mClickListener: (RepositoryDatabase) -> Unit)
     : PagedListAdapter<RepositoryDatabase, ReposListAdapter.ViewHolder>(REPO_COMPARATOR) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

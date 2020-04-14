@@ -1,5 +1,7 @@
 package br.com.bernardino.githubsearch.ui.activities
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -66,7 +68,7 @@ class PullRequestActivity : BaseActivity() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        mAdapter = PullRequestListAdapter(this)
+        mAdapter = PullRequestListAdapter(this) { url : String -> clickListener(url)}
         mBinding.rvPullrequest.adapter = mAdapter
     }
 
@@ -98,6 +100,14 @@ class PullRequestActivity : BaseActivity() {
             ).show()
             mBinding.viewmodel?.onNetworkErrorShown()
         }
+    }
+
+    private fun clickListener(url: String) {
+        val webIntent: Intent = Uri.parse(url).let { webpage ->
+            Intent(Intent.ACTION_VIEW, webpage)
+        }
+
+        startActivity(webIntent)
     }
 
     private fun injectFeatures() = koinFeatures
