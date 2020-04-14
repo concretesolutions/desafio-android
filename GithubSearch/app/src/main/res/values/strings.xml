@@ -4,4 +4,5 @@
     <string name="star_image">Star icon</string>
     <string name="network_error_msg">Network Error</string>
     <string name="title_activity_pull_request1">PullRequest1Activity</string>
+    <string name="no_results">No results 😓</string>
 </resources>

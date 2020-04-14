@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.bernardino.githubsearch.R
 import br.com.bernardino.githubsearch.adapter.ReposListAdapter
 import br.com.bernardino.githubsearch.database.RepositoryDatabase
@@ -21,7 +20,6 @@ import br.com.bernardino.githubsearch.viewmodel.HomeActivityViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.android.ext.android.inject
-import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
 class HomeActivity : BaseActivity() {
@@ -60,19 +58,14 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun attachObserver() {
-        mHomeActivityViewModel.isLoading.observe(this, Observer<Boolean> {
-            it?.let { showLoadingDialog(it) }
+        mHomeActivityViewModel.repos.observe(this, Observer {
+            showEmptyList(it?.size == 0)
+            mAdapter.submitList(it)
         })
 
-        mHomeActivityViewModel.repositories.observe(this, Observer {
-            mAdapter.setReposListItems(it)
+        mHomeActivityViewModel.networkErrors.observe(this, Observer {
+            onNetworkError(it)
         })
-
-        mHomeActivityViewModel.eventNetworkError.observe(
-            this,
-            Observer<Boolean> { isNetworkError ->
-                if (isNetworkError) onNetworkError()
-            })
     }
 
     private fun configureList() {
@@ -88,20 +81,12 @@ class HomeActivity : BaseActivity() {
         mBinding.rvRepos.adapter = mAdapter
     }
 
-    private fun showLoadingDialog(show: Boolean) {
-        if (show) mBinding.pbHome.visibility = View.VISIBLE else mBinding.pbHome.visibility =
-            View.GONE
-    }
-
-    private fun onNetworkError() {
-        if (!mHomeActivityViewModel.isNetworkErrorShown.value!!) {
+    private fun onNetworkError(message: String) {
             Snackbar.make(
                 rv_repos,
-                getString(R.string.network_error_msg),
+                message,
                 Snackbar.LENGTH_LONG
             ).show()
-            mBinding.viewmodel?.onNetworkErrorShown()
-        }
     }
 
     private fun clickListener(repository: RepositoryDatabase) {
@@ -109,6 +94,16 @@ class HomeActivity : BaseActivity() {
             putExtra(EXTRA_REPOSITORY, repository)
         }
         startActivity(intent)
+    }
+
+    private fun showEmptyList(show: Boolean) {
+        if (show) {
+            emptyList.visibility = View.VISIBLE
+            rv_repos.visibility = View.GONE
+        } else {
+            emptyList.visibility = View.GONE
+            rv_repos.visibility = View.VISIBLE
+        }
     }
 }
 

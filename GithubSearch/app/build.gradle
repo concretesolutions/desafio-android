@@ -49,6 +49,7 @@ dependencies {
     def koin_version = "2.1.5"
     def stetho_version = "1.5.1"
     def okhttp_version = "3.12.10"
+    def paging_version = "2.1.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -103,4 +104,7 @@ dependencies {
 
     //Stetho
     implementation "com.facebook.stetho:stetho:$stetho_version"
+
+    //paging library
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 }

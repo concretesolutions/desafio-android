@@ -4,6 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedList
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import br.com.bernardino.githubsearch.R
 import br.com.bernardino.githubsearch.database.RepositoryDatabase
@@ -12,29 +15,18 @@ import kotlinx.android.synthetic.main.list_item_repos.view.*
 
 
 class ReposListAdapter(private val mContext: Context, val mClickListener: (RepositoryDatabase) -> Unit)
-    : RecyclerView.Adapter<ReposListAdapter.ViewHolder>() {
-
-    var repos : List<RepositoryDatabase> = listOf()
+    : PagedListAdapter<RepositoryDatabase, ReposListAdapter.ViewHolder>(REPO_COMPARATOR) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val repo = repos[position]
+        val repo = getItem(position)
         holder.let {
-            it.bindView(repo, mContext, mClickListener)
+            repo?.let { it1 -> it.bindView(it1, mContext, mClickListener) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.list_item_repos, parent, false)
         return ViewHolder(view)
-    }
-
-    override fun getItemCount(): Int {
-        return repos.size
-    }
-
-    fun setReposListItems(repoList: List<RepositoryDatabase>){
-        this.repos = repoList
-        this.notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -64,6 +56,16 @@ class ReposListAdapter(private val mContext: Context, val mClickListener: (Repos
             itemView.setOnClickListener{
                 clickListener(repo)
             }
+        }
+    }
+
+    companion object {
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<RepositoryDatabase>() {
+            override fun areItemsTheSame(oldItem: RepositoryDatabase, newItem: RepositoryDatabase): Boolean =
+                oldItem.fullName == newItem.fullName
+
+            override fun areContentsTheSame(oldItem: RepositoryDatabase, newItem: RepositoryDatabase): Boolean =
+                oldItem == newItem
         }
     }
 

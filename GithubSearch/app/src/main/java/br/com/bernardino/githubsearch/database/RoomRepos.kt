@@ -3,6 +3,7 @@ package br.com.bernardino.githubsearch.database
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import br.com.bernardino.githubsearch.model.Repository
 import br.com.bernardino.githubsearch.model.RepositoryBody
@@ -10,7 +11,7 @@ import br.com.bernardino.githubsearch.model.RepositoryBody
 @Dao
 interface ReposDao {
     @Query("select * from repos")
-    fun getRepositories() : LiveData<List<RepositoryDatabase>>
+    fun getRepositories() : DataSource.Factory<Int,RepositoryDatabase>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(repositories : List<RepositoryDatabase>)
 }
