@@ -7,7 +7,6 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.example.githubtest.R
-import com.example.githubtest.features.MainActivity
 import com.example.githubtest.features.repository.RepositoryActivity
 import java.util.*
 
