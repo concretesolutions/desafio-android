@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githubtest.R
 import com.example.githubtest.data.model.Repository
 import com.example.githubtest.data.model.ViewStateModel
+import com.example.githubtest.features.PullRequestActivity
 import kotlinx.android.synthetic.main.activity_repository.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -77,27 +78,20 @@ class RepositoryActivity : AppCompatActivity(),RepositoryClickListener {
 
     private fun initRepositories() {
         layoutManager = LinearLayoutManager(this)
-        recyclerRepository.apply {
-            layoutManager = layoutManager
-            adapter = repositoryAdapter
-            setHasFixedSize(true)
+        recyclerRepository.layoutManager = layoutManager
+        recyclerRepository.adapter = repositoryAdapter
+        recyclerRepository.setHasFixedSize(true)
         }
 
-      // addItemDecoration(DividerItemDecoration(this, layoutManager.orientation))
-
-//    override fun onClick(repository: Repository) {
-//        try {
-//            val i = Intent(this, PullRequestActivity::class.java)
+    override fun onClick(repository: Repository) {
+        try {
+            val i = Intent(this, PullRequestActivity::class.java)
 //            i.putExtra(INTENT_REPOSITORY_NAME, repository.name)
 //            i.putExtra(INTENT_REPOSITORY_OWNER_NAME, repository.owner.login)
-//            startActivity(i)
-//        } catch (e: ArrayIndexOutOfBoundsException) {
-//            e.printStackTrace()
-//        }
-//    }
-    }
-
-    override fun onClick(repository: Repository) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+            startActivity(i)
+        } catch (e: ArrayIndexOutOfBoundsException) {
+            e.printStackTrace()
+        }    }
 }
+
+

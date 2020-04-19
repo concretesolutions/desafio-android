@@ -5,28 +5,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubtest.R
 import com.example.githubtest.data.model.Repository
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_view_repository.view.*
 
+
 class RepositoryAdapter (var repositories: ArrayList<Repository>, var repositoryClickListener: RepositoryClickListener)
-    : RecyclerView.Adapter<RepositoryAdapter.RepositoruViewHolder>(){
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var isLoading = false
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoruViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view_repository, parent, false)
-        return RepositoruViewHolder(view)
+    override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_view_repository, parent, false)
+        return RepositoruViewHolder(view, repositoryClickListener)
     }
 
     override fun getItemCount() = repositories.size
 
-    override fun onBindViewHolder(holder: RepositoruViewHolder, position: Int) {
-        val repository  = repositories.get(position)
-        holder.bindViewHolder(repository)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is RepositoruViewHolder) holder.bindViewHolder(repositories[position])
+
     }
+
     fun addRepositories(newRepositories: ArrayList<Repository>) {
         repositories.addAll(newRepositories)
         this.notifyDataSetChanged()
@@ -46,30 +50,31 @@ class RepositoryAdapter (var repositories: ArrayList<Repository>, var repository
         return isLoading
     }
 
-    inner class RepositoruViewHolder(private val view: View)
-        : RecyclerView.ViewHolder(view){
+    inner class RepositoruViewHolder(
+        private val view: View,
+        private val repositoryClickListener: RepositoryClickListener
+    ) : RecyclerView.ViewHolder(view) {
 
-        var mRepositoryUserImage: ImageView = view.imageViewProfile
-        var mRepositoryName: TextView = view.textViewRepository
-        var mRepositoryUserName: TextView = view.textViewUsername
-        var mRepositoryFullName: TextView = view.textViewNomeSobrenome
-        var mRepositoryDescription: TextView = view.textViewDescricao
-        var mRepositoryStar: TextView = view.textViewStars
-        var mRepositoryFork: TextView = view.textViewForks
+        var repositoryUserImage: ImageView = view.imageViewProfile
+        var repositoryName: TextView = view.textViewRepository
+        var repositoryUserName: TextView = view.textViewUsername
+        var repositoryFullName: TextView = view.textViewNomeSobrenome
+        var repositoryDescription: TextView = view.textViewDescricao
+        var repositoryStar: TextView = view.textViewStars
+        var repositoryFork: TextView = view.textViewForks
 
-        fun bindViewHolder(repository: Repository){
+        fun bindViewHolder(repository: Repository) {
             view.setOnClickListener { repositoryClickListener.onClick(repository) }
-            mRepositoryName.text = repository.name
-            mRepositoryDescription.text = repository.description
-            mRepositoryStar.text = repository.stargazers_count.toString()
-            mRepositoryFork.text = repository.forks_count.toString()
-            mRepositoryUserName.text = repository.owner.login
-            mRepositoryFullName.text = ""
+            repositoryName.text = repository.name
+            repositoryDescription.text = repository.description
+            repositoryStar.text = repository.stargazers_count.toString()
+            repositoryFork.text = repository.forks_count.toString()
+            repositoryUserName.text = repository.owner.login
+            repositoryFullName.text = repository.full_name
             Picasso.get().load(repository.owner.avatar_url)
                 .error(R.mipmap.ic_launcher)
-                .into(mRepositoryUserImage)
+                .into(repositoryUserImage)
 
         }
-
     }
 }

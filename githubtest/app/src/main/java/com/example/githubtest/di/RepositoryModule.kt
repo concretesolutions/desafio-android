@@ -5,5 +5,5 @@ import com.example.githubtest.data.request.RepositoryContract
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory { RepositoryRequest(get()) as RepositoryContract }
+    factory { RepositoryRequest(get()) as RepositoryContract}
 }
