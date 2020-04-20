@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GitHubTest</string>
+    <string name="status">%d Opened / %d Closed</string>
 </resources>

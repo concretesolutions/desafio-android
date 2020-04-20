@@ -3,15 +3,16 @@ package com.example.githubtest.features.repository
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubtest.R
 import com.example.githubtest.data.model.Repository
 import com.example.githubtest.data.model.ViewStateModel
-import com.example.githubtest.features.PullRequestActivity
+import com.example.githubtest.features.pullrequest.PullRequestActivity
+import kotlinx.android.synthetic.main.activity_pull_request.*
 import kotlinx.android.synthetic.main.activity_repository.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,10 +34,10 @@ class RepositoryActivity : AppCompatActivity(),RepositoryClickListener {
         repositoryViewModel.getRepository().observe(this, Observer { stateModel ->
             when (stateModel.status) {
                 ViewStateModel.Status.LOADING -> {
-                    repositoryAdapter.startLoading()
+                    repositoryAdapter.startLoading(progressBar2)
                 }
                 ViewStateModel.Status.SUCCESS -> {
-                    repositoryAdapter.stopLoading()
+                    repositoryAdapter.stopLoading(progressBar2)
                     stateModel.model?.items?.let { repositories ->
                         if (repositories.isEmpty()) showEmptyRepositoryMessage()
                         else {
@@ -49,6 +50,7 @@ class RepositoryActivity : AppCompatActivity(),RepositoryClickListener {
                                         val pastVisiblesItems = layoutManager.findFirstVisibleItemPosition()
                                         if ((visibleItemCount + pastVisiblesItems) >= totalItemCount && !repositoryAdapter.isLoading()) {
                                             repositoryViewModel.loadRepository()
+                                            repositoryAdapter.startLoading(progressBar2)
                                         }
                                     }
                                 }
@@ -59,7 +61,7 @@ class RepositoryActivity : AppCompatActivity(),RepositoryClickListener {
                     }
                 }
                 ViewStateModel.Status.ERROR -> {
-                    repositoryAdapter.stopLoading()
+                    repositoryAdapter.stopLoading(progressBar2)
                     showNetworkError()
                 }
             }
@@ -86,8 +88,8 @@ class RepositoryActivity : AppCompatActivity(),RepositoryClickListener {
     override fun onClick(repository: Repository) {
         try {
             val i = Intent(this, PullRequestActivity::class.java)
-//            i.putExtra(INTENT_REPOSITORY_NAME, repository.name)
-//            i.putExtra(INTENT_REPOSITORY_OWNER_NAME, repository.owner.login)
+            i.putExtra("repositoryName", repository.name)
+            i.putExtra("repositoryOwnerName", repository.owner.login)
             startActivity(i)
         } catch (e: ArrayIndexOutOfBoundsException) {
             e.printStackTrace()

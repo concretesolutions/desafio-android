@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githubtest.R
 import com.example.githubtest.data.model.Repository
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_repository.*
+import kotlinx.android.synthetic.main.activity_repository.view.*
 import kotlinx.android.synthetic.main.item_view_repository.view.*
 
 
@@ -36,13 +38,15 @@ class RepositoryAdapter (var repositories: ArrayList<Repository>, var repository
         this.notifyDataSetChanged()
     }
 
-    fun startLoading() {
+    fun startLoading(view: View) {
         isLoading = true
+        view.progressBar2.visibility = View.VISIBLE
         notifyDataSetChanged()
     }
 
-    fun stopLoading() {
+    fun stopLoading(view: View) {
         isLoading = false
+        view.progressBar2.visibility = View.GONE
         notifyDataSetChanged()
     }
 

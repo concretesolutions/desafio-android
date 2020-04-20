@@ -1,5 +1,6 @@
 package com.example.githubtest.data.request
 
+import com.example.githubtest.data.model.PullRequest
 import com.example.githubtest.data.model.RepositoryResponse
 import com.example.githubtest.data.service.GitHubService
 import io.reactivex.Observable
@@ -11,6 +12,14 @@ class RepositoryRequest (private val gitHubService: GitHubService) : RepositoryC
             .getRepositories(language, sort, page)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
+    }
+
+    override fun getPullRequests(owner: String, repository: String, status: String): Observable<ArrayList<PullRequest>> {
+        return gitHubService
+            .getPullRequests(owner, repository, status)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+
     }
 
 }
