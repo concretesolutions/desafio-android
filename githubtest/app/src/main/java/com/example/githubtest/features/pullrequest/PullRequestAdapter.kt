@@ -30,8 +30,8 @@ RecyclerView.Adapter<PullRequestAdapter.ViewHolder>(){
         holder.pullRequestBody.text = pullRequest.body
         holder.pullRequestNomeSobrenome.text = pullRequest.user.login
         holder.pullRequestUserName.text = pullRequest.user.login
-        Picasso.get().load(pullRequest.user.avatar_url).error(R.mipmap.ic_launcher).into(holder.pullRequestUseImage)    }
-
+        Picasso.get().load(pullRequest.user.avatar_url).error(R.mipmap.ic_launcher).into(holder.pullRequestUseImage)
+    }
 
     fun addPullRequests( newPullRequests: ArrayList<PullRequest>){
         pullRequests.addAll(newPullRequests)

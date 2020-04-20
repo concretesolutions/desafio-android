@@ -67,15 +67,12 @@ class RepositoryActivity : AppCompatActivity(),RepositoryClickListener {
             }
         })
     }
-
     private fun showNetworkError() {
         Toast.makeText(this,"Verifique sua conexão com a internet",Toast.LENGTH_LONG).show()
 
     }
-
     private fun showEmptyRepositoryMessage() {
         Toast.makeText(this,"Não foram encontrados registros",Toast.LENGTH_LONG).show()
-
     }
 
     private fun initRepositories() {

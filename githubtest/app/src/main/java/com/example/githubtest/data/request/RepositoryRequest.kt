@@ -13,13 +13,10 @@ class RepositoryRequest (private val gitHubService: GitHubService) : RepositoryC
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
     }
-
     override fun getPullRequests(owner: String, repository: String, status: String): Observable<ArrayList<PullRequest>> {
         return gitHubService
             .getPullRequests(owner, repository, status)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
-
     }
-
 }

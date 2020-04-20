@@ -79,21 +79,17 @@ class PullRequestActivity : AppCompatActivity(), PullRequestClickListener {
         rvPullRequest.layoutManager = layoutManager
         rvPullRequest.adapter = adapter
     }
-
     private fun getPullRequests() {
         pullRequestViewModel.loadPullRequests(repositoryOwnerName, repositoryName)
     }
-
     private fun showNetworkError() {
         Toast.makeText(this,"Verifique sua conexão com a internet",Toast.LENGTH_LONG).show()
 
     }
-
     private fun showEmptyPullRequestMessage() {
         Toast.makeText(this,"Não foram encontrados registros", Toast.LENGTH_LONG).show()
 
     }
-
     override fun onClick(pullRequest: PullRequest) {
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse(pullRequest.html_url)

@@ -28,7 +28,6 @@ class SplashActivity : AppCompatActivity() {
         )
         image.startAnimation(animation)
     }
-
     fun jump(view: View?) {
         startActivity(Intent(this, RepositoryActivity::class.java))
         finish()
