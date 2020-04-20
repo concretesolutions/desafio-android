@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/design_default_color_background"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_list_item"
+    android:id="@+id/ll_list_item"
+    android:weightSum="1">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_pull_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/title_pull_request"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="@color/my_app_color_title_item_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_body_pull_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:maxLines="3"
+            android:text="@string/description_pull_request"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="@color/my_app_color_description_item_color"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_title_pull_request"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_pull_request" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_body_pull_request"
+            app:layout_constraintTop_toBottomOf="@+id/tv_body_pull_request">
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="left"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_avatar" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/username"
+                android:textColor="@color/my_app_color_title_item_color"
+                android:textSize="@dimen/username"
+                app:layout_constraintRight_toRightOf="@+id/iv_avatar"
+                app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_created"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:gravity="center_horizontal"
+        android:text="@string/created"
+        android:textColor="@color/my_app_color_title_item_color"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.appcompat.widget.LinearLayoutCompat>

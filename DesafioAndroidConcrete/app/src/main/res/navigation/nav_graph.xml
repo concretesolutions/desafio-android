@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/repositoryFragment2">
+    <fragment
+        android:id="@+id/repositoryFragment2"
+        android:name="com.marcos.desafioandroidconcrete.view.fragment.RepositoryFragment"
+        android:label="fragment_repository"
+        tools:layout="@layout/fragment_repository" >
+        <action
+            android:id="@+id/next_action"
+            app:destination="@id/pullRequestFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/repositoryFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/pullRequestFragment2"
+        android:name="com.marcos.desafioandroidconcrete.view.fragment.PullRequestFragment"
+        android:label="fragment_pull_request"
+        tools:layout="@layout/fragment_pull_request" >
+        <argument
+            android:name="name_repository"
+            app:argType="string" />
+        <argument
+            android:name="name_owner"
+            app:argType="string" />
+    </fragment>
+</navigation>

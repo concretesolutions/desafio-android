@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Challenge Android Concrete</string>
+    <string name="name_repository">Name repositoryDetail</string>
+    <string name="description_repository">Description of repositoryDetail</string>
+    <string name="number_fork">00</string>
+    <string name="number_star">00</string>
+    <string name="username">username</string>
+    <string name="full_name">full name</string>
+    <string name="title_pull_request">Title of pull request</string>
+    <string name="description_pull_request">Description of pull request</string>
+    <string name="number_pull_request_open">00 opened</string>
+    <string name="number_pull_request_closed">" / 00 closed"</string>
+    <string name="error">Error unexpected, try again later</string>
+    <string name="repositories">Repositories Java</string>
+    <string name="sucess_auth">Authenticated</string>
+    <string name="login">Login with Github</string>
+    <string name="created">00/00/0000</string>
+
+
+</resources>
