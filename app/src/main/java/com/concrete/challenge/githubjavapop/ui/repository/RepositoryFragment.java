@@ -1,4 +1,4 @@
-package com.concrete.challenge.githubjavapop.ui.main;
+package com.concrete.challenge.githubjavapop.ui.repository;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -14,25 +14,25 @@ import android.view.ViewGroup;
 
 import com.concrete.challenge.githubjavapop.R;
 
-public class MainFragment extends Fragment {
+public class RepositoryFragment extends Fragment {
 
-    private MainViewModel mViewModel;
+    private RepositoryViewModel mViewModel;
 
-    public static MainFragment newInstance() {
-        return new MainFragment();
+    public static RepositoryFragment newInstance() {
+        return new RepositoryFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment, container, false);
+        return inflater.inflate(R.layout.repository_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(RepositoryViewModel.class);
         // TODO: Use the ViewModel
     }
 

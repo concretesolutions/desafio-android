@@ -16,11 +16,12 @@ android {
 
     buildTypes {
         debug {
-
+            buildConfigField 'String', 'BASE_API_URL', '"https://api.github.com"'
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'BASE_API_URL', '"https://api.github.com"'
         }
     }
 
