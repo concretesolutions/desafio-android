@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Github JavaPop</string>
+    <string name="error_message_toast">Application has encountered an unknown error. Check your internet connection and try again.</string>
 </resources>

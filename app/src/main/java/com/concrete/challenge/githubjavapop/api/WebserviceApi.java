@@ -6,6 +6,7 @@ import com.concrete.challenge.githubjavapop.domain.User;
 
 import java.util.ArrayList;
 
+import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -14,7 +15,7 @@ import retrofit2.http.Query;
 public interface WebserviceApi {
 
     @GET("/search/repositories?q=language:Java&sort=stars")
-    Call<RepositoriesResponse> getRepositories(@Query("page") Integer page);
+    Single<RepositoriesResponse> getRepositories(@Query("page") Integer page);
 
     @GET("/repos/:owner/:repo/pulls")
     Call<ArrayList<PullRequest>> getPullRequests(@Path("owner") String userName, @Path("repo") String repositoryName);

@@ -9,10 +9,12 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
+import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RepositoryApi {
@@ -28,13 +30,15 @@ public class RepositoryApi {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         webservice = retrofit.create(WebserviceApi.class);
     }
 
-    public void getRepositories(Integer page, final RepositoryCallback<RepositoriesResponse> repositoryCallback ) {
-        webservice.getRepositories(page).enqueue(new Callback<RepositoriesResponse>() {
+    public Single<RepositoriesResponse> getRepositories(Integer page) {
+        return webservice.getRepositories(page);
+        /*webservice.getRepositories(page).enqueue(new Callback<RepositoriesResponse>() {
             @Override
             public void onResponse(Call<RepositoriesResponse> call, Response<RepositoriesResponse> response) {
                 if(response.isSuccessful()) {
@@ -48,7 +52,7 @@ public class RepositoryApi {
             public void onFailure(Call<RepositoriesResponse> call, Throwable t) {
                 if(repositoryCallback != null) repositoryCallback.onFailure();
             }
-        });
+        });*/
     }
 
     public void getPullRequests(String userName, String repositoryName, final RepositoryCallback<ArrayList<PullRequest>> repositoryCallback ) {

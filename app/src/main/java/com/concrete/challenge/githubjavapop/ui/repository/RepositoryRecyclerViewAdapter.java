@@ -22,10 +22,8 @@ public class RepositoryRecyclerViewAdapter extends RecyclerView.Adapter<Reposito
     private ArrayList<Repository> data;
     private LayoutInflater inflater;
     private ItemClickListener clickListener;
-    private Context context;
 
     public RepositoryRecyclerViewAdapter(Context context) {
-        this.context = context;
         this.inflater = LayoutInflater.from(context);
         data = new ArrayList<>();
     }
@@ -41,13 +39,19 @@ public class RepositoryRecyclerViewAdapter extends RecyclerView.Adapter<Reposito
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Repository repository = data.get(position);
         User user = repository.owner;
-        if(user != null) Picasso.get().load(user.avatarUrl).into(holder.userImage);
-        holder.repositoryName.setText(repository.name);
-        holder.repositoryDesc.setText(repository.description);
-        holder.forkCount.setText(repository.forksCount != null ? repository.forksCount.toString() : "");
-        holder.starCount.setText(repository.stargazersCount != null ? repository.stargazersCount.toString() : "");
-        holder.userName.setText(user.login);
-        holder.userFullName.setText(user.name);
+
+        if(user != null) {
+            Picasso.get().load(user.avatarUrl).into(holder.userImage);
+            holder.userName.setText(user.login);
+            holder.userFullName.setText(user.name);
+        }
+
+        if(repository != null) {
+            holder.repositoryName.setText(repository.name);
+            holder.repositoryDesc.setText(repository.description);
+            holder.forkCount.setText(repository.forksCount != null ? repository.forksCount.toString() : "");
+            holder.starCount.setText(repository.stargazersCount != null ? repository.stargazersCount.toString() : "");
+        }
     }
 
     @Override
@@ -55,7 +59,7 @@ public class RepositoryRecyclerViewAdapter extends RecyclerView.Adapter<Reposito
         return data.size();
     }
 
-    public void setRepositories(ArrayList<Repository> repository) {
+    public void setRepositories(@NonNull ArrayList<Repository> repository) {
         data = repository;
         notifyDataSetChanged();
     }

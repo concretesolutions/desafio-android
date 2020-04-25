@@ -1,5 +1,8 @@
 package com.concrete.challenge.githubjavapop.ui.repository;
 
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -15,8 +18,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.concrete.challenge.githubjavapop.R;
+import com.concrete.challenge.githubjavapop.api.RepositoryApi;
+import com.concrete.challenge.githubjavapop.api.SingleSchedulers;
 
 public class RepositoryFragment extends Fragment implements  RepositoryRecyclerViewAdapter.ItemClickListener {
 
@@ -67,7 +73,7 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
                 if (!isLoading) {
                     if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == viewModel.getRepositories().getValue().size() - 1) {
                         progressBarBottom.setVisibility(View.VISIBLE);
-                        viewModel.loadRepositories(getContext(), page);
+                        viewModel.loadRepositories(page);
                         isLoading = true;
 
                     }
@@ -78,7 +84,18 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
-        viewModel = ViewModelProviders.of(this).get(RepositoryViewModel.class);
+        viewModel = ViewModelProviders.of(this, new ViewModelProvider.Factory() {
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T extends ViewModel > T create(final Class<T> modelClass) {
+                if (modelClass.equals(RepositoryViewModel.class)) {
+                    return (T) new RepositoryViewModel(new RepositoryApi(), SingleSchedulers.INSTANCE);
+                } else {
+                    return null;
+                }
+            }
+        }).get(RepositoryViewModel.class);
+
         viewModel.getRepositories().observe(getViewLifecycleOwner(), repositories -> {
             if(repositories.size() > 0) {
                 adapter.setRepositories(repositories);
@@ -92,7 +109,11 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
             }
         });
 
-        viewModel.loadRepositories(getContext(), page);
+        viewModel.getError().observe(getViewLifecycleOwner(), integer -> {
+            Toast.makeText(getContext(), R.string.error_message_toast, Toast.LENGTH_LONG).show();
+        });
+
+        viewModel.loadRepositories(page);
     }
 
     @Override
