@@ -125,11 +125,13 @@ public class PullRequestFragment extends BaseFragment implements PullRequestRecy
         });
 
         Bundle bundle = getArguments();
-        userName = bundle.getString(PullRequestActivity.USER_NAME_KEY);
-        repositoryName = bundle.getString(PullRequestActivity.REPOSITORY_NAME_KEY);
+        if(bundle != null) {
+            userName = bundle.getString(PullRequestActivity.USER_NAME_KEY);
+            repositoryName = bundle.getString(PullRequestActivity.REPOSITORY_NAME_KEY);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(repositoryName);
-        viewModel.loadPullRequests(userName, repositoryName, page);
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(repositoryName);
+            viewModel.loadPullRequests(userName, repositoryName, page);
+        }
     }
 
     @Override
