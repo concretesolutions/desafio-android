@@ -13,6 +13,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.concrete.challenge.githubjavapop.R;
 
@@ -23,8 +24,10 @@ public class PullRequestFragment extends Fragment implements PullRequestRecycler
     private boolean isReady;
     private ResourceCallback resourceCallback;
 
-    public static PullRequestFragment newInstance() {
-        return new PullRequestFragment();
+    public static PullRequestFragment newInstance(Bundle bundle) {
+        PullRequestFragment fragment = new PullRequestFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Nullable
@@ -38,6 +41,12 @@ public class PullRequestFragment extends Fragment implements PullRequestRecycler
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(PullRequestViewModel.class);
+
+        Bundle bundle = getArguments();
+        String user = bundle.getString("user");
+
+        TextView textView = getView().findViewById(R.id.message);
+        textView.setText(user);
 
         new CountDownTimer(3000, 1000) {
 

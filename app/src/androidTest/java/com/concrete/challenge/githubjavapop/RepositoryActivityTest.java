@@ -19,6 +19,7 @@ import com.concrete.challenge.githubjavapop.ui.repository.RepositoryActivity;
 import com.concrete.challenge.githubjavapop.ui.repository.RepositoryFragment;
 import com.concrete.challenge.githubjavapop.ui.repository.RepositoryRecyclerViewAdapter;
 
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
@@ -26,6 +27,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -59,9 +62,25 @@ public class RepositoryActivityTest {
     @Test
     public void testNavigateToPullRequests() {
         Espresso.onView(ViewMatchers.withId(R.id.recycler_view_repository))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(2, ViewActions.click()));
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, ViewActions.click()));
 
         Intents.intended(IntentMatchers.hasComponent(PullRequestActivity.class.getName()), Intents.times(1));
+    }
+
+    @Test
+    public void testInfinityScroll() {
+        AtomicReference<RepositoryRecyclerViewAdapter> adapter = new AtomicReference<>();
+        Espresso.onView(ViewMatchers.withId(R.id.recycler_view_repository)).check((view, noViewFoundException) -> {
+            RecyclerView viewById = rule.getActivity().requireViewById(R.id.recycler_view_repository);
+             adapter.set((RepositoryRecyclerViewAdapter) viewById.getAdapter());
+        });
+
+        int firstPageCount = adapter.get().getItemCount();
+
+        Espresso.onView(ViewMatchers.withId(R.id.recycler_view_repository))
+                .perform(RecyclerViewActions.scrollToPosition(adapter.get().getItemCount() - 1));
+
+        Assert.assertThat(adapter.get().getItemCount(), Matchers.greaterThan(firstPageCount));
     }
 
     @After

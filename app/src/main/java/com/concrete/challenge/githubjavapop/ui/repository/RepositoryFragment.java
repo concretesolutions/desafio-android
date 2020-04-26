@@ -81,7 +81,7 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
                         progressBarBottom.setVisibility(View.VISIBLE);
                         viewModel.loadRepositories(page);
                         isLoading = true;
-
+                        isReady = false;
                     }
                 }
             }
@@ -115,7 +115,10 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
 
     @Override
     public void onItemClick(int position) {
-        startActivity(new Intent(getActivity(), PullRequestActivity.class));
+        Intent intent = new Intent(getActivity(), PullRequestActivity.class);
+        String userName = viewModel.getRepositories().getValue().get(position).owner.login;
+        intent.putExtra("user", userName);
+        startActivity(intent);
     }
 
     @Override
