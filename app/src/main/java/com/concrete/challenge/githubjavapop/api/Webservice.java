@@ -12,14 +12,14 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface WebserviceApi {
+public interface Webservice {
 
     @GET("/search/repositories?q=language:Java&sort=stars")
     Single<RepositoriesResponse> getRepositories(@Query("page") Integer page);
 
     @GET("/repos/:owner/:repo/pulls")
-    Call<ArrayList<PullRequest>> getPullRequests(@Path("owner") String userName, @Path("repo") String repositoryName);
+    Single<ArrayList<PullRequest>> getPullRequests(@Path("owner") String userName, @Path("repo") String repositoryName);
 
     @GET("/users/:username")
-    Call<User> getUser(@Path("username") String name);
+    Single<User> getUser(@Path("username") String name);
 }

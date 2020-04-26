@@ -1,14 +1,10 @@
 package com.concrete.challenge.githubjavapop.ui.repository;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.concrete.challenge.githubjavapop.R;
-import com.concrete.challenge.githubjavapop.api.RepositoryApi;
+import com.concrete.challenge.githubjavapop.api.Api;
 import com.concrete.challenge.githubjavapop.api.SingleSchedulers;
 import com.concrete.challenge.githubjavapop.domain.RepositoriesResponse;
 import com.concrete.challenge.githubjavapop.domain.Repository;
@@ -20,12 +16,12 @@ import io.reactivex.disposables.CompositeDisposable;
 public class RepositoryViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Repository>> repositories;
     private MutableLiveData<Throwable> error;
-    private RepositoryApi repositoryApi;
+    private Api api;
     private SingleSchedulers singleSchedulers;
     private CompositeDisposable disposable;
 
-    public RepositoryViewModel(RepositoryApi repositoryApi, SingleSchedulers singleSchedulers) {
-        this.repositoryApi = repositoryApi;
+    public RepositoryViewModel(Api api, SingleSchedulers singleSchedulers) {
+        this.api = api;
         this.singleSchedulers = singleSchedulers;
         disposable = new CompositeDisposable();
         repositories = new MutableLiveData<>();
@@ -33,7 +29,7 @@ public class RepositoryViewModel extends ViewModel {
     }
 
     public void loadRepositories(int page) {
-        disposable.add(repositoryApi.getRepositories(page)
+        disposable.add(api.getRepositories(page)
                 .compose(singleSchedulers.applySchedulers())
                 .subscribe(this::onSuccess, this::onError));
     }

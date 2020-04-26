@@ -1,4 +1,4 @@
-package com.concrete.challenge.githubjavapop;
+package com.concrete.challenge.githubjavapop.ui.repository;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Lifecycle;
@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import androidx.lifecycle.Observer;
 
-import com.concrete.challenge.githubjavapop.api.RepositoryApi;
+import com.concrete.challenge.githubjavapop.api.Api;
 import com.concrete.challenge.githubjavapop.api.SingleSchedulers;
 import com.concrete.challenge.githubjavapop.domain.RepositoriesResponse;
 import com.concrete.challenge.githubjavapop.domain.Repository;
@@ -33,7 +33,7 @@ public class RepositoryViewModelTest {
     public InstantTaskExecutorRule instantExecutorRule = new InstantTaskExecutorRule();
 
     @Mock
-    RepositoryApi repositoryApi;
+    Api api;
     RepositoryViewModel repositoryViewModel;
     @Mock
     Observer<ArrayList<Repository>> repositoryObserver;
@@ -44,17 +44,17 @@ public class RepositoryViewModelTest {
     Lifecycle lifecycle;
 
     @Before
-    public void init() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
         lifecycle = new LifecycleRegistry(lifecycleOwner);
-        repositoryViewModel = new RepositoryViewModel(repositoryApi, SingleSchedulers.TEST);
+        repositoryViewModel = new RepositoryViewModel(api, SingleSchedulers.TEST);
         repositoryViewModel.getRepositories().observeForever(repositoryObserver);
         repositoryViewModel.getError().observeForever(errorObserver);
     }
 
     @Test
     public void testObserverNull() {
-        when(repositoryApi.getRepositories(1)).thenReturn(null);
+        when(api.getRepositories(1)).thenReturn(null);
         assertNotNull(repositoryViewModel.getRepositories());
         assertTrue(repositoryViewModel.getRepositories().hasObservers());
     }
@@ -65,7 +65,7 @@ public class RepositoryViewModelTest {
         repositoriesResponse.items = new ArrayList<>();
         repositoriesResponse.items.add(new Repository());
 
-        when(repositoryApi.getRepositories(1)).thenReturn(Single.just(repositoriesResponse));
+        when(api.getRepositories(1)).thenReturn(Single.just(repositoriesResponse));
         repositoryViewModel.loadRepositories(1);
         verify(repositoryObserver).onChanged(repositoriesResponse.items);
     }
@@ -73,15 +73,15 @@ public class RepositoryViewModelTest {
     @Test
     public void testApiLoadFailed() {
         Throwable throwable = new Throwable();
-        
-        when(repositoryApi.getRepositories(1)).thenReturn(Single.error(throwable));
+
+        when(api.getRepositories(1)).thenReturn(Single.error(throwable));
         repositoryViewModel.loadRepositories(1);
         verify(errorObserver).onChanged(throwable);
     }
 
     @After
     public void destroy() {
-        repositoryApi = null;
+        api = null;
         repositoryViewModel = null;
     }
 }

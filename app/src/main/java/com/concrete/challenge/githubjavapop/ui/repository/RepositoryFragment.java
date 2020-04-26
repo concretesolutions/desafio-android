@@ -1,10 +1,8 @@
 package com.concrete.challenge.githubjavapop.ui.repository;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.IdlingResource;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,22 +20,29 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.concrete.challenge.githubjavapop.R;
-import com.concrete.challenge.githubjavapop.api.RepositoryApi;
-import com.concrete.challenge.githubjavapop.api.SingleSchedulers;
+import com.concrete.challenge.githubjavapop.api.DefaultViewModelFactory;
+import com.concrete.challenge.githubjavapop.ui.pull.PullRequestActivity;
 
-public class RepositoryFragment extends Fragment implements  RepositoryRecyclerViewAdapter.ItemClickListener {
+public class RepositoryFragment extends Fragment implements  RepositoryRecyclerViewAdapter.ItemClickListener, IdlingResource {
 
     private RepositoryViewModel viewModel;
     private RepositoryRecyclerViewAdapter adapter;
+    private DefaultViewModelFactory viewModelFactory;
 
     private ProgressBar progressBarCenter;
     private ProgressBar progressBarBottom;
 
     private boolean isLoading = false;
     private int page;
+    private boolean isReady;
+    private ResourceCallback resourceCallback;
 
     public static RepositoryFragment newInstance() {
         return new RepositoryFragment();
+    }
+
+    public RepositoryFragment() {
+        viewModelFactory = new DefaultViewModelFactory();
     }
 
     @Nullable
@@ -84,17 +90,7 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
-        viewModel = ViewModelProviders.of(this, new ViewModelProvider.Factory() {
-            @SuppressWarnings("unchecked")
-            @Override
-            public <T extends ViewModel > T create(final Class<T> modelClass) {
-                if (modelClass.equals(RepositoryViewModel.class)) {
-                    return (T) new RepositoryViewModel(new RepositoryApi(), SingleSchedulers.INSTANCE);
-                } else {
-                    return null;
-                }
-            }
-        }).get(RepositoryViewModel.class);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RepositoryViewModel.class);
 
         viewModel.getRepositories().observe(getViewLifecycleOwner(), repositories -> {
             if(repositories.size() > 0) {
@@ -107,6 +103,7 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
                     progressBarCenter.setVisibility(View.GONE);
                 }
             }
+            isReady = true;
         });
 
         viewModel.getError().observe(getViewLifecycleOwner(), integer -> {
@@ -118,6 +115,22 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
 
     @Override
     public void onItemClick(int position) {
+        startActivity(new Intent(getActivity(), PullRequestActivity.class));
+    }
 
+    @Override
+    public String getName() {
+        return this.getClass().getName();
+    }
+
+    @Override
+    public boolean isIdleNow() {
+        if(isReady) resourceCallback.onTransitionToIdle();
+        return isReady;
+    }
+
+    @Override
+    public void registerIdleTransitionCallback(ResourceCallback callback) {
+        resourceCallback = callback;
     }
 }
