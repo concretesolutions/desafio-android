@@ -10,7 +10,6 @@ import com.concrete.challenge.githubjavapop.api.Api;
 import com.concrete.challenge.githubjavapop.api.SingleSchedulers;
 import com.concrete.challenge.githubjavapop.domain.RepositoriesResponse;
 import com.concrete.challenge.githubjavapop.domain.Repository;
-import com.concrete.challenge.githubjavapop.ui.repository.RepositoryViewModel;
 
 import org.junit.After;
 import org.junit.Before;

@@ -75,6 +75,10 @@ public class PullRequestRecyclerViewAdapter extends RecyclerView.Adapter<PullReq
         notifyDataSetChanged();
     }
 
+    public ArrayList<PullRequest> getPullRequests() {
+        return data;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView pullRequestTitle;
