@@ -19,7 +19,6 @@ import com.concrete.challenge.githubjavapop.ui.repository.RepositoryActivity;
 import com.concrete.challenge.githubjavapop.ui.repository.RepositoryFragment;
 import com.concrete.challenge.githubjavapop.ui.repository.RepositoryRecyclerViewAdapter;
 
-import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
@@ -72,7 +71,7 @@ public class RepositoryActivityTest {
         AtomicReference<RepositoryRecyclerViewAdapter> adapter = new AtomicReference<>();
         Espresso.onView(ViewMatchers.withId(R.id.recycler_view_repository)).check((view, noViewFoundException) -> {
             RecyclerView viewById = rule.getActivity().requireViewById(R.id.recycler_view_repository);
-             adapter.set((RepositoryRecyclerViewAdapter) viewById.getAdapter());
+            adapter.set((RepositoryRecyclerViewAdapter) viewById.getAdapter());
         });
 
         int firstPageCount = adapter.get().getItemCount();

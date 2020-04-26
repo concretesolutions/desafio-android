@@ -9,12 +9,14 @@ import com.concrete.challenge.githubjavapop.R;
 
 public class PullRequestActivity extends AppCompatActivity {
 
+    public static String USER_NAME_KEY = "__user_name_key__";
+    public static String REPOSITORY_NAME_KEY = "__repository_name_key__";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pull_request_activity);
 
-        getSupportActionBar().setTitle(R.string.pull_requests_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {

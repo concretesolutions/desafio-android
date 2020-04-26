@@ -2,6 +2,8 @@ package com.concrete.challenge.githubjavapop.domain;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class PullRequest {
 
     public int id;
@@ -12,8 +14,9 @@ public class PullRequest {
 
     public User user;
 
-    public String url;
+    @SerializedName("html_url")
+    public String htmlUrl;
 
     @SerializedName("created_at")
-    public String createdAt;
+    public Date createdAt;
 }

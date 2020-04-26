@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.concrete.challenge.githubjavapop.R;
 import com.concrete.challenge.githubjavapop.domain.PullRequest;
+import com.concrete.challenge.githubjavapop.domain.User;
+import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class PullRequestRecyclerViewAdapter extends RecyclerView.Adapter<PullRequestRecyclerViewAdapter.ViewHolder> {
@@ -35,7 +39,30 @@ public class PullRequestRecyclerViewAdapter extends RecyclerView.Adapter<PullReq
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        PullRequest pullRequest = data.get(position);
+        User user = pullRequest.user;
 
+        if(user != null) {
+            Picasso.get().load(user.avatarUrl).into(holder.userImage);
+            holder.userName.setText(user.login);
+        }
+
+        if(pullRequest != null) {
+            holder.pullRequestTitle.setText(pullRequest.title);
+
+            if(pullRequest.body != null && !pullRequest.body.equals("")) {
+                holder.pullRequestBody.setText(pullRequest.body);
+                holder.pullRequestBody.setVisibility(View.VISIBLE);
+            } else {
+                holder.pullRequestBody.setVisibility(View.GONE);
+            }
+
+            if(pullRequest.createdAt != null) {
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                String releasedText = df.format(pullRequest.createdAt);
+                holder.createdAt.setText(releasedText);
+            }
+        }
     }
 
     @Override
@@ -43,11 +70,26 @@ public class PullRequestRecyclerViewAdapter extends RecyclerView.Adapter<PullReq
         return data.size();
     }
 
+    public void setPullRequests(@NonNull ArrayList<PullRequest> pullRequests) {
+        data = pullRequests;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        public TextView pullRequestTitle;
+        public TextView pullRequestBody;
+        public TextView userName;
+        public TextView createdAt;
+        public ImageView userImage;
 
         ViewHolder(View itemView) {
             super(itemView);
-
+            pullRequestTitle = itemView.findViewById(R.id.pull_request_title);
+            pullRequestBody = itemView.findViewById(R.id.pull_request_body);
+            userName = itemView.findViewById(R.id.username);
+            createdAt = itemView.findViewById(R.id.created_at);
+            userImage = itemView.findViewById(R.id.user_image);
             itemView.setOnClickListener(this);
         }
 

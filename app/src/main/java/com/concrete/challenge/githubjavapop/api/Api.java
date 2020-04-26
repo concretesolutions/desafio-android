@@ -37,8 +37,8 @@ public class Api {
         return webservice.getRepositories(page);
     }
 
-    public Single<ArrayList<PullRequest>> getPullRequests(String userName, String repositoryName) {
-        return webservice.getPullRequests(userName, repositoryName);
+    public Single<ArrayList<PullRequest>> getPullRequests(String userName, String repositoryName, int page) {
+        return webservice.getPullRequests(userName, repositoryName, page);
     }
 
     public Single<User> getUser(String name) {

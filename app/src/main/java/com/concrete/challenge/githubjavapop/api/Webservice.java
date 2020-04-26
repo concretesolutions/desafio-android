@@ -17,9 +17,9 @@ public interface Webservice {
     @GET("/search/repositories?q=language:Java&sort=stars")
     Single<RepositoriesResponse> getRepositories(@Query("page") Integer page);
 
-    @GET("/repos/:owner/:repo/pulls")
-    Single<ArrayList<PullRequest>> getPullRequests(@Path("owner") String userName, @Path("repo") String repositoryName);
+    @GET("/repos/{owner}/{repo}/pulls")
+    Single<ArrayList<PullRequest>> getPullRequests(@Path("owner") String userName, @Path("repo") String repositoryName, @Query("page") int page);
 
-    @GET("/users/:username")
+    @GET("/users/{username}")
     Single<User> getUser(@Path("username") String name);
 }

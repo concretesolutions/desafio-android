@@ -7,11 +7,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.test.espresso.IdlingResource;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +19,10 @@ import android.widget.Toast;
 
 import com.concrete.challenge.githubjavapop.R;
 import com.concrete.challenge.githubjavapop.api.DefaultViewModelFactory;
+import com.concrete.challenge.githubjavapop.ui.BaseFragment;
 import com.concrete.challenge.githubjavapop.ui.pull.PullRequestActivity;
 
-public class RepositoryFragment extends Fragment implements  RepositoryRecyclerViewAdapter.ItemClickListener, IdlingResource {
+public class RepositoryFragment extends BaseFragment implements  RepositoryRecyclerViewAdapter.ItemClickListener {
 
     private RepositoryViewModel viewModel;
     private RepositoryRecyclerViewAdapter adapter;
@@ -34,8 +33,6 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
 
     private boolean isLoading = false;
     private int page;
-    private boolean isReady;
-    private ResourceCallback resourceCallback;
 
     public static RepositoryFragment newInstance() {
         return new RepositoryFragment();
@@ -59,6 +56,7 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
         page = 1;
         progressBarCenter = getView().findViewById(R.id.progress_bar_center);
         progressBarBottom = getView().findViewById(R.id.progress_bar_bottom);
+        progressBarBottom.setVisibility(View.GONE);
 
         RecyclerView recyclerView = getView().findViewById(R.id.recycler_view_repository);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -81,7 +79,7 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
                         progressBarBottom.setVisibility(View.VISIBLE);
                         viewModel.loadRepositories(page);
                         isLoading = true;
-                        isReady = false;
+                        isIdle = false;
                     }
                 }
             }
@@ -103,10 +101,10 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
                     progressBarCenter.setVisibility(View.GONE);
                 }
             }
-            isReady = true;
+            isIdle = true;
         });
 
-        viewModel.getError().observe(getViewLifecycleOwner(), integer -> {
+        viewModel.getError().observe(getViewLifecycleOwner(), throwable -> {
             Toast.makeText(getContext(), R.string.error_message_toast, Toast.LENGTH_LONG).show();
         });
 
@@ -117,23 +115,14 @@ public class RepositoryFragment extends Fragment implements  RepositoryRecyclerV
     public void onItemClick(int position) {
         Intent intent = new Intent(getActivity(), PullRequestActivity.class);
         String userName = viewModel.getRepositories().getValue().get(position).owner.login;
-        intent.putExtra("user", userName);
+        String repositoryName = viewModel.getRepositories().getValue().get(position).name;
+        intent.putExtra(PullRequestActivity.USER_NAME_KEY, userName);
+        intent.putExtra(PullRequestActivity.REPOSITORY_NAME_KEY, repositoryName);
         startActivity(intent);
     }
 
     @Override
     public String getName() {
         return this.getClass().getName();
-    }
-
-    @Override
-    public boolean isIdleNow() {
-        if(isReady) resourceCallback.onTransitionToIdle();
-        return isReady;
-    }
-
-    @Override
-    public void registerIdleTransitionCallback(ResourceCallback callback) {
-        resourceCallback = callback;
     }
 }
