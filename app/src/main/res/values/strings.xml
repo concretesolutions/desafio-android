@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Desafio Concrete Solution</string>
+
+    <!-- Git Repository -->
+    <string name="erro_get_movie">Erro ao buscar filmes</string>
+    <string name="unavailable_service">Serviço indisponível</string>
+    <string name="error_unexpected">Erro inesperado</string>
+    <string name="service_unhandled_error">Erro não tratado</string>
+    <string name="without_internet_connection">Sem conexão com a Internet</string>
+    <string name="git_hub_javapop">Github JavaPop</string>
+    <string name="limite_exceeded">Limit exceeded</string>
+    <string name="limite_search_exceeded">Only the firts 1000 search results are available</string>
+    <string name="open_drawer">Abrir</string>
+    <string name="close_drawer">Fechar</string>
+    <string name="language">language:java</string>
+    <string name="stars">stars</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="user_name">Username</string>
+    <string name="surname">Surname</string>
+    <string name="forks">Forks</string>
+    <string name="date">Date</string>
+    <string name="return_empty">Retorno vazio</string>
+
+
+</resources>

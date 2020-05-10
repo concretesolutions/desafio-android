@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        android:id="@+id/pullRequestLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:layout_marginRight="8dp"
+            android:id="@+id/pullRequestTitle"
+            android:textColor="@color/colorTitle"
+            android:textSize="22dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/name"/>
+
+    <TextView
+            android:layout_marginRight="8dp"
+            android:textSize="16dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:id="@+id/pullRequestBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/description"/>
+
+    <TextView
+            android:layout_marginRight="8dp"
+            android:textSize="16dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:id="@+id/pullRequestDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/date"/>
+
+    <LinearLayout
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+                android:id="@+id/relativeLayoutImage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/pullRequestImage"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/colorPrimary"
+                    android:src="@drawable/ic_avatar"/>
+
+            <ProgressBar
+                    android:id="@+id/pullRequestProgressBar"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:indeterminateDrawable="@drawable/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/pullRequestLogin"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorTitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/user_name"/>
+            <TextView
+                    android:textSize="16dp"
+                    android:textColor="@color/colorTitle3"
+                    android:id="@+id/pullRequestSurname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/surname"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+</LinearLayout>
+

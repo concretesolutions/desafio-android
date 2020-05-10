@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="presenter"
+                  type="com.hotmail.fignunes.desafioconcretesolution.presentation.pullrequest.PullRequestPresenter"/>
+    </data>
+
+    <RelativeLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pullRequestSwipe">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/pullRequestRecyclerview"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayoutMessage"
+                        tools:listitem="@layout/item_pullrequest"/>
+
+                <LinearLayout
+                        android:padding="16dp"
+                        android:background="@color/colorTitle3"
+                        android:id="@+id/linearLayoutMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                            android:id="@+id/pullRequestOpened"
+                            android:textSize="20dp"
+                            android:textColor="@color/colorIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:hint="opened"
+                            android:text="@={presenter.opened}"
+                            tools:text="16 opened"/>
+
+                    <TextView
+                            android:id="@+id/pullRequestClosed"
+                            android:textSize="20dp"
+                            android:hint="closed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@={presenter.closed}"
+                            tools:text="/ 80 closed"/>
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <!-- Loading -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:elevation="999dp"
+                android:focusable="true"
+                android:orientation="vertical"
+                android:visibility="@{presenter.showLoading}"
+                tools:visibility="gone">
+
+            <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateDrawable="@drawable/progress_bar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+</layout>

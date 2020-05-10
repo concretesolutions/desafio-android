@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:id="@+id/itemGitRepositoryLinearLayout"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/itemGitRepositoryName"
+                    android:textColor="@color/colorTitle"
+                    android:textSize="22dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/name"/>
+
+            <TextView
+                    android:textSize="16dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:id="@+id/itemGitRepositoryDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/description"/>
+
+            <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:id="@+id/imageBranch"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/ic_branch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/itemGitRepositoryBranch"
+                        android:layout_weight="1"
+                        android:textSize="21dp"
+                        android:layout_toRightOf="@+id/imageBranch"
+                        android:textColor="@color/colorIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/forks"/>
+
+                <ImageView
+                        android:layout_toRightOf="@+id/itemGitRepositoryBranch"
+                        android:id="@+id/imageStar"
+                        android:src="@drawable/ic_star"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:layout_toRightOf="@+id/imageStar"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:textSize="21dp"
+                        android:textColor="@color/colorIcon"
+                        android:id="@+id/itemGitRepositoryStar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/stars"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+            <RelativeLayout
+                    android:id="@+id/relativeLayoutImage"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/itemGitRepositoryImage"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@color/colorPrimary"
+                        android:src="@drawable/ic_avatar"/>
+
+                <ProgressBar
+                        android:id="@+id/itemGitRepositoryProgressBar"
+                        android:indeterminateTint="@color/colorPrimary"
+                        android:indeterminateDrawable="@drawable/progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+            <TextView
+                    android:id="@+id/itemGitRepositoryUserLogin"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorTitle2"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/user_name"/>
+            <TextView
+                    android:textSize="16dp"
+                    android:textColor="@color/colorTitle3"
+                    android:textAlignment="center"
+                    android:id="@+id/itemGitRepositoryUserSurname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/surname"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+</LinearLayout>
