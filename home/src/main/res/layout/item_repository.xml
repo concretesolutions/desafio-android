@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="@dimen/corner_radius_size">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_padding">
+
+        <TextView
+            android:id="@+id/tv_repository_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue_title"
+            app:layout_constraintEnd_toStartOf="@id/gl_repository"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Nome do Repositório"
+            android:textStyle="bold"
+            android:textSize="@dimen/material_text_subhead" />
+
+        <TextView
+            android:id="@+id/tv_repository_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:singleLine="false"
+            app:layout_constraintEnd_toStartOf="@id/gl_repository"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_repository_title"
+            android:layout_marginTop="@dimen/x_small_margin"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec bibendum odio. Nulla facilisi. Donecasdasdasdasdasda"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_repository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7"/>
+
+        <TextView
+            android:id="@+id/tv_repository_fork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/xx_small_padding"
+            android:layout_marginTop="@dimen/x_small_margin"
+            android:textColor="@color/yellow"
+            android:text="323"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_git_branch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repository_description"
+            app:layout_constraintEnd_toStartOf="@+id/tv_repository_stars"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <TextView
+            android:id="@+id/tv_repository_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:textColor="@color/yellow"
+            android:text="32"
+            android:drawableLeft="@drawable/ic_star"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/x_small_margin"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repository_description"
+            app:layout_constraintStart_toEndOf="@+id/tv_repository_fork"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_repository_description"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_repository_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue_title"
+            android:textSize="@dimen/material_text_body2"
+            android:layout_marginTop="@dimen/x_small_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_repository_description"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:text="germanofilho"
+            />
+
+        <TextView
+            android:id="@+id/tv_repository_name_and_last_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/material_text_caption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_repository_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repository_username"
+            android:text="Germano Filho"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
