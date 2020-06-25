@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toStartOf="@id/gl_repository"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Nome do Repositório"
+            tools:text="@tools:sample/full_names"
             android:textStyle="bold"
             android:textSize="@dimen/material_text_subhead" />
 
@@ -35,7 +35,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_repository_title"
             android:layout_marginTop="@dimen/x_small_margin"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec bibendum odio. Nulla facilisi. Donecasdasdasdasdasda"/>
+            android:layout_marginEnd="5dp"
+            tools:text="@tools:sample/lorem/random"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_repository"
@@ -51,7 +52,7 @@
             android:drawablePadding="@dimen/xx_small_padding"
             android:layout_marginTop="@dimen/x_small_margin"
             android:textColor="@color/yellow"
-            android:text="323"
+            tools:text="@tools:sample/us_zipcodes"
             android:gravity="center_vertical"
             android:drawableStart="@drawable/ic_git_branch"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,8 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
             android:textColor="@color/yellow"
-            android:text="32"
-            android:drawableLeft="@drawable/ic_star"
+            tools:text="@tools:sample/us_zipcodes"
+            android:drawableStart="@drawable/ic_star"
             android:gravity="center_vertical"
             android:layout_marginTop="@dimen/x_small_margin"
             app:layout_constraintTop_toBottomOf="@+id/tv_repository_description"
@@ -74,7 +75,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_avatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,9 +91,8 @@
             android:layout_marginTop="@dimen/x_small_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_repository_description"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            android:text="germanofilho"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
+            tools:text="@tools:sample/first_names" />
 
         <TextView
             android:id="@+id/tv_repository_name_and_last_name"
@@ -102,7 +102,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_repository_description"
             app:layout_constraintTop_toBottomOf="@+id/tv_repository_username"
-            android:text="Germano Filho"/>
+            tools:text="@tools:sample/full_names"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
