@@ -1,6 +1,5 @@
+include ':fork'
 include ':network'
-include ':detail'
 include ':home'
 include ':core'
 include ':app'
-rootProject.name = "Desafio Concrete"
