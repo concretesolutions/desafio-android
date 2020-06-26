@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.germanofilho.core.extension.fadeAnimation
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.germanofilho.home.R
 import com.germanofilho.network.feature.repositorylist.model.entity.Item
 import kotlinx.android.synthetic.main.item_repository.view.*
@@ -44,6 +44,7 @@ class ViewHolder(private val view: View, private val onItemClickListener: ((Stri
             Glide
                 .with(view.context)
                 .load(item.owner?.avatarUrl)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .circleCrop()
                 .into(iv_avatar)
 

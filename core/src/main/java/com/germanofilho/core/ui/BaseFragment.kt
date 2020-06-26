@@ -11,4 +11,22 @@ abstract class BaseFragment(@LayoutRes private val layout: Int) : Fragment(layou
         val snackBar = Snackbar.make(view, msg, Snackbar.LENGTH_INDEFINITE)
         snackBar.setAction(buttonMsg) { onClickAction.invoke() }.show()
     }
+
+    private var enableItem = true
+
+    override fun onResume() {
+        super.onResume()
+        enableItem = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        enableItem = false
+    }
+
+    protected fun ignoreReplaceFragment(itemListener: (() -> Unit)) {
+        if (enableItem) {
+            itemListener.invoke()
+        }
+    }
 }

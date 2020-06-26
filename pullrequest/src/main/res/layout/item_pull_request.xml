@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="@dimen/small_padding"
+    android:paddingBottom="@dimen/small_padding"
+    android:paddingStart="@dimen/medium_padding"
+    android:paddingEnd="@dimen/medium_padding"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_pull_request_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue_title"
+        android:textSize="@dimen/material_text_subhead"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/tv_pull_request_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x_small_margin"
+        android:layout_marginEnd="5dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pull_request_title"
+        tools:text="@tools:sample/lorem/random" />
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="@dimen/small_margin"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pull_request_description" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:textColor="@color/blue_title"
+        android:textSize="@dimen/material_text_body2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_avatar"
+        tools:text="@tools:sample/first_names" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+</androidx.constraintlayout.widget.ConstraintLayout>

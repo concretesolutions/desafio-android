@@ -2,16 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_fork"
+    android:id="@+id/nav_pull_request"
     tools:ignore="UnusedNavigation">
     <fragment
-        android:id="@+id/forkFragment"
-        android:name="com.germanofilho.fork.ForkFragment"
+        android:id="@+id/pullRequestFragment"
+        android:name="com.germanofilho.pullrequest.presentation.ui.fragment.PullRequestFragment"
         android:label="fragment_fork"
-        tools:layout="@layout/fragment_fork">
+        tools:layout="@layout/fragment_pull_request">
         <argument
             android:name="full_name"
             app:argType="string" />
-        <deepLink app:uri="desafio://forkFragment/{full_name}"/>
+        <deepLink app:uri="desafio://pullRequestFragment/{full_name}"/>
     </fragment>
 </navigation>

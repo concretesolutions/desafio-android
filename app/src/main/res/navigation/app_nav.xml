@@ -4,7 +4,7 @@
     android:id="@+id/app_nav"
     app:startDestination="@id/nav_home">
 
-    <include app:graph="@navigation/nav_fork"/>
+    <include app:graph="@navigation/nav_pull_request"/>
     <include app:graph="@navigation/nav_home"/>
 
 </navigation>

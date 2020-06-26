@@ -3,10 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_item"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
+    android:clickable="true"
+    android:focusable="true"
     android:layout_marginEnd="@dimen/small_margin"
     android:layout_marginStart="@dimen/small_margin"
     app:cardCornerRadius="@dimen/corner_radius_size">

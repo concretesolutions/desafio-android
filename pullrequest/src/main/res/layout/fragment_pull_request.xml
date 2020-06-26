@@ -12,13 +12,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-
     <include layout="@layout/error_layout"
         android:id="@+id/error_layout"
         android:visibility="gone"/>
 
+    <include layout="@layout/empty_layout"
+        android:id="@+id/empty_layout"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_repository"
+        android:id="@+id/rv_pull_request"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fadingEdgeLength="@dimen/x_large_padding"
@@ -27,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
-        tools:listitem="@layout/item_repository" />
+        tools:listitem="@layout/item_pull_request" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -38,15 +41,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone"/>
-
-    <ProgressBar
-        android:id="@+id/bottom_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@android:drawable/screen_background_dark_transparent"
-        android:indeterminateTint="@color/yellow"
-        android:padding="@dimen/x_small_padding"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_repository"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
