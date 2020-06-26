@@ -5,17 +5,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.germanofilho.core.extension.fadeAnimation
 import com.germanofilho.home.R
 import com.germanofilho.network.feature.repositorylist.model.entity.Item
 import kotlinx.android.synthetic.main.item_repository.view.*
 
-class RepositoryAdapter(/*private val onItemClickListener: ((String) -> Unit)*/) : RecyclerView.Adapter<ViewHolder>(){
+class RepositoryAdapter(private val onItemClickListener: ((String) -> Unit)) : RecyclerView.Adapter<ViewHolder>(){
 
     private var items = mutableListOf<Item>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_repository, parent, false)
-        return ViewHolder(view/*, onItemClickListener*/)
+        return ViewHolder(view, onItemClickListener)
     }
 
     override fun getItemCount(): Int = items.size
@@ -30,7 +31,7 @@ class RepositoryAdapter(/*private val onItemClickListener: ((String) -> Unit)*/)
     }
 }
 
-class ViewHolder(private val view: View/*, private val onItemClickListener: ((String) -> Unit)*/): RecyclerView.ViewHolder(view){
+class ViewHolder(private val view: View, private val onItemClickListener: ((String) -> Unit)): RecyclerView.ViewHolder(view){
     fun bind(item: Item){
         with(view){
             tv_repository_title.text = item.name
@@ -40,17 +41,15 @@ class ViewHolder(private val view: View/*, private val onItemClickListener: ((St
             tv_repository_fork.text = item.forksCount.toString()
             tv_repository_stars.text = item.stargazersCount.toString()
 
-
             Glide
                 .with(view.context)
                 .load(item.owner?.avatarUrl)
                 .circleCrop()
                 .into(iv_avatar)
 
-//            //setup listener
-//            this.setOnClickListener {
-//                onItemClickListener.invoke(item)
-//            }
+            this.setOnClickListener {
+                onItemClickListener.invoke(item.fullName ?: "")
+            }
         }
     }
 

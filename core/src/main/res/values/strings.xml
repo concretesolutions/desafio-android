@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="erro_msg">Ops! Something went wrong!</string>
+    <string name="erro_snack">We found a problem to retrieve data</string>
+    <string name="try_again">Try Again</string>
+
+
+
+    <!--Deeplink-->
+    <string name="deeplink_fork">"desafio://forkFragment/%s"</string>
+
+</resources>

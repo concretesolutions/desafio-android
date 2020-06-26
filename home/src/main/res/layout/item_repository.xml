@@ -2,9 +2,13 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/cv_item"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
+    android:layout_marginEnd="@dimen/small_margin"
+    android:layout_marginStart="@dimen/small_margin"
     app:cardCornerRadius="@dimen/corner_radius_size">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,15 +32,16 @@
             android:id="@+id/tv_repository_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxLines="2"
+            android:layout_marginTop="@dimen/x_small_margin"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="@dimen/x_small_margin"
             android:ellipsize="end"
-            android:singleLine="false"
+            android:maxLines="2"
+            app:layout_constraintBottom_toTopOf="@+id/tv_repository_stars"
             app:layout_constraintEnd_toStartOf="@id/gl_repository"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_repository_title"
-            android:layout_marginTop="@dimen/x_small_margin"
-            android:layout_marginEnd="5dp"
-            tools:text="@tools:sample/lorem/random"/>
+            tools:text="@tools:sample/lorem/random" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_repository"
@@ -49,37 +54,36 @@
             android:id="@+id/tv_repository_fork"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/xx_small_padding"
             android:layout_marginTop="@dimen/x_small_margin"
-            android:textColor="@color/yellow"
-            tools:text="@tools:sample/us_zipcodes"
-            android:gravity="center_vertical"
             android:drawableStart="@drawable/ic_git_branch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_repository_description"
+            android:drawablePadding="@dimen/xx_small_padding"
+            android:gravity="center_vertical"
+            android:textColor="@color/yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_repository_stars"
-            tools:layout_editor_absoluteX="8dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@tools:sample/us_zipcodes" />
 
         <TextView
             android:id="@+id/tv_repository_stars"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:textColor="@color/yellow"
-            tools:text="@tools:sample/us_zipcodes"
+            android:layout_marginTop="@dimen/x_small_margin"
             android:drawableStart="@drawable/ic_star"
             android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/x_small_margin"
-            app:layout_constraintTop_toBottomOf="@+id/tv_repository_description"
+            android:textColor="@color/yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_repository_fork"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            tools:text="@tools:sample/us_zipcodes" />
 
         <ImageView
             android:id="@+id/iv_avatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_repository_description"
+            android:layout_marginStart="@dimen/small_margin"
+            app:layout_constraintStart_toEndOf="@+id/gl_repository"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -88,21 +92,26 @@
             android:layout_height="wrap_content"
             android:textColor="@color/blue_title"
             android:textSize="@dimen/material_text_body2"
+            android:layout_marginStart="@dimen/small_margin"
             android:layout_marginTop="@dimen/x_small_margin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_repository_description"
+            app:layout_constraintStart_toEndOf="@+id/gl_repository"
             app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
             tools:text="@tools:sample/first_names" />
 
         <TextView
             android:id="@+id/tv_repository_name_and_last_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/small_margin"
             android:textSize="@dimen/material_text_caption"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_repository_description"
+            app:layout_constraintStart_toEndOf="@+id/gl_repository"
             app:layout_constraintTop_toBottomOf="@+id/tv_repository_username"
+            android:layout_marginEnd="@dimen/xx_small_margin"
             tools:text="@tools:sample/full_names"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

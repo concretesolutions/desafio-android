@@ -38,4 +38,6 @@ dependencies {
     implementation project(':home')
     implementation project(':fork')
     implementation project(':network')
+
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }
