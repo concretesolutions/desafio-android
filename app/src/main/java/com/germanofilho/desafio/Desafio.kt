@@ -1,14 +1,11 @@
 package com.germanofilho.desafio
 
 import android.app.Application
-import com.germanofilho.desafio.di.repositoryModule
-import com.germanofilho.desafio.di.viewModelModule
 import com.germanofilho.network.config.AppConfig
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class Desafio : Application() {
-
     override fun onCreate() {
         super.onCreate()
         startKoin()
@@ -22,7 +19,6 @@ class Desafio : Application() {
     private fun startKoin(){
         startKoin {
             androidContext(this@Desafio)
-            modules((listOf(repositoryModule, viewModelModule)))
         }
     }
 }
