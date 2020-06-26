@@ -13,4 +13,5 @@ dependencies {
     implementation project(':network')
 
     implementation 'androidx.cardview:cardview:1.0.0'
+    with defaultTestDependencies
 }

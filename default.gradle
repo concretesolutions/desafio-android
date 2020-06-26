@@ -23,3 +23,20 @@ ext.defaultBuildType = {
         }
     }
 }
+
+ext.defaultTestDependencies = {
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_core_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mock_web_server_version"
+    androidTestImplementation 'org.koin:koin-test:2.0.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:core:1.2.0'
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    debugImplementation 'androidx.fragment:fragment-testing:1.2.4'
+    androidTestImplementation "androidx.navigation:navigation-testing:2.3.0-alpha02"
+    debugImplementation "androidx.fragment:fragment-ktx:1.1.0-beta01"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation 'junit:junit:4.13'
+}

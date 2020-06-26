@@ -11,4 +11,6 @@ android {
 dependencies {
     implementation project(':core')
     implementation project(':network')
+
+    with defaultTestDependencies
 }

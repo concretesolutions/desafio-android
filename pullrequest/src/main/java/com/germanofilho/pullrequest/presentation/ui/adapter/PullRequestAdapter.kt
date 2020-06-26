@@ -1,6 +1,5 @@
 package com.germanofilho.pullrequest.presentation.ui.adapter
 
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +26,8 @@ class PullRequestAdapter(private val onItemClickListener: ((String) -> Unit)) : 
         holder.bind(pullRequestList[position])
     }
 
-    fun addItem(carList: List<GitPullRequestResponse>){
-        pullRequestList.addAll(carList)
+    fun addItem(item: List<GitPullRequestResponse>){
+        pullRequestList.addAll(item)
         notifyDataSetChanged()
     }
 }

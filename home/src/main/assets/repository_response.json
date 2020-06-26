@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "name": "litho",
+      "full_name": "facebook/litho",
+      "owner": {
+        "login": "facebook",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/69631?v=4"
+      },
+      "description": "A declarative framework for building efficient UIs on Android.",
+      "stargazers_count": 6758,
+      "forks_count": 613
+    },
+    {
+      "name": "ShortcutBadger",
+      "full_name": "leolin310148/ShortcutBadger",
+      "owner": {
+        "login": "leolin310148",
+        "avatar_url": "https://avatars1.githubusercontent.com/u/5039811?v=4"
+      },
+      "description": "An Android library supports badge notification like iOS in Samsung, LG, Sony and HTC launchers.",
+      "stargazers_count": 6680,
+      "forks_count": 1231
+    },
+    {
+      "name": "SmartTabLayout",
+      "full_name": "ogaclejapan/SmartTabLayout",
+      "owner": {
+        "login": "ogaclejapan",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/1496485?v=4"
+      },
+      "description": "A custom ViewPager title strip which gives continuous feedback to the user when scrolling",
+      "stargazers_count": 6663,
+      "forks_count": 1338
+    }
+  ]
+}
