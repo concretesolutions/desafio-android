@@ -1,5 +1,6 @@
-package com.bassul.mel.app
+package com.bassul.mel.app.endpoint
 
+import com.bassul.mel.app.RepositoriesListResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

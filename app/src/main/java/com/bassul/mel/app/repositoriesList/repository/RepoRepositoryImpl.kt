@@ -1,12 +1,16 @@
-package com.bassul.mel.app
+package com.bassul.mel.app.features.repositoriesList.repository
 
 import android.util.Log
+import com.bassul.mel.app.features.repositoriesList.RepositoriesListContract
+import com.bassul.mel.app.RepositoriesListResponse
+import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback
+import com.bassul.mel.app.endpoint.GithubAPI
 import retrofit2.Call
 import retrofit2.Response
 
-class RepoRepository(private val githubAPI: GithubAPI){
+class RepoRepositoryImpl(private val githubAPI: GithubAPI) : RepositoriesListContract.Repository {
 
-    fun readRepositoryJson(callback: RepositotyAllRepositoriesCallback){
+    override fun readRepositoryJson(callback: RepositotyAllRepositoriesCallback){
         githubAPI.fetchRepositoryData().enqueue(object : retrofit2.Callback<RepositoriesListResponse>{
             override fun onResponse(
                 call: Call<RepositoriesListResponse>,
