@@ -11,6 +11,11 @@ interface RepositoriesListContract{
         fun showCard(repositories: ArrayList<Item>)
     }
 
+    interface Presenter{
+        fun showCard(ItemModel: ArrayList<Item>)
+
+    }
+
     interface Interactor{
         fun loadRepositories()
     }

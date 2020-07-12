@@ -5,10 +5,10 @@ import com.bassul.mel.app.repositoriesList.repository.RepoRepositoryImpl
 import com.bassul.mel.app.repositoriesList.RepositoriesListContract
 import com.bassul.mel.app.repositoriesList.repository.model.RepositoriesListResponse
 import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback
-import com.bassul.mel.app.repositoriesList.view.MainActivity
+import com.bassul.mel.app.repositoriesList.RepoPresenterImpl
 
 class RepoInteractorImpl (
-    val activity: MainActivity,
+    val presenter: RepoPresenterImpl,
     val repository: RepoRepositoryImpl
 ) : RepositoriesListContract.Interactor {
 
@@ -17,7 +17,7 @@ class RepoInteractorImpl (
         return repository.readRepositoryJson(object : RepositotyAllRepositoriesCallback {
             override fun onSuccess(repositoriesList: RepositoriesListResponse) {
                 val repositories : ArrayList<Item> = convertGithubRepositoriesListResponseToRepositoriesList(repositoriesList)
-                activity.showCard(repositories)
+                presenter.showCard(repositories)
             }
         })
     }
