@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.R
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_repository_item.view.*
 
 class RepositoryAdapter (private val context: Context, var items : List<Item>) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>(){
@@ -25,6 +26,8 @@ class RepositoryAdapter (private val context: Context, var items : List<Item>) :
         holder?.description.text = item.description
         holder?.stars.text= item.stargazers_count
         holder?.forks.text= item.forks_count
+        holder?.nameOwner.text = item.owner.login
+        Picasso.get().load(item.owner.avatar_url).into(holder?.avatarOwner)
     }
 
     override fun getItemCount(): Int = items.size

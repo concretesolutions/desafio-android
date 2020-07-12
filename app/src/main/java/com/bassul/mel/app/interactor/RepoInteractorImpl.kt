@@ -28,6 +28,7 @@ class RepoInteractorImpl (
         listResponse.items.forEach{
             val repository = Item(it.id,
                 it.name,
+                it.owner,
                 it.stargazers_count,
                 it.forks_count,
                 it.description,
