@@ -1,8 +1,8 @@
-package com.bassul.mel.app.features.repositoriesList.repository
+package com.bassul.mel.app.repositoriesList.repository
 
 import android.util.Log
-import com.bassul.mel.app.features.repositoriesList.RepositoriesListContract
-import com.bassul.mel.app.RepositoriesListResponse
+import com.bassul.mel.app.repositoriesList.RepositoriesListContract
+import com.bassul.mel.app.repositoriesList.repository.model.RepositoriesListResponse
 import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback
 import com.bassul.mel.app.endpoint.GithubAPI
 import retrofit2.Call

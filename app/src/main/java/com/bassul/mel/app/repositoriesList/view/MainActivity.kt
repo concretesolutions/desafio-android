@@ -1,4 +1,4 @@
-package com.bassul.mel.app.features.repositoriesList.view
+package com.bassul.mel.app.repositoriesList.view
 
 
 import android.os.Bundle
@@ -8,9 +8,9 @@ import com.bassul.mel.app.*
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.endpoint.GithubAPI
 import com.bassul.mel.app.interactor.RepoInteractorImpl
-import com.bassul.mel.app.features.repositoriesList.RepositoriesListContract
-import com.bassul.mel.app.features.repositoriesList.repository.RepoRepositoryImpl
-import com.bassul.mel.app.features.repositoriesList.view.adapter.RepositoryAdapter
+import com.bassul.mel.app.repositoriesList.RepositoriesListContract
+import com.bassul.mel.app.repositoriesList.repository.RepoRepositoryImpl
+import com.bassul.mel.app.repositoriesList.view.adapter.RepositoryAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
 

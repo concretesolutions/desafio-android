@@ -1,4 +1,4 @@
-package com.bassul.mel.app
+package com.bassul.mel.app.ext
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

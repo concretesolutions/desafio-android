@@ -1,4 +1,4 @@
-package com.bassul.mel.app
+package com.bassul.mel.app.repositoriesList.repository.model
 
 
     data class RepositoriesListResponse(
