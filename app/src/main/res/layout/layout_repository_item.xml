@@ -122,14 +122,16 @@
 
                 <TextView
                     android:id="@+id/lr_tx_repository_description"
-                    android:text="Descricao Repositorio"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
                     android:ellipsize="end"
                     android:maxLines="2"
+                    android:text="Descricao Repositorio"
                     android:textSize="10dp"
-                    app:layout_constraintEnd_toEndOf="@+id/lr_tx_repository_name"
-                    app:layout_constraintStart_toStartOf="@+id/lr_tx_repository_name"
+                    app:layout_constraintEnd_toStartOf="@+id/lr_im_forks"
+                    app:layout_constraintStart_toEndOf="@+id/lr_tx_login"
                     app:layout_constraintTop_toBottomOf="@+id/lr_tx_repository_name" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
