@@ -17,10 +17,10 @@ interface RepositoriesListContract{
     }
 
     interface Interactor{
-        fun loadRepositories()
+        fun loadRepositories(pages : Int)
     }
 
     interface Repository{
-        fun readRepositoryJson(callback: RepositotyAllRepositoriesCallback)
+        fun readRepositoryJson(pages : Int, callback: RepositotyAllRepositoriesCallback)
     }
 }

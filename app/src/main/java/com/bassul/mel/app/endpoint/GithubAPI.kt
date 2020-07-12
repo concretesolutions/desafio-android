@@ -12,7 +12,7 @@ class GithubAPI {
 
         private val service = retrofitClient.create(GithubService::class.java)
 
-        fun fetchRepositoryData(): Call<RepositoriesListResponse> {
-            return service.fetchRepository(1) //TODO: Implementar passagem do page
+        fun fetchRepositoryData(pages : Int): Call<RepositoriesListResponse> {
+            return service.fetchRepository(pages) //TODO: Implementar passagem do page
         }
 }

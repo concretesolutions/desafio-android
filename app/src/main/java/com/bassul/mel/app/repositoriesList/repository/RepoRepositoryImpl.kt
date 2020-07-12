@@ -10,8 +10,8 @@ import retrofit2.Response
 
 class RepoRepositoryImpl(private val githubAPI: GithubAPI) : RepositoriesListContract.Repository {
 
-    override fun readRepositoryJson(callback: RepositotyAllRepositoriesCallback){
-        githubAPI.fetchRepositoryData().enqueue(object : retrofit2.Callback<RepositoriesListResponse>{
+    override fun readRepositoryJson(pages : Int, callback: RepositotyAllRepositoriesCallback){
+        githubAPI.fetchRepositoryData(pages).enqueue(object : retrofit2.Callback<RepositoriesListResponse>{
             override fun onResponse(
                 call: Call<RepositoriesListResponse>,
                 response: Response<RepositoriesListResponse>
