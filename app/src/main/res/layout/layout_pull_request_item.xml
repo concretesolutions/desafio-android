@@ -13,7 +13,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewItem"
+        android:id="@+id/cardViewPullRequest"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         app:cardBackgroundColor="@android:color/transparent">
@@ -27,7 +27,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:paddingTop="1dp">
 
             <ProgressBar
-                android:id="@+id/lr_progressbar"
+                android:id="@+id/lpr_progressbar"
                 android:layout_width="24dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -38,17 +38,17 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/lr_im_avatar"
+                android:id="@+id/lpr_im_avatar"
                 android:layout_width="44dp"
                 android:layout_height="32dp"
-                android:layout_marginStart="10dp"
+
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/lr_tx_login"
+                android:id="@+id/lpr_tx_name_owner"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginTop="8dp"
@@ -56,36 +56,49 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:text="Nome Autor"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/lr_im_avatar"
+                app:layout_constraintEnd_toEndOf="@+id/lpr_im_avatar"
                 app:layout_constraintHorizontal_bias="0.472"
-                app:layout_constraintStart_toStartOf="@+id/lr_im_avatar"
-                app:layout_constraintTop_toBottomOf="@+id/lr_im_avatar" />
+                app:layout_constraintStart_toStartOf="@+id/lpr_im_avatar"
+                app:layout_constraintTop_toBottomOf="@+id/lpr_im_avatar" />
 
             <TextView
-                android:id="@+id/lr_tx_pull_request_title"
+                android:id="@+id/lpr_tx_pull_request_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="Pull Request"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.504"
-                app:layout_constraintStart_toEndOf="@+id/lr_im_avatar"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toEndOf="@+id/lpr_im_avatar"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/lr_tx_pull_request_body"
+                android:id="@+id/lpr_tx_pull_request_body"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
                 android:text="Body Request"
                 android:textSize="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lpr_im_avatar"
+                app:layout_constraintTop_toBottomOf="@+id/lpr_tx_pull_request_title" />
+
+            <TextView
+                android:id="@+id/lpr_tx_date"
+                android:layout_width="wrap_content"
+                android:layout_height="11dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Data"
+                android:textSize="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/lr_tx_login"
-                app:layout_constraintTop_toBottomOf="@+id/lr_tx_repository_name" />
+                app:layout_constraintTop_toBottomOf="@+id/lpr_tx_pull_request_body"
+                app:layout_constraintVertical_bias="1.0" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

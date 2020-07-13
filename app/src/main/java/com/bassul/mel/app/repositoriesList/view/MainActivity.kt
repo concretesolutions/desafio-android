@@ -74,7 +74,9 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
     }
 
     override fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>) {
-        startActivity(Intent(this, PullRequestActivity::class.java))
+        val intent = Intent(this, PullRequestActivity::class.java)
+        intent.putExtra("pullRequest", pullRequest)
+        startActivity(intent)
     }
 
 

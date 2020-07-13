@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bassul.mel.app.AdapterItemsContract
 import com.bassul.mel.app.AdapterPullRequestContract
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.PullRequest
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.layout_pull_request_item.view.*
+import kotlinx.android.synthetic.main.layout_pull_request_item.view.lpr_im_avatar
 import kotlinx.android.synthetic.main.layout_repository_item.view.*
+import kotlinx.android.synthetic.main.layout_repository_item.view.cardViewItem
 
 class PullRequestAdapter (private val context: Context, var pr : MutableList<PullRequest>, private val itemClickListener: (Item) -> Unit) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>(),
     AdapterPullRequestContract{
@@ -30,6 +32,7 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
         holder?.body.text = pullRequest.body
         holder?.nameOwner.text = pullRequest.userName
         Picasso.get().load(pullRequest.userAvatar).into(holder?.avatarOwner)
+        holder?.date.text = pullRequest.updated_at
 
         if(position + 1 == pr.size){
          //   holder.changeVisibility(true)
@@ -52,12 +55,13 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
 
-        var name = itemView.lr_tx_repository_name!!
-        var body = itemView.lr_tx_repository_description!!
-        var avatarOwner = itemView.lr_im_avatar
-        var nameOwner = itemView.lr_tx_login
-        var progressBar = itemView.lr_progressbar
-        val clickableView = itemView.cardViewItem
+        var name = itemView.lpr_tx_pull_request_title!!
+        var body = itemView.lpr_tx_pull_request_body!!
+        var avatarOwner = itemView.lpr_im_avatar
+        var nameOwner = itemView.lpr_tx_name_owner
+        var date = itemView.lpr_tx_date
+      //  var progressBar = itemView.lpr_progressbar
+       // var clickableView = itemView.cardViewPullRequest
 /*
         fun changeVisibility(isLastItem : Boolean){
             if(isLastItem){
