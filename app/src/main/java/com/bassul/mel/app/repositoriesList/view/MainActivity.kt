@@ -1,6 +1,7 @@
 package com.bassul.mel.app.repositoriesList.view
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
     }
 
     override fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>) {
+        startActivity(Intent(this, PullRequestActivity::class.java))
     }
 
 
