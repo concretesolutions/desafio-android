@@ -2,6 +2,7 @@ package com.bassul.mel.app.repositoriesList.view
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
 
    override fun initRecyclerView() {
         recyclerViewRepositories.layoutManager = LinearLayoutManager(this)
-        adapter = RepositoryAdapter(this, mutableListOf())
+        adapter = RepositoryAdapter(this, mutableListOf(), itemClickListener = itemOnClick)
        recyclerViewRepositories.adapter = adapter
         recyclerViewRepositories.addOnScrollListener(object : RecyclerView.OnScrollListener() {
            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -68,5 +69,12 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
 
     override  fun showCard(repositories: ArrayList<Item>) {
         adapter!!.addItems(repositories)
+    }
+
+    val itemOnClick : (Item) -> Unit = {item ->
+       // recyclerViewRepositories.adapter!!.notifyDataSetChanged() //preciso disso?
+
+        interactor.getSelectedItem(item)
+        Log.i("desafio - android", "itemOnClick ")
     }
 }

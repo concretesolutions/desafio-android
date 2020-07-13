@@ -11,7 +11,7 @@ import com.bassul.mel.app.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_repository_item.view.*
 
-class RepositoryAdapter (private val context: Context, var items : MutableList<Item>) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>(),
+class RepositoryAdapter (private val context: Context, var items : MutableList<Item>,  private val itemClickListener: (Item) -> Unit) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>(),
     AdapterItemsContract{
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,6 +36,11 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
         }else{
             holder.changeVisibility(false)
         }
+
+        holder.clickableView.setOnClickListener {
+            itemClickListener(item)
+        }
+
     }
 
     override fun addItems(newItems: List<Item>) {
@@ -56,6 +61,7 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
         var progressBar = itemView.lr_progressbar
         var starImage = itemView.lr_im_stars
         var forkImage = itemView.lr_im_forks
+        val clickableView = itemView.cardViewItem
 
         fun changeVisibility(isLastItem : Boolean){
             if(isLastItem){
@@ -81,7 +87,6 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
         private fun setVisibilityLoading(visibility : Int){
             progressBar.visibility = visibility
         }
-
 
     }
 

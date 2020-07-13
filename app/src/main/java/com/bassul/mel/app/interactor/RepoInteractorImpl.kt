@@ -1,11 +1,14 @@
 package com.bassul.mel.app.interactor
 
+import android.util.Log
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.repositoriesList.repository.RepoRepositoryImpl
 import com.bassul.mel.app.repositoriesList.RepositoriesListContract
 import com.bassul.mel.app.repositoriesList.repository.model.RepositoriesListResponse
 import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback
+import com.bassul.mel.app.callback.RepositotySelectedRepositoriesCallback
 import com.bassul.mel.app.repositoriesList.RepoPresenterImpl
+import com.bassul.mel.app.repositoriesList.repository.model.PullRequestListResponse
 
 class RepoInteractorImpl (
     val presenter: RepositoriesListContract.Presenter,
@@ -19,6 +22,15 @@ class RepoInteractorImpl (
                 val repositories : ArrayList<Item> = convertGithubRepositoriesListResponseToRepositoriesList(repositoriesList)
                 presenter.showCard(repositories)
             }
+        })
+    }
+
+    override fun getSelectedItem(item: Item) {
+        repository.readPullRequestJson(item.owner.login, item.name, object : RepositotySelectedRepositoriesCallback{
+            override fun onSuccess(pullRequestList: PullRequestListResponse) {
+                    Log.i("desafio - android", "Leu dados ao selecionar item   "+pullRequestList)
+            }
+
         })
     }
 

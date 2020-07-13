@@ -13,6 +13,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewItem"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         app:cardBackgroundColor="@android:color/transparent">
