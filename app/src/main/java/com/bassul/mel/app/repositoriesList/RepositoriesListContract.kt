@@ -3,6 +3,7 @@ package com.bassul.mel.app.repositoriesList
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback
 import com.bassul.mel.app.callback.RepositotySelectedRepositoriesCallback
+import com.bassul.mel.app.domain.PullRequest
 
 interface RepositoriesListContract{
 
@@ -10,10 +11,12 @@ interface RepositoriesListContract{
         fun initRecyclerView()
         fun initRepositoriesCard()
         fun showCard(repositories: ArrayList<Item>)
+        fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>)
     }
 
     interface Presenter{
         fun showCard(ItemModel: ArrayList<Item>)
+        fun openListPullRequest(pullRequest: ArrayList<PullRequest>)
 
     }
 

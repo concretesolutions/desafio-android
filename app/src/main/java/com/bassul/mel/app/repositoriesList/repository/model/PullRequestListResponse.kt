@@ -9,11 +9,14 @@ import com.google.gson.annotations.SerializedName
 // Data do PR e Body do PR
 
 data class PullRequestListResponse(
-    @SerializedName("html_url")
-    val html_url : String
-  // val list : List<PR>
-   // val url: String,
-  //
+    val html_url : String, //browser
+    val updated_at : String, //Data do PR
+    val body : String, //body do PR
+    val user : UserResponse //
     )
 
+data class UserResponse(
+    val login : String,
+    val avatar_url : String
+)
 

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bassul.mel.app.*
 import com.bassul.mel.app.domain.Item
+import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.endpoint.GithubAPI
 import com.bassul.mel.app.interactor.RepoInteractorImpl
 import com.bassul.mel.app.repositoriesList.RepoPresenterImpl
@@ -71,10 +72,11 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
         adapter!!.addItems(repositories)
     }
 
-    val itemOnClick : (Item) -> Unit = {item ->
-       // recyclerViewRepositories.adapter!!.notifyDataSetChanged() //preciso disso?
+    override fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>) {
+    }
 
+
+    val itemOnClick : (Item) -> Unit = {item ->
         interactor.getSelectedItem(item)
-        Log.i("desafio - android", "itemOnClick ")
     }
 }

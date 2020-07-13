@@ -2,7 +2,6 @@ package com.bassul.mel.app.repositoriesList.repository.model
 
 import com.bassul.mel.app.domain.Owner
 
-
 data class RepositoriesListResponse(
         val total_count: Int,
         val incomplete_results: Boolean,
