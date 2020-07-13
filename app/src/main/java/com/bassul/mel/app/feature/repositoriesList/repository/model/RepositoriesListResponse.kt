@@ -1,4 +1,4 @@
-package com.bassul.mel.app.repositoriesList.repository.model
+package com.bassul.mel.app.feature.repositoriesList.repository.model
 
 import com.bassul.mel.app.domain.Owner
 

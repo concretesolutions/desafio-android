@@ -1,20 +1,16 @@
-package com.bassul.mel.app.repositoriesList.view
+package com.bassul.mel.app.feature.pullRequestList.view
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bassul.mel.app.*
-import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.domain.PullRequest
-import com.bassul.mel.app.repositoriesList.view.adapter.PullRequestAdapter
-import com.bassul.mel.app.repositoriesList.view.adapter.RepositoryAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import com.bassul.mel.app.feature.pullRequestList.view.adapter.PullRequestAdapter
 import kotlinx.android.synthetic.main.pull_request_activity.*
-import java.io.Serializable
 
 
 class PullRequestActivity : AppCompatActivity(){
@@ -27,10 +23,6 @@ class PullRequestActivity : AppCompatActivity(){
         setContentView(R.layout.pull_request_activity)
 
          listPullRequest = intent.getSerializableExtra("pullRequest") as ArrayList<PullRequest>
-        Log.i("listPullRequest", "listPullRequest   "+listPullRequest)
-
-
-
         initRecyclerView()
     }
 
@@ -38,13 +30,12 @@ class PullRequestActivity : AppCompatActivity(){
         recyclerViewPullRequest.layoutManager = LinearLayoutManager(this)
         adapter = PullRequestAdapter(this, listPullRequest, itemClickListener = itemOnClick)
         recyclerViewPullRequest.adapter = adapter
-
+        pull_request_progressbar.visibility = View.GONE
     }
 
     val itemOnClick : (PullRequest) -> Unit = { item ->
         val openURL = Intent(Intent.ACTION_VIEW)
         openURL.data = Uri.parse(item.html_url)
         startActivity(openURL)
-        Log.i("desafio_android", "clicou pull request  "+item.html_url)
     }
 }

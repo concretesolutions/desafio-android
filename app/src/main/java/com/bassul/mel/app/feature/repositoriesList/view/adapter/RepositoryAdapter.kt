@@ -1,18 +1,17 @@
-package com.bassul.mel.app.repositoriesList.view.adapter
+package com.bassul.mel.app.feature.repositoriesList.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bassul.mel.app.AdapterItemsContract
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_repository_item.view.*
 
 class RepositoryAdapter (private val context: Context, var items : MutableList<Item>,  private val itemClickListener: (Item) -> Unit) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>(),
-    AdapterItemsContract{
+    AdapterItemsContract {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

@@ -1,22 +1,18 @@
-package com.bassul.mel.app.repositoriesList.view.adapter
+package com.bassul.mel.app.feature.pullRequestList.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bassul.mel.app.AdapterPullRequestContract
-import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.PullRequest
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_pull_request_item.view.*
 import kotlinx.android.synthetic.main.layout_pull_request_item.view.lpr_im_avatar
-import kotlinx.android.synthetic.main.layout_repository_item.view.*
-import kotlinx.android.synthetic.main.layout_repository_item.view.cardViewItem
 
 class PullRequestAdapter (private val context: Context, var pr : MutableList<PullRequest>, private val itemClickListener: (PullRequest) -> Unit) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>(),
-    AdapterPullRequestContract{
+    AdapterPullRequestContract {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

@@ -1,4 +1,4 @@
-package com.bassul.mel.app.repositoriesList
+package com.bassul.mel.app.feature.repositoriesList
 
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback

@@ -1,7 +1,4 @@
-package com.bassul.mel.app.repositoriesList.repository.model
-
-import com.bassul.mel.app.domain.Owner
-import com.google.gson.annotations.SerializedName
+package com.bassul.mel.app.feature.repositoriesList.repository.model
 
 //Cada item da lista deve exibir Nome
 // / Foto do autor do PR,
