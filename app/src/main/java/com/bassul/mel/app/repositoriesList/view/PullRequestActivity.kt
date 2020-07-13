@@ -1,5 +1,7 @@
 package com.bassul.mel.app.repositoriesList.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -39,7 +41,10 @@ class PullRequestActivity : AppCompatActivity(){
 
     }
 
-    val itemOnClick : (Item) -> Unit = { item ->
-        Log.i("desafio_android", "clicou pull request")
+    val itemOnClick : (PullRequest) -> Unit = { item ->
+        val openURL = Intent(Intent.ACTION_VIEW)
+        openURL.data = Uri.parse(item.html_url)
+        startActivity(openURL)
+        Log.i("desafio_android", "clicou pull request  "+item.html_url)
     }
 }

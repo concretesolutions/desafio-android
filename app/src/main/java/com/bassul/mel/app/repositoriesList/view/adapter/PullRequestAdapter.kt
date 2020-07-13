@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.layout_pull_request_item.view.lpr_im_avata
 import kotlinx.android.synthetic.main.layout_repository_item.view.*
 import kotlinx.android.synthetic.main.layout_repository_item.view.cardViewItem
 
-class PullRequestAdapter (private val context: Context, var pr : MutableList<PullRequest>, private val itemClickListener: (Item) -> Unit) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>(),
+class PullRequestAdapter (private val context: Context, var pr : MutableList<PullRequest>, private val itemClickListener: (PullRequest) -> Unit) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>(),
     AdapterPullRequestContract{
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -33,6 +33,10 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
         holder?.nameOwner.text = pullRequest.userName
         Picasso.get().load(pullRequest.userAvatar).into(holder?.avatarOwner)
         holder?.date.text = pullRequest.updated_at
+        holder?.clickableView.setOnClickListener {
+            itemClickListener(pullRequest)
+        }
+
 
         if(position + 1 == pr.size){
          //   holder.changeVisibility(true)
@@ -61,7 +65,7 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
         var nameOwner = itemView.lpr_tx_name_owner
         var date = itemView.lpr_tx_date
       //  var progressBar = itemView.lpr_progressbar
-       // var clickableView = itemView.cardViewPullRequest
+        var clickableView = itemView.cardViewPullRequest
 /*
         fun changeVisibility(isLastItem : Boolean){
             if(isLastItem){
