@@ -1,15 +1,11 @@
-package com.bassul.mel.app.interactor
+package com.bassul.mel.app.feature.pullRequestList.interactor
 
 import android.util.Log
 import com.bassul.mel.app.R
-import com.bassul.mel.app.domain.Item
-import com.bassul.mel.app.feature.repositoriesList.RepositoriesListContract
-import com.bassul.mel.app.feature.repositoriesList.repository.model.RepositoriesListResponse
-import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback
 import com.bassul.mel.app.callback.RepositotySelectedRepositoriesCallback
 import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.feature.repositoriesList.PullRequestListContract
-import com.bassul.mel.app.feature.repositoriesList.repository.model.PullRequestListResponse
+import com.bassul.mel.app.feature.pullRequestList.repository.model.PullRequestListResponse
 
 class PullRequestInteractorImpl(
     val presenter: PullRequestListContract.Presenter,

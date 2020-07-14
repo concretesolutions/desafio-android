@@ -3,25 +3,18 @@ package com.bassul.mel.app.feature.pullRequestList.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bassul.mel.app.R
-import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.endpoint.GithubAPI
 import com.bassul.mel.app.ext.AlertDialogUtils
 import com.bassul.mel.app.feature.pullRequestList.view.adapter.PullRequestAdapter
 import com.bassul.mel.app.feature.repositoriesList.PullRepositoryPresenterImpl
 import com.bassul.mel.app.feature.repositoriesList.PullRequestListContract
-import com.bassul.mel.app.feature.repositoriesList.RepositoriesListContract
-import com.bassul.mel.app.feature.repositoriesList.repository.PullRequestRepositoryImpl
-import com.bassul.mel.app.feature.repositoriesList.repository.RepoRepositoryImpl
-import com.bassul.mel.app.interactor.PullRequestInteractorImpl
-import com.bassul.mel.app.interactor.RepoInteractorImpl
+import com.bassul.mel.app.feature.pullRequestList.repository.PullRequestRepositoryImpl
+import com.bassul.mel.app.feature.pullRequestList.interactor.PullRequestInteractorImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_pull_request.*
 

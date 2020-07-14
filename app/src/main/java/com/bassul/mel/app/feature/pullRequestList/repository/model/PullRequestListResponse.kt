@@ -1,4 +1,4 @@
-package com.bassul.mel.app.feature.repositoriesList.repository.model
+package com.bassul.mel.app.feature.pullRequestList.repository.model
 
 //Cada item da lista deve exibir Nome
 // / Foto do autor do PR,
