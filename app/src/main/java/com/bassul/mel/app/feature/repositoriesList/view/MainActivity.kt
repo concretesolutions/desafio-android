@@ -82,5 +82,13 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
 
     val itemOnClick : (Item) -> Unit = {item ->
         interactor.getSelectedItem(item)
+        arProgressbar.visibility = View.VISIBLE
+        arRecyclerViewRepositories.visibility = View.GONE
+    }
+
+    override fun onStop() {
+        super.onStop()
+        arProgressbar?.visibility = View.GONE
+        arRecyclerViewRepositories?.visibility = View.VISIBLE
     }
 }

@@ -41,8 +41,6 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
             holder.changeVisibility(false)
         }
 
-
-
         holder.clickableView.setOnTouchListener OnTouchListener@{ view: View, motionEvent: MotionEvent ->
             when (motionEvent.action){
                 MotionEvent.ACTION_DOWN -> {

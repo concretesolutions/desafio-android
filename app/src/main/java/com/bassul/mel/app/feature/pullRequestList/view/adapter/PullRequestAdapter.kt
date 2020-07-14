@@ -44,7 +44,7 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
                 MotionEvent.ACTION_DOWN -> {
                     holder?.background.setBackgroundColor(getColor(context, R.color.colorAccent))
                 }
-                MotionEvent.ACTION_UP -> {
+                else -> {
                     holder?.background.setBackgroundColor(getColor(context, R.color.lightGray))
                 }
             }

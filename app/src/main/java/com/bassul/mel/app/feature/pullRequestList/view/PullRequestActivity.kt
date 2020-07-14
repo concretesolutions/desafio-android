@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.feature.pullRequestList.view.adapter.PullRequestAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_pull_request.*
 
 
@@ -24,8 +25,6 @@ class PullRequestActivity : AppCompatActivity(){
 
         setSupportActionBar(findViewById(R.id.aprToolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
 
         var listPullRequest = intent.getSerializableExtra("pullRequest") as ArrayList<PullRequest>
 
@@ -52,7 +51,9 @@ class PullRequestActivity : AppCompatActivity(){
     }
 
     val itemOnClick : (PullRequest) -> Unit = { item ->
-        openUrlInBrowser(item.html_url)
+        openUrlInBrowser(item?.html_url)
+        arProgressbar?.visibility = View.VISIBLE
+        arRecyclerViewRepositories?.visibility = View.GONE
     }
 
     fun openUrlInBrowser(url : String){
@@ -60,4 +61,11 @@ class PullRequestActivity : AppCompatActivity(){
         openURL.data = Uri.parse(url)
         startActivity(openURL)
     }
+
+    override fun onStop() {
+        super.onStop()
+        arProgressbar?.visibility = View.GONE
+        arRecyclerViewRepositories?.visibility = View.VISIBLE
+    }
+
 }
