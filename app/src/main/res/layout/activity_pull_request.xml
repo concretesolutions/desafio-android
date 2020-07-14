@@ -8,22 +8,21 @@
     tools:context=".feature.repositoriesList.view.MainActivity">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/my_toolbar"
+            android:id="@+id/aprToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"
             android:background="@color/colorPrimary"
-            app:titleTextColor="@color/lightGray"
-            app:title="Pull Request"
-            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            android:elevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             app:theme="@style/ThemeOverlay.AppCompat.Light"
-             />
+            app:title="@string/title_pull_request"
+            app:titleTextColor="@color/lightGray" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewPullRequest"
+            android:id="@+id/aprRecyclerViewPullRequest"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="10dp"
@@ -31,10 +30,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/aprToolbar" />
 
         <ProgressBar
-            android:id="@+id/pull_request_progressbar"
+            android:id="@+id/aprProgressbar"
             android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -42,5 +41,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/aprTvEmptyList"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:textSize="16dp"
+            android:text="@string/empty_pull_request"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aprToolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

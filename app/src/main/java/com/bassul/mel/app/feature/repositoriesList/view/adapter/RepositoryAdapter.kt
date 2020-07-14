@@ -60,7 +60,7 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
         var progressBar = itemView.lr_progressbar
         var starImage = itemView.lr_im_stars
         var forkImage = itemView.lr_im_forks
-        val clickableView = itemView.cardViewItem
+        val clickableView = itemView.lr_cardview_repository_item
 
         fun changeVisibility(isLastItem : Boolean){
             if(isLastItem){

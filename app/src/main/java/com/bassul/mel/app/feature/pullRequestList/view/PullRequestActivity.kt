@@ -1,8 +1,6 @@
 package com.bassul.mel.app.feature.pullRequestList.view
 
 import android.content.Intent
-import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -11,29 +9,36 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.feature.pullRequestList.view.adapter.PullRequestAdapter
-import kotlinx.android.synthetic.main.pull_request_activity.*
+import kotlinx.android.synthetic.main.activity_pull_request.*
 
 
 class PullRequestActivity : AppCompatActivity(){
 
     private var adapter: PullRequestAdapter? = null
-    lateinit var listPullRequest : ArrayList<PullRequest>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.pull_request_activity)
+        setContentView(R.layout.activity_pull_request)
 
-        setSupportActionBar(findViewById(R.id.my_toolbar))
+        setSupportActionBar(findViewById(R.id.aprToolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        listPullRequest = intent.getSerializableExtra("pullRequest") as ArrayList<PullRequest>
-        initRecyclerView()
+        var listPullRequest = intent.getSerializableExtra("pullRequest") as ArrayList<PullRequest>
+
+        showTextIfEmptyList(listPullRequest)
+        initRecyclerView(listPullRequest)
     }
 
-    fun initRecyclerView() {
-        recyclerViewPullRequest.layoutManager = LinearLayoutManager(this)
+    fun showTextIfEmptyList(listPullRequest: ArrayList<PullRequest>){
+        if (listPullRequest.isEmpty()) {
+            aprTvEmptyList.visibility = View.VISIBLE
+        }
+    }
+
+    fun initRecyclerView(listPullRequest: ArrayList<PullRequest>) {
+        aprRecyclerViewPullRequest.layoutManager = LinearLayoutManager(this)
         adapter = PullRequestAdapter(this, listPullRequest, itemClickListener = itemOnClick)
-        recyclerViewPullRequest.adapter = adapter
-        pull_request_progressbar.visibility = View.GONE
+        aprRecyclerViewPullRequest.adapter = adapter
+        aprProgressbar.visibility = View.GONE
     }
 
     val itemOnClick : (PullRequest) -> Unit = { item ->

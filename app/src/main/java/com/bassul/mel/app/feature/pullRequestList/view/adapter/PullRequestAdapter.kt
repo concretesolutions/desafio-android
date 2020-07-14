@@ -61,7 +61,7 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
         var nameOwner = itemView.lpr_tx_name_owner
         var date = itemView.lpr_tx_date
       //  var progressBar = itemView.lpr_progressbar
-        var clickableView = itemView.cardViewPullRequest
+        var clickableView = itemView.lpr_cardview_pull_request_item
 /*
         fun changeVisibility(isLastItem : Boolean){
             if(isLastItem){

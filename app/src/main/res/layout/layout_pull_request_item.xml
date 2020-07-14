@@ -13,7 +13,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewPullRequest"
+        android:id="@+id/lpr_cardview_pull_request_item"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         app:cardBackgroundColor="@android:color/transparent">

@@ -2,7 +2,6 @@ package com.bassul.mel.app.feature.repositoriesList.view
 
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -47,10 +46,10 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
     }
 
    override fun initRecyclerView() {
-        recyclerViewRepositories.layoutManager = LinearLayoutManager(this)
+        arRecyclerViewRepositories.layoutManager = LinearLayoutManager(this)
         adapter = RepositoryAdapter(this, mutableListOf(), itemClickListener = itemOnClick)
-       recyclerViewRepositories.adapter = adapter
-        recyclerViewRepositories.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+       arRecyclerViewRepositories.adapter = adapter
+        arRecyclerViewRepositories.addOnScrollListener(object : RecyclerView.OnScrollListener() {
            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                super.onScrolled(recyclerView, dx, dy)
 
@@ -72,7 +71,7 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
 
     override  fun showCard(repositories: ArrayList<Item>) {
         adapter!!.addItems(repositories)
-        main_progressbar.visibility = View.GONE
+        arProgressbar.visibility = View.GONE
     }
 
     override fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>) {
