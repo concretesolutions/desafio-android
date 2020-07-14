@@ -13,7 +13,7 @@ import com.bassul.mel.app.endpoint.GithubAPI
 import com.bassul.mel.app.ext.AlertDialogUtils.Companion.createAndShowAlertDialog
 import com.bassul.mel.app.feature.repositoriesList.interactor.RepoInteractorImpl
 import com.bassul.mel.app.feature.pullRequestList.view.PullRequestActivity
-import com.bassul.mel.app.feature.repositoriesList.RepoPresenterImpl
+import com.bassul.mel.app.feature.repositoriesList.presenter.RepoPresenterImpl
 import com.bassul.mel.app.feature.repositoriesList.RepositoriesListContract
 import com.bassul.mel.app.feature.repositoriesList.repository.RepoRepositoryImpl
 import com.bassul.mel.app.feature.repositoriesList.view.adapter.RepositoryAdapter

@@ -3,8 +3,6 @@ package com.bassul.mel.app.feature.repositoriesList
 import androidx.annotation.StringRes
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback
-import com.bassul.mel.app.callback.RepositotySelectedRepositoriesCallback
-import com.bassul.mel.app.domain.PullRequest
 
 interface RepositoriesListContract{
 

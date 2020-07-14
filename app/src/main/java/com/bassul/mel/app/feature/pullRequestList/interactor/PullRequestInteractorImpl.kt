@@ -1,10 +1,9 @@
 package com.bassul.mel.app.feature.pullRequestList.interactor
 
-import android.util.Log
 import com.bassul.mel.app.R
-import com.bassul.mel.app.callback.RepositotySelectedRepositoriesCallback
+import com.bassul.mel.app.callback.RepositorySelectedRepositoriesCallback
 import com.bassul.mel.app.domain.PullRequest
-import com.bassul.mel.app.feature.repositoriesList.PullRequestListContract
+import com.bassul.mel.app.feature.pullRequestList.PullRequestListContract
 import com.bassul.mel.app.feature.pullRequestList.repository.model.PullRequestListResponse
 
 class PullRequestInteractorImpl(
@@ -14,9 +13,8 @@ class PullRequestInteractorImpl(
 
 
      override fun getSelectedItem(login: String, nameRepository: String) {
-        repository.readPullRequestJson(login, nameRepository, object : RepositotySelectedRepositoriesCallback{
+        repository.readPullRequestJson(login, nameRepository, object : RepositorySelectedRepositoriesCallback{
             override fun onSuccess(pullRequestList: List<PullRequestListResponse>) {
-                Log.i("MELLINA getSelectedItem", "  Pull Request List:  "+pullRequestList)
                 presenter.openListPullRequest(convertPullRequestListResponseToPullResponse(pullRequestList))
             }
 
@@ -27,7 +25,7 @@ class PullRequestInteractorImpl(
         })
     }
 
-    private fun convertPullRequestListResponseToPullResponse(pullRequestList: List<PullRequestListResponse>) : ArrayList<PullRequest>{
+    override fun convertPullRequestListResponseToPullResponse(pullRequestList: List<PullRequestListResponse>) : ArrayList<PullRequest>{
         val pullRequests : ArrayList<PullRequest> = arrayListOf()
         pullRequestList.forEach{
             val pr = PullRequest(it.html_url,

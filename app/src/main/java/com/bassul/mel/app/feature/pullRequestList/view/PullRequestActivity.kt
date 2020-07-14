@@ -11,8 +11,8 @@ import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.endpoint.GithubAPI
 import com.bassul.mel.app.ext.AlertDialogUtils
 import com.bassul.mel.app.feature.pullRequestList.view.adapter.PullRequestAdapter
-import com.bassul.mel.app.feature.repositoriesList.PullRepositoryPresenterImpl
-import com.bassul.mel.app.feature.repositoriesList.PullRequestListContract
+import com.bassul.mel.app.feature.pullRequestList.presenter.PullRequestPresenterImpl
+import com.bassul.mel.app.feature.pullRequestList.PullRequestListContract
 import com.bassul.mel.app.feature.pullRequestList.repository.PullRequestRepositoryImpl
 import com.bassul.mel.app.feature.pullRequestList.interactor.PullRequestInteractorImpl
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,7 +24,7 @@ class PullRequestActivity : AppCompatActivity(), PullRequestListContract.View{
     private var adapter: PullRequestAdapter? = null
 
     private val presenter : PullRequestListContract.Presenter by lazy {
-        PullRepositoryPresenterImpl(this)
+        PullRequestPresenterImpl(this)
     }
 
     private val repository : PullRequestListContract.Repository by lazy {
