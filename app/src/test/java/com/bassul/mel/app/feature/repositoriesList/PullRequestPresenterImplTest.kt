@@ -1,10 +1,10 @@
 package com.bassul.mel.app.feature.repositoriesList
 
 
-import com.bassul.mel.app.feature.pullRequestList.PullRequestListContract
+import com.bassul.mel.app.feature.pullRequestsList.PullRequestListContract
 import com.bassul.mel.app.feature.pullRequestList.PullRequestMock.Companion.errorMessagePullRequestMock
 import com.bassul.mel.app.feature.pullRequestList.PullRequestMock.Companion.pullRequestListMock
-import com.bassul.mel.app.feature.pullRequestList.presenter.PullRequestPresenterImpl
+import com.bassul.mel.app.feature.pullRequestsList.presenter.PullRequestPresenterImpl
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -27,12 +27,12 @@ internal class PullRequestPresenterImplTest {
     @Test
     fun openListPullRequest() {
         pullRequestPresenter.openListPullRequest(pullRequestListMock())
-        verify(pullRequestView).showListPullRequest(pullRequestListMock())
+        verify(pullRequestView).showPullRequestList(pullRequestListMock())
     }
 
     @Test
     fun errorShowPullRequestCard() {
         pullRequestPresenter.errorShowPullRequestCard(errorMessagePullRequestMock())
-        verify(pullRequestView).showErrorPullRequestCard(errorMessagePullRequestMock())
+        verify(pullRequestView).showErrorPullRequestList(errorMessagePullRequestMock())
     }
 }

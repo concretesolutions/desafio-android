@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.bassul.mel.app.feature.repositoriesList.view.MainActivity">
+        <activity android:name="com.bassul.mel.app.feature.repositoriesList.view.RepoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,8 +20,8 @@
         </activity>
         <activity
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:parentActivityName=".feature.repositoriesList.view.MainActivity"
-            android:name="com.bassul.mel.app.feature.pullRequestList.view.PullRequestActivity">
+            android:parentActivityName=".feature.repositoriesList.view.RepoActivity"
+            android:name="com.bassul.mel.app.feature.pullRequestsList.view.PullRequestActivity">
         </activity>
     </application>
 

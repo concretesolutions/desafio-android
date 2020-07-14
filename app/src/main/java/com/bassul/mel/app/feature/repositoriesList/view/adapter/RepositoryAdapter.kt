@@ -28,9 +28,10 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder?.name.text = item.name
-        holder?.description.text = item.description
-        holder?.stars.text= item.stargazers_count
+        //apply
+        holder.name.text = item.name
+        holder.description.text = item.description
+        holder.stars.text= item.stargazers_count
         holder?.forks.text= item.forks_count
         holder?.nameOwner.text = item.owner.login
         Picasso.get().load(item.owner.avatar_url).into(holder?.avatarOwner)

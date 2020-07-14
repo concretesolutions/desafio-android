@@ -3,7 +3,8 @@ package com.bassul.mel.app.feature.pullRequestList.interactor
 import com.bassul.mel.app.callback.RepositorySelectedRepositoriesCallback
 import com.bassul.mel.app.feature.pullRequestList.PullRequestMock.Companion.listPullRequestResponseMock
 import com.bassul.mel.app.feature.pullRequestList.PullRequestMock.Companion.pullRequestListMock
-import com.bassul.mel.app.feature.pullRequestList.PullRequestListContract
+import com.bassul.mel.app.feature.pullRequestsList.PullRequestListContract
+import com.bassul.mel.app.feature.pullRequestsList.interactor.PullRequestInteractorImpl
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

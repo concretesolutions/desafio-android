@@ -1,10 +1,8 @@
 package com.bassul.mel.app.feature.repositoriesList.interactor
 
 import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback
-import com.bassul.mel.app.feature.repositoriesList.RepositoriesListContract
-import com.bassul.mel.app.feature.repositoriesList.RepositoryMock.Companion.itemResponseMock
+import com.bassul.mel.app.feature.repositoriesList.RepoListContract
 import com.bassul.mel.app.feature.repositoriesList.RepositoryMock.Companion.listItemMock
-import com.bassul.mel.app.feature.repositoriesList.RepositoryMock.Companion.listResponseMock
 import com.bassul.mel.app.feature.repositoriesList.RepositoryMock.Companion.repositoriesListReponseMock
 import org.junit.Assert
 import org.junit.Before
@@ -18,31 +16,31 @@ import org.mockito.MockitoAnnotations
 internal class RepoInteractorImplTest {
 
     @Mock
-    lateinit var repositoriesRepository:  RepositoriesListContract.Repository
+    lateinit var repoRepository:  RepoListContract.Repository
     @Mock
-    lateinit var repositoriesPresenter: RepositoriesListContract.Presenter
+    lateinit var repoPresenter: RepoListContract.Presenter
 
-    lateinit var repositoriesInteractor: RepositoriesListContract.Interactor
+    lateinit var repoInteractor: RepoListContract.Interactor
 
     @Captor
-    lateinit var repositotyAllRepositoriesCallback: ArgumentCaptor<RepositotyAllRepositoriesCallback>
+     var repositotyAllRepositoriesCallback = ArgumentCaptor.forClass(RepositotyAllRepositoriesCallback::class.java)
 
 
     @Before
     fun setup(){
         MockitoAnnotations.initMocks(this)
-        repositoriesInteractor = RepoInteractorImpl(repositoriesPresenter, repositoriesRepository)
+        repoInteractor = RepoInteractorImpl(repoPresenter, repoRepository)
     }
 
     @Test
     fun loadRepositories() {
-     //   repositoriesInteractor.loadRepositories(1)
-     //   verify(repositoriesRepository).readRepositoryJson(1, capture(repositotyAllRepositoriesCallback))
+        repoInteractor.loadRepositories(1)
+        verify(repoRepository).readRepositoryJson(1, repositotyAllRepositoriesCallback.capture())
     }
 
     @Test
     fun convertGithubRepositoriesListResponseToRepositoriesList(){
-       var repoListResponse =  repositoriesInteractor.convertGithubRepositoriesListResponseToRepositoriesList(repositoriesListReponseMock())
+       var repoListResponse =  repoInteractor.convertGithubRepositoriesListResponseToRepositoriesList(repositoriesListReponseMock())
         Assert.assertEquals(repoListResponse, listItemMock())
     }
 

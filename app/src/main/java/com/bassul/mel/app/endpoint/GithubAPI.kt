@@ -1,7 +1,7 @@
 package com.bassul.mel.app.endpoint
 
 import com.bassul.mel.app.ext.NetworkUtils
-import com.bassul.mel.app.feature.pullRequestList.repository.model.PullRequestListResponse
+import com.bassul.mel.app.feature.pullRequestsList.repository.model.PullRequestListResponse
 import com.bassul.mel.app.feature.repositoriesList.repository.model.RepositoriesListResponse
 import retrofit2.Call
 

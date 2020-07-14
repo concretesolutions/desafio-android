@@ -2,7 +2,8 @@ package com.bassul.mel.app.feature.pullRequestList.repository
 
 import com.bassul.mel.app.callback.RepositorySelectedRepositoriesCallback
 import com.bassul.mel.app.endpoint.GithubAPI
-import com.bassul.mel.app.feature.pullRequestList.PullRequestListContract
+import com.bassul.mel.app.feature.pullRequestsList.PullRequestListContract
+import com.bassul.mel.app.feature.pullRequestsList.repository.PullRequestRepositoryImpl
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentCaptor

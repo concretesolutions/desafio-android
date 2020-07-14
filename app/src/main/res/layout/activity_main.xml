@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightGray"
-    tools:context=".feature.repositoriesList.view.MainActivity">
+    tools:context=".feature.repositoriesList.view.RepoActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/arToolbar"

@@ -1,8 +1,8 @@
 package com.bassul.mel.app.feature.pullRequestList
 
 import com.bassul.mel.app.domain.PullRequest
-import com.bassul.mel.app.feature.pullRequestList.repository.model.PullRequestListResponse
-import com.bassul.mel.app.feature.pullRequestList.repository.model.UserResponse
+import com.bassul.mel.app.feature.pullRequestsList.repository.model.PullRequestListResponse
+import com.bassul.mel.app.feature.pullRequestsList.repository.model.UserResponse
 
 class PullRequestMock {
     companion object{
