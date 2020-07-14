@@ -10,16 +10,9 @@ class RepoPresenterImpl (val view: RepositoriesListContract.View) : Repositories
         return view.showCard(ItemModel)
     }
 
-    override fun openListPullRequest(pullRequest: ArrayList<PullRequest>) {
-        return view.openActivityPullRequest(pullRequest)
-    }
 
     override fun errorShowCard(errorMessage: Int) {
         return view.showErrorCard(errorMessage)
-    }
-
-    override fun errorShowPullRequestCard(errorPullRequest: Int) {
-        return view.showErrorPullRequestCard(errorPullRequest)
     }
 
 }

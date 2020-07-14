@@ -75,17 +75,11 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
         arProgressbar.visibility = View.GONE
     }
 
-    override fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>) {
-        val intent = Intent(this, PullRequestActivity::class.java)
-        intent.putExtra("pullRequest", pullRequest)
-        startActivity(intent)
-    }
-
     override fun showErrorCard(errorMessage: Int) {
         createAndShowAlertDialog(errorMessage)
     }
 
-    override fun showErrorPullRequestCard(errorPullRequest: Int) {
+     fun showErrorPullRequestCard(errorPullRequest: Int) {
         createAndShowAlertDialog(errorPullRequest)
         arProgressbar?.visibility = View.GONE
         arRecyclerViewRepositories?.visibility = View.VISIBLE
@@ -99,9 +93,20 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
     }
 
     val itemOnClick : (Item) -> Unit = {item ->
-        interactor.getSelectedItem(item)
+        /*interactor.getSelectedItem(item)
         arProgressbar.visibility = View.VISIBLE
-        arRecyclerViewRepositories.visibility = View.GONE
+        arRecyclerViewRepositories.visibility = View.GONE*/
+
+        val intent = Intent(this, PullRequestActivity::class.java)
+        intent.putExtra("login", item.owner.login)
+        intent.putExtra("nameRepository", item.name)
+        startActivity(intent)
+    }
+
+     fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>) {
+        /*val intent = Intent(this, PullRequestActivity::class.java)
+        intent.putExtra("pullRequest", pullRequest)
+        startActivity(intent)*/
     }
 
     override fun onStop() {

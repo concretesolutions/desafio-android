@@ -12,25 +12,23 @@ interface RepositoriesListContract{
         fun initRecyclerView()
         fun initRepositoriesCard()
         fun showCard(repositories: ArrayList<Item>)
-        fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>)
+
         fun showErrorCard(@StringRes errorMessage: Int)
-        fun showErrorPullRequestCard(@StringRes errorPullRequest: Int)
+
     }
 
     interface Presenter{
         fun showCard(ItemModel: ArrayList<Item>)
-        fun openListPullRequest(pullRequest: ArrayList<PullRequest>)
         fun errorShowCard(@StringRes errorMessage: Int)
-        fun errorShowPullRequestCard(@StringRes errorPullRequest: Int)
+
     }
 
     interface Interactor{
         fun loadRepositories(pages : Int)
-        fun getSelectedItem(item: Item)
     }
 
     interface Repository{
         fun readRepositoryJson(pages : Int, callback: RepositotyAllRepositoriesCallback)
-        fun readPullRequestJson(login : String, nameRepository : String, callback: RepositotySelectedRepositoriesCallback)
+
     }
 }

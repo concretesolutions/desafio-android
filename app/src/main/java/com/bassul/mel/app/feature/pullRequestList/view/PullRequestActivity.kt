@@ -6,18 +6,40 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bassul.mel.app.R
+import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.domain.PullRequest
+import com.bassul.mel.app.endpoint.GithubAPI
 import com.bassul.mel.app.feature.pullRequestList.view.adapter.PullRequestAdapter
+import com.bassul.mel.app.feature.repositoriesList.PullRepositoryPresenterImpl
+import com.bassul.mel.app.feature.repositoriesList.PullRequestListContract
+import com.bassul.mel.app.feature.repositoriesList.RepositoriesListContract
+import com.bassul.mel.app.feature.repositoriesList.repository.PullRequestRepositoryImpl
+import com.bassul.mel.app.feature.repositoriesList.repository.RepoRepositoryImpl
+import com.bassul.mel.app.interactor.PullRequestInteractorImpl
+import com.bassul.mel.app.interactor.RepoInteractorImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_pull_request.*
 
 
-class PullRequestActivity : AppCompatActivity(){
+class PullRequestActivity : AppCompatActivity(), PullRequestListContract.View{
 
     private var adapter: PullRequestAdapter? = null
+
+    private val presenter : PullRequestListContract.Presenter by lazy {
+        PullRepositoryPresenterImpl(this)
+    }
+
+    private val repository : PullRequestListContract.Repository by lazy {
+        PullRequestRepositoryImpl(GithubAPI())
+    }
+
+    private val interactor : PullRequestListContract.Interactor by lazy {
+        PullRequestInteractorImpl(presenter, repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +48,10 @@ class PullRequestActivity : AppCompatActivity(){
         setSupportActionBar(findViewById(R.id.aprToolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        var listPullRequest = intent.getSerializableExtra("pullRequest") as ArrayList<PullRequest>
+        var login = intent.getSerializableExtra("login") as String
+        var nameRepository = intent.getSerializableExtra("nameRepository") as String
 
-        showTextIfEmptyList(listPullRequest)
-        initRecyclerView(listPullRequest)
+        interactor.getSelectedItem(login, nameRepository)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -66,6 +88,22 @@ class PullRequestActivity : AppCompatActivity(){
         super.onStop()
         arProgressbar?.visibility = View.GONE
         arRecyclerViewRepositories?.visibility = View.VISIBLE
+    }
+
+    override fun showListPullRequest(pullRequest: ArrayList<PullRequest>) {
+        initRecyclerView(pullRequest)
+        showTextIfEmptyList(pullRequest)
+    }
+
+    override fun showErrorPullRequestCard(errorPullRequest: Int) {
+        createAndShowAlertDialog(errorPullRequest)
+    }
+
+    private fun createAndShowAlertDialog(message : Int){
+        val mAlertDialog = AlertDialog.Builder(this)
+        mAlertDialog.setTitle("Erro")
+        mAlertDialog.setMessage(getString(message))
+        mAlertDialog.show()
     }
 
 }
