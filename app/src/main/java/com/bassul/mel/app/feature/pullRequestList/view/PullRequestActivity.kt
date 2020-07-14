@@ -1,13 +1,14 @@
 package com.bassul.mel.app.feature.pullRequestList.view
 
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bassul.mel.app.*
+import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.feature.pullRequestList.view.adapter.PullRequestAdapter
 import kotlinx.android.synthetic.main.pull_request_activity.*
@@ -22,7 +23,9 @@ class PullRequestActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pull_request_activity)
 
-         listPullRequest = intent.getSerializableExtra("pullRequest") as ArrayList<PullRequest>
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        listPullRequest = intent.getSerializableExtra("pullRequest") as ArrayList<PullRequest>
         initRecyclerView()
     }
 
