@@ -13,6 +13,12 @@ android {
         viewBinding {
             enabled = true
         }
+        sourceSets{
+            main { java.srcDirs = ['src/main/java'] }
+            test { java.srcDirs = ['src/test/java'] }
+            androidTest { java.srcDirs = ['src/androidTest/java'] }
+        }
+
     }
     
     defaultConfig {
@@ -59,6 +65,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-
+    testCompile 'org.mockito:mockito-core:2.12.0'
 
 }
