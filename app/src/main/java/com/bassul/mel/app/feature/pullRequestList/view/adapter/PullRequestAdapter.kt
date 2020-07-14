@@ -1,9 +1,14 @@
 package com.bassul.mel.app.feature.pullRequestList.view.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.PullRequest
@@ -21,6 +26,7 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
         return ViewHolder(view)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pullRequest = pr[position]
 
@@ -33,16 +39,18 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
             itemClickListener(pullRequest)
         }
 
+        holder?.clickableView.setOnTouchListener OnTouchListener@{ view: View, motionEvent: MotionEvent ->
+            when (motionEvent.action){
+                MotionEvent.ACTION_DOWN -> {
+                    holder?.background.setBackgroundColor(getColor(context, R.color.colorAccent))
+                }
+                MotionEvent.ACTION_UP -> {
+                    holder?.background.setBackgroundColor(getColor(context, R.color.lightGray))
+                }
+            }
+            return@OnTouchListener false
 
-        if(position + 1 == pr.size){
-         //   holder.changeVisibility(true)
-        }else{
-        //    holder.changeVisibility(false)
         }
-/*
-        holder.clickableView.setOnClickListener {
-            itemClickListener(item)
-        }*/
 
     }
 
@@ -62,31 +70,7 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
         var date = itemView.lpr_tx_date
       //  var progressBar = itemView.lpr_progressbar
         var clickableView = itemView.lpr_cardview_pull_request_item
-/*
-        fun changeVisibility(isLastItem : Boolean){
-            if(isLastItem){
-                setVisibilityLoading(View.VISIBLE)
-                setVisibilityItem(View.INVISIBLE)
-            }else{
-                setVisibilityLoading(View.INVISIBLE)
-                setVisibilityItem(View.VISIBLE)
-            }
-        }*/
-
-   /*     private fun setVisibilityItem(visibility : Int) {
-            name.visibility = visibility
-            description.visibility = visibility
-            avatarOwner.visibility = visibility
-            nameOwner.visibility = visibility
-            stars.visibility = visibility
-            forks.visibility = visibility
-            starImage.visibility = visibility
-            forkImage.visibility = visibility
-        }
-
-        private fun setVisibilityLoading(visibility : Int){
-            progressBar.visibility = visibility
-        }*/
+        var background = itemView.lpr_background
 
     }
 

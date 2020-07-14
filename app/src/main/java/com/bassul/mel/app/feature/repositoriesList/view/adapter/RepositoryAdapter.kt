@@ -1,9 +1,13 @@
 package com.bassul.mel.app.feature.repositoriesList.view.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.R
@@ -20,6 +24,7 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
         return ViewHolder(view)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
@@ -34,6 +39,30 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
             holder.changeVisibility(true)
         }else{
             holder.changeVisibility(false)
+        }
+
+
+
+        holder.clickableView.setOnTouchListener OnTouchListener@{ view: View, motionEvent: MotionEvent ->
+            when (motionEvent.action){
+                MotionEvent.ACTION_DOWN -> {
+                    holder?.background.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorAccent
+                        )
+                    )
+                }
+                else -> {
+                    holder?.background.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.lightGray
+                        )
+                    )
+                }
+            }
+            return@OnTouchListener false
         }
 
         holder.clickableView.setOnClickListener {
@@ -61,6 +90,7 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
         var starImage = itemView.lr_im_stars
         var forkImage = itemView.lr_im_forks
         val clickableView = itemView.lr_cardview_repository_item
+        val background = itemView.lr_background
 
         fun changeVisibility(isLastItem : Boolean){
             if(isLastItem){

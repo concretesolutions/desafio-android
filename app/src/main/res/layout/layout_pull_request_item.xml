@@ -20,6 +20,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lpr_background"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
