@@ -47,7 +47,6 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
                 }
             }
             return@OnTouchListener false
-
         }
 
     }
@@ -66,10 +65,8 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
         var avatarOwner = itemView.lpr_im_avatar
         var nameOwner = itemView.lpr_tx_name_owner
         var date = itemView.lpr_tx_date
-      //  var progressBar = itemView.lpr_progressbar
         var clickableView = itemView.lpr_cardview_pull_request_item
         var background = itemView.lpr_background
-
     }
 
 }

@@ -10,6 +10,7 @@ interface PullRequestListContract{
     interface View{
         fun showListPullRequest(pullRequest: ArrayList<PullRequest>)
         fun showErrorPullRequestCard(@StringRes errorPullRequest: Int)
+        fun setLoadingState(isLoading: Boolean)
     }
 
     interface Presenter{

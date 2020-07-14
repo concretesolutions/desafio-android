@@ -63,13 +63,12 @@ class PullRequestActivity : AppCompatActivity(), PullRequestListContract.View{
         aprRecyclerViewPullRequest.layoutManager = LinearLayoutManager(this)
         adapter = PullRequestAdapter(this, listPullRequest, itemClickListener = itemOnClick)
         aprRecyclerViewPullRequest.adapter = adapter
-        aprProgressbar.visibility = View.GONE
+        setLoadingState(false)
     }
 
     val itemOnClick : (PullRequest) -> Unit = { item ->
         openUrlInBrowser(item?.html_url)
-        arProgressbar?.visibility = View.VISIBLE
-        arRecyclerViewRepositories?.visibility = View.GONE
+        setLoadingState(true)
     }
 
     fun openUrlInBrowser(url : String){
@@ -80,8 +79,7 @@ class PullRequestActivity : AppCompatActivity(), PullRequestListContract.View{
 
     override fun onStop() {
         super.onStop()
-        arProgressbar?.visibility = View.GONE
-        arRecyclerViewRepositories?.visibility = View.VISIBLE
+        setLoadingState(false)
     }
 
     override fun showListPullRequest(pullRequest: ArrayList<PullRequest>) {
@@ -93,4 +91,13 @@ class PullRequestActivity : AppCompatActivity(), PullRequestListContract.View{
         AlertDialogUtils.createAndShowAlertDialog(errorPullRequest, this)
     }
 
+    override fun setLoadingState(isLoading : Boolean){
+        if(isLoading){
+            aprProgressbar?.visibility = View.VISIBLE
+            aprRecyclerViewPullRequest?.visibility = View.GONE
+        }else{
+            aprProgressbar?.visibility = View.GONE
+            aprRecyclerViewPullRequest?.visibility = View.VISIBLE
+        }
+    }
 }

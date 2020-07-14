@@ -114,7 +114,6 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
         private fun setVisibilityLoading(visibility : Int){
             progressBar.visibility = visibility
         }
-
     }
 
 }
