@@ -16,7 +16,6 @@ class RepoInteractorImpl (
 
         return repository.readRepositoryJson(pages, object : RepositotyAllRepositoriesCallback {
             override fun onSuccess(repositoriesList: RepositoriesListResponse) {
-                Log.i("MELLINA getSelectedItem", "  repositoriesList:  "+repositoriesList)
                 val repositories : ArrayList<Item> = convertGithubRepositoriesListResponseToRepositoriesList(repositoriesList)
                 presenter.showCard(repositories)
             }
@@ -27,10 +26,7 @@ class RepoInteractorImpl (
         })
     }
 
-
-
-
-    private fun convertGithubRepositoriesListResponseToRepositoriesList(listResponse: RepositoriesListResponse) : ArrayList<Item>{
+    override fun convertGithubRepositoriesListResponseToRepositoriesList(listResponse: RepositoriesListResponse) : ArrayList<Item>{
         val items : ArrayList<Item> = arrayListOf()
 
         listResponse.items.forEach{
