@@ -13,6 +13,7 @@ import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.endpoint.GithubAPI
+import com.bassul.mel.app.ext.AlertDialogUtils
 import com.bassul.mel.app.feature.pullRequestList.view.adapter.PullRequestAdapter
 import com.bassul.mel.app.feature.repositoriesList.PullRepositoryPresenterImpl
 import com.bassul.mel.app.feature.repositoriesList.PullRequestListContract
@@ -96,14 +97,7 @@ class PullRequestActivity : AppCompatActivity(), PullRequestListContract.View{
     }
 
     override fun showErrorPullRequestCard(errorPullRequest: Int) {
-        createAndShowAlertDialog(errorPullRequest)
-    }
-
-    private fun createAndShowAlertDialog(message : Int){
-        val mAlertDialog = AlertDialog.Builder(this)
-        mAlertDialog.setTitle("Erro")
-        mAlertDialog.setMessage(getString(message))
-        mAlertDialog.show()
+        AlertDialogUtils.createAndShowAlertDialog(errorPullRequest, this)
     }
 
 }

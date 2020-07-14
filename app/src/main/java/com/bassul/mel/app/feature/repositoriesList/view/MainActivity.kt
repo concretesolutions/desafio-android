@@ -12,6 +12,8 @@ import com.bassul.mel.app.*
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.endpoint.GithubAPI
+import com.bassul.mel.app.ext.AlertDialogUtils
+import com.bassul.mel.app.ext.AlertDialogUtils.Companion.createAndShowAlertDialog
 import com.bassul.mel.app.interactor.RepoInteractorImpl
 import com.bassul.mel.app.feature.pullRequestList.view.PullRequestActivity
 import com.bassul.mel.app.feature.repositoriesList.RepoPresenterImpl
@@ -23,15 +25,15 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
 
-    private val presenter : RepositoriesListContract.Presenter by lazy {
+    private val presenter: RepositoriesListContract.Presenter by lazy {
         RepoPresenterImpl(this)
     }
 
-    private val repository : RepositoriesListContract.Repository by lazy {
+    private val repository: RepositoriesListContract.Repository by lazy {
         RepoRepositoryImpl(GithubAPI())
     }
 
-    private val interactor : RepositoriesListContract.Interactor by lazy {
+    private val interactor: RepositoriesListContract.Interactor by lazy {
         RepoInteractorImpl(presenter, repository)
     }
 
@@ -46,68 +48,52 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
         initRepositoriesCard()
     }
 
-   override fun initRecyclerView() {
+    override fun initRecyclerView() {
         arRecyclerViewRepositories.layoutManager = LinearLayoutManager(this)
         adapter = RepositoryAdapter(this, mutableListOf(), itemClickListener = itemOnClick)
-       arRecyclerViewRepositories.adapter = adapter
+        arRecyclerViewRepositories.adapter = adapter
         arRecyclerViewRepositories.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-           override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-               super.onScrolled(recyclerView, dx, dy)
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
 
-               val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
-               if (linearLayoutManager != null && isBottomOfList(linearLayoutManager)) {
-                   interactor.loadRepositories(++pages)
-               }
-           }
-       })
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
+                if (linearLayoutManager != null && isBottomOfList(linearLayoutManager)) {
+                    interactor.loadRepositories(++pages)
+                }
+            }
+        })
     }
 
-    fun isBottomOfList(llm : LinearLayoutManager) : Boolean{
+    fun isBottomOfList(llm: LinearLayoutManager): Boolean {
         return llm.findLastCompletelyVisibleItemPosition() == adapter!!.items.size - 1
     }
 
-    override  fun initRepositoriesCard(){
+    override fun initRepositoriesCard() {
         interactor.loadRepositories(pages)
     }
 
-    override  fun showCard(repositories: ArrayList<Item>) {
+    override fun showCard(repositories: ArrayList<Item>) {
         adapter!!.addItems(repositories)
         arProgressbar.visibility = View.GONE
     }
 
     override fun showErrorCard(errorMessage: Int) {
-        createAndShowAlertDialog(errorMessage)
-    }
-
-     fun showErrorPullRequestCard(errorPullRequest: Int) {
-        createAndShowAlertDialog(errorPullRequest)
+        createAndShowAlertDialog(errorMessage, this)
         arProgressbar?.visibility = View.GONE
         arRecyclerViewRepositories?.visibility = View.VISIBLE
     }
 
-    private fun createAndShowAlertDialog(message : Int){
-        val mAlertDialog = AlertDialog.Builder(this)
-        mAlertDialog.setTitle("Erro")
-        mAlertDialog.setMessage(getString(message))
-        mAlertDialog.show()
+    val itemOnClick: (Item) -> Unit = { item ->
+        openPullRequesActivity(item)
     }
 
-    val itemOnClick : (Item) -> Unit = {item ->
-        /*interactor.getSelectedItem(item)
-        arProgressbar.visibility = View.VISIBLE
-        arRecyclerViewRepositories.visibility = View.GONE*/
-
+    fun openPullRequesActivity(item: Item) {
         val intent = Intent(this, PullRequestActivity::class.java)
         intent.putExtra("login", item.owner.login)
         intent.putExtra("nameRepository", item.name)
         startActivity(intent)
     }
 
-     fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>) {
-        /*val intent = Intent(this, PullRequestActivity::class.java)
-        intent.putExtra("pullRequest", pullRequest)
-        startActivity(intent)*/
-    }
 
     override fun onStop() {
         super.onStop()

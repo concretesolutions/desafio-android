@@ -10,7 +10,6 @@ class RepoPresenterImpl (val view: RepositoriesListContract.View) : Repositories
         return view.showCard(ItemModel)
     }
 
-
     override fun errorShowCard(errorMessage: Int) {
         return view.showErrorCard(errorMessage)
     }
