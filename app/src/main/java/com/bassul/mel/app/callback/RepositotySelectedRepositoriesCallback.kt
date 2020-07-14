@@ -4,4 +4,5 @@ import com.bassul.mel.app.feature.repositoriesList.repository.model.PullRequestL
 
 interface RepositotySelectedRepositoriesCallback {
     fun onSuccess(pullRequestList : List<PullRequestListResponse>)
+    fun onError(s: String)
 }

@@ -1,5 +1,6 @@
 package com.bassul.mel.app.feature.repositoriesList
 
+import androidx.annotation.StringRes
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.callback.RepositotyAllRepositoriesCallback
 import com.bassul.mel.app.callback.RepositotySelectedRepositoriesCallback
@@ -12,12 +13,15 @@ interface RepositoriesListContract{
         fun initRepositoriesCard()
         fun showCard(repositories: ArrayList<Item>)
         fun openActivityPullRequest(pullRequest: ArrayList<PullRequest>)
+        fun showErrorCard(@StringRes errorMessage: Int)
+        fun showErrorPullRequestCard(@StringRes errorPullRequest: Int)
     }
 
     interface Presenter{
         fun showCard(ItemModel: ArrayList<Item>)
         fun openListPullRequest(pullRequest: ArrayList<PullRequest>)
-
+        fun errorShowCard(@StringRes errorMessage: Int)
+        fun errorShowPullRequestCard(@StringRes errorPullRequest: Int)
     }
 
     interface Interactor{

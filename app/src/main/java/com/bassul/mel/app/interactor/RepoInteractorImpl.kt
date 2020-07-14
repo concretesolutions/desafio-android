@@ -1,6 +1,7 @@
 package com.bassul.mel.app.interactor
 
 import android.util.Log
+import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.feature.repositoriesList.RepositoriesListContract
 import com.bassul.mel.app.feature.repositoriesList.repository.model.RepositoriesListResponse
@@ -22,6 +23,10 @@ class RepoInteractorImpl (
                 val repositories : ArrayList<Item> = convertGithubRepositoriesListResponseToRepositoriesList(repositoriesList)
                 presenter.showCard(repositories)
             }
+
+            override fun onError(errorMessage: String) {
+                presenter.errorShowCard(R.string.error_repository)
+            }
         })
     }
 
@@ -30,6 +35,10 @@ class RepoInteractorImpl (
             override fun onSuccess(pullRequestList: List<PullRequestListResponse>) {
                 Log.i("MELLINA getSelectedItem", "  Login:  "+item.owner.login+"  Name:  "+ item.name)
                 presenter.openListPullRequest(convertPullRequestListResponseToPullResponse(pullRequestList))
+            }
+
+            override fun onError(s: String) {
+                presenter.errorShowPullRequestCard(R.string.error_pull_request)
             }
 
         })

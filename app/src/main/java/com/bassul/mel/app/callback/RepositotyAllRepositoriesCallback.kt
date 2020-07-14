@@ -4,4 +4,5 @@ import com.bassul.mel.app.feature.repositoriesList.repository.model.Repositories
 
 interface RepositotyAllRepositoriesCallback {
     fun onSuccess(repositoriesList : RepositoriesListResponse)
+    fun onError(errorMessage : String)
 }

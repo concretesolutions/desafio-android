@@ -23,7 +23,7 @@ class RepoRepositoryImpl(private val githubAPI: GithubAPI) : RepositoriesListCon
             }
 
             override fun onFailure(call: Call<RepositoriesListResponse>, t: Throwable) {
-              //TODO: Implementar onFailure
+              callback.onError(t.localizedMessage)
             }
 
         })
@@ -41,7 +41,7 @@ class RepoRepositoryImpl(private val githubAPI: GithubAPI) : RepositoriesListCon
             }
 
             override fun onFailure(call: Call<List<PullRequestListResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+                callback.onError(t.localizedMessage)
             }
         })
     }

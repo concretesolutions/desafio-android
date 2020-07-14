@@ -3,4 +3,6 @@
     <string name="title_repositories">Repositories</string>
     <string name="title_pull_request">Pull Request</string>
     <string name="empty_pull_request">No pull requests show up for this repositories</string>
+    <string name="error_repository">Failed to load repositories list</string>
+    <string name="error_pull_request">Failed to load pull request list</string>
 </resources>

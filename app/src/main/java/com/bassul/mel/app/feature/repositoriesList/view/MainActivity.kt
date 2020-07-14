@@ -4,6 +4,7 @@ package com.bassul.mel.app.feature.repositoriesList.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -78,6 +79,23 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
         val intent = Intent(this, PullRequestActivity::class.java)
         intent.putExtra("pullRequest", pullRequest)
         startActivity(intent)
+    }
+
+    override fun showErrorCard(errorMessage: Int) {
+        createAndShowAlertDialog(errorMessage)
+    }
+
+    override fun showErrorPullRequestCard(errorPullRequest: Int) {
+        createAndShowAlertDialog(errorPullRequest)
+        arProgressbar?.visibility = View.GONE
+        arRecyclerViewRepositories?.visibility = View.VISIBLE
+    }
+
+    private fun createAndShowAlertDialog(message : Int){
+        val mAlertDialog = AlertDialog.Builder(this)
+        mAlertDialog.setTitle("Erro")
+        mAlertDialog.setMessage(getString(message))
+        mAlertDialog.show()
     }
 
     val itemOnClick : (Item) -> Unit = {item ->
