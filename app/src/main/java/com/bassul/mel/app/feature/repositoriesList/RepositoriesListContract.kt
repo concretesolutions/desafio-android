@@ -11,9 +11,9 @@ interface RepositoriesListContract{
         fun initRecyclerView()
         fun initRepositoriesCard()
         fun showCard(repositories: ArrayList<Item>)
-
         fun showErrorCard(@StringRes errorMessage: Int)
 
+        fun setLoadingState(isLoading: Boolean)
     }
 
     interface Presenter{

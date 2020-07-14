@@ -71,13 +71,12 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
 
     override fun showCard(repositories: ArrayList<Item>) {
         adapter!!.addItems(repositories)
-        arProgressbar.visibility = View.GONE
+        setLoadingState(false)
     }
 
     override fun showErrorCard(errorMessage: Int) {
         createAndShowAlertDialog(errorMessage, this)
-        arProgressbar?.visibility = View.GONE
-        arRecyclerViewRepositories?.visibility = View.VISIBLE
+        setLoadingState(false)
     }
 
     val itemOnClick: (Item) -> Unit = { item ->
@@ -91,10 +90,18 @@ class MainActivity : AppCompatActivity(), RepositoriesListContract.View {
         startActivity(intent)
     }
 
-
     override fun onStop() {
         super.onStop()
-        arProgressbar?.visibility = View.GONE
-        arRecyclerViewRepositories?.visibility = View.VISIBLE
+        setLoadingState(false)
+    }
+
+    override fun setLoadingState(isLoading : Boolean){
+        if(isLoading){
+            arProgressbar?.visibility = View.VISIBLE
+            arRecyclerViewRepositories?.visibility = View.GONE
+        }else{
+            arProgressbar?.visibility = View.GONE
+            arRecyclerViewRepositories?.visibility = View.VISIBLE
+        }
     }
 }
