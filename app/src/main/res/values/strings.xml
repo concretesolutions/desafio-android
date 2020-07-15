@@ -5,4 +5,9 @@
     <string name="empty_pull_request">No pull requests show up for this repositories</string>
     <string name="error_repository">Failed to load repositories list</string>
     <string name="error_pull_request">Failed to load pull request list</string>
+    <string name="ErroTitleAlertDialog">Erro</string>
+    <string name="cd_star_image">star image</string>
+    <string name="cd_avatar_image">Repository picture</string>
+    <string name="cd_fork_image">Fork Image</string>
+    <string name="cd_avatar_Image">Owner Picture</string>
 </resources>
