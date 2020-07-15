@@ -21,7 +21,6 @@ interface RepoListContract {
 
     interface Interactor {
         fun loadRepositories(pages: Int)
-        fun convertGithubRepositoriesListResponseToRepositoriesList(listResponse: RepositoriesListResponse): ArrayList<Item>
     }
 
     interface Repository {

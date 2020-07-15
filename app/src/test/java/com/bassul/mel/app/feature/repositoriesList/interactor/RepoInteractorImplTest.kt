@@ -38,10 +38,4 @@ internal class RepoInteractorImplTest {
         verify(repoRepository).readRepositoryJson(1, repositotyAllRepositoriesCallback.capture())
     }
 
-    @Test
-    fun convertGithubRepositoriesListResponseToRepositoriesList(){
-       val repoListResponse =  repoInteractor.convertGithubRepositoriesListResponseToRepositoriesList(repositoriesListReponseMock())
-        Assert.assertEquals(repoListResponse, listItemMock())
-    }
-
 }
