@@ -10,11 +10,11 @@ import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.endpoint.GithubAPI
 import com.bassul.mel.app.ext.AlertDialogUtils
-import com.bassul.mel.app.feature.pullRequestsList.view.adapter.PullRequestAdapter
-import com.bassul.mel.app.feature.pullRequestsList.presenter.PullRequestPresenterImpl
 import com.bassul.mel.app.feature.pullRequestsList.PullRequestListContract
-import com.bassul.mel.app.feature.pullRequestsList.repository.PullRequestRepositoryImpl
 import com.bassul.mel.app.feature.pullRequestsList.interactor.PullRequestInteractorImpl
+import com.bassul.mel.app.feature.pullRequestsList.presenter.PullRequestPresenterImpl
+import com.bassul.mel.app.feature.pullRequestsList.repository.PullRequestRepositoryImpl
+import com.bassul.mel.app.feature.pullRequestsList.view.adapter.PullRequestAdapter
 import kotlinx.android.synthetic.main.activity_pull_request.*
 
 
@@ -88,6 +88,7 @@ class PullRequestActivity : AppCompatActivity(), PullRequestListContract.View {
 
     override fun showTextEmptyList() {
         aprTvEmptyList.visibility = View.VISIBLE
+        hideLoading()
     }
 
     override fun showErrorPullRequestList(errorPullRequest: Int) {

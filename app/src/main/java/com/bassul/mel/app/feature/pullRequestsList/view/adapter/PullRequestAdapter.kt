@@ -12,15 +12,19 @@ import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.PullRequest
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_pull_request_item.view.*
-import kotlinx.android.synthetic.main.layout_pull_request_item.view.itemPullReqImageViewAvatar
 
-class PullRequestAdapter (private val context: Context, var pr : MutableList<PullRequest>, private val itemClickListener: (PullRequest) -> Unit) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>(),
+class PullRequestAdapter(
+    private val context: Context,
+    var pr: MutableList<PullRequest>,
+    private val itemClickListener: (PullRequest) -> Unit
+) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>(),
     AdapterPullRequestContract {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.layout_pull_request_item, parent, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.layout_pull_request_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -28,27 +32,38 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pullRequest = pr[position]
 
-        holder?.name.text = pullRequest.userName
-        holder?.body.text = pullRequest.body
-        holder?.nameOwner.text = pullRequest.userName
-        Picasso.get().load(pullRequest.userAvatar).into(holder?.avatarOwner)
-        holder?.date.text = pullRequest.updated_at
-        holder?.clickableView.setOnClickListener {
-            itemClickListener(pullRequest)
+        holder.apply {
+            name.text = pullRequest.userName
+            body.text = pullRequest.body
+            nameOwner.text = pullRequest.userName
+            Picasso.get().load(pullRequest.userAvatar).into(holder.avatarOwner)
+            date.text = pullRequest.updated_at
+
         }
 
-        holder?.clickableView.setOnTouchListener OnTouchListener@{ view: View, motionEvent: MotionEvent ->
-            when (motionEvent.action){
+        setTouchListener(holder)
+        setClickListener(holder, pullRequest)
+    }
+
+    private fun setClickListener(holder: ViewHolder, pullRequest: PullRequest) {
+        holder.clickableView.setOnClickListener {
+            itemClickListener(pullRequest)
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setTouchListener(holder: ViewHolder) {
+        holder.clickableView.setOnTouchListener OnTouchListener@{ _, motionEvent: MotionEvent ->
+            when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    holder?.background.setBackgroundColor(getColor(context, R.color.colorAccent))
+                    holder.background.setBackgroundColor(getColor(context, R.color.colorAccent))
                 }
                 else -> {
-                    holder?.background.setBackgroundColor(getColor(context, R.color.lightGray))
+                    holder.background.setBackgroundColor(getColor(context, R.color.lightGray))
                 }
             }
             return@OnTouchListener false
         }
-
     }
 
     override fun addItems(newItems: List<PullRequest>) {
@@ -58,7 +73,7 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
 
     override fun getItemCount(): Int = pr.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var name = itemView.itemPullReqTextViewTitle!!
         var body = itemView.itemPullReqTextViewBody!!

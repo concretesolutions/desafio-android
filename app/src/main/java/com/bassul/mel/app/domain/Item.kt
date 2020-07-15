@@ -8,6 +8,6 @@ data class Item(
     val owner: Owner,
     val stargazers_count: String,
     val forks_count: String,
-    val description : String?,
-    val pulls_url : String
+    val description: String?,
+    val pulls_url: String
 ) : Serializable

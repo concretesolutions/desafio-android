@@ -5,26 +5,31 @@ import com.bassul.mel.app.callback.RepositorySelectedRepositoriesCallback
 import com.bassul.mel.app.domain.PullRequest
 import com.bassul.mel.app.feature.pullRequestsList.repository.model.PullRequestListResponse
 
-interface PullRequestListContract{
+interface PullRequestListContract {
 
-    interface View{
+    interface View {
         fun showPullRequestList(pullRequest: ArrayList<PullRequest>)
         fun showErrorPullRequestList(@StringRes errorPullRequest: Int)
-      //  fun setLoadingState(isLoading: Boolean)
+
+        //  fun setLoadingState(isLoading: Boolean)
         fun showTextEmptyList()
     }
 
-    interface Presenter{
+    interface Presenter {
         fun openListPullRequest(pullRequest: ArrayList<PullRequest>)
         fun errorShowPullRequestCard(@StringRes errorPullRequest: Int)
     }
 
-    interface Interactor{
+    interface Interactor {
         fun getSelectedItem(login: String, nameRepository: String)
         fun convertPullRequestListResponseToPullResponse(pullRequestList: List<PullRequestListResponse>): ArrayList<PullRequest>
     }
 
-    interface Repository{
-        fun readPullRequestJson(login : String, nameRepository : String, callback: RepositorySelectedRepositoriesCallback)
+    interface Repository {
+        fun readPullRequestJson(
+            login: String,
+            nameRepository: String,
+            callback: RepositorySelectedRepositoriesCallback
+        )
     }
 }

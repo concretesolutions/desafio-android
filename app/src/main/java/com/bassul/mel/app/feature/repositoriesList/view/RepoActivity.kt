@@ -7,18 +7,17 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bassul.mel.app.*
+import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.endpoint.GithubAPI
 import com.bassul.mel.app.ext.AlertDialogUtils.Companion.createAndShowAlertDialog
-import com.bassul.mel.app.feature.repositoriesList.interactor.RepoInteractorImpl
 import com.bassul.mel.app.feature.pullRequestsList.view.PullRequestActivity
-import com.bassul.mel.app.feature.repositoriesList.presenter.RepoPresenterImpl
 import com.bassul.mel.app.feature.repositoriesList.RepoListContract
+import com.bassul.mel.app.feature.repositoriesList.interactor.RepoInteractorImpl
+import com.bassul.mel.app.feature.repositoriesList.presenter.RepoPresenterImpl
 import com.bassul.mel.app.feature.repositoriesList.repository.RepoRepositoryImpl
 import com.bassul.mel.app.feature.repositoriesList.view.adapter.RepositoryAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.collections.ArrayList
 
 class RepoActivity : AppCompatActivity(), RepoListContract.View {
 
@@ -49,7 +48,10 @@ class RepoActivity : AppCompatActivity(), RepoListContract.View {
         repoRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = RepositoryAdapter(this, mutableListOf(), itemClickListener = itemOnClick)
         repoRecyclerView.adapter = adapter
+        addOnScrollListener()
+    }
 
+    private fun addOnScrollListener() {
         repoRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -62,52 +64,50 @@ class RepoActivity : AppCompatActivity(), RepoListContract.View {
         })
     }
 
-    fun isBottomOfList(llm: LinearLayoutManager): Boolean {
+    private fun isBottomOfList(llm: LinearLayoutManager): Boolean {
         return llm.findLastCompletelyVisibleItemPosition() == adapter!!.items.size - 1
     }
 
-    override fun initRepositoriesCard(pages : Int) {
-        //habilita o loading aqui
+    override fun initRepositoriesCard(pages: Int) {
+        showLoading()
         interactor.loadRepositories(pages)
     }
 
     override fun showCard(repositories: ArrayList<Item>) {
-        setLoadingState(false)
-        adapter?.let{
+        hideLoading()
+        adapter?.let {
             it.addItems(repositories)
         }
     }
 
-    override fun showErrorCard(errorMessage: Int) {
+    override fun showErrorRepoList(errorMessage: Int) {
+        hideLoading()
         createAndShowAlertDialog(errorMessage, this)
-        setLoadingState(false)
     }
 
-    val itemOnClick: (Item) -> Unit = { item ->
+    private val itemOnClick: (Item) -> Unit = { item ->
         openPullRequesActivity(item)
     }
 
-    fun openPullRequesActivity(item: Item) {
+    private fun openPullRequesActivity(item: Item) {
         val intent = Intent(this, PullRequestActivity::class.java)
         intent.putExtra("login", item.owner.login)
         intent.putExtra("nameRepository", item.name)
         startActivity(intent)
     }
 
-    //nao preciso mais
     override fun onStop() {
         super.onStop()
-        setLoadingState(false)
+        hideLoading()
     }
 
-    //tirar o override se nao for usar no presenter
-    override fun setLoadingState(isLoading : Boolean){
-        if(isLoading){
-            repoProgressbar?.visibility = View.VISIBLE
-            repoRecyclerView?.visibility = View.GONE
-        }else{
-            repoProgressbar?.visibility = View.GONE
-            repoRecyclerView?.visibility = View.VISIBLE
-        }
+    private fun hideLoading() {
+        repoProgressbar.visibility = View.GONE
+        repoRecyclerView.visibility = View.VISIBLE
+    }
+
+    private fun showLoading() {
+        repoProgressbar.visibility = View.VISIBLE
+        repoRecyclerView.visibility = View.GONE
     }
 }

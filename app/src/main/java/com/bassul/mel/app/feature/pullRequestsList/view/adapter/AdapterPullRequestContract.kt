@@ -4,5 +4,5 @@ import com.bassul.mel.app.domain.PullRequest
 
 interface AdapterPullRequestContract {
 
-    fun addItems(list: List<PullRequest>)
+    fun addItems(newItems: List<PullRequest>)
 }

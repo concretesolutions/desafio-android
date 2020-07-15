@@ -7,22 +7,28 @@ import com.bassul.mel.app.feature.pullRequestsList.repository.model.PullRequestL
 import retrofit2.Call
 import retrofit2.Response
 
-class PullRequestRepositoryImpl(private val githubAPI: GithubAPI) : PullRequestListContract.Repository {
+class PullRequestRepositoryImpl(private val githubAPI: GithubAPI) :
+    PullRequestListContract.Repository {
 
-    override fun readPullRequestJson(login: String, repositoryName : String, callback: RepositorySelectedRepositoriesCallback) {
-        githubAPI.fetchPullRequestData(login, repositoryName).enqueue(object : retrofit2.Callback<List<PullRequestListResponse>>{
-            override fun onResponse(
-                call: Call<List<PullRequestListResponse>>,
-                response: Response<List<PullRequestListResponse>>
-            ) {
-                response.body()?.let {
-                    callback.onSuccess(it)
+    override fun readPullRequestJson(
+        login: String,
+        repositoryName: String,
+        callback: RepositorySelectedRepositoriesCallback
+    ) {
+        githubAPI.fetchPullRequestData(login, repositoryName)
+            .enqueue(object : retrofit2.Callback<List<PullRequestListResponse>> {
+                override fun onResponse(
+                    call: Call<List<PullRequestListResponse>>,
+                    response: Response<List<PullRequestListResponse>>
+                ) {
+                    response.body()?.let {
+                        callback.onSuccess(it)
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<List<PullRequestListResponse>>, t: Throwable) {
-                callback.onError(t.localizedMessage)
-            }
-        })
+                override fun onFailure(call: Call<List<PullRequestListResponse>>, t: Throwable) {
+                    callback.onError(t.localizedMessage)
+                }
+            })
     }
 }

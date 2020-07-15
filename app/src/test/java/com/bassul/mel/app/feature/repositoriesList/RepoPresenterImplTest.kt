@@ -31,6 +31,6 @@ internal class RepoPresenterImplTest {
     @Test
     fun errorShowCard(){
         repoPresenter.errorShowCard(errorMessageRepositoryMock())
-        verify(repoView).showErrorCard(errorMessageRepositoryMock())
+        verify(repoView).showErrorRepoList(errorMessageRepositoryMock())
     }
 }

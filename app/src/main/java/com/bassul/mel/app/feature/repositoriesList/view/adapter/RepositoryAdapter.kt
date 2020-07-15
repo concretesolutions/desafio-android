@@ -8,43 +8,61 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bassul.mel.app.domain.Item
 import com.bassul.mel.app.R
+import com.bassul.mel.app.domain.Item
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_repository_item.view.*
 
-class RepositoryAdapter (private val context: Context, var items : MutableList<Item>,  private val itemClickListener: (Item) -> Unit) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>(),
-    AdapterItemsContract {
+class RepositoryAdapter(
+    private val context: Context,
+    var items: MutableList<Item>,
+    private val itemClickListener: (Item) -> Unit
+) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>(),
+    AdapterRepoContract {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.layout_repository_item, parent, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.layout_repository_item, parent, false)
         return ViewHolder(view)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        //apply
-        holder.name.text = item.name
-        holder.description.text = item.description
-        holder.stars.text= item.stargazers_count
-        holder?.forks.text= item.forks_count
-        holder?.nameOwner.text = item.owner.login
-        Picasso.get().load(item.owner.avatar_url).into(holder?.avatarOwner)
+        holder.apply {
+            name.text = item.name
+            description.text = item.description
+            stars.text = item.stargazers_count
+            forks.text = item.forks_count
+            nameOwner.text = item.owner.login
+            Picasso.get().load(item.owner.avatar_url).into(avatarOwner)
+        }
 
-        if(position + 1 == items.size){
+        if (position + 1 == items.size) {
             holder.changeVisibility(true)
-        }else{
+        } else {
             holder.changeVisibility(false)
         }
 
-        holder.clickableView.setOnTouchListener OnTouchListener@{ view: View, motionEvent: MotionEvent ->
-            when (motionEvent.action){
+        setTouchListener(holder)
+        setClickListener(holder, item)
+    }
+
+    private fun setClickListener(holder: ViewHolder, item : Item){
+        holder.clickableView.setOnClickListener {
+            itemClickListener(item)
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setTouchListener(holder: ViewHolder) =
+        holder.clickableView.setOnTouchListener OnTouchListener@{ _, motionEvent: MotionEvent ->
+            when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    holder?.background.setBackgroundColor(
+                    holder.background.setBackgroundColor(
                         ContextCompat.getColor(
                             context,
                             R.color.colorAccent
@@ -52,7 +70,7 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
                     )
                 }
                 else -> {
-                    holder?.background.setBackgroundColor(
+                    holder.background.setBackgroundColor(
                         ContextCompat.getColor(
                             context,
                             R.color.lightGray
@@ -63,12 +81,6 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
             return@OnTouchListener false
         }
 
-        holder.clickableView.setOnClickListener {
-            itemClickListener(item)
-        }
-
-    }
-
     override fun addItems(newItems: List<Item>) {
         items.addAll(newItems)
         notifyDataSetChanged()
@@ -76,31 +88,31 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
 
     override fun getItemCount(): Int = items.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var name = itemView.itemRepoTextViewName!!
-        var description = itemView.itemRepoTextViewDescription!!
-        var avatarOwner = itemView.itemRepoImageViewAvatar
-        var nameOwner = itemView.itemRepoTextViewOwnerName
-        var stars = itemView.itemRepoTextViewStars
-        var forks = itemView.itemRepoTextViewForks
-        var progressBar = itemView.itemRepoProgressbar
-        var starImage = itemView.itemRepoImageViewStars
-        var forkImage = itemView.itemRepoImageViewForks
+        val name = itemView.itemRepoTextViewName!!
+        val description = itemView.itemRepoTextViewDescription!!
+        val avatarOwner = itemView.itemRepoImageViewAvatar
+        val nameOwner = itemView.itemRepoTextViewOwnerName
+        val stars = itemView.itemRepoTextViewStars
+        val forks = itemView.itemRepoTextViewForks
+        val progressBar = itemView.itemRepoProgressbar
+        val starImage = itemView.itemRepoImageViewStars
+        val forkImage = itemView.itemRepoImageViewForks
         val clickableView = itemView.itemRepoCardview
         val background = itemView.itemRepoLayoutbackground
 
-        fun changeVisibility(isLastItem : Boolean){
-            if(isLastItem){
+        fun changeVisibility(isLastItem: Boolean) {
+            if (isLastItem) {
                 setVisibilityLoading(View.VISIBLE)
                 setVisibilityItem(View.INVISIBLE)
-            }else{
+            } else {
                 setVisibilityLoading(View.INVISIBLE)
                 setVisibilityItem(View.VISIBLE)
             }
         }
 
-        private fun setVisibilityItem(visibility : Int) {
+        private fun setVisibilityItem(visibility: Int) {
             name.visibility = visibility
             description.visibility = visibility
             avatarOwner.visibility = visibility
@@ -111,7 +123,7 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
             forkImage.visibility = visibility
         }
 
-        private fun setVisibilityLoading(visibility : Int){
+        private fun setVisibilityLoading(visibility: Int) {
             progressBar.visibility = visibility
         }
     }

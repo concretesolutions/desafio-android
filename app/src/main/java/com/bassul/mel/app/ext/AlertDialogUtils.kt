@@ -1,7 +1,6 @@
 package com.bassul.mel.app.ext
 
 import android.content.Context
-import android.provider.Settings.Global.getString
 import androidx.appcompat.app.AlertDialog
 
 class AlertDialogUtils {
