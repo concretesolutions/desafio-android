@@ -17,48 +17,50 @@ class RepositoryAdapter(
     private val context: Context,
     var items: MutableList<Item>,
     private val itemClickListener: (Item) -> Unit
-) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>(),
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     AdapterRepoContract {
-    override fun onCreateViewHolder(
+
+    private val TYPE_LOADING = 0
+    private val TYPE_ITEM = 1
+
+    override fun onCreateViewHolder (
         parent: ViewGroup,
         viewType: Int
-    ): ViewHolder {
-        val view =
-            LayoutInflater.from(context).inflate(R.layout.layout_repository_item, parent, false)
-        return ViewHolder(view)
-    }
-
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = items[position]
-
-        holder.apply {
-            name.text = item.name
-            description.text = item.description
-            stars.text = item.stargazers_count
-            forks.text = item.forks_count
-            nameOwner.text = item.owner.login
-            Picasso.get().load(item.owner.avatar_url).into(avatarOwner)
-        }
-
-        if (position + 1 == items.size) {
-            holder.changeVisibility(true)
+    ): RecyclerView.ViewHolder {
+        return if (viewType == TYPE_ITEM) {
+            ViewHolderItem(LayoutInflater.from(context).inflate(R.layout.layout_repository_item, parent, false))
         } else {
-            holder.changeVisibility(false)
+            ViewHolderLoading(LayoutInflater.from(context)
+                .inflate(R.layout.layout_repository_loading_item, parent, false))
         }
-
-        setTouchListener(holder)
-        setClickListener(holder, item)
     }
 
-    private fun setClickListener(holder: ViewHolder, item : Item){
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            if(getItemViewType(position) == TYPE_ITEM){
+                val item = items[position]
+
+                val holder  = holder as ViewHolderItem
+                holder.apply {
+                    name.text = item.name
+                    description.text = item.description
+                    stars.text = item.stargazers_count
+                    forks.text = item.forks_count
+                    nameOwner.text = item.owner.login
+                    Picasso.get().load(item.owner.avatar_url).into(avatarOwner)
+                }
+                setTouchListener(holder)
+                setClickListener(holder, item)
+            }
+    }
+
+    private fun setClickListener(holder: ViewHolderItem, item: Item) {
         holder.clickableView.setOnClickListener {
             itemClickListener(item)
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun setTouchListener(holder: ViewHolder) =
+    private fun setTouchListener(holder: ViewHolderItem) =
         holder.clickableView.setOnTouchListener OnTouchListener@{ _, motionEvent: MotionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -86,46 +88,28 @@ class RepositoryAdapter(
         notifyDataSetChanged()
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (position + 1 == items.size) {
+            TYPE_LOADING
+        } else {
+            TYPE_ITEM
+        }
+        return super.getItemViewType(position)
+    }
+
     override fun getItemCount(): Int = items.size
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolderLoading(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
+    class ViewHolderItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name = itemView.itemRepoTextViewName!!
         val description = itemView.itemRepoTextViewDescription!!
         val avatarOwner = itemView.itemRepoImageViewAvatar
         val nameOwner = itemView.itemRepoTextViewOwnerName
         val stars = itemView.itemRepoTextViewStars
         val forks = itemView.itemRepoTextViewForks
-        private val progressBar = itemView.itemRepoProgressbar
-        private val starImage = itemView.itemRepoImageViewStars
-        private val forkImage = itemView.itemRepoImageViewForks
         val clickableView = itemView.itemRepoCardview
         val background = itemView.itemRepoLayoutbackground
-
-        fun changeVisibility(isLastItem: Boolean) {
-            if (isLastItem) {
-                setVisibilityLoading(View.VISIBLE)
-                setVisibilityItem(View.INVISIBLE)
-            } else {
-                setVisibilityLoading(View.INVISIBLE)
-                setVisibilityItem(View.VISIBLE)
-            }
-        }
-
-        private fun setVisibilityItem(visibility: Int) {
-            name.visibility = visibility
-            description.visibility = visibility
-            avatarOwner.visibility = visibility
-            nameOwner.visibility = visibility
-            stars.visibility = visibility
-            forks.visibility = visibility
-            starImage.visibility = visibility
-            forkImage.visibility = visibility
-        }
-
-        private fun setVisibilityLoading(visibility: Int) {
-            progressBar.visibility = visibility
-        }
     }
 
 }

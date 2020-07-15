@@ -27,17 +27,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:paddingStart="10dp"
             android:paddingTop="1dp">
 
-            <ProgressBar
-                android:id="@+id/itemRepoProgressbar"
-                android:layout_width="24dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <ImageView
                 android:id="@+id/itemRepoImageViewAvatar"
                 android:layout_width="44dp"
