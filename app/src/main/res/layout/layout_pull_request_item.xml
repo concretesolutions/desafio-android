@@ -13,14 +13,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/lpr_cardview_pull_request_item"
+        android:id="@+id/itemPullReqCardview"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         app:cardBackgroundColor="@android:color/transparent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/lpr_background"
+            android:id="@+id/itemPullReqBackground"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -28,7 +28,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:paddingTop="1dp">
 
             <ProgressBar
-                android:id="@+id/lpr_progressbar"
+                android:id="@+id/itemPullReqProgressbar"
                 android:layout_width="24dp"
                 android:visibility="gone"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/lpr_im_avatar"
+                android:id="@+id/itemPullReqImageViewAvatar"
                 android:layout_width="44dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="8dp"
@@ -48,7 +48,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/lpr_tx_name_owner"
+                android:id="@+id/itemPullReqTextViewOwnerName"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginTop="8dp"
@@ -56,24 +56,24 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:text="Nome Autor"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/lpr_im_avatar"
+                app:layout_constraintEnd_toEndOf="@+id/itemPullReqImageViewAvatar"
                 app:layout_constraintHorizontal_bias="0.472"
-                app:layout_constraintStart_toStartOf="@+id/lpr_im_avatar"
-                app:layout_constraintTop_toBottomOf="@+id/lpr_im_avatar" />
+                app:layout_constraintStart_toStartOf="@+id/itemPullReqImageViewAvatar"
+                app:layout_constraintTop_toBottomOf="@+id/itemPullReqImageViewAvatar" />
 
             <TextView
-                android:id="@+id/lpr_tx_pull_request_title"
+                android:id="@+id/itemPullReqTextViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pull Request"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.505"
-                app:layout_constraintStart_toEndOf="@+id/lpr_im_avatar"
+                app:layout_constraintStart_toEndOf="@+id/itemPullReqImageViewAvatar"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/lpr_tx_pull_request_body"
+                android:id="@+id/itemPullReqTextViewBody"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -83,11 +83,11 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:text="Body Request"
                 android:textSize="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/lpr_im_avatar"
-                app:layout_constraintTop_toBottomOf="@+id/lpr_tx_pull_request_title" />
+                app:layout_constraintStart_toEndOf="@+id/itemPullReqImageViewAvatar"
+                app:layout_constraintTop_toBottomOf="@+id/itemPullReqTextViewTitle" />
 
             <TextView
-                android:id="@+id/lpr_tx_date"
+                android:id="@+id/itemPullReqTextViewDate"
                 android:layout_width="wrap_content"
                 android:layout_height="11dp"
                 android:layout_marginEnd="8dp"
@@ -96,7 +96,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:textSize="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lpr_tx_pull_request_body"
+                app:layout_constraintTop_toBottomOf="@+id/itemPullReqTextViewBody"
                 app:layout_constraintVertical_bias="1.0" />
 
 

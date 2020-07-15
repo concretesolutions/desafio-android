@@ -13,14 +13,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/lr_cardview_repository_item"
+        android:id="@+id/itemRepoCardview"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         app:cardBackgroundColor="@android:color/transparent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/lr_background"
+            android:id="@+id/itemRepoLayoutbackground"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -28,7 +28,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:paddingTop="1dp">
 
             <ProgressBar
-                android:id="@+id/lr_progressbar"
+                android:id="@+id/itemRepoProgressbar"
                 android:layout_width="24dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/lr_im_avatar"
+                android:id="@+id/itemRepoImageViewAvatar"
                 android:layout_width="44dp"
                 android:layout_height="32dp"
 
@@ -49,7 +49,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/lr_tx_login"
+                android:id="@+id/itemRepoTextViewOwnerName"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginTop="8dp"
@@ -58,24 +58,24 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:text="Nome Autor"
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/lr_im_avatar"
+                app:layout_constraintEnd_toEndOf="@+id/itemRepoImageViewAvatar"
                 app:layout_constraintHorizontal_bias="0.472"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lr_im_avatar" />
+                app:layout_constraintTop_toBottomOf="@+id/itemRepoImageViewAvatar" />
 
             <TextView
-                android:id="@+id/lr_tx_starts"
+                android:id="@+id/itemRepoTextViewStars"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/lr_tx_forks"
+                app:layout_constraintBottom_toTopOf="@+id/itemRepoTextViewForks"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.323" />
 
             <TextView
-                android:id="@+id/lr_tx_forks"
+                android:id="@+id/itemRepoTextViewForks"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginEnd="8dp"
@@ -85,47 +85,47 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
-                android:id="@+id/lr_im_stars"
+                android:id="@+id/itemRepoImageViewStars"
                 android:layout_width="21dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/star_50"
-                app:layout_constraintBottom_toBottomOf="@+id/lr_tx_starts"
-                app:layout_constraintEnd_toStartOf="@+id/lr_tx_starts"
-                app:layout_constraintTop_toTopOf="@+id/lr_tx_starts"
+                app:layout_constraintBottom_toBottomOf="@+id/itemRepoTextViewStars"
+                app:layout_constraintEnd_toStartOf="@+id/itemRepoTextViewStars"
+                app:layout_constraintTop_toTopOf="@+id/itemRepoTextViewStars"
                 app:layout_constraintVertical_bias="1.0"
                 tools:ignore="MissingConstraints"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/lr_im_forks"
+                android:id="@+id/itemRepoImageViewForks"
                 android:layout_width="21dp"
                 android:layout_height="20dp"
                 android:src="@drawable/fork_50"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/lr_tx_forks"
-                app:layout_constraintEnd_toEndOf="@+id/lr_im_stars"
-                app:layout_constraintStart_toStartOf="@+id/lr_im_stars"
-                app:layout_constraintTop_toTopOf="@+id/lr_tx_forks"
+                app:layout_constraintBottom_toBottomOf="@+id/itemRepoTextViewForks"
+                app:layout_constraintEnd_toEndOf="@+id/itemRepoImageViewStars"
+                app:layout_constraintStart_toStartOf="@+id/itemRepoImageViewStars"
+                app:layout_constraintTop_toTopOf="@+id/itemRepoTextViewForks"
                 app:layout_constraintVertical_bias="0.0"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/lr_tx_repository_name"
+                android:id="@+id/itemRepoTextViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nome Repositorio"
                 android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="@+id/lr_im_forks"
-                app:layout_constraintEnd_toStartOf="@+id/lr_im_forks"
+                app:layout_constraintBottom_toBottomOf="@+id/itemRepoImageViewForks"
+                app:layout_constraintEnd_toStartOf="@+id/itemRepoImageViewForks"
                 app:layout_constraintHorizontal_bias="0.543"
-                app:layout_constraintStart_toEndOf="@+id/lr_im_avatar"
+                app:layout_constraintStart_toEndOf="@+id/itemRepoImageViewAvatar"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.120000005" />
 
             <TextView
-                android:id="@+id/lr_tx_repository_description"
+                android:id="@+id/itemRepoTextViewDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -134,9 +134,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:maxLines="2"
                 android:text="Descricao Repositorio"
                 android:textSize="10dp"
-                app:layout_constraintEnd_toStartOf="@+id/lr_im_forks"
-                app:layout_constraintStart_toEndOf="@+id/lr_tx_login"
-                app:layout_constraintTop_toBottomOf="@+id/lr_tx_repository_name" />
+                app:layout_constraintEnd_toStartOf="@+id/itemRepoImageViewForks"
+                app:layout_constraintStart_toEndOf="@+id/itemRepoTextViewOwnerName"
+                app:layout_constraintTop_toBottomOf="@+id/itemRepoTextViewName" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

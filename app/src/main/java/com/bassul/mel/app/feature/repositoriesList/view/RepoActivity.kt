@@ -42,21 +42,21 @@ class RepoActivity : AppCompatActivity(), RepoListContract.View {
         setContentView(R.layout.activity_main)
 
         initRecyclerView()
-        initRepositoriesCard()
+        initRepositoriesCard(pages)
     }
 
     private fun initRecyclerView() {
-        arRecyclerViewRepositories.layoutManager = LinearLayoutManager(this)
+        repoRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = RepositoryAdapter(this, mutableListOf(), itemClickListener = itemOnClick)
-        arRecyclerViewRepositories.adapter = adapter
-        arRecyclerViewRepositories.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        repoRecyclerView.adapter = adapter
+
+        repoRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
                 if (linearLayoutManager != null && isBottomOfList(linearLayoutManager)) {
-                    interactor.loadRepositories(++pages)
-                    //initRepositoriesCard(pages : Int) TODO
+                    initRepositoriesCard(++pages)
                 }
             }
         })
@@ -66,20 +66,15 @@ class RepoActivity : AppCompatActivity(), RepoListContract.View {
         return llm.findLastCompletelyVisibleItemPosition() == adapter!!.items.size - 1
     }
 
-    override fun initRepositoriesCard() {
+    override fun initRepositoriesCard(pages : Int) {
         //habilita o loading aqui
         interactor.loadRepositories(pages)
     }
-
-    /*private fun initRepositoriesCard(pages : Int) {
-        interactor.loadRepositories(pages)
-    }*/
 
     override fun showCard(repositories: ArrayList<Item>) {
         setLoadingState(false)
         adapter?.let{
             it.addItems(repositories)
-
         }
     }
 
@@ -108,11 +103,11 @@ class RepoActivity : AppCompatActivity(), RepoListContract.View {
     //tirar o override se nao for usar no presenter
     override fun setLoadingState(isLoading : Boolean){
         if(isLoading){
-            arProgressbar?.visibility = View.VISIBLE
-            arRecyclerViewRepositories?.visibility = View.GONE
+            repoProgressbar?.visibility = View.VISIBLE
+            repoRecyclerView?.visibility = View.GONE
         }else{
-            arProgressbar?.visibility = View.GONE
-            arRecyclerViewRepositories?.visibility = View.VISIBLE
+            repoProgressbar?.visibility = View.GONE
+            repoRecyclerView?.visibility = View.VISIBLE
         }
     }
 }

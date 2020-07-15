@@ -2,7 +2,6 @@ package com.bassul.mel.app.feature.repositoriesList.view.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -79,17 +78,17 @@ class RepositoryAdapter (private val context: Context, var items : MutableList<I
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
 
-        var name = itemView.lr_tx_repository_name!!
-        var description = itemView.lr_tx_repository_description!!
-        var avatarOwner = itemView.lr_im_avatar
-        var nameOwner = itemView.lr_tx_login
-        var stars = itemView.lr_tx_starts
-        var forks = itemView.lr_tx_forks
-        var progressBar = itemView.lr_progressbar
-        var starImage = itemView.lr_im_stars
-        var forkImage = itemView.lr_im_forks
-        val clickableView = itemView.lr_cardview_repository_item
-        val background = itemView.lr_background
+        var name = itemView.itemRepoTextViewName!!
+        var description = itemView.itemRepoTextViewDescription!!
+        var avatarOwner = itemView.itemRepoImageViewAvatar
+        var nameOwner = itemView.itemRepoTextViewOwnerName
+        var stars = itemView.itemRepoTextViewStars
+        var forks = itemView.itemRepoTextViewForks
+        var progressBar = itemView.itemRepoProgressbar
+        var starImage = itemView.itemRepoImageViewStars
+        var forkImage = itemView.itemRepoImageViewForks
+        val clickableView = itemView.itemRepoCardview
+        val background = itemView.itemRepoLayoutbackground
 
         fun changeVisibility(isLastItem : Boolean){
             if(isLastItem){

@@ -12,7 +12,7 @@ import com.bassul.mel.app.R
 import com.bassul.mel.app.domain.PullRequest
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_pull_request_item.view.*
-import kotlinx.android.synthetic.main.layout_pull_request_item.view.lpr_im_avatar
+import kotlinx.android.synthetic.main.layout_pull_request_item.view.itemPullReqImageViewAvatar
 
 class PullRequestAdapter (private val context: Context, var pr : MutableList<PullRequest>, private val itemClickListener: (PullRequest) -> Unit) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>(),
     AdapterPullRequestContract {
@@ -60,13 +60,13 @@ class PullRequestAdapter (private val context: Context, var pr : MutableList<Pul
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
 
-        var name = itemView.lpr_tx_pull_request_title!!
-        var body = itemView.lpr_tx_pull_request_body!!
-        var avatarOwner = itemView.lpr_im_avatar
-        var nameOwner = itemView.lpr_tx_name_owner
-        var date = itemView.lpr_tx_date
-        var clickableView = itemView.lpr_cardview_pull_request_item
-        var background = itemView.lpr_background
+        var name = itemView.itemPullReqTextViewTitle!!
+        var body = itemView.itemPullReqTextViewBody!!
+        var avatarOwner = itemView.itemPullReqImageViewAvatar
+        var nameOwner = itemView.itemPullReqTextViewOwnerName
+        var date = itemView.itemPullReqTextViewDate
+        var clickableView = itemView.itemPullReqCardview
+        var background = itemView.itemPullReqBackground
     }
 
 }

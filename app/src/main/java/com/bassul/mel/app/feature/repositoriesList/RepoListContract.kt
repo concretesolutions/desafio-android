@@ -8,11 +8,10 @@ import com.bassul.mel.app.feature.repositoriesList.repository.model.Repositories
 interface RepoListContract{
 
     interface View{
-        fun initRepositoriesCard()
         fun showCard(repositories: ArrayList<Item>)
         fun showErrorCard(@StringRes errorMessage: Int)
-
         fun setLoadingState(isLoading: Boolean)
+        fun initRepositoriesCard(pages: Int)
     }
 
     interface Presenter{

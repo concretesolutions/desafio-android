@@ -8,7 +8,7 @@
     tools:context=".feature.repositoriesList.view.RepoActivity">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/arToolbar"
+            android:id="@+id/repoToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:elevation="4dp"
@@ -22,7 +22,7 @@
             />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/arRecyclerViewRepositories"
+            android:id="@+id/repoRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="10dp"
@@ -30,10 +30,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/arToolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/repoToolbar" />
 
         <ProgressBar
-            android:id="@+id/arProgressbar"
+            android:id="@+id/repoProgressbar"
             android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
