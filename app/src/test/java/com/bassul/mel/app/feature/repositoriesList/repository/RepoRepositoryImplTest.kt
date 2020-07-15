@@ -12,7 +12,7 @@ internal class RepoRepositoryImplTest {
     @Mock
     lateinit var githubAPI: GithubAPI
 
-    lateinit var repoRepository: RepoListContract.Repository
+    private lateinit var repoRepository: RepoListContract.Repository
 
     @Before
     fun setup(){

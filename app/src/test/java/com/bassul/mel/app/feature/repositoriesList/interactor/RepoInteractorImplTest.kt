@@ -20,7 +20,7 @@ internal class RepoInteractorImplTest {
     @Mock
     lateinit var repoPresenter: RepoListContract.Presenter
 
-    lateinit var repoInteractor: RepoListContract.Interactor
+    private lateinit var repoInteractor: RepoListContract.Interactor
 
     @Captor
      var repositotyAllRepositoriesCallback = ArgumentCaptor.forClass(RepositotyAllRepositoriesCallback::class.java)
@@ -40,7 +40,7 @@ internal class RepoInteractorImplTest {
 
     @Test
     fun convertGithubRepositoriesListResponseToRepositoriesList(){
-       var repoListResponse =  repoInteractor.convertGithubRepositoriesListResponseToRepositoriesList(repositoriesListReponseMock())
+       val repoListResponse =  repoInteractor.convertGithubRepositoriesListResponseToRepositoriesList(repositoriesListReponseMock())
         Assert.assertEquals(repoListResponse, listItemMock())
     }
 

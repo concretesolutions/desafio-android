@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations
 
 internal class RepoPresenterImplTest {
 
-    lateinit var repoPresenter: RepoListContract.Presenter
+    private lateinit var repoPresenter: RepoListContract.Presenter
 
     @Mock
     lateinit var repoView: RepoListContract.View

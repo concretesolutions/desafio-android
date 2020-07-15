@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface GithubService {
 
     companion object {
-        val BASE_URL = "https://api.github.com/"
+        const val BASE_URL = "https://api.github.com/"
     }
 
     @GET("search/repositories?q=language:java&sort=stargazers_count")

@@ -17,10 +17,10 @@ internal class PullRequestRepositoryImplTest {
     @Mock
     lateinit var githubAPI: GithubAPI
 
-    lateinit var pullRequestRepository: PullRequestListContract.Repository
+    private lateinit var pullRequestRepository: PullRequestListContract.Repository
 
-    @Captor
-    lateinit var repositorySelectedRepositoriesCallback: ArgumentCaptor<RepositorySelectedRepositoriesCallback>
+//    @Captor
+  //  lateinit var repositorySelectedRepositoriesCallback: ArgumentCaptor<RepositorySelectedRepositoriesCallback>
 
 
     @Before

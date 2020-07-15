@@ -7,26 +7,26 @@ import com.bassul.mel.app.feature.pullRequestsList.repository.model.UserResponse
 class PullRequestMock {
     companion object{
         fun listPullRequestResponseMock() : List<PullRequestListResponse>{
-            var list : ArrayList<PullRequestListResponse> = ArrayList()
+            val list : ArrayList<PullRequestListResponse> = ArrayList()
             list.add(pullRequestResponseMock())
             return list
         }
 
-        fun pullRequestResponseMock(): PullRequestListResponse {
+        private fun pullRequestResponseMock(): PullRequestListResponse {
             return PullRequestListResponse("url","update", "body", userMock())
         }
 
         fun pullRequestListMock() : ArrayList<PullRequest>{
-            var list : ArrayList<PullRequest> = ArrayList()
+            val list : ArrayList<PullRequest> = ArrayList()
             list.add(pullRequestMock())
             return list
         }
 
-        fun userMock() : UserResponse {
+        private fun userMock() : UserResponse {
             return UserResponse("login", "avatar")
         }
 
-        fun pullRequestMock() : PullRequest {
+        private fun pullRequestMock() : PullRequest {
             return PullRequest("url", "update", "body", userMock().login, userMock().avatar_url)
         }
 

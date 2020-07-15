@@ -15,14 +15,14 @@ import org.mockito.MockitoAnnotations
 
 internal class PullRequestInteractorImplTest{
 
-    lateinit var pullRequestInteractor: PullRequestListContract.Interactor
+    private lateinit var pullRequestInteractor: PullRequestListContract.Interactor
     @Mock
     lateinit var pullRequestPresenter: PullRequestListContract.Presenter
     @Mock
     lateinit var pullRequestRepository: PullRequestListContract.Repository
 
-    @Captor
-    lateinit var repositorySelectedRepositoriesCallback: ArgumentCaptor<RepositorySelectedRepositoriesCallback>
+   // @Captor
+   // lateinit var repositorySelectedRepositoriesCallback: ArgumentCaptor<RepositorySelectedRepositoriesCallback>
 
     @Before
     fun setup(){
@@ -38,7 +38,7 @@ internal class PullRequestInteractorImplTest{
 
     @Test
     fun convertPullRequestListResponseToPullResponse(){
-       var arrayListPullRequest =  pullRequestInteractor.convertPullRequestListResponseToPullResponse(listPullRequestResponseMock())
+       val arrayListPullRequest =  pullRequestInteractor.convertPullRequestListResponseToPullResponse(listPullRequestResponseMock())
         Assert.assertEquals(arrayListPullRequest, pullRequestListMock())
 
     }

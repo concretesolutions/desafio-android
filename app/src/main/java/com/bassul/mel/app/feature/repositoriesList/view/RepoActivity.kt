@@ -75,9 +75,7 @@ class RepoActivity : AppCompatActivity(), RepoListContract.View {
 
     override fun showCard(repositories: ArrayList<Item>) {
         hideLoading()
-        adapter?.let {
-            it.addItems(repositories)
-        }
+        adapter?.addItems(repositories)
     }
 
     override fun showErrorRepoList(errorMessage: Int) {

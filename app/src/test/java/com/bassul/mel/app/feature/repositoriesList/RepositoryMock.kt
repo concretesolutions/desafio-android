@@ -8,16 +8,16 @@ import com.bassul.mel.app.feature.repositoriesList.repository.model.Repositories
 class RepositoryMock {
     companion object{
         fun listItemMock() : ArrayList<Item>{
-            var list: ArrayList<Item> = ArrayList()
+            val list: ArrayList<Item> = ArrayList()
             list.add(itemMock())
             return list
         }
 
-        fun itemMock() : Item {
+        private fun itemMock() : Item {
             return Item(1, "Name", ownerMock(), "300", "200", "description", "url")
         }
 
-        fun ownerMock() : Owner {
+        private fun ownerMock() : Owner {
             return Owner("logn", 2, "url")
         }
 
@@ -25,8 +25,8 @@ class RepositoryMock {
             return 2
         }
 
-        fun listResponseMock() : ArrayList<ItemResponse>{
-            var list : ArrayList<ItemResponse> = ArrayList()
+        private fun listResponseMock() : ArrayList<ItemResponse>{
+            val list : ArrayList<ItemResponse> = ArrayList()
             list.add(itemResponseMock())
             return list
 
@@ -36,7 +36,7 @@ class RepositoryMock {
             return RepositoriesListResponse(23, false, listResponseMock(), "message")
         }
 
-        fun itemResponseMock() : ItemResponse{
+        private fun itemResponseMock() : ItemResponse{
             return ItemResponse(1, "Name", ownerMock(), "300", "200", "description", "url")
         }
     }

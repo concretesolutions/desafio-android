@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations
 
 internal class PullRequestPresenterImplTest {
 
-    lateinit var pullRequestPresenter: PullRequestListContract.Presenter
+    private lateinit var pullRequestPresenter: PullRequestListContract.Presenter
 
     @Mock
     lateinit var pullRequestView: PullRequestListContract.View

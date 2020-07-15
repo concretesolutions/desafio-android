@@ -96,9 +96,9 @@ class RepositoryAdapter(
         val nameOwner = itemView.itemRepoTextViewOwnerName
         val stars = itemView.itemRepoTextViewStars
         val forks = itemView.itemRepoTextViewForks
-        val progressBar = itemView.itemRepoProgressbar
-        val starImage = itemView.itemRepoImageViewStars
-        val forkImage = itemView.itemRepoImageViewForks
+        private val progressBar = itemView.itemRepoProgressbar
+        private val starImage = itemView.itemRepoImageViewStars
+        private val forkImage = itemView.itemRepoImageViewForks
         val clickableView = itemView.itemRepoCardview
         val background = itemView.itemRepoLayoutbackground
 

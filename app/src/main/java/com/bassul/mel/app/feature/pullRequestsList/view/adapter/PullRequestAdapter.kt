@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.layout_pull_request_item.view.*
 
 class PullRequestAdapter(
     private val context: Context,
-    var pr: MutableList<PullRequest>,
+    private var pr: MutableList<PullRequest>,
     private val itemClickListener: (PullRequest) -> Unit
 ) : RecyclerView.Adapter<PullRequestAdapter.ViewHolder>(),
     AdapterPullRequestContract {
