@@ -58,27 +58,28 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/itemRepoImageViewStars"
                 style="@style/StarForkImageTheme"
                 android:layout_marginTop="8dp"
-
+                android:layout_marginEnd="12dp"
+                android:contentDescription="@string/cd_star_image"
                 android:src="@drawable/star_50"
                 app:layout_constraintBottom_toBottomOf="@+id/itemRepoTextViewStars"
                 app:layout_constraintEnd_toStartOf="@+id/itemRepoTextViewStars"
                 app:layout_constraintTop_toTopOf="@+id/itemRepoTextViewStars"
                 app:layout_constraintVertical_bias="1.0"
                 tools:ignore="MissingConstraints"
-                tools:srcCompat="@tools:sample/avatars"
-                android:contentDescription="@string/cd_star_image" />
+                tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
                 android:id="@+id/itemRepoImageViewForks"
                 style="@style/StarForkImageTheme"
+                android:contentDescription="@string/cd_fork_image"
                 android:src="@drawable/fork_50"
                 app:layout_constraintBottom_toBottomOf="@+id/itemRepoTextViewForks"
                 app:layout_constraintEnd_toEndOf="@+id/itemRepoImageViewStars"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/itemRepoImageViewStars"
                 app:layout_constraintTop_toTopOf="@+id/itemRepoTextViewForks"
                 app:layout_constraintVertical_bias="0.0"
-                tools:srcCompat="@tools:sample/avatars"
-                android:contentDescription="@string/cd_fork_image" />
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/itemRepoTextViewName"
