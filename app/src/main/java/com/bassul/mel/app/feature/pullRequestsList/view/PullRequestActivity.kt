@@ -40,7 +40,10 @@ class PullRequestActivity : AppCompatActivity(), PullRequestListContract.View {
 
         setSupportActionBar(findViewById(R.id.aprToolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
+    override fun onResume() {
+        super.onResume()
         initLoadingPullRequestData()
     }
 

@@ -69,7 +69,6 @@ class RepoActivity : AppCompatActivity(), RepoListContract.View {
     }
 
     override fun initRepositoriesCard(pages: Int) {
-       // showLoading()
         interactor.loadRepositories(pages)
     }
 
