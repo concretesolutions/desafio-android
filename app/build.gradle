@@ -14,10 +14,6 @@ android {
         versionName version_name
     }
 
-    buildFeatures {
-        viewBinding = true
-    }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -28,22 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    // Uncategorized
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.core:core-ktx:$core_ktx_version"
-    implementation "androidx.legacy:legacy-support-v4:$androidx_legacy_support_version"
 
-    // App Compat
-    implementation "androidx.appcompat:appcompat:$app_compat_version"
-
-    // Constraint Layout
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-
-    // RecyclerView
-    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
-
-    // CardView
-    implementation "androidx.cardview:cardview:$card_view_version"
-
-    implementation "de.hdodenhof:circleimageview:$circle_image_view_version"
+    implementation project (':shared-components')
+    implementation project (':repocatalog')
 }

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GithubRepos</string>
+
+    // Common Item List
+    <string name="mock_full_name_item_list">Eric T. Cartman</string>
+    <string name="mock_username_item_list">Cartman</string>
+
+    // Repository Item List
+    <string name="mock_star_count_list_item">32767</string>
+    <string name="mock_branch_count_item_list">112535</string>
+    <string name="content_description_branch_icon">Slingshot Branch icon</string>
+    <string name="content_description_star_icon">Star icon</string>
+    <string name="mock_lorem_ipsum">Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</string>
+    <string name="mock_item_name_list_item">Colored Notes CSS</string>
+</resources>

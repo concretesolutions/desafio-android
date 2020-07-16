@@ -1,2 +1,4 @@
+include ':repocatalog'
+include ':shared-components'
 include ':app'
 rootProject.name = "GithubRepos"
