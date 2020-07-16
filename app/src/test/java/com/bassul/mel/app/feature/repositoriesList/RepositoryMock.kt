@@ -25,19 +25,18 @@ class RepositoryMock {
             return 2
         }
 
-        private fun listResponseMock() : ArrayList<ItemResponse>{
+  /*      private fun listResponseMock() : ArrayList<ItemResponse>{
             val list : ArrayList<ItemResponse> = ArrayList()
             list.add(itemResponseMock())
             return list
+        }*/
 
-        }
-
-        fun repositoriesListReponseMock() : RepositoriesListResponse {
+        /*fun repositoriesListReponseMock() : RepositoriesListResponse {
             return RepositoriesListResponse(23, false, listResponseMock(), "message")
-        }
+        }*/
 
-        private fun itemResponseMock() : ItemResponse{
+  /*      private fun itemResponseMock() : ItemResponse{
             return ItemResponse(1, "Name", ownerMock(), "300", "200", "description", "url")
-        }
+        }*/
     }
 }
