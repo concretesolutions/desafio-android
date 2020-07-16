@@ -14,6 +14,10 @@ android {
         versionName version_name
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -34,4 +38,12 @@ dependencies {
 
     // Constraint Layout
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+
+    // CardView
+    implementation "androidx.cardview:cardview:$card_view_version"
+
+    implementation "de.hdodenhof:circleimageview:$circle_image_view_version"
 }

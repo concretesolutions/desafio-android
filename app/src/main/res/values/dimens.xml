@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // Material Design
+    <dimen name="material_margin_4dp">4dp</dimen>
+    <dimen name="material_margin_8dp">8dp</dimen>
+    <dimen name="material_margin_16dp">16dp</dimen>
+
+    // List item
+    <dimen name="recycler_card_view_height_list_item">145dp</dimen>
+    <dimen name="colored_view_width_list_item">5dp</dimen>
+    <dimen name="branch_icon_width_list_item">24dp</dimen>
+    <dimen name="branch_icon_height_list_item">24dp</dimen>
+    <dimen name="star_icon_width_list_item">24dp</dimen>
+    <dimen name="star_icon_height_list_item">24dp</dimen>
+    <dimen name="repository_owner_container_width_list_item">130dp</dimen>
+    <dimen name="repository_owner_container_height_list_item">145dp</dimen>
+    <dimen name="owner_avatar_width_list_item">78dp</dimen>
+    <dimen name="owner_avatar_height_list_item">78dp</dimen>
+</resources>

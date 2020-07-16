@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="color_primary">#343438</color>
+    <color name="color_primary_dark">#343438</color>
+    <color name="color_accent">#df9408</color>
+
+    <color name="list_item_title_text_color">#F000</color>
+    <color name="list_item_default_text_color">#F000</color>
+    <color name="default_card_background_color">#FFF</color>
 </resources>
