@@ -6,7 +6,6 @@ import com.bassul.mel.app.feature.pullRequestsList.PullRequestListContract
 class PullRequestPresenterImpl(val view: PullRequestListContract.View) :
     PullRequestListContract.Presenter {
 
-
     override fun openListPullRequest(pullRequest: ArrayList<PullRequest>) =
         if (pullRequest.isEmpty()) {
             view.showTextEmptyList()
@@ -14,8 +13,8 @@ class PullRequestPresenterImpl(val view: PullRequestListContract.View) :
             view.showPullRequestList(pullRequest)
         }
 
-    override fun errorShowPullRequestCard(errorPullRequest: Int) {
-        return view.showErrorPullRequestList(errorPullRequest)
+    override fun errorShowPullRequest(errorPullRequest: Int) {
+        view.showErrorPullRequestList(errorPullRequest)
     }
 
 }

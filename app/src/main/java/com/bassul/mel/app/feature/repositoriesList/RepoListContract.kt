@@ -16,7 +16,6 @@ interface RepoListContract {
     interface Presenter {
         fun showCard(ItemModel: ArrayList<Item>)
         fun errorShowCard(@StringRes errorMessage: Int)
-
     }
 
     interface Interactor {
@@ -25,6 +24,5 @@ interface RepoListContract {
 
     interface Repository {
         fun readRepositoryJson(pages: Int, callback: RepositotyAllRepositoriesCallback)
-
     }
 }

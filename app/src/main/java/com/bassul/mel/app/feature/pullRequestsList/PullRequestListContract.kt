@@ -1,7 +1,7 @@
 package com.bassul.mel.app.feature.pullRequestsList
 
 import androidx.annotation.StringRes
-import com.bassul.mel.app.callback.RepositorySelectedRepositoriesCallback
+import com.bassul.mel.app.callback.RepositorySelectedRepositoryCallback
 import com.bassul.mel.app.domain.PullRequest
 
 interface PullRequestListContract {
@@ -14,7 +14,7 @@ interface PullRequestListContract {
 
     interface Presenter {
         fun openListPullRequest(pullRequest: ArrayList<PullRequest>)
-        fun errorShowPullRequestCard(@StringRes errorPullRequest: Int)
+        fun errorShowPullRequest(@StringRes errorPullRequest: Int)
     }
 
     interface Interactor {
@@ -25,7 +25,7 @@ interface PullRequestListContract {
         fun readPullRequestJson(
             login: String,
             nameRepository: String,
-            callback: RepositorySelectedRepositoriesCallback?
+            callback: RepositorySelectedRepositoryCallback?
         )
     }
 }

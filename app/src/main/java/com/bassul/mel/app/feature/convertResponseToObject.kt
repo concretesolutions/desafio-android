@@ -10,6 +10,7 @@ class convertResponseToObject {
     companion object {
         fun convertPullRequestListResponseToPullResponse(pullRequestList: List<PullRequestListResponse>): ArrayList<PullRequest> {
             val pullRequests: ArrayList<PullRequest> = arrayListOf()
+
             pullRequestList.forEach {
                 val pr = PullRequest(
                     it.html_url,

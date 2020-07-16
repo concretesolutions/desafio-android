@@ -1,6 +1,6 @@
 package com.bassul.mel.app.feature.pullRequestsList.repository
 
-import com.bassul.mel.app.callback.RepositorySelectedRepositoriesCallback
+import com.bassul.mel.app.callback.RepositorySelectedRepositoryCallback
 import com.bassul.mel.app.endpoint.GithubAPI
 import com.bassul.mel.app.feature.pullRequestsList.PullRequestListContract
 import com.bassul.mel.app.feature.pullRequestsList.repository.model.PullRequestListResponse
@@ -13,7 +13,7 @@ class PullRequestRepositoryImpl(private val githubAPI: GithubAPI) :
     override fun readPullRequestJson(
         login: String,
         repositoryName: String,
-        callback: RepositorySelectedRepositoriesCallback?
+        callback: RepositorySelectedRepositoryCallback?
     ) {
         githubAPI.fetchPullRequestData(login, repositoryName)
             .enqueue(object : retrofit2.Callback<List<PullRequestListResponse>> {

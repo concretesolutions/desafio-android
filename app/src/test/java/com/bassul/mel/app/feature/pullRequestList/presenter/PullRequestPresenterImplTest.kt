@@ -32,7 +32,7 @@ internal class PullRequestPresenterImplTest {
 
     @Test
     fun errorShowPullRequestCard() {
-        pullRequestPresenter.errorShowPullRequestCard(errorMessagePullRequestMock())
+        pullRequestPresenter.errorShowPullRequest(errorMessagePullRequestMock())
         verify(pullRequestView).showErrorPullRequestList(errorMessagePullRequestMock())
     }
 }

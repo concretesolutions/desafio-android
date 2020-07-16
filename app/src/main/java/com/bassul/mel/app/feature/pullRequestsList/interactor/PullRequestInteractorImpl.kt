@@ -1,7 +1,7 @@
 package com.bassul.mel.app.feature.pullRequestsList.interactor
 
 import com.bassul.mel.app.R
-import com.bassul.mel.app.callback.RepositorySelectedRepositoriesCallback
+import com.bassul.mel.app.callback.RepositorySelectedRepositoryCallback
 import com.bassul.mel.app.feature.convertResponseToObject.Companion.convertPullRequestListResponseToPullResponse
 import com.bassul.mel.app.feature.pullRequestsList.PullRequestListContract
 import com.bassul.mel.app.feature.pullRequestsList.repository.model.PullRequestListResponse
@@ -15,7 +15,7 @@ class PullRequestInteractorImpl(
         repository.readPullRequestJson(
             login,
             nameRepository,
-            object : RepositorySelectedRepositoriesCallback {
+            object : RepositorySelectedRepositoryCallback {
                 override fun onSuccess(pullRequestList: List<PullRequestListResponse>) {
                     presenter.openListPullRequest(
                         convertPullRequestListResponseToPullResponse(
@@ -24,12 +24,10 @@ class PullRequestInteractorImpl(
                     )
                 }
 
-                override fun onError(s: String) {
-                    presenter.errorShowPullRequestCard(R.string.error_pull_request)
+                override fun onError(errorMessage: String) {
+                    presenter.errorShowPullRequest(R.string.error_pull_request)
                 }
             })
     }
-
-
 
 }

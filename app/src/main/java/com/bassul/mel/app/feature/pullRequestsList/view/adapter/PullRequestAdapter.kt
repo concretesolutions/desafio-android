@@ -38,7 +38,6 @@ class PullRequestAdapter(
             nameOwner.text = pullRequest.userName
             Picasso.get().load(pullRequest.userAvatar).into(holder.avatarOwner)
             date.text = pullRequest.updated_at
-
         }
 
         setTouchListener(holder)
@@ -74,7 +73,6 @@ class PullRequestAdapter(
     override fun getItemCount(): Int = pr.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         var name = itemView.itemPullReqTextViewTitle!!
         var body = itemView.itemPullReqTextViewBody!!
         var avatarOwner = itemView.itemPullReqImageViewAvatar

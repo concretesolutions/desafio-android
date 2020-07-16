@@ -20,9 +20,11 @@ class RepositoryAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     AdapterRepoContract {
 
-    private val TYPE_LOADING = 0
-    private val TYPE_ITEM = 1
-
+    companion object{
+        private const val TYPE_LOADING = 0
+        private const val TYPE_ITEM = 1
+    }
+    
     override fun onCreateViewHolder (
         parent: ViewGroup,
         viewType: Int
