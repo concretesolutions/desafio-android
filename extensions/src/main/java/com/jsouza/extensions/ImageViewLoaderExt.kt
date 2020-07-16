@@ -2,6 +2,7 @@ package com.jsouza.extensions
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.DataSource
@@ -31,6 +32,7 @@ private fun setupGlide(
     return Glide.with(imageView)
         .`as`(Drawable::class.java)
         .override(IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT)
+        .transition(GenericTransitionOptions.with(R.anim.fade_in))
         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
         .listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(
