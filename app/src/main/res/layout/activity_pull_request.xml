@@ -9,10 +9,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/aprToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            android:elevation="4dp"
+            style="@style/ToolbarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -23,9 +20,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/aprRecyclerViewPullRequest"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
+            style="@style/RecyclerViewTheme"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,9 +29,7 @@
 
         <ProgressBar
             android:id="@+id/aprProgressbar"
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            style="@style/ProgressbarActivityTheme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,11 +37,8 @@
 
         <TextView
             android:id="@+id/aprTvEmptyList"
+            style="@style/MessageActivityTheme"
             android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:textSize="16sp"
             android:text="@string/empty_pull_request"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
