@@ -1,4 +1,4 @@
-package com.bassul.mel.app.feature.repositoriesList
+package com.bassul.mel.app.feature.pullRequestList.presenter
 
 
 import com.bassul.mel.app.feature.pullRequestsList.PullRequestListContract

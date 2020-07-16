@@ -1,8 +1,8 @@
-package com.bassul.mel.app.feature.repositoriesList
+package com.bassul.mel.app.feature.repositoriesList.presenter
 
+import com.bassul.mel.app.feature.repositoriesList.RepoListContract
 import com.bassul.mel.app.feature.repositoriesList.RepositoryMock.Companion.errorMessageRepositoryMock
 import com.bassul.mel.app.feature.repositoriesList.RepositoryMock.Companion.listItemMock
-import com.bassul.mel.app.feature.repositoriesList.presenter.RepoPresenterImpl
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock

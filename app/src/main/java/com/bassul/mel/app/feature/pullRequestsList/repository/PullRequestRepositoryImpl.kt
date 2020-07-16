@@ -13,7 +13,7 @@ class PullRequestRepositoryImpl(private val githubAPI: GithubAPI) :
     override fun readPullRequestJson(
         login: String,
         repositoryName: String,
-        callback: RepositorySelectedRepositoriesCallback
+        callback: RepositorySelectedRepositoriesCallback?
     ) {
         githubAPI.fetchPullRequestData(login, repositoryName)
             .enqueue(object : retrofit2.Callback<List<PullRequestListResponse>> {
@@ -22,12 +22,12 @@ class PullRequestRepositoryImpl(private val githubAPI: GithubAPI) :
                     response: Response<List<PullRequestListResponse>>
                 ) {
                     response.body()?.let {
-                        callback.onSuccess(it)
+                        callback?.onSuccess(it)
                     }
                 }
 
                 override fun onFailure(call: Call<List<PullRequestListResponse>>, t: Throwable) {
-                    callback.onError(t.localizedMessage)
+                    callback?.onError(t.localizedMessage)
                 }
             })
     }

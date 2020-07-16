@@ -25,7 +25,7 @@ interface PullRequestListContract {
         fun readPullRequestJson(
             login: String,
             nameRepository: String,
-            callback: RepositorySelectedRepositoriesCallback
+            callback: RepositorySelectedRepositoriesCallback?
         )
     }
 }
