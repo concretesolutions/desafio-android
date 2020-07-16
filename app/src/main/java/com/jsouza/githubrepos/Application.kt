@@ -1,6 +1,8 @@
 package com.jsouza.githubrepos
 
 import android.app.Application
+import com.jsouza.repocatalog.di.repositoryCatalogModule
+import com.jsouza.shared_components.di.sharedModule
 import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.logger.AndroidLogger
@@ -17,7 +19,10 @@ class Application : Application() {
             androidContext(this@Application)
             logger(koinLogger())
             modules(
-                modules = listOf()
+                modules = listOf(
+                    sharedModule,
+                    repositoryCatalogModule
+                )
             )
         }
     }

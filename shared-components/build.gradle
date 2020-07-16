@@ -27,6 +27,8 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
+    api project (':extensions')
+
     // Uncategorized
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api "androidx.core:core-ktx:$core_ktx_version"
@@ -41,4 +43,35 @@ dependencies {
     // Koin
     api "org.koin:koin-android:$koin_version"
     api "org.koin:koin-android-viewmodel:$koin_version"
+
+    // Retrofit
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+
+    // Moshi Converter
+    api "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+
+    // Moshi
+    api "com.squareup.moshi:moshi:$moshi_version"
+    api "com.squareup.moshi:moshi-kotlin:$moshi_version"
+
+    // Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit_coroutines_adapter_version"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // ViewModel
+    api "android.arch.lifecycle:extensions:$view_model_version"
+
+    // Logging Interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+
+    // RecyclerView
+    api "androidx.recyclerview:recyclerview:$recyclerview_version"
+
+    // CardView
+    api "androidx.cardview:cardview:$card_view_version"
+
+    // Circular Image View
+    api "de.hdodenhof:circleimageview:$circle_image_view_version"
 }

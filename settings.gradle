@@ -1,3 +1,4 @@
+include ':extensions'
 include ':repocatalog'
 include ':shared-components'
 include ':app'

@@ -1,23 +1,25 @@
-package com.jsouza.githubrepos.presentation
+package com.jsouza.repocatalog.presentation
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.jsouza.extensions.loadImageUrl
 import com.jsouza.githubrepos.R
 import com.jsouza.githubrepos.databinding.RepositoryListItemBinding
-import com.jsouza.githubrepos.presentation.model.Repository
+import com.jsouza.repocatalog.data.repocatalog.remote.response.Repository
 
 class RepositoryCatalogAdapter : RecyclerView.Adapter<RepositoryCatalogAdapter.ViewHolder>() {
 
-    private val repositories = mutableListOf<Repository>(
-        Repository("CS Notes", "Lorem ipsum sit dolor amer", "The BoB", "Uncle Bob"),
-        Repository("Butter Knife", "Lorem ipsum sit dolor amer", "jake wharton", "mr jake"),
-        Repository("CS Notes", "Lorem ipsum sit dolor amer", "jsouza987", " repository"),
-        Repository("Butter Knife", "Lorem ipsum sit dolor amer", "G0ll1m", "Smeagol"),
-        Repository("CS Notes", "Lorem ipsum sit dolor amer", "Spider Pig", "homer simpson"),
-        Repository("Butter Knife", "Lorem ipsum sit dolor amer", "jsouza678", "repository name")
-    )
+    private val repositories = mutableListOf<Repository>()
+
+    fun submitList(newData: List<Repository>) {
+        if (repositories.isNotEmpty()) {
+            repositories.clear()
+        }
+        repositories.addAll(newData)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater
@@ -41,10 +43,11 @@ class RepositoryCatalogAdapter : RecyclerView.Adapter<RepositoryCatalogAdapter.V
         val binding = RepositoryListItemBinding.bind(itemView)
 
         fun itemBind(repository: Repository) {
-            binding.repositoryNameTextViewListItem.text = repository.repoName
+            binding.repositoryNameTextViewListItem.text = repository.name
             binding.repositoryDescriptionTextViewListItem.text = repository.description
-            binding.usernameTextViewListItem.text = repository.userName
+            binding.usernameTextViewListItem.text = repository.owner?.login
             binding.fullNameTextViewListItem.text = repository.fullName
+            binding.ownerAvatarCircularImageViewListItem.loadImageUrl(repository.owner?.avatarUrl)
         }
     }
 }

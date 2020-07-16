@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jsouza.githubrepos">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,7 @@
         android:name="com.jsouza.githubrepos.Application"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
-        <activity android:name="com.jsouza.githubrepos.presentation.RepositoryCatalogActivity">
+        <activity android:name="com.jsouza.repocatalog.presentation.RepositoryCatalogActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
