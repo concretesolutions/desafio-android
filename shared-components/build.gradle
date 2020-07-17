@@ -74,4 +74,10 @@ dependencies {
 
     // Circular Image View
     api "de.hdodenhof:circleimageview:$circle_image_view_version"
+
+    // Paging
+    api "androidx.paging:paging-runtime:$paging_version"
+
+    //Paging
+    implementation "androidx.paging:paging-runtime-ktx:$paging_ktx_version"
 }

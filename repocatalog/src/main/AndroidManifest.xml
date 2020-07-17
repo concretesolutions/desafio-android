@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jsouza.githubrepos">
+    package="com.jsouza.repocatalog">
 
     <application>
-        <activity android:name="com.jsouza.repocatalog.presentation.RepositoryCatalogActivity"/>
+        <activity android:name="com.jsouza.repocatalog.presentation.RepoCatalogActivity"/>
     </application>
 
 </manifest>

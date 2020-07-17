@@ -1,34 +1,36 @@
 package com.jsouza.repocatalog.di
 
-import com.jsouza.repocatalog.data.repocatalog.CatalogRepositoryImpl
+import com.jsouza.repocatalog.data.repocatalog.paging.local.RepoRepositoryImpl
 import com.jsouza.repocatalog.data.repocatalog.remote.RepositoryCatalogService
-import com.jsouza.repocatalog.domain.repository.CatalogRepository
-import com.jsouza.repocatalog.domain.usecase.FetchRepositoriesFromApi
-import com.jsouza.repocatalog.presentation.RepositoryCatalogViewModel
+import com.jsouza.repocatalog.domain.repository.RepoRepository
+import com.jsouza.repocatalog.domain.usecase.FetchReposFromApi
+import com.jsouza.repocatalog.presentation.RepoCatalogViewModel
 import com.jsouza.shared_components.di.SHARED_RETROFIT
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
+@ExperimentalCoroutinesApi
 val repositoryCatalogModule = module {
 
     viewModel {
-        RepositoryCatalogViewModel(
-            get<FetchRepositoriesFromApi>()
+        RepoCatalogViewModel(
+            get<FetchReposFromApi>()
         )
     }
 
     single {
-        FetchRepositoriesFromApi(
-            get<CatalogRepository>()
-        )
+        RepoRepositoryImpl(
+            get<RepositoryCatalogService>()
+        ) as RepoRepository
     }
 
-    factory {
-        CatalogRepositoryImpl(
-            repositoryCatalogService = get<RepositoryCatalogService>()
-        ) as CatalogRepository
+    single {
+        FetchReposFromApi(
+            get<RepoRepository>()
+        )
     }
 
     single {

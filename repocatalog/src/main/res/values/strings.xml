@@ -12,4 +12,6 @@
     <string name="content_description_star_icon">Star icon</string>
     <string name="mock_lorem_ipsum">Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</string>
     <string name="mock_item_name_list_item">Colored Notes CSS</string>
+    <string name="retry_network_call_list_item">Retry</string>
+    <string name="mock_timeout_list_item">Timeout</string>
 </resources>
