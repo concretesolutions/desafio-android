@@ -7,12 +7,12 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jsouza.extensions.loadImageUrl
 import com.jsouza.repocatalog.R
-import com.jsouza.repocatalog.data.repocatalog.remote.response.Repository
+import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
+import com.jsouza.repocatalog.data.local.utils.RepoTypeConverter
 import com.jsouza.repocatalog.databinding.RepositoryListItemBinding
 import com.jsouza.repocatalog.utils.DiffUtilCallback
 
-class RepoCatalogAdapter() : PagingDataAdapter<Repository,
-        RepoCatalogAdapter.ViewHolder>(DiffUtilCallback()) {
+class RepoCatalogAdapter() : PagingDataAdapter<RepositoryEntity, RepoCatalogAdapter.ViewHolder>(DiffUtilCallback()) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -33,7 +33,7 @@ class RepoCatalogAdapter() : PagingDataAdapter<Repository,
     ) {
         val repoItem = getItem(position)
         if (repoItem != null) {
-            (holder).itemBind(repoItem)
+            holder.itemBind(repoItem)
         }
     }
 
@@ -42,14 +42,14 @@ class RepoCatalogAdapter() : PagingDataAdapter<Repository,
     ) : RecyclerView.ViewHolder(itemView) {
         private val binding = RepositoryListItemBinding.bind(itemView)
 
-        fun itemBind(repository: Repository) {
+        fun itemBind(repository: RepositoryEntity) {
             binding.repositoryNameTextViewListItem.text = repository.name
             binding.repositoryDescriptionTextViewListItem.text = repository.description
-            binding.usernameTextViewListItem.text = repository.owner?.login
+            val owner = RepoTypeConverter.toOwner(repository.owner)
+            binding.usernameTextViewListItem.text = owner?.login
             binding.fullNameTextViewListItem.text = repository.fullName
             binding.ownerAvatarCircularImageViewListItem
-                .loadImageUrl(repository
-                    .owner
+                .loadImageUrl(owner
                     ?.avatarUrl)
         }
     }

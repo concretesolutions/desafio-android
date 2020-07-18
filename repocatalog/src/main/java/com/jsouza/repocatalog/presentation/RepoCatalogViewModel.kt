@@ -4,18 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.jsouza.repocatalog.data.repocatalog.remote.response.Repository
-import com.jsouza.repocatalog.domain.usecase.FetchReposFromApi
+import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
+import com.jsouza.repocatalog.domain.usecase.RefreshPaginatedData
 import kotlinx.coroutines.flow.Flow
 
 class RepoCatalogViewModel(
-    private val fetchReposFromApi: FetchReposFromApi
+    private val fetchReposFromApi: RefreshPaginatedData
 ) : ViewModel() {
+    private var currentSearchResult: Flow<PagingData<RepositoryEntity>>? = null
 
-    private var currentSearchResult: Flow<PagingData<Repository>>? = null
-
-    fun searchRepo(): Flow<PagingData<Repository>> {
-        val newResult: Flow<PagingData<Repository>> = fetchReposFromApi()
+    fun searchRepo(): Flow<PagingData<RepositoryEntity>> {
+        val newResult = fetchReposFromApi()
             .cachedIn(viewModelScope)
         currentSearchResult = newResult
         return newResult

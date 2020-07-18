@@ -22,7 +22,7 @@ buildscript {
         kotlin_coroutines_version = "1.1.0"
         ktlint_version = '0.35.0'
         androidx_legacy_support_version = "1.0.0"
-        recyclerview_version = "1.1.0"
+        recyclerview_version = "1.2.0-alpha03"
         retrofit_coroutines_adapter_version = "0.9.2"
         retrofit_version = "2.9.0"
         circle_image_view_version = "3.0.0"
@@ -30,6 +30,8 @@ buildscript {
         lifecycle_version = "2.2.0"
         koin_version = "2.0.1"
         moshi_version = "1.8.0"
+        gson_version = "2.8.6"
+        room_version = "2.3.0-alpha01"
         paging_ktx_version = "3.0.0-alpha02"
         view_model_version = "1.1.1"
         paging_version = "2.1.2"

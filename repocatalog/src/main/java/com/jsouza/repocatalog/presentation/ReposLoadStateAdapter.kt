@@ -25,7 +25,9 @@ class ReposLoadStateAdapter(
         loadState: LoadState
     ): LoadStateViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.repos_load_container_item, parent, false)
+            .inflate(R.layout.repos_load_container_item,
+                parent,
+                false)
         val binding = ReposLoadContainerItemBinding.bind(view)
         return LoadStateViewHolder(binding, retry)
     }
@@ -36,16 +38,18 @@ class ReposLoadStateAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.retryButton.setOnClickListener { retry.invoke() }
+            binding.retryButtonListItem.setOnClickListener {
+                retry.invoke()
+            }
         }
 
         fun bind(loadState: LoadState) {
             if (loadState is LoadState.Error) {
-                binding.errorMsg.text = loadState.error.localizedMessage
+                binding.errorMsgListItem.text = loadState.error.localizedMessage
             }
-            binding.progressBar.isVisible = loadState is LoadState.Loading
-            binding.retryButton.isVisible = loadState !is LoadState.Loading
-            binding.errorMsg.isVisible = loadState !is LoadState.Loading
+            binding.progressBarListItem.isVisible = loadState is LoadState.Loading
+            binding.retryButtonListItem.isVisible = loadState !is LoadState.Loading
+            binding.errorMsgListItem.isVisible = loadState !is LoadState.Loading
         }
     }
 }
