@@ -28,7 +28,8 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     api project (':extensions')
-
+    api project (':resource-components')
+    
     // Uncategorized
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api "androidx.core:core-ktx:$core_ktx_version"

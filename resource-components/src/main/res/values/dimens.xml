@@ -16,4 +16,8 @@
     <dimen name="repository_owner_container_height_list_item">145dp</dimen>
     <dimen name="owner_avatar_width_list_item">78dp</dimen>
     <dimen name="owner_avatar_height_list_item">78dp</dimen>
+
+    // Toolbar
+    <dimen name="github_logo_width_toolbar">170dp</dimen>
+    <dimen name="github_logo_height_toolbar">56dp</dimen>
 </resources>

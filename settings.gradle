@@ -1,3 +1,4 @@
+include ':resource-components'
 include ':extensions'
 include ':repocatalog'
 include ':shared-components'

@@ -11,8 +11,16 @@ import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
 import com.jsouza.repocatalog.data.local.utils.RepoTypeConverter
 import com.jsouza.repocatalog.databinding.RepositoryListItemBinding
 import com.jsouza.repocatalog.utils.DiffUtilCallback
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
-class RepoCatalogAdapter() : PagingDataAdapter<RepositoryEntity, RepoCatalogAdapter.ViewHolder>(DiffUtilCallback()) {
+class RepoCatalogAdapter : PagingDataAdapter<RepositoryEntity, RepoCatalogAdapter.ViewHolder>(DiffUtilCallback()) {
+
+    companion object {
+        private const val NUMBER_PATTERN = "#,###"
+        private const val COMMA_SEPARATOR = ","
+        private const val DOT_SEPARATOR = "."
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -42,12 +50,26 @@ class RepoCatalogAdapter() : PagingDataAdapter<RepositoryEntity, RepoCatalogAdap
     ) : RecyclerView.ViewHolder(itemView) {
         private val binding = RepositoryListItemBinding.bind(itemView)
 
+        var formatter: NumberFormat = DecimalFormat(NUMBER_PATTERN)
+
         fun itemBind(repository: RepositoryEntity) {
             binding.repositoryNameTextViewListItem.text = repository.name
             binding.repositoryDescriptionTextViewListItem.text = repository.description
+            binding.fullNameTextViewListItem.text = repository.fullName
+
             val owner = RepoTypeConverter.toOwner(repository.owner)
             binding.usernameTextViewListItem.text = owner?.login
-            binding.fullNameTextViewListItem.text = repository.fullName
+
+            val forksCountFormatted = formatter.format(
+                repository.forksCount
+            ).toString().replace(COMMA_SEPARATOR, DOT_SEPARATOR)
+            binding.repositoryBranchCountTextViewListItem.text = forksCountFormatted
+
+            val stargazersCountFormatted = formatter.format(
+                repository.stargazersCount
+            ).toString().replace(COMMA_SEPARATOR, DOT_SEPARATOR)
+            binding.repositoryStarCountTextViewListItem.text = stargazersCountFormatted
+
             binding.ownerAvatarCircularImageViewListItem
                 .loadImageUrl(owner
                     ?.avatarUrl)

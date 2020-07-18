@@ -40,15 +40,13 @@
             android:id="@+id/branch_image_view_list_item"
             android:layout_width="@dimen/branch_icon_width_list_item"
             android:layout_height="@dimen/branch_icon_height_list_item"
-            android:src="@drawable/ic_branch"
-            android:tint="@color/color_accent"
-            android:contentDescription="@string/content_description_branch_icon"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="@dimen/material_margin_8dp"
-            android:layout_marginTop="@dimen/material_margin_8dp"
-            android:layout_marginBottom="@dimen/material_margin_8dp"
-            app:layout_constraintStart_toEndOf="@id/repository_colored_view_list_item"
-            app:layout_constraintTop_toBottomOf="@id/repository_description_text_view_list_item"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:contentDescription="@string/content_description_branch_icon"
+            android:src="@drawable/ic_branch"
+            android:tint="@color/color_attributes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/repository_colored_view_list_item" />
 
         <TextView
             android:id="@+id/repository_branch_count_text_view_list_item"
@@ -63,10 +61,8 @@
             android:layout_width="@dimen/star_icon_width_list_item"
             android:layout_height="@dimen/star_icon_height_list_item"
             android:src="@drawable/ic_star"
-            android:tint="@color/color_accent"
+            android:tint="@color/color_attributes"
             android:layout_marginStart="@dimen/material_margin_8dp"
-            android:layout_marginTop="@dimen/material_margin_8dp"
-            android:layout_marginBottom="@dimen/material_margin_8dp"
             android:contentDescription="@string/content_description_star_icon"
             app:layout_constraintStart_toEndOf="@id/repository_branch_count_text_view_list_item"
             app:layout_constraintTop_toTopOf="@id/repository_branch_count_text_view_list_item"
