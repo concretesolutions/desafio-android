@@ -1,4 +1,4 @@
-package com.jsouza.repocatalog.presentation
+package com.jsouza.repocatalog.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

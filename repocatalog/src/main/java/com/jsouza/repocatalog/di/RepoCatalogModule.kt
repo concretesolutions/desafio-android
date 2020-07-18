@@ -7,8 +7,8 @@ import com.jsouza.repocatalog.data.repocatalog.local.RepoRepositoryImpl
 import com.jsouza.repocatalog.data.repocatalog.remote.RepoCatalogService
 import com.jsouza.repocatalog.domain.repository.RepoRepository
 import com.jsouza.repocatalog.domain.usecase.RefreshPaginatedData
-import com.jsouza.repocatalog.presentation.RepoCatalogAdapter
 import com.jsouza.repocatalog.presentation.RepoCatalogViewModel
+import com.jsouza.repocatalog.presentation.adapter.RepoCatalogAdapter
 import com.jsouza.shared_components.di.SHARED_RETROFIT
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.ext.koin.androidContext
@@ -34,7 +34,10 @@ val repositoryCatalogModule = module {
     factory {
         (startRepoDetail: (
             String?
-        ) -> Unit) -> RepoCatalogAdapter(startRepoDetail)
+        ) -> Unit) ->
+        RepoCatalogAdapter(
+            startRepoDetail
+        )
     }
 
     single {

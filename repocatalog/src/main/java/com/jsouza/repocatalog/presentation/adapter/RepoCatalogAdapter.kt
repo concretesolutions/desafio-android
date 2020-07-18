@@ -1,4 +1,4 @@
-package com.jsouza.repocatalog.presentation
+package com.jsouza.repocatalog.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -75,12 +75,18 @@ class RepoCatalogAdapter(
 
             val forksCountFormatted = formatter.format(
                 repo.forksCount
-            ).toString().replace(COMMA_SEPARATOR, DOT_SEPARATOR)
+            ).toString().replace(
+                COMMA_SEPARATOR,
+                DOT_SEPARATOR
+            )
             binding.repositoryBranchCountTextViewListItem.text = forksCountFormatted
 
             val stargazersCountFormatted = formatter.format(
                 repo.stargazersCount
-            ).toString().replace(COMMA_SEPARATOR, DOT_SEPARATOR)
+            ).toString().replace(
+                COMMA_SEPARATOR,
+                DOT_SEPARATOR
+            )
             binding.repositoryStarCountTextViewListItem.text = stargazersCountFormatted
 
             binding.ownerAvatarCircularImageViewListItem

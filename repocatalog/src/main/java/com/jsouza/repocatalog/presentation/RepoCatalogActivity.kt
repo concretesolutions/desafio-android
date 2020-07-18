@@ -7,7 +7,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.jsouza.repocatalog.databinding.ActivityCatalogRepositoryBinding
 import com.jsouza.repocatalog.domain.`typealias`.StartRepoDetail
-import com.jsouza.repocatalog.presentation.DetailActivity.Companion.REPO_DETAIL_NAME
+import com.jsouza.repocatalog.presentation.adapter.RepoCatalogAdapter
+import com.jsouza.repocatalog.presentation.adapter.ReposLoadStateAdapter
+import com.jsouza.repodetail.RepoDetailActivity
+import com.jsouza.repodetail.RepoDetailActivity.Companion.REPO_DETAIL_NAME
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -45,7 +48,7 @@ class RepoCatalogActivity : AppCompatActivity() {
     private fun startDetailActivity(
         name: String?
     ) {
-        val intent = Intent(this, DetailActivity::class.java)
+        val intent = Intent(this, RepoDetailActivity::class.java)
             .apply {
                 putExtra(REPO_DETAIL_NAME, name)
             }
