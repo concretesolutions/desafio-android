@@ -3,7 +3,8 @@
     package="com.jsouza.repocatalog">
 
     <application>
-        <activity android:name="com.jsouza.repocatalog.presentation.RepoCatalogActivity"/>
+        <activity android:name=".presentation.DetailActivity"></activity>
+        <activity android:name=".presentation.RepoCatalogActivity" />
     </application>
 
 </manifest>

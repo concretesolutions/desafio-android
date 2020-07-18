@@ -7,6 +7,7 @@ import com.jsouza.repocatalog.data.repocatalog.local.RepoRepositoryImpl
 import com.jsouza.repocatalog.data.repocatalog.remote.RepoCatalogService
 import com.jsouza.repocatalog.domain.repository.RepoRepository
 import com.jsouza.repocatalog.domain.usecase.RefreshPaginatedData
+import com.jsouza.repocatalog.presentation.RepoCatalogAdapter
 import com.jsouza.repocatalog.presentation.RepoCatalogViewModel
 import com.jsouza.shared_components.di.SHARED_RETROFIT
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,6 +29,12 @@ val repositoryCatalogModule = module {
         RepoCatalogViewModel(
             get<RefreshPaginatedData>()
         )
+    }
+
+    factory {
+        (startRepoDetail: (
+            String?
+        ) -> Unit) -> RepoCatalogAdapter(startRepoDetail)
     }
 
     single {

@@ -10,11 +10,14 @@ import com.jsouza.repocatalog.R
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
 import com.jsouza.repocatalog.data.local.utils.RepoTypeConverter
 import com.jsouza.repocatalog.databinding.RepositoryListItemBinding
+import com.jsouza.repocatalog.domain.`typealias`.StartRepoDetail
 import com.jsouza.repocatalog.utils.DiffUtilCallback
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
-class RepoCatalogAdapter : PagingDataAdapter<RepositoryEntity, RepoCatalogAdapter.ViewHolder>(DiffUtilCallback()) {
+class RepoCatalogAdapter(
+    private val startDetailActivity: StartRepoDetail
+) : PagingDataAdapter<RepositoryEntity, RepoCatalogAdapter.ViewHolder>(DiffUtilCallback()) {
 
     companion object {
         private const val NUMBER_PATTERN = "#,###"
@@ -49,24 +52,34 @@ class RepoCatalogAdapter : PagingDataAdapter<RepositoryEntity, RepoCatalogAdapte
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
         private val binding = RepositoryListItemBinding.bind(itemView)
+        private var repo: RepositoryEntity? = null
 
-        var formatter: NumberFormat = DecimalFormat(NUMBER_PATTERN)
+        init {
+            itemView.setOnClickListener {
+                startDetailActivity(
+                    repo?.name
+                )
+            }
+        }
 
-        fun itemBind(repository: RepositoryEntity) {
-            binding.repositoryNameTextViewListItem.text = repository.name
-            binding.repositoryDescriptionTextViewListItem.text = repository.description
-            binding.fullNameTextViewListItem.text = repository.fullName
+        private var formatter: NumberFormat = DecimalFormat(NUMBER_PATTERN)
 
-            val owner = RepoTypeConverter.toOwner(repository.owner)
+        fun itemBind(repo: RepositoryEntity) {
+            this.repo = repo
+            binding.repositoryNameTextViewListItem.text = repo.name
+            binding.repositoryDescriptionTextViewListItem.text = repo.description
+            binding.fullNameTextViewListItem.text = repo.fullName
+
+            val owner = RepoTypeConverter.toOwner(repo.owner)
             binding.usernameTextViewListItem.text = owner?.login
 
             val forksCountFormatted = formatter.format(
-                repository.forksCount
+                repo.forksCount
             ).toString().replace(COMMA_SEPARATOR, DOT_SEPARATOR)
             binding.repositoryBranchCountTextViewListItem.text = forksCountFormatted
 
             val stargazersCountFormatted = formatter.format(
-                repository.stargazersCount
+                repo.stargazersCount
             ).toString().replace(COMMA_SEPARATOR, DOT_SEPARATOR)
             binding.repositoryStarCountTextViewListItem.text = stargazersCountFormatted
 
