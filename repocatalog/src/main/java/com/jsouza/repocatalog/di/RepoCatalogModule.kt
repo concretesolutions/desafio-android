@@ -1,10 +1,10 @@
 package com.jsouza.repocatalog.di
 
 import androidx.room.Room
+import com.jsouza.repocatalog.data.RepoRepositoryImpl
 import com.jsouza.repocatalog.data.local.RepoDatabase
 import com.jsouza.repocatalog.data.local.dao.RepoDao
-import com.jsouza.repocatalog.data.repocatalog.local.RepoRepositoryImpl
-import com.jsouza.repocatalog.data.repocatalog.remote.RepoCatalogService
+import com.jsouza.repocatalog.data.remote.RepoCatalogService
 import com.jsouza.repocatalog.domain.repository.RepoRepository
 import com.jsouza.repocatalog.domain.usecase.RefreshPaginatedData
 import com.jsouza.repocatalog.presentation.RepoCatalogViewModel
@@ -32,9 +32,9 @@ val repositoryCatalogModule = module {
     }
 
     factory {
-        (startRepoDetail: (
-            String?
-        ) -> Unit) ->
+            (startRepoDetail: (
+                String?
+            ) -> Unit) ->
         RepoCatalogAdapter(
             startRepoDetail
         )

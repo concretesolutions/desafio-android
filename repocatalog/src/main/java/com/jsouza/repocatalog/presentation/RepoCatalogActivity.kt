@@ -9,8 +9,8 @@ import com.jsouza.repocatalog.databinding.ActivityCatalogRepositoryBinding
 import com.jsouza.repocatalog.domain.`typealias`.StartRepoDetail
 import com.jsouza.repocatalog.presentation.adapter.RepoCatalogAdapter
 import com.jsouza.repocatalog.presentation.adapter.ReposLoadStateAdapter
-import com.jsouza.repodetail.RepoDetailActivity
-import com.jsouza.repodetail.RepoDetailActivity.Companion.REPO_DETAIL_NAME
+import com.jsouza.repodetail.presentation.RepoDetailActivity
+import com.jsouza.repodetail.presentation.RepoDetailActivity.Companion.REPO_DETAIL_NAME
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest

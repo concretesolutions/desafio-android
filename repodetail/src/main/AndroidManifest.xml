@@ -3,7 +3,7 @@
     package="com.jsouza.repodetail">
 
     <application>
-        <activity android:name=".RepoDetailActivity"></activity>
+        <activity android:name=".presentation.RepoDetailActivity"></activity>
     </application>
 
 </manifest>

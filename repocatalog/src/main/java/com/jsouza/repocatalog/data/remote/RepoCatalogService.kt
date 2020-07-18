@@ -1,6 +1,6 @@
-package com.jsouza.repocatalog.data.repocatalog.remote
+package com.jsouza.repocatalog.data.remote
 
-import com.jsouza.repocatalog.data.repocatalog.remote.response.RepositoryResponse
+import com.jsouza.repocatalog.data.remote.response.RepositoryResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

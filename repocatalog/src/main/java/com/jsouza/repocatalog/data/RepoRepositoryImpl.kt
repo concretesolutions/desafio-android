@@ -1,4 +1,4 @@
-package com.jsouza.repocatalog.data.repocatalog.local
+package com.jsouza.repocatalog.data
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
@@ -6,9 +6,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.jsouza.repocatalog.data.local.RepoDatabase
 import com.jsouza.repocatalog.data.local.dao.RepoDao
+import com.jsouza.repocatalog.data.local.datasource.RepoMediator
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
-import com.jsouza.repocatalog.data.repocatalog.local.datasource.RepoMediator
-import com.jsouza.repocatalog.data.repocatalog.remote.RepoCatalogService
+import com.jsouza.repocatalog.data.remote.RepoCatalogService
 import com.jsouza.repocatalog.domain.repository.RepoRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow

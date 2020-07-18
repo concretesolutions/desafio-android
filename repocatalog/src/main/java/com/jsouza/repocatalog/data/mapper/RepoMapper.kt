@@ -1,8 +1,8 @@
-package com.jsouza.repocatalog.data.local.mapper
+package com.jsouza.repocatalog.data.mapper
 
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
-import com.jsouza.repocatalog.data.local.utils.RepoTypeConverter
-import com.jsouza.repocatalog.data.repocatalog.remote.response.Repository
+import com.jsouza.repocatalog.data.remote.response.Repository
+import com.jsouza.repocatalog.utils.RepoTypeConverter
 
 class RepoMapper {
 

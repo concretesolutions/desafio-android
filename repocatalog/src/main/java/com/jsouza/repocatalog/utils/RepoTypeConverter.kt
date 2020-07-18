@@ -1,9 +1,9 @@
-package com.jsouza.repocatalog.data.local.utils
+package com.jsouza.repocatalog.utils
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.jsouza.repocatalog.data.repocatalog.remote.response.Owner
+import com.jsouza.repocatalog.data.remote.response.Owner
 
 class RepoTypeConverter {
 

@@ -1,4 +1,4 @@
-package com.jsouza.repocatalog.data.repocatalog.remote.response
+package com.jsouza.repocatalog.data.remote.response
 
 import com.squareup.moshi.Json
 
