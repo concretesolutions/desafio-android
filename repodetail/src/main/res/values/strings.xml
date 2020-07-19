@@ -1,6 +1,9 @@
 <resources>
+    // RepoDetail
     <string name="google_weblink_in_case_of_no_url_from_pull_request">https://www.google.com</string>
     <string name="open_pull_request_status">open</string>
     <string name="closed_pull_request_status">closed</string>
     <string name="mock_date_pull_request">12/06/1996</string>
+    <string name="closed_status_pull_request_list_item">/ 16 closed</string>
+    <string name="opened_status_pull_request_list_item">16 opened</string>
 </resources>

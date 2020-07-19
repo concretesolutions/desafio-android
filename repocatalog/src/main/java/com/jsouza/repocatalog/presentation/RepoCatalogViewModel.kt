@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 class RepoCatalogViewModel(
     private val fetchReposFromApi: RefreshPaginatedData
 ) : ViewModel() {
+
     private var currentSearchResult: Flow<PagingData<RepositoryEntity>>? = null
 
     fun searchRepo(): Flow<PagingData<RepositoryEntity>> {

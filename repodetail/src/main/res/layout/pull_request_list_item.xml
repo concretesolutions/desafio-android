@@ -15,16 +15,15 @@
         <TextView
             android:id="@+id/repository_name_text_view_pull_list_item"
             tools:text="@string/mock_item_name_list_item"
-            style="@style/title_default_style_item_list"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/title_default_style_item_list"/>
 
         <TextView
             android:id="@+id/repository_description_text_view_pull_list_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/description_text_style_item_list"
             tools:text="@string/mock_lorem_ipsum_large"
             android:maxLines="20"
             android:ellipsize="end"
@@ -33,7 +32,8 @@
             android:layout_marginTop="@dimen/material_margin_8dp"
             app:layout_constraintTop_toBottomOf="@id/repository_name_text_view_pull_list_item"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/description_text_style_item_list"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/repository_owner_container_pull_list_item"
@@ -49,8 +49,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/owner_avatar_circular_image_view_pull_list_item"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/owner_avatar_width"
+                android:layout_height="@dimen/owner_avatar_height"
                 android:layout_marginTop="@dimen/material_margin_8dp"
                 android:layout_marginEnd="@dimen/material_margin_8dp"
                 android:layout_marginBottom="@dimen/material_margin_8dp"
@@ -61,25 +61,26 @@
 
             <TextView
                 android:id="@+id/username_text_view_pull_list_item"
-                style="@style/default_text_owner_style_item_list"
                 android:textAlignment="center"
+                tools:text="@string/mock_username_item_list"
                 app:layout_constraintBottom_toBottomOf="@id/owner_avatar_circular_image_view_pull_list_item"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/owner_avatar_circular_image_view_pull_list_item"
                 app:layout_constraintTop_toTopOf="@id/owner_avatar_circular_image_view_pull_list_item"
-                tools:text="@string/mock_username_item_list" />
+                style="@style/default_text_owner_style_item_list" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/repository_created_date_text_view_pull_list_item"
-            style="@style/default_text_owner_style_item_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/material_margin_8dp"
             tools:text="@string/mock_date_pull_request"
             app:layout_constraintBottom_toBottomOf="@id/repository_owner_container_pull_list_item"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/repository_owner_container_pull_list_item" />
+            app:layout_constraintTop_toTopOf="@id/repository_owner_container_pull_list_item"
+            style="@style/default_text_owner_style_item_list"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

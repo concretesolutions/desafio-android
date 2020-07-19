@@ -44,9 +44,9 @@ class RepoDetailActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        binding.repositoryRecyclerViewDetailActivity.addItemDecoration(decoration)
-        binding.repositoryRecyclerViewDetailActivity.setHasFixedSize(true)
-        binding.repositoryRecyclerViewDetailActivity.adapter = adapter
+        binding.pullRequestRecyclerViewDetailActivity.addItemDecoration(decoration)
+        binding.pullRequestRecyclerViewDetailActivity.setHasFixedSize(true)
+        binding.pullRequestRecyclerViewDetailActivity.adapter = adapter
     }
 
     private fun initObserver() {
@@ -112,5 +112,10 @@ class RepoDetailActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         initObserver()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 }
