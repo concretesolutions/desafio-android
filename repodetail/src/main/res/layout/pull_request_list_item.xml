@@ -5,16 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/default_card_background_color"
-    android:layout_margin="@dimen/material_margin_8dp">
+    app:cardBackgroundColor="@color/darker_background_color"
+    android:layout_margin="@dimen/material_margin_4dp"
+    app:cardCornerRadius="@dimen/card_corner_radius_list_item"
+    app:cardElevation="@dimen/card_elevation_list_item">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/repository_name_text_view_pull_list_item"
+            android:id="@+id/pull_name_text_view_pull_list_item"
             tools:text="@string/mock_item_name_list_item"
+            android:layout_marginStart="@dimen/material_margin_8dp"
+            android:layout_marginEnd="@dimen/material_margin_8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,10 +31,11 @@
             tools:text="@string/mock_lorem_ipsum_large"
             android:maxLines="20"
             android:ellipsize="end"
+            android:textColor="@color/description_text_color"
             android:layout_marginStart="@dimen/material_margin_8dp"
             android:layout_marginEnd="@dimen/material_margin_8dp"
             android:layout_marginTop="@dimen/material_margin_8dp"
-            app:layout_constraintTop_toBottomOf="@id/repository_name_text_view_pull_list_item"
+            app:layout_constraintTop_toBottomOf="@id/pull_name_text_view_pull_list_item"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/description_text_style_item_list"/>

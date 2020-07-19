@@ -1,7 +1,6 @@
 package com.jsouza.repodetail.presentation
 
 import android.os.Bundle
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -10,6 +9,7 @@ import com.jsouza.repodetail.data.remote.response.PullsResponse
 import com.jsouza.repodetail.databinding.ActivityRepoDetailBinding
 import com.jsouza.repodetail.presentation.adapter.RepoDetailAdapter
 import com.jsouza.repodetail.utils.Constants.Companion.ONE_ITEM
+import java.util.Locale
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -28,18 +28,21 @@ class RepoDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRepoDetailBinding.inflate(layoutInflater)
 
-        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_TITLE
-        supportActionBar?.title = "Pull Requests"
-
         val repoName = intent.getStringExtra(REPO_DETAIL_NAME)
         val userName = intent.getStringExtra(REPO_USER_NAME)
 
+        setupToolbar(repoName ?: "")
         setupRecyclerView()
 
+        binding.pullRequestToolbarMainDetail.setNavigationOnClickListener { onBackPressed() }
         viewModel.fetchPullRequests(userName, repoName)
         initObserver()
 
         setContentView(binding.root)
+    }
+
+    private fun setupToolbar(repoName: String) {
+        binding.repositoryTitleTextViewPullList.text = repoName.toUpperCase(Locale.getDefault())
     }
 
     private fun setupRecyclerView() {

@@ -2,11 +2,13 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/default_card_background_color"
-    android:layout_margin="@dimen/material_margin_8dp">
+    app:cardBackgroundColor="@color/background_color"
+    android:layout_margin="@dimen/material_margin_4dp"
+    app:cardCornerRadius="@dimen/card_corner_radius_list_item"
+    app:cardElevation="@dimen/card_elevation_list_item">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +17,7 @@
         <View
             android:id="@+id/repository_colored_view_list_item"
             android:layout_width="@dimen/colored_view_width_list_item"
-            android:layout_height="@dimen/recycler_card_view_height_list_item"
+            android:layout_height="0dp"
             android:background="@color/color_accent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -23,10 +25,12 @@
 
         <TextView
             android:id="@+id/repository_name_text_view_list_item"
-            tools:text="@string/mock_item_name_list_item"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textAlignment="viewStart"
+            app:layout_constraintEnd_toStartOf="@+id/repository_owner_container_list_item"
             app:layout_constraintStart_toEndOf="@id/repository_colored_view_list_item"
-            style="@style/title_default_style_item_list" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/mock_item_name_list_item"
+            style="@style/title_default_style_item_list"/>
 
         <TextView
             android:id="@+id/repository_description_text_view_list_item"
@@ -40,7 +44,7 @@
             android:id="@+id/branch_image_view_list_item"
             android:layout_width="@dimen/branch_icon_width_list_item"
             android:layout_height="@dimen/branch_icon_height_list_item"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="@dimen/material_margin_8dp"
             android:layout_marginStart="@dimen/material_margin_8dp"
             android:contentDescription="@string/content_description_branch_icon"
             android:src="@drawable/ic_branch"
@@ -51,6 +55,7 @@
         <TextView
             android:id="@+id/repository_branch_count_text_view_list_item"
             tools:text="@string/mock_branch_count_item_list"
+            android:layout_marginStart="@dimen/material_margin_4dp"
             app:layout_constraintStart_toEndOf="@id/branch_image_view_list_item"
             app:layout_constraintTop_toTopOf="@id/branch_image_view_list_item"
             app:layout_constraintBottom_toBottomOf="@id/branch_image_view_list_item"
@@ -62,7 +67,7 @@
             android:layout_height="@dimen/star_icon_height_list_item"
             android:src="@drawable/ic_star"
             android:tint="@color/color_attributes"
-            android:layout_marginStart="@dimen/material_margin_8dp"
+            android:layout_marginStart="@dimen/material_margin_4dp"
             android:contentDescription="@string/content_description_star_icon"
             app:layout_constraintStart_toEndOf="@id/repository_branch_count_text_view_list_item"
             app:layout_constraintTop_toTopOf="@id/repository_branch_count_text_view_list_item"
@@ -70,10 +75,14 @@
 
         <TextView
             android:id="@+id/repository_star_count_text_view_list_item"
-            tools:text="@string/mock_star_count_list_item"
+            android:layout_marginStart="@dimen/material_margin_4dp"
+            android:textAlignment="viewStart"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@id/branch_image_view_list_item"
+            app:layout_constraintEnd_toStartOf="@+id/repository_owner_container_list_item"
             app:layout_constraintStart_toEndOf="@id/star_image_view_list_item"
             app:layout_constraintTop_toTopOf="@id/branch_image_view_list_item"
-            app:layout_constraintBottom_toBottomOf="@id/branch_image_view_list_item"
+            tools:text="@string/mock_star_count_list_item"
             style="@style/default_text_style_item_list"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -113,6 +122,7 @@
                 android:layout_height="wrap_content"
                 tools:text="@string/mock_full_name_item_list"
                 android:textSize="12sp"
+                android:textColor="@color/list_item_default_text_color"
                 android:fontFamily="@font/ubuntu_regular"
                 android:gravity="center"
                 android:layout_marginStart="@dimen/material_margin_8dp"

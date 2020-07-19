@@ -53,7 +53,7 @@ class RepoDetailAdapter : RecyclerView.Adapter<RepoDetailAdapter.ViewHolder>() {
         private val binding = PullRequestListItemBinding.bind(itemView)
 
         fun itemBind(pullsResponse: PullsResponse) {
-            binding.repositoryNameTextViewPullListItem.text = pullsResponse.title
+            binding.pullNameTextViewPullListItem.text = pullsResponse.title
             binding.repositoryDescriptionTextViewPullListItem.text = pullsResponse.body
             binding.usernameTextViewPullListItem.text = pullsResponse.owner?.username
             binding.repositoryCreatedDateTextViewPullListItem.text = pullsResponse.getCreatedAtDateString()

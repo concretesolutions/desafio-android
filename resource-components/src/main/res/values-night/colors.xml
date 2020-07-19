@@ -2,4 +2,13 @@
 <resources>
     <color name="color_primary">#343438</color>
     <color name="color_primary_dark">#343438</color>
+
+    <color name="color_attributes">#FFAD13</color>
+    <color name="list_item_title_text_color">#306997</color>
+    <color name="list_item_default_text_color">#2B2B2B</color>
+    <color name="default_card_background_color">#FFF</color>
+    <color name="description_text_color">#B8B8B8</color>
+    <color name="background_color">#888888</color>
+    <color name="toolbar_text_color">#D5D5D5</color>
+    <color name="darker_background_color">#272727</color>
 </resources>
