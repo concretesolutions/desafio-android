@@ -7,9 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.jsouza.repocatalog.presentation.RepoCatalogActivity">
 
-    <include android:id="@+id/main_toolbar_catalog_activity"
-        layout="@layout/main_toolbar"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/repository_recycler_view_catalog_activity"
         android:layout_width="0dp"
@@ -20,9 +17,10 @@
         android:layout_marginTop="@dimen/material_margin_8dp"
         android:layout_marginStart="@dimen/material_margin_8dp"
         android:layout_marginEnd="@dimen/material_margin_8dp"
+        android:layout_marginBottom="@dimen/material_margin_8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar_catalog_activity"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

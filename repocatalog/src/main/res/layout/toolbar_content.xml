@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:gravity="center"
+    android:id="@+id/toolbar_content">
+
+    <ImageView
+        android:id="@+id/octocat_image_view_toolbar"
+        android:layout_width="198dp"
+        android:layout_height="50dp"
+        android:src="@drawable/github_logo"
+        android:layout_gravity="clip_horizontal"
+        android:contentDescription="@string/app_name" />
+
+</LinearLayout>

@@ -13,21 +13,20 @@ class RepoDetailViewModel(
     private val repoDetailService: RepoDetailService
 ) : ViewModel() {
 
-    private val _pulls = MutableLiveData<List<PullsResponse>>()
-    val returnPulls: LiveData<List<PullsResponse>>? = _pulls
+    private val _pullRequests = MutableLiveData<List<PullsResponse>>()
+    val returnPulls: LiveData<List<PullsResponse>>? = _pullRequests
 
-    private fun pulls() {
+    fun fetchPullRequests(
+        userName: String?,
+        repoName: String?
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            _pulls.postValue(repoDetailService.loadPullsPageFromApiAsync(
-                username = "elastic",
-                repoName = "elasticsearch",
-                page = 1,
-                per_page = 20)
-            )
+            if (userName != null && repoName != null) {
+                _pullRequests.postValue(repoDetailService.loadPullsPageFromApiAsync(
+                    username = userName,
+                    repoName = repoName)
+                )
+            }
         }
-    }
-
-    init {
-        pulls()
     }
 }

@@ -33,6 +33,7 @@ val repositoryCatalogModule = module {
 
     factory {
             (startRepoDetail: (
+                String?,
                 String?
             ) -> Unit) ->
         RepoCatalogAdapter(

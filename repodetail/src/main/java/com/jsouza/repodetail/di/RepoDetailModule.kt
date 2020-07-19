@@ -2,6 +2,7 @@ package com.jsouza.repodetail.di
 
 import com.jsouza.repodetail.data.RepoDetailService
 import com.jsouza.repodetail.presentation.RepoDetailViewModel
+import com.jsouza.repodetail.presentation.adapter.RepoDetailAdapter
 import com.jsouza.shared_components.di.SHARED_RETROFIT
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.viewmodel.dsl.viewModel
@@ -17,6 +18,10 @@ val repositoryDetailModule = module {
         RepoDetailViewModel(
             get<RepoDetailService>()
         )
+    }
+
+    single {
+        RepoDetailAdapter()
     }
 
     single {

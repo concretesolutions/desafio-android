@@ -4,6 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgorund_color"
     tools:context=".presentation.RepoDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/repository_colored_view_list_item"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/darker_background_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingBottom="@dimen/material_margin_8dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/repository_closed_text_view_list_item"
+            style="@style/title_default_style_item_list"
+            android:textColor="#000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:gravity="start"
+            app:layout_constraintStart_toEndOf="@+id/repository_open_text_view_list_item"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="/ 16 opened" />
+
+        <TextView
+            android:id="@+id/repository_open_text_view_list_item"
+            style="@style/title_default_style_item_list"
+            android:textColor="@color/color_attributes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="end"
+            app:layout_constraintEnd_toStartOf="@+id/repository_closed_text_view_list_item"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="16 opened" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/repository_recycler_view_detail_activity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:listitem="@layout/pull_request_list_item"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_marginTop="@dimen/material_margin_8dp"
+        android:layout_marginStart="@dimen/material_margin_8dp"
+        android:layout_marginEnd="@dimen/material_margin_8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/repository_colored_view_list_item"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -59,7 +59,7 @@ class RepoMediator(
                 state.config.pageSize)
 
             val repos = apiResponse.items
-            val endOfPaginationReached = repos.isEmpty()
+            val endOfPaginationReached = repos?.isEmpty() ?: true
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -68,16 +68,16 @@ class RepoMediator(
                 }
                 val prevKey = if (page == FIRST_PAGE) null else page - SINGLE_PAGE
                 val nextKey = if (endOfPaginationReached) null else page + SINGLE_PAGE
-                val keys = repos.map {
+                val keys = repos?.map {
                     RepoKeysEntity(
                         repositoryId = it.id,
                         previousKey = prevKey,
                         nextKey = nextKey
                     )
                 }
-                val resultList = RepoMapper.toDatabaseModel(repos)
-                database.keysDao().insertAll(keys)
-                database.reposDao().insertAll(resultList)
+                val resultList = repos?.let { RepoMapper.toDatabaseModel(it) }
+                keys?.let { database.keysDao().insertAll(it) }
+                resultList?.let { database.reposDao().insertAll(it) }
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {

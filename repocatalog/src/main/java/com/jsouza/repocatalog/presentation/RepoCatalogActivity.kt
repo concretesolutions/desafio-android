@@ -2,15 +2,18 @@ package com.jsouza.repocatalog.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.jsouza.repocatalog.R
 import com.jsouza.repocatalog.databinding.ActivityCatalogRepositoryBinding
 import com.jsouza.repocatalog.domain.`typealias`.StartRepoDetail
 import com.jsouza.repocatalog.presentation.adapter.RepoCatalogAdapter
 import com.jsouza.repocatalog.presentation.adapter.ReposLoadStateAdapter
 import com.jsouza.repodetail.presentation.RepoDetailActivity
 import com.jsouza.repodetail.presentation.RepoDetailActivity.Companion.REPO_DETAIL_NAME
+import com.jsouza.repodetail.presentation.RepoDetailActivity.Companion.REPO_USER_NAME
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -23,7 +26,9 @@ class RepoCatalogActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<RepoCatalogViewModel>()
     private lateinit var binding: ActivityCatalogRepositoryBinding
-    private val loadRepoDetail: StartRepoDetail = { String -> startDetailActivity(name = String) }
+    private val loadRepoDetail: StartRepoDetail = { repoName, userName ->
+        startDetailActivity(repoName = repoName, userName = userName)
+    }
     private val repositoriesAdapter by inject<RepoCatalogAdapter> { parametersOf(loadRepoDetail) }
     private var showDataJob: Job? = null
 
@@ -31,6 +36,9 @@ class RepoCatalogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCatalogRepositoryBinding.inflate(layoutInflater)
+
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.toolbar_content)
 
         initAdapter()
         setupRecyclerView()
@@ -46,11 +54,13 @@ class RepoCatalogActivity : AppCompatActivity() {
     }
 
     private fun startDetailActivity(
-        name: String?
+        repoName: String?,
+        userName: String?
     ) {
         val intent = Intent(this, RepoDetailActivity::class.java)
             .apply {
-                putExtra(REPO_DETAIL_NAME, name)
+                putExtra(REPO_DETAIL_NAME, repoName)
+                putExtra(REPO_USER_NAME, userName)
             }
         startActivity(intent)
     }

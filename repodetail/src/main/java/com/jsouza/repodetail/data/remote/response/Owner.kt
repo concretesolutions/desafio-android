@@ -4,6 +4,5 @@ import com.squareup.moshi.Json
 
 data class Owner(
     var avatar_url: String?,
-    @Json(name = "login")
-    var username: String?
+    @Json(name = "login") var username: String?
 )

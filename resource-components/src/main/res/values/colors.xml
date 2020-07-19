@@ -5,7 +5,10 @@
     <color name="color_accent">#c0575e</color>
 
     <color name="color_attributes">#df9408</color>
-    <color name="list_item_title_text_color">#F000</color>
-    <color name="list_item_default_text_color">#F000</color>
+    <color name="list_item_title_text_color">#57778F</color>
+    <color name="list_item_default_text_color">#424242</color>
     <color name="default_card_background_color">#FFF</color>
+
+    <color name="backgorund_color">#FFFFFF</color>
+    <color name="darker_background_color">#f0f0f0</color>
 </resources>

@@ -19,5 +19,17 @@ class RepoMapper {
                 pageNumber = it.pageNumber)
             }
         }
+
+        fun toDomainModel(response: RepositoryEntity): Repository {
+            return Repository(
+                id = response.id,
+                name = response.name,
+                owner = RepoTypeConverter.toOwner(response.owner),
+                fullName = response.fullName,
+                description = response.description,
+                stargazersCount = response.stargazersCount,
+                forksCount = response.forksCount,
+                pageNumber = response.pageNumber)
+        }
     }
 }

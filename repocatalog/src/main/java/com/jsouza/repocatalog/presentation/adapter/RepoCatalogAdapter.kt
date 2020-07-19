@@ -1,5 +1,6 @@
 package com.jsouza.repocatalog.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jsouza.extensions.loadImageUrl
 import com.jsouza.repocatalog.R
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
+import com.jsouza.repocatalog.data.mapper.RepoMapper
+import com.jsouza.repocatalog.data.remote.response.Repository
 import com.jsouza.repocatalog.databinding.RepositoryListItemBinding
 import com.jsouza.repocatalog.domain.`typealias`.StartRepoDetail
 import com.jsouza.repocatalog.utils.DiffUtilCallback
-import com.jsouza.repocatalog.utils.RepoTypeConverter
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
@@ -52,25 +54,26 @@ class RepoCatalogAdapter(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
         private val binding = RepositoryListItemBinding.bind(itemView)
-        private var repo: RepositoryEntity? = null
-
+        private lateinit var repo: Repository
         init {
             itemView.setOnClickListener {
+                Log.i("Api adapter", "${repo.name}, ${repo.owner?.login}")
                 startDetailActivity(
-                    repo?.name
+                    repo.name,
+                    repo.owner?.login
                 )
             }
         }
 
         private var formatter: NumberFormat = DecimalFormat(NUMBER_PATTERN)
 
-        fun itemBind(repo: RepositoryEntity) {
-            this.repo = repo
+        fun itemBind(repoEntity: RepositoryEntity) {
+            this.repo = RepoMapper.toDomainModel(repoEntity)
             binding.repositoryNameTextViewListItem.text = repo.name
             binding.repositoryDescriptionTextViewListItem.text = repo.description
             binding.fullNameTextViewListItem.text = repo.fullName
 
-            val owner = RepoTypeConverter.toOwner(repo.owner)
+            val owner = repo.owner
             binding.usernameTextViewListItem.text = owner?.login
 
             val forksCountFormatted = formatter.format(
