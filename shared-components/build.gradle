@@ -51,6 +51,9 @@ dependencies {
     // Moshi Converter
     api "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
+    // Gson
+    api "com.google.code.gson:gson:$gson_version"
+
     // Moshi
     api "com.squareup.moshi:moshi:$moshi_version"
     api "com.squareup.moshi:moshi-kotlin:$moshi_version"
@@ -79,7 +82,7 @@ dependencies {
     // Paging
     api "androidx.paging:paging-runtime:$paging_version"
 
-    //Paging
+    //Paging KTX
     implementation "androidx.paging:paging-runtime-ktx:$paging_ktx_version"
 
     // Material Design
