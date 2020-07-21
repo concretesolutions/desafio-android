@@ -11,5 +11,6 @@
     <color name="description_text_color">#424242</color>
     <color name="toolbar_text_color">#f0f0f0</color>
     <color name="background_color">#FFFFFF</color>
+    <color name="icon_launcher_color">#f0f0f0</color>
     <color name="darker_background_color">#f0f0f0</color>
 </resources>
