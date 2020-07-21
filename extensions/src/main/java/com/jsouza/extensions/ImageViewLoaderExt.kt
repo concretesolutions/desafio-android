@@ -13,6 +13,8 @@ import com.bumptech.glide.request.target.Target
 import com.jsouza.utils.Constants.Companion.IMAGE_MAX_HEIGHT
 import com.jsouza.utils.Constants.Companion.IMAGE_MAX_WIDTH
 
+private var errorAndPlaceHolderImage: Int = R.drawable.place_holder
+
 fun ImageView.loadImageUrl(
     url: String? = null
 ) {
@@ -29,7 +31,7 @@ private fun setupGlide(
     onError: () -> Unit = {}
 ): RequestBuilder<Drawable> {
 
-    return Glide.with(imageView)
+    val requestBuilder = Glide.with(imageView)
         .`as`(Drawable::class.java)
         .override(IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT)
         .transition(GenericTransitionOptions.with(R.anim.fade_in))
@@ -56,4 +58,13 @@ private fun setupGlide(
                 return false
             }
         })
+
+    errorAndPlaceHolderImage.let {
+        requestBuilder
+            .placeholder(errorAndPlaceHolderImage)
+            .override(IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT)
+            .error(errorAndPlaceHolderImage)
+    }
+
+    return requestBuilder
 }
