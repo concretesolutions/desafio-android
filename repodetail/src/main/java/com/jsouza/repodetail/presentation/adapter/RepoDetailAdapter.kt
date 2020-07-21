@@ -65,7 +65,7 @@ class RepoDetailAdapter : RecyclerView.Adapter<RepoDetailAdapter.ViewHolder>() {
             itemView.setOnClickListener {
                 callPullRequestOnBrowser(
                     pullsResponse.url ?: itemView.context
-                        .getString(R.string.google_weblink_in_case_of_no_url_from_pull_request)
+                        .getString(R.string.github_home_weblink_in_case_of_no_url_from_pull_request)
                 )
             }
         }

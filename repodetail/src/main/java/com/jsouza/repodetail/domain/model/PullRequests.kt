@@ -4,7 +4,7 @@ import com.jsouza.repodetail.data.remote.response.Owner
 
 data class PullRequests(
     var id: Int,
-    var url: String,
+    var url: String?,
     var title: String?,
     var body: String?,
     var owner: Owner?,
