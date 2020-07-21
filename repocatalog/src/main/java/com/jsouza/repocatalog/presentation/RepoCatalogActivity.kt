@@ -3,7 +3,10 @@ package com.jsouza.repocatalog.presentation
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.jsouza.repocatalog.R
 import com.jsouza.repocatalog.databinding.ActivityCatalogRepositoryBinding
@@ -41,10 +44,50 @@ class RepoCatalogActivity : AppCompatActivity() {
         binding = ActivityCatalogRepositoryBinding.inflate(layoutInflater)
 
         initAdapter()
+        initAdapterLoadListener()
         setupRecyclerView()
         initObserver()
+        setupRetryButton()
 
         setContentView(binding.root)
+    }
+
+    private fun initAdapterLoadListener() {
+        repositoriesAdapter.addLoadStateListener { loadState ->
+            showRecyclerViewOnLoadSuccess(loadState)
+            showLoadingSpinnerOnRefreshStatus(loadState)
+            showErrorScreen(loadState)
+        }
+    }
+
+    private fun showRecyclerViewOnLoadSuccess(
+        loadState: CombinedLoadStates
+    ) {
+        binding.repositoryRecyclerViewCatalogActivity
+            .isVisible = loadState.refresh is LoadState.NotLoading
+    }
+
+    private fun showLoadingSpinnerOnRefreshStatus(
+        loadState: CombinedLoadStates
+    ) {
+        binding.loadingProgressBarCatalogActivity
+            .isVisible = loadState.refresh is LoadState.Loading
+    }
+
+    private fun showErrorScreen(
+        loadState: CombinedLoadStates
+    ) {
+        binding.emptyRepositoriesMessageContainerCatalogActivity
+            .root
+            .isVisible = loadState.refresh is LoadState.Error
+        binding.retryButtonCatalogActivity
+            .isVisible = loadState.refresh is LoadState.Error
+    }
+
+    private fun setupRetryButton() {
+        binding.retryButtonCatalogActivity.setOnClickListener {
+            repositoriesAdapter.retry()
+        }
     }
 
     private fun setupRecyclerView() {

@@ -5,6 +5,7 @@
     <dimen name="material_margin_8dp">8dp</dimen>
     <dimen name="material_margin_16dp">16dp</dimen>
     <dimen name="default_elevation_toolbar">4dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
 
     // Toolbar
     <dimen name="github_logo_width_toolbar">170dp</dimen>

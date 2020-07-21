@@ -41,6 +41,7 @@
         android:id="@+id/repository_colored_view_list_item"
         android:layout_width="0dp"
         android:layout_height="@dimen/colored_item_view_list_item"
+        android:visibility="gone"
         android:background="@color/darker_background_color"
         android:paddingBottom="@dimen/material_margin_8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/repository_open_text_view_list_item"
+            app:layout_constraintStart_toEndOf="@id/repository_open_text_view_list_item"
             app:layout_constraintTop_toTopOf="parent"
             style="@style/title_default_style_item_list"/>
 
@@ -65,7 +66,7 @@
             android:gravity="end"
             tools:text="@string/opened_status_pull_request_list_item"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/repository_closed_text_view_list_item"
+            app:layout_constraintEnd_toStartOf="@id/repository_closed_text_view_list_item"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

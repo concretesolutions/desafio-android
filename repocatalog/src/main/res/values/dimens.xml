@@ -11,4 +11,6 @@
     <dimen name="repository_owner_container_height_list_item">145dp</dimen>
     <dimen name="owner_avatar_width_list_item">78dp</dimen>
     <dimen name="owner_avatar_height_list_item">78dp</dimen>
+    <dimen name="sad_octocat_empty_list_width">220dp</dimen>
+    <dimen name="sad_octocat_empty_list_height">220dp</dimen>
 </resources>

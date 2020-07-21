@@ -1,6 +1,7 @@
 package com.jsouza.repodetail.presentation
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -76,6 +77,7 @@ class RepoDetailActivity : AppCompatActivity() {
         val closedPullRequests = PullRequestCalculator
             .calculateClosedPullRequestsCount(pullRequests)
         displayClosedCount(closedPullRequests)
+        binding.repositoryColoredViewListItem.visibility = View.VISIBLE
     }
 
     private fun displayOpenedCount(

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,13 +8,13 @@
     tools:context="com.jsouza.repocatalog.presentation.RepoCatalogActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/repositories_main_catalog"
-        android:orientation="vertical"
+        android:id="@+id/repositories_main_catalog_activity"
         android:layout_width="match_parent"
-        android:background="@color/color_primary_dark"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:background="@color/color_primary_dark"
         android:elevation="@dimen/default_elevation_toolbar"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,8 +22,8 @@
         <ImageView
             android:layout_width="@dimen/github_logo_width_toolbar"
             android:layout_height="@dimen/github_logo_height_toolbar"
-            android:contentDescription="@string/mock_lorem_ipsum_large"
             android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/mock_lorem_ipsum_large"
             android:src="@drawable/github_logo" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -33,19 +32,65 @@
         android:id="@+id/repository_recycler_view_catalog_activity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/darker_background_color"
-        tools:listitem="@layout/repository_list_item"
-        android:scrollbars="vertical"
-        android:fadeScrollbars="true"
-        android:scrollbarStyle="outsideInset"
-        app:layoutManager="LinearLayoutManager"
-        android:layout_marginTop="@dimen/material_margin_8dp"
         android:layout_marginStart="@dimen/material_margin_8dp"
+        android:layout_marginTop="@dimen/material_margin_8dp"
         android:layout_marginEnd="@dimen/material_margin_8dp"
         android:layout_marginBottom="@dimen/material_margin_8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/darker_background_color"
+        android:fadeScrollbars="true"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/repositories_main_catalog"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/repositories_main_catalog_activity"
+        tools:listitem="@layout/repository_list_item" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/empty_repositories_contraint_layout_catalog_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/repositories_main_catalog_activity">
+
+        <include
+            android:id="@+id/empty_repositories_message_container_catalog_activity"
+            layout="@layout/empty_repositories_list"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ProgressBar
+            android:id="@+id/loading_progress_bar_catalog_activity"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/material_margin_8dp"
+            android:progressTint="@color/color_attributes"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/empty_repositories_message_container_catalog_activity" />
+
+        <android.widget.Button
+            android:id="@+id/retry_button_catalog_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/ubuntu_regular"
+            android:includeFontPadding="false"
+            android:padding="@dimen/padding_16"
+            android:text="@string/retry_network_call_list_item"
+            android:textColor="@color/background_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/empty_repositories_message_container_catalog_activity" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

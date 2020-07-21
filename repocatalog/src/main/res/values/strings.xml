@@ -14,4 +14,6 @@
     <string name="mock_item_name_list_item">Colored Notes CSS</string>
     <string name="retry_network_call_list_item">Retry</string>
     <string name="mock_timeout_list_item">Timeout</string>
+    <string name="content_description_sad_octocat">Sad octocat</string>
+    <string name="no_repositories_message">Sorry, we don´t have repositories to show.</string>
 </resources>
