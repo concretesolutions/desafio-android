@@ -4,11 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.jsouza.extensions.observeOnce
 import com.jsouza.repodetail.R
 import com.jsouza.repodetail.data.remote.response.PullsResponse
 import com.jsouza.repodetail.databinding.ActivityRepoDetailBinding
 import com.jsouza.repodetail.presentation.adapter.RepoDetailAdapter
-import com.jsouza.repodetail.utils.Constants.Companion.ONE_ITEM
+import com.jsouza.repodetail.utils.Constants.Companion.EMPTY_STRING
+import com.jsouza.repodetail.utils.PullRequestCalculator
 import java.util.Locale
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -24,25 +26,28 @@ class RepoDetailActivity : AppCompatActivity() {
     private val viewModel by viewModel<RepoDetailViewModel>()
     private val adapter by inject<RepoDetailAdapter>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(
+        savedInstanceState: Bundle?
+    ) {
         super.onCreate(savedInstanceState)
         binding = ActivityRepoDetailBinding.inflate(layoutInflater)
 
         val repoName = intent.getStringExtra(REPO_DETAIL_NAME)
         val userName = intent.getStringExtra(REPO_USER_NAME)
 
-        setupToolbar(repoName ?: "")
+        setupToolbar(repoName ?: EMPTY_STRING)
         setupRecyclerView()
-
         viewModel.loadPullRequests(userName, repoName)
         initObserver()
 
         setContentView(binding.root)
     }
 
-    private fun setupToolbar(repoName: String) {
+    private fun setupToolbar(
+        repositoryName: String
+    ) {
         binding.pullRequestToolbarMainDetail.setNavigationOnClickListener { onBackPressed() }
-        binding.repositoryTitleTextViewPullList.text = repoName.toUpperCase(Locale.getDefault())
+        binding.repositoryTitleTextViewPullList.text = repositoryName.toUpperCase(Locale.getDefault())
     }
 
     private fun setupRecyclerView() {
@@ -54,71 +59,50 @@ class RepoDetailActivity : AppCompatActivity() {
 
     private fun initObserver() {
         viewModel.apply {
-            this.returnPulls?.observe(this@RepoDetailActivity,
-                Observer { adapter.submitList(it) ; loadOpenedAndClosedPullRequests(it) })
+            this.returnPulls?.observeOnce(this@RepoDetailActivity,
+                Observer {
+                    adapter.submitList(it) ; loadOpenedAndClosedPullRequests(it)
+                })
         }
     }
 
     private fun loadOpenedAndClosedPullRequests(
         pullRequests: List<PullsResponse>
     ) {
-        calculateOpenedPullRequestsCount(pullRequests)
-        calculateClosedPullRequestsCount(pullRequests)
-    }
+        val openedPullRequests = PullRequestCalculator
+            .calculateOpenedPullRequestsCount(pullRequests)
+        displayOpenedCount(openedPullRequests)
 
-    private fun calculateOpenedPullRequestsCount(
-        pullRequests: List<PullsResponse>
-    ) {
-        val openedPullsList = arrayListOf<Int>()
-        for (element in pullRequests) {
-            element.state.let { pullRequestStatus ->
-                when (pullRequestStatus) {
-                    getString(R.string.open_pull_request_status) -> openedPullsList.add(ONE_ITEM)
-                    else -> {}
-                }
-            }
-        }
-        displayOpenedCount(openedPullsList)
+        val closedPullRequests = PullRequestCalculator
+            .calculateClosedPullRequestsCount(pullRequests)
+        displayClosedCount(closedPullRequests)
     }
 
     private fun displayOpenedCount(
-        openedPullsList: ArrayList<Int>
+        openedPullRequests: Int
     ) {
-        val openedCount = openedPullsList.sum()
-        val formattedOpenedCount = "$openedCount ${getString(R.string.open_pull_request_status)}"
+        val formattedOpenedCount = "$openedPullRequests " +
+                getString(R.string.opened_pull_request_status)
         binding.repositoryOpenTextViewListItem.text = formattedOpenedCount
     }
 
-    private fun calculateClosedPullRequestsCount(
-        pullRequests: List<PullsResponse>
-    ) {
-        val closedPullsList = arrayListOf<Int>()
-        for (element in pullRequests) {
-            element.state.let { pullRequestStatus ->
-                when (pullRequestStatus) {
-                    getString(R.string.closed_pull_request_status) -> closedPullsList.add(ONE_ITEM)
-                    else -> {}
-                }
-            }
-        }
-        displayClosedCount(closedPullsList)
-    }
-
     private fun displayClosedCount(
-        closedPullsList: ArrayList<Int>
+        closedPullRequests: Int
     ) {
-        val closedCount = closedPullsList.sum()
-        val formattedClosedCount = "/ $closedCount ${getString(R.string.closed_pull_request_status)}"
+        val formattedClosedCount = "/ $closedPullRequests " +
+                getString(R.string.closed_pull_request_status)
         binding.repositoryClosedTextViewListItem.text = formattedClosedCount
-    }
-
-    override fun onPause() {
-        super.onPause()
-        initObserver()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.repositoryClosedTextViewListItem.text = EMPTY_STRING
+        binding.repositoryOpenTextViewListItem.text = EMPTY_STRING
+        adapter.submitList(emptyList())
     }
 }
