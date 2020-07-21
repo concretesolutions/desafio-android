@@ -8,7 +8,7 @@ data class PullsEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var repositoryId: Long?,
-    var url: String,
+    var url: String?,
     var title: String?,
     var body: String?,
     var owner: String?,

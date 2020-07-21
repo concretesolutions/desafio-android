@@ -5,5 +5,6 @@ import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
 import kotlinx.coroutines.flow.Flow
 
 interface RepoRepository {
+
     fun getSearchResultStream(): Flow<PagingData<RepositoryEntity>>
 }

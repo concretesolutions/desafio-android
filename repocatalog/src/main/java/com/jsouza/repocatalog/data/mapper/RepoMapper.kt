@@ -7,7 +7,9 @@ import com.jsouza.repocatalog.utils.RepoTypeConverter
 class RepoMapper {
 
     companion object {
-        fun toDatabaseModel(response: List<Repository>): List<RepositoryEntity> {
+        fun toDatabaseModel(
+            response: List<Repository>
+        ): List<RepositoryEntity> {
             return response.map { RepositoryEntity(
                 id = it.id,
                 name = it.name,
@@ -20,7 +22,9 @@ class RepoMapper {
             }
         }
 
-        fun toDomainModel(response: RepositoryEntity): Repository {
+        fun toDomainModel(
+            response: RepositoryEntity
+        ): Repository {
             return Repository(
                 id = response.id,
                 name = response.name,

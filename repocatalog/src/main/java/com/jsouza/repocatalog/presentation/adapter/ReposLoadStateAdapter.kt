@@ -43,7 +43,9 @@ class ReposLoadStateAdapter(
             }
         }
 
-        fun bind(loadState: LoadState) {
+        fun bind(
+            loadState: LoadState
+        ) {
             if (loadState is LoadState.Error) {
                 binding.errorMsgListItem.text = loadState.error.localizedMessage
             }

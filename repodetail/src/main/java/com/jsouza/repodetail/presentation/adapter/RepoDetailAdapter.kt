@@ -52,7 +52,9 @@ class RepoDetailAdapter : RecyclerView.Adapter<RepoDetailAdapter.ViewHolder>() {
     ) : RecyclerView.ViewHolder(itemView) {
         private val binding = PullRequestListItemBinding.bind(itemView)
 
-        fun itemBind(pullsResponse: PullRequests) {
+        fun itemBind(
+            pullsResponse: PullRequests
+        ) {
             binding.pullNameTextViewPullListItem.text = pullsResponse.title
             binding.repositoryDescriptionTextViewPullListItem.text = pullsResponse.body
             binding.usernameTextViewPullListItem.text = pullsResponse.owner?.username

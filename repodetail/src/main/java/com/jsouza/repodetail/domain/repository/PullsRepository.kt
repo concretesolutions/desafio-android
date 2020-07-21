@@ -5,7 +5,13 @@ import com.jsouza.repodetail.domain.model.PullRequests
 
 interface PullsRepository {
 
-    fun getPullRequests(repositoryId: Long): LiveData<List<PullRequests>?>
+    fun getPullRequests(
+        repositoryId: Long
+    ): LiveData<List<PullRequests>?>
 
-    suspend fun refreshPullRequests(userName: String, repoName: String, repositoryId: Long)
+    suspend fun refreshPullRequests(
+        userName: String,
+        repoName: String,
+        repositoryId: Long
+    )
 }

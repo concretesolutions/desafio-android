@@ -7,6 +7,7 @@ import com.jsouza.repodetail.domain.repository.PullsRepository
 class GetPullRequestsFromDatabase(
     private val repository: PullsRepository
 ) {
-    operator fun invoke(repositoryId: Long): LiveData<List<PullRequests>?> = repository
-        .getPullRequests(repositoryId = repositoryId)
+    operator fun invoke(
+        repositoryId: Long
+    ): LiveData<List<PullRequests>?> = repository.getPullRequests(repositoryId = repositoryId)
 }

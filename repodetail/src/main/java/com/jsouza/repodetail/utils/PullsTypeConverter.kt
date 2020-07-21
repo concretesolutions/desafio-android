@@ -11,7 +11,9 @@ class PullsTypeConverter {
         private var gson = Gson()
 
         @TypeConverter
-        fun fromOwner(owner: Owner?): String? {
+        fun fromOwner(
+            owner: Owner?
+        ): String? {
             if (owner == null) { return null }
             gson = Gson()
             val type = object : TypeToken<Owner>() {
@@ -21,7 +23,9 @@ class PullsTypeConverter {
         }
 
         @TypeConverter
-        fun toOwner(owner: String?): Owner? {
+        fun toOwner(
+            owner: String?
+        ): Owner? {
             if (owner == null) { return null }
             gson = Gson()
             val type = object : TypeToken<Owner>() {
