@@ -8,7 +8,8 @@ import com.jsouza.repocatalog.data.local.entity.RepoKeysEntity
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
 
 @Database(
-    entities = [RepositoryEntity::class, RepoKeysEntity::class],
+    entities = [RepositoryEntity::class,
+        RepoKeysEntity::class],
     version = 1,
     exportSchema = false
 )

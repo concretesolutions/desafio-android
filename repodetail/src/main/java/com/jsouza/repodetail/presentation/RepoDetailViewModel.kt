@@ -1,31 +1,29 @@
 package com.jsouza.repodetail.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jsouza.repodetail.data.RepoDetailService
-import com.jsouza.repodetail.data.remote.response.PullsResponse
+import com.jsouza.repodetail.domain.usecase.FetchPullRequestsFromApi
+import com.jsouza.repodetail.domain.usecase.GetPullRequestsFromDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RepoDetailViewModel(
-    private val repoDetailService: RepoDetailService
+    private val fetchPullRequestsFromApi: FetchPullRequestsFromApi,
+    private val getPullRequestsFromDatabase: GetPullRequestsFromDatabase
 ) : ViewModel() {
 
-    private val _pullRequests = MutableLiveData<List<PullsResponse>>()
-    val returnPulls: LiveData<List<PullsResponse>>? = _pullRequests
+    fun returnPullRequestsOnLiveData(
+        repositoryId: Long
+    ) = getPullRequestsFromDatabase.invoke(repositoryId)
 
-    fun loadPullRequests(
+    fun loadPullRequestsOfRepository(
         userName: String?,
-        repoName: String?
+        repoName: String?,
+        repositoryId: Long?
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (userName != null && repoName != null) {
-                _pullRequests.postValue(repoDetailService.loadPullsPageFromApiAsync(
-                    username = userName,
-                    repoName = repoName)
-                )
+        if (userName != null && repoName != null && repositoryId != null) {
+            viewModelScope.launch(Dispatchers.IO) {
+                fetchPullRequestsFromApi.invoke(userName, repoName, repositoryId)
             }
         }
     }

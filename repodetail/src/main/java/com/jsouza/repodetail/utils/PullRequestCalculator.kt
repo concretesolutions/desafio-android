@@ -1,6 +1,6 @@
 package com.jsouza.repodetail.utils
 
-import com.jsouza.repodetail.data.remote.response.PullsResponse
+import com.jsouza.repodetail.domain.model.PullRequests
 
 class PullRequestCalculator {
 
@@ -9,7 +9,7 @@ class PullRequestCalculator {
         private const val CLOSED_PULL_REQUEST_STATUS = "closed"
 
         fun calculateOpenedPullRequestsCount(
-            pullRequests: List<PullsResponse>
+            pullRequests: List<PullRequests>
         ): Int {
             val openedPullsList = arrayListOf<Int>()
             for (element in pullRequests) {
@@ -26,7 +26,7 @@ class PullRequestCalculator {
         }
 
         fun calculateClosedPullRequestsCount(
-            pullRequests: List<PullsResponse>
+            pullRequests: List<PullRequests>
         ): Int {
             val closedPullsList = arrayListOf<Int>()
             for (element in pullRequests) {

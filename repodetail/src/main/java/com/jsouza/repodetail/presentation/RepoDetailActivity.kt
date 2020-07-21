@@ -5,10 +5,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.jsouza.extensions.observeOnce
 import com.jsouza.repodetail.R
-import com.jsouza.repodetail.data.remote.response.PullsResponse
 import com.jsouza.repodetail.databinding.ActivityRepoDetailBinding
+import com.jsouza.repodetail.domain.model.PullRequests
 import com.jsouza.repodetail.presentation.adapter.RepoDetailAdapter
 import com.jsouza.repodetail.utils.Constants.Companion.EMPTY_STRING
 import com.jsouza.repodetail.utils.PullRequestCalculator
@@ -17,11 +16,6 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RepoDetailActivity : AppCompatActivity() {
-
-    companion object {
-        const val REPO_DETAIL_NAME = "REPO_DETAIL_NAME"
-        const val REPO_USER_NAME = "REPO_USER_NAME"
-    }
 
     private lateinit var binding: ActivityRepoDetailBinding
     private val viewModel by viewModel<RepoDetailViewModel>()
@@ -35,11 +29,12 @@ class RepoDetailActivity : AppCompatActivity() {
 
         val repoName = intent.getStringExtra(REPO_DETAIL_NAME)
         val userName = intent.getStringExtra(REPO_USER_NAME)
+        val repositoryId = intent.getLongExtra(REPO_ID, DEFAULT_REPO_ID)
 
         setupToolbar(repoName ?: EMPTY_STRING)
         setupRecyclerView()
-        viewModel.loadPullRequests(userName, repoName)
-        initObserver()
+        viewModel.loadPullRequestsOfRepository(userName, repoName, repositoryId)
+        initObserver(repositoryId)
 
         setContentView(binding.root)
     }
@@ -48,7 +43,8 @@ class RepoDetailActivity : AppCompatActivity() {
         repositoryName: String
     ) {
         binding.pullRequestToolbarMainDetail.setNavigationOnClickListener { onBackPressed() }
-        binding.repositoryTitleTextViewPullList.text = repositoryName.toUpperCase(Locale.getDefault())
+        val repositoryNameToBeDisplayed = repositoryName.toUpperCase(Locale.getDefault())
+        binding.repositoryTitleTextViewPullList.text = repositoryNameToBeDisplayed
     }
 
     private fun setupRecyclerView() {
@@ -58,17 +54,23 @@ class RepoDetailActivity : AppCompatActivity() {
         binding.pullRequestRecyclerViewDetailActivity.adapter = adapter
     }
 
-    private fun initObserver() {
+    private fun initObserver(
+        repositoryId: Long
+    ) {
         viewModel.apply {
-            this.returnPulls?.observeOnce(this@RepoDetailActivity,
+            this.returnPullRequestsOnLiveData(repositoryId).observe(this@RepoDetailActivity,
                 Observer {
-                    adapter.submitList(it) ; loadOpenedAndClosedPullRequests(it)
-                })
+                    it?.let { pullRequests ->
+                        adapter.submitList(pullRequests)
+                        loadOpenedAndClosedPullRequests(pullRequests)
+                    }
+                }
+            )
         }
     }
 
     private fun loadOpenedAndClosedPullRequests(
-        pullRequests: List<PullsResponse>
+        pullRequests: List<PullRequests>
     ) {
         val openedPullRequests = PullRequestCalculator
             .calculateOpenedPullRequestsCount(pullRequests)
@@ -106,5 +108,12 @@ class RepoDetailActivity : AppCompatActivity() {
         binding.repositoryClosedTextViewListItem.text = EMPTY_STRING
         binding.repositoryOpenTextViewListItem.text = EMPTY_STRING
         adapter.submitList(emptyList())
+    }
+
+    companion object {
+        const val REPO_DETAIL_NAME = "REPO_DETAIL_NAME"
+        const val REPO_USER_NAME = "REPO_USER_NAME"
+        const val REPO_ID = "REPO_ID"
+        const val DEFAULT_REPO_ID = 0L
     }
 }

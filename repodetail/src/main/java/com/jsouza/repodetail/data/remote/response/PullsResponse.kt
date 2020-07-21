@@ -6,12 +6,14 @@ import java.util.Date
 import java.util.Locale
 
 data class PullsResponse(
+    var id: Int,
     var title: String?,
     var body: String?,
     @Json(name = "user") var owner: Owner?,
     @Json(name = "created_at") var createdAt: String?,
-    @Json(name = "html_url") var url: String?,
-    var state: String?
+    @Json(name = "html_url") var url: String = "",
+    var state: String?,
+    var repositoryId: Long?
 ) {
 
     fun getCreatedAtDateString(): String {

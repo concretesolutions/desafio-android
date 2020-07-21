@@ -34,11 +34,10 @@ val repositoryCatalogModule = module {
     factory {
             (startRepoDetail: (
                 String?,
-                String?
+                String?,
+                Long?
             ) -> Unit) ->
-        RepoCatalogAdapter(
-            startRepoDetail
-        )
+        RepoCatalogAdapter(startRepoDetail)
     }
 
     single {
@@ -61,28 +60,25 @@ val repositoryCatalogModule = module {
         )
     }
 
-    // DB
     single(named(repositoryDatabase)) {
         Room.databaseBuilder(
             androidContext(),
             RepoDatabase::class.java,
-            "repos.db"
+            "pulls.db"
         ).fallbackToDestructiveMigration()
             .build()
     }
 
-    // DAO
     single(named(repositoryDao)) {
         get<RepoDatabase>(named(repositoryDatabase)).reposDao()
     }
 
-    // DAO
     single(named(keysDao)) {
         get<RepoDatabase>(named(repositoryDatabase)).keysDao()
     }
 }
 
-fun getRepositoryService(
+private fun getRepositoryService(
     retrofit: Retrofit
 ): RepoCatalogService = retrofit
     .create(RepoCatalogService::class.java)

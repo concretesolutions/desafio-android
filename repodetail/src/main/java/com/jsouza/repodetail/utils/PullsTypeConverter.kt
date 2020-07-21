@@ -1,11 +1,11 @@
-package com.jsouza.repocatalog.utils
+package com.jsouza.repodetail.utils
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.jsouza.repocatalog.data.remote.response.Owner
+import com.jsouza.repodetail.data.remote.response.Owner
 
-class RepoTypeConverter {
+class PullsTypeConverter {
 
     companion object {
         private var gson = Gson()

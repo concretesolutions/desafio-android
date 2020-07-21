@@ -58,14 +58,17 @@ class RepoCatalogAdapter(
             itemView.setOnClickListener {
                 startDetailActivity(
                     repo.name,
-                    repo.owner?.login
+                    repo.owner?.login,
+                    repo.id
                 )
             }
         }
 
         private var formatter: NumberFormat = DecimalFormat(NUMBER_PATTERN)
 
-        fun itemBind(repoEntity: RepositoryEntity) {
+        fun itemBind(
+            repoEntity: RepositoryEntity
+        ) {
             this.repo = RepoMapper.toDomainModel(repoEntity)
             binding.repositoryNameTextViewListItem.text = repo.name
             binding.repositoryDescriptionTextViewListItem.text = repo.description

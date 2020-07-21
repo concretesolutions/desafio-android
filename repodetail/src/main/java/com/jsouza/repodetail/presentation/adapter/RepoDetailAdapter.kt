@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jsouza.extensions.loadImageUrl
 import com.jsouza.repodetail.R
-import com.jsouza.repodetail.data.remote.response.PullsResponse
 import com.jsouza.repodetail.databinding.PullRequestListItemBinding
+import com.jsouza.repodetail.domain.model.PullRequests
 
 class RepoDetailAdapter : RecyclerView.Adapter<RepoDetailAdapter.ViewHolder>() {
 
-    private val pullList = mutableListOf<PullsResponse>()
+    private val pullList = mutableListOf<PullRequests>()
 
     fun submitList(
-        newData: List<PullsResponse>
+        newData: List<PullRequests>
     ) {
         if (pullList.isNotEmpty()) {
             pullList.clear()
@@ -52,11 +52,11 @@ class RepoDetailAdapter : RecyclerView.Adapter<RepoDetailAdapter.ViewHolder>() {
     ) : RecyclerView.ViewHolder(itemView) {
         private val binding = PullRequestListItemBinding.bind(itemView)
 
-        fun itemBind(pullsResponse: PullsResponse) {
+        fun itemBind(pullsResponse: PullRequests) {
             binding.pullNameTextViewPullListItem.text = pullsResponse.title
             binding.repositoryDescriptionTextViewPullListItem.text = pullsResponse.body
             binding.usernameTextViewPullListItem.text = pullsResponse.owner?.username
-            binding.repositoryCreatedDateTextViewPullListItem.text = pullsResponse.getCreatedAtDateString()
+            binding.repositoryCreatedDateTextViewPullListItem.text = pullsResponse.createdAt
             binding.ownerAvatarCircularImageViewPullListItem
                 .loadImageUrl(pullsResponse
                     .owner

@@ -15,6 +15,7 @@ import com.jsouza.repocatalog.presentation.adapter.RepoCatalogAdapter
 import com.jsouza.repocatalog.presentation.adapter.ReposLoadStateAdapter
 import com.jsouza.repodetail.presentation.RepoDetailActivity
 import com.jsouza.repodetail.presentation.RepoDetailActivity.Companion.REPO_DETAIL_NAME
+import com.jsouza.repodetail.presentation.RepoDetailActivity.Companion.REPO_ID
 import com.jsouza.repodetail.presentation.RepoDetailActivity.Companion.REPO_USER_NAME
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -28,10 +29,12 @@ class RepoCatalogActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<RepoCatalogViewModel>()
     private lateinit var binding: ActivityCatalogRepositoryBinding
-    private val loadRepoDetail: StartRepoDetail = { repoName, userName ->
+    private val loadRepoDetail: StartRepoDetail = { repoName, userName, repositoryId ->
         startDetailActivity(
             repoName = repoName,
-            userName = userName)
+            userName = userName,
+            repositoryId = repositoryId
+        )
     }
     private val repositoriesAdapter by inject<RepoCatalogAdapter> { parametersOf(loadRepoDetail) }
     private var showDataJob: Job? = null
@@ -100,13 +103,15 @@ class RepoCatalogActivity : AppCompatActivity() {
 
     private fun startDetailActivity(
         repoName: String?,
-        userName: String?
+        userName: String?,
+        repositoryId: Long?
     ) {
         val intent = Intent(this,
             RepoDetailActivity::class.java)
             .apply {
                 putExtra(REPO_DETAIL_NAME, repoName)
                 putExtra(REPO_USER_NAME, userName)
+                putExtra(REPO_ID, repositoryId)
             }
 
         startActivity(intent)
