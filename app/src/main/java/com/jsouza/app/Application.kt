@@ -2,7 +2,7 @@ package com.jsouza.app
 
 import android.app.Application
 import com.jsouza.repocatalog.di.repositoryCatalogModule
-import com.jsouza.repodetail.di.repositoryDetailModule
+import com.jsouza.repopullrequests.di.repositoryDetailModule
 import com.jsouza.shared_components.di.sharedModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.BuildConfig

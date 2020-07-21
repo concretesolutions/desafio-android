@@ -4,9 +4,9 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.jsouza.repocatalog.data.datasource.RepoMediator
 import com.jsouza.repocatalog.data.local.RepoDatabase
 import com.jsouza.repocatalog.data.local.dao.RepoDao
-import com.jsouza.repocatalog.data.local.datasource.RepoMediator
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
 import com.jsouza.repocatalog.data.remote.RepoCatalogService
 import com.jsouza.repocatalog.domain.repository.RepoRepository

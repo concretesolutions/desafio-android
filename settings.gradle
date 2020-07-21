@@ -1,4 +1,4 @@
-include ':repodetail'
+include ':repopullrequests'
 include ':resource-components'
 include ':extensions'
 include ':repocatalog'

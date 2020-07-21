@@ -43,7 +43,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation project (':shared-components')
-    implementation project (':repodetail')
+    implementation project (':repopullrequests')
 
     // Room Database
     implementation "androidx.room:room-runtime:$room_version"

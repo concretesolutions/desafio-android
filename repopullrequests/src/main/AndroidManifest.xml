@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jsouza.repopullrequests">
+
+    <application>
+        <activity android:name="com.jsouza.repopullrequests.presentation.PullRequestsActivity"></activity>
+    </application>
+
+</manifest>

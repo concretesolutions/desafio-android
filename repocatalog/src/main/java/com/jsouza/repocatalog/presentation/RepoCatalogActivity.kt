@@ -13,10 +13,10 @@ import com.jsouza.repocatalog.databinding.ActivityCatalogRepositoryBinding
 import com.jsouza.repocatalog.domain.`typealias`.StartRepoDetail
 import com.jsouza.repocatalog.presentation.adapter.RepoCatalogAdapter
 import com.jsouza.repocatalog.presentation.adapter.ReposLoadStateAdapter
-import com.jsouza.repodetail.presentation.RepoDetailActivity
-import com.jsouza.repodetail.presentation.RepoDetailActivity.Companion.REPO_DETAIL_NAME
-import com.jsouza.repodetail.presentation.RepoDetailActivity.Companion.REPO_ID
-import com.jsouza.repodetail.presentation.RepoDetailActivity.Companion.REPO_USER_NAME
+import com.jsouza.repopullrequests.presentation.PullRequestsActivity
+import com.jsouza.repopullrequests.presentation.PullRequestsActivity.Companion.REPO_DETAIL_NAME
+import com.jsouza.repopullrequests.presentation.PullRequestsActivity.Companion.REPO_ID
+import com.jsouza.repopullrequests.presentation.PullRequestsActivity.Companion.REPO_USER_NAME
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -107,7 +107,7 @@ class RepoCatalogActivity : AppCompatActivity() {
         repositoryId: Long?
     ) {
         val intent = Intent(this,
-            RepoDetailActivity::class.java)
+            PullRequestsActivity::class.java)
             .apply {
                 putExtra(REPO_DETAIL_NAME, repoName)
                 putExtra(REPO_USER_NAME, userName)
