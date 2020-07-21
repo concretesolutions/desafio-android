@@ -20,19 +20,17 @@ class RepoRepositoryImpl(
     private val reposDatabase: RepoDatabase
 ) : RepoRepository {
 
+    private companion object {
+        private const val GITHUB_PAGE_SIZE = 20
+    }
+
     @ExperimentalPagingApi
     override fun getSearchResultStream(): Flow<PagingData<RepositoryEntity>> {
 
         val pagingSourceFactory = { reposDao.getRepos() }
 
         return Pager(
-            config = PagingConfig(
-                pageSize = 50,
-                prefetchDistance = 10,
-                enablePlaceholders = false,
-                initialLoadSize = 80,
-                maxSize = 70
-            ),
+            config = PagingConfig(pageSize = GITHUB_PAGE_SIZE),
             remoteMediator = RepoMediator(
                 catalogService, reposDatabase
             ),

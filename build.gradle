@@ -1,5 +1,6 @@
 buildscript {
 
+    // Project
     ext{
         app_name = "com.jsouza.githubrepos"
         compile_sdk_version = 30
@@ -10,6 +11,7 @@ buildscript {
         version_name = "1.0"
     }
 
+    // Dependencies Versions
     ext {
         androidx_legacy_support_version = "1.0.0"
         app_compat_version = "1.1.0"

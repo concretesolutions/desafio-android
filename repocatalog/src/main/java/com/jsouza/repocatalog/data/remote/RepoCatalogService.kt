@@ -8,7 +8,6 @@ interface RepoCatalogService {
 
     @GET("/search/repositories?q=language:Java&?sort=stars")
     suspend fun loadRepositoryPageFromApiAsync(
-        @Query("page") page: Int,
-        @Query("per_page") per_page: Int
+        @Query("page") page: Int
     ): RepositoryResponse
 }

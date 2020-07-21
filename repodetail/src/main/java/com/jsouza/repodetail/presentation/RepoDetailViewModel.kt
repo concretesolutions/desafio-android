@@ -16,7 +16,7 @@ class RepoDetailViewModel(
     private val _pullRequests = MutableLiveData<List<PullsResponse>>()
     val returnPulls: LiveData<List<PullsResponse>>? = _pullRequests
 
-    fun fetchPullRequests(
+    fun loadPullRequests(
         userName: String?,
         repoName: String?
     ) {

@@ -10,8 +10,9 @@ import com.jsouza.repocatalog.data.local.entity.RepoKeysEntity
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
 import com.jsouza.repocatalog.data.mapper.RepoMapper
 import com.jsouza.repocatalog.data.remote.RepoCatalogService
+import com.jsouza.repocatalog.data.remote.requeststatus.RequestStatus
+import com.jsouza.repocatalog.data.remote.response.Repository
 import java.io.IOException
-import java.io.InvalidObjectException
 import retrofit2.HttpException
 
 @ExperimentalPagingApi
@@ -25,65 +26,46 @@ class RepoMediator(
         private const val SINGLE_PAGE = 1
     }
 
+    private var actualPage = 0
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, RepositoryEntity>
     ): MediatorResult {
 
-        val page = when (loadType) {
+        actualPage = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
                 remoteKeys?.nextKey?.minus(SINGLE_PAGE) ?: FIRST_PAGE
             }
             LoadType.PREPEND -> {
-                val remoteKeys = getRemoteKeyForFirstItem(state)
-                    ?: throw InvalidObjectException("Remote key and the prevKey should not be null")
+                val remoteKeys = getRemoteKeyForFirstItem(state) ?: throw RequestStatus.NullKeysError
 
-                remoteKeys.previousKey ?: return MediatorResult.Success(
-                    endOfPaginationReached = true)
+                remoteKeys.previousKey ?: return MediatorResult.Success(endOfPaginationReached = true)
 
                 remoteKeys.previousKey
             }
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastItem(state)
                 if (remoteKeys?.nextKey == null) {
-                    throw InvalidObjectException("Remote key should not be null for $loadType")
+                    return MediatorResult.Success(endOfPaginationReached = true)
                 }
                 remoteKeys.nextKey
             }
         }
 
-        try {
-            val apiResponse = service.loadRepositoryPageFromApiAsync(
-                page,
-                state.config.pageSize)
+        return try {
+            val reposList = fetchDataFromApi()
 
-            val repos = apiResponse.items
-            val endOfPaginationReached = repos?.isEmpty() ?: true
+            val isPaginationOnEnd = reposList?.isEmpty() ?: true
 
-            database.withTransaction {
-                if (loadType == LoadType.REFRESH) {
-                    database.keysDao().clearRemoteKeys()
-                    database.reposDao().clearRepos()
-                }
-                val prevKey = if (page == FIRST_PAGE) null else page - SINGLE_PAGE
-                val nextKey = if (endOfPaginationReached) null else page + SINGLE_PAGE
-                val keys = repos?.map {
-                    RepoKeysEntity(
-                        repositoryId = it.id,
-                        previousKey = prevKey,
-                        nextKey = nextKey
-                    )
-                }
-                val resultList = repos?.let { RepoMapper.toDatabaseModel(it) }
-                keys?.let { database.keysDao().insertAll(it) }
-                resultList?.let { database.reposDao().insertAll(it) }
-            }
-            return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
+            saveDataOnDatabase(loadType, isPaginationOnEnd, reposList)
+
+            MediatorResult.Success(endOfPaginationReached = isPaginationOnEnd)
         } catch (exception: IOException) {
-            return MediatorResult.Error(exception)
+            MediatorResult.Error(RequestStatus.LoadError)
         } catch (exception: HttpException) {
-            return MediatorResult.Error(exception)
+            MediatorResult.Error(RequestStatus.ApiError)
         }
     }
 
@@ -113,5 +95,62 @@ class RepoMediator(
                 database.keysDao().getRemoteKey(repoId)
             }
         }
+    }
+
+    private suspend fun fetchDataFromApi(): List<Repository>? {
+        val repositoriesResponse = service
+            .loadRepositoryPageFromApiAsync(
+                actualPage)
+
+        return repositoriesResponse.items
+    }
+
+    private suspend fun saveDataOnDatabase(
+        loadType: LoadType,
+        endOfPaginationReached: Boolean,
+        repos: List<Repository>?
+    ) {
+        database.withTransaction {
+            clearDatabaseIfIsOnRefreshingState(loadType)
+
+            val prevKey = if (actualPage == FIRST_PAGE) null else actualPage - SINGLE_PAGE
+            val nextKey = if (endOfPaginationReached) null else actualPage + SINGLE_PAGE
+
+            val keys = keysToDomainModel(repos, prevKey, nextKey)
+
+            insertDataOnDatabase(keys, repos)
+        }
+    }
+
+    private suspend fun clearDatabaseIfIsOnRefreshingState(
+        loadType: LoadType
+    ) {
+        if (loadType == LoadType.REFRESH) {
+            database.keysDao().clearRemoteKeys()
+            database.reposDao().clearRepos()
+        }
+    }
+
+    private fun keysToDomainModel(
+        repos: List<Repository>?,
+        prevKey: Int?,
+        nextKey: Int?
+    ): List<RepoKeysEntity>? {
+        return repos?.map {
+            RepoKeysEntity(
+                repositoryId = it.id,
+                previousKey = prevKey,
+                nextKey = nextKey
+            )
+        }
+    }
+
+    private suspend fun insertDataOnDatabase(
+        keys: List<RepoKeysEntity>?,
+        repos: List<Repository>?
+    ) {
+        val resultList = repos?.let { RepoMapper.toDatabaseModel(it) }
+        keys?.let { database.keysDao().insertAll(it) }
+        resultList?.let { database.reposDao().insertAll(it) }
     }
 }

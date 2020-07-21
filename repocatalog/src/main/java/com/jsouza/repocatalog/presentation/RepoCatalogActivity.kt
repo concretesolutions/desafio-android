@@ -26,15 +26,17 @@ class RepoCatalogActivity : AppCompatActivity() {
     private val viewModel by viewModel<RepoCatalogViewModel>()
     private lateinit var binding: ActivityCatalogRepositoryBinding
     private val loadRepoDetail: StartRepoDetail = { repoName, userName ->
-        startDetailActivity(repoName = repoName, userName = userName)
+        startDetailActivity(
+            repoName = repoName,
+            userName = userName)
     }
-    private val repositoriesAdapter by inject<RepoCatalogAdapter> {
-        parametersOf(loadRepoDetail)
-    }
+    private val repositoriesAdapter by inject<RepoCatalogAdapter> { parametersOf(loadRepoDetail) }
     private var showDataJob: Job? = null
 
     @ExperimentalCoroutinesApi
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(
+        savedInstanceState: Bundle?
+    ) {
         super.onCreate(savedInstanceState)
         binding = ActivityCatalogRepositoryBinding.inflate(layoutInflater)
 
@@ -57,15 +59,16 @@ class RepoCatalogActivity : AppCompatActivity() {
         repoName: String?,
         userName: String?
     ) {
-        val intent = Intent(
-            this,
+        val intent = Intent(this,
             RepoDetailActivity::class.java)
             .apply {
                 putExtra(REPO_DETAIL_NAME, repoName)
                 putExtra(REPO_USER_NAME, userName)
             }
+
         startActivity(intent)
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        overridePendingTransition(R.anim.slide_in_right,
+            R.anim.slide_out_left)
     }
 
     @ExperimentalCoroutinesApi

@@ -1,6 +1,5 @@
 package com.jsouza.repocatalog.presentation.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +56,6 @@ class RepoCatalogAdapter(
         private lateinit var repo: Repository
         init {
             itemView.setOnClickListener {
-                Log.i("Api adapter", "${repo.name}, ${repo.owner?.login}")
                 startDetailActivity(
                     repo.name,
                     repo.owner?.login

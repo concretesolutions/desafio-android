@@ -34,14 +34,14 @@ class RepoDetailActivity : AppCompatActivity() {
         setupToolbar(repoName ?: "")
         setupRecyclerView()
 
-        binding.pullRequestToolbarMainDetail.setNavigationOnClickListener { onBackPressed() }
-        viewModel.fetchPullRequests(userName, repoName)
+        viewModel.loadPullRequests(userName, repoName)
         initObserver()
 
         setContentView(binding.root)
     }
 
     private fun setupToolbar(repoName: String) {
+        binding.pullRequestToolbarMainDetail.setNavigationOnClickListener { onBackPressed() }
         binding.repositoryTitleTextViewPullList.text = repoName.toUpperCase(Locale.getDefault())
     }
 
