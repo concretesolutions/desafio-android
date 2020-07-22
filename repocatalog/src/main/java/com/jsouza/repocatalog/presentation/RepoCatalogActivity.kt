@@ -29,9 +29,9 @@ import org.koin.core.parameter.parametersOf
 @ExperimentalCoroutinesApi
 class RepoCatalogActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCatalogRepositoryBinding
     private val viewModel by viewModel<RepoCatalogViewModel>()
     private val repositoriesAdapter by inject<RepoCatalogAdapter> { parametersOf(loadRepoDetail) }
+    private lateinit var binding: ActivityCatalogRepositoryBinding
     private var showDataJob: Job? = null
     private val loadRepoDetail: StartRepoDetail = { repoName, userName, repositoryId ->
         startDetailActivity(

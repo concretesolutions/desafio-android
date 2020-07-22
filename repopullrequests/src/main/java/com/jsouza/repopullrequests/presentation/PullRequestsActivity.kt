@@ -17,9 +17,9 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class PullRequestsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRepoDetailBinding
     private val viewModel by viewModel<PullRequestsViewModel>()
     private val adapter by inject<PullRequestsAdapter>()
+    private lateinit var binding: ActivityRepoDetailBinding
 
     override fun onCreate(
         savedInstanceState: Bundle?

@@ -3,7 +3,7 @@ package com.jsouza.repopullrequests.utils
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.jsouza.repopullrequests.data.remote.response.Owner
+import com.jsouza.repopullrequests.data.remote.response.OwnerResponse
 
 class PullsTypeConverter {
 
@@ -12,11 +12,11 @@ class PullsTypeConverter {
 
         @TypeConverter
         fun fromOwner(
-            owner: Owner?
+            owner: OwnerResponse?
         ): String? {
             if (owner == null) { return null }
             gson = Gson()
-            val type = object : TypeToken<Owner>() {
+            val type = object : TypeToken<OwnerResponse>() {
             }.type
 
             return gson.toJson(owner, type)
@@ -25,10 +25,10 @@ class PullsTypeConverter {
         @TypeConverter
         fun toOwner(
             owner: String?
-        ): Owner? {
+        ): OwnerResponse? {
             if (owner == null) { return null }
             gson = Gson()
-            val type = object : TypeToken<Owner>() {
+            val type = object : TypeToken<OwnerResponse>() {
             }.type
 
             return gson.fromJson(owner, type)

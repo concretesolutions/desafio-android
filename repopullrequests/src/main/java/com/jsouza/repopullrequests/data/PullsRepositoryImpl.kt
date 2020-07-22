@@ -7,7 +7,7 @@ import com.jsouza.repopullrequests.data.local.dao.PullsDao
 import com.jsouza.repopullrequests.data.local.entity.PullsEntity
 import com.jsouza.repopullrequests.data.mapper.PullsMapper
 import com.jsouza.repopullrequests.data.remote.RepoDetailService
-import com.jsouza.repopullrequests.data.remote.response.Owner
+import com.jsouza.repopullrequests.data.remote.response.OwnerResponse
 import com.jsouza.repopullrequests.data.remote.response.PullsResponse
 import com.jsouza.repopullrequests.domain.model.PullRequests
 import com.jsouza.repopullrequests.domain.repository.PullsRepository
@@ -19,6 +19,9 @@ class PullsRepositoryImpl(
     private val dao: PullsDao
 ) : PullsRepository {
 
+    private var pullsList = listOf<PullsResponse>()
+    private var repositoryId = 0L
+
     override fun getPullRequests(
         repositoryId: Long
     ): LiveData<List<PullRequests>?> {
@@ -26,9 +29,6 @@ class PullsRepositoryImpl(
             PullsMapper.toDomainModel(it)
         }
     }
-
-    private var pullsList = listOf<PullsResponse>()
-    private var repositoryId = 0L
 
     override suspend fun refreshPullRequests(
         userName: String,
@@ -69,7 +69,7 @@ class PullsRepositoryImpl(
                 "http://github.com",
                 "",
                 "This Repository Does not have Pull Requests",
-                Owner("", ""),
+                OwnerResponse("", ""),
                 "",
                 "",
                 repositoryId)

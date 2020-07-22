@@ -17,10 +17,6 @@ class RepoRepositoryImpl(
     private val reposDatabase: RepoDatabase
 ) : RepoRepository {
 
-    private companion object {
-        private const val GITHUB_PAGE_SIZE = 20
-    }
-
     @ExperimentalPagingApi
     override suspend fun getSearchResultStream(): Flow<PagingData<RepositoryEntity>> {
 
@@ -33,5 +29,9 @@ class RepoRepositoryImpl(
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
+    }
+
+    private companion object {
+        private const val GITHUB_PAGE_SIZE = 20
     }
 }

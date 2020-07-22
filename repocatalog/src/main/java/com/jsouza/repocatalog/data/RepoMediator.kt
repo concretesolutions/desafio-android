@@ -12,7 +12,8 @@ import com.jsouza.repocatalog.data.mapper.KeysMapper
 import com.jsouza.repocatalog.data.mapper.RepoMapper
 import com.jsouza.repocatalog.data.remote.RepoCatalogService
 import com.jsouza.repocatalog.data.remote.requeststatus.RequestStatus
-import com.jsouza.repocatalog.data.remote.response.Repository
+import com.jsouza.repocatalog.data.remote.response.RepositoryResponse
+import com.jsouza.repocatalog.utils.Constants.Companion.ABSOLUTE_ZERO
 import java.io.IOException
 import retrofit2.HttpException
 
@@ -22,12 +23,7 @@ class RepoMediator(
     private val database: RepoDatabase
 ) : RemoteMediator<Int, RepositoryEntity>() {
 
-    companion object {
-        private const val FIRST_PAGE = 0
-        private const val SINGLE_PAGE = 1
-    }
-
-    private var actualPage = 0
+    private var actualPage = ABSOLUTE_ZERO
 
     override suspend fun load(
         loadType: LoadType,
@@ -47,7 +43,7 @@ class RepoMediator(
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastItem(state)
                 if (remoteKeys?.nextKey == null) {
-                    return return MediatorResult.Success(endOfPaginationReached = true)
+                    return MediatorResult.Success(endOfPaginationReached = true)
                 }
                 remoteKeys.nextKey
             }
@@ -95,7 +91,7 @@ class RepoMediator(
         }
     }
 
-    private suspend fun fetchDataFromApi(): List<Repository> {
+    private suspend fun fetchDataFromApi(): List<RepositoryResponse> {
         val repositoriesResponse = service
             .loadRepositoryPageFromApiAsync(
                 actualPage)
@@ -106,7 +102,7 @@ class RepoMediator(
     private suspend fun saveDataOnDatabase(
         loadType: LoadType,
         endOfPaginationReached: Boolean,
-        repos: List<Repository>
+        repos: List<RepositoryResponse>
     ) {
         database.withTransaction {
             clearDatabaseIfIsOnRefreshingState(loadType)
@@ -131,10 +127,15 @@ class RepoMediator(
 
     private suspend fun insertDataOnDatabase(
         keys: List<RepoKeysEntity>,
-        repos: List<Repository>
+        repos: List<RepositoryResponse>
     ) {
         val resultList = repos.let { RepoMapper.toDatabaseModel(it) }
         keys.let { database.keysDao().insertAll(it) }
         resultList.let { database.reposDao().insertAll(it) }
+    }
+
+    companion object {
+        private const val FIRST_PAGE = 0
+        private const val SINGLE_PAGE = 1
     }
 }

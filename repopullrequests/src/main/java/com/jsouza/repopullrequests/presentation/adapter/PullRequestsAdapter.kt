@@ -18,9 +18,10 @@ class PullRequestsAdapter : RecyclerView.Adapter<PullRequestsAdapter.ViewHolder>
     fun submitList(
         newData: List<PullRequests>
     ) {
-        if (pullList.isNotEmpty()) {
+        pullList.isNotEmpty().let {
             pullList.clear()
         }
+
         pullList.addAll(newData)
         notifyDataSetChanged()
     }

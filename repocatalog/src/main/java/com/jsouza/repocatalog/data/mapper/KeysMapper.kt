@@ -1,13 +1,13 @@
 package com.jsouza.repocatalog.data.mapper
 
 import com.jsouza.repocatalog.data.local.entity.RepoKeysEntity
-import com.jsouza.repocatalog.data.remote.response.Repository
+import com.jsouza.repocatalog.data.remote.response.RepositoryResponse
 
 class KeysMapper {
 
     companion object {
         fun keysToDatabaseModel(
-            repos: List<Repository>,
+            repos: List<RepositoryResponse>,
             prevKey: Int?,
             nextKey: Int?
         ): List<RepoKeysEntity> {

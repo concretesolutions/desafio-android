@@ -1,14 +1,14 @@
 package com.jsouza.repocatalog.data.mapper
 
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
-import com.jsouza.repocatalog.data.remote.response.Repository
+import com.jsouza.repocatalog.data.remote.response.RepositoryResponse
 import com.jsouza.repocatalog.utils.RepoTypeConverter
 
 class RepoMapper {
 
     companion object {
         fun toDatabaseModel(
-            response: List<Repository>
+            response: List<RepositoryResponse>
         ): List<RepositoryEntity> {
             return response.map { RepositoryEntity(
                 id = it.id,
@@ -24,8 +24,8 @@ class RepoMapper {
 
         fun toDomainModel(
             response: RepositoryEntity
-        ): Repository {
-            return Repository(
+        ): RepositoryResponse {
+            return RepositoryResponse(
                 id = response.id,
                 name = response.name,
                 owner = RepoTypeConverter.toOwner(response.owner),

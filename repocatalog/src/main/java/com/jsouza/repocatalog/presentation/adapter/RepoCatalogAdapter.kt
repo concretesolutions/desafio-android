@@ -9,7 +9,7 @@ import com.jsouza.extensions.loadImageUrl
 import com.jsouza.repocatalog.R
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
 import com.jsouza.repocatalog.data.mapper.RepoMapper
-import com.jsouza.repocatalog.data.remote.response.Repository
+import com.jsouza.repocatalog.data.remote.response.RepositoryResponse
 import com.jsouza.repocatalog.databinding.RepositoryListItemBinding
 import com.jsouza.repocatalog.domain.`typealias`.StartRepoDetail
 import com.jsouza.repocatalog.utils.DiffUtilCallback
@@ -19,12 +19,6 @@ import java.text.NumberFormat
 class RepoCatalogAdapter(
     private val startDetailActivity: StartRepoDetail
 ) : PagingDataAdapter<RepositoryEntity, RepoCatalogAdapter.ViewHolder>(DiffUtilCallback()) {
-
-    companion object {
-        private const val NUMBER_PATTERN = "#,###"
-        private const val COMMA_SEPARATOR = ","
-        private const val DOT_SEPARATOR = "."
-    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -44,26 +38,23 @@ class RepoCatalogAdapter(
         position: Int
     ) {
         val repoItem = getItem(position)
-        if (repoItem != null) {
-            holder.itemBind(repoItem)
+
+        repoItem?.let { repositoryItem ->
+            holder.itemBind(repositoryItem)
         }
+    }
+
+    companion object {
+        private const val NUMBER_PATTERN = "#,###"
+        private const val COMMA_SEPARATOR = ","
+        private const val DOT_SEPARATOR = "."
     }
 
     inner class ViewHolder(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
         private val binding = RepositoryListItemBinding.bind(itemView)
-        private lateinit var repo: Repository
-        init {
-            itemView.setOnClickListener {
-                startDetailActivity(
-                    repo.name,
-                    repo.owner?.login,
-                    repo.id
-                )
-            }
-        }
-
+        private lateinit var repo: RepositoryResponse
         private var formatter: NumberFormat = DecimalFormat(NUMBER_PATTERN)
 
         fun itemBind(
@@ -96,6 +87,14 @@ class RepoCatalogAdapter(
             binding.ownerAvatarCircularImageViewListItem
                 .loadImageUrl(owner
                     ?.avatarUrl)
+
+            itemView.setOnClickListener {
+                startDetailActivity(
+                    repo.name,
+                    repo.owner?.login,
+                    repo.id
+                )
+            }
         }
     }
 }

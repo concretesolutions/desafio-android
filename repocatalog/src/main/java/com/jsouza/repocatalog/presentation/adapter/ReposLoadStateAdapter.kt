@@ -29,19 +29,12 @@ class ReposLoadStateAdapter(
                 parent,
                 false)
         val binding = ReposLoadContainerItemBinding.bind(view)
-        return LoadStateViewHolder(binding, retry)
+        return LoadStateViewHolder(binding)
     }
 
     inner class LoadStateViewHolder(
-        private val binding: ReposLoadContainerItemBinding,
-        retry: () -> Unit
+        private val binding: ReposLoadContainerItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-
-        init {
-            binding.retryButtonListItem.setOnClickListener {
-                retry.invoke()
-            }
-        }
 
         fun bind(
             loadState: LoadState
@@ -52,6 +45,10 @@ class ReposLoadStateAdapter(
             binding.progressBarListItem.isVisible = loadState is LoadState.Loading
             binding.retryButtonListItem.isVisible = loadState !is LoadState.Loading
             binding.errorMsgListItem.isVisible = loadState !is LoadState.Loading
+
+            binding.retryButtonListItem.setOnClickListener {
+                retry.invoke()
+            }
         }
     }
 }
