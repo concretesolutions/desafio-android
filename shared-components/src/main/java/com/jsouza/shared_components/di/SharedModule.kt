@@ -23,7 +23,7 @@ val sharedModule = module {
         )
     }
 
-    single(named(SHARED_OKHTTP)) {
+    factory(named(SHARED_OKHTTP)) {
         createOkHttpClient()
     }
 }

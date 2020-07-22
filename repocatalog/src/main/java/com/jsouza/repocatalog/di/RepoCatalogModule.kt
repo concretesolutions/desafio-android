@@ -31,29 +31,28 @@ val repoCatalogModule = module {
         )
     }
 
-    factory {
-            (startRepoDetail: (
-                String?,
-                String?,
-                Long?
-            ) -> Unit) ->
+    factory { (startRepoDetail: (
+        String?,
+        String?,
+        Long?
+    ) -> Unit) ->
         RepoCatalogAdapter(startRepoDetail)
     }
 
-    single {
+    factory {
         RepoRepositoryImpl(
             get<RepoCatalogService>(),
             get<RepoDatabase>(named(repositoryDatabase))
         ) as RepoRepository
     }
 
-    single {
+    factory {
         RefreshPaginatedData(
             get<RepoRepository>()
         )
     }
 
-    single {
+    factory {
         getRepositoryService(
             get<Retrofit>(named(SHARED_RETROFIT))
         )

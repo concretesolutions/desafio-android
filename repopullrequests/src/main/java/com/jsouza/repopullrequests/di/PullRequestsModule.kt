@@ -33,30 +33,30 @@ val pullRequestsModule = module {
         )
     }
 
-    single {
+    factory {
         PullRequestsAdapter()
     }
 
-    single {
+    factory {
         PullsRepositoryImpl(
             get<PullRequestsService>(),
             get<PullsDao>(named(pullsDao))
         ) as PullsRepository
     }
 
-    single {
+    factory {
         getRepositoryService(
             get<Retrofit>(named(SHARED_RETROFIT))
         )
     }
 
-    single {
+    factory {
         FetchPullRequestsFromApi(
             get<PullsRepository>()
         )
     }
 
-    single {
+    factory {
         GetPullRequestsFromDatabase(
             get<PullsRepository>()
         )
