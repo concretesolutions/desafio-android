@@ -1,5 +1,5 @@
 <resources>
-    // RepoDetail
+    <!-- RepoDetail -->
     <string name="github_home_weblink_in_case_of_no_url_from_pull_request">https://www.github.com</string>
     <string name="opened_pull_request_status">open</string>
     <string name="closed_pull_request_status">closed</string>

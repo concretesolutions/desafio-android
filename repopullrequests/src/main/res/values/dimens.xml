@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    // RepoDetail
+    <!-- RepoDetail -->
     <dimen name="colored_item_view_list_item">40dp</dimen>
 
-    // List item
+    <!-- List item -->
     <dimen name="owner_avatar_width">40dp</dimen>
     <dimen name="owner_avatar_height">40dp</dimen>
 </resources>

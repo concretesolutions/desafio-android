@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    // List item
+    <!-- List item -->
     <dimen name="recycler_card_view_height_list_item">145dp</dimen>
     <dimen name="colored_view_width_list_item">5dp</dimen>
     <dimen name="branch_icon_width_list_item">24dp</dimen>

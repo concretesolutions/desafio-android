@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    // Material Design
+    <!--  Material Design -->
     <dimen name="material_margin_4dp">4dp</dimen>
     <dimen name="material_margin_8dp">8dp</dimen>
     <dimen name="material_margin_16dp">16dp</dimen>
     <dimen name="default_elevation_toolbar">4dp</dimen>
     <dimen name="padding_16">16dp</dimen>
 
-    // Toolbar
+    <!-- Toolbar -->
     <dimen name="github_logo_width_toolbar">170dp</dimen>
     <dimen name="github_logo_height_toolbar">56dp</dimen>
 
-    // List Item
+    <!-- List Item -->
     <dimen name="card_corner_radius_list_item">4dp</dimen>
     <dimen name="card_elevation_list_item">2dp</dimen>
 </resources>

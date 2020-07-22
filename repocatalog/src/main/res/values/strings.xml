@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">GithubRepos</string>
 
-    // Common Item List
+    <!-- Common Item List -->
     <string name="mock_full_name_item_list">Eric T. Cartman</string>
     <string name="mock_username_item_list">Cartman</string>
 
-    // Repository Item List
+    <!-- Repository Item List -->
     <string name="mock_star_count_list_item">32767</string>
     <string name="mock_branch_count_item_list">112535</string>
     <string name="content_description_branch_icon">Slingshot Branch icon</string>
