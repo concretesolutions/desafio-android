@@ -37,4 +37,12 @@ dependencies {
 
    //Room Kapt
     kapt "androidx.room:room-compiler:$room_version"
+
+    // Mockk
+    testImplementation "io.mockk:mockk:$mockk_version"
+    // Coroutines Testing
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_core"
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "androidx.arch.core:core-testing:$arch_testing_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_coroutines_core"
 }

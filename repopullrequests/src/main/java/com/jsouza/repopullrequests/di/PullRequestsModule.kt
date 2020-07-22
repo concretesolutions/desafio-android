@@ -12,6 +12,8 @@ import com.jsouza.repopullrequests.presentation.PullRequestsViewModel
 import com.jsouza.repopullrequests.presentation.adapter.PullRequestsAdapter
 import com.jsouza.repopullrequests.utils.Constants.Companion.DATABASE_NAME
 import com.jsouza.shared_components.di.SHARED_RETROFIT
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -28,6 +30,7 @@ val pullRequestsModule = module {
 
     viewModel {
         PullRequestsViewModel(
+            get<CoroutineDispatcher>(),
             get<FetchPullRequestsFromApi>(),
             get<GetPullRequestsFromDatabase>()
         )
@@ -71,6 +74,10 @@ val pullRequestsModule = module {
             .build()
     }
 
+    factory {
+        getCoroutinesDispatchersIo()
+    }
+
     single(named(pullsDao)) {
         get<PullsDatabase>(named(pullsDatabase)).pullsDao()
     }
@@ -80,3 +87,5 @@ fun getRepositoryService(
     retrofit: Retrofit
 ): PullRequestsService = retrofit
     .create(PullRequestsService::class.java)
+
+private fun getCoroutinesDispatchersIo() = Dispatchers.IO

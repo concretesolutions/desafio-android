@@ -8,6 +8,6 @@ class FetchPullRequestsFromApi(
     suspend operator fun invoke(
         userName: String,
         repoName: String,
-        repositoryId: Long
-    ) = repository.refreshPullRequests(userName, repoName, repositoryId)
+        repoId: Long
+    ) = repository.refreshPullRequests(userName, repoName, repoId)
 }

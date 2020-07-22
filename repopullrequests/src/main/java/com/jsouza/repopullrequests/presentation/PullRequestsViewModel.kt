@@ -4,12 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jsouza.repopullrequests.domain.usecase.FetchPullRequestsFromApi
 import com.jsouza.repopullrequests.domain.usecase.GetPullRequestsFromDatabase
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class PullRequestsViewModel(
-    private val fetchPullRequestsFromApi: FetchPullRequestsFromApi,
-    private val getPullRequestsFromDatabase: GetPullRequestsFromDatabase
+    internal val coroutineContext: CoroutineDispatcher,
+    internal val fetchPullRequestsFromApi: FetchPullRequestsFromApi,
+    internal val getPullRequestsFromDatabase: GetPullRequestsFromDatabase
 ) : ViewModel() {
 
     fun returnPullRequestsOnLiveData(
@@ -19,11 +20,11 @@ class PullRequestsViewModel(
     fun loadPullRequestsOfRepository(
         userName: String?,
         repoName: String?,
-        repositoryId: Long?
+        repoId: Long?
     ) {
-        if (userName != null && repoName != null && repositoryId != null) {
-            viewModelScope.launch(Dispatchers.IO) {
-                fetchPullRequestsFromApi.invoke(userName, repoName, repositoryId)
+        if (userName != null && repoName != null && repoId != null) {
+            viewModelScope.launch(coroutineContext) {
+                fetchPullRequestsFromApi.invoke(userName, repoName, repoId)
             }
         }
     }

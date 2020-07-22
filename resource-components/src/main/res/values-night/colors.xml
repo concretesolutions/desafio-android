@@ -2,7 +2,6 @@
 <resources>
     <color name="color_primary">#343438</color>
     <color name="color_primary_dark">#343438</color>
-
     <color name="color_attributes">#FFAD13</color>
     <color name="list_item_title_text_color">#306997</color>
     <color name="list_item_default_text_color">#2B2B2B</color>

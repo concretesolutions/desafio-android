@@ -57,7 +57,7 @@ O Remote Mediador age como uma camada que verifica a página atual, próxima e a
 
 ## O que eu gostaria de ter feito
 
-* _criado testes unitários;_
+* _aumentado a cobertura dos testes unitários;_
 
 * _criado testes de ui;_
 
