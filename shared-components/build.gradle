@@ -84,4 +84,8 @@ dependencies {
 
     // Material Design
     implementation "com.google.android.material:material:$material_design_version"
+
+    // Room Database
+    api "androidx.room:room-runtime:$room_version"
+    api "androidx.room:room-ktx:$room_version"
 }

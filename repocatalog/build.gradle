@@ -45,8 +45,6 @@ dependencies {
     implementation project (':shared-components')
     implementation project (':repopullrequests')
 
-    // Room Database
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
+    // Room Kapt
     kapt "androidx.room:room-compiler:$room_version"
 }

@@ -37,7 +37,7 @@ O `./gradlew ktlintFormat` roda uma rotina que formata o código de acordo com o
 **Coroutines** - _lidando com threads e assincronismo_
  <p>Abordagem sugerida pela Google e com um bom funcionamento com o Live Data, faz bom uso das threads do dispositivo, melhorando a performance da aplicação. No aplicativo também foi utilizado o Flow na tela principal.</p>
 
-** Paging Library 3.0 **
+**Paging Library 3.0**
 <p> A Paging Library 3.0 em sua versão nova, permite que os dados carregados da Api sejam salvos no banco de dados e carregados de acordo com a página em questão.
 O Remote Mediador age como uma camada que verifica a página atual, próxima e anterior para determinar a próxima chamada à Api, assim como a operação de inserção dos dados no Banco de Dados.</p>
 
