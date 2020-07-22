@@ -30,6 +30,7 @@ class RepoCatalogAdapter(
                 R.layout.repository_list_item,
                 parent,
                 false)
+
         return ViewHolder(view)
     }
 

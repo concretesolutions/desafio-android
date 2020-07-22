@@ -29,6 +29,7 @@ class RepoMediator(
         loadType: LoadType,
         state: PagingState<Int, RepositoryEntity>
     ): MediatorResult {
+
         actualPage = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -38,13 +39,16 @@ class RepoMediator(
                 val remoteKeys = getRemoteKeyForFirstItem(state) ?: throw RequestStatus.NullKeysError
 
                 remoteKeys.previousKey ?: return MediatorResult.Success(endOfPaginationReached = false)
+
                 remoteKeys.previousKey
             }
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastItem(state)
+
                 if (remoteKeys?.nextKey == null) {
                     return MediatorResult.Success(endOfPaginationReached = true)
                 }
+
                 remoteKeys.nextKey
             }
         }
@@ -129,9 +133,17 @@ class RepoMediator(
         keys: List<RepoKeysEntity>,
         repos: List<RepositoryResponse>
     ) {
-        val resultList = repos.let { RepoMapper.toDatabaseModel(it) }
-        keys.let { database.keysDao().insertAll(it) }
-        resultList.let { database.reposDao().insertAll(it) }
+        val resultList = repos.let {
+            RepoMapper.toDatabaseModel(it)
+        }
+
+        keys.let {
+            database.keysDao().insertAll(it)
+        }
+
+        resultList.let {
+            database.reposDao().insertAll(it)
+        }
     }
 
     companion object {

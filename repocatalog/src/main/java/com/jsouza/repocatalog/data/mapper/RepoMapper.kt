@@ -10,15 +10,16 @@ class RepoMapper {
         fun toDatabaseModel(
             response: List<RepositoryResponse>
         ): List<RepositoryEntity> {
-            return response.map { RepositoryEntity(
-                id = it.id,
-                name = it.name,
-                owner = RepoTypeConverter.fromOwner(it.owner),
-                fullName = it.fullName,
-                description = it.description,
-                stargazersCount = it.stargazersCount,
-                forksCount = it.forksCount,
-                pageNumber = it.pageNumber)
+            return response.map { repositoryResponse ->
+                RepositoryEntity(
+                id = repositoryResponse.id,
+                name = repositoryResponse.name,
+                owner = RepoTypeConverter.fromOwner(repositoryResponse.owner),
+                fullName = repositoryResponse.fullName,
+                description = repositoryResponse.description,
+                stargazersCount = repositoryResponse.stargazersCount,
+                forksCount = repositoryResponse.forksCount,
+                pageNumber = repositoryResponse.pageNumber)
             }
         }
 

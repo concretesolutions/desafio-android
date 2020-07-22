@@ -4,12 +4,13 @@ import androidx.room.Room
 import com.jsouza.repopullrequests.data.PullsRepositoryImpl
 import com.jsouza.repopullrequests.data.local.PullsDatabase
 import com.jsouza.repopullrequests.data.local.dao.PullsDao
-import com.jsouza.repopullrequests.data.remote.RepoDetailService
+import com.jsouza.repopullrequests.data.remote.PullRequestsService
 import com.jsouza.repopullrequests.domain.repository.PullsRepository
 import com.jsouza.repopullrequests.domain.usecase.FetchPullRequestsFromApi
 import com.jsouza.repopullrequests.domain.usecase.GetPullRequestsFromDatabase
 import com.jsouza.repopullrequests.presentation.PullRequestsViewModel
 import com.jsouza.repopullrequests.presentation.adapter.PullRequestsAdapter
+import com.jsouza.repopullrequests.utils.Constants.Companion.DATABASE_NAME
 import com.jsouza.shared_components.di.SHARED_RETROFIT
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.ext.koin.androidContext
@@ -23,7 +24,7 @@ private const val pullsDao = "PULLS_DAO"
 
 @ExperimentalCoroutinesApi
 @Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
-val repositoryDetailModule = module {
+val pullRequestsModule = module {
 
     viewModel {
         PullRequestsViewModel(
@@ -38,7 +39,7 @@ val repositoryDetailModule = module {
 
     single {
         PullsRepositoryImpl(
-            get<RepoDetailService>(),
+            get<PullRequestsService>(),
             get<PullsDao>(named(pullsDao))
         ) as PullsRepository
     }
@@ -65,7 +66,7 @@ val repositoryDetailModule = module {
         Room.databaseBuilder(
             androidContext(),
             PullsDatabase::class.java,
-            "pullRequests.db"
+            DATABASE_NAME
         ).fallbackToDestructiveMigration()
             .build()
     }
@@ -77,5 +78,5 @@ val repositoryDetailModule = module {
 
 fun getRepositoryService(
     retrofit: Retrofit
-): RepoDetailService = retrofit
-    .create(RepoDetailService::class.java)
+): PullRequestsService = retrofit
+    .create(PullRequestsService::class.java)

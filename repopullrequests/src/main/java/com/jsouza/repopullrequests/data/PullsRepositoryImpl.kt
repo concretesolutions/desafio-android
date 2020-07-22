@@ -6,7 +6,7 @@ import androidx.lifecycle.Transformations
 import com.jsouza.repopullrequests.data.local.dao.PullsDao
 import com.jsouza.repopullrequests.data.local.entity.PullsEntity
 import com.jsouza.repopullrequests.data.mapper.PullsMapper
-import com.jsouza.repopullrequests.data.remote.RepoDetailService
+import com.jsouza.repopullrequests.data.remote.PullRequestsService
 import com.jsouza.repopullrequests.data.remote.response.OwnerResponse
 import com.jsouza.repopullrequests.data.remote.response.PullsResponse
 import com.jsouza.repopullrequests.domain.model.PullRequests
@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PullsRepositoryImpl(
-    private val service: RepoDetailService,
+    private val service: PullRequestsService,
     private val dao: PullsDao
 ) : PullsRepository {
 

@@ -31,6 +31,7 @@ class RepoCatalogActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<RepoCatalogViewModel>()
     private val repositoriesAdapter by inject<RepoCatalogAdapter> { parametersOf(loadRepoDetail) }
+
     private lateinit var binding: ActivityCatalogRepositoryBinding
     private var showDataJob: Job? = null
     private val loadRepoDetail: StartRepoDetail = { repoName, userName, repositoryId ->

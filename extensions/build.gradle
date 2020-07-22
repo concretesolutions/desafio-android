@@ -28,6 +28,8 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
+    implementation project (':resource-components')
+
     // Uncategorized
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "androidx.legacy:legacy-support-v4:$androidx_legacy_support_version"

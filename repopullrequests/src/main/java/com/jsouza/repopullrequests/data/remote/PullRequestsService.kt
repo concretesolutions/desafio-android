@@ -4,7 +4,7 @@ import com.jsouza.repopullrequests.data.remote.response.PullsResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface RepoDetailService {
+interface PullRequestsService {
 
     @GET("/repos/{username}/{repoName}/pulls")
     suspend fun loadPullsPageFromApiAsync(

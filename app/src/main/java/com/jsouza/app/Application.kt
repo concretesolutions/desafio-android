@@ -1,8 +1,8 @@
 package com.jsouza.app
 
 import android.app.Application
-import com.jsouza.repocatalog.di.repositoryCatalogModule
-import com.jsouza.repopullrequests.di.repositoryDetailModule
+import com.jsouza.repocatalog.di.repoCatalogModule
+import com.jsouza.repopullrequests.di.pullRequestsModule
 import com.jsouza.shared_components.di.sharedModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.BuildConfig
@@ -24,8 +24,8 @@ class Application : Application() {
             modules(
                 modules = listOf(
                     sharedModule,
-                    repositoryCatalogModule,
-                    repositoryDetailModule
+                    repoCatalogModule,
+                    pullRequestsModule
                 )
             )
         }

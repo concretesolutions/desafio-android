@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.jsouza.repopullrequests.R
-import com.jsouza.repopullrequests.databinding.ActivityRepoDetailBinding
+import com.jsouza.repopullrequests.databinding.ActivityPullRequestsBinding
 import com.jsouza.repopullrequests.domain.model.PullRequests
 import com.jsouza.repopullrequests.presentation.adapter.PullRequestsAdapter
 import com.jsouza.repopullrequests.utils.Constants.Companion.EMPTY_STRING
@@ -19,13 +19,14 @@ class PullRequestsActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<PullRequestsViewModel>()
     private val adapter by inject<PullRequestsAdapter>()
-    private lateinit var binding: ActivityRepoDetailBinding
+
+    private lateinit var binding: ActivityPullRequestsBinding
 
     override fun onCreate(
         savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRepoDetailBinding.inflate(layoutInflater)
+        binding = ActivityPullRequestsBinding.inflate(layoutInflater)
 
         val repoName = intent.getStringExtra(REPO_DETAIL_NAME)
         val userName = intent.getStringExtra(REPO_USER_NAME)

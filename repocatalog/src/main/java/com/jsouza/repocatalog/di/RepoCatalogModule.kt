@@ -8,6 +8,7 @@ import com.jsouza.repocatalog.domain.repository.RepoRepository
 import com.jsouza.repocatalog.domain.usecase.RefreshPaginatedData
 import com.jsouza.repocatalog.presentation.RepoCatalogViewModel
 import com.jsouza.repocatalog.presentation.adapter.RepoCatalogAdapter
+import com.jsouza.repocatalog.utils.Constants.Companion.DATABASE_NAME
 import com.jsouza.shared_components.di.SHARED_RETROFIT
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.ext.koin.androidContext
@@ -22,7 +23,7 @@ private const val keysDao = "REPOSITORY_KEYS_DAO"
 
 @ExperimentalCoroutinesApi
 @Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
-val repositoryCatalogModule = module {
+val repoCatalogModule = module {
 
     viewModel {
         RepoCatalogViewModel(
@@ -62,7 +63,7 @@ val repositoryCatalogModule = module {
         Room.databaseBuilder(
             androidContext(),
             RepoDatabase::class.java,
-            "pulls.db"
+            DATABASE_NAME
         ).fallbackToDestructiveMigration()
             .build()
     }

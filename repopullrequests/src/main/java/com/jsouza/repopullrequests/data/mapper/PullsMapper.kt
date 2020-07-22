@@ -12,16 +12,16 @@ class PullsMapper {
         fun toDatabaseModel(
             response: List<PullsResponse>
         ): Array<PullsEntity>? {
-            return response.map {
+            return response.map { responseModel ->
                 PullsEntity(
-                    id = it.id,
-                    url = it.url,
-                    title = it.title,
-                    owner = PullsTypeConverter.fromOwner(it.owner),
-                    body = it.body,
-                    createdAt = it.getCreatedAtDateString(),
-                    state = it.state,
-                    repositoryId = it.repositoryId
+                    id = responseModel.id,
+                    url = responseModel.url,
+                    title = responseModel.title,
+                    owner = PullsTypeConverter.fromOwner(responseModel.owner),
+                    body = responseModel.body,
+                    createdAt = responseModel.getCreatedAtDateString(),
+                    state = responseModel.state,
+                    repositoryId = responseModel.repositoryId
                 )
             }.toTypedArray()
         }
@@ -29,15 +29,16 @@ class PullsMapper {
         fun toDomainModel(
             entity: List<PullsEntity>?
         ): List<PullRequests>? {
-            return entity?.map { PullRequests(
-                id = it.id,
-                url = it.url,
-                title = it.title,
-                owner = PullsTypeConverter.toOwner(it.owner),
-                body = it.body,
-                createdAt = it.createdAt,
-                state = it.state,
-                repositoryId = it.repositoryId)
+            return entity?.map { entityModel ->
+                PullRequests(
+                id = entityModel.id,
+                url = entityModel.url,
+                title = entityModel.title,
+                owner = PullsTypeConverter.toOwner(entityModel.owner),
+                body = entityModel.body,
+                createdAt = entityModel.createdAt,
+                state = entityModel.state,
+                repositoryId = entityModel.repositoryId)
             }
         }
 
