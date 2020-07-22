@@ -7,10 +7,10 @@ A tela inicial mostra a lista citada acima e, ao clicar em algum repositório é
 Para abrir o Pull Request, basta clicar no item da lista que o aplicativo abrirá a página do repositório no Github em seu navegador.
 
 ## Algumas screenshots
-![light](https://github.com/jsouza678/concrete-desafio/blob/master/screenshots/home_light.png)
-![dark](https://github.com/jsouza678/concrete-desafio/blob/master/screenshots/home_dark.png)
-![pulls_dark](https://github.com/jsouza678/concrete-desafio/blob/master/screenshots/pulls_dark.png)
-![error](https://github.com/jsouza678/concrete-desafio/blob/master/screenshots/error.png)
+![light](/screenshots/home_light.png)
+![dark](/screenshots/home_dark.png)
+![pulls_dark](/screenshots/pulls_dark.png)
+![error](/screenshots/error.png)
 
 ## Ambiente de instalação
 * 1: Instale o Android Studio;
