@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface RepoRepository {
 
-    fun getSearchResultStream(): Flow<PagingData<RepositoryEntity>>
+    suspend fun getSearchResultStream(): Flow<PagingData<RepositoryEntity>>
 }

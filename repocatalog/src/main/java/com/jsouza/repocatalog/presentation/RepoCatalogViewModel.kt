@@ -12,12 +12,8 @@ class RepoCatalogViewModel(
     private val fetchReposFromApi: RefreshPaginatedData
 ) : ViewModel() {
 
-    private var currentSearchResult: Flow<PagingData<RepositoryEntity>>? = null
-
-    fun searchRepo(): Flow<PagingData<RepositoryEntity>> {
-        val newResult = fetchReposFromApi()
+    suspend fun searchRepo(): Flow<PagingData<RepositoryEntity>> {
+        return fetchReposFromApi()
             .cachedIn(viewModelScope)
-        currentSearchResult = newResult
-        return newResult
     }
 }

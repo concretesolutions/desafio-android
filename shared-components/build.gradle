@@ -80,10 +80,7 @@ dependencies {
     api "de.hdodenhof:circleimageview:$circle_image_view_version"
 
     // Paging
-    api "androidx.paging:paging-runtime:$paging_version"
-
-    //Paging KTX
-    implementation "androidx.paging:paging-runtime-ktx:$paging_ktx_version"
+    api "androidx.paging:paging-runtime:$paging_ktx_version"
 
     // Material Design
     implementation "com.google.android.material:material:$material_design_version"

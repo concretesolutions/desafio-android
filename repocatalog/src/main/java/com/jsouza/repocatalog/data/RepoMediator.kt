@@ -1,4 +1,4 @@
-package com.jsouza.repocatalog.data.datasource
+package com.jsouza.repocatalog.data
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -8,6 +8,7 @@ import androidx.room.withTransaction
 import com.jsouza.repocatalog.data.local.RepoDatabase
 import com.jsouza.repocatalog.data.local.entity.RepoKeysEntity
 import com.jsouza.repocatalog.data.local.entity.RepositoryEntity
+import com.jsouza.repocatalog.data.mapper.KeysMapper
 import com.jsouza.repocatalog.data.mapper.RepoMapper
 import com.jsouza.repocatalog.data.remote.RepoCatalogService
 import com.jsouza.repocatalog.data.remote.requeststatus.RequestStatus
@@ -32,7 +33,6 @@ class RepoMediator(
         loadType: LoadType,
         state: PagingState<Int, RepositoryEntity>
     ): MediatorResult {
-
         actualPage = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -41,14 +41,13 @@ class RepoMediator(
             LoadType.PREPEND -> {
                 val remoteKeys = getRemoteKeyForFirstItem(state) ?: throw RequestStatus.NullKeysError
 
-                remoteKeys.previousKey ?: return MediatorResult.Success(endOfPaginationReached = true)
-
+                remoteKeys.previousKey ?: return MediatorResult.Success(endOfPaginationReached = false)
                 remoteKeys.previousKey
             }
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastItem(state)
                 if (remoteKeys?.nextKey == null) {
-                    return MediatorResult.Success(endOfPaginationReached = true)
+                    return return MediatorResult.Success(endOfPaginationReached = true)
                 }
                 remoteKeys.nextKey
             }
@@ -56,8 +55,7 @@ class RepoMediator(
 
         return try {
             val reposList = fetchDataFromApi()
-
-            val isPaginationOnEnd = reposList?.isEmpty() ?: true
+            val isPaginationOnEnd = reposList.isEmpty()
 
             saveDataOnDatabase(loadType, isPaginationOnEnd, reposList)
 
@@ -97,7 +95,7 @@ class RepoMediator(
         }
     }
 
-    private suspend fun fetchDataFromApi(): List<Repository>? {
+    private suspend fun fetchDataFromApi(): List<Repository> {
         val repositoriesResponse = service
             .loadRepositoryPageFromApiAsync(
                 actualPage)
@@ -108,7 +106,7 @@ class RepoMediator(
     private suspend fun saveDataOnDatabase(
         loadType: LoadType,
         endOfPaginationReached: Boolean,
-        repos: List<Repository>?
+        repos: List<Repository>
     ) {
         database.withTransaction {
             clearDatabaseIfIsOnRefreshingState(loadType)
@@ -116,7 +114,7 @@ class RepoMediator(
             val prevKey = if (actualPage == FIRST_PAGE) null else actualPage - SINGLE_PAGE
             val nextKey = if (endOfPaginationReached) null else actualPage + SINGLE_PAGE
 
-            val keys = keysToDomainModel(repos, prevKey, nextKey)
+            val keys = KeysMapper.keysToDatabaseModel(repos, prevKey, nextKey)
 
             insertDataOnDatabase(keys, repos)
         }
@@ -131,26 +129,12 @@ class RepoMediator(
         }
     }
 
-    private fun keysToDomainModel(
-        repos: List<Repository>?,
-        prevKey: Int?,
-        nextKey: Int?
-    ): List<RepoKeysEntity>? {
-        return repos?.map {
-            RepoKeysEntity(
-                repositoryId = it.id,
-                previousKey = prevKey,
-                nextKey = nextKey
-            )
-        }
-    }
-
     private suspend fun insertDataOnDatabase(
-        keys: List<RepoKeysEntity>?,
-        repos: List<Repository>?
+        keys: List<RepoKeysEntity>,
+        repos: List<Repository>
     ) {
-        val resultList = repos?.let { RepoMapper.toDatabaseModel(it) }
-        keys?.let { database.keysDao().insertAll(it) }
-        resultList?.let { database.reposDao().insertAll(it) }
+        val resultList = repos.let { RepoMapper.toDatabaseModel(it) }
+        keys.let { database.keysDao().insertAll(it) }
+        resultList.let { database.reposDao().insertAll(it) }
     }
 }

@@ -3,7 +3,6 @@ package com.jsouza.repocatalog.di
 import androidx.room.Room
 import com.jsouza.repocatalog.data.RepoRepositoryImpl
 import com.jsouza.repocatalog.data.local.RepoDatabase
-import com.jsouza.repocatalog.data.local.dao.RepoDao
 import com.jsouza.repocatalog.data.remote.RepoCatalogService
 import com.jsouza.repocatalog.domain.repository.RepoRepository
 import com.jsouza.repocatalog.domain.usecase.RefreshPaginatedData
@@ -43,7 +42,6 @@ val repositoryCatalogModule = module {
     single {
         RepoRepositoryImpl(
             get<RepoCatalogService>(),
-            get<RepoDao>(named(repositoryDao)),
             get<RepoDatabase>(named(repositoryDatabase))
         ) as RepoRepository
     }

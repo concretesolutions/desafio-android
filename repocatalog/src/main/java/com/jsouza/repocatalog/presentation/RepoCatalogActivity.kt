@@ -13,22 +13,26 @@ import com.jsouza.repocatalog.databinding.ActivityCatalogRepositoryBinding
 import com.jsouza.repocatalog.domain.`typealias`.StartRepoDetail
 import com.jsouza.repocatalog.presentation.adapter.RepoCatalogAdapter
 import com.jsouza.repocatalog.presentation.adapter.ReposLoadStateAdapter
+import com.jsouza.repocatalog.utils.Constants.Companion.ABSOLUTE_ZERO
 import com.jsouza.repopullrequests.presentation.PullRequestsActivity
 import com.jsouza.repopullrequests.presentation.PullRequestsActivity.Companion.REPO_DETAIL_NAME
 import com.jsouza.repopullrequests.presentation.PullRequestsActivity.Companion.REPO_ID
 import com.jsouza.repopullrequests.presentation.PullRequestsActivity.Companion.REPO_USER_NAME
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+@ExperimentalCoroutinesApi
 class RepoCatalogActivity : AppCompatActivity() {
 
-    private val viewModel by viewModel<RepoCatalogViewModel>()
     private lateinit var binding: ActivityCatalogRepositoryBinding
+    private val viewModel by viewModel<RepoCatalogViewModel>()
+    private val repositoriesAdapter by inject<RepoCatalogAdapter> { parametersOf(loadRepoDetail) }
+    private var showDataJob: Job? = null
     private val loadRepoDetail: StartRepoDetail = { repoName, userName, repositoryId ->
         startDetailActivity(
             repoName = repoName,
@@ -36,10 +40,7 @@ class RepoCatalogActivity : AppCompatActivity() {
             repositoryId = repositoryId
         )
     }
-    private val repositoriesAdapter by inject<RepoCatalogAdapter> { parametersOf(loadRepoDetail) }
-    private var showDataJob: Job? = null
 
-    @ExperimentalCoroutinesApi
     override fun onCreate(
         savedInstanceState: Bundle?
     ) {
@@ -49,7 +50,7 @@ class RepoCatalogActivity : AppCompatActivity() {
         initAdapter()
         initAdapterLoadListener()
         setupRecyclerView()
-        initObserver()
+        initRepoCollect()
         setupRetryButton()
 
         setContentView(binding.root)
@@ -66,8 +67,10 @@ class RepoCatalogActivity : AppCompatActivity() {
     private fun showRecyclerViewOnLoadSuccess(
         loadState: CombinedLoadStates
     ) {
-        binding.repositoryRecyclerViewCatalogActivity
-            .isVisible = loadState.refresh is LoadState.NotLoading
+        when (repositoriesAdapter.itemCount != ABSOLUTE_ZERO) {
+            binding.repositoryRecyclerViewCatalogActivity
+                .isVisible -> loadState.source.refresh is LoadState.NotLoading
+        }
     }
 
     private fun showLoadingSpinnerOnRefreshStatus(
@@ -80,11 +83,13 @@ class RepoCatalogActivity : AppCompatActivity() {
     private fun showErrorScreen(
         loadState: CombinedLoadStates
     ) {
-        binding.emptyRepositoriesMessageContainerCatalogActivity
-            .root
-            .isVisible = loadState.refresh is LoadState.Error
-        binding.retryButtonCatalogActivity
-            .isVisible = loadState.refresh is LoadState.Error
+        binding.retryButtonCatalogActivity.isVisible =
+            repositoriesAdapter.itemCount == ABSOLUTE_ZERO &&
+                    loadState.refresh is LoadState.Error
+
+        binding.emptyRepositoriesMessageContainerCatalogActivity.root.isVisible =
+            loadState.mediator?.refresh is LoadState.Error &&
+                    repositoriesAdapter.itemCount == ABSOLUTE_ZERO
     }
 
     private fun setupRetryButton() {
@@ -98,6 +103,7 @@ class RepoCatalogActivity : AppCompatActivity() {
             this,
             DividerItemDecoration.VERTICAL)
         binding.repositoryRecyclerViewCatalogActivity.addItemDecoration(decoration)
+
         binding.repositoryRecyclerViewCatalogActivity.setHasFixedSize(true)
     }
 
@@ -115,25 +121,26 @@ class RepoCatalogActivity : AppCompatActivity() {
             }
 
         startActivity(intent)
+
         overridePendingTransition(R.anim.slide_in_right,
             R.anim.slide_out_left)
     }
 
-    @ExperimentalCoroutinesApi
-    private fun initObserver() {
+    private fun initRepoCollect() {
         showDataJob?.cancel()
+
         showDataJob = lifecycleScope.launch {
-            viewModel.searchRepo().collectLatest {
+            viewModel.searchRepo().collect {
                 repositoriesAdapter.submitData(it)
             }
         }
     }
 
     private fun initAdapter() {
-        binding.repositoryRecyclerViewCatalogActivity
-            .adapter = repositoriesAdapter.withLoadStateHeaderAndFooter(
-            header = ReposLoadStateAdapter { repositoriesAdapter.retry() },
-            footer = ReposLoadStateAdapter { repositoriesAdapter.retry() }
-        )
+        binding.repositoryRecyclerViewCatalogActivity.adapter =
+            repositoriesAdapter.withLoadStateHeaderAndFooter(
+                header = ReposLoadStateAdapter { repositoriesAdapter.retry() },
+                footer = ReposLoadStateAdapter { repositoriesAdapter.retry() }
+            )
     }
 }

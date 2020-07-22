@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 class RefreshPaginatedData(
     private val repoRepository: RepoRepository
 ) {
-    operator fun invoke(): Flow<PagingData<RepositoryEntity>> = repoRepository.getSearchResultStream()
+    suspend operator fun invoke(): Flow<PagingData<RepositoryEntity>> = repoRepository.getSearchResultStream()
 }

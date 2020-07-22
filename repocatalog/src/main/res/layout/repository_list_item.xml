@@ -34,11 +34,12 @@
 
         <TextView
             android:id="@+id/repository_description_text_view_list_item"
-            tools:text="@string/mock_lorem_ipsum"
-            app:layout_constraintStart_toEndOf="@id/repository_colored_view_list_item"
+            style="@style/description_text_style_item_list"
+            app:layout_constraintBottom_toTopOf="@+id/branch_image_view_list_item"
             app:layout_constraintEnd_toStartOf="@id/repository_owner_container_list_item"
+            app:layout_constraintStart_toEndOf="@id/repository_colored_view_list_item"
             app:layout_constraintTop_toBottomOf="@id/repository_name_text_view_list_item"
-            style="@style/description_text_style_item_list" />
+            tools:text="@string/mock_lorem_ipsum" />
 
         <ImageView
             android:id="@+id/branch_image_view_list_item"
