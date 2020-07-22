@@ -20,6 +20,9 @@ class PullRequestsActivity : AppCompatActivity() {
     private val viewModel by viewModel<PullRequestsViewModel>()
     private val adapter by inject<PullRequestsAdapter>()
 
+    private var repositoryName = EMPTY_STRING
+    private var userName = EMPTY_STRING
+    private var repositoryId = DEFAULT_REPO_ID
     private lateinit var binding: ActivityPullRequestsBinding
 
     override fun onCreate(
@@ -28,21 +31,28 @@ class PullRequestsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPullRequestsBinding.inflate(layoutInflater)
 
-        val repoName = intent.getStringExtra(REPO_DETAIL_NAME)
-        val userName = intent.getStringExtra(REPO_USER_NAME)
-        val repositoryId = intent.getLongExtra(REPO_ID, DEFAULT_REPO_ID)
-
-        setupToolbar(repoName ?: EMPTY_STRING)
+        loadExtraFromIntent()
+        setupToolbar()
         setupRecyclerView()
-        viewModel.loadPullRequestsOfRepository(userName, repoName, repositoryId)
+        loadPullRequests()
         initObserver(repositoryId)
 
         setContentView(binding.root)
     }
 
-    private fun setupToolbar(
-        repositoryName: String
-    ) {
+    private fun loadExtraFromIntent() {
+        intent.getStringExtra(REPO_DETAIL_NAME)?.let { repositoryNameExtra ->
+            repositoryName = repositoryNameExtra
+        }
+        intent.getStringExtra(REPO_USER_NAME)?.let { userNameExtra ->
+            userName = userNameExtra
+        }
+        intent.getLongExtra(REPO_ID, DEFAULT_REPO_ID).let { repositoryExtraId ->
+            repositoryId = repositoryExtraId
+        }
+    }
+
+    private fun setupToolbar() {
         binding.pullRequestToolbarMainDetail.setNavigationOnClickListener { onBackPressed() }
         val repositoryNameToBeDisplayed = repositoryName.toUpperCase(Locale.getDefault())
         binding.repositoryTitleTextViewPullList.text = repositoryNameToBeDisplayed
@@ -53,6 +63,10 @@ class PullRequestsActivity : AppCompatActivity() {
         binding.pullRequestRecyclerViewDetailActivity.addItemDecoration(decoration)
         binding.pullRequestRecyclerViewDetailActivity.setHasFixedSize(true)
         binding.pullRequestRecyclerViewDetailActivity.adapter = adapter
+    }
+
+    private fun loadPullRequests() {
+        viewModel.loadPullRequestsOfRepository(userName, repositoryName, repositoryId)
     }
 
     private fun initObserver(

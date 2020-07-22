@@ -12,9 +12,9 @@ class KeysMapper {
             nextKey: Int?
         ): List<RepoKeysEntity> {
 
-            return repos.map {
+            return repos.map { repositoryResponse ->
                 RepoKeysEntity(
-                    repositoryId = it.id,
+                    repositoryId = repositoryResponse.id,
                     previousKey = prevKey,
                     nextKey = nextKey
                 )

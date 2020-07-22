@@ -3,7 +3,7 @@
     package="com.jsouza.repopullrequests">
 
     <application>
-        <activity android:name="com.jsouza.repopullrequests.presentation.PullRequestsActivity"></activity>
+        <activity android:name="com.jsouza.repopullrequests.presentation.PullRequestsActivity" />
     </application>
 
 </manifest>

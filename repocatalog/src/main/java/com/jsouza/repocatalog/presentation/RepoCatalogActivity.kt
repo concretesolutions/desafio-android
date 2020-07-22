@@ -131,8 +131,8 @@ class RepoCatalogActivity : AppCompatActivity() {
         showDataJob?.cancel()
 
         showDataJob = lifecycleScope.launch {
-            viewModel.searchRepo().collect {
-                repositoriesAdapter.submitData(it)
+            viewModel.searchRepo().collect { pagedPullRequestsData ->
+                repositoriesAdapter.submitData(pagedPullRequestsData)
             }
         }
     }

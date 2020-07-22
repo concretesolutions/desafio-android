@@ -1,5 +1,2 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jsouza.shared_components">
-
-    /
+<manifest package="com.jsouza.shared_components">
 </manifest>

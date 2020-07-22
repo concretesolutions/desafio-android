@@ -30,18 +30,8 @@ dependencies {
 
     implementation project (':resource-components')
 
-    // Uncategorized
-    implementation "androidx.core:core-ktx:$core_ktx_version"
-    implementation "androidx.legacy:legacy-support-v4:$androidx_legacy_support_version"
-
-    // App Compat
-    implementation "androidx.appcompat:appcompat:$app_compat_version"
-
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
     kapt "com.github.bumptech.glide:annotations:$glide_version"
-
-    // Circular Image View
-    implementation "de.hdodenhof:circleimageview:$circle_image_view_version"
 }
