@@ -22,14 +22,14 @@ Para abrir o Pull Request, basta clicar no item da lista que o aplicativo abrir�
 <p>A API utilizada é a GitHub Api.</p>
 (https://developer.github.com/v3/)
 
-** Automação **
+## Automação
 Ktlint - a task valida se o padrão do código está de acordo com o lint.
 O `./gradlew ktlint` realiza a verificação de todos os componentes do projeto, e retorna o resultado.
 
 KtlintFormat - esta tarefa modifica o código para que ele siga o padrão do lint.
 O `./gradlew ktlintFormat` roda uma rotina que formata o código de acordo com o máximo que o lint pode fazer de modificações para que o código esteja no seu padrão.
 
-** Arquitetura **
+## Arquitetura
  A aplicação busca o desacoplamento e a escalabilidade em sua arquitetura, fazendo uso do Clean Architecture e do MVVM com Modularização.
 
 # Principais dependências #
