@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Carros</string>
+
+    <string name="car_name">Item name</string>
+    <string name="loading_cars">Loading cars ...</string>
+    <string name="loading_car">Loading Car ...</string>
+    <string name="cars">Cars</string>
+    <string name="car_list">Car List</string>
+    <string name="car_description">Car Description</string>
+    <string name="car_brand">Car Brand</string>
+    <string name="car_qty">Quantity</string>
+    <string name="car_price">Preço</string>
+    <string name="details">Mais detalhes</string>
+    <string name="put_shop_cart">Comprar</string>
+    <string name="remove_shop_cart">Remover</string>
+    <string name="add_shop_cart">Adicionar</string>
+    <string name="shop_car_list">Shopping Cart Car List</string>
+    <string name="end_shopping">Finalizar Compra</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_pulls">Sem pull requests para exibir.</string>
+
+    <string name="icon_description">Ícone</string>
+</resources>

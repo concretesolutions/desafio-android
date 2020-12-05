@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="isLoading" type="boolean" />
+        <variable name="carViewModel" type="com.ccortez.desafioconcreteapplication.viewmodel.RepositoryViewModel"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/loading_car"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/loading_car"
+            android:textAlignment="center"
+            app:visibleGone="@{isLoading}"/>
+
+        <LinearLayout
+            android:layout_marginStart="@dimen/item_horizontal_margin"
+            android:layout_marginEnd="@dimen/item_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dp"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            app:visibleGone="@{!isLoading}">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/logo_width"
+                android:layout_height="@dimen/logo_height"
+                android:src="@drawable/ic_car" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/car_name"
+                android:textStyle="bold"
+                android:textSize="@dimen/car_header1"
+                android:text="@{carViewModel.car.total_count}"
+                android:textAlignment="center"
+                android:paddingBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/car_brand"
+                android:textSize="@dimen/car_text"
+                android:text="@{carViewModel.car.total_count}"/>
+
+            <TextView
+                android:id="@+id/car_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/car_description"
+                android:textSize="@dimen/car_header2"
+                android:text="@{carViewModel.car.total_count}"/>
+
+
+            <TextView
+                android:id="@+id/car_qtd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/car_qty"
+                android:textSize="@dimen/car_text"
+                android:text="@{String.format(@string/car_qty, carViewModel.car.total_count)}"/>
+
+            <Spinner
+                android:id="@+id/spinner_qtd"
+                android:layout_width="match_parent"
+                android:textColor = "#ffffff"
+                android:padding="10dp"
+                android:spinnerMode="dropdown"
+                android:layout_height="wrap_content">
+            </Spinner>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_colocar_carrinho"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/car_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/car_image"
+                app:layout_constraintTop_toBottomOf="@+id/car_price"
+                android:background="@drawable/layout_button_bg_shopping_cart"
+                android:padding="13dp"
+                tools:ignore="NotSibling">
+
+                <ImageView
+                    android:id="@+id/img_shop_cart"
+                    android:src="@drawable/ic_shop_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.101"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/car_price"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="@string/add_shop_cart"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/img_shop_cart"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/car_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/car_price"
+                android:textSize="@dimen/car_text"
+                android:text="@{String.format(@string/car_price, carViewModel.car.total_count)}"/>
+
+            <TextView
+                android:id="@+id/car_price2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/car_price"
+                android:textSize="@dimen/car_text"
+                android:text="@{String.valueOf(carViewModel.car.total_count)}"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.5"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/car_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>
