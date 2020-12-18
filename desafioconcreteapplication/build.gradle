@@ -8,6 +8,7 @@ project.ext {
     timber = "4.7.1"
     room_version = "1.1.1"
     dagger_version = "2.21"
+    paging_version = "2.1.2"
     groupId = "com.ccortez.desafioconcreteapplication"
     version = "0.0.1"
 }
@@ -119,6 +120,9 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$project.retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$project.retrofit"
     implementation "com.squareup.okhttp3:logging-interceptor:$project.okhttp3"
+
+    // Paging
+    implementation "androidx.paging:paging-runtime:$project.paging_version"
 
     //requestmatcher
     // local tests

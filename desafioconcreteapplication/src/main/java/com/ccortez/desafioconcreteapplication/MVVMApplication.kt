@@ -17,8 +17,6 @@ open class MVVMApplication : DaggerApplication(), HasActivityInjector {
     override fun onCreate() {
         super.onCreate()
         initPicasso()
-//        Picasso.setSingletonInstance(Picasso.Builder(this).build())
-//        AppInjector.init(this)
         DaggerAppComponent.builder().application(this)
             .build().inject(this)
     }

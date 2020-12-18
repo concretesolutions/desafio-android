@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Carros</string>
+    <string name="app_name">Github JavaPop</string>
 
     <string name="car_name">Item name</string>
-    <string name="loading_cars">Loading cars ...</string>
-    <string name="loading_car">Loading Car ...</string>
-    <string name="cars">Cars</string>
-    <string name="car_list">Car List</string>
+    <string name="loading_cars">Loading repositories ...</string>
+    <string name="loading_car">Loading repository ...</string>
+    <string name="cars">Repositories</string>
+    <string name="car_list">Repository List</string>
     <string name="car_description">Car Description</string>
     <string name="car_brand">Car Brand</string>
     <string name="car_qty">Quantity</string>

@@ -11,21 +11,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RepositoryViewModel @Inject constructor(
-    carRepository: GitHubRepository,
+    gitHubRepository: GitHubRepository,
     application: Application
 ) : AndroidViewModel(application) {
 
     lateinit var observableCar: LiveData<List<PullRequest>>
-    lateinit var carID: MutableLiveData<String>
+    lateinit var repositoryID: MutableLiveData<String>
     @JvmField
     var car = ObservableField<Repositories>()
 
-    fun setCar(car: Repositories) {
-        this.car.set(car)
-    }
-
-    fun setCarID(carID: String?) {
-        this.carID.value = carID
+    fun repositoryID(repositoryID: String?) {
+        this.repositoryID.value = repositoryID
     }
 
     companion object {
@@ -39,27 +35,27 @@ class RepositoryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            carID = MutableLiveData()
+            repositoryID = MutableLiveData()
             observableCar = Transformations.switchMap<String, List<PullRequest>>(
-                carID
+                repositoryID
             ) { input: String ->
                 if (input.isEmpty()) {
                     Log.i(
                         TAG,
-                        "CarViewModel carID is absent!!!"
+                        "RepositoryViewModel carID is absent!!!"
                     )
 //                return@switchMap ABSENT
                 }
                 Log.i(
                     TAG,
-                    "CarViewModel carID is " + carID.value
+                    "RepositoryViewModel carID is " + repositoryID.value
                 )
-                getCarDetails(carRepository)
+                getRepositoryPulls(gitHubRepository)
             }
         }
     }
 
-    fun getCarDetails(carRepository: GitHubRepository) : LiveData<List<PullRequest>?> {
-        return carRepository.getPulls(carID.value)
+    fun getRepositoryPulls(gitHubRepository: GitHubRepository) : LiveData<List<PullRequest>?> {
+        return gitHubRepository.getPulls(repositoryID.value)
     }
 }

@@ -20,12 +20,12 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(RepositoryListViewModel::class)
-    abstract fun bindCarListViewModel(carListViewModel: RepositoryListViewModel): ViewModel
+    abstract fun bindRepositoryListViewModel(repositoryListViewModel: RepositoryListViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(RepositoryViewModel::class)
-    abstract fun bindCarViewModel(carViewModel: RepositoryViewModel): ViewModel
+    abstract fun bindRepositoryViewModel(repositoryViewModel: RepositoryViewModel): ViewModel
 
 
 }

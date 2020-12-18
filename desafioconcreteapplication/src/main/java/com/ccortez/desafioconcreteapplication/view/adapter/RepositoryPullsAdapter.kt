@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ccortez.desafioconcreteapplication.R
 import com.ccortez.desafioconcreteapplication.databinding.PullListItemClBinding
@@ -17,58 +16,13 @@ import com.squareup.picasso.Picasso
 class RepositoryPullsAdapter(private val repositoryPullsClickCallback: RepositoryPullsItemClickCallback?) :
     RecyclerView.Adapter<RepositoryPullsAdapter.CarViewHolder>() {
 
-    internal var repositoryList: List<Repositories>? = null
     internal var repositories: Repositories? = null
     internal var pullsItems: List<PullRequest>? = null
-
-    fun setRepositories(repositories: Repositories) {
-        if (this.repositories == null) {
-            this.repositories = repositories
-            notifyItemRangeInserted(0, repositories.items!!.size)
-        }
-    }
 
     fun setItems(pulls: List<PullRequest>) {
         if (this.pullsItems == null) {
             this.pullsItems = pulls
             notifyItemRangeInserted(0, pulls.size)
-        }
-    }
-
-    fun setCarList(repositoryList: List<Repositories>) {
-        if (this.repositoryList == null) {
-            this.repositoryList = repositoryList
-            notifyItemRangeInserted(0, repositoryList.size)
-        } else {
-            val result = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-                override fun getOldListSize(): Int {
-                    return this@RepositoryPullsAdapter.repositoryList!!.size
-                }
-
-                override fun getNewListSize(): Int {
-                    return repositoryList.size
-                }
-
-                override fun areItemsTheSame(
-                    oldItemPosition: Int,
-                    newItemPosition: Int
-                ): Boolean {
-//                    return this@RepositoryAdapter.repositoryList!![oldItemPosition].id ==
-//                            repositoryList[newItemPosition].id
-                    return false;
-                }
-
-                override fun areContentsTheSame(
-                    oldItemPosition: Int,
-                    newItemPosition: Int
-                ): Boolean {
-                    val (id) = repositoryList[newItemPosition]
-                    val (id1) = repositoryList[oldItemPosition]
-                    return id == id1
-                }
-            })
-            this.repositoryList = repositoryList
-            result.dispatchUpdatesTo(this)
         }
     }
 
@@ -79,7 +33,7 @@ class RepositoryPullsAdapter(private val repositoryPullsClickCallback: Repositor
         val binding: PullListItemClBinding =
             DataBindingUtil
                 .inflate(
-                    LayoutInflater.from(parent.context),  // R.layout.car_list_item,
+                    LayoutInflater.from(parent.context),
                     R.layout.pull_list_item_cl,
                     parent, false
                 )
@@ -92,7 +46,6 @@ class RepositoryPullsAdapter(private val repositoryPullsClickCallback: Repositor
         position: Int
     ) {
         holder.binding.item = pullsItems!![position]
-        // Log.d(TAG, "img: "+carList.get(position).imagem);
         Log.d(TAG, "pull item: " + pullsItems!![position])
         Picasso.get()
             .load(pullsItems!![position].user?.avatar_url)

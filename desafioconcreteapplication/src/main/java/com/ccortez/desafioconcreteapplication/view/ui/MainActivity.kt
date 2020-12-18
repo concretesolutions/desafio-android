@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.ccortez.desafioconcreteapplication.R
 import com.ccortez.desafioconcreteapplication.service.model.Items
-import com.ccortez.desafioconcreteapplication.service.model.Repositories
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.DaggerAppCompatActivity
@@ -19,7 +18,7 @@ class MainActivity : DaggerAppCompatActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // Add car list fragment if this is first creation
+        // Add repository list fragment if this is first creation
         if (savedInstanceState == null) {
             val fragment = RepositoryListFragment()
             supportFragmentManager.beginTransaction()
@@ -28,7 +27,7 @@ class MainActivity : DaggerAppCompatActivity(), HasSupportFragmentInjector {
     }
 
     fun show(car: Items) {
-        val carFragment = RepositoryFragment.forCar(car.owner!!.login+"/"+car.name.toString())
+        val carFragment = RepositoryFragment.forRepository(car.owner!!.login+"/"+car.name.toString())
         supportFragmentManager
             .beginTransaction()
             .addToBackStack("item")
@@ -48,17 +47,6 @@ class MainActivity : DaggerAppCompatActivity(), HasSupportFragmentInjector {
                 carListFragment, RepositoryListFragment.TAG
             ).commit()
     }
-
-//    fun showCart() {
-//        val shopCartListFragment = ShopCartListFragment()
-//        supportFragmentManager
-//            .beginTransaction()
-//            .addToBackStack("shopcart")
-//            .replace(
-//                R.id.fragment_container,
-//                shopCartListFragment, ShopCartListFragment.TAG
-//            ).commit()
-//    }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector

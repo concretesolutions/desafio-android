@@ -25,32 +25,6 @@ class GitHubRepository {
 
     constructor() {}
 
-    // TODO better error handling in part #2 ...
-    fun carList(): LiveData<List<Repositories>> {
-            val data =
-                MutableLiveData<List<Repositories>>()
-            backEndService?.repositoryList()
-                ?.enqueue(object : Callback<List<Repositories>> {
-                    override fun onResponse(
-                        call: Call<List<Repositories>>,
-                        response: Response<List<Repositories>>
-                    ) {
-                        Log.d(TAG, "carList: " + response.body())
-                        data.value = response.body()
-                    }
-
-                    override fun onFailure(
-                        call: Call<List<Repositories>>,
-                        t: Throwable
-                    ) {
-                        Log.e(TAG, "error carList: ", t)
-                        // TODO better error handling in part #2 ...
-                        data.value = null
-                    }
-                })
-            return data
-        }
-
     fun repositories(): LiveData<Repositories> {
         val data =
             MutableLiveData<Repositories>()

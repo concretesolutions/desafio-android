@@ -11,31 +11,25 @@ import com.ccortez.desafioconcreteapplication.service.repository.GitHubRepositor
 import kotlinx.coroutines.launch
 
 class RepositoryListViewModel @Inject constructor(
-    carRepository: GitHubRepository,
+    gitHubRepository: GitHubRepository,
     application: Application
 ) : AndroidViewModel(application) {
     /**
-     * Expose the LiveData Cars query so the UI can observe it.
+     * Expose the LiveData Repository query so the UI can observe it.
      */
     lateinit var repositoriesObservable: LiveData<Repositories>
-    lateinit var carDbListObservable: LiveData<List<Repositories>>
     var carRepository = GitHubRepository()
 
-    fun getCarDbListObservable(mContext: Context?): LiveData<List<Repositories>> {
-        println("getCarDbListObservable: "+ carDbListObservable)
-        return carDbListObservable
-    }
-
     init {
-        this.carRepository = carRepository
+        this.carRepository = gitHubRepository
 
         println("application: "+application)
         println("application.applicationContext: "+application.applicationContext)
-        println("carRepository: "+carRepository)
+        println("carRepository: "+gitHubRepository)
 
         // If any transformation is needed, this can be simply done by Transformations class ...
         viewModelScope.launch {
-            repositoriesObservable = carRepository.repositories()
+            repositoriesObservable = gitHubRepository.repositories()
         }
     }
 

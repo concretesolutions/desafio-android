@@ -4,5 +4,4 @@ import com.ccortez.desafioconcreteapplication.service.model.PullRequest;
 
 public interface RepositoryPullsItemClickCallback {
     void onClick(PullRequest item);
-//    void onClickPutInCart(Car car);
 }

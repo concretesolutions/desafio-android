@@ -1,6 +1,5 @@
 package com.ccortez.desafioconcreteapplication.di
 
-import android.app.Application
 import com.ccortez.desafioconcreteapplication.MVVMApplication
 import com.ccortez.desafioconcreteapplication.di.module.AppModule
 import com.ccortez.desafioconcreteapplication.di.module.MainActivityModule

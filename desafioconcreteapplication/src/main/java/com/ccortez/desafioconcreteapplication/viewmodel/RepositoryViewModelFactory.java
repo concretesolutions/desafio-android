@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.ccortez.desafioconcreteapplication.di.ViewModelSubComponent;
-import com.ccortez.desafioconcreteapplication.viewmodel.RepositoryViewModel;
 
 @Singleton
 public class RepositoryViewModelFactory implements ViewModelProvider.Factory {

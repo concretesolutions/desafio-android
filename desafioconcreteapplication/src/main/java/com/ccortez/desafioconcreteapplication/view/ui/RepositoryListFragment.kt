@@ -27,7 +27,6 @@ class RepositoryListFragment : Fragment(), Injectable {
     private lateinit var repositoryAdapter: RepositoryAdapter
     private lateinit var binding: FragmentRepositoryListBinding
     var mContext: Context? = null
-//    var repositoryService: RepositoryService? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -40,28 +39,12 @@ class RepositoryListFragment : Fragment(), Injectable {
         repositoryAdapter = RepositoryAdapter(repositoryClickCallback)
         binding!!.carList.adapter = repositoryAdapter
         binding!!.setIsLoading(true)
-        mContext = activity!!.getApplicationContext()
-//        repositoryService = RepositoryService(mContext)
-        binding!!.fab.setOnClickListener {
-            if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-//                (activity as MainActivity?)!!.showCart()
-            }
-        }
+        mContext = requireActivity().getApplicationContext()
         return binding!!.getRoot()
     }
 
     override fun onAttach(context: Context) {
-        // you should create a `DaggerAppComponent` instance once, e.g. in a custom `Application` class and use it throughout all activities and fragments
-//        (context.applicationContext as MVVMApplication).appComponent.inject(this)
-//        DaggerAppComponent.builder()
-//            .application(context.applicationContext as MVVMApplication)
-//            .build().inject(this)
-//        (context.applicationContext as MVVMApplication)
-//            .hotelListFragmentInjector(this)
         AndroidSupportInjection.inject(this)
-//        DaggerAppComponent.builder()
-//            .application(context.applicationContext as MVVMApplication).build()
-//            .inject()
         super.onAttach(context)
     }
 
@@ -76,10 +59,9 @@ class RepositoryListFragment : Fragment(), Injectable {
 
     private fun observeViewModel(viewModel: RepositoryListViewModel) { // Update the list when the data changes
         viewModel.repositoriesObservable
-            .observe(this, Observer { repositories ->
+            .observe(viewLifecycleOwner, Observer { repositories ->
                 if (repositories != null) {
                     binding!!.isLoading = false
-//                    repositoryAdapter!!.setCarList(cars)
                     repositoryAdapter!!.setRepositories(repositories)
                 }
             })
@@ -91,31 +73,6 @@ class RepositoryListFragment : Fragment(), Injectable {
                 (activity as MainActivity).show(item)
             }
         }
-
-//        override fun onClickPutInCart(car: Repositories) {
-//            if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-//                val carToVerify = db!!.carDao()?.getCarById(car.id)
-//                if (carToVerify == null) {
-//                    if (car.preco + carService!!.sumFromShopCart <= 100000) {
-//                        car.quantidade = 1
-//                        db!!.carDao()?.insert(car)
-//                        Toast.makeText(
-//                            activity!!.applicationContext,
-//                            "Adicionado ao carrinho !",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    } else Toast.makeText(
-//                        activity!!.applicationContext,
-//                        "Carrinho passará de 100.000 em compras !",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                } else Toast.makeText(
-//                    activity!!.applicationContext,
-//                    "Carro já no carrinho !",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//        }
     }
 
     companion object {

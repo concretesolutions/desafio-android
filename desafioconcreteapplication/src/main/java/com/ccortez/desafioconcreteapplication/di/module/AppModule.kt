@@ -37,7 +37,6 @@ internal class AppModule {
             .readTimeout(100, TimeUnit.SECONDS)
             .build()
         return Retrofit.Builder()
-//            .baseUrl(BackEndService.HTTP_API_URL)
             .baseUrl(API_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
@@ -53,12 +52,4 @@ internal class AppModule {
     @Singleton
     fun provideContext(mvvmApp: MVVMApplication): Context = mvvmApp
 
-
-//    @Singleton
-//    @Provides
-//    fun provideViewModelFactory(
-//        viewModelSubComponent: ViewModelSubComponent.Builder
-//    ): ViewModelProvider.Factory {
-//        return CarViewModelFactory(viewModelSubComponent.build())
-//    }
 }
