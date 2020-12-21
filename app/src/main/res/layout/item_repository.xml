@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="item" type="com.ccortez.desafioconcrete.model.ItemEntity"/>
+        <variable name="callback" type="com.ccortez.desafioconcrete.ui.callback.RepositoryClickCallback"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/repository_item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_repository_height"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{() ->  callback.onClick(item)}"
+        tools:ignore="Overdraw">
+
+        <TextView
+            android:id="@+id/repo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            android:maxLines="1"
+            android:textColor="@color/blue_card_title"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@{item.name}" />
+
+        <TextView
+            android:id="@+id/repo_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default"
+            android:maxLines="2"
+            android:textSize="12sp"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@+id/repo_profile_data"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repo_name"
+            tools:text="@{item.description}" />
+
+        <ImageView
+            android:id="@+id/fork_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginStart="@dimen/margin_default"
+            android:contentDescription="@string/icon_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_if_git_branch" />
+
+        <TextView
+            android:id="@+id/repo_fork_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/gold"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/fork_icon"
+            app:layout_constraintTop_toTopOf="@+id/fork_icon"
+            tools:text="@{item.forks_count}" />
+
+        <ImageView
+            android:id="@+id/repo_star_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:contentDescription="@string/icon_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/repo_fork_num"
+            app:layout_constraintTop_toTopOf="@+id/repo_fork_num"
+            app:srcCompat="@drawable/ic_if_star"
+            tools:text="000" />
+
+        <TextView
+            android:id="@+id/repo_star_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/gold"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/repo_star_icon"
+            app:layout_constraintTop_toTopOf="@+id/repo_star_icon"
+            tools:text="@{item.stargazers_count}" />
+
+        <LinearLayout
+            android:id="@+id/repo_profile_data"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/repo_profile_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/icon_description"
+                app:srcCompat="@drawable/ic_profile_icon" />
+
+            <TextView
+                android:id="@+id/repo_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_card_title"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="@{item.owner.login}" />
+
+            <TextView
+                android:id="@+id/repo_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2sp"
+                android:gravity="center_horizontal"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:maxLines="2"
+                tools:text="@{item.full_name}" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

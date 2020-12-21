@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Github JavaPop</string>
+
+    <string name="item_name">Item name</string>
+    <string name="loading_pulls">Loading pulls ...</string>
+    <string name="loading_repository">Loading repositories ...</string>
+    <string name="repositories">Repositories</string>
+    <string name="repo_list">Repository List</string>
+
+    <string name="icon_description">Ícone</string>
+
+    <string name="empty_pulls">Sem pull requests para exibir.</string>
+</resources>
