@@ -11,7 +11,9 @@ import com.ccortez.desafioconcrete.databinding.ItemRepositoryBinding
 import com.ccortez.desafioconcrete.model.ItemEntity
 import com.ccortez.desafioconcrete.ui.callback.RepositoryClickCallback
 
-class RepositoryPagedListAdapter(private val repositoryClickCallback: RepositoryClickCallback?) : PagedListAdapter<ItemEntity, RepositoryPagedListAdapter.ViewHolder>(
+class RepositoryPagedListAdapter(
+    private val repositoryClickCallback: RepositoryClickCallback?)
+        : PagedListAdapter<ItemEntity, RepositoryPagedListAdapter.ViewHolder>(
     DIFF_CALLBACK
 ) {
 
@@ -20,15 +22,10 @@ class RepositoryPagedListAdapter(private val repositoryClickCallback: Repository
 
         fun bindView(item: ItemEntity) {
 
-//            binding.item = item.items?.get(adapterPosition)
             binding.item = item
 
-//            binding.repoName.text = repository.
-//            binding.repoDesc.text = repository.description
-//            binding.tvEmail.text = userEntity.email
-//
             binding.repoProfileImage.load(
-                item.owner?.avatar_url) {
+                item.owner?.avatarUrl) {
                 placeholder(R.drawable.ic_if_git_branch)
                 error(R.drawable.ic_broken_image)
             }
@@ -56,9 +53,6 @@ class RepositoryPagedListAdapter(private val repositoryClickCallback: Repository
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        getItem(position)?.let {
-//            it.items?.get(0)?.let { it1 -> holder.bindView(it1) }
-//        }
         getItem(position)?.let { holder.bindView(it) }
     }
 

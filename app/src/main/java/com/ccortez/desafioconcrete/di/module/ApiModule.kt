@@ -29,8 +29,8 @@ class ApiModule {
     @Provides
     fun provideHttpInterceptor(): OkHttpClient.Builder {
         val httpClientBuilder = OkHttpClient.Builder()
-        httpClientBuilder.connectTimeout(30, TimeUnit.SECONDS)
-        httpClientBuilder.readTimeout(30, TimeUnit.SECONDS)
+        httpClientBuilder.connectTimeout(TIMEOUT_CONNECT, TimeUnit.SECONDS)
+        httpClientBuilder.readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
         httpClientBuilder.retryOnConnectionFailure(true)
         val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
 //        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -44,5 +44,12 @@ class ApiModule {
                 )
             )
         return httpClientBuilder
+    }
+
+    companion object {
+
+        var TIMEOUT_CONNECT: Long = 30L
+        var TIMEOUT_READ: Long = 30L
+
     }
 }

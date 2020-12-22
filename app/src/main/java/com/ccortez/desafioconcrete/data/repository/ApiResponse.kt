@@ -33,10 +33,12 @@ sealed class ApiResponse<T> {
             )
         }
 
+        var HTTP_204: Int = 204
+
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
                 val body = response.body()
-                if (body == null || response.code() == 204) {
+                if (body == null || response.code() == HTTP_204) {
                     ApiEmptyResponse()
                 } else {
                     ApiSuccessResponse(
@@ -57,6 +59,7 @@ sealed class ApiResponse<T> {
             }
         }
     }
+
 }
 
 /**

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ccortez.desafioconcrete.BuildConfig
 import com.ccortez.desafioconcrete.data.remote.ApiService
 import com.ccortez.desafioconcrete.model.PullRequest
 import retrofit2.Call
@@ -22,8 +23,6 @@ class GitHubRepository {
     constructor(backEndService: ApiService?) {
         this.backEndService = backEndService
     }
-
-    constructor() {}
 
     fun getPulls(carID: String?): LiveData<List<PullRequest>?> {
         Log.d(TAG, "full_name: "+ carID.toString())
@@ -50,7 +49,7 @@ class GitHubRepository {
 
     private fun simulateDelay() {
         try {
-            Thread.sleep(10)
+            Thread.sleep(TIMEOUT_SIMULATE_DELAY)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
@@ -59,5 +58,6 @@ class GitHubRepository {
 
     companion object {
         private val TAG = GitHubRepository::class.java.simpleName
+        var TIMEOUT_SIMULATE_DELAY: Long = 10L
     }
 }

@@ -6,9 +6,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.ccortez.desafioconcrete.data.local.dao.ItemDao
 import com.ccortez.desafioconcrete.factory.ItemDataSourceFactory
-import com.ccortez.desafioconcrete.factory.UserDataSourceFactory
 import com.ccortez.desafioconcrete.model.ItemEntity
-import com.ccortez.desafioconcrete.model.UserEntity
 import com.ccortez.desafioconcrete.utils.NetworkUtils
 import javax.inject.Inject
 import javax.inject.Singleton

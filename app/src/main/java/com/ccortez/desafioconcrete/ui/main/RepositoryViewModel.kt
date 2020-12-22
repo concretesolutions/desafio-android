@@ -3,7 +3,11 @@ package com.ccortez.desafioconcrete.ui.main
 import android.app.Application
 import android.util.Log
 import androidx.databinding.ObservableField
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import com.ccortez.desafioconcrete.data.repository.GitHubRepository
 import com.ccortez.desafioconcrete.model.PullRequest
 import com.ccortez.desafioconcrete.model.Repositories
@@ -15,10 +19,8 @@ class RepositoryViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    lateinit var observableCar: LiveData<List<PullRequest>>
+    lateinit var observableRepository: LiveData<List<PullRequest>>
     lateinit var repositoryID: MutableLiveData<String>
-    @JvmField
-    var car = ObservableField<Repositories>()
 
     fun repositoryID(repositoryID: String?) {
         this.repositoryID.value = repositoryID
@@ -36,7 +38,7 @@ class RepositoryViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             repositoryID = MutableLiveData()
-            observableCar = Transformations.switchMap<String, List<PullRequest>>(
+            observableRepository = Transformations.switchMap<String, List<PullRequest>>(
                 repositoryID
             ) { input: String ->
                 if (input.isEmpty()) {

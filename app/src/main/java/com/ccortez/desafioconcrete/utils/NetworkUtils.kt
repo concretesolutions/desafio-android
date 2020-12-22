@@ -15,8 +15,12 @@ import androidx.lifecycle.MutableLiveData
 object NetworkUtils {
 
     fun isOnline(context: Context): Boolean {
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val cm = context.getSystemService(
+            Context.CONNECTIVITY_SERVICE
+        ) as ConnectivityManager
         val netInfo = cm.activeNetworkInfo
-        return netInfo != null && netInfo.isConnectedOrConnecting && cm.activeNetworkInfo!!.isAvailable && cm.activeNetworkInfo!!.isConnected
+        return netInfo != null && netInfo.isConnectedOrConnecting
+                && cm.activeNetworkInfo!!.isAvailable
+                && cm.activeNetworkInfo!!.isConnected
     }
 }

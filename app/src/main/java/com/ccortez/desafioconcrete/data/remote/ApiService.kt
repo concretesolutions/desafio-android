@@ -6,7 +6,6 @@ import com.ccortez.desafioconcrete.data.repository.ApiResponse
 import com.ccortez.desafioconcrete.model.PullRequest
 import com.ccortez.desafioconcrete.model.Repo
 import com.ccortez.desafioconcrete.model.Repositories
-import com.ccortez.desafioconcrete.model.UserListResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,13 +13,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-
-    @GET("api/users")
-    suspend fun fetchUsers(
-        @Query("page") number: Int,
-        @Query("per_page") per_page: Int
-    ): Response<UserListResponse>
-
 
     @GET("search/repositories?q=language:Java&sort=stars&page=1")
     fun getRepos(): LiveData<ApiResponse<List<Repo>>>

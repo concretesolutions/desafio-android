@@ -9,7 +9,7 @@ import com.ccortez.desafioconcrete.data.local.dao.UserDao
 import com.ccortez.desafioconcrete.model.ItemEntity
 import com.ccortez.desafioconcrete.model.UserEntity
 
-@Database(entities = [ItemEntity::class], version = 1, exportSchema = false)
+@Database(entities = [ItemEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     lateinit var INSTANCE: AppDatabase
@@ -26,6 +26,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) = Room.databaseBuilder(context,
             AppDatabase::class.java, "github-item-list.db")
+            .fallbackToDestructiveMigrationFrom(1)
             .allowMainThreadQueries()
             .build()
 

@@ -63,7 +63,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/fork_icon"
             app:layout_constraintTop_toTopOf="@+id/fork_icon"
-            tools:text="@{item.forks_count}" />
+            tools:text="@{item.forksCount}" />
 
         <ImageView
             android:id="@+id/repo_star_icon"
@@ -86,7 +86,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/repo_star_icon"
             app:layout_constraintTop_toTopOf="@+id/repo_star_icon"
-            tools:text="@{item.stargazers_count}" />
+            tools:text="@{item.stargazersCount}" />
 
         <LinearLayout
             android:id="@+id/repo_profile_data"
@@ -126,7 +126,7 @@
                 android:ellipsize="end"
                 android:textSize="12sp"
                 android:maxLines="2"
-                tools:text="@{item.full_name}" />
+                tools:text="@{item.fullName}" />
 
         </LinearLayout>
 

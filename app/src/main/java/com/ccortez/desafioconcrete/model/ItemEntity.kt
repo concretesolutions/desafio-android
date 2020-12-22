@@ -14,9 +14,12 @@ data class ItemEntity(
     @field:SerializedName("owner")
     @field:Embedded(prefix = "owner_")
     val owner: Owner,
-    var forks_count: String?,
-    var stargazers_count: String?,
-    var full_name: String?
+    @field:SerializedName("forks_count")
+    var forksCount: String?,
+    @field:SerializedName("stargazers_count")
+    var stargazersCount: String?,
+    @field:SerializedName("full_name")
+    var fullName: String?
 ) {
 
     data class Owner(
@@ -25,7 +28,7 @@ data class ItemEntity(
         @field:SerializedName("url")
         val url: String?,
         @field:SerializedName("avatar_url")
-        val avatar_url: String?
+        val avatarUrl: String?
     )
 
     companion object {

@@ -48,7 +48,7 @@ class RepositoryPullsAdapter(private val repositoryPullsClickCallback: Repositor
         holder.binding.item = pullsItems!![position]
         Log.d(TAG, "pull item: " + pullsItems!![position])
         Picasso.get()
-            .load(pullsItems!![position].user?.avatar_url)
+            .load(pullsItems!![position].user?.avatarUrl)
             .placeholder(R.drawable.ic_user_placeholder)
             .error(R.drawable.ic_alert)
             .into(holder.carImage)

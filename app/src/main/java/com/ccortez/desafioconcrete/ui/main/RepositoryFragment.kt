@@ -4,16 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.DataBindingUtil.setContentView
+import android.view.ActionMode
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.ccortez.desafioconcrete.R
 import com.ccortez.desafioconcrete.databinding.FragmentPullListBinding
-import com.ccortez.desafioconcrete.di.Injectable
 import com.ccortez.desafioconcrete.model.PullRequest
 import com.ccortez.desafioconcrete.ui.base.BaseFragment
 import com.ccortez.desafioconcrete.ui.callback.RepositoryPullsItemClickCallback
@@ -63,12 +63,11 @@ class RepositoryFragment : BaseFragment<RepositoryViewModel, FragmentPullListBin
     }
 
     private fun observeViewModel(viewModel: RepositoryViewModel) { // Observe car data
-        viewModel.observableCar.observe(viewLifecycleOwner, Observer { car ->
-            if (car != null) {
+        viewModel.observableRepository.observe(viewLifecycleOwner, Observer { repository ->
+            if (repository != null) {
                 mViewBinding!!.isLoading = false
                 mViewBinding!!.tvEmptyPullList.text = ""
-                repositoryPullsAdapter!!.setItems(car)
-//                binding!!.openedClosed.text = car.
+                repositoryPullsAdapter!!.setItems(repository)
                 if (repositoryPullsAdapter!!.pullsItems!!.isEmpty()) {
                     mViewBinding!!.tvEmptyPullList.text = getString(R.string.empty_pulls)
                 }
@@ -85,7 +84,7 @@ class RepositoryFragment : BaseFragment<RepositoryViewModel, FragmentPullListBin
         override fun onClick(item: PullRequest) {
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                 val browserIntent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse(item.html_url))
+                    Intent(Intent.ACTION_VIEW, Uri.parse(item.htmlUrl))
                 startActivity(browserIntent)
             }
         }
@@ -135,12 +134,12 @@ class RepositoryFragment : BaseFragment<RepositoryViewModel, FragmentPullListBin
         const val TAG = "RepositoryFragment"
         private const val KEY_REPOSITORY_ID = "full_name"
         /**
-         * Creates car fragment for specific car ID
+         * Creates car fragment for specific repository ID
          */
-        fun forRepository(full_name: String?): RepositoryFragment {
+        fun forRepository(fullName: String?): RepositoryFragment {
             val fragment = RepositoryFragment()
             val args = Bundle()
-            args.putString(KEY_REPOSITORY_ID, full_name)
+            args.putString(KEY_REPOSITORY_ID, fullName)
             fragment.arguments = args
             return fragment
         }

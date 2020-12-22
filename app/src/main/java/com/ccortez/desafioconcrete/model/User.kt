@@ -1,21 +1,37 @@
 package com.ccortez.desafioconcreteapplication.service.model
 
+import com.google.gson.annotations.SerializedName
+
 data class User (
-    var received_events_url: String? = null,
-    var organizations_url: String? = null,
-    var avatar_url: String? = null,
-    var gravatar_id: String? = null,
-    var gists_url: String? = null,
-    var starred_url: String? = null,
-    var site_admin: String? = null,
+
+    @field:SerializedName("received_events_url")
+    var receivedEventsUrl: String? = null,
+    @field:SerializedName("organizations_url")
+    var organizationsUrl: String? = null,
+    @field:SerializedName("avatar_url")
+    var avatarUrl: String? = null,
+    @field:SerializedName("gravatar_id")
+    var gravatarId: String? = null,
+    @field:SerializedName("gists_url")
+    var gistsUrl: String? = null,
+    @field:SerializedName("starred_url")
+    var starredUrl: String? = null,
+    @field:SerializedName("site_admin")
+    var siteAdmin: String? = null,
     var type: String? = null,
     var url: String? = null,
     var id: String? = null,
-    var html_url: String? = null,
-    var following_url: String? = null,
-    var events_url: String? = null,
+    @field:SerializedName("html_url")
+    var htmlUrl: String? = null,
+    @field:SerializedName("following_url")
+    var followingUrl: String? = null,
+    @field:SerializedName("events_url")
+    var eventsUrl: String? = null,
     var login: String? = null,
-    var subscriptions_url: String? = null,
-    var repos_url: String? = null,
-    var followers_url: String? = null
+    @field:SerializedName("subscriptions_url")
+    var subscriptionsUrl: String? = null,
+    @field:SerializedName("repos_url")
+    var reposUrl: String? = null,
+    @field:SerializedName("followers_url")
+    var followersUrl: String? = null
 )
