@@ -74,7 +74,7 @@ class GithubServiceTest {
 
         val request = mockWebServer.takeRequest()
         out.print("------------- " + request.path)
-        assertThat(request.path, `is`("/repositories?q=language:Java&sort=stars&page=1"))
+        assertThat(request.path, `is`("/search/repositories?q=language:Java&sort=stars&page=1"))
 
         assertThat(repos.size, `is`(2))
 

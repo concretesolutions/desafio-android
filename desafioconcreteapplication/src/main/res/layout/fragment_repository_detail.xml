@@ -46,7 +46,7 @@
                 android:contentDescription="@string/car_name"
                 android:textStyle="bold"
                 android:textSize="@dimen/car_header1"
-                android:text="@{carViewModel.car.total_count}"
+                android:text="@{carViewModel.car.totalCount}"
                 android:textAlignment="center"
                 android:paddingBottom="5dp"/>
 
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/car_brand"
                 android:textSize="@dimen/car_text"
-                android:text="@{carViewModel.car.total_count}"/>
+                android:text="@{carViewModel.car.totalCount}"/>
 
             <TextView
                 android:id="@+id/car_desc"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/car_description"
                 android:textSize="@dimen/car_header2"
-                android:text="@{carViewModel.car.total_count}"/>
+                android:text="@{carViewModel.car.totalCount}"/>
 
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/car_qty"
                 android:textSize="@dimen/car_text"
-                android:text="@{String.format(@string/car_qty, carViewModel.car.total_count)}"/>
+                android:text="@{String.format(@string/car_qty, carViewModel.car.totalCount)}"/>
 
             <Spinner
                 android:id="@+id/spinner_qtd"
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/car_price"
                 android:textSize="@dimen/car_text"
-                android:text="@{String.format(@string/car_price, carViewModel.car.total_count)}"/>
+                android:text="@{String.format(@string/car_price, carViewModel.car.totalCount)}"/>
 
             <TextView
                 android:id="@+id/car_price2"
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/car_price"
                 android:textSize="@dimen/car_text"
-                android:text="@{String.valueOf(carViewModel.car.total_count)}"/>
+                android:text="@{String.valueOf(carViewModel.car.totalCount)}"/>
 
             <LinearLayout
                 android:layout_width="0dp"

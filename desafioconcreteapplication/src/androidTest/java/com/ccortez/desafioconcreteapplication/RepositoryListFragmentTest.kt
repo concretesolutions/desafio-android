@@ -231,7 +231,7 @@ class RepositoryListFragmentTest {
 
         activityRule.launchActivity(Intent())
 
-        val expected = 6
+        val expected = 7
 
         Thread.sleep(5000);
 
@@ -274,7 +274,7 @@ class RepositoryListFragmentTest {
         @Throws(InterruptedException::class)
         override fun dispatch(request: RecordedRequest): MockResponse? {
             System.out.println("------------- request.path: " + request.path)
-            if (request.path == "/repositories?q=language:Java&sort=stars&page=1") {
+            if (request.path == "/search/repositories?q=language:Java&sort=stars&page=1") {
 //                val fileName = "repos-yigit.json"
                 val fileName = "search.json"
                 try {

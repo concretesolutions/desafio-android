@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:text="@{String.valueOf(car.total_count)}"
+            android:text="@{String.valueOf(car.totalCount)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/car_image"
             app:layout_constraintTop_toBottomOf="@+id/btn_mais_detalhes"

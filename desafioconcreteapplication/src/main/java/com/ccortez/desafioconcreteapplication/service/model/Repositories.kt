@@ -1,6 +1,9 @@
 package com.ccortez.desafioconcreteapplication.service.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Repositories (
     var items: List<Items>? = null,
-    var total_count: Int
+    @field:SerializedName("total_count")
+    var totalCount: Int
 )
