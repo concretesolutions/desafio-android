@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">GitHubApp</string>
+
+    <string name="repository_name">Nombre del repositorio</string>
+    <string name="repository_description">Descripción del repositorio lorem ipsum dolor sit amet…</string>
+
+    <string name="username">username</string>
+    <string name="user_name">Nombre Apellido</string>
+    <string name="desc">Imagen del usuario en GitHub</string>
+
+    <string name="forks_amount">640</string>
+    <string name="star_gazers_amount">98</string>
 </resources>
