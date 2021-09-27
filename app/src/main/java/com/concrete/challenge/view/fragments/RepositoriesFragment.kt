@@ -1,17 +1,18 @@
 package com.concrete.challenge.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.concrete.challenge.R
 import com.concrete.challenge.adapter.RepositoryAdapter
 import com.concrete.challenge.data.RepositoryEntity
 import com.concrete.challenge.databinding.FragmentRepositoriesBinding
 import com.concrete.challenge.presentation.viewmodel.RepositoryViewModel
+import com.concrete.challenge.utils.Constants.TAG
 
 class RepositoriesFragment : Fragment() {
 
@@ -19,8 +20,7 @@ class RepositoriesFragment : Fragment() {
     private val layoutManager by lazy { LinearLayoutManager(activity) }
     private val viewModel by lazy { ViewModelProvider(this).get(RepositoryViewModel::class.java) }
 
-    private var _binding: FragmentRepositoriesBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentRepositoriesBinding
 
     private val repositoriesList = listOf(
         RepositoryEntity("panchyh97","Francisca Hernández","desafioandroid",
@@ -32,8 +32,8 @@ class RepositoriesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
+    ): View {
+        binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -53,9 +53,10 @@ class RepositoriesFragment : Fragment() {
     private fun loadList() {
         viewModel.repositoriesList.observe(viewLifecycleOwner, ::add)
     }
-    
+
     private fun add(repositoriesList: List<String>) {
-        val list = listOf<String>("1", "2")
+        val list = listOf("1", "2")
+        Log.i(TAG, list.toString() + repositoriesList.toString())
         //adapter.addItems(list)
     }
 
