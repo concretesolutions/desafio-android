@@ -4,8 +4,12 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.concrete.challenge.data.PullRequestEntity
 import com.concrete.challenge.databinding.ItemPullRequestBinding
+import com.concrete.challenge.ui.adapters.PullRequestAdapter
 
-class PullRequestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class PullRequestViewHolder(
+    private val view: View,
+    private val manager: PullRequestAdapter.AdapterManager
+) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemPullRequestBinding.bind(view)
 
@@ -16,5 +20,9 @@ class PullRequestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.txtPullRequestBody.text = item.pullRequestBody
         binding.txtUsername.text = item.username
         binding.txtUserName.text = item.userName
+
+        view.setOnClickListener {
+            manager.onPullRequestClicked(item)
+        }
     }
 }

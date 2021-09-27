@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.concrete.challenge.data.PullRequestEntity
@@ -47,7 +48,7 @@ class PullRequestFragment : Fragment() {
 
     private fun initRecyclerView() {
         rvPullRequest.layoutManager = layoutManager
-        val adapter = PullRequestAdapter(pullRequestsList)
+        val adapter = PullRequestAdapter(pullRequestsList, PullRequestManager())
         rvPullRequest.adapter = adapter
     }
 
@@ -57,6 +58,16 @@ class PullRequestFragment : Fragment() {
 
     private fun add(pullRequestsList: List<String>) {
         Log.i(TAG, pullRequestsList.toString())
+    }
+
+    inner class PullRequestManager : PullRequestAdapter.AdapterManager {
+        override fun onPullRequestClicked(pullRequestClicked: PullRequestEntity) {
+            Toast.makeText(
+                activity,
+                "Abrir navegador con el pull request seleccionado",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
 }
