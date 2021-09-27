@@ -10,4 +10,11 @@
 
     <string name="forks_amount">640</string>
     <string name="star_gazers_amount">98</string>
+
+    <string name="open_pull_request_amount">16 abiertos</string>
+    <string name="slash">/</string>
+    <string name="closed_pull_request_amount">800 cerrados</string>
+
+    <string name="pull_request_title">Título Pull Request</string>
+    <string name="pull_request_body">Cuerpo pull request lorem ipsum dolor sit amet…</string>
 </resources>
