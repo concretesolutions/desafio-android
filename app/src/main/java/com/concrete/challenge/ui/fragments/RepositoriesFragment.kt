@@ -1,4 +1,4 @@
-package com.concrete.challenge.view.fragments
+package com.concrete.challenge.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.concrete.challenge.adapter.RepositoryAdapter
+import com.concrete.challenge.ui.adapters.RepositoryAdapter
 import com.concrete.challenge.data.RepositoryEntity
 import com.concrete.challenge.databinding.FragmentRepositoriesBinding
 import com.concrete.challenge.presentation.viewmodel.RepositoryViewModel

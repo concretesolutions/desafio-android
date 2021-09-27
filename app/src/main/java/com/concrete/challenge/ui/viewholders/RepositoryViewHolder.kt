@@ -1,4 +1,4 @@
-package com.concrete.challenge.adapter
+package com.concrete.challenge.ui.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

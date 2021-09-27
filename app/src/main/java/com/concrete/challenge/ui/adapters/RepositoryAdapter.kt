@@ -1,10 +1,11 @@
-package com.concrete.challenge.adapter
+package com.concrete.challenge.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.concrete.challenge.R
 import com.concrete.challenge.data.RepositoryEntity
+import com.concrete.challenge.ui.viewholders.RepositoryViewHolder
 
 class RepositoryAdapter(private val repositoryList: List<RepositoryEntity>): RecyclerView.Adapter<RepositoryViewHolder>() {
 

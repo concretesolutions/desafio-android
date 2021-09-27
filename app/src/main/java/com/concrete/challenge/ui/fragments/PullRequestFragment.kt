@@ -1,11 +1,10 @@
-package com.concrete.challenge.view.fragments
+package com.concrete.challenge.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.concrete.challenge.R
 import com.concrete.challenge.databinding.FragmentPullRequestBinding
 
 class PullRequestFragment : Fragment() {

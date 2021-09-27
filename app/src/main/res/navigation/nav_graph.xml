@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/repositoriesFragment"
-        android:name="com.concrete.challenge.view.fragments.RepositoriesFragment"
+        android:name="com.concrete.challenge.ui.fragments.RepositoriesFragment"
         android:label="fragment_repositories"
         tools:layout="@layout/fragment_repositories" />
 </navigation>
