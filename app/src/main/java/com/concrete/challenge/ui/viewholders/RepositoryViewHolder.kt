@@ -21,7 +21,7 @@ class RepositoryViewHolder(
         binding.txtForksAmount.text = item.forksAmount.toString()
         binding.txtStarGazersAmount.text = item.starsAmount.toString()
 
-        view.setOnClickListener {
+        binding.repositoryCard.setOnClickListener {
             manager.onRepositoryClicked(item)
         }
     }

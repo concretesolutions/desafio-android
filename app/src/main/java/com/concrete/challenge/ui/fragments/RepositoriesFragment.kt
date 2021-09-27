@@ -19,7 +19,7 @@ import com.concrete.challenge.utils.Constants.TAG
 class RepositoriesFragment : Fragment() {
 
     //private val adapter by lazy { RepositoryAdapter() }
-    private val layoutManager by lazy { LinearLayoutManager(activity) }
+    //private val layoutManager by lazy { LinearLayoutManager(activity) }
     private val viewModel by lazy { ViewModelProvider(this).get(RepositoryViewModel::class.java) }
 
     private lateinit var binding: FragmentRepositoriesBinding
@@ -36,6 +36,8 @@ class RepositoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
+        binding.rvRepository.layoutManager = LinearLayoutManager(activity)
+
         return binding.root
     }
 
@@ -47,7 +49,7 @@ class RepositoriesFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding.rvRepository.layoutManager = layoutManager
+        //binding.rvRepository.layoutManager = layoutManager
         val adapter = RepositoryAdapter(repositoriesList, RepositoryManager())
         binding.rvRepository.adapter = adapter
     }
