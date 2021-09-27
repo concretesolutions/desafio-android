@@ -69,7 +69,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/txtRepositoryName"
+                    android:id="@+id/txtPullRequestTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/pull_request_title"
@@ -78,7 +78,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtRepositoryDescription"
+                    android:id="@+id/txtPullRequestBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/pull_request_body"
