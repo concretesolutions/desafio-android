@@ -26,9 +26,9 @@ class RepositoriesFragment : Fragment() {
 
     private val repositoriesList = listOf(
         RepositoryEntity("panchyh97","Francisca Hernández","desafioandroid",
-            "Lorem ipsum dolor sit", 1, 1),
+            "Lorem ipsum dolor sit", 1, 1, 17, 900),
         RepositoryEntity("johndoe","John Doe","desafioandroid",
-            "Lorem ipsum dolor sit", 1, 1),
+            "Lorem ipsum dolor sit", 2, 2, 11, 99,),
     )
 
     override fun onCreateView(
@@ -66,6 +66,14 @@ class RepositoriesFragment : Fragment() {
 
     inner class RepositoryManager : RepositoryAdapter.AdapterManager {
         override fun onRepositoryClicked(repositoryClicked: RepositoryEntity) {
+
+            val bundle = Bundle()
+
+            bundle.putString("openMR", repositoryClicked.openPullRequestAmount.toString())
+            bundle.putString("closedMR", repositoryClicked.closedPullRequestAmount.toString())
+
+            parentFragmentManager.setFragmentResult("key", bundle)
+
             findNavController().navigate(
                 R.id.action_repositoriesFragment_to_pullRequestFragment
             )
