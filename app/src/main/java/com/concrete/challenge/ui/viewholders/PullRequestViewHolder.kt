@@ -22,7 +22,7 @@ class PullRequestViewHolder(
         binding.txtUsername.text = item.username
         binding.txtUserName.text = item.userName
 
-        view.setOnClickListener {
+        binding.pullRequestCard.setOnClickListener {
             manager.onPullRequestClicked(item)
         }
     }
