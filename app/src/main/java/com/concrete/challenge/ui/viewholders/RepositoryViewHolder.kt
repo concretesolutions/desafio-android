@@ -1,12 +1,14 @@
-package com.concrete.challenge.adapter
+package com.concrete.challenge.ui.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.concrete.challenge.data.RepositoryEntity
 import com.concrete.challenge.databinding.ItemRepositoryBinding
+import com.concrete.challenge.ui.adapters.RepositoryAdapter
 
 class RepositoryViewHolder(
-    view: View,
+    private val view: View,
+    private val manager: RepositoryAdapter.AdapterManager
 ) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemRepositoryBinding.bind(view)
@@ -18,6 +20,10 @@ class RepositoryViewHolder(
         binding.txtRepositoryDescription.text = item.repositoryDescription
         binding.txtForksAmount.text = item.forksAmount.toString()
         binding.txtStarGazersAmount.text = item.starsAmount.toString()
+
+        binding.repositoryCard.setOnClickListener {
+            manager.onRepositoryClicked(item)
+        }
     }
 
 }

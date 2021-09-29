@@ -1,4 +1,4 @@
-package com.concrete.challenge.view.fragments
+package com.concrete.challenge.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.concrete.challenge.adapter.RepositoryAdapter
+import com.concrete.challenge.R
+import com.concrete.challenge.ui.adapters.RepositoryAdapter
 import com.concrete.challenge.data.RepositoryEntity
 import com.concrete.challenge.databinding.FragmentRepositoriesBinding
 import com.concrete.challenge.presentation.viewmodel.RepositoryViewModel
@@ -17,16 +19,16 @@ import com.concrete.challenge.utils.Constants.TAG
 class RepositoriesFragment : Fragment() {
 
     //private val adapter by lazy { RepositoryAdapter() }
-    private val layoutManager by lazy { LinearLayoutManager(activity) }
+    //private val layoutManager by lazy { LinearLayoutManager(activity) }
     private val viewModel by lazy { ViewModelProvider(this).get(RepositoryViewModel::class.java) }
 
     private lateinit var binding: FragmentRepositoriesBinding
 
     private val repositoriesList = listOf(
         RepositoryEntity("panchyh97","Francisca Hernández","desafioandroid",
-            "Lorem ipsum dolor sit", 1, 1),
+            "Lorem ipsum dolor sit", 1, 1, 17, 900),
         RepositoryEntity("johndoe","John Doe","desafioandroid",
-            "Lorem ipsum dolor sit", 1, 1),
+            "Lorem ipsum dolor sit", 2, 2, 11, 99,),
     )
 
     override fun onCreateView(
@@ -34,6 +36,8 @@ class RepositoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
+        binding.rvRepository.layoutManager = LinearLayoutManager(activity)
+
         return binding.root
     }
 
@@ -45,8 +49,8 @@ class RepositoriesFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding.rvRepository.layoutManager = layoutManager
-        val adapter = RepositoryAdapter(repositoriesList)
+        //binding.rvRepository.layoutManager = layoutManager
+        val adapter = RepositoryAdapter(repositoriesList, RepositoryManager())
         binding.rvRepository.adapter = adapter
     }
 
@@ -60,4 +64,19 @@ class RepositoriesFragment : Fragment() {
         //adapter.addItems(list)
     }
 
+    inner class RepositoryManager : RepositoryAdapter.AdapterManager {
+        override fun onRepositoryClicked(repositoryClicked: RepositoryEntity) {
+
+            val bundle = Bundle()
+
+            bundle.putString("openMR", repositoryClicked.openPullRequestAmount.toString())
+            bundle.putString("closedMR", repositoryClicked.closedPullRequestAmount.toString())
+
+            parentFragmentManager.setFragmentResult("key", bundle)
+
+            findNavController().navigate(
+                R.id.action_repositoriesFragment_to_pullRequestFragment
+            )
+        }
+    }
 }

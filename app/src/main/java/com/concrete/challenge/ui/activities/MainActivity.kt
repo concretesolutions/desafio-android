@@ -1,4 +1,4 @@
-package com.concrete.challenge.view.activities
+package com.concrete.challenge.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

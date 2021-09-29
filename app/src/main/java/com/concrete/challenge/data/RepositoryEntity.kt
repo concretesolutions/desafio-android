@@ -7,5 +7,7 @@ data class RepositoryEntity (
         val repositoryName: String,
         val repositoryDescription: String,
         val forksAmount: Int,
-        val starsAmount: Int
+        val starsAmount: Int,
+        val openPullRequestAmount: Int,
+        val closedPullRequestAmount: Int
 )

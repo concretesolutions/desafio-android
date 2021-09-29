@@ -7,7 +7,20 @@
 
     <fragment
         android:id="@+id/repositoriesFragment"
-        android:name="com.concrete.challenge.view.fragments.RepositoriesFragment"
+        android:name="com.concrete.challenge.ui.fragments.RepositoriesFragment"
         android:label="fragment_repositories"
-        tools:layout="@layout/fragment_repositories" />
+        tools:layout="@layout/fragment_repositories" >
+        <action
+            android:id="@+id/action_repositoriesFragment_to_pullRequestFragment"
+            app:destination="@id/pullRequestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pullRequestFragment"
+        android:name="com.concrete.challenge.ui.fragments.PullRequestFragment"
+        android:label="fragment_pull_request"
+        tools:layout="@layout/fragment_pull_request" >
+        <action
+            android:id="@+id/action_pullRequestFragment_to_repositoriesFragment"
+            app:destination="@id/repositoriesFragment" />
+    </fragment>
 </navigation>
