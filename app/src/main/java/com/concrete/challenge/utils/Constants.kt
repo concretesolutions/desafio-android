@@ -1,5 +1,5 @@
 package com.concrete.challenge.utils
 
 object Constants {
-    const val TAG = "CONSOLE-MSG"
+    const val TAG = "APP-MSG"
 }
