@@ -40,4 +40,8 @@ class RepositoryAdapter(
         notifyDataSetChanged()
     }
 
+    fun repositoryList(): MutableList<RepositoryItem> {
+        return repositoryList
+    }
+
 }

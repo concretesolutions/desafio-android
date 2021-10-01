@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.concrete.challenge.domain.io.APIService
 import com.concrete.challenge.domain.io.response.RepositoriesResponse
-import com.concrete.challenge.utils.callService
+import com.concrete.challenge.utils.callServiceRepositories
 
 class RepositoryViewModel(private val service: APIService) : ViewModel() {
 
@@ -19,7 +19,7 @@ class RepositoryViewModel(private val service: APIService) : ViewModel() {
     }
 
     fun getRepositories() {
-        callService(liveData = repositoriesResponse) { service.getRepositories(page) }
+        callServiceRepositories(liveData = repositoriesResponse) { service.getRepositories(page) }
     }
 
 }

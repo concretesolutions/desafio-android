@@ -1,6 +1,7 @@
 package com.concrete.challenge.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +9,22 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.concrete.challenge.R
+import com.concrete.challenge.data.UserEntity
 import com.concrete.challenge.ui.adapters.RepositoryAdapter
 import com.concrete.challenge.databinding.FragmentRepositoriesBinding
 import com.concrete.challenge.domain.io.response.RepositoriesResponse
 import com.concrete.challenge.presentation.model.RepositoryItem
 import com.concrete.challenge.presentation.toRepositoryItem
 import com.concrete.challenge.presentation.viewmodel.RepositoryViewModel
+import com.concrete.challenge.presentation.viewmodel.UserViewModel
+import com.concrete.challenge.utils.Constants.TAG
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepositoriesFragment : Fragment() {
 
     private val adapter by lazy { RepositoryAdapter(manager = RepositoryManager()) }
-    private val viewModel: RepositoryViewModel by viewModel()
+    private val repositoryViewModel: RepositoryViewModel by viewModel()
+    private val userViewModel: UserViewModel by viewModel()
 
     private lateinit var binding: FragmentRepositoriesBinding
 
@@ -43,24 +48,34 @@ class RepositoriesFragment : Fragment() {
 
     private fun initView() {
         initRecyclerView()
-        loadList()
+        initObservers()
+        loadInfo()
     }
 
     private fun initRecyclerView() {
         rvRepository.adapter = adapter
     }
 
-    private fun loadList() {
-        viewModel.repositoriesResponse.observe(viewLifecycleOwner, ::add)
-        viewModel.getRepositories()
+    private fun initObservers() {
+        repositoryViewModel.repositoriesResponse.observe(viewLifecycleOwner, ::addRepositories)
+        userViewModel.userResponse.observe(viewLifecycleOwner, ::addUser)
     }
 
-    private fun add(repositoriesResponse: RepositoriesResponse) {
+    private fun loadInfo() {
+        repositoryViewModel.getRepositories()
+        userViewModel.getUser()
+    }
+
+    private fun addRepositories(repositoriesResponse: RepositoriesResponse) {
         val item = repositoriesResponse.repositoriesEntityList?.map {
                 repository -> repository.toRepositoryItem()
         }
 
         item?.let { adapter.addItems(item) }
+    }
+
+    private fun addUser(userResponse: List<UserEntity>) {
+        // TODO
     }
 
     inner class RepositoryManager : RepositoryAdapter.AdapterManager {
