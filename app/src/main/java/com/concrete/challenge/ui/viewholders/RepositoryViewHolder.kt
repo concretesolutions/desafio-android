@@ -2,9 +2,10 @@ package com.concrete.challenge.ui.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.concrete.challenge.data.RepositoryEntity
 import com.concrete.challenge.databinding.ItemRepositoryBinding
+import com.concrete.challenge.presentation.model.RepositoryItem
 import com.concrete.challenge.ui.adapters.RepositoryAdapter
+import com.squareup.picasso.Picasso
 
 class RepositoryViewHolder(
     private val view: View,
@@ -13,9 +14,12 @@ class RepositoryViewHolder(
 
     private val binding = ItemRepositoryBinding.bind(view)
 
-    fun bind(item: RepositoryEntity) {
-        binding.txtUsername.text = item.username
-        binding.txtUserName.text = item.userName
+    fun bind(item: RepositoryItem) {
+
+        Picasso.get().load(item.repositoryOwner.userAvatarUrl).into(binding.ivImageUser)
+
+        binding.txtUsername.text = item.repositoryOwner.username
+        binding.txtUserName.text = item.repositoryOwner.userName
         binding.txtRepositoryName.text = item.repositoryName
         binding.txtRepositoryDescription.text = item.repositoryDescription
         binding.txtForksAmount.text = item.forksAmount.toString()
@@ -25,5 +29,4 @@ class RepositoryViewHolder(
             manager.onRepositoryClicked(item)
         }
     }
-
 }

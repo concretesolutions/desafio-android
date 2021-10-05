@@ -2,11 +2,24 @@ package com.concrete.challenge.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.concrete.challenge.domain.io.APIService
+import com.concrete.challenge.domain.io.response.RepositoriesResponse
+import com.concrete.challenge.utils.callServiceRepositories
 
-class RepositoryViewModel() : ViewModel() {
+class RepositoryViewModel(private val service: APIService) : ViewModel() {
 
-    val repositoriesList: MutableLiveData<List<String>> by lazy {
-        MutableLiveData<List<String>>()
+    val repositoriesResponse: MutableLiveData<RepositoriesResponse> by lazy {
+        MutableLiveData<RepositoriesResponse>()
+    }
+
+    private var page: Int = 1
+
+    fun incrementPage() {
+        page++
+    }
+
+    fun getRepositories() {
+        callServiceRepositories(liveData = repositoriesResponse) { service.getRepositories(page) }
     }
 
 }

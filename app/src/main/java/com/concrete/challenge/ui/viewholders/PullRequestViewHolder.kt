@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.concrete.challenge.data.PullRequestEntity
 import com.concrete.challenge.databinding.ItemPullRequestBinding
 import com.concrete.challenge.ui.adapters.PullRequestAdapter
-import com.concrete.challenge.ui.fragments.PullRequestFragment
 
 class PullRequestViewHolder(
     private val view: View,

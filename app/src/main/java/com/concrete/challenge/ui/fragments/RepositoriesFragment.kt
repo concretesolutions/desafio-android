@@ -6,66 +6,81 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.concrete.challenge.R
+import com.concrete.challenge.data.UserEntity
 import com.concrete.challenge.ui.adapters.RepositoryAdapter
-import com.concrete.challenge.data.RepositoryEntity
 import com.concrete.challenge.databinding.FragmentRepositoriesBinding
+import com.concrete.challenge.domain.io.response.RepositoriesResponse
+import com.concrete.challenge.presentation.model.RepositoryItem
+import com.concrete.challenge.presentation.toRepositoryItem
 import com.concrete.challenge.presentation.viewmodel.RepositoryViewModel
+import com.concrete.challenge.presentation.viewmodel.UserViewModel
 import com.concrete.challenge.utils.Constants.TAG
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepositoriesFragment : Fragment() {
 
-    //private val adapter by lazy { RepositoryAdapter() }
-    //private val layoutManager by lazy { LinearLayoutManager(activity) }
-    private val viewModel by lazy { ViewModelProvider(this).get(RepositoryViewModel::class.java) }
+    private val adapter by lazy { RepositoryAdapter(manager = RepositoryManager()) }
+    private val repositoryViewModel: RepositoryViewModel by viewModel()
+    private val userViewModel: UserViewModel by viewModel()
 
     private lateinit var binding: FragmentRepositoriesBinding
 
-    private val repositoriesList = listOf(
-        RepositoryEntity("panchyh97","Francisca Hernández","desafioandroid",
-            "Lorem ipsum dolor sit", 1, 1, 17, 900),
-        RepositoryEntity("johndoe","John Doe","desafioandroid",
-            "Lorem ipsum dolor sit", 2, 2, 11, 99,),
-    )
+    private val rvRepository by lazy { binding.rvRepository }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
-        binding.rvRepository.layoutManager = LinearLayoutManager(activity)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        rvRepository.layoutManager = LinearLayoutManager(requireContext())
 
+        initView()
+    }
+
+    private fun initView() {
         initRecyclerView()
-        loadList()
+        initObservers()
+        loadInfo()
     }
 
     private fun initRecyclerView() {
-        //binding.rvRepository.layoutManager = layoutManager
-        val adapter = RepositoryAdapter(repositoriesList, RepositoryManager())
-        binding.rvRepository.adapter = adapter
+        rvRepository.adapter = adapter
     }
 
-    private fun loadList() {
-        viewModel.repositoriesList.observe(viewLifecycleOwner, ::add)
+    private fun initObservers() {
+        repositoryViewModel.repositoriesResponse.observe(viewLifecycleOwner, ::addRepositories)
+        userViewModel.userResponse.observe(viewLifecycleOwner, ::addUser)
     }
 
-    private fun add(repositoriesList: List<String>) {
-        val list = listOf("1", "2")
-        Log.i(TAG, list.toString() + repositoriesList.toString())
-        //adapter.addItems(list)
+    private fun loadInfo() {
+        repositoryViewModel.getRepositories()
+        userViewModel.getUser()
+    }
+
+    private fun addRepositories(repositoriesResponse: RepositoriesResponse) {
+
+        val item = repositoriesResponse.repositoriesEntityList?.map {
+                repository -> repository.toRepositoryItem()
+        }
+
+        item?.let { adapter.addItems(item) }
+    }
+
+    private fun addUser(userResponse: List<UserEntity>) {
+        // TODO
     }
 
     inner class RepositoryManager : RepositoryAdapter.AdapterManager {
-        override fun onRepositoryClicked(repositoryClicked: RepositoryEntity) {
+        override fun onRepositoryClicked(repositoryClicked: RepositoryItem) {
 
             val bundle = Bundle()
 

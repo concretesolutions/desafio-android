@@ -4,19 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.concrete.challenge.R
-import com.concrete.challenge.data.RepositoryEntity
+import com.concrete.challenge.presentation.model.RepositoryItem
 import com.concrete.challenge.ui.viewholders.RepositoryViewHolder
 
 class RepositoryAdapter(
-    private val repositoryList: List<RepositoryEntity>,
     private val manager: AdapterManager
 ) : RecyclerView.Adapter<RepositoryViewHolder>() {
 
-    //private val repositoryList = mutableListOf<String>()
-
     interface AdapterManager {
-        fun onRepositoryClicked(repositoryClicked: RepositoryEntity)
+        fun onRepositoryClicked(repositoryClicked: RepositoryItem)
     }
+
+    private val repositoryList = mutableListOf<RepositoryItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -29,14 +28,17 @@ class RepositoryAdapter(
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
         val item = repositoryList[position]
+
         holder.bind(item)
     }
 
-    /*
-    fun addItems(list: List<String>) {
-        //repositoryList.addAll(list)
+    override fun getItemId(position: Int): Long {
+        return repositoryList[position].repositoryId.hashCode().toLong()
+    }
+
+    fun addItems(list: List<RepositoryItem>) {
+        repositoryList.addAll(list)
         notifyDataSetChanged()
     }
-    */
 
 }
