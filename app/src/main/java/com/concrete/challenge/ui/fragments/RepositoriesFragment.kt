@@ -35,13 +35,13 @@ class RepositoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
-        rvRepository.layoutManager = LinearLayoutManager(activity)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        rvRepository.layoutManager = LinearLayoutManager(requireContext())
 
         initView()
     }
@@ -67,6 +67,7 @@ class RepositoriesFragment : Fragment() {
     }
 
     private fun addRepositories(repositoriesResponse: RepositoriesResponse) {
+
         val item = repositoriesResponse.repositoriesEntityList?.map {
                 repository -> repository.toRepositoryItem()
         }

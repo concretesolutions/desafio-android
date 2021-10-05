@@ -17,7 +17,7 @@ import com.concrete.challenge.utils.Constants.TAG
 
 class PullRequestFragment : Fragment() {
 
-    private val layoutManager by lazy { LinearLayoutManager(activity) }
+    private val layoutManager by lazy { LinearLayoutManager(requireContext()) }
     private val pullRequestViewModel by lazy {
         ViewModelProvider(this).get(PullRequestViewModel::class.java)
     }

@@ -11,11 +11,11 @@ class RepositoryAdapter(
     private val manager: AdapterManager
 ) : RecyclerView.Adapter<RepositoryViewHolder>() {
 
-    private val repositoryList = mutableListOf<RepositoryItem>()
-
     interface AdapterManager {
         fun onRepositoryClicked(repositoryClicked: RepositoryItem)
     }
+
+    private val repositoryList = mutableListOf<RepositoryItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -28,6 +28,7 @@ class RepositoryAdapter(
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
         val item = repositoryList[position]
+
         holder.bind(item)
     }
 
@@ -38,10 +39,6 @@ class RepositoryAdapter(
     fun addItems(list: List<RepositoryItem>) {
         repositoryList.addAll(list)
         notifyDataSetChanged()
-    }
-
-    fun repositoryList(): MutableList<RepositoryItem> {
-        return repositoryList
     }
 
 }
