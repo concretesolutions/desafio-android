@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -90,22 +89,13 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_gravity="center"
-                        app:cardCornerRadius="250dp">
-
-                        <ImageView
-                            android:id="@+id/ivImageUser"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            tools:srcCompat="@tools:sample/avatars"
-                            android:contentDescription="@string/desc"/>
-
-                    </com.google.android.material.card.MaterialCardView>
-
+                <ImageView
+                    android:id="@+id/ivImageUser"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/desc"/>
 
                 <TextView
                     android:id="@+id/txtUsername"

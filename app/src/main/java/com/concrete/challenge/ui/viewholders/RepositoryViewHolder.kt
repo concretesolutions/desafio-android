@@ -7,6 +7,7 @@ import com.concrete.challenge.presentation.model.RepositoryItem
 import com.concrete.challenge.ui.adapters.RepositoryAdapter
 import com.squareup.picasso.Picasso
 
+
 class RepositoryViewHolder(
     private val view: View,
     private val manager: RepositoryAdapter.AdapterManager

@@ -46,6 +46,10 @@ class RepositoriesFragment : Fragment() {
         initView()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+    }
+
     private fun initView() {
         initRecyclerView()
         initObservers()
@@ -84,8 +88,11 @@ class RepositoriesFragment : Fragment() {
 
             val bundle = Bundle()
 
+            bundle.putString("username", repositoryClicked.repositoryOwner.username)
+            bundle.putString("userName", repositoryClicked.repositoryOwner.userName)
             bundle.putString("openMR", repositoryClicked.openPullRequestAmount.toString())
             bundle.putString("closedMR", repositoryClicked.closedPullRequestAmount.toString())
+            bundle.putString("url", repositoryClicked.pullRequestsUrl)
 
             parentFragmentManager.setFragmentResult("key", bundle)
 

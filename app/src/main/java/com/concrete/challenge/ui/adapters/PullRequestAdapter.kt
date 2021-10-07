@@ -8,15 +8,14 @@ import com.concrete.challenge.data.PullRequestEntity
 import com.concrete.challenge.ui.viewholders.PullRequestViewHolder
 
 class PullRequestAdapter(
-    private val pullRequestList: List<PullRequestEntity>,
     private val manager: AdapterManager
 ) : RecyclerView.Adapter<PullRequestViewHolder>() {
-
-    //private val pullRequestList = mutableListOf<String>()
 
     interface AdapterManager {
         fun onPullRequestClicked(pullRequestClicked: PullRequestEntity)
     }
+
+    private val pullRequestList = mutableListOf<PullRequestEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PullRequestViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -29,8 +28,13 @@ class PullRequestAdapter(
 
     override fun onBindViewHolder(holder: PullRequestViewHolder, position: Int) {
         val item = pullRequestList[position]
+
         holder.bind(item)
     }
 
+    fun addItems(list: List<PullRequestEntity>) {
+        pullRequestList.addAll(list)
+        notifyDataSetChanged()
+    }
 
 }

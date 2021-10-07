@@ -10,6 +10,7 @@ data class RepositoryItem (
     val repositoryOwner: UserEntity,
     val starsAmount: Int,
     val forksAmount: Int,
+    val pullRequestsUrl: String,
 
     val openPullRequestAmount: Int,
     val closedPullRequestAmount: Int
