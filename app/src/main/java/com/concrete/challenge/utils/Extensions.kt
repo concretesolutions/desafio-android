@@ -20,6 +20,7 @@ fun ViewModel.callServiceRepositories(
         runCatching {
             withContext(Dispatchers.IO) { block.invoke() }
         }.onSuccess { response ->
+            Log.i(TAG, response.toString())
             liveData.postValue(response)
         }.onFailure { throwable ->
             liveData.postValue(null)
@@ -37,7 +38,7 @@ fun ViewModel.callServiceUser(
             withContext(Dispatchers.IO) { block.invoke() }
         }.onSuccess { response ->
             liveData.postValue(response)
-            Log.i(TAG, response.toString())
+            //Log.i(TAG, response.toString())
         }.onFailure { throwable ->
             liveData.postValue(null)
             Log.i(TAG, throwable.toString())

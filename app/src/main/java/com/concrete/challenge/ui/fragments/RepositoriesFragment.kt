@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.concrete.challenge.R
 import com.concrete.challenge.data.UserEntity
 import com.concrete.challenge.ui.adapters.RepositoryAdapter
-import com.concrete.challenge.databinding.FragmentRepositoriesBinding
 import com.concrete.challenge.domain.io.response.RepositoriesResponse
 import com.concrete.challenge.presentation.model.RepositoryItem
 import com.concrete.challenge.presentation.toRepositoryItem
@@ -26,17 +26,16 @@ class RepositoriesFragment : Fragment() {
     private val repositoryViewModel: RepositoryViewModel by viewModel()
     private val userViewModel: UserViewModel by viewModel()
 
-    private lateinit var binding: FragmentRepositoriesBinding
-
-    private val rvRepository by lazy { binding.rvRepository }
+    private lateinit var rvRepository: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
+        val view = inflater.inflate(R.layout.fragment_repositories, container, false)
+        rvRepository = view.findViewById(R.id.rvRepository)
 
-        return binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,10 +43,6 @@ class RepositoriesFragment : Fragment() {
         rvRepository.layoutManager = LinearLayoutManager(requireContext())
 
         initView()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
     }
 
     private fun initView() {
@@ -61,8 +56,9 @@ class RepositoriesFragment : Fragment() {
     }
 
     private fun initObservers() {
+        Log.i(TAG, "initObservers()")
         repositoryViewModel.repositoriesResponse.observe(viewLifecycleOwner, ::addRepositories)
-        userViewModel.userResponse.observe(viewLifecycleOwner, ::addUser)
+        //userViewModel.userResponse.observe(viewLifecycleOwner, ::addUser)
     }
 
     private fun loadInfo() {
@@ -70,13 +66,14 @@ class RepositoriesFragment : Fragment() {
         userViewModel.getUser()
     }
 
-    private fun addRepositories(repositoriesResponse: RepositoriesResponse) {
+    private fun addRepositories(repositoriesResponse: RepositoriesResponse?) {
+        if (repositoriesResponse != null) {
+            val item = repositoriesResponse.repositoriesEntityList.map {
+                    repository -> repository.toRepositoryItem()
+            }
 
-        val item = repositoriesResponse.repositoriesEntityList?.map {
-                repository -> repository.toRepositoryItem()
+            adapter.setItems(item)
         }
-
-        item?.let { adapter.addItems(item) }
     }
 
     private fun addUser(userResponse: List<UserEntity>) {
