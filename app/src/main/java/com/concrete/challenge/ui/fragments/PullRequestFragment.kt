@@ -3,19 +3,17 @@ package com.concrete.challenge.ui.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.concrete.challenge.BuildConfig
 import com.concrete.challenge.data.PullRequestEntity
 import com.concrete.challenge.databinding.FragmentPullRequestBinding
 import com.concrete.challenge.presentation.viewmodel.PullRequestViewModel
 import com.concrete.challenge.ui.adapters.PullRequestAdapter
-import com.concrete.challenge.utils.Constants.TAG
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val pullRequestNumber = "{/number}"
@@ -23,7 +21,6 @@ const val pullRequestNumber = "{/number}"
 class PullRequestFragment : Fragment() {
 
     private val adapter by lazy { PullRequestAdapter(manager = PullRequestManager()) }
-    private val layoutManager by lazy { LinearLayoutManager(requireContext()) }
     private val pullRequestViewModel: PullRequestViewModel by viewModel()
 
     private lateinit var binding: FragmentPullRequestBinding
@@ -41,6 +38,10 @@ class PullRequestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        rvPullRequest.layoutManager = LinearLayoutManager(requireContext())
+
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), (rvPullRequest.layoutManager as LinearLayoutManager).orientation)
+        rvPullRequest.addItemDecoration(dividerItemDecoration)
 
         initView()
     }
@@ -52,7 +53,6 @@ class PullRequestFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        rvPullRequest.layoutManager = layoutManager
         rvPullRequest.adapter = adapter
     }
 
