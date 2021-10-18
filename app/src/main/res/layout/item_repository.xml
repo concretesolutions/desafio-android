@@ -59,6 +59,13 @@
                     android:orientation="horizontal"
                     android:paddingTop="8dp">
 
+                    <ImageView
+                        android:id="@+id/ivForks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_code_fork_icon"
+                        android:contentDescription="@string/fork_desc"/>
+
                     <TextView
                         android:id="@+id/txtForksAmount"
                         android:layout_width="wrap_content"
@@ -68,11 +75,18 @@
                         android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
+                    <ImageView
+                        android:id="@+id/ivStars"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_star_icon"
+                        android:layout_marginStart="24dp"
+                        android:contentDescription="@string/star_desc"/>
+
                     <TextView
                         android:id="@+id/txtStarGazersAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
                         android:text="@string/forks_amount"
                         android:textColor="@color/yellow_mustard"
                         android:textStyle="bold"

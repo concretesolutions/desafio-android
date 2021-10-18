@@ -9,7 +9,10 @@
     <string name="desc">Imagen del usuario en GitHub</string>
 
     <string name="forks_amount">640</string>
+    <string name="fork_desc">Fork icon</string>
     <string name="star_gazers_amount">98</string>
+    <string name="star_desc">Star icon</string>
+
 
     <string name="open_pull_request_amount">16</string>
     <string name="open_pull_request">abiertos</string>
