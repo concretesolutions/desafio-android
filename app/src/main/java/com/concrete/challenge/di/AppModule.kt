@@ -2,6 +2,7 @@ package com.concrete.challenge.di
 
 import com.concrete.challenge.BuildConfig
 import com.concrete.challenge.domain.io.APIService
+import com.concrete.challenge.presentation.viewmodel.PullRequestViewModel
 import com.concrete.challenge.presentation.viewmodel.RepositoryViewModel
 import com.concrete.challenge.presentation.viewmodel.UserViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -23,5 +24,7 @@ val appModule = module {
     viewModel<RepositoryViewModel>()
 
     viewModel<UserViewModel>()
+
+    viewModel<PullRequestViewModel>()
 
 }

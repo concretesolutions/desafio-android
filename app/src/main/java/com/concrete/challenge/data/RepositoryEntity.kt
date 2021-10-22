@@ -9,6 +9,7 @@ data class RepositoryEntity (
         @SerializedName("owner") val repositoryOwner: UserEntity,
         @SerializedName("stargazers_count") val starsAmount: Int,
         @SerializedName("forks_count") val forksAmount: Int,
+        @SerializedName("pulls_url") val pullRequestsUrl: String,
 
         // TODO: Get open and closed pull requests
         @SerializedName("open") val openPullRequestAmount: Int,

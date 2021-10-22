@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -48,21 +50,13 @@
                     android:orientation="horizontal"
                     android:paddingTop="8dp">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="250dp"
-                        android:layout_marginTop="2dp">
-
-                        <ImageView
-                            android:id="@+id/ivUser"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="@string/desc"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                    </com.google.android.material.card.MaterialCardView>
+                    <ImageView
+                        android:id="@+id/ivUser"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/desc"
+                        tools:srcCompat="@tools:sample/avatars" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

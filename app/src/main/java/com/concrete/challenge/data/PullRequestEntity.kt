@@ -1,9 +1,10 @@
 package com.concrete.challenge.data
 
-// Temporal
+import com.google.gson.annotations.SerializedName
+
 data class PullRequestEntity(
-    val pullRequestTitle: String,
-    val pullRequestBody: String,
-    val username: String,
-    val userName: String
+    @SerializedName("html_url") val pullRequestUrl: String,
+    @SerializedName("title") val pullRequestTitle: String,
+    @SerializedName("body") val pullRequestBody: String,
+    @SerializedName("user") val userInfo: UserEntity
 )

@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.concrete.challenge.R
 import com.concrete.challenge.data.UserEntity
 import com.concrete.challenge.ui.adapters.RepositoryAdapter
-import com.concrete.challenge.databinding.FragmentRepositoriesBinding
 import com.concrete.challenge.domain.io.response.RepositoriesResponse
 import com.concrete.challenge.presentation.model.RepositoryItem
 import com.concrete.challenge.presentation.toRepositoryItem
@@ -26,22 +27,24 @@ class RepositoriesFragment : Fragment() {
     private val repositoryViewModel: RepositoryViewModel by viewModel()
     private val userViewModel: UserViewModel by viewModel()
 
-    private lateinit var binding: FragmentRepositoriesBinding
-
-    private val rvRepository by lazy { binding.rvRepository }
+    private lateinit var rvRepository: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
+        val view = inflater.inflate(R.layout.fragment_repositories, container, false)
+        rvRepository = view.findViewById(R.id.rvRepository)
 
-        return binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvRepository.layoutManager = LinearLayoutManager(requireContext())
+
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), (rvRepository.layoutManager as LinearLayoutManager).orientation)
+        rvRepository.addItemDecoration(dividerItemDecoration)
 
         initView()
     }
@@ -57,8 +60,9 @@ class RepositoriesFragment : Fragment() {
     }
 
     private fun initObservers() {
+        Log.i(TAG, "initObservers()")
         repositoryViewModel.repositoriesResponse.observe(viewLifecycleOwner, ::addRepositories)
-        userViewModel.userResponse.observe(viewLifecycleOwner, ::addUser)
+        //userViewModel.userResponse.observe(viewLifecycleOwner, ::addUser)
     }
 
     private fun loadInfo() {
@@ -66,13 +70,14 @@ class RepositoriesFragment : Fragment() {
         userViewModel.getUser()
     }
 
-    private fun addRepositories(repositoriesResponse: RepositoriesResponse) {
+    private fun addRepositories(repositoriesResponse: RepositoriesResponse?) {
+        if (repositoriesResponse != null) {
+            val item = repositoriesResponse.repositoriesEntityList.map {
+                    repository -> repository.toRepositoryItem()
+            }
 
-        val item = repositoriesResponse.repositoriesEntityList?.map {
-                repository -> repository.toRepositoryItem()
+            adapter.setItems(item)
         }
-
-        item?.let { adapter.addItems(item) }
     }
 
     private fun addUser(userResponse: List<UserEntity>) {
@@ -84,8 +89,11 @@ class RepositoriesFragment : Fragment() {
 
             val bundle = Bundle()
 
+            bundle.putString("username", repositoryClicked.repositoryOwner.username)
+            bundle.putString("userName", repositoryClicked.repositoryOwner.userName)
             bundle.putString("openMR", repositoryClicked.openPullRequestAmount.toString())
             bundle.putString("closedMR", repositoryClicked.closedPullRequestAmount.toString())
+            bundle.putString("url", repositoryClicked.pullRequestsUrl)
 
             parentFragmentManager.setFragmentResult("key", bundle)
 

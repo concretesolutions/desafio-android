@@ -36,7 +36,8 @@ class RepositoryAdapter(
         return repositoryList[position].repositoryId.hashCode().toLong()
     }
 
-    fun addItems(list: List<RepositoryItem>) {
+    fun setItems(list: List<RepositoryItem>) {
+        repositoryList.clear()
         repositoryList.addAll(list)
         notifyDataSetChanged()
     }
