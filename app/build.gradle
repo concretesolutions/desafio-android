@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id("io.gitlab.arturbosch.detekt").version("1.18.1")
 }
 
 android {
@@ -35,6 +36,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
+
+detekt {
+    toolVersion = "1.18.1"
+    config = files("../config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
 }
 
 dependencies {
