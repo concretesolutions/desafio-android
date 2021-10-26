@@ -16,7 +16,7 @@ import com.concrete.challenge.presentation.viewmodel.PullRequestViewModel
 import com.concrete.challenge.ui.adapters.PullRequestAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-const val pullRequestNumber = "{/number}"
+const val PULL_REQUEST_NUMBER = "{/number}"
 
 class PullRequestFragment : Fragment() {
 
@@ -40,7 +40,9 @@ class PullRequestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rvPullRequest.layoutManager = LinearLayoutManager(requireContext())
 
-        val dividerItemDecoration = DividerItemDecoration(requireContext(), (rvPullRequest.layoutManager as LinearLayoutManager).orientation)
+        val dividerItemDecoration = DividerItemDecoration(
+            requireContext(),
+            (rvPullRequest.layoutManager as LinearLayoutManager).orientation)
         rvPullRequest.addItemDecoration(dividerItemDecoration)
 
         initView()
@@ -65,7 +67,8 @@ class PullRequestFragment : Fragment() {
             { _, result ->
                 val urlPullRequests = result.getString("url")
 
-                val splitUrlPullRequests = urlPullRequests?.split("${BuildConfig.BASE_URL}repos/", pullRequestNumber, "/")
+                val splitUrlPullRequests = urlPullRequests?.split(
+                    "${BuildConfig.BASE_URL}repos/", PULL_REQUEST_NUMBER, "/")
 
                 val owner = splitUrlPullRequests?.get(1)
                 val repo = splitUrlPullRequests?.get(2)

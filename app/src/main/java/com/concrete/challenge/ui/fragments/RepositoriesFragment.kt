@@ -44,7 +44,9 @@ class RepositoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rvRepository.layoutManager = LinearLayoutManager(requireContext())
 
-        val dividerItemDecoration = DividerItemDecoration(requireContext(), (rvRepository.layoutManager as LinearLayoutManager).orientation)
+        val dividerItemDecoration = DividerItemDecoration(
+            requireContext(),
+            (rvRepository.layoutManager as LinearLayoutManager).orientation)
         rvRepository.addItemDecoration(dividerItemDecoration)
 
         initView()

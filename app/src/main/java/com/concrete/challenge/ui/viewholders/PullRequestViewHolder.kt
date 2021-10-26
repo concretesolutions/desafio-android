@@ -7,7 +7,7 @@ import com.concrete.challenge.databinding.ItemPullRequestBinding
 import com.concrete.challenge.ui.adapters.PullRequestAdapter
 import com.squareup.picasso.Picasso
 
-const val emptyBody = "<< No tiene descripción >>"
+const val EMPTY_BODY = "<< No tiene descripción >>"
 
 class PullRequestViewHolder(
     private val view: View,
@@ -25,7 +25,7 @@ class PullRequestViewHolder(
         binding.txtPullRequestTitle.text = item.pullRequestTitle
 
         when(item.pullRequestBody == "") {
-            true -> binding.txtPullRequestBody.text = emptyBody
+            true -> binding.txtPullRequestBody.text = EMPTY_BODY
             false -> binding.txtPullRequestBody.text = item.pullRequestBody
         }
 
