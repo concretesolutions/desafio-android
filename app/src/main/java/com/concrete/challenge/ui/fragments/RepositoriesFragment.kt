@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ViewFlipper
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,11 +72,15 @@ class RepositoriesFragment : Fragment() {
     }
 
     private fun addRepositories(repositoriesResponse: RepositoriesResponse?) {
+
+        val viewFlipper = view?.findViewById<ViewFlipper>(R.id.viewFlipper)
+
         if (repositoriesResponse != null) {
             val item = repositoriesResponse.repositoriesEntityList.map {
                     repository -> repository.toRepositoryItem()
             }
 
+            viewFlipper?.showNext()
             adapter.setItems(item)
         }
     }
