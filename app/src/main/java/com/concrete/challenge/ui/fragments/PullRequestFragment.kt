@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ViewFlipper
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.concrete.challenge.BuildConfig
+import com.concrete.challenge.R
 import com.concrete.challenge.data.PullRequestEntity
 import com.concrete.challenge.databinding.FragmentPullRequestBinding
 import com.concrete.challenge.presentation.viewmodel.PullRequestViewModel
@@ -78,9 +80,13 @@ class PullRequestFragment : Fragment() {
 
     private fun addPullRequests(pullRequestsList: List<PullRequestEntity>) {
 
+        val viewFlipper = view?.findViewById<ViewFlipper>(R.id.vfPullRequest)
+
         pullRequestsList.let {
+            viewFlipper?.showNext()
             adapter.addItems(pullRequestsList)
         }
+
     }
 
     inner class PullRequestManager : PullRequestAdapter.AdapterManager {

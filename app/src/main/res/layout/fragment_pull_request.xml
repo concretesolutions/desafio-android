@@ -71,8 +71,8 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPullRequest"
+        <ViewFlipper
+            android:id="@+id/vfPullRequest"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -82,7 +82,39 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/sflPullRequest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/layout_pull_request_shimmer"/>
+                    <include layout="@layout/layout_pull_request_shimmer"/>
+                    <include layout="@layout/layout_pull_request_shimmer"/>
+                    <include layout="@layout/layout_pull_request_shimmer"/>
+                    <include layout="@layout/layout_pull_request_shimmer"/>
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPullRequest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+        </ViewFlipper>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

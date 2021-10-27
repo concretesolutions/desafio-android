@@ -33,11 +33,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <include layout="@layout/shimmer_placeholder_layout"/>
-                    <include layout="@layout/shimmer_placeholder_layout"/>
-                    <include layout="@layout/shimmer_placeholder_layout"/>
-                    <include layout="@layout/shimmer_placeholder_layout"/>
-                    <include layout="@layout/shimmer_placeholder_layout"/>
+                    <include layout="@layout/layout_repository_shimmer"/>
+                    <include layout="@layout/layout_repository_shimmer"/>
+                    <include layout="@layout/layout_repository_shimmer"/>
+                    <include layout="@layout/layout_repository_shimmer"/>
+                    <include layout="@layout/layout_repository_shimmer"/>
 
                 </LinearLayout>
 
