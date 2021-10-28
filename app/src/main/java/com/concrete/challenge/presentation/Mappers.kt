@@ -10,8 +10,5 @@ fun RepositoryEntity.toRepositoryItem() = RepositoryItem(
     repositoryOwner = repositoryOwner,
     starsAmount = starsAmount,
     forksAmount = forksAmount,
-    pullRequestsUrl = pullRequestsUrl,
-
-    openPullRequestAmount = openPullRequestAmount,
-    closedPullRequestAmount = closedPullRequestAmount
+    pullRequestsUrl = pullRequestsUrl
 )
