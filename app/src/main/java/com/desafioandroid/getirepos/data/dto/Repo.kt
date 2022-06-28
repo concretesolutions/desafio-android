@@ -13,6 +13,10 @@ data class Repo(
     val fullName: String,
     @SerializedName("pulls_url")
     val pullsUrl: String,
+    @SerializedName("stargazers_count")
+    val stargazersCount: Long,
+    @SerializedName("forks_count")
+    val forksCount: Long,
     @SerializedName("owner")
     val owner: Owner
 )
