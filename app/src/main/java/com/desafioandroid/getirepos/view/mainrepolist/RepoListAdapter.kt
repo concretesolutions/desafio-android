@@ -16,7 +16,7 @@ class RepoListAdapter(private val listener: RepoListActivityListener): RecyclerV
     }
 
     fun setReposItems(newRepoItems: List<Repo>) {
-        this.repos = RepoTranslator.translateRepoToRepoItem(newRepoItems)
+        this.repos.addAll(RepoTranslator.translateRepoToRepoItem(newRepoItems))
         this.notifyDataSetChanged()
     }
 

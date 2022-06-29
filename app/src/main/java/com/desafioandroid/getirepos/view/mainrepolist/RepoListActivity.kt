@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.desafioandroid.getirepos.databinding.ActivityMainBinding
 
 class RepoListActivity : AppCompatActivity() {
@@ -25,10 +26,21 @@ class RepoListActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.repoListRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.repoListRecyclerView.adapter = repoListAdapter
-        fillReposOnCreate()
+        fillReposInList()
+
+        binding.repoListRecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if(dy > 0) {
+                    if(!binding.repoListRecyclerView.canScrollVertically(1)) {
+                        pageCount++
+                        fillReposInList()
+                    }
+                }
+            }
+        })
     }
 
-    fun fillReposOnCreate() {
+    fun fillReposInList() {
         viewModel.getRepos(pageCount)
         viewModel.repos.observe(this) {
             value ->
