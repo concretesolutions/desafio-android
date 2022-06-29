@@ -1,11 +1,11 @@
 package com.desafioandroid.getirepos.data
 
-class GetReposRepository(private val getReposRepository: GetReposRepository) {
+class GetReposRepository(private val getReposDatasource: GetReposDatasource) {
     fun getRepos(page: Int, listener: SearchResponseListener){
-        this.getReposRepository.getRepos(page, listener)
+        this.getReposDatasource.getRepos(page, listener)
     }
 
     fun getPulls(owner: String, respository: String, listener: PullsResponseListener) {
-        this.getReposRepository.getPulls(owner, respository, listener)
+        this.getReposDatasource.getPulls(owner, respository, listener)
     }
 }
