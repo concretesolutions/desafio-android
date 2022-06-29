@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desafioandroid.getirepos.databinding.ActivityMainBinding
@@ -44,11 +45,13 @@ class RepoListActivity : AppCompatActivity() {
     }
 
     fun fillReposInList() {
+        binding.repoProgressBar.isVisible = true
         viewModel.getRepos(pageCount)
         viewModel.repos.observe(this) {
             value ->
             if(null != value) {
                 repoListAdapter.setReposItems(value)
+                binding.repoProgressBar.isVisible = false
             }
         }
     }

@@ -8,7 +8,7 @@ data class PullsResponse(
     @SerializedName("title")
     val title: String,
     @SerializedName("body")
-    val body: String,
+    val body: String?,
     @SerializedName("html_url")
     val htmlUrl: String,
     @SerializedName("user")

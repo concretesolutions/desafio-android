@@ -18,7 +18,7 @@ data class Repo(
     @SerializedName("forks_count")
     val forksCount: Long,
     @SerializedName("description")
-    val description: String,
+    val description: String?,
     @SerializedName("owner")
     val owner: Owner
 )

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.desafioandroid.getirepos.databinding.ActivityPullsListBinding
 
@@ -36,11 +37,13 @@ class PullsListActivity : AppCompatActivity() {
     }
 
     fun fillPullsInList() {
+        binding.pullsProgressBar.isVisible = true
         viewModel.getPulls(owner, repository)
         viewModel.pulls.observe(this) {
             value ->
             if(null != value) {
                 pullsListAdapter.setPullsItems(value)
+                binding.pullsProgressBar.isVisible = false
             }
         }
     }

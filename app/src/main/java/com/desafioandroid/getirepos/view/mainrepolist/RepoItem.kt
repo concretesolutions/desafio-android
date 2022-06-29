@@ -7,7 +7,7 @@ class RepoItem(
     val nodeId: String,
     val name: String,
     val fullName: String,
-    val description: String,
+    val description: String?,
     val pullsUrl: String,
     val stargazersCount: Long,
     val forksCount: Long,
