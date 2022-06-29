@@ -16,6 +16,7 @@
         android:textColor="#2196F3"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:maxWidth="320sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginLeft="32dp"
         android:maxLength="60"
-        android:maxWidth="256sp"
+        android:maxWidth="320sp"
         android:text="Descripcion muy laaaaaaaaaaaaaaarga"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pullTitleText" />
