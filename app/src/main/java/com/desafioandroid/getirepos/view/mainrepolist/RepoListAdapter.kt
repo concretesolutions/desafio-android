@@ -12,7 +12,7 @@ class RepoListAdapter(private val listener: RepoListActivityListener): RecyclerV
 
     private var repos = ArrayList<RepoItem>()
     interface RepoListActivityListener {
-        fun repoSelected(repoLink: String)
+        fun repoSelected(owner: String, repository: String)
     }
 
     fun setReposItems(newRepoItems: List<Repo>) {
@@ -44,7 +44,7 @@ class RepoListAdapter(private val listener: RepoListActivityListener): RecyclerV
             this.binding.userNameText.text = repo.owner.login
             Glide.with(binding.root).load(repo.owner.avatarUrl).into(this.binding.userAvatarImageView)
             this.binding.root.setOnClickListener {
-                listener.repoSelected(this.binding.hiddenRepoLink.text.toString())
+                listener.repoSelected(repo.owner.login, repo.name)
             }
         }
     }

@@ -16,10 +16,10 @@
         android:theme="@style/Theme.GitRepos"
         tools:targetApi="31">
         <activity
-            android:name=".PullsListActivity"
+            android:name=".view.pullslist.PullsListActivity"
             android:exported="false" />
         <activity
-            android:name=".PullsItem"
+            android:name=".view.pullslist.PullsItem"
             android:exported="false" />
         <activity
             android:name=".view.mainrepolist.RepoItem"
