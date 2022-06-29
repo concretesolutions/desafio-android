@@ -47,17 +47,12 @@ class GetReposDatasource {
     fun getPulls(owner: String, repository: String, listener: PullsResponseListener) {
         val service = RetrofitService.instance.create(GetReposService::class.java).getPulls(owner, repository)
 
-        service.enqueue(object: Callback<PullsResponse> {
-            override fun onResponse(call: Call<PullsResponse>, response: Response<PullsResponse>) {
+        service.enqueue(object: Callback<List<PullsResponse>> {
+            override fun onResponse(call: Call<List<PullsResponse>>, response: Response<List<PullsResponse>>) {
                 val responseResult = response.body()
                 if (response.isSuccessful && null != responseResult) {
                     listener.onPullsResponse(
-                        PullsResponse(
-                            state = responseResult.state,
-                            title = responseResult.title,
-                            body = responseResult.body,
-                            user = responseResult.user
-                        )
+                        responseResult
                     )
                 } else {
                     listener.onError(
@@ -69,7 +64,7 @@ class GetReposDatasource {
                 }
             }
 
-            override fun onFailure(call: Call<PullsResponse>, t: Throwable) {
+            override fun onFailure(call: Call<List<PullsResponse>>, t: Throwable) {
                 listener.onError(
                     RepositoryError(
                         message = t.message ?: "Unexpected error",

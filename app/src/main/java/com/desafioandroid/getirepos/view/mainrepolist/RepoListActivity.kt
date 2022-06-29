@@ -3,6 +3,7 @@ package com.desafioandroid.getirepos.view.mainrepolist
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desafioandroid.getirepos.databinding.ActivityMainBinding
@@ -51,6 +52,6 @@ class RepoListActivity : AppCompatActivity() {
     }
 
     fun onRepoClickCallPull(pullsLink: String) {
-
+        Toast.makeText(this, "List item clicked!!!", Toast.LENGTH_LONG).show()
     }
 }
