@@ -3,6 +3,7 @@ package com.desafioandroid.getirepos.view.mainrepolist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.desafioandroid.getirepos.databinding.ActivityRepoItemBinding
 import com.desafioandroid.getirepos.data.dto.Repo
 import com.desafioandroid.getirepos.data.utils.RepoTranslator
@@ -41,7 +42,7 @@ class RepoListAdapter(private val listener: RepoListActivityListener): RecyclerV
             this.binding.repoForksCountText.text = repo.forksCount.toString()
             this.binding.repoStarsCountText.text = repo.stargazersCount.toString()
             this.binding.userNameText.text = repo.owner.login
-            //TODO:Falta setear link de imagen de avatar
+            Glide.with(binding.root).load(repo.owner.avatarUrl).into(this.binding.userAvatarImageView)
             this.binding.root.setOnClickListener {
                 listener.repoSelected(this.binding.hiddenRepoLink.text.toString())
             }

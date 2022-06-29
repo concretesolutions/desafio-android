@@ -10,9 +10,12 @@
         android:id="@+id/repoTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
         android:text="Titulo Repositorio"
+        android:textColor="#2196F3"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,6 +26,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="96dp"
         android:text="Descripcion muy laaaaaaaaaaaaaaarga"
+        android:maxLength="60"
+        android:maxWidth="256sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repoTitleText" />
@@ -31,8 +36,12 @@
         android:id="@+id/repoForksCountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_baseline_fork_right_24"
         android:text="600"
+        android:textColor="#FFC107"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/repoStarsCountText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText" />
@@ -41,11 +50,15 @@
         android:id="@+id/repoStarsCountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="96dp"
         android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_baseline_star_24"
         android:text="80"
+        android:textColor="#FFC107"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/repoForksCountText"
-        app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText"
-        tools:layout_editor_absoluteX="120dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText" />
 
     <ImageView
         android:id="@+id/userAvatarImageView"
@@ -64,9 +77,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="32dp"
         android:text="usuario"
+        android:textColor="#2196F3"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/userAvatarImageView"
-        app:layout_constraintTop_toBottomOf="@+id/userAvatarImageView"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/userAvatarImageView" />
 
     <TextView
         android:id="@+id/hiddenRepoLink"
