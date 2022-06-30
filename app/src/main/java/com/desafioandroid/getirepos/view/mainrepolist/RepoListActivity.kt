@@ -6,7 +6,9 @@ import androidx.activity.viewModels
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.desafioandroid.getirepos.databinding.ActivityMainBinding
 import com.desafioandroid.getirepos.view.pullslist.PullsListActivity
@@ -30,6 +32,7 @@ class RepoListActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.repoListRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.repoListRecyclerView.adapter = repoListAdapter
+        binding.repoListRecyclerView.addItemDecoration(DividerItemDecoration(this, OrientationHelper.VERTICAL))
         fillReposInList()
 
         binding.repoListRecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {

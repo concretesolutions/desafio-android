@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
 import com.desafioandroid.getirepos.databinding.ActivityPullsListBinding
 
 class PullsListActivity : AppCompatActivity() {
@@ -35,6 +37,7 @@ class PullsListActivity : AppCompatActivity() {
 
         binding.pullsRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.pullsRecyclerView.adapter = pullsListAdapter
+        binding.pullsRecyclerView.addItemDecoration(DividerItemDecoration(this, OrientationHelper.VERTICAL))
         fillPullsInList()
     }
 
