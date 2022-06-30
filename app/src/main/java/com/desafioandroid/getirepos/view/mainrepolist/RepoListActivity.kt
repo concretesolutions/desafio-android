@@ -57,7 +57,6 @@ class RepoListActivity : AppCompatActivity() {
     }
 
     fun onRepoClickCallPull(owner: String, repository: String) {
-        Toast.makeText(this, "List item clicked!!!", Toast.LENGTH_LONG).show()
         val intent = Intent(this, PullsListActivity::class.java).apply {
             putExtra("owner", owner)
             putExtra("repository", repository)

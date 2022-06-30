@@ -51,7 +51,6 @@ class PullsListActivity : AppCompatActivity() {
     }
 
     fun onPullClickCall(pullLink: String) {
-        Toast.makeText(this, "List item clicked!!!!", Toast.LENGTH_LONG).show()
         val intent = Intent(Intent.ACTION_VIEW).setData(Uri.parse(pullLink))
         startActivity(intent)
     }

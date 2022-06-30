@@ -65,7 +65,7 @@
         android:layout_width="72dp"
         android:layout_height="66dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -80,6 +80,7 @@
         android:textColor="#2196F3"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/userAvatarImageView"
         app:layout_constraintStart_toStartOf="@+id/userAvatarImageView"
         app:layout_constraintTop_toBottomOf="@+id/userAvatarImageView" />
 
