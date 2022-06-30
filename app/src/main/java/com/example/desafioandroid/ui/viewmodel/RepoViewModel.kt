@@ -11,17 +11,22 @@ import kotlinx.coroutines.launch
 class RepoViewModel : ViewModel() {
 
     private val _repositoriesModel = MutableLiveData<List<RepositoriesModel>?>(null)
-    val repositoriesModel: LiveData<List<RepositoriesModel>?>
-        get() = _repositoriesModel
+    val repositoriesModel: LiveData<List<RepositoriesModel>?> get() = _repositoriesModel
+
+    private val _isLoading = MutableLiveData<Boolean>(false)
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+
 
     var getRepositories = GetRepositoriesUserCase()
 
     fun onCreate(){
         viewModelScope.launch{
+            _isLoading.value = true
             val result: List<RepositoriesModel>? = getRepositories()
-
             if(!result.isNullOrEmpty()){
                 _repositoriesModel.postValue(result)
+                _isLoading.value = false
             }
         }
     }

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,11 +32,11 @@ class RepoFragment : Fragment() {
 
         viewModel.onCreate()
 
-        viewModel.repositoriesModel.observe(viewLifecycleOwner) { value ->
-            Log.i("repositoriesModel",value.toString())
-            if (value != null) {
+        viewModel.repositoriesModel.observe(viewLifecycleOwner) { it ->
+            Log.i("repositoriesModel",it.toString())
+            if (it != null) {
                 val adapter =
-                    RepoRecyclerViewAdapter(value,
+                    RepoRecyclerViewAdapter(it,
                         object : RepoRecyclerViewAdapter.RepoSelectionListener {
                             override fun select(repoName: String) {
                                 Log.i("RepoFragment", repoName)
@@ -44,6 +45,10 @@ class RepoFragment : Fragment() {
                 adapter.notifyDataSetChanged()
                 binding.rvRepositories.adapter = adapter
             }
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner){it
+            binding.bprogress.isVisible = it
         }
         return binding.root
     }
