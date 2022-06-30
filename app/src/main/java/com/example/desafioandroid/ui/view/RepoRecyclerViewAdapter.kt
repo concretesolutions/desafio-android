@@ -1,10 +1,11 @@
-package com.example.desafioandroid.data.model
+package com.example.desafioandroid.ui.view
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.desafioandroid.data.model.RepositoriesModel
 import com.example.desafioandroid.databinding.FragmentRepoBinding
 
 
@@ -14,7 +15,7 @@ class RepoRecyclerViewAdapter(
 ): RecyclerView.Adapter<RepoRecyclerViewAdapter.RepoViewHolder>() {
 
     interface RepoSelectionListener {
-        fun select(activityName: String)
+        fun select(repoName: String, owner: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
@@ -35,13 +36,12 @@ class RepoRecyclerViewAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(repo: RepositoriesModel) {
             binding.ivAvatarUser.load(repo.owner.avatar_url)
-
-            Log.i("RepoViewHolder",repo.name)
-
             binding.tvRepoName.text = repo.name
             binding.tvRepoDescription.text = repo.description
+            binding.tvOwnerName.text= repo.owner.login
+            //Log.i("Repo", "$repo.name $repo.owner.login")
             this.binding.tvRepoName.setOnClickListener{
-                listener.select(binding.tvRepoName.text.toString().lowercase())
+                listener.select(binding.tvRepoName.text.toString(),repo.owner.login)
             }
         }
     }

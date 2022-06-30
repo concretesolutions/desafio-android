@@ -1,8 +1,8 @@
 package com.example.desafioandroid.data.model
 
-class RepositoriesProvider {
+class ApiProvider {
     companion object {
         var repositoriesList: List<RepositoriesModel> = emptyList()
-
+        var pullList: List<PullModel> = emptyList()
     }
 }

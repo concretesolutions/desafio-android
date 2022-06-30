@@ -5,14 +5,28 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/repoFragment">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.desafioandroid.ui.view.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/repoFragment"
         android:name="com.example.desafioandroid.ui.view.RepoFragment"
         tools:layout="@layout/fragment_repo"
-        android:label="RepoFragment" />
+        android:label="RepoFragment" >
+        <action
+            android:id="@+id/action_repoFragment_to_pullFragment"
+            app:destination="@id/pullFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pullFragment"
+        android:name="com.example.desafioandroid.ui.view.PullFragment"
+        tools:layout="@layout/fragment_pull"
+        android:label="PullFragment" >
+        <action
+            android:id="@+id/action_pullFragment_to_repoFragment"
+            app:destination="@id/repoFragment" />
+        <argument
+            android:name="repo_name"
+            app:argType="string"/>
+        <argument
+            android:name="owner"
+            app:argType="string"/>
+    </fragment>
 </navigation>

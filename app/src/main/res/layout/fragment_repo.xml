@@ -17,7 +17,6 @@
         android:lines="@integer/material_motion_duration_long_1"
         android:textColor="@color/teal_200"
         android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +30,6 @@
         android:lines="@integer/material_motion_duration_long_1"
         android:textColor="@color/teal_200"
         android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.067"
@@ -43,16 +41,30 @@
         android:id="@+id/iv_avatar_user"
         android:layout_width="58dp"
         android:layout_height="54dp"
-        android:layout_marginStart="288dp"
+        android:layout_marginStart="268dp"
         android:clickable="true"
         android:lines="@integer/material_motion_duration_long_1"
         android:textColor="@color/teal_200"
         android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.592" />
+        app:layout_constraintVertical_bias="0.214" />
+
+    <TextView
+        android:id="@+id/tv_owner_name"
+        android:layout_width="173dp"
+        android:layout_height="31dp"
+        android:clickable="true"
+        android:lines="@integer/material_motion_duration_long_1"
+        android:textColor="@color/teal_200"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar_user"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

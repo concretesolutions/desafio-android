@@ -8,17 +8,17 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.desafioandroid.data.model.RepoRecyclerViewAdapter
 import com.example.desafioandroid.databinding.FragmentRepoListBinding
-import com.example.desafioandroid.ui.viewmodel.RepoViewModel
-import com.example.desafioandroid.ui.viewmodel.RepoViewModelFactory
+import com.example.desafioandroid.ui.viewmodel.MainViewModel
+import com.example.desafioandroid.ui.viewmodel.MainViewModelFactory
 
 class RepoFragment : Fragment() {
 
     private lateinit var binding: FragmentRepoListBinding
-    private val viewModel: RepoViewModel by viewModels(
-        factoryProducer = { RepoViewModelFactory() }
+    private val viewModel: MainViewModel by viewModels(
+        factoryProducer = { MainViewModelFactory() }
     )
 
     override fun onCreateView(
@@ -32,18 +32,23 @@ class RepoFragment : Fragment() {
 
         viewModel.onCreate()
 
-        viewModel.repositoriesModel.observe(viewLifecycleOwner) { it ->
+
+
+        viewModel.repositoriesModel.observe(viewLifecycleOwner) {
             Log.i("repositoriesModel",it.toString())
             if (it != null) {
                 val adapter =
                     RepoRecyclerViewAdapter(it,
                         object : RepoRecyclerViewAdapter.RepoSelectionListener {
-                            override fun select(repoName: String) {
-                                Log.i("RepoFragment", repoName)
+                            override fun select(repoName: String, owner: String) {
+                                Log.i("RepoFragment", "$repoName  $owner")
+                                val action = RepoFragmentDirections.actionRepoFragmentToPullFragment(repoName,owner)
+                                findNavController().navigate(action)
                             }
                         })
-                adapter.notifyDataSetChanged()
+
                 binding.rvRepositories.adapter = adapter
+                adapter.notifyDataSetChanged()
             }
         }
 
