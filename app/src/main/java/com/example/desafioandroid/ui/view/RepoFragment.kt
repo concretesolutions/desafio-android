@@ -28,11 +28,7 @@ class RepoFragment : Fragment() {
     ): View {
         binding = FragmentRepoListBinding.inflate(inflater, container, false)
 
-        binding.rvRepositories.layoutManager = LinearLayoutManager(context)
-
         viewModel.onCreate()
-
-
 
         viewModel.repositoriesModel.observe(viewLifecycleOwner) {
             Log.i("repositoriesModel",it.toString())
@@ -46,6 +42,7 @@ class RepoFragment : Fragment() {
                                 findNavController().navigate(action)
                             }
                         })
+                binding.rvRepositories.layoutManager = LinearLayoutManager(context)
 
                 binding.rvRepositories.adapter = adapter
                 adapter.notifyDataSetChanged()
