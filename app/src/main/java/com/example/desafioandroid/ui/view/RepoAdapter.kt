@@ -1,5 +1,6 @@
 package com.example.desafioandroid.ui.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,16 +9,23 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.desafioandroid.data.model.RepositoriesModel
 import com.example.desafioandroid.databinding.FragmentRepoBinding
+import javax.inject.Inject
 
 
-class RepoAdapter: ListAdapter<RepositoriesModel,RepoAdapter.RepoViewHolder>(DiffCallback) {
+class RepoAdapter @Inject constructor() : ListAdapter<RepositoriesModel, RepoAdapter.RepoViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<RepositoriesModel>() {
-        override fun areItemsTheSame(oldItem: RepositoriesModel, newItem: RepositoriesModel): Boolean {
+        override fun areItemsTheSame(
+            oldItem: RepositoriesModel,
+            newItem: RepositoriesModel
+        ): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: RepositoriesModel, newItem: RepositoriesModel): Boolean {
+        override fun areContentsTheSame(
+            oldItem: RepositoriesModel,
+            newItem: RepositoriesModel
+        ): Boolean {
             return oldItem.id_repos === newItem.id_repos
         }
     }
@@ -39,15 +47,14 @@ class RepoAdapter: ListAdapter<RepositoriesModel,RepoAdapter.RepoViewHolder>(Dif
 
 
     inner class RepoViewHolder(private val binding: FragmentRepoBinding) :
-    RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(repo: RepositoriesModel) {
             binding.ivAvatarUser.load(repo.owner_repos.avatar_url_owner)
             binding.tvRepoName.text = repo.name_repos
             binding.tvRepoDescription.text = repo.description_repos
-            binding.tvOwnerName.text= repo.owner_repos.login_owner
-            //Log.i("Repo", repo.toString())
-            binding.layoutRepo.setOnClickListener{
+            binding.tvOwnerName.text = repo.owner_repos.login_owner
+            binding.layoutRepo.setOnClickListener {
                 onItemClickListener?.invoke(repo)
             }
         }

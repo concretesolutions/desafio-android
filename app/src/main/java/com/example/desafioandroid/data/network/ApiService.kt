@@ -1,5 +1,6 @@
 package com.example.desafioandroid.data.network
 
+import android.util.Log
 import com.example.desafioandroid.data.model.PullModel
 import com.example.desafioandroid.data.model.RepoModel
 import com.example.desafioandroid.data.model.RepositoriesModel
@@ -30,6 +31,7 @@ class ApiService @Inject constructor(private val api: RepositoriesApiClient) {
         return withContext(Dispatchers.IO) {
             val response: Response<RepoModel> =
                 api.getRepoByOwner(owner, repo)
+            Log.i("getRepoByOwner", response.toString())
                 response.body()!!
         }
     }

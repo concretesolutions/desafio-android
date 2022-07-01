@@ -35,7 +35,7 @@ class MainViewModel @Inject constructor(
     private val _repoModel = MutableLiveData<RepoModel?>()
     val repoModel: LiveData<RepoModel?> get() = _repoModel
 
-    fun onCreate() {
+    fun loadRepositories() {
         viewModelScope.launch {
             _isLoading.value = true
             val result: List<RepositoriesModel>? = getRepositories()
@@ -46,7 +46,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun onCreatePullOwner(owner: String, repo: String) {
+    fun loadPullOwner(owner: String, repo: String) {
         viewModelScope.launch {
             _isLoading.value = true
             val result: List<PullModel>? = getPullByOwner(owner, repo)
