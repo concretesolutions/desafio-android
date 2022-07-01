@@ -1,13 +1,11 @@
 package com.example.desafioandroid.data
 
-import android.util.Log
 import com.example.desafioandroid.data.model.ApiProvider
 import com.example.desafioandroid.data.model.PullModel
 import com.example.desafioandroid.data.network.ApiService
+import javax.inject.Inject
 
-class PullRepository {
-
-    private val api = ApiService()
+class PullRepository @Inject constructor(private val api: ApiService,private val ApiProvider: ApiProvider) {
 
     suspend fun getPullByOwner(owner: String, repo: String): List<PullModel> {
         val response = api.getPullByOwner(owner, repo)

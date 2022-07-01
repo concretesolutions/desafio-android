@@ -12,14 +12,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafioandroid.databinding.FragmentRepoListBinding
 import com.example.desafioandroid.ui.viewmodel.MainViewModel
-import com.example.desafioandroid.ui.viewmodel.MainViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RepoFragment : Fragment() {
 
     private lateinit var binding: FragmentRepoListBinding
-    private val viewModel: MainViewModel by viewModels(
-        factoryProducer = { MainViewModelFactory() }
-    )
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

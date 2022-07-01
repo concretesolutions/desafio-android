@@ -1,8 +1,10 @@
 package com.example.desafioandroid.data.model
 
-class ApiProvider {
-    companion object {
-        var repositoriesList: List<RepositoriesModel> = emptyList()
-        var pullList: List<PullModel> = emptyList()
-    }
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class ApiProvider @Inject constructor() {
+    var repositoriesList: List<RepositoriesModel> = emptyList()
+    var pullList: List<PullModel> = emptyList()
 }

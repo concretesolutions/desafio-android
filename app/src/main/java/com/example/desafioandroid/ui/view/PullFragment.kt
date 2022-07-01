@@ -12,15 +12,14 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafioandroid.databinding.FragmentPullListBinding
 import com.example.desafioandroid.ui.viewmodel.MainViewModel
-import com.example.desafioandroid.ui.viewmodel.MainViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PullFragment : Fragment() {
 
     private lateinit var binding: FragmentPullListBinding
     private val args: PullFragmentArgs by navArgs()
-    private val viewModel: MainViewModel by viewModels(
-        factoryProducer = { MainViewModelFactory() }
-    )
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

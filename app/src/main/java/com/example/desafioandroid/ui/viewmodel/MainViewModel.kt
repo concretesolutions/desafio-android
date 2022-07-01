@@ -9,9 +9,16 @@ import com.example.desafioandroid.data.model.PullModel
 import com.example.desafioandroid.data.model.RepositoriesModel
 import com.example.desafioandroid.domain.GetPullsByOwner
 import com.example.desafioandroid.domain.GetRepositories
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val getRepositories: GetRepositories,
+    private val getPullByOwner: GetPullsByOwner
+
+) : ViewModel() {
 
     private val _repositoriesModel = MutableLiveData<List<RepositoriesModel>?>(null)
     val repositoriesModel: LiveData<List<RepositoriesModel>?> get() = _repositoriesModel
@@ -21,8 +28,6 @@ class MainViewModel : ViewModel() {
 
     private val _pullModel = MutableLiveData<List<PullModel>?>(null)
     val pullModel: LiveData<List<PullModel>?> get() = _pullModel
-
-    var getRepositories = GetRepositories()
 
     fun onCreate() {
         viewModelScope.launch {
@@ -34,8 +39,6 @@ class MainViewModel : ViewModel() {
             }
         }
     }
-
-    var getPullByOwner = GetPullsByOwner()
 
     fun onCreatePullOwner(owner: String, repo: String) {
         viewModelScope.launch {
