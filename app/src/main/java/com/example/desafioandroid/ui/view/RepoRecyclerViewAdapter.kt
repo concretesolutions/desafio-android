@@ -1,47 +1,54 @@
 package com.example.desafioandroid.ui.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.desafioandroid.data.model.RepositoriesModel
 import com.example.desafioandroid.databinding.FragmentRepoBinding
 
 
-class RepoRecyclerViewAdapter(
-    private val repo: List<RepositoriesModel>,
-    private val listener: RepoSelectionListener
-): RecyclerView.Adapter<RepoRecyclerViewAdapter.RepoViewHolder>() {
+class RepoAdapter: ListAdapter<RepositoriesModel,RepoAdapter.RepoViewHolder>(DiffCallback) {
 
-    interface RepoSelectionListener {
-        fun select(repoName: String, owner: String)
+    companion object DiffCallback : DiffUtil.ItemCallback<RepositoriesModel>() {
+        override fun areItemsTheSame(oldItem: RepositoriesModel, newItem: RepositoriesModel): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: RepositoriesModel, newItem: RepositoriesModel): Boolean {
+            return oldItem.id_repos === newItem.id_repos
+        }
+    }
+
+    private var onItemClickListener: ((RepositoriesModel) -> Unit)? = null
+    fun setOnItemClickListener(onItemClickListener: (RepositoriesModel) -> Unit) {
+        this.onItemClickListener = onItemClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = FragmentRepoBinding.inflate(layoutInflater,parent,false)
-        return RepoViewHolder(binding, listener)
+        val binding = FragmentRepoBinding.inflate(LayoutInflater.from(parent.context))
+        return RepoViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
-        holder.bind(this.repo[position])
+    override fun onBindViewHolder(repoViewHolder: RepoViewHolder, position: Int) {
+        val repo = getItem(position)
+        repoViewHolder.bind(repo)
     }
 
-    override fun getItemCount(): Int {
-        return this.repo.size
-    }
 
-    class RepoViewHolder( private val binding: FragmentRepoBinding, private val listener: RepoSelectionListener
-    ): RecyclerView.ViewHolder(binding.root) {
+    inner class RepoViewHolder(private val binding: FragmentRepoBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+
         fun bind(repo: RepositoriesModel) {
             binding.ivAvatarUser.load(repo.owner_repos.avatar_url_owner)
             binding.tvRepoName.text = repo.name_repos
             binding.tvRepoDescription.text = repo.description_repos
             binding.tvOwnerName.text= repo.owner_repos.login_owner
-            Log.i("Repo", repo.toString())
-            this.binding.tvRepoName.setOnClickListener{
-                listener.select(binding.tvRepoName.text.toString(),repo.owner_repos.login_owner)
+            //Log.i("Repo", repo.toString())
+            binding.layoutRepo.setOnClickListener{
+                onItemClickListener?.invoke(repo)
             }
         }
     }
