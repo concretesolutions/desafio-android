@@ -35,13 +35,13 @@ class RepoRecyclerViewAdapter(
     class RepoViewHolder( private val binding: FragmentRepoBinding, private val listener: RepoSelectionListener
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(repo: RepositoriesModel) {
-            binding.ivAvatarUser.load(repo.owner.avatar_url)
-            binding.tvRepoName.text = repo.name
-            binding.tvRepoDescription.text = repo.description
-            binding.tvOwnerName.text= repo.owner.login
-            //Log.i("Repo", "$repo.name $repo.owner.login")
+            binding.ivAvatarUser.load(repo.owner_repos.avatar_url_owner)
+            binding.tvRepoName.text = repo.name_repos
+            binding.tvRepoDescription.text = repo.description_repos
+            binding.tvOwnerName.text= repo.owner_repos.login_owner
+            Log.i("Repo", repo.toString())
             this.binding.tvRepoName.setOnClickListener{
-                listener.select(binding.tvRepoName.text.toString(),repo.owner.login)
+                listener.select(binding.tvRepoName.text.toString(),repo.owner_repos.login_owner)
             }
         }
     }

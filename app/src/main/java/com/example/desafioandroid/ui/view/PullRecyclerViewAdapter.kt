@@ -35,7 +35,7 @@ class PullRecyclerViewAdapter(
     class PullViewHolder( private val binding: FragmentPullBinding, private val listener: PullSelectionListener
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(pull: PullModel) {
-            binding.ivAvatarUserPull.load(pull.user.avatar_url)
+            binding.ivAvatarUserPull.load(pull.user.avatar_url_owner)
             binding.tvPullName.text = pull.title
             this.binding.tvPullName.setOnClickListener{
                 listener.select(binding.tvPullName.text.toString())

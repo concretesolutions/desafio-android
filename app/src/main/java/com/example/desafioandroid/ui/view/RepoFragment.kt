@@ -29,11 +29,13 @@ class RepoFragment : Fragment() {
 
         viewModel.onCreate()
 
+        //EDU Revisar validacion repositorios sin pull
+        //EDU Revisar warning No adapter attached; skipping layout
+
         viewModel.repositoriesModel.observe(viewLifecycleOwner) {
             Log.i("repositoriesModel",it.toString())
             if (it != null) {
-                val adapter =
-                    RepoRecyclerViewAdapter(it,
+                val adapter = RepoRecyclerViewAdapter(it,
                         object : RepoRecyclerViewAdapter.RepoSelectionListener {
                             override fun select(repoName: String, owner: String) {
                                 Log.i("RepoFragment", "$repoName  $owner")

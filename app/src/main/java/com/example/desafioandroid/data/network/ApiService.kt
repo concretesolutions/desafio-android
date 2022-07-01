@@ -1,6 +1,7 @@
 package com.example.desafioandroid.data.network
 
 import com.example.desafioandroid.data.model.PullModel
+import com.example.desafioandroid.data.model.RepoModel
 import com.example.desafioandroid.data.model.RepositoriesModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -22,6 +23,14 @@ class ApiService @Inject constructor(private val api: RepositoriesApiClient) {
             val response: Response<List<PullModel>> =
                 api.getPullByOwner(owner, repo)
             response.body() ?: emptyList()
+        }
+    }
+
+    suspend fun getRepoByOwner(owner: String, repo: String): RepoModel {
+        return withContext(Dispatchers.IO) {
+            val response: Response<RepoModel> =
+                api.getRepoByOwner(owner, repo)
+                response.body()!!
         }
     }
 }
