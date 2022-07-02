@@ -37,11 +37,11 @@ class RepoFragment : Fragment() {
 
         adapter.setOnItemClickListener {
       //      Log.i("Test",it.toString())
-      //      val action = RepoFragmentDirections.actionRepoFragmentToPullFragment(it.name_repos,it.owner_repos.login_owner)
-      //      findNavController().navigate(action)
-            Log.i("onRepoOwner_repo",it.name_repos)
-            Log.i("onRepoOwner_dueño",it.owner_repos.login_owner)
-            viewModel.onRepoOwner(it.owner_repos.login_owner,it.name_repos)
+            val action = RepoFragmentDirections.actionRepoFragmentToPullFragment(it.name_repos,it.owner_repos.login_owner)
+            findNavController().navigate(action)
+      //      Log.i("onRepoOwner_repo",it.name_repos)
+      //      Log.i("onRepoOwner_dueño",it.owner_repos.login_owner)
+      //      viewModel.onRepoOwner(it.owner_repos.login_owner,it.name_repos)
         }
 
         recycler.adapter = adapter

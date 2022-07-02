@@ -2,6 +2,7 @@ package com.example.desafioandroid.domain
 
 import com.example.desafioandroid.data.RepoRepository
 import com.example.desafioandroid.data.model.RepoModel
+import retrofit2.Response
 import javax.inject.Inject
 
 class GetRepoByOwner @Inject constructor(private val repository: RepoRepository) {

@@ -13,6 +13,7 @@ import com.example.desafioandroid.domain.GetRepoByOwner
 import com.example.desafioandroid.domain.GetRepositories
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel

@@ -6,6 +6,8 @@ import com.example.desafioandroid.data.model.RepoModel
 import com.example.desafioandroid.data.model.RepositoriesModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -35,4 +37,5 @@ class ApiService @Inject constructor(private val api: RepositoriesApiClient) {
                 response.body()!!
         }
     }
+
 }

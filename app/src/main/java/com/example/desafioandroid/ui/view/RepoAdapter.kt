@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.desafioandroid.data.model.RepositoriesModel
 import com.example.desafioandroid.databinding.FragmentRepoBinding
+import com.example.desafioandroid.domain.GetRepoByOwner
 import javax.inject.Inject
 
 

@@ -1,6 +1,7 @@
 package com.example.desafioandroid.data.model
 
 import kotlinx.coroutines.flow.emptyFlow
+import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
