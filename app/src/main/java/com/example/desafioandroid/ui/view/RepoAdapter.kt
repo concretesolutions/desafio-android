@@ -67,10 +67,6 @@ class RepoAdapter @Inject constructor() :
             binding.layoutRepo.setOnClickListener {
                 onItemClickListener?.invoke(repo)
             }
-
-            itemView.setOnClickListener{
-                Toast.makeText(binding.layoutRepo.context, repo.nameRepo, Toast.LENGTH_SHORT).show()
-            }
         }
     }
 }

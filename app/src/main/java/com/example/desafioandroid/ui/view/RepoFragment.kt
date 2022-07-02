@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafioandroid.databinding.FragmentRepoListBinding
 import com.example.desafioandroid.ui.viewmodel.MainViewModel
@@ -30,8 +31,9 @@ class RepoFragment : Fragment() {
         viewModel.loadRepositories("q", 10)
 
         val recycler = binding.rvRepositories
-        recycler.layoutManager = LinearLayoutManager(context)
-
+        val manager = LinearLayoutManager(context)
+        recycler.layoutManager = manager
+        recycler.addItemDecoration(DividerItemDecoration(context, manager.orientation))
         val adapter = RepoAdapter()
 
         adapter.setOnItemClickListener {

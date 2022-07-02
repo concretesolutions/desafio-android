@@ -20,14 +20,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_repositories"
         android:name="com.example.desafioandroid.ItemFragment"
-        android:layout_width="414dp"
-        android:layout_height="533dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

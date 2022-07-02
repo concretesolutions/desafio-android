@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
+import com.example.desafioandroid.R
 import com.example.desafioandroid.data.model.PullModel
 import com.example.desafioandroid.databinding.FragmentPullBinding
 
@@ -45,7 +47,11 @@ class PullAdapter() : ListAdapter<PullModel, PullAdapter.PullViewHolder>(DiffCal
     inner class PullViewHolder(private val binding: FragmentPullBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pull: PullModel) {
-            binding.ivAvatarUserPull.load(pull.user.avatarUrl)
+            binding.ivAvatarUserPull.load(pull.user.avatarUrl) {
+                crossfade(true)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .transformations(CircleCropTransformation())
+            }
             binding.tvPullName.text = pull.title
             binding.layoutPull.setOnClickListener {
                 onItemClickListener?.invoke(pull)

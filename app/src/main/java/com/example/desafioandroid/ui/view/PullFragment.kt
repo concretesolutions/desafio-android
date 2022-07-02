@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafioandroid.databinding.FragmentPullListBinding
 import com.example.desafioandroid.ui.viewmodel.MainViewModel
@@ -30,14 +30,17 @@ class PullFragment : Fragment() {
     ): View {
         binding = FragmentPullListBinding.inflate(inflater, container, false)
 
-        viewModel.loadPullOwner(args.owner,args.repoName)
+        viewModel.loadPullOwner(args.owner, args.repoName)
 
-        binding.rvPull.layoutManager = LinearLayoutManager(context)
+        val recycler = binding.rvPull
+        val manager = LinearLayoutManager(context)
+        recycler.layoutManager = manager
+        recycler.addItemDecoration(DividerItemDecoration(context, manager.orientation))
         val adapter = PullAdapter()
-        binding.rvPull.adapter = adapter
+        recycler.adapter = adapter
 
         adapter.setOnItemClickListener {
-            Log.i("Test",it.toString())
+            Log.i("Test", it.toString())
             Toast.makeText(context, "Abrir Navegador", Toast.LENGTH_SHORT).show()
         }
 
@@ -46,7 +49,8 @@ class PullFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner){it
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            it
             binding.bprogressPull.isVisible = it
         }
         return binding.root
