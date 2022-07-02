@@ -7,7 +7,6 @@
     android:background="@color/white"
     tools:context=".ui.view.MainActivity">
 
-
     <ProgressBar
         android:id="@+id/bprogress"
         android:layout_width="99dp"

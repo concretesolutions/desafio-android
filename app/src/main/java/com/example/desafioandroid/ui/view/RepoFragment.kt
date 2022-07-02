@@ -27,7 +27,7 @@ class RepoFragment : Fragment() {
     ): View {
         binding = FragmentRepoListBinding.inflate(inflater, container, false)
 
-        viewModel.loadRepositories("q",10)
+        viewModel.loadRepositories("q", 10)
 
         val recycler = binding.rvRepositories
         recycler.layoutManager = LinearLayoutManager(context)
@@ -35,12 +35,12 @@ class RepoFragment : Fragment() {
         val adapter = RepoAdapter()
 
         adapter.setOnItemClickListener {
-           Log.i("Test",it.toString())
-            val action = RepoFragmentDirections.actionRepoFragmentToPullFragment(it.nameRepo,it.owner_repos.loginOwner)
+            Log.i("Test", it.toString())
+            val action = RepoFragmentDirections.actionRepoFragmentToPullFragment(
+                it.nameRepo,
+                it.owner_repos.loginOwner
+            )
             findNavController().navigate(action)
-      //      Log.i("onRepoOwner_repo",it.name_repos)
-      //      Log.i("onRepoOwner_dueño",it.owner_repos.login_owner)
-      //      viewModel.onRepoOwner(it.owner_repos.login_owner,it.name_repos)
         }
 
         recycler.adapter = adapter
@@ -50,7 +50,8 @@ class RepoFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner){it
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            it
             binding.bprogress.isVisible = it
         }
         return binding.root
