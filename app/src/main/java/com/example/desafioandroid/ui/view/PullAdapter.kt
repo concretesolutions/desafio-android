@@ -45,7 +45,7 @@ class PullAdapter() : ListAdapter<PullModel, PullAdapter.PullViewHolder>(DiffCal
     inner class PullViewHolder(private val binding: FragmentPullBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pull: PullModel) {
-            binding.ivAvatarUserPull.load(pull.user.avatar_url_owner)
+            binding.ivAvatarUserPull.load(pull.user.avatarUrl)
             binding.tvPullName.text = pull.title
             binding.layoutPull.setOnClickListener {
                 onItemClickListener?.invoke(pull)

@@ -27,17 +27,16 @@ class RepoFragment : Fragment() {
     ): View {
         binding = FragmentRepoListBinding.inflate(inflater, container, false)
 
-        viewModel.loadRepositories()
+        viewModel.loadRepositories("q",10)
 
         val recycler = binding.rvRepositories
         recycler.layoutManager = LinearLayoutManager(context)
-        //val adapter = RepoAdapter(viewModel.onRepoOwner(viewModel.repoModel.value?.name_repo.toString(),viewModel.repoModel.value?.owner_repo.toString()))
 
         val adapter = RepoAdapter()
 
         adapter.setOnItemClickListener {
-      //      Log.i("Test",it.toString())
-            val action = RepoFragmentDirections.actionRepoFragmentToPullFragment(it.name_repos,it.owner_repos.login_owner)
+           Log.i("Test",it.toString())
+            val action = RepoFragmentDirections.actionRepoFragmentToPullFragment(it.nameRepo,it.owner_repos.loginOwner)
             findNavController().navigate(action)
       //      Log.i("onRepoOwner_repo",it.name_repos)
       //      Log.i("onRepoOwner_dueño",it.owner_repos.login_owner)

@@ -7,25 +7,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.desafioandroid.data.model.PullModel
 import com.example.desafioandroid.data.model.RepoModel
-import com.example.desafioandroid.data.model.RepositoriesModel
+import com.example.desafioandroid.data.model.SearchModel
 import com.example.desafioandroid.domain.GetPullsByOwner
-import com.example.desafioandroid.domain.GetRepoByOwner
-import com.example.desafioandroid.domain.GetRepositories
+import com.example.desafioandroid.domain.GetRepos
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getRepositories: GetRepositories,
+    private val getRepos: GetRepos,
     private val getPullByOwner: GetPullsByOwner,
-    private val getRepoByOwner: GetRepoByOwner,
 
     ) : ViewModel() {
 
-    private val _repositoriesModel = MutableLiveData<List<RepositoriesModel>?>(null)
-    val repositoriesModel: LiveData<List<RepositoriesModel>?> get() = _repositoriesModel
+    private val _repositoriesModel = MutableLiveData<List<RepoModel>>(null)
+    val repositoriesModel: LiveData<List<RepoModel>> get() = _repositoriesModel
 
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -33,14 +30,11 @@ class MainViewModel @Inject constructor(
     private val _pullModel = MutableLiveData<List<PullModel>?>(null)
     val pullModel: LiveData<List<PullModel>?> get() = _pullModel
 
-    private val _repoModel = MutableLiveData<RepoModel?>()
-    val repoModel: LiveData<RepoModel?> get() = _repoModel
-
-    fun loadRepositories() {
+    fun loadRepositories(query: String, page: Int) {
         viewModelScope.launch {
             _isLoading.value = true
-            val result: List<RepositoriesModel>? = getRepositories()
-            if (!result.isNullOrEmpty()) {
+            val result: List<RepoModel> = getRepos(query,page)
+            if (result != null) {
                 _repositoriesModel.postValue(result)
                 _isLoading.value = false
             }
@@ -59,15 +53,4 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun onRepoOwner(owner: String, repo: String) {
-        viewModelScope.launch {
-            _isLoading.value = true
-            val result: RepoModel? = getRepoByOwner(owner, repo)
-            Log.i("onRepoOwner", result.toString())
-            if (result != null) {
-                _repoModel.postValue(result)
-                _isLoading.value = false
-            }
-        }
-    }
 }
