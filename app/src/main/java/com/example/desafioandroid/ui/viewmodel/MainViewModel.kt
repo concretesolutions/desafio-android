@@ -30,6 +30,8 @@ class MainViewModel @Inject constructor(
     private val _pullModel = MutableLiveData<List<PullModel>?>(null)
     val pullModel: LiveData<List<PullModel>?> get() = _pullModel
 
+    var page = 1
+
     fun loadRepositories(query: String, page: Int) {
         viewModelScope.launch {
             _isLoading.value = true
@@ -51,6 +53,11 @@ class MainViewModel @Inject constructor(
                 _isLoading.value = false
             }
         }
+    }
+
+    fun searchRepos( newQuery : String ){
+        page = 1
+        loadRepositories(newQuery, page)
     }
 
 }
