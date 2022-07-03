@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GitRepos</string>
+    <string name="is_empty_pull_list_txt">This repository doesn\'t have open pull request</string>
+    <string name="repo_title_placeholder">Titulo Repositorio</string>
+    <string name="repo_desc_placeholder">Descripcion muy laaaaaaaaaaaaaaarga</string>
+    <string name="repo_star_count_placeholder">80</string>
+    <string name="repo_fork_count_placeholder">600</string>
+    <string name="repo_username_placeholder">usuario</string>
+    <string name="pull_title_placeholder">Titulo Pull</string>
+    <string name="pull_desc_placeholder">Descripcion muy laaaaaaaaaaaaaaarga</string>
+    <string name="pull_username_placeholder">usuario</string>
 </resources>

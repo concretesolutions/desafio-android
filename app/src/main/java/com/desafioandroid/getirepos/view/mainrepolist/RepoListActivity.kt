@@ -57,6 +57,13 @@ class RepoListActivity : AppCompatActivity() {
                 binding.repoProgressBar.isVisible = false
             }
         }
+        viewModel.error.observe(this) {
+            value ->
+            if (null != value) {
+                binding.repoProgressBar.isVisible = false
+                Toast.makeText(this, "Error getting data", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     fun onRepoClickCallPull(owner: String, repository: String) {

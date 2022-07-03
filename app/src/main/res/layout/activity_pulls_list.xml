@@ -25,4 +25,19 @@
         app:layout_constraintEnd_toEndOf="@+id/pullsRecyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pullsRecyclerView" />
+
+    <TextView
+        android:id="@+id/isEmptyPullsListText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/is_empty_pull_list_txt"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/pullsRecyclerView"
+        app:layout_constraintEnd_toEndOf="@+id/pullsRecyclerView"
+        app:layout_constraintStart_toStartOf="@+id/pullsRecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/pullsRecyclerView"
+        tools:visibility="invisible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

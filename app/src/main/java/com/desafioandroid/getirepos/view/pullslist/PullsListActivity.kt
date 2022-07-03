@@ -38,6 +38,7 @@ class PullsListActivity : AppCompatActivity() {
         binding.pullsRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.pullsRecyclerView.adapter = pullsListAdapter
         binding.pullsRecyclerView.addItemDecoration(DividerItemDecoration(this, OrientationHelper.VERTICAL))
+        binding.isEmptyPullsListText.isVisible = false
         fillPullsInList()
     }
 
@@ -49,6 +50,9 @@ class PullsListActivity : AppCompatActivity() {
             if(null != value) {
                 pullsListAdapter.setPullsItems(value)
                 binding.pullsProgressBar.isVisible = false
+                if (pullsListAdapter.itemCount == 0) {
+                    binding.isEmptyPullsListText.isVisible = true
+                }
             }
         }
     }

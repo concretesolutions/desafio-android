@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-        android:text="Titulo pull"
+        android:maxWidth="320sp"
+        android:text="@string/pull_title_placeholder"
         android:textColor="#2196F3"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:maxWidth="320sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,11 +24,11 @@
         android:id="@+id/pullDescriptionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginLeft="32dp"
-        android:maxLength="60"
+        android:layout_marginTop="8dp"
         android:maxWidth="320sp"
-        android:text="Descripcion muy laaaaaaaaaaaaaaarga"
+        android:maxLength="60"
+        android:text="@string/pull_desc_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pullTitleText" />
 
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="Nombre"
+        android:text="@string/pull_username_placeholder"
         android:textColor="#2196F3"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/userAvatarPullsImageView"
