@@ -29,14 +29,14 @@ class MainViewModel @Inject constructor(
     private val _pullModel = MutableLiveData<List<PullModel>?>(null)
     val pullModel: LiveData<List<PullModel>?> get() = _pullModel
 
-    var page = 1
+    private var page = 1
 
     fun loadRepositories(query: String, page: Int) {
         viewModelScope.launch {
             try {
                 _status.value = ApiResponseStatus.LOADING
                 val result: List<Repo> = getRepos(query, page)
-                if (result != null) {
+                if (result.isNotEmpty()) {
                     _repositoriesModel.postValue(result)
                 }
                 _status.value = ApiResponseStatus.SUCCESS
@@ -64,9 +64,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun searchRepos(newQuery: String) {
+    /*fun searchRepos(newQuery: String) {
         page = 1
         loadRepositories(newQuery, page)
-    }
+    }*/
 
 }
