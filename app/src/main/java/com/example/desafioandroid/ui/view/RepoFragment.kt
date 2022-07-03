@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,6 +29,7 @@ class RepoFragment : Fragment() {
     ): View {
         binding = FragmentRepoListBinding.inflate(inflater, container, false)
 
+        //EU por ahora esta buscando el valor hardcodeado..
         viewModel.loadRepositories("q", 10)
 
         val recycler = binding.rvRepositories
@@ -56,6 +58,11 @@ class RepoFragment : Fragment() {
             it
             binding.bprogress.isVisible = it
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            activity?.finish()
+        }
+
         return binding.root
     }
 }

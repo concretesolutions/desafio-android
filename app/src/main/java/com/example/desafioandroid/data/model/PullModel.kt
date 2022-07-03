@@ -8,5 +8,6 @@ data class PullModel(
     @SerializedName("body") val body: String,
     @SerializedName("number") val number: Int,
     @SerializedName("updated_at") val updated_at: String,
+    @SerializedName("html_url") val html_url: String,
     @SerializedName("user") val user: OwnerModel
 )

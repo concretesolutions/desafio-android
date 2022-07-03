@@ -19,9 +19,6 @@
         android:name="com.example.desafioandroid.ui.view.PullFragment"
         tools:layout="@layout/fragment_pull"
         android:label="PullFragment" >
-        <action
-            android:id="@+id/action_pullFragment_to_repoFragment"
-            app:destination="@id/repoFragment" />
         <argument
             android:name="repo_name"
             app:argType="string"/>

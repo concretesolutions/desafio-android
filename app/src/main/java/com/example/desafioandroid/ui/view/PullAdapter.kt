@@ -11,7 +11,7 @@ import com.example.desafioandroid.R
 import com.example.desafioandroid.data.model.PullModel
 import com.example.desafioandroid.databinding.FragmentPullBinding
 
-class PullAdapter() : ListAdapter<PullModel, PullAdapter.PullViewHolder>(DiffCallback) {
+class PullAdapter : ListAdapter<PullModel, PullAdapter.PullViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<PullModel>() {
         override fun areItemsTheSame(
@@ -25,7 +25,7 @@ class PullAdapter() : ListAdapter<PullModel, PullAdapter.PullViewHolder>(DiffCal
             oldItem: PullModel,
             newItem: PullModel
         ): Boolean {
-            return oldItem.id_pull === newItem.id_pull
+            return oldItem == newItem
         }
     }
 
@@ -52,6 +52,7 @@ class PullAdapter() : ListAdapter<PullModel, PullAdapter.PullViewHolder>(DiffCal
                     .placeholder(R.drawable.ic_launcher_background)
                     .transformations(CircleCropTransformation())
             }
+            binding.tvPullBody.text = pull.body
             binding.tvPullName.text = pull.title
             binding.layoutPull.setOnClickListener {
                 onItemClickListener?.invoke(pull)

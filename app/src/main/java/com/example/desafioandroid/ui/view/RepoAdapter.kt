@@ -54,10 +54,12 @@ class RepoAdapter @Inject constructor() :
         fun bind(repo: RepoModel) {
             binding.ivAvatarUser.load(repo.owner_repos.avatarUrl) {
                 crossfade(true)
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .placeholder(R.drawable.ic_launcher_background) //EDU agregar placeholder
                     .transformations(CircleCropTransformation())
             }
 
+            binding.ivFork.load(R.drawable.ic_baseline_fork)
+            binding.ivStar.load(R.drawable.ic_baseline_star)
             binding.tvRepoName.text = repo.nameRepo
             binding.tvOwnerFullName.text = repo.fullNameRepo
             binding.tvStar.text = repo.stars.toString()
