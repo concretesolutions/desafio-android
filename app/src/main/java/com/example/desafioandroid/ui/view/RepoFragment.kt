@@ -2,17 +2,16 @@ package com.example.desafioandroid.ui.view
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
-import android.widget.SearchView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.core.view.MenuItemCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.desafioandroid.R
 import com.example.desafioandroid.databinding.FragmentRepoListBinding
 import com.example.desafioandroid.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +33,6 @@ class RepoFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentRepoListBinding.inflate(inflater, container, false)
-
 
         //EU por ahora esta buscando el valor hardcodeado..
         viewModel.loadRepositories("q", 10)

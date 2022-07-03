@@ -2,39 +2,39 @@ package com.example.desafioandroid.ui.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.desafioandroid.R
-import com.example.desafioandroid.data.model.RepoModel
 import com.example.desafioandroid.databinding.FragmentRepoBinding
+import com.example.desafioandroid.domain.model.Repo
 import javax.inject.Inject
 
 
 class RepoAdapter @Inject constructor() :
-    ListAdapter<RepoModel, RepoAdapter.RepoViewHolder>(DiffCallback) {
+    ListAdapter<Repo, RepoAdapter.RepoViewHolder>(DiffCallback) {
 
-    companion object DiffCallback : DiffUtil.ItemCallback<RepoModel>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<Repo>() {
         override fun areItemsTheSame(
-            oldItem: RepoModel,
-            newItem: RepoModel
+            oldItem: Repo,
+            newItem: Repo
         ): Boolean {
             return oldItem === newItem
+
         }
 
         override fun areContentsTheSame(
-            oldItem: RepoModel,
-            newItem: RepoModel
+            oldItem: Repo,
+            newItem: Repo
         ): Boolean {
             return oldItem.idRepo === newItem.idRepo
         }
     }
 
-    private var onItemClickListener: ((RepoModel) -> Unit)? = null
-    fun setOnItemClickListener(onItemClickListener: (RepoModel) -> Unit) {
+    private var onItemClickListener: ((Repo) -> Unit)? = null
+    fun setOnItemClickListener(onItemClickListener: (Repo) -> Unit) {
         this.onItemClickListener = onItemClickListener
     }
 
@@ -51,7 +51,7 @@ class RepoAdapter @Inject constructor() :
     inner class RepoViewHolder(private val binding: FragmentRepoBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(repo: RepoModel) {
+        fun bind(repo: Repo) {
             binding.ivAvatarUser.load(repo.owner_repos.avatarUrl) {
                 crossfade(true)
                     .placeholder(R.drawable.ic_launcher_background) //EDU agregar placeholder

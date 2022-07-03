@@ -10,6 +10,7 @@ import com.example.desafioandroid.data.model.RepoModel
 import com.example.desafioandroid.data.model.SearchModel
 import com.example.desafioandroid.domain.GetPullsByOwner
 import com.example.desafioandroid.domain.GetRepos
+import com.example.desafioandroid.domain.model.Repo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,8 +22,11 @@ class MainViewModel @Inject constructor(
 
     ) : ViewModel() {
 
-    private val _repositoriesModel = MutableLiveData<List<RepoModel>>(null)
-    val repositoriesModel: LiveData<List<RepoModel>> get() = _repositoriesModel
+    private val _repositoriesModel = MutableLiveData<List<Repo>>(null)
+    val repositoriesModel: LiveData<List<Repo>> get() = _repositoriesModel
+
+    private val _repositoriesDb = MutableLiveData<List<Repo>>(null)
+    val repositoriesDb: LiveData<List<Repo>> get() = _repositoriesDb
 
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -35,7 +39,7 @@ class MainViewModel @Inject constructor(
     fun loadRepositories(query: String, page: Int) {
         viewModelScope.launch {
             _isLoading.value = true
-            val result: List<RepoModel> = getRepos(query,page)
+            val result: List<Repo> = getRepos(query,page)
             if (result != null) {
                 _repositoriesModel.postValue(result)
                 _isLoading.value = false
