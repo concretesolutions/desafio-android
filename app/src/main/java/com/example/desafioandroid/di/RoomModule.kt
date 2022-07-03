@@ -18,7 +18,8 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun provideRoom(@ApplicationContext context: Context) = Room.databaseBuilder(context, RepoDatabase::class.java,PULL_DATABASE_NAME).build()
+    fun provideRoom(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, RepoDatabase::class.java, PULL_DATABASE_NAME).build()
 
     @Singleton
     @Provides

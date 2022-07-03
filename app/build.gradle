@@ -59,6 +59,8 @@ dependencies {
     //dagger hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    //Mockk
+    testImplementation 'io.mockk:mockk:1.12.2'
     //Room
     implementation "androidx.room:room-ktx:2.4.0"
     kapt "androidx.room:room-compiler:2.4.0"

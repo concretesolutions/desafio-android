@@ -49,7 +49,7 @@ class PullAdapter : ListAdapter<PullModel, PullAdapter.PullViewHolder>(DiffCallb
         fun bind(pull: PullModel) {
             binding.ivAvatarUserPull.load(pull.user.avatarUrl) {
                 crossfade(true)
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .placeholder(R.drawable.placeholder)
                     .transformations(CircleCropTransformation())
             }
             binding.tvPullBody.text = pull.body

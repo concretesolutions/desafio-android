@@ -54,7 +54,7 @@ class RepoAdapter @Inject constructor() :
         fun bind(repo: Repo) {
             binding.ivAvatarUser.load(repo.owner_repos.avatarUrl) {
                 crossfade(true)
-                    .placeholder(R.drawable.ic_launcher_background) //EDU agregar placeholder
+                    .placeholder(R.drawable.placeholder)
                     .transformations(CircleCropTransformation())
             }
 

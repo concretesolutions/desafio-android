@@ -1,22 +1,21 @@
 package com.example.desafioandroid.ui.view
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.view.*
 import androidx.activity.addCallback
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.desafioandroid.R
 import com.example.desafioandroid.data.network.ApiResponseStatus
 import com.example.desafioandroid.databinding.FragmentRepoListBinding
 import com.example.desafioandroid.ui.viewmodel.MainViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class RepoFragment : Fragment() {
@@ -34,9 +33,11 @@ class RepoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+
+
         binding = FragmentRepoListBinding.inflate(inflater, container, false)
 
-        //EU por ahora esta buscando el valor hardcodeado..
+        //EU por ahora esta buscando el valor hardcodeado.
         viewModel.loadRepositories("q", 10)
 
         val recycler = binding.rvRepositories
@@ -61,21 +62,21 @@ class RepoFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
-        viewModel.status.observe(viewLifecycleOwner){ status ->
-            when(status){
-                ApiResponseStatus.LOADING ->{
+        viewModel.status.observe(viewLifecycleOwner) { status ->
+            when (status) {
+                ApiResponseStatus.LOADING -> {
                     binding.bprogress.visibility = View.VISIBLE
                 }
                 ApiResponseStatus.ERROR -> {
                     binding.bprogress.visibility = View.GONE
-                    Toast.makeText(context, "Error, agregar Alert", Toast.LENGTH_SHORT).show()
+                    dialogAlert(getString(R.string.emptyRepository))
                 }
                 ApiResponseStatus.SUCCESS -> {
                     binding.bprogress.visibility = View.GONE
                 }
-                else ->{
+                else -> {
                     binding.bprogress.visibility = View.GONE
-                    Toast.makeText(context, "Error, agregar Alert desconocido", Toast.LENGTH_SHORT).show()
+                    dialogAlert(getString(R.string.emptyRepository))
                 }
             }
         }
@@ -85,6 +86,27 @@ class RepoFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun dialogAlert(body: String) {
+        context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle(getString(R.string.emptyPullError))
+                .setMessage(body)
+                .setPositiveButton(
+                    getString(R.string.buttonOK)
+                ) { _, _ ->
+                    activity?.finish()
+                }
+                .show()
+        };
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.search_menu, menu)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.titleRepository)
     }
 
 /*EU La aplicacion crashea al buscar por Null en .ApiService$searchRepositories$2.invokeSuspend(ApiService.kt:17)

@@ -4,4 +4,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search</string>
     <string name="search_hint">Type a repo</string>
+    <string name="buttonOK">OK</string>
+    <string name="tittle">tittle</string>
+    <string name="emptyPull">Repository has no pulls, you will be redirected to the list of repositories</string>
+    <string name="emptyRepository">Service error, please try again later</string>
+    <string name="emptyPullError">Error</string>
+    <string name="titleRepository">Github Repository</string>
+    <string name="titlePulls">Pull Request</string>
 </resources>

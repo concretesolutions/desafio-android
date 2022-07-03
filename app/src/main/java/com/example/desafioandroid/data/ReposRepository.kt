@@ -2,8 +2,6 @@ package com.example.desafioandroid.data
 
 import com.example.desafioandroid.data.database.dao.RepoDao
 import com.example.desafioandroid.data.database.entities.RepoEntity
-import com.example.desafioandroid.data.model.ApiProvider
-import com.example.desafioandroid.data.model.RepoModel
 import com.example.desafioandroid.data.network.ApiService
 import com.example.desafioandroid.domain.model.Repo
 import com.example.desafioandroid.domain.model.toDomain

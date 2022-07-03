@@ -15,9 +15,9 @@ data class Repo(
 )
 
 fun RepoModel.toDomain() = Repo(
-    idRepo, nameRepo, descriptionRepo, fullNameRepo, owner_repos,stars ,forks
+    idRepo, nameRepo, descriptionRepo, fullNameRepo, owner_repos, stars, forks
 )
 
 fun RepoEntity.toDomain() = Repo(
-    idRepo, nameRepo, descriptionRepo, fullNameRepo, owner_repos, stars ,forks
+    idRepo, nameRepo, descriptionRepo, fullNameRepo, owner_repos, stars, forks
 )

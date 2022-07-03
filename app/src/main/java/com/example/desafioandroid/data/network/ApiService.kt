@@ -1,7 +1,6 @@
 package com.example.desafioandroid.data.network
 
 import com.example.desafioandroid.data.model.PullModel
-import com.example.desafioandroid.data.model.RepoModel
 import com.example.desafioandroid.data.model.SearchModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,7 +12,7 @@ class ApiService @Inject constructor(private val api: RepositoriesApiClient) {
     suspend fun searchRepositories(query: String, page: Int): SearchModel {
         return withContext(Dispatchers.IO) {
             val response: Response<SearchModel> =
-                api.getAllRepositories(query,page)
+                api.getAllRepositories(query, page)
             response.body()!!
         }//Edu validar null?
     }

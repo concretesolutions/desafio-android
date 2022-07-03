@@ -1,13 +1,10 @@
 package com.example.desafioandroid.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.desafioandroid.data.model.PullModel
-import com.example.desafioandroid.data.model.RepoModel
-import com.example.desafioandroid.data.model.SearchModel
 import com.example.desafioandroid.data.network.ApiResponseStatus
 import com.example.desafioandroid.domain.GetPullsByOwner
 import com.example.desafioandroid.domain.GetRepos
@@ -55,10 +52,10 @@ class MainViewModel @Inject constructor(
                 _status.value = ApiResponseStatus.LOADING
                 val result: List<PullModel>? = getPullByOwner(owner, repo)
                 if (!result.isNullOrEmpty()) {
-                    Log.i("onCreatePullOwner", result.toString())
+                    //     Log.i("onCreatePullOwner", result.toString())
                     _pullModel.postValue(result)
                     _status.value = ApiResponseStatus.SUCCESS
-                }else{
+                } else {
                     _status.value = ApiResponseStatus.ERROR
                 }
             } catch (e: Exception) {
