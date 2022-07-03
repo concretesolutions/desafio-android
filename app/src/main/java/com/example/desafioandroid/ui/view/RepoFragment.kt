@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.desafioandroid.data.network.ApiResponseStatus
 import com.example.desafioandroid.databinding.FragmentRepoListBinding
 import com.example.desafioandroid.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +46,7 @@ class RepoFragment : Fragment() {
         val adapter = RepoAdapter()
 
         adapter.setOnItemClickListener {
-            Log.i("Test", it.toString())
+            //Log.i("Test", it.toString())
             val action = RepoFragmentDirections.actionRepoFragmentToPullFragment(
                 it.nameRepo,
                 it.owner_repos.loginOwner
@@ -59,9 +61,23 @@ class RepoFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            it
-            binding.bprogress.isVisible = it
+        viewModel.status.observe(viewLifecycleOwner){ status ->
+            when(status){
+                ApiResponseStatus.LOADING ->{
+                    binding.bprogress.visibility = View.VISIBLE
+                }
+                ApiResponseStatus.ERROR -> {
+                    binding.bprogress.visibility = View.GONE
+                    Toast.makeText(context, "Error, agregar Alert", Toast.LENGTH_SHORT).show()
+                }
+                ApiResponseStatus.SUCCESS -> {
+                    binding.bprogress.visibility = View.GONE
+                }
+                else ->{
+                    binding.bprogress.visibility = View.GONE
+                    Toast.makeText(context, "Error, agregar Alert desconocido", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {

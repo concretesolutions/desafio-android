@@ -6,14 +6,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.navigateUp
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.desafioandroid.data.network.ApiResponseStatus
 import com.example.desafioandroid.databinding.FragmentPullListBinding
 import com.example.desafioandroid.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,9 +67,25 @@ class PullFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            it
-            binding.bprogressPull.isVisible = it
+        viewModel.status.observe(viewLifecycleOwner){ status ->
+            when(status){
+                ApiResponseStatus.LOADING ->{
+                    binding.bprogressPull.visibility = View.VISIBLE
+                }
+                ApiResponseStatus.ERROR -> {
+                    binding.bprogressPull.visibility = View.GONE
+                    Toast.makeText(context, "Repositorio no tiene Pull, sera redirigido al listado", Toast.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                }
+                ApiResponseStatus.SUCCESS -> {
+                    binding.bprogressPull.visibility = View.GONE
+                }
+                else ->{
+                    binding.bprogressPull.visibility = View.GONE
+                    Toast.makeText(context, "Error, agregar Alert desconocido", Toast.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                }
+            }
         }
         return binding.root
     }
