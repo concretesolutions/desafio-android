@@ -1,18 +1,26 @@
 package com.example.desafioandroid.ui.viewmodel
+
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.desafioandroid.data.model.OwnerModel
 import com.example.desafioandroid.data.model.PullModel
 import com.example.desafioandroid.domain.GetPullsByOwner
 import com.example.desafioandroid.domain.GetRepos
 import com.example.desafioandroid.domain.model.Repo
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-internal class MainViewModelTest {
+class MainViewModelTest {
 
     @RelaxedMockK
     private lateinit var getRepos: GetRepos
@@ -40,28 +48,31 @@ internal class MainViewModelTest {
     @Test
     fun `when getRepos return a repo set on the livedata`() = runTest {
         //Given
-        val repo =  Repo(
-            276963,
-            "jQuery-Validation-Engine",
-            "jQuery form validation plugin",
-            "posabsolute/jQuery-Validation-Engine",
-            OwnerModel(
-                114950,
-                "https://avatars.githubusercontent.com/u/114950?v=4",
-                "posabsolute"
-            ),
-            2590,
-            1232
+        val repo = listOf(
+            Repo(
+                276963,
+                "jQuery-Validation-Engine",
+                "jQuery form validation plugin",
+                "posabsolute/jQuery-Validation-Engine",
+                OwnerModel(
+                    114950,
+                    "https://avatars.githubusercontent.com/u/114950?v=4",
+                    "posabsolute"
+                ),
+                2590,
+                1232
+            )
         )
-        coEvery { getRepos("q",30) } returns repo
+        coEvery {getRepos("q", 30) } returns repo
 
         //When
-        mainViewModel.loadRepositories("q",30)
+        mainViewModel.loadRepositories("q", 30)
 
         //Then
         assert(mainViewModel.repositoriesModel.value == repo)
     }
 
+    @Test
     fun `when getPullByOwner return a pulls set on the livedata`() = runTest {
         //Given
         val pull = listOf(
