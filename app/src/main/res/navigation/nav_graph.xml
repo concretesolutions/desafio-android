@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/repoFragment">
+
+    <fragment
+        android:id="@+id/repoFragment"
+        android:name="com.example.desafioandroid.ui.view.RepoFragment"
+        tools:layout="@layout/fragment_repo"
+        android:label="RepoFragment" >
+        <action
+            android:id="@+id/action_repoFragment_to_pullFragment"
+            app:destination="@id/pullFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pullFragment"
+        android:name="com.example.desafioandroid.ui.view.PullFragment"
+        tools:layout="@layout/fragment_pull"
+        android:label="PullFragment" >
+        <argument
+            android:name="repo_name"
+            app:argType="string"/>
+        <argument
+            android:name="owner"
+            app:argType="string"/>
+    </fragment>
+</navigation>

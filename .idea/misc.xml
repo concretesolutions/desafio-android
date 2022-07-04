@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/layout/activity_main.xml" value="0.2869791666666667" />
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/layout/fragment_item.xml" value="0.2869791666666667" />
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/layout/fragment_item_list.xml" value="0.2869791666666667" />
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/layout/fragment_pull.xml" value="0.46846846846846846" />
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/layout/fragment_pull_list.xml" value="0.1" />
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/layout/fragment_pull_shimmer.xml" value="0.5140625" />
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/layout/fragment_repo.xml" value="0.42857142857142855" />
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/layout/fragment_repo_list.xml" value="0.1" />
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/layout/fragment_repo_shimmer.xml" value="0.5142857142857143" />
+        <entry key="..\:/Interfaces/Kotlin/desafio-android/app/src/main/res/menu/search_menu.xml" value="0.2875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.view.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/view_container"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pull"
+            android:name="com.example.desafioandroid.ItemFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_pull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shimmer_auto_start="true">
+
+        <LinearLayout
+            android:id="@+id/view_container_shimmer"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            include layout="@layout/fragment_repo_shimmer" />
+            include layout="@layout/fragment_repo_shimmer" />
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

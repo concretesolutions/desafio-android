@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_repo"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:background="@color/white">
+
+        <FrameLayout
+            android:id="@+id/tv_repo_name"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/gray_shimmer"
+            app:layout_constraintBottom_toTopOf="@+id/tv_repo_description"
+            app:layout_constraintEnd_toStartOf="@+id/iv_avatar_user"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/tv_repo_description"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@color/gray_shimmer"
+            app:layout_constraintBottom_toTopOf="@+id/tv_forks"
+            app:layout_constraintEnd_toStartOf="@+id/iv_avatar_user"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
+
+        <FrameLayout
+            android:id="@+id/iv_avatar_user"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@color/gray_shimmer"
+            app:layout_constraintBottom_toTopOf="@+id/tv_owner_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/iv_fork"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/gray_shimmer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_forks"
+            app:layout_constraintTop_toBottomOf="@id/tv_repo_description" />
+
+        <FrameLayout
+            android:id="@+id/tv_forks"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/gray_shimmer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_star"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repo_description" />
+
+        <FrameLayout
+            android:id="@+id/iv_star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="24dp"
+            android:background="@color/gray_shimmer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_star"
+            app:layout_constraintTop_toBottomOf="@id/tv_repo_description" />
+
+        <FrameLayout
+            android:id="@+id/tv_star"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="56dp"
+            android:background="@color/gray_shimmer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_owner_full_name"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repo_description" />
+
+        <FrameLayout
+            android:id="@+id/tv_owner_name"
+            android:layout_width="100dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/gray_shimmer"
+            app:layout_constraintBottom_toTopOf="@+id/tv_owner_full_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_avatar_user" />
+
+        <FrameLayout
+            android:id="@+id/tv_owner_full_name"
+            android:layout_width="100dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/gray_shimmer"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_owner_name" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
