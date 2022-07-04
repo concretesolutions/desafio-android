@@ -9,5 +9,6 @@ class RepositoryDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.repository_details)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setTitle(this.intent.extras?.getString("title"))
     }
 }

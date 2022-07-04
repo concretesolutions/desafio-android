@@ -8,8 +8,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DesafioApiDataSource {
-    fun getRepositories(listener: ResponseListener<Repository>) {
-        val service = RetrofitService.instance.create(DesafioApiService::class.java).getRepositories()
+    fun getRepositories(listener: ResponseListener<Repository>, page: Int) {
+        val service = RetrofitService.instance.create(DesafioApiService::class.java).getRepositories(page)
 
         service.enqueue(object : Callback<Repository> {
             override fun onResponse(

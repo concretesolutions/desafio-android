@@ -7,12 +7,20 @@ import com.example.desafioandroidapp.data.dto.Item
 import com.example.desafioandroidapp.databinding.RepositoryItemBinding
 import com.squareup.picasso.Picasso
 
-class MainActivityAdapter: RecyclerView.Adapter<MainActivityAdapter.ItemViewHolder>()  {
+class MainActivityAdapter(val listener: ItemsListener): RecyclerView.Adapter<MainActivityAdapter.ItemViewHolder>() {
 
-    private lateinit var items : List<Item>
+    var items : ArrayList<Item> = ArrayList()
+    interface ItemsListener{
+        fun selectedItem(
+            ownerName: String,
+            repository: String)
+    }
     fun setRepositories(newItem: List<Item>) {
-        this.items = newItem
-        this.notifyDataSetChanged()
+        if(this.items.isNullOrEmpty()){
+            this.items = newItem as ArrayList<Item>
+        }else {
+            this.items.addAll(newItem)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -33,8 +41,11 @@ class MainActivityAdapter: RecyclerView.Adapter<MainActivityAdapter.ItemViewHold
         private val binding: RepositoryItemBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(item: Item) {
-            this.binding.name.text = item.name
+            this.binding.repoName.text = item.name
             this.binding.description.text = item.description
+            this.binding.forkNumber.text = item.forks_count
+            this.binding.starNumber.text = item.stargazers_count
+            this.binding.ownerName.text = item.owner.login
             Picasso.get().load(item.owner.avatar_url).into(this.binding.imageView)
         }
     }

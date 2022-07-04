@@ -12,8 +12,9 @@ import com.example.desafioandroidapp.data.dto.RepositoryError
 class MainActivityViewModel(val desafioApiRepository: DesafioApiRepository) : ViewModel(){
     val success = MutableLiveData(false)
     val data = MutableLiveData<List<Item>?>(null)
+    val continueapi = MutableLiveData<Boolean>(true)
 
-    fun getRepos() {
+    fun getRepos(page: Int) {
         success.value = false
         data.value = null
 
@@ -21,6 +22,7 @@ class MainActivityViewModel(val desafioApiRepository: DesafioApiRepository) : Vi
             override fun onResponse(response: Repository) {
                 if(response.total_count > 0) {
                     data.value = response.items
+                    continueapi.value = response.incomplete_results
                     success.value = true
                 }
             }
@@ -29,6 +31,6 @@ class MainActivityViewModel(val desafioApiRepository: DesafioApiRepository) : Vi
                 Toast.makeText(null, "Error getting imageSlider data", Toast.LENGTH_LONG).show()
             }
 
-        })
+        }, page)
     }
 }

@@ -6,7 +6,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/pulls_item.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/repository_details.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/repository_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/repository_item.xml" value="0.45" />
       </map>
     </option>
   </component>
@@ -15,5 +15,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.45" />
+      </ProjectState>
+    </option>
   </component>
 </project>
