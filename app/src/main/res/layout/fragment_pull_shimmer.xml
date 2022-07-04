@@ -1,70 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_pull"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:autoLink="web"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
+        <FrameLayout
             android:id="@+id/tv_pull_name"
             android:layout_width="350dp"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
             app:layout_constraintHorizontal_bias="0.2"
-            android:textAlignment="viewStart"
-            android:textColor="@color/blue"
-            android:textSize="12sp"
-            android:textStyle="bold"
+            android:background="@color/gray_shimmer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <com.google.android.material.textview.MaterialTextView
+        <FrameLayout
             android:id="@+id/tv_pull_body"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:textAlignment="viewStart"
-            android:textColor="@color/gray"
-            android:textSize="10sp"
+            android:background="@color/gray_shimmer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_pull_name" />
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <FrameLayout
             android:id="@+id/iv_avatar_user_pull"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/gray_shimmer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_pull_body" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_pull_body"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <FrameLayout
             android:id="@+id/tv_owner_name"
             android:layout_width="150dp"
             android:layout_height="16dp"
-            android:textAlignment="viewStart"
-            android:textColor="@color/blue"
-            android:textSize="12sp"
             android:layout_marginHorizontal="10dp"
+            android:background="@color/gray_shimmer"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_avatar_user_pull"
-            app:layout_constraintTop_toBottomOf="@+id/tv_pull_body" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_pull_body"
+            app:layout_constraintVertical_bias="0.509" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

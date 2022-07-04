@@ -54,6 +54,7 @@ class PullAdapter : ListAdapter<PullModel, PullAdapter.PullViewHolder>(DiffCallb
             }
             binding.tvPullBody.text = pull.body
             binding.tvPullName.text = pull.title
+            binding.tvOwnerName.text = pull.user.loginOwner
             binding.layoutPull.setOnClickListener {
                 onItemClickListener?.invoke(pull)
             }

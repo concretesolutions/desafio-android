@@ -1,5 +1,6 @@
 package com.example.desafioandroid.ui.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -57,7 +58,6 @@ class RepoAdapter @Inject constructor() :
                     .placeholder(R.drawable.placeholder)
                     .transformations(CircleCropTransformation())
             }
-
             binding.ivFork.load(R.drawable.ic_baseline_fork)
             binding.ivStar.load(R.drawable.ic_baseline_star)
             binding.tvRepoName.text = repo.nameRepo

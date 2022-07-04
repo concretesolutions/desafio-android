@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -65,17 +66,21 @@ class RepoFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner) { status ->
             when (status) {
                 ApiResponseStatus.LOADING -> {
-                    binding.bprogress.visibility = View.VISIBLE
+                    binding.shimmerRepo.isVisible = true
+                    binding.viewContainer.isVisible= false
                 }
                 ApiResponseStatus.ERROR -> {
-                    binding.bprogress.visibility = View.GONE
+                    binding.shimmerRepo.isVisible = false
+                    binding.viewContainer.isVisible= false
                     dialogAlert(getString(R.string.emptyRepository))
                 }
                 ApiResponseStatus.SUCCESS -> {
-                    binding.bprogress.visibility = View.GONE
+                    binding.shimmerRepo.isVisible = false
+                    binding.viewContainer.isVisible= true
                 }
                 else -> {
-                    binding.bprogress.visibility = View.GONE
+                    binding.shimmerRepo.isVisible = false
+                    binding.viewContainer.isVisible= false
                     dialogAlert(getString(R.string.emptyRepository))
                 }
             }

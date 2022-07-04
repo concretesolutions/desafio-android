@@ -7,28 +7,58 @@
     android:background="@color/white"
     tools:context=".ui.view.MainActivity">
 
-
-    <ProgressBar
-        android:id="@+id/bprogress_pull"
-        android:layout_width="99dp"
-        android:layout_height="37dp"
-        android:visibility="visible"
+    <LinearLayout
+        android:id="@+id/view_container"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_pull"
-        android:name="com.example.desafioandroid.ItemFragment"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pull"
+            android:name="com.example.desafioandroid.ItemFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_pull"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:shimmer_auto_start="true">
+
+        <LinearLayout
+            android:id="@+id/view_container_shimmer"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            <include layout="@layout/fragment_pull_shimmer" />
+            include layout="@layout/fragment_repo_shimmer" />
+            include layout="@layout/fragment_repo_shimmer" />
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
