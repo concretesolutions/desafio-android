@@ -7,21 +7,22 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.desafioandroidapp.R
 import com.example.desafioandroidapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class RepositoryMain : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private val viewModel: MainActivityViewModel by viewModels(
-        factoryProducer = { MainActivityViewModelFactory() }
+    private val viewModel: RepositoryMainViewModel by viewModels(
+        factoryProducer = { RepositoryMainViewModelFactory() }
     )
 
-    private val adapter = MainActivityAdapter(object: MainActivityAdapter.ItemsListener {
+    private val adapter = RepositoryMainAdapter(object: RepositoryMainAdapter.ItemsListener {
         override fun selectedItem(ownerName: String, repository: String) {
             val intent = Intent(applicationContext, RepositoryDetail::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                putExtra("title", repository)
-                putExtra("ownerName", ownerName)
+                putExtra(R.string.title, repository)
+                putExtra(R.string.ownerName, ownerName)
             }
 
             startActivity(intent)
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.getRepos(page)
         addOnScrollListener()
         setObservers()
-        //setListeners()
+        setListeners()
     }
 
     private fun addOnScrollListener() {
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                     super.onScrolled(recyclerView, dx, dy)
 
                     val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
-                    if (linearLayoutManager != null && isBottomOfList(linearLayoutManager) && viewModel.continueapi.value ?: true) {
+                    if (linearLayoutManager != null && isBottomOfList(linearLayoutManager) && viewModel.continueapi.value != false) {
                         ++page
                         viewModel.getRepos(page)
                     }
@@ -73,12 +74,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setListeners(){
-        binding.lista.setOnClickListener(){
+    private fun setListeners(){
+        binding.lista.setOnClickListener{
             val intent = Intent(this, RepositoryDetail::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
-            intent.putExtra("title", viewModel.data.value?.get(1)?.name)
+            intent.putExtra(R.string.title, viewModel.data.value?.get(1)?.name)
             startActivity(intent)
         }
     }

@@ -16,7 +16,7 @@
         android:theme="@style/Theme.DesafioAndroidApp"
         tools:targetApi="31">
         <activity
-            android:name=".views.MainActivity"
+            android:name=".views.RepositoryMain"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize">

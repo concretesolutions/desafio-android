@@ -7,7 +7,7 @@ import com.example.desafioandroidapp.data.dto.Item
 import com.example.desafioandroidapp.databinding.RepositoryItemBinding
 import com.squareup.picasso.Picasso
 
-class MainActivityAdapter(val listener: ItemsListener): RecyclerView.Adapter<MainActivityAdapter.ItemViewHolder>() {
+class RepositoryMainAdapter(val listener: ItemsListener): RecyclerView.Adapter<RepositoryMainAdapter.ItemViewHolder>() {
 
     var items : ArrayList<Item> = ArrayList()
     interface ItemsListener{
