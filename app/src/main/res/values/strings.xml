@@ -2,6 +2,7 @@
     <string name="app_name">GitHub Java Pop</string>
     <string name="title">title</string>
     <string name="ownerName">ownerName</string>
+    <string name="ITEM">item</string>
     <string name="username_photo">Username photo</string>
     <string name="star_icon">Username photo</string>
     <string name="fork_icon">Username photo</string>

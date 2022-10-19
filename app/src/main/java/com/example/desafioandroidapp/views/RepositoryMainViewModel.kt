@@ -9,12 +9,12 @@ import com.example.desafioandroidapp.data.dto.Item
 import com.example.desafioandroidapp.data.dto.Repository
 import com.example.desafioandroidapp.data.dto.RepositoryError
 
-class RepositoryMainViewModel(val desafioApiRepository: DesafioApiRepository) : ViewModel(){
+class RepositoryMainViewModel(private val desafioApiRepository: DesafioApiRepository) : ViewModel(){
     val success = MutableLiveData(false)
     val data = MutableLiveData<List<Item>?>(null)
-    val continueapi = MutableLiveData<Boolean>(true)
+    val continueapi = MutableLiveData(true)
 
-    fun getRepos(page: Int) {
+    fun getRepositories(page: Int) {
         success.value = false
         data.value = null
 

@@ -8,23 +8,23 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioandroidapp.R
-import com.example.desafioandroidapp.databinding.ActivityMainBinding
+import com.example.desafioandroidapp.data.dto.Item
+//import com.example.desafioandroidapp.R
+import com.example.desafioandroidapp.databinding.RepositoryMainBinding
 
 class RepositoryMain : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding : RepositoryMainBinding
     private val viewModel: RepositoryMainViewModel by viewModels(
         factoryProducer = { RepositoryMainViewModelFactory() }
     )
 
     private val adapter = RepositoryMainAdapter(object: RepositoryMainAdapter.ItemsListener {
-        override fun selectedItem(ownerName: String, repository: String) {
-            val intent = Intent(applicationContext, RepositoryDetail::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                putExtra(R.string.title, repository)
-                putExtra(R.string.ownerName, ownerName)
-            }
-
+        override fun selectedItem(item : Item) {
+            val bundle = Bundle()
+            bundle.putParcelable(R.string.ITEM.toString(),item)
+            val intent = Intent(applicationContext, RepositoryDetail::class.java)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
     })
@@ -33,15 +33,15 @@ class RepositoryMain : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = RepositoryMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.lista.layoutManager = LinearLayoutManager(this)
 
-        viewModel.getRepos(page)
+        viewModel.getRepositories(page)
         addOnScrollListener()
         setObservers()
-        setListeners()
+        //setListeners()
     }
 
     private fun addOnScrollListener() {
@@ -53,7 +53,7 @@ class RepositoryMain : AppCompatActivity() {
                     val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
                     if (linearLayoutManager != null && isBottomOfList(linearLayoutManager) && viewModel.continueapi.value != false) {
                         ++page
-                        viewModel.getRepos(page)
+                        viewModel.getRepositories(page)
                     }
                 }
             })
@@ -64,6 +64,7 @@ class RepositoryMain : AppCompatActivity() {
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setObservers(){
         this.viewModel.data.observe(this){ value ->
             if (value != null) {
@@ -75,13 +76,7 @@ class RepositoryMain : AppCompatActivity() {
     }
 
     private fun setListeners(){
-        binding.lista.setOnClickListener{
-            val intent = Intent(this, RepositoryDetail::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            }
-            intent.putExtra(R.string.title, viewModel.data.value?.get(1)?.name)
-            startActivity(intent)
-        }
+        TODO()
     }
 
 

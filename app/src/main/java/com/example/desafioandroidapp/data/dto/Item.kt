@@ -1,7 +1,10 @@
 package com.example.desafioandroidapp.data.dto
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Item(
     @SerializedName("id")
     val id: Int,
@@ -23,4 +26,4 @@ data class Item(
     val description: String?,
     @SerializedName("pulls_url")
     val pulls_url: String
-)
+) : Parcelable
