@@ -11,7 +11,7 @@ class RepositoryDetail : AppCompatActivity() {
         val item = bundle?.getParcelable<Item>(R.string.ITEM.toString())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.repository_details)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.title = item?.name
     }
 }
