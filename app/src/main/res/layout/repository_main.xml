@@ -7,7 +7,7 @@
     tools:context=".views.RepositoryMain">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lista"
+        android:id="@+id/repositoryList"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="parent"

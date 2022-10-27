@@ -8,5 +8,5 @@ data class Repository(
     @SerializedName("incomplete_results")
     val incomplete_results: Boolean,
     @SerializedName("items")
-    val items : List<Item>
+    val repositoryItems : List<RepositoryItem>
 )

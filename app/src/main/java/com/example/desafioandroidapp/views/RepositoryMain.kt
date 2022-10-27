@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioandroidapp.R
-import com.example.desafioandroidapp.data.dto.Item
+import com.example.desafioandroidapp.data.dto.RepositoryItem
 //import com.example.desafioandroidapp.R
 import com.example.desafioandroidapp.databinding.RepositoryMainBinding
 
@@ -20,9 +20,9 @@ class RepositoryMain : AppCompatActivity() {
     )
 
     private val adapter = RepositoryMainAdapter(object: RepositoryMainAdapter.ItemsListener {
-        override fun selectedItem(item : Item) {
+        override fun selectedItem(repositoryItem : RepositoryItem) {
             val bundle = Bundle()
-            bundle.putParcelable(R.string.ITEM.toString(),item)
+            bundle.putParcelable(R.string.ITEM.toString(),repositoryItem)
             val intent = Intent(applicationContext, RepositoryDetail::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
@@ -36,7 +36,7 @@ class RepositoryMain : AppCompatActivity() {
         binding = RepositoryMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.lista.layoutManager = LinearLayoutManager(this)
+        binding.repositoryList.layoutManager = LinearLayoutManager(this)
 
         viewModel.getRepositories(page)
         addOnScrollListener()
@@ -45,7 +45,7 @@ class RepositoryMain : AppCompatActivity() {
     }
 
     private fun addOnScrollListener() {
-            binding.lista.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            binding.repositoryList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
@@ -60,7 +60,7 @@ class RepositoryMain : AppCompatActivity() {
     }
 
     fun isBottomOfList(linearLayoutManager : LinearLayoutManager): Boolean {
-        return linearLayoutManager.findLastCompletelyVisibleItemPosition() == adapter.items.size - 1
+        return linearLayoutManager.findLastCompletelyVisibleItemPosition() == adapter.repositoryItems.size - 1
     }
 
 
@@ -68,7 +68,7 @@ class RepositoryMain : AppCompatActivity() {
     private fun setObservers(){
         this.viewModel.data.observe(this){ value ->
             if (value != null) {
-                binding.lista.adapter = adapter
+                binding.repositoryList.adapter = adapter
                 adapter.setRepositories(value)
                 adapter.notifyDataSetChanged()
             }

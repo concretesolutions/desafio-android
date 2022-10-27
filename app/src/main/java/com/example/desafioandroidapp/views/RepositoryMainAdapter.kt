@@ -3,22 +3,22 @@ package com.example.desafioandroidapp.views
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.desafioandroidapp.data.dto.Item
+import com.example.desafioandroidapp.data.dto.RepositoryItem
 import com.example.desafioandroidapp.databinding.RepositoryItemBinding
 import com.squareup.picasso.Picasso
 
 class RepositoryMainAdapter(private val listener: ItemsListener): RecyclerView.Adapter<RepositoryMainAdapter.ItemViewHolder>() {
 
-    var items : ArrayList<Item> = ArrayList()
+    var repositoryItems : ArrayList<RepositoryItem> = ArrayList()
     interface ItemsListener{
         fun selectedItem(
-            item : Item)
+            repositoryItem : RepositoryItem)
     }
-    fun setRepositories(newItem: List<Item>) {
-        if(this.items.isNullOrEmpty()){
-            this.items = newItem as ArrayList<Item>
+    fun setRepositories(newRepositoryItem: List<RepositoryItem>) {
+        if(this.repositoryItems.isEmpty()){
+            this.repositoryItems = newRepositoryItem as ArrayList<RepositoryItem>
         }else {
-            this.items.addAll(newItem)
+            this.repositoryItems.addAll(newRepositoryItem)
         }
     }
 
@@ -29,25 +29,25 @@ class RepositoryMainAdapter(private val listener: ItemsListener): RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(this.items[position], listener)
+        holder.bind(this.repositoryItems[position], listener)
     }
 
     override fun getItemCount(): Int {
-        return this.items.size
+        return this.repositoryItems.size
     }
 
     class ItemViewHolder(
         private val binding: RepositoryItemBinding
     ): RecyclerView.ViewHolder(binding.root){
-        fun bind(item: Item, listener: ItemsListener) {
-            this.binding.repoName.text = item.name
-            this.binding.description.text = item.description
-            this.binding.forkNumber.text = item.forks_count
-            this.binding.starNumber.text = item.stargazers_count
-            this.binding.ownerName.text = item.owner.login
-            Picasso.get().load(item.owner.avatar_url).into(this.binding.imageView)
+        fun bind(repositoryItem: RepositoryItem, listener: ItemsListener) {
+            this.binding.repoName.text = repositoryItem.name
+            this.binding.description.text = repositoryItem.description
+            this.binding.forkNumber.text = repositoryItem.forks_count
+            this.binding.starNumber.text = repositoryItem.stargazers_count
+            this.binding.ownerName.text = repositoryItem.owner.login
+            Picasso.get().load(repositoryItem.owner.avatar_url).into(this.binding.imageView)
             this.binding.cardView.setOnClickListener{
-                listener.selectedItem(item)
+                listener.selectedItem(repositoryItem)
             }
         }
 

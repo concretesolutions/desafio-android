@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Item(
+data class RepositoryItem(
     @SerializedName("id")
     val id: Int,
     @SerializedName("node_id")

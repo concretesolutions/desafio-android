@@ -6,4 +6,7 @@
     <string name="username_photo">Username photo</string>
     <string name="star_icon">Username photo</string>
     <string name="fork_icon">Username photo</string>
+    <string name="zero">0</string>
+    <string name="openedLabel">Opened</string>
+    <string name="closedLabel">Closed</string>
 </resources>
