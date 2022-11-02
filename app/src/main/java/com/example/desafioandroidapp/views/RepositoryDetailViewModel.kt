@@ -8,10 +8,8 @@ import com.example.desafioandroidapp.data.DesafioApiRepository
 import com.example.desafioandroidapp.data.PullListener
 import com.example.desafioandroidapp.data.dto.Error
 import com.example.desafioandroidapp.data.dto.Pull
-import com.example.desafioandroidapp.data.dto.RepositoryItem
 
 class RepositoryDetailViewModel (private val desafioApiRepository: DesafioApiRepository) : ViewModel(){
-    var repositoryItem : RepositoryItem? = null
     val success = MutableLiveData(false)
     val data = MutableLiveData<List<Pull>?>(null)
 
@@ -25,6 +23,9 @@ class RepositoryDetailViewModel (private val desafioApiRepository: DesafioApiRep
                         data.value = response
                         success.value = true
                     }
+                    System.out.println("Size: ${data.value?.size}")
+                    System.out.println("Title: ${data.value?.get(0)?.title}")
+                    System.out.println("Title: ${data.value?.get(1)?.title}")
                 }
 
                 override fun onError(repositoryError: Error) {
