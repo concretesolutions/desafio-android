@@ -24,8 +24,6 @@ class RepositoryDetailViewModel (private val desafioApiRepository: DesafioApiRep
                         success.value = true
                     }
                     System.out.println("Size: ${data.value?.size}")
-                    System.out.println("Title: ${data.value?.get(0)?.title}")
-                    System.out.println("Title: ${data.value?.get(1)?.title}")
                 }
 
                 override fun onError(repositoryError: Error) {

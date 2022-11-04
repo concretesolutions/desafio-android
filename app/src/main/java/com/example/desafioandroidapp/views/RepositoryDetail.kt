@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioandroidapp.R
 import com.example.desafioandroidapp.data.dto.Pull
 import com.example.desafioandroidapp.data.dto.RepositoryItem
@@ -24,15 +25,16 @@ class RepositoryDetail : AppCompatActivity() {
     })
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val bundle = intent.extras
         val repositoryItem = bundle?.getParcelable<RepositoryItem>(R.string.ITEM.toString())
-        super.onCreate(savedInstanceState)
         binding = RepositoryDetailBinding.inflate(layoutInflater)
         setContentView(R.layout.repository_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = repositoryItem?.name
 
         binding.pullsList.layoutManager = LinearLayoutManager(this)
+        binding.pullsList.adapter = adapter
         viewModel.getPulls(repositoryItem?.owner?.login ?: "", repositoryItem?.name ?: "")
         setObservers()
     }
@@ -41,8 +43,8 @@ class RepositoryDetail : AppCompatActivity() {
     private fun setObservers(){
         this.viewModel.data.observe(this){ value ->
             if(value != null){
-                System.out.println("Tamaño: $value?.size")
-                adapter.also { this.binding.pullsList.adapter = it }
+                System.out.println("Tamaño: ${value.size}")
+                //binding.pullsList.adapter = adapter
                 adapter.setPulls(value)
                 adapter.notifyDataSetChanged()
             }
