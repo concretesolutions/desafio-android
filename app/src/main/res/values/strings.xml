@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">GitHub Java Pop</string>
+    <string name="Title">Title</string>
     <string name="title">title</string>
     <string name="ownerName">ownerName</string>
     <string name="ITEM">item</string>

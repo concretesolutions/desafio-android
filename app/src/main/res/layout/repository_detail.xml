@@ -38,7 +38,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/closedNumber"
         app:layout_constraintStart_toEndOf="@+id/openedNumber"
-        android:paddingLeft="3dp"
+        android:paddingStart="1dp"
+        android:paddingEnd="1dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="10dp" />
 
@@ -50,7 +51,8 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/closedLabel"
-        android:paddingLeft="3dp"
+        android:paddingStart="1dp"
+        android:paddingEnd="1dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="10dp" />
 
@@ -62,7 +64,8 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/closedNumber"
-        android:paddingLeft="3dp"
+        android:paddingStart="1dp"
+        android:paddingEnd="1dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="100dp"
         tools:layout_editor_absoluteY="10dp" />
@@ -72,10 +75,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pullsList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/pullsStatus"
-        app:layout_constraintTop_toBottomOf="@+id/pullsStatus" />
+        app:layout_constraintStart_toEndOf="@id/pullsStatus"
+        app:layout_constraintTop_toBottomOf="@+id/pullsStatus"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.example.desafioandroidapp.views
 
-import android.content.ClipData
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +11,8 @@ import com.example.desafioandroidapp.data.dto.Pull
 class RepositoryDetailViewModel (private val desafioApiRepository: DesafioApiRepository) : ViewModel(){
     val success = MutableLiveData(false)
     val data = MutableLiveData<List<Pull>?>(null)
+    var openedPullsNumber = MutableLiveData(0)
+    var closedPullsNumber = MutableLiveData(0)
 
     fun getPulls(owner: String, repository: String){
         success.value = false
@@ -19,11 +20,11 @@ class RepositoryDetailViewModel (private val desafioApiRepository: DesafioApiRep
 
         desafioApiRepository.getPulls(object: PullListener<List<Pull>> {
                 override fun onResponsePull(response: List<Pull>) {
-                    if(response.size > 0) {
+                    if(response.isNotEmpty()) {
                         data.value = response
+                        pullStatusCount(data.value!!)
                         success.value = true
                     }
-                    System.out.println("Size: ${data.value?.size}")
                 }
 
                 override fun onError(repositoryError: Error) {
@@ -31,5 +32,16 @@ class RepositoryDetailViewModel (private val desafioApiRepository: DesafioApiRep
                 }
 
             }, owner, repository)
+    }
+
+    private fun pullStatusCount(pullsList : List<Pull>){
+        pullsList.forEach {
+            println("estado: ${it.state}")
+            if(it.state == "open"){
+                openedPullsNumber.value = openedPullsNumber.value?.plus(1)
+            }else{
+                closedPullsNumber.value = closedPullsNumber.value?.plus(1)
+            }
+        }
     }
 }

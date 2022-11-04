@@ -44,7 +44,7 @@ class RepositoryDetailAdapter(private val listener: PullsListener): RecyclerView
             this.binding.title.text = pull.title
             this.binding.body.text = pull.body
             this.binding.ownerName.text = pull.user.login
-            Picasso.get().load(pull.url).into(this.binding.imageView)
+            Picasso.get().load(pull.user.avatar_url).into(this.binding.imageView)
             this.binding.root.setOnClickListener{
                 listener.selectedItem(pull)
             }

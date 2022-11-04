@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioandroidapp.R
 import com.example.desafioandroidapp.data.dto.Pull
 import com.example.desafioandroidapp.data.dto.RepositoryItem
@@ -29,12 +28,11 @@ class RepositoryDetail : AppCompatActivity() {
         val bundle = intent.extras
         val repositoryItem = bundle?.getParcelable<RepositoryItem>(R.string.ITEM.toString())
         binding = RepositoryDetailBinding.inflate(layoutInflater)
-        setContentView(R.layout.repository_detail)
+        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = repositoryItem?.name
 
         binding.pullsList.layoutManager = LinearLayoutManager(this)
-        binding.pullsList.adapter = adapter
         viewModel.getPulls(repositoryItem?.owner?.login ?: "", repositoryItem?.name ?: "")
         setObservers()
     }
@@ -43,10 +41,21 @@ class RepositoryDetail : AppCompatActivity() {
     private fun setObservers(){
         this.viewModel.data.observe(this){ value ->
             if(value != null){
-                System.out.println("Tamaño: ${value.size}")
-                //binding.pullsList.adapter = adapter
+                binding.pullsList.adapter = adapter
                 adapter.setPulls(value)
                 adapter.notifyDataSetChanged()
+            }
+        }
+        this.viewModel.openedPullsNumber.observe(this){ value ->
+            if(value != 0){
+                binding.openedNumber.text = viewModel.openedPullsNumber.value.toString()
+                println("abiertos: ${viewModel.openedPullsNumber.value}")
+            }
+        }
+        this.viewModel.closedPullsNumber.observe(this){ value ->
+            if(value != 0){
+                binding.closedNumber.text = viewModel.closedPullsNumber.value.toString()
+                println("cerrados: ${viewModel.closedPullsNumber.value}")
             }
         }
     }
