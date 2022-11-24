@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.desafioandroidapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/github_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/github_logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.DesafioAndroidApp"
+        tools:targetApi="31">
+        <activity
+            android:name=".views.RepositoryMain"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.RepositoryDetail"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+        </activity>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>
